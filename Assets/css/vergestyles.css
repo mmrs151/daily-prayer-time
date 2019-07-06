@@ -1,0 +1,94 @@
+/*
+Theme Name:   Verge Framework Child Theme
+Description: Verge Framework is a base for Verge Design projects. We use a set of default settings to create your website with clean code from the ground up on a solid framework encompassing the least amount of files possible, properly enqueued in the relevant places for a fast and stable website.
+Author: Verge Design
+Author URI: http://vergedesign.co.uk
+Template: vergeFramework
+*/
+/*@import url("../css/vergestyles.css");*/
+/* Fonts start here */
+.dpt-horizontal-wrapper.customStyles .dpt-heading {
+  font-size: 0;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-heading h3, .dpt-horizontal-wrapper.customStyles .dpt-heading p {
+  display: inline-block;
+  width: 50%;
+  margin: 5px 0;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-heading p {
+  text-align: right;
+  font-size: 14px;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-wrapper-container {
+  background-color: #eeeeee;
+  text-align: center;
+  font-size: 0;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time {
+  width: calc(100%/6);
+  height: 90px;
+  display: inline-table;
+  border-right: 1px solid #e2e2e2;
+  padding: 15px 0;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time:last-child {
+  border-right: 0;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time.highlight {
+  background-color: #a9b9c9;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time h3 {
+  text-align: center;
+  margin: 10px;
+  font-size: 18px;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time div {
+  text-align: center;
+  margin: 5px;
+  font-size: 14px;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-announcement {
+  background-color: #d60000;
+  padding: 10px;
+}
+
+.dpt-horizontal-wrapper.customStyles .dpt-announcement h3 {
+  margin: 0;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time {
+    width: 100px;
+  }
+  .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time h3 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .dpt-horizontal-wrapper.customStyles .dpt-heading h3, .dpt-horizontal-wrapper.customStyles .dpt-heading p {
+    display: block;
+    width: 100%;
+  }
+  .dpt-horizontal-wrapper.customStyles .dpt-heading p {
+    text-align: left;
+  }
+}

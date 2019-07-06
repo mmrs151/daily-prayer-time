@@ -1,0 +1,789 @@
+/*Default styling*/
+-body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+td.Sat, td.Sun{
+    font-weight: bold;
+    color: red;
+}
+
+tr.today {
+    font-size: large;
+    font-weight: bold;
+    color: blue;
+}
+
+table.dptAdmin td{
+    text-align: left;
+    padding-right: 20px;
+    padding-left: 10px;
+    width: auto;
+}
+table.dptAdmin td input.other{
+    text-align: center;
+    width: 110px;
+}
+table.dptAdmin th{
+    text-align: center;
+    background-color: #ccddee;
+}
+
+table.quickUpdate th{
+    text-align: center;
+    width: 80px;
+    background-color: #514444;
+    color: #fff;
+}
+table.quickUpdate td {
+    text-align: center;
+    border-bottom: 1px solid grey;
+}
+table.quickUpdate td input[type="time"]{
+    color: grey;
+    font-weight: 500;
+    width: 100px;
+    text-align: center;
+}
+table.quickUfpdate td input:focus{
+    color: #000;
+}
+
+table.dptTimetable {
+    margin-top: 5px;
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+table.dptTimetable thead.prayerName {
+    font-weight: bold;
+    background: #eee;
+}
+table.dptTimetable tr, table.dptTimetable td, table.dptTimetable th {
+    border: 1px solid black;
+}
+table.dptTimetable tr td{
+    text-align: center;
+    padding: 5px;
+    width: 100px;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: none;
+}
+table.dptTimetable tr, table.dptTimetable th{
+     text-align: center;
+     padding: 5px;
+     vertical-align: middle;
+     width: 100px;
+     white-space: nowrap;
+}
+table.dptTimetable tr td.jamah{
+    font-weight: bold;
+}
+table.dptTimetable th.tableHeading{
+    background-color: #D2A9AC;
+    font-weight: bold;
+}
+table.dptTimetable th.fasting, td.fasting{
+    background: rgba(0, 128, 0, 0.34);
+    width: 100px;
+    font-weight: bold;
+}
+table.dptTimetable th.azanOnly {
+    width: 140px;
+}
+table.dptTimetable tr:hover {
+    background: #eee;
+}
+table.dptTimetable tr.highlight{
+    background-color: #F5FF92 !important;
+    font-weight: bold;
+}
+table.dptTimetable th.highlight,
+table.dptTimetable td.highlight{
+    background-color: #F5FF92;
+    font-weight: bold;
+}
+table.dptTimetable tr:nth-child(even) {
+    background: rgba(232, 251, 232, 0.34);
+}
+
+/*No Border styling*/
+table.dptNoBorder {
+    border: 0;
+    background: inherit;
+}
+table.dptNoBorder tr, table.dptNoBorder td, table.dptNoBorder th{
+    border: 0;
+    background: inherit;
+}
+/* End of No Border styling*/
+
+table.customStyles {}  /* intentionally blank  */
+
+.dptCenter {
+    margin: auto;
+    width: 50%;
+    border:3px solid #8AC007;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.orange {
+    color: orange;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.green {
+    color: green;
+}
+
+.smallFont {
+    font-style: italic;
+    font-size: smaller;
+}
+
+div.donation {
+    width: auto;
+    color: #000000;
+    background-color: #f1f1f1;
+    padding: 15px;
+    line-height: 1.15em;
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+div.donation-text {
+    margin-top: 20px;
+    width: auto;
+    background-color: #ffffff;
+    padding: 1.1%;
+    border-left: 4px solid #8AC007;
+    word-wrap: break-word;
+}
+div.donation-link {
+    margin-top: 20px;
+    width: 25%;
+    background-color: #0088cc;
+    color: white;
+    padding: 1.1%;
+    border-left: 4px solid #8AC007;
+    word-wrap: break-word;
+    font-size: medium;
+    text-align: center;
+}
+div.donation-link a{
+    color: white;
+}
+div.donation-link a:hover{
+    color: black;
+}
+table.dptTimetable th.jummah, table.dptTimetable th.notificationBackground  {
+    background-color: maroon;
+    font-weight: bold;
+    color: #FFF;
+    text-align: center;
+}
+
+#langSettings{
+    cursor: pointer;
+}
+
+p.monthHeading{
+    float:left;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+span.printIcon {
+    float: right;
+    cursor: pointer;
+}
+
+select.otherMonth  {
+    border: 1px solid;  /*Removes border*/
+    -moz-appearance: none; /* Removes Default Firefox style*/
+    width: 100px; /*Width of select dropdown to give space for arrow image*/
+    text-indent: 0.01px; /* Removes default arrow from firefox*/
+    text-overflow: "";  /*Removes default arrow from firefox*/ /*My custom style for fonts*/
+    padding: 5px;
+    float: left;
+    border-radius: 5px 5px 5px 5px;
+}
+
+span.dpt-donation {
+    float: right;
+    width: auto;
+    color: #000000;
+    background-color: maroon;
+    padding: 10px;
+    line-height: 1.15em;
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    font-size: 15px;
+}
+
+span.dpt-donation a{
+    color: #abc;
+    font-weight: bold;
+}
+
+span.dpt-donation a:hover{
+    color: #fff;
+    font-weight: bold;
+}
+
+span.timeLeft {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.button {
+    font-weight: bold;
+}
+
+.saveButton {
+    float: left;
+    margin-right: 5px;
+}
+
+h3.printSiteName {
+    display: none;
+    visibility: hidden;
+}
+
+.hijriDate {
+    font-weight: initial;
+    font-style: italic;
+    display: block;
+    margin-bottom: 0px;
+}
+
+span.dptScNextPrayer {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+h2.dptScTime {
+    margin: 0px;
+}
+h2.vertical div span h2.dptScTime {
+    margin: 10px;
+}
+h2#dsNextPrayer div span h2.dptScTime {
+    font-size: 2em !important;
+    font-weight: 700;
+}
+
+.jamahChanges span{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+p.nextIqamah {
+    margin: 0px;
+}
+
+div.digital-screen div.left-screen {
+    float: left;
+}
+
+.monthlyTimetable{
+	width: 100%;
+	overflow-x:auto;
+}
+
+.active-slider{
+    width: 200px;
+}
+
+.fa-check {
+    display: block !important;
+}
+.fa-check:after {
+    padding-right: 5px;
+}
+div.monthSelector {
+    margin-bottom: 10px;
+}
+a.url {
+    text-decoration: underline;
+}
+
+div.todaySpan {
+    padding: 10px 0px 10px 0px;
+    font-weight: bold;
+}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover {
+    transform: scale(9);
+    cursor: pointer;
+    transform-origin: right 2px;
+}
+
+/* X BOARD */
+.x-board {
+    color: #000;
+    height: 100vh;
+    text-align: center;
+    font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+}
+
+#overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; opacity: 0; z-index: 99;}
+
+
+.x-board .height-100 {
+    height: 100%;
+}
+
+.x-board .height-50 {
+    height: 50%;
+}
+.x-board .height-30 {
+    height: 24%;
+    top: 10% !important;
+}
+
+.x-board .top-row {
+    height: 15%;
+}
+
+.x-board .middle-row {
+height: 70%;
+}
+
+.x-board .bottom-row {
+    height: 15%;
+    flex-wrap: nowrap;
+}
+
+.x-board .table-borderless td,
+.x-board .table-borderless th,
+.x-board .table-borderless tr{
+    border: 0 !important;
+}
+
+.x-board .align-middle {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.x-board .green {
+    color: #fff;
+    opacity: .8;
+}
+
+.x-board .bg-dark {
+    background-color: #000 !important;
+    color: #eee;
+}
+.x-board .bg-white {
+    background-color: #fff !important;
+}
+.x-board .time{
+    background-color: #000;
+    color: #fff;
+    font-size: 8vh;
+    font-weight:bold;
+}
+.x-board .vertical-time{
+    font-size: 17vw;
+    height: 70%;
+}
+.x-board .vertical-date{
+    height: 30%;
+}
+
+.x-board .date-eng{
+    font-weight: bold;
+    color: maroon;
+    padding-left: 5px;
+    font-size: 6vh;
+}
+
+.x-board span.vertical {
+    font-size: 3vh !important;
+}
+
+.x-board p.hijriDate{
+    display: inline;
+    color: blue;
+
+}
+.x-board span.hijri p{
+    font-size: 4vh !important;
+}
+.x-board span.verticalhijri p{
+    font-size: 2vh !important;
+}
+
+.x-board h3 {
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+.x-board .bg-red {
+    background-color: #0066bf;
+}
+.x-board .bg-green {
+    background-color: #008743;
+}
+.x-board .bg-green h2{}
+
+.x-board table {
+    margin: 0;
+    border: none;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.x-board .l-red {
+    background-color: #dd8500;
+}
+
+.x-board table th, .x-board table td {
+    padding: 15px;
+    font-size: 5vh;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.x-board table.vertical th, .x-board table.vertical td{
+    padding: 0px;
+    font-size: 3vh;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.x-board table td.prayerName {
+    background: #383838;
+    color: #eee;
+}
+
+.x-board table thead tr th,
+.x-board table thead tr td,
+.x-board table tbody tr td {
+    padding: 0px !important;
+    border-bottom: 1px solid rgba(155,96,91,1);
+    border-left: none;
+    border-right: none;
+    vertical-align: middle;
+    border-collapse: collapse;
+    color: #eee;
+}
+.x-board table > thead > tr > td {
+    border-top: 1px solid #000;
+}
+.x-board table > thead > tr > td {
+    border-bottom: 1px solid #000;
+}
+.x-board table > tbody > tr:last-child > td {
+    border: none;
+}
+
+.x-board table td span {
+    font-weight: bold;
+}
+
+.x-board .nextPrayer {
+    color: #fff !important;
+}
+
+.x-board .nextPrayer h2 {
+    color: #fff !important;
+    font-size: 10vh !important;
+    margin: 30px;
+}
+.x-board .nextPrayer h3 {
+    color: #fff !important;
+    font-size: 10vh !important;
+    opacity: .8
+}
+
+.x-board .nextPrayer h2.vertical {
+    font-size: 5vh !important;
+}
+.x-board .nextPrayer h3.vertical {
+    font-size: 5vh !important;
+    opacity: .8
+}
+
+.x-board .dptScTime{
+    color: inherit;
+}
+.x-board .timeLeft {
+    font-size: 5vh;
+}
+
+.x-board .timeLeft{
+    font-size: 0.7em;
+}
+
+.x-board .blink{
+    animation: blink 1s infinite;
+    font-weight: bold;
+    font-size: 4vh;
+}
+.x-board .blink-vertical{
+    animation: blink 1s infinite;
+    font-weight: bold;
+    font-size: 5vw;
+}
+
+.x-board span.tomorrow {
+    margin-left: 10px;
+}
+div.jamahChanges-horizontal span{
+    font-size: 5vh;
+    word-spacing: 10px;
+    padding-bottom: 10px;
+}
+div.jamahChanges-vertical span{
+    font-size: 3vh;
+    word-spacing: 10px;
+    padding-bottom: 10px;
+}
+
+h3.scrolling-vertical > marquee > div > span {
+    font-size: 3vh;
+    word-spacing: 10px;
+    padding-bottom: 10px;
+}
+
+.x-time-change{
+    word-spacing: 10px;
+    background: #565656;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.x-board .padding-null {
+    padding: 0;
+}
+
+.x-board .carousel .item{
+   height:100%;
+ }
+.x-board .carousel-inner {
+    height:100%;
+}
+
+.x-board img.logo{
+    max-width: 50%;
+    max-height: 100%;
+}
+
+.x-board .carousel-inner .item img.carousel-slide{
+    height: 100%;
+    width: 100%;
+}
+
+.x-board .scrolling{
+    font-size: 5vh;
+}
+
+.x-board .scrolling-vertical{
+    font-size: 3vh;
+}
+
+.x-board h2.dptScTime p.jumuah {
+    font-size: 12vh;
+}
+
+h2.vertical > div > span > h2 > p {
+    font-size: 6vh !important;
+}
+
+@keyframes blink{
+    0%{opacity: 1;}
+    75%{opacity: 1;}
+    76%{ opacity: 0;}
+    100%{opacity: 0;}
+}
+
+/*
+inspired from https://codepen.io/Rowno/pen/Afykb
+*/
+.carousel-fade .carousel-inner .item {
+    opacity: 0;
+    transition-property: opacity;
+}
+
+.carousel-fade .carousel-inner .active {
+    opacity: 1;
+}
+
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+    opacity: 1;
+}
+
+.carousel-fade .carousel-control {
+    z-index: 2;
+}
+
+@media only screen and (max-width: 900px) {
+    h2#dsNextPrayer div span h2.dptScTime{
+        font-size: 1em !important;
+        font-weight: 700;
+    }
+    .x-board .nextPrayer h2 {
+        margin: 0px;
+    }
+}
+
+
+/*
+WHAT IS NEW IN 3.3: "Added transforms to improve carousel performance in modern browsers."
+now override the 3.3 new styles for modern browsers & apply opacity
+*/
+@media all and (transform-3d), (-webkit-transform-3d) {
+    .carousel-fade .carousel-inner > .item.next,
+    .carousel-fade .carousel-inner > .item.active.right {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.prev,
+    .carousel-fade .carousel-inner > .item.active.left {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.next.left,
+    .carousel-fade .carousel-inner > .item.prev.right,
+    .carousel-fade .carousel-inner > .item.active {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.clock {
+    margin: 0 auto;
+    color: #fff;
+}
+
+ul.clock {
+    margin: 0 auto;
+    padding: 0px;
+    list-style: none;
+    border: none;
+    word-spacing: -10px;
+}
+
+ul.clock li {
+    display: inline;
+    font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+    text-shadow: 0 0 5px #00c6ff;
+}
+
+ul.clock li#sec {
+    font-size: 20px !important;
+}
+#point {
+    position: relative;
+    -moz-animation: mymove 1s ease infinite;
+    -webkit-animation: mymove 1s ease infinite;
+}
+
+/* Simple Animation */
+@-webkit-keyframes mymove {
+    0% {opacity: 1.0;
+    text-shadow: 0 0 20px #00c6ff;
+    }
+
+    50% {
+        opacity: 0;
+        text-shadow: none;
+    }
+
+    100% {
+        opacity: 1.0;
+        text-shadow: 0 0 20px #00c6ff;
+    }
+}
+
+@-moz-keyframes mymove {
+    0% {
+        opacity: 1.0;
+        text-shadow: 0 0 20px #00c6ff;
+    }
+
+    50% {
+        opacity: 0;
+        text-shadow: none;
+    }
+
+    100% {
+        opacity: 1.0;
+        text-shadow: 0 0 20px #00c6ff;
+    }
+}
+
+/*Print*/
+@media print {
+    * {
+        background: initial!important;
+        -webkit-print-color-adjust: exact;
+   }
+    body {
+        -webkit-print-color-adjust: exact;
+        background-color: #c30;
+    }
+    #monthlyTimetable, #monthlyTimetable * {
+        visibility: visible;
+        font-size: 10px;
+    }
+    .monthHeading, .printIcon{
+        visibility: hidden;
+    }
+    select.otherMonth {
+        width: 100%;
+        font-size: 20px;
+        color: blue;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+    table.timetable td {
+        -webkit-print-color-adjust: exact;
+    }
+    h3.printSiteName {
+        font-size: 30px;
+        display: block;
+        visibility: visible;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%, -30%);
+        padding-top: 15px;
+    }
+    table.customStyles tr.highlight, th.highlight, td.highlight {
+        background: transparent !important;
+    }
+    p.hijriDate{
+        display: none;
+    }
+}
