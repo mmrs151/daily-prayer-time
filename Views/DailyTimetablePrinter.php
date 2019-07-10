@@ -41,7 +41,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         if ( get_option('jumuah') && ! $this->todayIsFriday() ) {
             $table .= '<tr>
                             <th class="tableHeading">' . stripslashes($this->getLocalHeaders()['jumuah']) . '</th>
-                            <td colspan="6" class="prayerName">' . get_option('jumuah') . '</td>
+                            <td colspan="6" class="jamah">' . get_option('jumuah') . '</td>
                         </tr>';
         }
 
@@ -350,7 +350,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         if ( get_option('jumuah') && ! $this->todayIsFriday() ) {
             $trs .= '<tr>
                             <th class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
-                            <td colspan="2" class="prayerName">' . get_option('jumuah') . '</td>
+                            <td colspan="2" class="jamah">' . get_option('jumuah') . '</td>
                         </tr>';
         }
 
@@ -366,74 +366,9 @@ class DailyTimetablePrinter extends TimetablePrinter
         return $this->formatDateForPrayer($time);
     }
 
-    public function displayNextPrayer($row, $nextFajr)
+    public function displayNextPrayer($row)
     {
-        // get next prayer name
-        // get next prayer time
-        // get time diff 
-        
-        $nextPrayer = $this->getNextPrayer( $row );
-        $nextIqamah = $this->getNextIqamahTimeDiff($row);
-        $key = ($nextPrayer == 'sunrise') ? $nextPrayer : strtolower($nextPrayer.'_jamah');
-        $iqamah = ($nextPrayer == 'sunrise') ? '' : $this->localHeaders['iqamah'];
+        return $this->getNextIqamahTime($row);
 
-        $nextPrayerName = $row[$key];
-
-        if ( is_null($nextPrayer) ) {
-            $nextPrayerName = $nextFajr;
-        }
-
-        if ($nextIqamah) {
-            $timeLeftText = $this->getLocalizedNumber( $nextIqamah ) .':00';
-            $minLeftText = '<span class="timeLeft '.$this->getIqamahClass( $nextIqamah ).'">'. $this->localTimes["minute"] .'</span>';
-            if ($nextIqamah > 60) {
-                $hours = $nextIqamah / 60;
-                $hours = (int)$hours;
-                $mins = $nextIqamah % 60;
-                $mins = (int)$mins;
-                $timeLeftText = $this->getLocalizedNumber( $hours ) .' '.$this->localTimes["hours"] .' '. $this->getLocalizedNumber( $mins );
-            }
-        }
-
-        $nextPrayerString = "";
-
-        $nextPrayerString .=' 
-        <div class="scNextPrayer">
-            <span class="dptScNextPrayer">
-                '. $this->getHeading($row, $nextPrayer, $iqamah) .'
-                <h2 class="dptScTime">
-                '. $this->getNextPrayerTime($nextPrayerName, $row)
-                .'</h2>
-            </span>
-            ';
-        if (! $this->isJumahDisplay($row) ) {
-            $nextPrayerString .= '<span class="green">
-                <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'">'.  $timeLeftText .' </span>
-                ' . $minLeftText . '
-            </span>
-        </div>';
-        }
-
-        return $nextPrayerString;
-    }
-
-    private function getHeading($dbRow, $nextPrayer, $iqamah)
-    {
-        if ( is_null($nextPrayer)) {
-            return $this->localPrayerNames['fajr'].' '. $iqamah;
-        }
-        if ( $this->isJumahDisplay($dbRow) ) {
-            return $this->getLocalHeaders()['jumuah'];
-        }
-
-        return $this->localPrayerNames[$nextPrayer] .' '. $iqamah;
-    }
-
-    private function getNextPrayerTime($nextPrayerName, $dbRow)
-    {
-        if ( $this->isJumahDisplay($dbRow) ) {
-            return '<p class="jumuah">' . get_option('jumuah') . '</span>';
-        }
-        return $this->formatDateForPrayer($nextPrayerName);
     }
 }

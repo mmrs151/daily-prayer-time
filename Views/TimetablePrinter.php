@@ -280,22 +280,26 @@ class TimetablePrinter
      * @param int $countStart
      * @return string
      */
-    protected function getNextIqamahTime(array $row, $countStart=160)
+    protected function getNextIqamahTime(array $row)
     {
         $diff = $this->getNextIqamahTimeDiff($row);
+        $nextPrayer = $this->getNextPrayer($row);
 
-        if ($diff && $diff < $countStart) {
-            return $this->getTimeLeftString($diff);
-        }
+        return
+            '
+        <div class="dptScNextPrayer">
+            <span class="green">
+                <span class="nextPrayer">' . $this->getHeading($row, $nextPrayer). '</span> ' .
+                $this->getTimeLeftString($diff, $row);
     }
 
-    protected function getTimeLeftString($nextIqamah)
+    protected function getTimeLeftString($nextIqamah, $row)
     {
         $nextPrayerString = '';
 
         if ($nextIqamah) {
             $timeLeftText = $this->getLocalizedNumber( $nextIqamah ) .':00';
-            $minLeftText = '<span class="timeLeft '.$this->getIqamahClass( $nextIqamah ).'">'. $this->localTimes["minute"] .'</span>';
+            $minLeftText =  $this->localTimes["minute"];
             if ($nextIqamah > 60) {
                 $hours = $nextIqamah / 60;
                 $hours = (int)$hours;
@@ -304,11 +308,7 @@ class TimetablePrinter
                 $timeLeftText = $this->getLocalizedNumber( $hours ) .' '.$this->localTimes["hours"] .' '. $this->getLocalizedNumber( $mins );
             }
 
-            $nextPrayerString .= '
-                <span class="green">
-                    <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'">'.  $timeLeftText .' </span>
-                    ' . $minLeftText . 
-                '</span>';
+            return $this->getNextPrayerTime($row, $nextIqamah, $timeLeftText, $minLeftText);
         }
 
         return $nextPrayerString;
@@ -354,6 +354,44 @@ class TimetablePrinter
             }
         }
     }
+
+    protected function getHeading($dbRow, $nextPrayer)
+    {
+        $iqamah = ($nextPrayer == 'sunrise') ? '' : $this->localHeaders['iqamah'];
+        if ( is_null($nextPrayer)) {
+            return $this->localPrayerNames['fajr'].' '. $iqamah;
+        }
+        if ( $this->isJumahDisplay($dbRow) ) {
+            return $this->getLocalHeaders()['jumuah'];
+        }
+
+        return $this->localPrayerNames[$nextPrayer] .' '. $iqamah;
+    }
+
+    protected function getNextPrayerTime($dbRow, $nextIqamah, $timeLeftText, $minLeftText)
+    {
+        $nextPrayer = $this->getNextPrayer($dbRow);
+
+        $key = ($nextPrayer == 'sunrise') ? $nextPrayer : strtolower($nextPrayer.'_jamah');
+        $nextPrayerName = $dbRow[$key];
+        if ( is_null($nextPrayer) ) {
+            $nextPrayerName = $dbRow['nextFajr'];
+        }
+
+        if ( $this->isJumahDisplay($dbRow) ) {
+            return '<p class="jumuah">' . get_option('jumuah') . '</span>';
+        } else {
+            return
+                '<h2 class="dptScTime">' .
+                $this->formatDateForPrayer($nextPrayerName). '
+                </h2> 
+                <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
+                    '.  $timeLeftText .' 
+                </span><span class="minLeftText"> ' . $minLeftText .'</span>
+        </div>';
+        }
+    }
+
 
 	/**
      * @param array $row
@@ -484,7 +522,7 @@ class TimetablePrinter
                 $hijriDate = $hijridateArray['day']. ' '. $hijridateArray['month'] . ' ' . $hijridateArray['year'];
             }
 
-            return '<p class="hijriDate">('. $hijriDate .')</p>';
+            return '<p class="hijriDate"> '. $hijriDate .'</p>';
         }
         return;
     }

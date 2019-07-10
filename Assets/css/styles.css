@@ -271,11 +271,13 @@ h3.printSiteName {
     margin-bottom: 0px;
 }
 
-span.dptScNextPrayer {
+div.dptScNextPrayer {
     font-weight: bold;
     text-transform: uppercase;
 }
-
+span.minLeftText {
+    text-transform: lowercase !important;
+}
 h2.dptScTime {
     margin: 0px;
 }
@@ -420,11 +422,10 @@ height: 70%;
 .x-board span.vertical {
     font-size: 3vh !important;
 }
-
 .x-board p.hijriDate{
     display: inline;
     color: blue;
-
+    margin-left: 10px;
 }
 .x-board span.hijri p{
     font-size: 4vh !important;
@@ -528,11 +529,10 @@ height: 70%;
     color: inherit;
 }
 .x-board .timeLeft {
-    font-size: 5vh;
+    font-size: 0.8em;
 }
-
-.x-board .timeLeft{
-    font-size: 0.7em;
+.x-board .timeLeftCountDown {
+    display: inline;
 }
 
 .x-board .blink{
@@ -645,7 +645,7 @@ inspired from https://codepen.io/Rowno/pen/Afykb
     z-index: 2;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1024px) {
     h2#dsNextPrayer div span h2.dptScTime{
         font-size: 1em !important;
         font-weight: 700;

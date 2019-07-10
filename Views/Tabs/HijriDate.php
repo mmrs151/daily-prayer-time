@@ -1,14 +1,5 @@
-<?php
-$hd = new HijriDate();
-$date = $hd->getDate(date("d"), date("m"), date("Y"), true);
-?>
 <h3>Hijri date settings</h3>
 <div class="container-fluid">
-    <div class="row todaySpan">
-        <div class="col-sm-6 col-xs-12">
-            <span>Today is <?= $date?><span>
-        </div>
-    </div>
     <div class="row">
         <div class="col-sm-6 col-xs-12">
             <form name="hijriSettings" method="post">
