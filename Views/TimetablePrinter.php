@@ -295,8 +295,6 @@ class TimetablePrinter
 
     protected function getTimeLeftString($nextIqamah, $row)
     {
-        $nextPrayerString = '';
-
         if ($nextIqamah) {
             $timeLeftText = $this->getLocalizedNumber( $nextIqamah ) .':00';
             $minLeftText =  $this->localTimes["minute"];
@@ -308,10 +306,8 @@ class TimetablePrinter
                 $timeLeftText = $this->getLocalizedNumber( $hours ) .' '.$this->localTimes["hours"] .' '. $this->getLocalizedNumber( $mins );
             }
 
-            return $this->getNextPrayerTime($row, $nextIqamah, $timeLeftText, $minLeftText);
         }
-
-        return $nextPrayerString;
+        return $this->getNextPrayerTime($row, $nextIqamah, $timeLeftText, $minLeftText);
     }
 
     protected function getNextIqamahTimeDiff(array $row)
