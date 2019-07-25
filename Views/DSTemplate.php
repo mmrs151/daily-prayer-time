@@ -2,6 +2,9 @@
 <html <?php language_attributes(); ?>>
 <head>
     <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <?php if ( ! get_theme_support( 'title-tag' ) ): ?>
         <title><?php wp_title(); ?></title>

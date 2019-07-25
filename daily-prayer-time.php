@@ -75,8 +75,8 @@ class DailyPrayerTime extends WP_Widget
         wp_enqueue_style( 'jquery-ui' );
 
         // load bootstrap
-        wp_register_style( 'dpt_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
-        wp_enqueue_style( 'dpt_bootstrap' );
+//        wp_register_style( 'dpt_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+//        wp_enqueue_style( 'dpt_bootstrap' );
 
         wp_register_style( 'dpt_font_awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
         wp_enqueue_style( 'dpt_font_awesome' );
@@ -101,7 +101,7 @@ class DailyPrayerTime extends WP_Widget
 
         // bootstrap js from CDN
         wp_enqueue_script( 'dpt_popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js');
-        wp_enqueue_script( 'dpt_bootstrap_js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
+//        wp_enqueue_script( 'dpt_bootstrap_js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
         wp_enqueue_script( 'jquery-ui-dialog' );
 
         wp_enqueue_script("jquery-ui",'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), '1.8.8');
