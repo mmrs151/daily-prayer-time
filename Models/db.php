@@ -13,14 +13,12 @@ class DatabaseConnection
     /** @var array */
     private $transients = array('prayerTimeForToday', 'fajrJamahForTomorrow', 'jamahChanges', 'fajrForTomorrow');
 
-
     public function __construct()
     {
         global $wpdb;
 
         $this->tableName = $wpdb->prefix . "timetable";
         $this->dbTable = "`".DB_NAME ."`.`" .$this->tableName."`";
-
         $this->createTableIfNotExist();
     }
 
@@ -29,18 +27,12 @@ class DatabaseConnection
      */
     public function getPrayerTimeForToday()
     {
-        if (false === ( $result = $this->getTransient( 'prayerTimeForToday' )) ) {
-            error_log('prayer time for today');
+        global $wpdb;
 
-            global $wpdb;
-
-            $today = user_current_time( 'Y-m-d' );
-            $sql = "SELECT * FROM  $this->dbTable WHERE d_date = '$today' LIMIT 1";
-            $result = $wpdb->get_row($sql, ARRAY_A);
-            $result['jamah_changes'] = $this->getJamahChanges();
-
-            set_transient('prayerTimeForToday', $result,DAY_IN_SECONDS );
-        }
+        $today = user_current_time( 'Y-m-d' );
+        $sql = "SELECT * FROM  $this->dbTable WHERE d_date = '$today' LIMIT 1";
+        $result = $wpdb->get_row($sql, ARRAY_A);
+        $result['jamah_changes'] = $this->getJamahChanges();
 
         return $result;
     }
