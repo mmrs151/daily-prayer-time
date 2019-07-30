@@ -36,7 +36,6 @@
         <li>hide_ramadan=true</li>
         <li>announcement="Any text" day=everyday/saturday/sunday/monday/tuesday/wednesday/thursday/friday</li>
         <li>heading="any text"</li>
-        <li>display_hijri_date=true</li>
         <li>use_div_layout=true (only for horizontal table and you can easily update html/css using this mode)</li>
         <li>start_time=true (only for single prayer time)</li>
         <li>view='vertical' (only for digital_screen)</li>

@@ -95,17 +95,9 @@ table.dptTimetable th.azanOnly {
 table.dptTimetable tr:hover {
     background: #eee;
 }
-table.dptTimetable tr.highlight{
-    background-color: #F5FF92 !important;
-    font-weight: bold;
-}
-table.dptTimetable th.highlight,
-table.dptTimetable td.highlight{
+table.dptTimetable th.highlight, tr.highlight, td.highlight {
     background-color: #F5FF92;
     font-weight: bold;
-}
-table.dptTimetable tr:nth-child(even) {
-    background: rgba(232, 251, 232, 0.34);
 }
 
 /*No Border styling*/

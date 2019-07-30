@@ -45,15 +45,15 @@
                         <td><input type="text" name="evenRow" value="<?php echo get_option('evenRow') ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Highlight</td>
+                        <td>Highlight next prayer</td>
                         <td><input type="text" name="highlight" value="<?php echo get_option('highlight') ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Notification/blink background</td>
+                        <td>Announcement/Blink Background</td>
                         <td><input type="text" name="notificationBackground" value="<?php echo get_option('notificationBackground') ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Notification/blink Font</td>
+                        <td>Announcement/Blink Font</td>
                         <td><input type="text" name="notificationFont" value="<?php echo get_option('notificationFont') ?>" class="color-field"></td>
                     </tr>
                 </table>

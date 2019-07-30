@@ -41,15 +41,15 @@ class MonthlyTimetablePrinter extends TimetablePrinter
         $table = "
         <table class='dptTimetable customStyles dptUserStyles'>
          <thead class='prayerName'>
-             <th></th>
-             <th></th>
+             <th class='prayerName'></th>
+             <th class='prayerName'></th>
 
-             <th colspan='$fajrColspan'>" .$prayers['fajr']. "</th>
-             <th colspan='2'>" .$prayers['zuhr']. "</th>";
-        $table .= "<th colspan=".$this->getAsrMethodColspan().">" .$prayers['asr']. "</th>";
+             <th class='prayerName' colspan='$fajrColspan'>" .$prayers['fajr']. "</th>
+             <th class='prayerName' colspan='2'>" .$prayers['zuhr']. "</th>";
+        $table .= "<th class='prayerName' colspan=".$this->getAsrMethodColspan().">" .$prayers['asr']. "</th>";
         $table .= "
-             <th colspan='2'>" .$prayers['maghrib']. "</th>
-             <th colspan='2'>" .$prayers['isha']. "</th>
+             <th class='prayerName' colspan='2'>" .$prayers['maghrib']. "</th>
+             <th class='prayerName' colspan='2'>" .$prayers['isha']. "</th>
          </thead>
          <thead>
             <th class='tableHeading'>".$this->localTimes['date']."</th>

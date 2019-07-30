@@ -27,7 +27,7 @@ class DailyTimetablePrinter extends TimetablePrinter
 
         $table .= '
             <tr>
-                <th class="tableHeading">' .$this->localHeaders['prayer']. '</th>'
+                <th class="tableHeading prayerName">' .$this->localHeaders['prayer']. '</th>'
                   . $this->printTableHeading($row) .
             '</tr>
             <tr>
@@ -209,7 +209,7 @@ class DailyTimetablePrinter extends TimetablePrinter
 
         foreach ($this->localPrayerNames as $key=>$prayerName) {
             $class = $nextPrayer == $key ? 'highlight' : '';
-            $ths .= "<th class='tableHeading" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
+            $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
 
         return $ths;
