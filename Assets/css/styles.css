@@ -467,6 +467,7 @@ height: 70%;
 .x-board table td.prayerName {
     background: #383838;
     color: #eee;
+    font-weight: bold;
 }
 
 .x-board table thead tr th,
@@ -596,6 +597,11 @@ h3.scrolling-vertical > marquee > div > span {
 
 .x-board h2.dptScTime p.jumuah {
     font-size: 12vh;
+    margin: 20px;
+}
+
+p.jumuah {
+    margin: 40px;
 }
 
 h2.vertical > div > span > h2 > p {

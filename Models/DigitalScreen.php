@@ -105,13 +105,13 @@ class DigitalScreen extends DailyShortCode
                     <table id="dsPrayerTimetable" class="table height-100 '. $verticalClass .'">
                     <thead class="bg-dark">
                 <tr>
-                    <td>
+                    <td class="dsPrayerName">
                         <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['prayer']) . '</span>
                     </td>
-                    <td>
+                    <td class="dsBegins">
                         <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['begins']) . '</span>
                     </td>
-                    <td> 
+                    <td class="dsIqamah"> 
                         <span class="dpt_jamah">' . strtoupper($this->getLocalHeaders()['iqamah']) . '</span>
                     </td>
                 </tr>
@@ -132,7 +132,7 @@ class DigitalScreen extends DailyShortCode
         if ( get_option('jumuah') && $this->todayIsFriday() && $this->isJumahDisplay($this->row)) {
             $html .= '<tr>
                             <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
-                            <td colspan="2" class="prayerName">' . get_option('jumuah') . '</td>
+                            <td colspan="2" class="prayerName"><span>' . get_option('jumuah') . '</span></td>
                         </tr>';
         } else {
             $html .= '
