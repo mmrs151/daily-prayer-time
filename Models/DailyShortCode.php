@@ -255,7 +255,8 @@ class DailyShortCode extends TimetablePrinter
         $row['jamah_changes'] = $this->db->getJamahChanges(1);
         if (empty($row['jamah_changes'])) { return; }
 
-        return $this->getJamahChange($row, true, $attr['orientation']);
+        $orientation =  isset($attr['orientation']) ? $attr['orientation'] : '';
+        return $this->getJamahChange($row, true, $orientation);
     }
 
     public function scDigitalScreen($attr)
