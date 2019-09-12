@@ -95,8 +95,8 @@ class DigitalScreen extends DailyShortCode
 
         if ( $this->isPortrait ) {
             $verticalClass = "vertical";
-            $leftClass = "col-sm-12 bg-red padding-null text-center height-50";
-            $rightClass = "col-sm-12 padding-null text-center bg-green height-50";
+            $leftClass = "col-sm-12 bg-red padding-null text-center height-60";
+            $rightClass = "col-sm-12 padding-null text-center bg-green height-40";
         }
 
         $html =  '
@@ -105,15 +105,15 @@ class DigitalScreen extends DailyShortCode
                     <table id="dsPrayerTimetable" class="table height-100 '. $verticalClass .'">
                     <thead class="bg-dark">
                 <tr>
-                    <td class="dsPrayerName">
+                    <th class="dsPrayerName">
                         <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['prayer']) . '</span>
-                    </td>
-                    <td class="dsBegins">
+                    </th>
+                    <th class="dsBegins">
                         <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['begins']) . '</span>
-                    </td>
-                    <td class="dsIqamah"> 
+                    </th>
+                    <th class="dsIqamah">
                         <span class="dpt_jamah">' . strtoupper($this->getLocalHeaders()['iqamah']) . '</span>
-                    </td>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -126,7 +126,7 @@ class DigitalScreen extends DailyShortCode
                 </tr>
                 <tr>
                     <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
-                    <td class="prayerName" colspan="2">' . do_shortcode("[sunrise]") . '</td>
+                    <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
                 </tr>';
 
         if ( get_option('jumuah') && $this->todayIsFriday() && $this->isJumahDisplay($this->row)) {
@@ -220,7 +220,7 @@ class DigitalScreen extends DailyShortCode
         if ($this->isPortrait) {
             $html = '
                 <div class="row bottom-row">             
-                    <div class="col-sm-12 col-xs-12 height-30">
+                    <div class="col-sm-12 col-xs-12 height-24">
                         <div class="align-middle">
                             <h3 class="text-primary scrolling-vertical">
                                 <marquee id="dsIqamahUpdate" scrollamount="11">' . $this->getIqamahUpdate() . '</marquee> 

@@ -342,11 +342,22 @@ div.todaySpan {
 .x-board .height-100 {
     height: 100%;
 }
-
+.x-board .height-70 {
+    height: 70%;
+}
+.x-board .height-60 {
+    height: 60%;
+}
 .x-board .height-50 {
     height: 50%;
 }
+.x-board .height-40 {
+    height: 40%;
+}
 .x-board .height-30 {
+    height: 30%;
+}
+.x-board .height-24 {
     height: 24%;
     top: 10% !important;
 }
@@ -429,7 +440,7 @@ height: 70%;
 .x-board h3 {
     font-weight: bold;
     margin-bottom: 0px;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 .x-board .bg-red {
     background-color: #0066bf;
@@ -468,12 +479,19 @@ height: 70%;
     background: #383838;
     color: #eee;
     font-weight: bold;
+    text-align: left;
+    padding-left: 35px;
 }
-
+.x-board table td.sunrise {
+    text-align: center;
+}
+.x-board table thead tr th {
+    text-align: center;
+}
 .x-board table thead tr th,
 .x-board table thead tr td,
 .x-board table tbody tr td {
-    padding: 0px !important;
+    padding: 0px;
     border-bottom: 1px solid rgba(155,96,91,1);
     border-left: none;
     border-right: none;
@@ -482,10 +500,14 @@ height: 70%;
     color: #eee;
 }
 .x-board table > thead > tr > td {
+    border-bottom: 1px solid #000;
     border-top: 1px solid #000;
 }
-.x-board table > thead > tr > td {
-    border-bottom: 1px solid #000;
+.x-board td span.dpt_start, td span.dpt_jamah {
+    font-size: 6vh;
+}
+.x-board .vertical td span.dpt_start, .vertical td span.dpt_jamah {
+    font-size: 4vh;
 }
 .x-board table > tbody > tr:last-child > td {
     border: none;
@@ -511,10 +533,10 @@ height: 70%;
 }
 
 .x-board .nextPrayer h2.vertical {
-    font-size: 5vh !important;
+    font-size: 4vh !important;
 }
 .x-board .nextPrayer h3.vertical {
-    font-size: 5vh !important;
+    font-size: 4vh !important;
     opacity: .8
 }
 
@@ -645,7 +667,6 @@ inspired from https://codepen.io/Rowno/pen/Afykb
 
 @media only screen and (max-width: 1024px) {
     h2#dsNextPrayer div span h2.dptScTime{
-        font-size: 1em !important;
         font-weight: 700;
     }
     .x-board .nextPrayer h2 {
