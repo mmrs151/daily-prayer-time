@@ -23,8 +23,6 @@ delete_option('evenRow');
 delete_option('fontColor');
 delete_option('highlight');
 delete_option('jamah_changes');
-delete_option('scrolling-text');
-delete_option('blink-text');
 delete_option('slider-chbox');
 delete_option('transitionEffect');
 delete_option('transitionSpeed');

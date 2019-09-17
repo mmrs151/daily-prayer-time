@@ -10,6 +10,12 @@ class DigitalScreen extends DailyShortCode
 
     /** @var int */
     private $screenTimeout;
+    
+    /** @var string */
+    private $scrollText;
+    
+    /** @var string */
+    private $blinkText = 'WELCOME TO HOUSE OF ALLAH';
 
     public function __construct($attr=array())
     {
@@ -21,6 +27,14 @@ class DigitalScreen extends DailyShortCode
 
         if ( isset($attr['dim']) ) {
             $this->screenTimeout = $attr['dim'];
+        }
+    
+        if ( isset($attr['scroll']) ) {
+            $this->scrollText = $attr['scroll'];
+        }
+    
+        if ( isset($attr['blink']) ) {
+            $this->blinkText = $attr['blink'];
         }
     }
 
@@ -242,8 +256,8 @@ class DigitalScreen extends DailyShortCode
 
     private function getIqamahUpdate()
     {
-        if ( get_option('scrolling-text')) {
-            return get_option('scrolling-text');
+        if ( $this->scrollText ) {
+            return $this->scrollText;
         } else {
             return do_shortcode("[display_iqamah_update orientation='horizontal']");
         }
@@ -251,7 +265,7 @@ class DigitalScreen extends DailyShortCode
 
     private function getBlink()
     {
-        return get_option('blink-text', 'SILENT YOUR MOBILE');
+        return $this->blinkText;
     }
 
     private function getFirstSlide()

@@ -49,7 +49,4 @@ try {
             </ol>
         </div>
     </div>
-    <div class="row">
-        <?php include 'subscription.php' ?>
-    </div>
 </div>

@@ -12,14 +12,6 @@
                         <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="60" value=<?= get_option("ds-logo") ?>></td>
                     </tr>
                     <tr>
-                        <td class="active-slider">Scrolling Text</td>
-                        <td><input type="text" class="scrolling-text" placeholder="This text will scroll at the bottom" name="scrolling-text" size="60" value="<?= get_option("scrolling-text") ?>"></td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Blink Text</td>
-                        <td><input type="text" class="blink-text" placeholder="This text will BLINK at the bottom" name="blink-text" size="60" value="<?= get_option("blink-text") ?>"></td>
-                    </tr>
-                    <tr>
                         <td class="active-slider">Activate Slider</td>
                         <td><input type="checkbox" id="slider-chbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>></td>
                     </tr>
@@ -90,14 +82,13 @@
                 <li style="margin-left:2em">Install wordpress to use that theme </li>
                 <li style="margin-left:2em">Only allow whitelisted IP addresses to avoid hack</li>
             <li><a class="url" href="post-new.php?post_type=page">Create a new page</a></li>
-            <li>Use shortcode <code>[digital_screen]</code> to display horizontally/Landscape</li>
-            <li>Use shortcode <code>[digital_screen view='vertical']</code> to display vertically/Portrait</li>
-            <li>Use shortcode <code>[digital_screen view='vertical' dim=10]</code> to dim vertically screen for 10 mins when prayer starts</li>
             <li>Select page template <code>Digital Screen Prayer Time</code></li>
+            <li>Use shortcode <code>[digital_screen]</code> to display horizontally/Landscape</li>
+            <li><code>[digital_screen view='vertical']</code> to display vertically/Portrait</li>
+            <li><code>[digital_screen view='vertical' dim=10]</code> to dim vertically screen for 10 mins when prayer starts</li>
+            <li><code>[digital_screen view='vertical' dim=10 scroll='any text']</code> to override scrolling message</li>
+            <li><code>[digital_screen view='vertical' dim=10 blink='any text']</code> to override blinking alert message</li>
         </div>
-    </div>
-    <div class="row">
-        <?php include 'subscription.php' ?>
     </div>
 </div>
 

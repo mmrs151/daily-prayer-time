@@ -16,18 +16,10 @@ class DigitalScreenProcessor
 
     public function process()
     {
-        $scrollingText = $this->data['scrolling-text'];
-        delete_option('scrolling-text');
-        add_option('scrolling-text', $scrollingText);
-
         $dsLogo = $this->data['ds-logo'];
         delete_option('ds-logo');
         add_option('ds-logo', $dsLogo);
-
-        $blinkText = $this->data['blink-text'];
-        delete_option('blink-text');
-        add_option('blink-text', $blinkText);
-
+        
         $slider = $this->data['slider-chbox'];
         delete_option('slider-chbox');
         add_option('slider-chbox', $slider);

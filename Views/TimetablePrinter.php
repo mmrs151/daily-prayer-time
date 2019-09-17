@@ -218,7 +218,7 @@ class TimetablePrinter
     {
         $phpDate = strtotime($mysqlDate);
         if ($imsak) {
-            $phpDate = $phpDate - (get_option('imsaq') * 60);
+            $phpDate = $phpDate - ((int)get_option('imsaq') * 60);
         }
         $wpDate = date(get_option('time_format'), $phpDate);
 
