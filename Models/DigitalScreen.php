@@ -146,7 +146,7 @@ class DigitalScreen extends DailyShortCode
         if ( get_option('jumuah') && $this->todayIsFriday() && $this->isJumahDisplay($this->row)) {
             $html .= '<tr>
                             <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
-                            <td colspan="2" class="prayerName"><span>' . get_option('jumuah') . '</span></td>
+                            <td colspan="2" class="prayerName sunrise"><span>' . get_option('jumuah') . '</span></td>
                         </tr>';
         } else {
             $html .= '
@@ -177,7 +177,7 @@ class DigitalScreen extends DailyShortCode
             $html .= '
                 <tr>
                     <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
-                    <td colspan="2" class="prayerName"><span>' . get_option('jumuah') . '</span></td>
+                    <td colspan="2" class="prayerName sunrise"><span>' . get_option('jumuah') . '</span></td>
                 </tr>';
             }
         $html .= '

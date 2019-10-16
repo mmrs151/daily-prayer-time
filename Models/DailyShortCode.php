@@ -296,6 +296,7 @@ class DailyShortCode extends TimetablePrinter
         $row['hideRamadan'] = $this->hideRamadan;
         $row['hideTimeRemaining'] = $this->hideTimeRemaining;
         $row['displayHijriDate'] = $this->displayHijriDate;
+        $row['nextFajr'] = $this->db->getFajrJamahForTomorrow();
 
         return $row;
     }
