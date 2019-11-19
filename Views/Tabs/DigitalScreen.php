@@ -9,7 +9,7 @@
                 <table class="table">
                     <tr>
                         <td class="active-slider">Site Logo</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="60" value=<?= get_option("ds-logo") ?>></td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="65" value=<?= get_option("ds-logo") ?>></td>
                     </tr>
                     <tr>
                         <td class="active-slider">Activate Slider</td>
@@ -33,37 +33,37 @@
 
                     <tr class="ds-slides">
                         <td>Slider #1</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider1Url" size="60" value=<?= get_option("slider1Url") ?>>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider1Url" size="50" value=<?= get_option("slider1Url") ?>>
                             <img src="<?= get_option("slider1Url") ?>" style="max-height: 25px;" class="grow">
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #2</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider2Url" size="60" value=<?= get_option("slider2Url") ?>>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider2Url" size="50" value=<?= get_option("slider2Url") ?>>
                             <img src="<?= get_option("slider2Url") ?>" style="max-height: 25px;" class="grow">
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #3</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider3Url" size="60" value=<?= get_option("slider3Url") ?>>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider3Url" size="50" value=<?= get_option("slider3Url") ?>>
                             <img src="<?= get_option("slider3Url") ?>" style="max-height: 25px;" class="grow">
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #4</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider4Url" size="60" value=<?= get_option("slider4Url") ?>>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider4Url" size="50" value=<?= get_option("slider4Url") ?>>
                             <img src="<?= get_option("slider4Url") ?>" style="max-height: 25px;" class="grow">
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #5</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider5Url" size="60" value=<?= get_option("slider5Url") ?>>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider5Url" size="50" value=<?= get_option("slider5Url") ?>>
                             <img src="<?= get_option("slider5Url") ?>" style="max-height: 25px;" class="grow">
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #6</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider6Url" size="60" value=<?= get_option("slider6Url") ?>>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider6Url" size="50" value=<?= get_option("slider6Url") ?>>
                             <img src="<?= get_option("slider6Url") ?>" style="max-height: 25px;" class="grow">
                         </td>
                     </tr>
@@ -84,6 +84,7 @@
             <li><a class="url" href="post-new.php?post_type=page">Create a new page</a></li>
             <li>Select page template <code>Digital Screen Prayer Time</code></li>
             <li>Use shortcode <code>[digital_screen]</code> to display horizontally/Landscape</li>
+            <li><code>[digital_screen view='presentation' slides=image,image,...]</code> display slides only, hiding prayer time</li>
             <li><code>[digital_screen view='vertical']</code> to display vertically/Portrait</li>
             <li><code>[digital_screen view='vertical' dim=10]</code> to dim vertically screen for 10 mins when prayer starts</li>
             <li><code>[digital_screen view='vertical' dim=10 scroll='any text']</code> to override scrolling message</li>

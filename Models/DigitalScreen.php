@@ -7,6 +7,8 @@ class DigitalScreen extends DailyShortCode
 
     /** @var bool */
     private $isPortrait;
+    
+    private $isPresentation;
 
     /** @var int */
     private $screenTimeout;
@@ -14,15 +16,19 @@ class DigitalScreen extends DailyShortCode
     /** @var string */
     private $scrollText;
     
+    /** @var array */
+    private $presentationSlides;
+    
+    
     /** @var string */
     private $blinkText = 'WELCOME TO HOUSE OF ALLAH';
 
     public function __construct($attr=array())
     {
         parent::__construct();
-
         if ( isset($attr['view']) ) {
             $this->isPortrait = ( strtolower($attr['view']) == 'vertical' );
+            $this->isPresentation = ( strtolower($attr['view']) == 'presentation' );
         }
 
         if ( isset($attr['dim']) ) {
@@ -36,13 +42,23 @@ class DigitalScreen extends DailyShortCode
         if ( isset($attr['blink']) ) {
             $this->blinkText = $attr['blink'];
         }
+        
+        if ( isset($attr['slides']) ) {
+            $this->presentationSlides = explode(',', $attr['slides']);
+        }
     }
 
     public function displayDigitalScreen()
     {
-        $html = $this->getTopRow()
-            . $this->getMiddleRow()
-            .$this->getBottomRow();
+        $html = $this->getTopRow();
+        
+        if ($this->isPresentation) {
+            $html .= $this->getPresentationRow();
+        } else {
+            $html .= $this->getMiddleRow();
+        }
+        
+        $html .= $this->getBottomRow();
 
         return $html;
     }
@@ -101,6 +117,51 @@ class DigitalScreen extends DailyShortCode
             </div>';
         return $html;
     }
+    
+    private function getPresentationRow()
+    {
+        $transitionEffect = get_option('transitionEffect');
+        $transitionSpeed = get_option('transitionSpeed');
+        
+        $html ='
+            <div class="row middle-row bg-red">
+                <div class="col-sm-12 col-xs-12 padding-null text-center bg-green height-100 padding-null">
+                    <div id="text-carousel" class="carousel slide ' . $transitionEffect . '
+                        height-100" data-ride="carousel" data-interval="'. $transitionSpeed .'" data-pause="false">
+                        <div class="carousel-inner height-100">
+                            ' . $this->getPresentationSlides() . '
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+    
+        return $html;
+    }
+    
+    private function getPresentationSlides()
+    {
+        if (!$this->presentationSlides) {
+            return "<h1>add slides option, ie. <br/>
+                <i><pre> [digital_screen view='presentation' slides=imageLink,imageLink,imageLink]</pre></i></h1>";
+        }
+        
+        $html = '
+                <div class="item active" >
+                    <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
+                </div>';
+        
+        foreach ($this->presentationSlides as $i => $slideUrl) {
+            $html .= '
+                <div class="item" >
+                    <img class="carousel-slide" src="' . $slideUrl . '">
+                </div>
+                ';
+        }
+        
+        return $html;
+    }
+    
     private function getMiddleRow()
     {
         $leftClass = "col-sm-5 col-xs-12 bg-red height-100 padding-null text-center";
@@ -308,13 +369,15 @@ class DigitalScreen extends DailyShortCode
                 </div>               
                 ';
 
-                $count = $i + 1;
-                if ( $count % 2 == 0 ) {
-                    $html .= '
+                if (!$this->isPresentation) {
+                    $count = $i + 1;
+                    if ( $count % 2 == 0 ) {
+                        $html .= '
                         <div class="item">
                             ' . $this->getFirstSlide() . '
                         </div>
                     ';
+                    }
                 }
             }
 
