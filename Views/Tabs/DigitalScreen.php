@@ -73,14 +73,6 @@
         </div>
         <div class="col-sm-6 col-xs-12 highlight">
             <h3 class="pt-2"><code>INSTRUCTIONS</code></h3>
-            <li>Get a small computer, possibly a raspberry Pi</li>
-            <li>Install wordpress locally - to avoid your site being hacked and redirected(x)</li>
-            <li>Supported Theme:</li>
-                <li style="margin-left:2em"><a class="url" href="https://en-gb.wordpress.org/themes/blankslate/" target="_blank">Blank Slate theme <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
-                <li style="margin-left:2em"><a class="url" href="https://wordpress.org/themes/page-builder-framework/" target="_blank">Page-builder-framework theme<i class="fa fa-external-link" aria-hidden="true"></i></a></li>
-            <li>Alternatively - create a subdomain on your site, i.e screen.yourmasjid.com</li>
-                <li style="margin-left:2em">Install wordpress to use that theme </li>
-                <li style="margin-left:2em">Only allow whitelisted IP addresses to avoid hack</li>
             <li><a class="url" href="post-new.php?post_type=page">Create a new page</a></li>
             <li>Select page template <code>Digital Screen Prayer Time</code></li>
             <li>Use shortcode <code>[digital_screen]</code> to display horizontally/Landscape</li>

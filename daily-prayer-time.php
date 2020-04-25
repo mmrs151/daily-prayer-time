@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Daily Prayer Time
-Version: 2019.10.16
+Version: 2019.11.19
 Plugin URI: https://wordpress.org/plugins/daily-prayer-time-for-mosques/
 Description: Display yearly, monthly and daily prayer time, ramadan time vertically or horizontally, in any language
 Author: <a href="http://mmrs151.wordpress.com">mmrs151</a>
@@ -18,7 +18,7 @@ require_once ('Models/DigitalScreen.php');
 
 class DailyPrayerTime extends WP_Widget
 {
-    private $version = '2019.10.16';
+    private $version = '2019.11.19';
 
     public function __construct()
     {
@@ -29,7 +29,9 @@ class DailyPrayerTime extends WP_Widget
         $this->add_stylesheet();
         $this->add_scripts();
         add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
-
+    
+        delete_option('dpt-init');
+    
         if (get_option('dpt-init') != 1) {
             new Init();
         }
