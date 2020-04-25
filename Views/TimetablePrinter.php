@@ -221,7 +221,7 @@ class TimetablePrinter
             $phpDate = $phpDate - ((int)get_option('imsaq') * 60);
         }
         $wpDate = date(get_option('time_format'), $phpDate);
-
+    
         $result = str_split($wpDate);
         $intlDate = '';
         $this->localNumbers = $this->getLocalNumbers();
@@ -231,7 +231,7 @@ class TimetablePrinter
                 $intlDate .= $number;
             }
         }
-
+    
         return $intlDate;
     }
 

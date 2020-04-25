@@ -336,11 +336,21 @@ class DigitalScreen extends DailyShortCode
             $verticalClass = "vertical";
         }
 
+        if (get_option('ramadan-chbox')) {
+            $h3 = '<div class="dsRamadan">
+
+                <div class="sehri">' . $this->getLocalHeaders()['fast_begins'] . ': ' . $this->formatDateForPrayer($this->row['fajr_begins'], true) . '</div>
+                <div class="iftar pull-right">' . $this->getLocalHeaders()['fast_ends']. ': ' . do_shortcode("[maghrib_start]") . '</div>
+            </div>';
+        } else {
+            $h3 = '<h3 class="'.$verticalClass.'">'. $this->getLocalTimes()['next prayer'] . '</h3>';
+        }
+
         $html =  '
             <div class="nextPrayer height-100">
-                <div class="align-middle">
-                <h3 class="'.$verticalClass.'">'. $this->getLocalTimes()['next prayer'] . '</h3>
-                    <h2 id="dsNextPrayer" class="dsNextPrayer '.$verticalClass.'"></h2>
+                <div class="align-middle">'
+                   . $h3 .
+                    '<h2 id="dsNextPrayer" class="dsNextPrayer '.$verticalClass.'"></h2>
                 </div>
             </div>';
 

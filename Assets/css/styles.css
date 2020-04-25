@@ -205,12 +205,14 @@ span.printIcon {
 select.otherMonth  {
     border: 1px solid;  /*Removes border*/
     -moz-appearance: none; /* Removes Default Firefox style*/
-    width: 100px; /*Width of select dropdown to give space for arrow image*/
+    width: 150px; /*Width of select dropdown to give space for arrow image*/
     text-indent: 0.01px; /* Removes default arrow from firefox*/
     text-overflow: "";  /*Removes default arrow from firefox*/ /*My custom style for fonts*/
     padding: 5px;
     float: left;
     border-radius: 5px 5px 5px 5px;
+    background-size: 20px auto;
+    background-position: right 5px center;
 }
 
 span.dpt-donation {
@@ -520,7 +522,9 @@ height: 70%;
 .x-board .nextPrayer {
     color: #fff !important;
 }
-
+.x-board span.nextPrayer {
+    display: inline-block;
+}
 .x-board .nextPrayer h2 {
     color: #fff !important;
     font-size: 10vh !important;
@@ -564,6 +568,22 @@ height: 70%;
 .x-board span.tomorrow {
     margin-left: 10px;
 }
+
+.x-board div.sehri  {
+    float: left;
+    padding: 0px 30px 0px 30px;
+    font-size: 3vh;
+    background: red;
+    font-weight: 800;
+}
+
+.x-board div.iftar  {
+    padding: 0px 30px 0px 30px;
+    font-size: 3vh;
+    background: red;
+    font-weight: 800;
+}
+
 div.jamahChanges-horizontal span{
     font-size: 5vh;
     word-spacing: 10px;
@@ -673,7 +693,14 @@ inspired from https://codepen.io/Rowno/pen/Afykb
         margin: 0px;
     }
 }
-
+@media only screen and (max-device-width: 520px) {
+    .x-board div.sehri {
+        font-size: 2vh;
+    }
+    .x-board div.iftar  {
+        font-size: 2vh;
+    }
+}
 
 /*
 WHAT IS NEW IN 3.3: "Added transforms to improve carousel performance in modern browsers."
