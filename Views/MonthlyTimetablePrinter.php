@@ -26,9 +26,14 @@ class MonthlyTimetablePrinter extends TimetablePrinter
     private function printFullTableTop($options)
     {
         if ($options['isRamadan']) {
-            $fajrBegins = $this->localHeaders['begins'];
+            if ((int)get_option('imsaq') > 0 ) {
+                $fajrBegins = $this->localHeaders['begins'];
+                $fajrColspan = 4;
+            } else {
+                $fajrBegins = $this->localHeaders['fast_begins'];
+                $fajrColspan = 3;
+            }
             $maghribBegins = $this->localHeaders['fast_ends'];
-            $fajrColspan = 4;
         } else {
             $fajrBegins = $this->localHeaders['begins'];
             $maghribBegins = $this->localHeaders['begins'];
@@ -56,7 +61,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             <th class='tableHeading'>".$this->localTimes['day']."</th>
             ";
 
-        if ($options['isRamadan']) {
+        if ($options['isRamadan'] && (int)get_option('imsaq') > 0) {
             $table .="<th class='tableHeading ". $fastingClass ."'>" . $this->localHeaders['fast_begins'] . "</th>";
         }
 
@@ -107,9 +112,11 @@ class MonthlyTimetablePrinter extends TimetablePrinter
                 <td>" . date_i18n(get_option( 'date_format' ), strtotime($day['d_date'])). ' '. $this->getHijriDate($today[2], $today[1], $today[0], $day, true) ."</td>
                 <td class=" . $weekday . ">" . $weekday . "</td>
 ";
-            if ($options['isRamadan']) {
+            
+            if ($options['isRamadan'] && (int)get_option('imsaq') > 0) {
                 $table .="<td ". $classFasting .">" . $this->formatDateForPrayer($day['fajr_begins'], true). "</td>";
             }
+            
                 $table .= "
                 <td ". $classFasting .">" . $this->formatDateForPrayer($day['fajr_begins']). "</td>
                 <td class='jamah'>" . $this->formatDateForPrayer($day['fajr_jamah']). "</td>
