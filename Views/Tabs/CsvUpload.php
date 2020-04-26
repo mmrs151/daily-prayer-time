@@ -2,7 +2,7 @@
 $adapter = new DatabaseConnection();
 $rows = $adapter->getRows();
 $header = (array_keys($rows[1]));
-$writeFile = plugin_dir_path(__FILE__) . '../../Assets/yearly-prayer-time.csv';
+$writeFile = plugin_dir_path(__FILE__) . '../../Assets/prayer-time-'.date('Y'). '.csv';
 try {
     $f = fopen($writeFile, "w");
     fputcsv($f, $header);
@@ -10,7 +10,7 @@ try {
         fputcsv($f, array_values($line));
     }
     fclose($f);
-    $readFile = plugins_url('../../Assets/yearly-prayer-time.csv', __FILE__);
+    $readFile = plugins_url('../../Assets/prayer-time-'.date('Y').'.csv', __FILE__);
 } catch (\Exception $e) {
     die($e->getMessage());
 }

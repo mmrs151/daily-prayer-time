@@ -4,19 +4,20 @@ Donate link: http://www.uwt.org/
 Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, salat, namaz, fasting
 Requires at least: 4.5
 Requires PHP: 5.6
-Tested up to: 5.2
-Stable tag: 2019.11.19
+Tested up to: 5.4
+Stable tag: 2020.04.25
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Display Yearly, Monthly and Daily prayer time vertically or horizontally, in any language.
 
 == Description ==
-For video tutorial please follow these links
-How to use the plugin [youtube https://www.youtube.com/watch?v=SaE-2VS5Ru0]
-How to setup digital screen in mosque with this plugin [youtube https://www.youtube.com/watch?v=WzXc7nY4974]
+For video tutorial please follow these links:
+- (Latest) How to tutorial [youtube youtube https://youtu.be/uRq2UFZlpMA]
+- How to use the plugin [youtube https://www.youtube.com/watch?v=SaE-2VS5Ru0]
+- How to setup digital screen in mosque with this plugin [youtube https://www.youtube.com/watch?v=WzXc7nY4974]
 
-Alhamdulillah that you can Display Yearly and Monthly prayer time with ajax month selector using shortcode [timetable]
+Alhamdulillah that you can display Yearly and Monthly prayer time with ajax month selector using shortcode [timetable]
 Daily prayer time can be displayed vertically or horizontally in your preferable widget area. Designed for any Mosque or Islamic institutes.
 
 **You need to upload your masjid's timetable from plugin admin section.**
@@ -126,10 +127,10 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2019.11.19 =
-* New Presentation mode, hides prayer time
+= 2020.04.25 =
+* Display Sehri and Iftar time on Digital screen if ramadaan is activated
 
 == Upgrade Notice ==
 
-= 2019.11.19 =
-* New Presentation mode, hides prayer time
+= 2020.04.25 =
+* Display Sehri and Iftar time on Digital screen if ramadaan is activated

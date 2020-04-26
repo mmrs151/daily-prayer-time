@@ -59,6 +59,7 @@ class Init
     private function getYearlyData()
     {
         $year = date('Y');
+        
         $range = array();
         $start = strtotime($year.'-01-01');
         $end = strtotime($year.'-12-31');
