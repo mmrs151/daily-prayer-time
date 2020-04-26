@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.4
-Stable tag: 2020.04.25
+Stable tag: 2020.04.26
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Display Yearly, Monthly and Daily prayer time vertically or horizontally, in any
 
 == Description ==
 For video tutorial please follow these links:
-- (Latest) How to tutorial [youtube youtube https://youtu.be/uRq2UFZlpMA]
+- (Latest) How to tutorial [youtube https://youtu.be/uRq2UFZlpMA]
 - How to use the plugin [youtube https://www.youtube.com/watch?v=SaE-2VS5Ru0]
 - How to setup digital screen in mosque with this plugin [youtube https://www.youtube.com/watch?v=WzXc7nY4974]
 
@@ -127,10 +127,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2020.04.25 =
+= 2020.04.26 =
 * Display Sehri and Iftar time on Digital screen if ramadaan is activated
+* Fix YT link
 
 == Upgrade Notice ==
 
-= 2020.04.25 =
+= 2020.04.26 =
 * Display Sehri and Iftar time on Digital screen if ramadaan is activated
+* Fix YT link
