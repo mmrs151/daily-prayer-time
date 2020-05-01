@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.4
-Stable tag: 2020.04.26
+Stable tag: 2020.05.01
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,12 +127,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2020.04.26 =
-* Display Sehri and Iftar time on Digital screen if ramadaan is activated
-* Fix YT link
+= 2020.05.01 =
+* Digital screen blink and scroll can have url now, so people on mobile can click.
+* added blink_link and scroll_link short code
 
 == Upgrade Notice ==
 
-= 2020.04.26 =
-* Display Sehri and Iftar time on Digital screen if ramadaan is activated
-* Fix YT link
+= 2020.05.01 =
+* Digital screen blink and scroll can have url now, so people on mobile can click.
+* added blink_link and scroll_link short code
