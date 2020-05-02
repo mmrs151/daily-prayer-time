@@ -81,6 +81,7 @@
             <li><code>[digital_screen view='vertical' dim=10]</code> to dim vertically screen for 10 mins when prayer starts</li>
             <li><code>[digital_screen view='vertical' dim=10 scroll='any text']</code> to override scrolling message</li>
             <li><code>[digital_screen view='vertical' dim=10 blink='any text']</code> to override blinking alert message</li>
+            <li><code>[digital_screen view='vertical' blink='any text' blnk_link='https://valid.url' scroll='any text' scroll_link='https://valid.url']</code> Allows mobile user to click on the text and possibly pay donation</li>
         </div>
     </div>
 </div>
