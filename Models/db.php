@@ -32,6 +32,11 @@ class DatabaseConnection
         $today = user_current_time( 'Y-m-d' );
         $sql = "SELECT * FROM  $this->dbTable WHERE d_date = '$today' LIMIT 1";
         $result = $wpdb->get_row($sql, ARRAY_A);
+        
+        if ( empty($result) ) {
+            $sql = "SELECT * FROM  $this->dbTable WHERE month (d_date) = ". date('m') ." and day(d_date)=". date('d') ." LIMIT 1";
+            $result = $wpdb->get_row($sql, ARRAY_A);
+        }
         $result['jamah_changes'] = $this->getJamahChanges();
 
         return $result;
@@ -39,20 +44,23 @@ class DatabaseConnection
 
     public function getIqamahTimeForToday()
     {
-        error_log('iqamah time for today');
         $result = $this->getPrayerTimeForToday();
-        return array($result['fajr_jamah'], $result['sunrise'], $result['zuhr_jamah'], $result['asr_jamah'], $result['maghrib_jamah'], $result['isha_jamah']);
+        return array(
+        'fajr' => $result['fajr_jamah'],
+        'sunrise' => $result['sunrise'],
+        'zuhr' => $result['zuhr_jamah'],
+        'asr' => $result['asr_jamah'],
+        'maghrib' => $result['maghrib_jamah'],
+        'isha' => $result['isha_jamah']
+        );
     }
-
-
-
+    
     /**
      * @return array
      */
     public function getFajrJamahForTomorrow()
     {
         if (false === ( $result = $this->getTransient( 'fajrForTomorrow' )) ) {
-            error_log('fajr for tomorrow');
             global $wpdb;
 
             $sql = "SELECT fajr_jamah FROM  $this->dbTable WHERE d_date =  CURDATE()  + INTERVAL 1 DAY;";
@@ -71,7 +79,6 @@ class DatabaseConnection
      */
     public function getJamahChanges($min=null)
     {
-        error_log('jamah chnages');
         $xmin = get_option( 'jamah_changes' );
         $xmin = empty($min) ? $xmin : $min;
 
@@ -81,7 +88,7 @@ class DatabaseConnection
 
         global $wpdb;
 
-        $sql = "SELECT
+        $baseSql = "SELECT
                 abs(TIME_TO_SEC(TIMEDIFF(today.fajr_jamah, tomorrow.fajr_jamah)) / 60) as fajr_jamah,
                 abs(TIME_TO_SEC(TIMEDIFF(today.zuhr_jamah, tomorrow.zuhr_jamah)) /60) as zuhr_jamah,
                 abs(TIME_TO_SEC(TIMEDIFF(today.asr_jamah, tomorrow.asr_jamah)) /60) as asr_jamah,
@@ -89,12 +96,20 @@ class DatabaseConnection
                 abs(TIME_TO_SEC(TIMEDIFF(today.isha_jamah, tomorrow.isha_jamah)) /60) as isha_jamah
             FROM $this->dbTable  today
             INNER JOIN $this->dbTable tomorrow
-            ON today.d_date = tomorrow.d_date + INTERVAL 1 DAY
-            WHERE today.d_date = CURDATE() + INTERVAL 1 DAY;";
+            ON today.d_date = tomorrow.d_date + INTERVAL 1 DAY";
+        
+        $sql = $baseSql . " WHERE today.d_date = CURDATE() + INTERVAL 1 DAY;";
 
         $result = $wpdb->get_row($sql, ARRAY_A);
-
+        //(select d_date from $this->dbTable where month(d_date) = 05 and day(d_date) = 11)
         if ( empty($result) ) {
+            $sql = $baseSql . "
+            WHERE today.d_date = (select d_date from $this->dbTable
+            WHERE month(d_date) = ". date('m') ." AND day(d_date) = ". date('d') .") + INTERVAL 1 DAY;";
+            $result = $wpdb->get_row($sql, ARRAY_A);
+        }
+        
+        if (empty($result)) {
             return null;
         }
 
@@ -119,6 +134,14 @@ class DatabaseConnection
 
         $result = $wpdb->get_row($sql, ARRAY_A);
 
+        if (empty($result)) {
+            $sql = "SELECT " . $jamahNamesString . "
+            FROM $this->dbTable
+            WHERE d_date = (select d_date from $this->dbTable
+            WHERE month(d_date) = ". date('m') ." AND day(d_date) = ". date('d') .") + INTERVAL 1 DAY;";
+            $result = $wpdb->get_row($sql, ARRAY_A);
+        }
+        
         return $result;
     }
 
@@ -132,6 +155,11 @@ class DatabaseConnection
 
         $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = $monthNumber AND YEAR(d_date) = YEAR(CURDATE()) ORDER BY d_date ASC";
         $result = $wpdb->get_results($sql, ARRAY_A);
+        
+        if ( empty($result) ) {
+            $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = $monthNumber ORDER BY d_date ASC";
+            $result = $wpdb->get_results($sql, ARRAY_A);
+        }
 
         return $result;
     }
@@ -145,7 +173,12 @@ class DatabaseConnection
 
         $sql = "SELECT * FROM  $this->dbTable WHERE is_ramadan = 1 AND YEAR(d_date) = YEAR(CURDATE()) ORDER BY d_date ASC";
         $result = $wpdb->get_results($sql, ARRAY_A);
-
+        
+        if ( empty($result) ){
+            $sql = "SELECT * FROM  $this->dbTable WHERE is_ramadan = 1 ORDER BY d_date ASC";
+            $result = $wpdb->get_results($sql, ARRAY_A);
+        }
+ 
         return $result;
     }
 
@@ -230,12 +263,9 @@ class DatabaseConnection
 
     public function getRows()
     {
-        error_log('get rows');
-
         global $wpdb;
-        $sql = "SELECT * FROM " . $this->dbTable;
-        $result = $wpdb->get_results($sql, ARRAY_A);
-        return $result;
+        $sql = "SELECT * FROM ". $this->dbTable ." WHERE year(d_date) = (select max(year(d_date)) from " . $this->dbTable . ")";
+        return  $wpdb->get_results($sql, ARRAY_A);
     }
 
     private function getTransient($transientName)

@@ -52,6 +52,8 @@ if (! empty($_POST['digitalScreen'])) {
     $themeSettings = new DigitalScreenProcessor($_POST);
     $themeSettings->process();
 }
+    $path = plugin_dir_url( __FILE__ ); // I am in Models
+    $path .= '../';
 ?>
 
 <div id="tabs" style="display: none;">
@@ -63,6 +65,7 @@ if (! empty($_POST['digitalScreen'])) {
         <li><a href="#tabs-5" data-tab-index="4">Quick Update</a></li>
         <li><a href="#tabs-6" data-tab-index="6">Digital Screen</a></li>
         <li><a href="#tabs-7" data-tab-index="7">Other settings</a></li>
+        <li><a href="#tabs-8" data-tab-index="8">API Doc</a></li>
     </ul>
 
     <div id="tabs-1" class="wrap" xmlns="http://www.w3.org/1999/html">
@@ -91,6 +94,10 @@ if (! empty($_POST['digitalScreen'])) {
 
     <div id="tabs-7">
         <?php include 'Tabs/OtherSettings.php' ?>
+    </div>
+    
+    <div id="tabs-8">
+        <?php include 'Tabs/APIdoc.php' ?>
     </div>
 </div>
     <span class="dpt-donation"><a href="http://www.uwt.org/" target="_blank">Support The Ummah</a></span>

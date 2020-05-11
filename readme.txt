@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.4
-Stable tag: 2020.05.01
+Stable tag: 2020.05.08
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,8 +14,6 @@ Display Yearly, Monthly and Daily prayer time vertically or horizontally, in any
 == Description ==
 For video tutorial please follow these links:
 - (Latest) How to tutorial [youtube https://youtu.be/uRq2UFZlpMA]
-- How to use the plugin [youtube https://www.youtube.com/watch?v=SaE-2VS5Ru0]
-- How to setup digital screen in mosque with this plugin [youtube https://www.youtube.com/watch?v=WzXc7nY4974]
 
 Alhamdulillah that you can display Yearly and Monthly prayer time with ajax month selector using shortcode [timetable]
 Daily prayer time can be displayed vertically or horizontally in your preferable widget area. Designed for any Mosque or Islamic institutes.
@@ -112,27 +110,24 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 3. Hijri date settings
 4. Change timetable look and feel
 5. Update monthly prayer time from admin section
-6. Ramadan, Asr and Iqamah notification settings
-7. Widget settings
-8. Dark and no border styling
-9. Support for any language
-10. Custom title in widget
-11. Change monthly time table heading and month name
-12. Highlight next prayer, time remaining for iqamah, ramadan timing
-13. Ramadan calendar for current year
-14. Shortcode for displaying next prayer
-15. Shortcode for displaying daily ramadan times
+6. Digital screen settings
+7. Jumuah, Ramadan, Asr and Iqamah notification settings
+8. API docs
+9. Widget settings
+10. Example 1: daily prayer times
+11. Example 2: monthly prayer times
+12. Digital screen or mobile screen
+13. Example1: Using individual shortcode
+14. Example2: Using individual shortcode
+15. API response
 16. Iqamah change notification for tomorrow
-17. Display prayer time on big monitors in the masjid
 
 == Changelog ==
 
-= 2020.05.01 =
-* Digital screen blink and scroll can have url now, so people on mobile can click.
-* added blink_link and scroll_link short code
+= 2020.05.08 =
+* Making work with php 5.6
 
 == Upgrade Notice ==
 
-= 2020.05.01 =
-* Digital screen blink and scroll can have url now, so people on mobile can click.
-* added blink_link and scroll_link short code
+= 2020.05.08 =
+* Making work with php 5.6

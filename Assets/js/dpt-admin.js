@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-
+    jQuery('.selectpicker').selectpicker();
 // Tabs
     jQuery('#tabs').tabs().show();
     jQuery('#tabs').tabs({

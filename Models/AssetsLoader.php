@@ -1,7 +1,7 @@
 <?php
     class AssetsLoader
     {
-        private $version = '2020.05.01';
+        private $version = '2020.05.08';
     
         public function __construct()
         {
@@ -15,7 +15,8 @@
             if ($hook == 'toplevel_page_dpt') {
                 wp_enqueue_script('dpt-admin', plugins_url( '../Assets/js/dpt-admin.js', __FILE__ ), array( 'jquery' ), '4.0.0');
                 wp_enqueue_script( 'dpt_bootstrap_js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
-            
+                wp_enqueue_script("bootstrap-select", "https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js");
+    
                 wp_register_style( 'dpt_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
                 wp_enqueue_style( 'dpt_bootstrap' );
             }
@@ -58,6 +59,9 @@
         
             wp_register_style('jquery_ui_css', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
             wp_enqueue_style( 'jquery_ui_css' );
+    
+            wp_register_style("bootstrap-select", "https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css");
+            wp_enqueue_style("bootstrap-select");
         
         
             new UpdateStyles('timetable-style');

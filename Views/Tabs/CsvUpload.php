@@ -1,4 +1,25 @@
 <?php
+    
+    $method = 1;
+    $year = date('Y');
+    $date = strtotime($year. '-1-1');
+    $endDate = strtotime(($year+ 1). '-1-1');
+    error_log('time Zone: ' . get_option('gmt_offset'));
+    error_log('time Zone city: ' . get_option('timezone_string'));
+//    while ($date < $endDate)
+//    {
+//        $times = $prayTime->getPrayerTimes($date, $latitude, $longitude, $timeZone);
+//        $day = date('M d', $date);
+//        print $day. "\t". implode("\t", $times). "\n";
+//        $date += 24* 60* 60;  // next day
+//    }
+    
+    $prayTime = new PrayTime($method);
+    
+    
+    
+    
+    
 $adapter = new DatabaseConnection();
 $rows = $adapter->getRows();
 $header = (array_keys($rows[1]));
@@ -29,6 +50,14 @@ try {
                     </div>
                 </div>
             </form>
+        <div>
+            Select your nearest city
+            <select class="selectpicker" data-live-search="true">
+                <option data-tokens=""></option>
+                <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+            </select>
+        </div>
         </div>
         <div class="col-sm-6 col-xs-12 highlight">
             <h3 class="pt-2"><code>INSTRUCTIONS</code></h3>
