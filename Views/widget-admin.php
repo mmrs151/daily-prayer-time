@@ -6,11 +6,19 @@ require_once(__DIR__.'/../Models/Processors/HijriProcessor.php');
 require_once(__DIR__.'/../Models/Processors/QuickUpdateProcessor.php');
 require_once(__DIR__.'/../Models/Processors/ThemeSettingsProcessor.php');
 require_once(__DIR__.'/../Models/Processors/DigitalScreenProcessor.php');
+require_once(__DIR__.'/../Models/Processors/StartTimeProcessor.php');
 require_once(__DIR__.'/../Models/DailyShortCode.php');
 require_once(__DIR__.'/../Models/db.php');
 require_once(__DIR__.'/../Models/HijriDate.php');
+require_once(__DIR__.'/../Models/StartTime/WorldCities.php');
+
 
 ini_set('auto_detect_line_endings', true);
+
+if (isset($_POST['set-start-time'])) {
+    $startTimeProcessor = new StartTimeProcessor($_POST);
+    $startTimeProcessor->process();
+}
 
 if (isset($_POST['submit'])) {
     $csvProcessor = new CsvProcessor($_FILES);
@@ -58,7 +66,7 @@ if (! empty($_POST['digitalScreen'])) {
 
 <div id="tabs" style="display: none;">
     <ul>
-        <li><a href="#tabs-1" data-tab-index="0">Upload Timetable</a></li>
+        <li><a href="#tabs-1" data-tab-index="0">Set Prayer Times</a></li>
         <li><a href="#tabs-2" data-tab-index="1">Change Language</a></li>
         <li><a href="#tabs-3" data-tab-index="2">Hijri settings</a></li>
         <li><a href="#tabs-4" data-tab-index="3">Theme settings</a></li>

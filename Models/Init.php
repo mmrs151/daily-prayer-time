@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__. '/db.php');
+require_once (__DIR__ . '/StartTime/WorldCities.php');
 
 class Init
 {
@@ -28,6 +29,8 @@ class Init
     {
         $this->db = new DatabaseConnection();
         $this->importSampleCsv();
+        $cities = new WorldCities();
+        $cities->importCities();
     }
 
     private function importSampleCsv()
@@ -53,7 +56,6 @@ class Init
             $this->db->insertRow($row);
         }
         add_option('dpt-init', '1');
-
     }
 
     private function getYearlyData()

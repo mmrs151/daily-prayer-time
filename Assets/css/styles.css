@@ -2,7 +2,15 @@
 -body {
     font-family: 'Ubuntu', sans-serif;
 }
-
+div.upload-step {
+    padding-bottom: 20px;
+}
+div.upload-step label{
+    width: 200px;
+}
+div.upload-step select{
+    padding-left: 10px;
+}
 td.Sat, td.Sun{
     font-weight: bold;
     color: red;

@@ -31,5 +31,6 @@ delete_option('slider2Url');
 delete_option('slider3Url');
 delete_option('slider4Url');
 delete_option('slider5Url');
+delete_transient('dpt_cities'))
 
 $wpdb->query("DROP TABLE IF EXISTS $table");

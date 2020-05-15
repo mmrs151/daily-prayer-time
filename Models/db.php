@@ -101,7 +101,6 @@ class DatabaseConnection
         $sql = $baseSql . " WHERE today.d_date = CURDATE() + INTERVAL 1 DAY;";
 
         $result = $wpdb->get_row($sql, ARRAY_A);
-        //(select d_date from $this->dbTable where month(d_date) = 05 and day(d_date) = 11)
         if ( empty($result) ) {
             $sql = $baseSql . "
             WHERE today.d_date = (select d_date from $this->dbTable

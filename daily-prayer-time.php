@@ -16,8 +16,7 @@ require_once ('Models/DPTAjaxHandler.php');
 require_once ('Models/DigitalScreen.php');
 require_once ('Models/AssetsLoader.php');
 require_once ('API/v1/PrayerTimeController.php');
-
-require_once ('Models/PrayTime.php');
+require_once ('Models/StartTime/PrayTime.php');
 
 
 class DailyPrayerTime extends WP_Widget
@@ -39,6 +38,7 @@ class DailyPrayerTime extends WP_Widget
         if (get_option('dpt-init') != 1) {
             new Init();
         }
+//        delete_option('dpt-init'); // only enable for testing
     }
     
     public function form($instance)
@@ -115,8 +115,22 @@ function prayer_settings()
         plugins_url( 'Assets/images/icon19.png', __FILE__ )
     );
 
-    add_submenu_page('dpt', 'Settings', 'Settings', 'manage_options', 'dpt', 'renderMainPage');
-    add_submenu_page('dpt', 'Helps and Tips', 'Helps and Tips', 'manage_options', 'helps-and-tips', 'helps_and_tips');
+    add_submenu_page('dpt',
+        'Settings',
+        'Settings',
+        'manage_options',
+        'dpt',
+        'renderMainPage'
+    );
+    
+    add_submenu_page(
+        'dpt',
+        'Helps and Tips',
+        'Helps and Tips',
+        'manage_options',
+        'helps-and-tips',
+        'helps_and_tips'
+    );
 
     function renderMainPage() { include 'Views/widget-admin.php'; }
 

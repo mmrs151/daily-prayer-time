@@ -2,7 +2,6 @@
 
 class DPTAjaxHandler extends DailyShortCode
 {
-
     public function __construct()
     {
         $this->addAjaxActions();
