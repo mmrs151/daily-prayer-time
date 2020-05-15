@@ -67,12 +67,12 @@ if (! empty($_POST['digitalScreen'])) {
 <div id="tabs" style="display: none;">
     <ul>
         <li><a href="#tabs-1" data-tab-index="0">Set Prayer Times</a></li>
-        <li><a href="#tabs-2" data-tab-index="1">Change Language</a></li>
-        <li><a href="#tabs-3" data-tab-index="2">Hijri settings</a></li>
-        <li><a href="#tabs-4" data-tab-index="3">Theme settings</a></li>
-        <li><a href="#tabs-5" data-tab-index="4">Quick Update</a></li>
-        <li><a href="#tabs-6" data-tab-index="6">Digital Screen</a></li>
-        <li><a href="#tabs-7" data-tab-index="7">Other settings</a></li>
+        <li><a href="#tabs-5" data-tab-index="1">Quick Update Times</a></li>
+        <li><a href="#tabs-6" data-tab-index="2">Monitor/mobile Setup</a></li>
+        <li><a href="#tabs-3" data-tab-index="4">Hijri Settings</a></li>
+        <li><a href="#tabs-4" data-tab-index="3">Theme Settings</a></li>
+        <li><a href="#tabs-7" data-tab-index="7">Other Settings</a></li>
+        <li><a href="#tabs-2" data-tab-index="2">Language Settings</a></li>
         <li><a href="#tabs-8" data-tab-index="8">API Doc</a></li>
     </ul>
 

@@ -26,11 +26,18 @@ delete_option('jamah_changes');
 delete_option('slider-chbox');
 delete_option('transitionEffect');
 delete_option('transitionSpeed');
+
 delete_option('slider1Url');
 delete_option('slider2Url');
 delete_option('slider3Url');
 delete_option('slider4Url');
 delete_option('slider5Url');
-delete_transient('dpt_cities'))
+
+delete_option('fajr-delay');
+delete_option('zuhr-delay');
+delete_option('asr-delay');
+delete_option('maghrib-delah');
+delete_option('isha-delay');
+delete_transient('dpt_cities');
 
 $wpdb->query("DROP TABLE IF EXISTS $table");

@@ -40,6 +40,18 @@ class StartTimeProcessor
         $asrMethod = $this->data['asr-method'];
         $latLong = $this->getLatLong($this->data['city']);
         $timeZone =  get_option('gmt_offset');
+    
+        delete_option('fajr-delay');
+        delete_option('zuhr-delay');
+        delete_option('asr-delay');
+        delete_option('maghrib-delay');
+        delete_option('isha-delay');
+        
+        add_option('fajr-delay', $this->data['fajr-delay']);
+        add_option('zuhr-delay', $this->data['zuhr-delay']);
+        add_option('asr-delay', $this->data['asr-delay']);
+        add_option('maghrib-delay', $this->data['maghrib-delay']);
+        add_option('isha-delay', $this->data['isha-delay']);
         
         $this->prayTime->setCalcMethod($calcMethod);
         $this->prayTime->setAsrMethod($asrMethod);
@@ -85,16 +97,18 @@ class StartTimeProcessor
         return $dt->format('H:i');
     }
     
-    private function getLatLong($cityId) // LONDON default
+    private function getLatLong($cityId)
     {
+        $cityId = empty($cityId) ? 26 : $cityId; // DEFAULT LONDON
+        
         global $wpdb;
         $sql = "SELECT lat, lng FROM  $this->dbTable WHERE id = " . $cityId;
         $row = $wpdb->get_row($sql, ARRAY_A);
+        
         return array(
             'lat' => $row['lat'],
             'lng' => $row['lng']
         );
-        
     }
     
 }

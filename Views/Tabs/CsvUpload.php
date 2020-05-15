@@ -21,7 +21,7 @@ try {
     die($e->getMessage());
 }
 ?>
-<h3>Set Prayer Times Automatically</h3>
+<h3 style="padding-bottom: 30px;">Set Prayer Times Automatically</h3>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-xs-12">
@@ -59,22 +59,22 @@ try {
                     </select>
                 </div>
                 <div class="upload-step">
-                    <label>Fajr Iqamah delay:</label><input type="number" name="fajr-delay" min="3" max="120"> mins
+                    <label>Fajr Iqamah delay:</label><input type="number" name="fajr-delay" min="3" max="120" value="<?=get_option('fajr-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Dhuhr Iqamah delay:</label><input type="number" name="zuhr-delay" min="3" max="120"> mins
+                    <label>Dhuhr Iqamah delay:</label><input type="number" name="zuhr-delay" min="3" max="120" value="<?=get_option('zuhr-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Asr Iqamah delay:</label><input type="number" name="asr-delay" min="3" max="120"> mins
+                    <label>Asr Iqamah delay:</label><input type="number" name="asr-delay" min="3" max="120" value="<?=get_option('asr-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Maghrib Iqamah delay:</label><input type="number" name="maghrib-delay" min="3" max="120"> mins
+                    <label>Maghrib Iqamah delay:</label><input type="number" name="maghrib-delay" min="3" max="120" value="<?=get_option('maghrib-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Isha Iqamah delay:</label><input type="number" name="isha-delay" min="3" max="120"> mins
+                    <label>Isha Iqamah delay:</label><input type="number" name="isha-delay" min="3" max="120" value="<?=get_option('isha-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <input type='submit' name="set-start-time" id="set-start-time" class='button button-primary' value='Set Start Time'>
+                    <input type='submit' name="set-start-time" id="set-start-time" class='button button-primary' value='Set Prayer Time'>
                 </div>
         </div>
         <div class="col-sm-6 col-xs-12 highlight">
