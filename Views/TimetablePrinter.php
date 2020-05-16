@@ -273,20 +273,33 @@ class TimetablePrinter
 
         return $html;
     }
-
+    
     /**
      * @param array $row
-     *
-     * @param int $countStart
+     * @param bool $displayDates
      * @return string
      */
-    protected function getNextIqamahTime(array $row)
+    protected function getNextIqamahTime(array $row, $displayDates=false)
     {
         $diff = $this->getNextIqamahTimeDiff($row);
         $nextPrayer = $this->getNextPrayer($row);
+        if($row['displayHijriDate']) {
+            $hijriDate = $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true);
+        }
+
+        $printDates = '';
+        if ($displayDates) {
+            $printDates = '<div>
+        <span class="scDate">
+        ' . date_i18n( get_option( 'date_format' ) ) . '
+        </span>
+        <span class="scHijri">
+            ' . $hijriDate . '
+        </span>';
+        }
 
         return
-            '
+            $printDates . '
         <div class="dptScNextPrayer">
             <span class="green">
                 <span class="nextPrayer">' . $this->getHeading($row, $nextPrayer). '</span> ' .

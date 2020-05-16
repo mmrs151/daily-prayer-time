@@ -16,6 +16,22 @@ DPT = {
         this.digitialClock();
         this.playFajrAdhaanBeforeIqamah();
         this.playOtherAdhaanBeforeIqamah();
+        this.displayCustomAngleFields();
+    },
+
+    displayCustomAngleFields: function() {
+        var id = jQuery( "#calculationMethod option:selected" ).val();
+        if ( id === '6') {
+            jQuery("#customMethod").show()
+        }
+        jQuery('#calculationMethod').on('change',function(){
+            if( jQuery(this).val() === '6'){ //custom settings
+                console.log(jQuery(this).val());
+                jQuery("#customMethod").show()
+            } else{
+                jQuery("#customMethod").hide()
+            }
+        });
     },
 
     monthlyCalendarChange: function () {

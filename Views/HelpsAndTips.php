@@ -12,7 +12,7 @@
         <li>[dailytable_vertical]</li>
         <li>[dailytable_horizontal]</li>
         <li>[display_ramadan_time] <i>(no shortcode options)</i></li>
-        <li>[daily_next_prayer] <i>(no shortcode options)</i></li>
+        <li>[daily_next_prayer] <i>display_dates=true</i></li>
         <li>[fajr_prayer]</li>
         <li>[sunrise]</li>
         <li>[zuhr_prayer]</li>

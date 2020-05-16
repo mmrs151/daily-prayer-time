@@ -21,7 +21,7 @@ try {
     die($e->getMessage());
 }
 ?>
-<h3 style="padding-bottom: 30px;">Set Prayer Times Automatically</h3>
+<h3 style="padding-bottom: 30px;" xmlns="http://www.w3.org/1999/html">Set Prayer Times Automatically</h3>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-xs-12">
@@ -40,16 +40,20 @@ try {
                 </div>
                 <div class="upload-step">
                     <label>Select calculation method:</label>
-                    <select class="selectpicker" data-live-search="true" name="method">
-                        <option value="0">Ithna Ashari</option>
-                        <option value="1">University of Islamic Sciences, Karachi</option>
-                        <option value="2" selected>Islamic Society of North America (ISNA)</option>
-                        <option value="3">Muslim World League (MWL)</option>
-                        <option value="4">Umm al-Qura, Makkah</option>
-                        <option value="5">Egyptian General Authority of Survey</option>
-                        <option value="6">Custom Setting</option>
-                        <option value="7">Institute of Geophysics, University of Tehran</option>
+                    <select class="selectpicker" name="method" id="calculationMethod">
+                        <option value="0" <?php if (get_option('calc-method') == 0){echo "selected='selected'";}?>>Ithna Ashari</option>
+                        <option value="1" <?php if (get_option('calc-method') == 1){echo "selected='selected'";}?>>University of Islamic Sciences, Karachi</option>
+                        <option value="2" <?php if (get_option('calc-method') == 2){echo "selected='selected'";}?>>Islamic Society of North America (ISNA)</option>
+                        <option value="3" <?php if (get_option('calc-method') == 3){echo "selected='selected'";}?>>Muslim World League (MWL)</option>
+                        <option value="4" <?php if (get_option('calc-method') == 4){echo "selected='selected'";}?>>Umm al-Qura, Makkah</option>
+                        <option value="5" <?php if (get_option('calc-method') == 5){echo "selected='selected'";}?>>Egyptian General Authority of Survey</option>
+                        <option value="7" <?php if (get_option('calc-method') == 7){echo "selected='selected'";}?>>Institute of Geophysics, University of Tehran</option>
+                        <option value="6" <?php if (get_option('calc-method') == 6){echo "selected='selected'";}?>>Custom Fajr and Isha angle</option>
                     </select>
+                </div>
+                <div class="upload-step" id="customMethod" style="background: #f1f1f1; display: none;">
+                    <input type="number" value="<?= get_option('fajr-angle')?>" placeholder="Fajr angle" name="fajr-angle" style="margin: 20px 0px 0px 300px">
+                    <input type="number" value="<?= get_option('isha-angle')?>" placeholder="Isha angle" name="isha-angle">
                 </div>
                 <div class="upload-step">
                     <label>Select Asr juristic method:</label>
@@ -59,19 +63,28 @@ try {
                     </select>
                 </div>
                 <div class="upload-step">
-                    <label>Fajr Iqamah delay:</label><input type="number" name="fajr-delay" min="3" max="120" value="<?=get_option('fajr-delay')?>"> mins
+                    <label>Adjusting Methods for Higher Latitudes:</label>
+                    <select class="selectpicker" name="higher-lat">
+                        <option selected value="0">None</option>
+                        <option value="1">Middle of the Night</option>
+                        <option value="2">One Seventh of the Night</option>
+                        <option value="3">Angle Based</option>
+                    </select>
                 </div>
                 <div class="upload-step">
-                    <label>Dhuhr Iqamah delay:</label><input type="number" name="zuhr-delay" min="3" max="120" value="<?=get_option('zuhr-delay')?>"> mins
+                    <label>Fajr Iqamah delay:</label><input type="number" name="fajr-delay" min="1" max="120" value="<?=get_option('fajr-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Asr Iqamah delay:</label><input type="number" name="asr-delay" min="3" max="120" value="<?=get_option('asr-delay')?>"> mins
+                    <label>Dhuhr Iqamah delay:</label><input type="number" name="zuhr-delay" min="1" max="120" value="<?=get_option('zuhr-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Maghrib Iqamah delay:</label><input type="number" name="maghrib-delay" min="3" max="120" value="<?=get_option('maghrib-delay')?>"> mins
+                    <label>Asr Iqamah delay:</label><input type="number" name="asr-delay" min="1" max="120" value="<?=get_option('asr-delay')?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Isha Iqamah delay:</label><input type="number" name="isha-delay" min="3" max="120" value="<?=get_option('isha-delay')?>"> mins
+                    <label>Maghrib Iqamah delay:</label><input type="number" name="maghrib-delay" min="1" max="120" value="<?=get_option('maghrib-delay')?>"> mins
+                </div>
+                <div class="upload-step">
+                    <label>Isha Iqamah delay:</label><input type="number" name="isha-delay" min="1" max="120" value="<?=get_option('isha-delay')?>"> mins
                 </div>
                 <div class="upload-step">
                     <input type='submit' name="set-start-time" id="set-start-time" class='button button-primary' value='Set Prayer Time'>

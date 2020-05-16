@@ -5,8 +5,8 @@
             <form name="otherSettings" method="post" class="form-group">
                 <table class="table">
                     <tr>
-                        <td class="active-slider">Jumu'ah</td>
-                        <td><input type="text" class="jumuah" name="jumuah" size="60" value='<?= get_option("jumuah") ?>'></td>
+                        <td class="active-slider" style="width: 300px;">Jumu'ah</td>
+                        <td><input style="width: 300px;" type="text" class="jumuah" name="jumuah" size="60" value='<?= get_option("jumuah") ?>'></td>
                     </tr>
                     <tr>
                         <td>Activate Ramadan timetable</td>

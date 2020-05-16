@@ -15,11 +15,13 @@ require_once ('Models/DSTemplateLoader.php');
 require_once ('Models/DPTAjaxHandler.php');
 require_once ('Models/DigitalScreen.php');
 require_once ('Models/AssetsLoader.php');
-require_once ('API/v1/PrayerTimeController.php');
 require_once ('Models/StartTime/PrayTime.php');
-
-
-class DailyPrayerTime extends WP_Widget
+require_once ('Models/AdminMenu.php');
+require_once ('Models/Shortcodes.php');
+require_once ('API/v1/PrayerTimeController.php');
+    
+    
+    class DailyPrayerTime extends WP_Widget
 {
     public function __construct()
     {
@@ -39,6 +41,12 @@ class DailyPrayerTime extends WP_Widget
             new Init();
         }
 //        delete_option('dpt-init'); // only enable for testing
+        
+        new AdminMenu();
+    
+        new DPTAjaxHandler();
+        
+        new Shortcodes();
     }
     
     public function form($instance)
@@ -75,73 +83,7 @@ function init_dpt_widget()
 {
     register_widget('DailyPrayerTime');
 }
-############################# END OF WIDGET ############################################
-
-#============================= SHORTCODE =================================================
-$monthlyShortcode = new MonthlyShortCode();
-add_shortcode( 'monthlytable', array($monthlyShortcode, 'printMonthlyTimeTable') );
-
-$dailyShortCode = new DailyShortCode();
-add_shortcode( 'dailytable_vertical', array($dailyShortCode, 'verticalTime') );
-add_shortcode( 'dailytable_horizontal', array($dailyShortCode, 'horizontalTime') );
-add_shortcode( 'display_ramadan_time', array($dailyShortCode, 'scRamadanTime') );
-add_shortcode( 'daily_next_prayer', array($dailyShortCode, 'scNextPrayer') );
-add_shortcode( 'fajr_prayer', array($dailyShortCode, 'scFajr') );
-add_shortcode( 'sunrise', array($dailyShortCode, 'scSunrise') );
-add_shortcode( 'zuhr_prayer', array($dailyShortCode, 'scZuhr') );
-add_shortcode( 'asr_prayer', array($dailyShortCode, 'scAsr') );
-add_shortcode( 'maghrib_prayer', array($dailyShortCode, 'scMaghrib') );
-add_shortcode( 'isha_prayer', array($dailyShortCode, 'scIsha') );
-add_shortcode( 'fajr_start', array($dailyShortCode, 'scFajrStart') );
-add_shortcode( 'zuhr_start', array($dailyShortCode, 'scZuhrStart') );
-add_shortcode( 'asr_start', array($dailyShortCode, 'scAsrStart') );
-add_shortcode( 'maghrib_start', array($dailyShortCode, 'scMaghribStart') );
-add_shortcode( 'isha_start', array($dailyShortCode, 'scIshaStart') );
-add_shortcode( 'display_iqamah_update', array($dailyShortCode, 'scIqamahUpdate') );
-add_shortcode( 'digital_screen', array($dailyShortCode, 'scDigitalScreen') );
-
-$ajax = new DPTAjaxHandler();
-
-#============================= MENU PAGES =========================================== #
-add_action( 'admin_menu', "prayer_settings");
-function prayer_settings()
-{
-    add_menu_page(
-        'Daily Prayer Time',
-        'Prayer time',
-        'manage_options',
-        'dpt',
-        'renderMainPage',
-        plugins_url( 'Assets/images/icon19.png', __FILE__ )
-    );
-
-    add_submenu_page('dpt',
-        'Settings',
-        'Settings',
-        'manage_options',
-        'dpt',
-        'renderMainPage'
-    );
-    
-    add_submenu_page(
-        'dpt',
-        'Helps and Tips',
-        'Helps and Tips',
-        'manage_options',
-        'helps-and-tips',
-        'helps_and_tips'
-    );
-
-    function renderMainPage() { include 'Views/widget-admin.php'; }
-
-    function helps_and_tips()
-    {
-        include('Views/HelpsAndTips.php');
-    }
-}
 
 #============================ DEACTIVATION =========================================== #
 register_deactivation_hook( __FILE__, 'pluginUninstall' );
-function pluginUninstall() {
-
-}
+function pluginUninstall() {}

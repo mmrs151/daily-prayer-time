@@ -2,11 +2,19 @@
 -body {
     font-family: 'Ubuntu', sans-serif;
 }
+span.scDate {
+    font-weight: 800;
+}
+span.scHijri {
+    font-style: italic;
+}
 div.upload-step {
     padding-bottom: 20px;
 }
 div.upload-step label{
-    width: 200px;
+    width: 300px;
+    font-style: normal;
+    font-weight: 200;
 }
 div.upload-step select{
     padding-left: 10px;

@@ -157,7 +157,7 @@ class DailyTimetablePrinter extends TimetablePrinter
     private function printHorizontalTableTop($row, $isAzanOnly=false)
     {
         if (! $row['hideTimeRemaining']) {
-            $nextIqamah = $isAzanOnly == true ? '' : $this->getNextIqamahTime( $row );
+            $nextIqamah = $isAzanOnly == true ? '' : $this->getNextIqamahTime($row);
         }
         $colspan = 7;
         $ramadanTds = '<td></td>';

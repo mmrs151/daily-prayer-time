@@ -164,6 +164,9 @@ class DailyShortCode extends TimetablePrinter
         $nextFajr = $this->db->getFajrJamahForTomorrow();
         $row['displayHijriDate'] = $this->displayHijriDate;
         $row['nextFajr'] = $nextFajr;
+        if (isset($attr['display_dates'])) {
+            return $this->getNextIqamahTime($row, true);
+        }
         return $this->getNextIqamahTime($row);
     }
 

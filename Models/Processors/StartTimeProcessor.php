@@ -35,27 +35,46 @@ class StartTimeProcessor
     public function process()
     {
         set_transient('nearest_city', $this->data['city']);
-        
+
         $calcMethod = $this->data['method'];
         $asrMethod = $this->data['asr-method'];
         $latLong = $this->getLatLong($this->data['city']);
         $timeZone =  get_option('gmt_offset');
+        $higherLatMethod = (int)$this->data['higher-lat'];
+        if ($calcMethod == 6) { // custom settings
+            $fajrAngle = (int)$this->data['fajr-angle'];
+            $ishaAngle = (int)$this->data['isha-angle'];
+            $this->prayTime->setFajrAngle($fajrAngle);
+            $this->prayTime->setIshaAngle($ishaAngle);
+        }
     
         delete_option('fajr-delay');
         delete_option('zuhr-delay');
         delete_option('asr-delay');
         delete_option('maghrib-delay');
         delete_option('isha-delay');
+        delete_option('higher-lat');
+        delete_option('calc-method');
+        delete_option('fajr-angle');
+        delete_option('isha-angle');
         
         add_option('fajr-delay', $this->data['fajr-delay']);
         add_option('zuhr-delay', $this->data['zuhr-delay']);
         add_option('asr-delay', $this->data['asr-delay']);
         add_option('maghrib-delay', $this->data['maghrib-delay']);
         add_option('isha-delay', $this->data['isha-delay']);
+        add_option('higher-lat', $higherLatMethod);
+        add_option('calc-method', $calcMethod);
+        add_option('fajr-angle', $fajrAngle);
+        add_option('isha-angle', $ishaAngle);
         
         $this->prayTime->setCalcMethod($calcMethod);
         $this->prayTime->setAsrMethod($asrMethod);
-    
+
+        if ($higherLatMethod > 0 ) {
+            $this->prayTime->setHighLatsMethod($higherLatMethod);
+        }
+        
         $year = date('Y');
         $date = strtotime($year. '-1-1');
         $endDate = strtotime(($year+ 1). '-1-1');
