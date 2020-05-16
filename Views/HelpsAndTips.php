@@ -25,7 +25,7 @@
         <li>[maghrib_start]</li>
         <li>[isha_start]</li>
         <li>[digital_screen]</li>
-        <li>[display_iqamah_update]</li>
+        <li>[display_iqamah_update] <i>threshold={min}</i></li>
     </ol>
 
     <h3>Shortcode Options:</h3>

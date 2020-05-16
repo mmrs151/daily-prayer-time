@@ -255,7 +255,8 @@ class DailyShortCode extends TimetablePrinter
 
     public function scIqamahUpdate($attr)
     {
-        $row['jamah_changes'] = $this->db->getJamahChanges(1);
+        $min = isset($attr['threshold']) ? (int) $attr['threshold'] : 1;
+        $row['jamah_changes'] = $this->db->getJamahChanges($min);
         if (empty($row['jamah_changes'])) { return; }
 
         $orientation =  isset($attr['orientation']) ? $attr['orientation'] : '';

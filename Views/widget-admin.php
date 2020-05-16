@@ -71,8 +71,8 @@ if (! empty($_POST['digitalScreen'])) {
         <li><a href="#tabs-6" data-tab-index="2">Monitor/mobile Setup</a></li>
         <li><a href="#tabs-3" data-tab-index="4">Hijri Settings</a></li>
         <li><a href="#tabs-4" data-tab-index="3">Theme Settings</a></li>
-        <li><a href="#tabs-7" data-tab-index="7">Other Settings</a></li>
         <li><a href="#tabs-2" data-tab-index="2">Language Settings</a></li>
+        <li><a href="#tabs-7" data-tab-index="7">Misc</a></li>
         <li><a href="#tabs-8" data-tab-index="8">API Doc</a></li>
     </ul>
 

@@ -57,6 +57,8 @@ class StartTimeProcessor
         delete_option('calc-method');
         delete_option('fajr-angle');
         delete_option('isha-angle');
+        delete_option('isha-angle');
+        delete_option('asr-method');
         
         add_option('fajr-delay', $this->data['fajr-delay']);
         add_option('zuhr-delay', $this->data['zuhr-delay']);
@@ -67,6 +69,7 @@ class StartTimeProcessor
         add_option('calc-method', $calcMethod);
         add_option('fajr-angle', $fajrAngle);
         add_option('isha-angle', $ishaAngle);
+        add_option('asr-method', $asrMethod);
         
         $this->prayTime->setCalcMethod($calcMethod);
         $this->prayTime->setAsrMethod($asrMethod);
