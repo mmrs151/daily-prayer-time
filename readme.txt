@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.4
-Stable tag: 2020.05.08
+Stable tag: 2020.05.17
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Display Yearly, Monthly and Daily prayer time vertically or horizontally, in any
 
 == Description ==
 For video tutorial please follow these links:
-- (Latest) How to tutorial [youtube https://youtu.be/uRq2UFZlpMA]
+- (Latest) How to tutorial [youtube https://youtu.be/ka5WxQfkFww]
 
 Alhamdulillah that you can display Yearly and Monthly prayer time with ajax month selector using shortcode [timetable]
 Daily prayer time can be displayed vertically or horizontally in your preferable widget area. Designed for any Mosque or Islamic institutes.
@@ -124,10 +124,18 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2020.05.08 =
-* Making work with php 5.6
+= 2020.05.17 =
+* Automatic start time
+* Atomatic jamaat/iqamah time
+* Permanent prayer time for all year
+* daily_next_prayer now have display_dates=true option
+* display_iqamah_update now have threshold={min} option
 
 == Upgrade Notice ==
 
-= 2020.05.08 =
-* Making work with php 5.6
+= 2020.05.17 =
+* Automatic start time
+* Atomatic jamaat/iqamah time
+* Permanent prayer time for all year
+* daily_next_prayer now have display_dates=true option
+* display_iqamah_update now have threshold={min} option

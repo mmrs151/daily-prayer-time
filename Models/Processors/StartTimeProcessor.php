@@ -41,6 +41,7 @@ class StartTimeProcessor
         $latLong = $this->getLatLong($this->data['city']);
         $timeZone =  get_option('gmt_offset');
         $higherLatMethod = (int)$this->data['higher-lat'];
+        
         if ($calcMethod == 6) { // custom settings
             $fajrAngle = (int)$this->data['fajr-angle'];
             $ishaAngle = (int)$this->data['isha-angle'];
@@ -73,10 +74,7 @@ class StartTimeProcessor
         
         $this->prayTime->setCalcMethod($calcMethod);
         $this->prayTime->setAsrMethod($asrMethod);
-
-        if ($higherLatMethod > 0 ) {
-            $this->prayTime->setHighLatsMethod($higherLatMethod);
-        }
+        $this->prayTime->setHighLatsMethod($higherLatMethod);
         
         $year = date('Y');
         $date = strtotime($year. '-1-1');

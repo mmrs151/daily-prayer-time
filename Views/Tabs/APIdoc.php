@@ -21,24 +21,30 @@
             <span>
                 Sample output for the <code>today</code> filter:
 <pre>
-{
-    "d_date": "2020-05-16",
-    "fajr_begins": "02:51:00",
-    "fajr_jamah": "03:51:00",
-    "sunrise": "05:07:00",
+  {
+    "d_date": "2020-05-17",
+    "fajr_begins": "02:48:00",
+    "fajr_jamah": "03:48:00",
+    "sunrise": "05:05:00",
     "zuhr_begins": "12:57:00",
     "zuhr_jamah": "14:27:00",
     "asr_mithl_1": "17:10:00",
     "asr_mithl_2": "17:10:00",
     "asr_jamah": "17:55:00",
-    "maghrib_begins": "20:48:00",
-    "maghrib_jamah": "20:53:00",
-    "isha_begins": "23:04:00",
-    "isha_jamah": "23:19:00",
+    "maghrib_begins": "20:49:00",
+    "maghrib_jamah": "20:54:00",
+    "isha_begins": "23:07:00",
+    "isha_jamah": "23:22:00",
     "is_ramadan": "0",
     "hijri_date": "0",
-    "jamah_changes": null
-}
+    "jamah_changes": {
+      "fajr_jamah": "03:45:00",
+      "asr_jamah": "17:56:00",
+      "maghrib_jamah": "20:56:00",
+      "isha_jamah": "23:25:00"
+    },
+    "hijri_date_convert": "Ramadan 24, 1441"
+  }
 </pre>
             </span>
         </div>
