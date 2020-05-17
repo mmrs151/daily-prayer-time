@@ -1,6 +1,7 @@
 <?php
-    require_once(__DIR__. '/../../Models/db.php');
-
+    require_once (__DIR__. '/../../Models/db.php');
+    require_once (__DIR__. '/../../Models/HijriDate.php');
+    
     class PrayerTimeController extends WP_REST_Controller
     {
         /** @var DatabaseConnection */
@@ -41,11 +42,12 @@
          * @return WP_Error|WP_REST_Response
          */
         public function get_prayer_times( $request ) {
-            $response = [];
             $filter = $request->get_param('filter');
             
             if ( $filter == 'today' ) {
                 $response = $this->db->getPrayerTimeForToday();
+                $hijriDate = new HijriDate();
+                $response['hijri_date_convert'] = $hijriDate->getDate(date("d"), date("m"), date("Y"), true);
             } elseif ( $filter == 'month'){
                 $response = $this->db->getPrayerTimeForMonth(date('m'));
             } elseif ( $filter == 'ramadan'){
@@ -69,7 +71,6 @@
                     '&filter=iqamah_changes']
                 ];
             }
-            
             return new WP_REST_Response( [$response], 200 );
         }
     }
