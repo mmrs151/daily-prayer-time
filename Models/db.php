@@ -21,11 +21,12 @@ class DatabaseConnection
         $this->dbTable = "`".DB_NAME ."`.`" .$this->tableName."`";
         $this->createTableIfNotExist();
     }
-
+    
     /**
+     * @param int $jamahChanges
      * @return array
      */
-    public function getPrayerTimeForToday()
+    public function getPrayerTimeForToday($jamahChanges=null)
     {
         global $wpdb;
 
@@ -37,7 +38,7 @@ class DatabaseConnection
             $sql = "SELECT * FROM  $this->dbTable WHERE month (d_date) = ". date('m') ." and day(d_date)=". date('d') ." LIMIT 1";
             $result = $wpdb->get_row($sql, ARRAY_A);
         }
-        $result['jamah_changes'] = $this->getJamahChanges();
+        $result['jamah_changes'] = $this->getJamahChanges($jamahChanges);
 
         return $result;
     }

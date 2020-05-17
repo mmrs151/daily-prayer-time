@@ -45,7 +45,7 @@
             $filter = $request->get_param('filter');
             
             if ( $filter == 'today' ) {
-                $response = $this->db->getPrayerTimeForToday();
+                $response = $this->db->getPrayerTimeForToday(1);
                 $hijriDate = new HijriDate();
                 $response['hijri_date_convert'] = $hijriDate->getDate(date("d"), date("m"), date("Y"), true);
             } elseif ( $filter == 'month'){
