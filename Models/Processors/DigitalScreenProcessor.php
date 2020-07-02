@@ -23,7 +23,10 @@ class DigitalScreenProcessor
         $slider = $this->data['slider-chbox'];
         delete_option('slider-chbox');
         add_option('slider-chbox', $slider);
-
+    
+        $nextPrayerSlide = $this->data['nextPrayerSlide'];
+        update_option('nextPrayerSlide', $nextPrayerSlide);
+        
         $transitionEffect = $this->data['transitionEffect'];
         update_option('transitionEffect', $transitionEffect);
 
@@ -48,5 +51,21 @@ class DigitalScreenProcessor
 
         $slider6Url = $this->data['slider6Url'];
         update_option('slider6Url', $slider6Url);
+
+        $slider7Url = $this->data['slider7Url'];
+        update_option('slider7Url', $slider7Url);
+
+        $slider8Url = $this->data['slider8Url'];
+        update_option('slider8Url', $slider8Url);
+
+        $slider9Url = $this->data['slider9Url'];
+        update_option('slider9Url', $slider9Url);
+
+        $slider10Url = $this->data['slider10Url'];
+        update_option('slider10Url', $slider10Url);
+
+        $slider11Url = $this->data['slider11Url'];
+        update_option('slider11Url', $slider11Url);
+
     }
 }

@@ -264,7 +264,7 @@ class DigitalScreen extends DailyShortCode
         $transitionSpeed = get_option('transitionSpeed');
         $html .='
             <div class="'. $rightClass .'">
-                <div id="text-carousel" class="carousel slide ' . $transitionEffect . ' 
+                <div id="text-carousel" class="carousel slide ' . $transitionEffect . '
                     height-100" data-ride="carousel" data-interval="'. $transitionSpeed .'" data-pause="false">
                     <div class="carousel-inner height-100">
                         <div class="item active height-100">
@@ -294,12 +294,12 @@ class DigitalScreen extends DailyShortCode
                         <div class="align-middle">
                                 <span id="dsBlink" class="blink">' . $this->getBlink() . '</span>
                         </div>
-                    </div>                
+                    </div>
                     <div class="col-sm-9 col-xs-12 height-100">
                         <div class="align-middle">
                             <h3 class="text-primary scrolling">
-                                <marquee id="dsIqamahUpdate" scrollamount="11">' . $this->getIqamahUpdate() . '</marquee> 
-                            </h3> 
+                                <marquee id="dsIqamahUpdate" scrollamount="11">' . $this->getIqamahUpdate() . '</marquee>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -308,19 +308,19 @@ class DigitalScreen extends DailyShortCode
 
         if ($this->isPortrait) {
             $html = '
-                <div class="row bottom-row">             
+                <div class="row bottom-row">
                     <div class="col-sm-12 col-xs-12 height-24">
                         <div class="align-middle">
                             <h3 class="text-primary scrolling-vertical">
-                                <marquee id="dsIqamahUpdate" scrollamount="11">' . $this->getIqamahUpdate() . '</marquee> 
-                            </h3> 
+                                <marquee id="dsIqamahUpdate" scrollamount="11">' . $this->getIqamahUpdate() . '</marquee>
+                            </h3>
                         </div>
                     </div>
                     <div class="notificationBackground col-sm-12 col-xs-12 text-center height-50 align-middle">
                         <div class="align-middle">
                                 <span id="dsBlink" class="blink-'.$verticalClass.'">' . $this->getBlink() . '</span>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
         ';
@@ -377,25 +377,23 @@ class DigitalScreen extends DailyShortCode
         if ( $isSlide ) {
             $html = "";
             $slides = array();
-
-            $slides[] = get_option('slider1Url');
-            $slides[] = get_option('slider2Url');
-            $slides[] = get_option('slider3Url');
-            $slides[] = get_option('slider4Url');
-            $slides[] = get_option('slider5Url');
-            $slides[] = get_option('slider6Url');
+            
+            foreach (range(1, 11) as $item) {
+                $slides[] = get_option('slider' . $item . 'Url');
+            }
 
             $slides = array_filter($slides);
             foreach ($slides as $i => $slideUrl) {
                 $html .= '
                 <div class="item" >
                     <img class="carousel-slide" src="' . $slideUrl . '">
-                </div>               
+                </div>
                 ';
 
-                if (!$this->isPresentation) {
+                $nextPrayerSlide = (int)get_option('nextPrayerSlide');
+                if (!$this->isPresentation && $nextPrayerSlide > 0) {
                     $count = $i + 1;
-                    if ( $count % 2 == 0 ) {
+                    if ( $count % $nextPrayerSlide == 0 ) {
                         $html .= '
                         <div class="item">
                             ' . $this->getFirstSlide() . '

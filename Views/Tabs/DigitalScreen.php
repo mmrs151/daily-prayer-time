@@ -16,6 +16,12 @@
                         <td><input type="checkbox" id="slider-chbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>></td>
                     </tr>
                     <tr class="ds-slides">
+                        <td>Re-display Next Prayer</td>
+                        <td><input type="number" class="slider-text" placeholder=" after number of slides" name="nextPrayerSlide" min="0" value=<?= get_option("nextPrayerSlide") ?>>
+                            <i>0 to disable</i>
+                        </td>
+                    </tr>
+                    <tr class="ds-slides">
                         <td>Transition Effect</td>
                         <td>
                             <label class="radio-inline">
@@ -28,7 +34,7 @@
                     </tr>
                     <tr class="ds-slides">
                         <td>Transition Speed</td>
-                        <td><input type="number" class="slider-text" name="transitionSpeed" placeholder="5" value=<?= get_option("transitionSpeed")/1000 ?>> seconds </td>
+                        <td><input type="number" min="0" class="slider-text" name="transitionSpeed" placeholder="5" value=<?= get_option("transitionSpeed")/1000 ?>> seconds </td>
                     </tr>
 
                     <tr class="ds-slides">
@@ -67,6 +73,37 @@
                             <img src="<?= get_option("slider6Url") ?>" style="max-height: 25px;" class="grow">
                         </td>
                     </tr>
+                    <tr class="ds-slides">
+                        <td>Slider #7</td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider7Url" size="50" value=<?= get_option("slider7Url") ?>>
+                            <img src="<?= get_option("slider7Url") ?>" style="max-height: 25px;" class="grow">
+                        </td>
+                    </tr>
+                    <tr class="ds-slides">
+                        <td>Slider #8</td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider8Url" size="50" value=<?= get_option("slider8Url") ?>>
+                            <img src="<?= get_option("slider8Url") ?>" style="max-height: 25px;" class="grow">
+                        </td>
+                    </tr>
+                    <tr class="ds-slides">
+                        <td>Slider #9</td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider9Url" size="50" value=<?= get_option("slider9Url") ?>>
+                            <img src="<?= get_option("slider9Url") ?>" style="max-height: 25px;" class="grow">
+                        </td>
+                    </tr>
+                    <tr class="ds-slides">
+                        <td>Slider #10</td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider10Url" size="50" value=<?= get_option("slider10Url") ?>>
+                            <img src="<?= get_option("slider10Url") ?>" style="max-height: 25px;" class="grow">
+                        </td>
+                    </tr>
+                    <tr class="ds-slides">
+                        <td>Slider #11</td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider11Url" size="50" value=<?= get_option("slider11Url") ?>>
+                            <img src="<?= get_option("slider11Url") ?>" style="max-height: 25px;" class="grow">
+                        </td>
+                    </tr>
+                    
                 </table>
                 <?php submit_button('Save changes', 'primary', 'digitalScreen'); ?>
             </form>
