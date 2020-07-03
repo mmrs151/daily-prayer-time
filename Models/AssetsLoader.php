@@ -1,7 +1,7 @@
 <?php
     class AssetsLoader
     {
-        private $version = '2020.05.17';
+        private $version = '2020.07.03';
     
         public function __construct()
         {

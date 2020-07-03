@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.4
-Stable tag: 2020.05.17
+Stable tag: 2020.07.03
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,18 +124,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2020.05.17 =
-* Automatic start time
-* Atomatic jamaat/iqamah time
-* Permanent prayer time for all year
-* daily_next_prayer now have display_dates=true option
-* display_iqamah_update now have threshold={min} option
+= 2020.07.03 =
+* Allow 11 slides for digital screen
+* Make next prayer slide optional and control
 
 == Upgrade Notice ==
 
-= 2020.05.17 =
-* Automatic start time
-* Atomatic jamaat/iqamah time
-* Permanent prayer time for all year
-* daily_next_prayer now have display_dates=true option
-* display_iqamah_update now have threshold={min} option
+= 2020.07.03 =
+* Allow 11 slides for digital screen
+* Make next prayer slide optional and control
