@@ -2,11 +2,12 @@ version: "3.3"
 
 services:
   db:
+    container_name: 'local-wordpress-db'
     image: mysql:5.7
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
-      - "1106:3306"
+      - "3333:3306"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
@@ -15,13 +16,14 @@ services:
       MYSQL_PASSWORD: wordpress
 
   wordpress:
+    container_name: 'local-wordpress'
     depends_on:
       - db
     image: wordpress:latest
     volumes:
-      - ./:/var/www/html/wp-content/plugins/dpt
+      - /home/muhammad/sites/wp-plugins/daily-prayer-time-for-mosques/trunk/:/var/www/html/wp-content/plugins/dpt
     ports:
-      - "8000:80"
+      - "8888:80"
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
