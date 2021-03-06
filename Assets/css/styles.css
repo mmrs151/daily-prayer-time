@@ -821,26 +821,23 @@ ul.clock li#sec {
         font-size: 10px;
     }
     .monthHeading, .printIcon{
+        display: none;
+        visibility: hidden;
+    }
+    span.monthSelector {
+        display: none;
         visibility: hidden;
     }
     select.otherMonth {
-        width: 100%;
-        font-size: 20px;
-        color: blue;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-    }
-    table.timetable td {
-        -webkit-print-color-adjust: exact;
+        display: none;
+        visibility: hidden;
     }
     h3.printSiteName {
-        font-size: 30px;
         display: block;
+        color: grey !important;
+        font-size: 30px;
         visibility: visible;
-        position: fixed;
-        left: 50%;
-        transform: translate(-50%, -30%);
-        padding-top: 15px;
+        margin: 0px !important;
     }
     table.customStyles tr.highlight, th.highlight, td.highlight {
         background: transparent !important;

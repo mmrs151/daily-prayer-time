@@ -40,7 +40,7 @@ class MonthlyShortCode
         $path = plugin_dir_url( __FILE__ ); // I am in Models
         $path .= '../';
 
-        $siteName = get_bloginfo( 'name' );
+        $siteName = get_bloginfo( 'name' ) . "</br><span style='color:green'>" .  date("M, Y") ."</span>";
 
         return $introText = "
         <div class='container-fluid'>
