@@ -225,13 +225,12 @@ class DailyTimetablePrinter extends TimetablePrinter
         $tds = '';
         $nextPrayer = $this->getNextPrayer( $row );
         $azanTimings = $this->getAzanTime( $row );
-        if ($this->todayIsFriday()) {
-            $azanTimings['zuhr'] = get_option('jumuah');
-        }
+
         foreach ($azanTimings as $key => $azan) {
+
             $class = $nextPrayer == $key ? 'class=highlight' : '';
             $rowspan = '';
-            if ($key == 'sunrise' || ($key == 'zuhr' && $this->todayIsFriday()))
+            if ($key == 'sunrise')
             {
                 $rowspan = "rowspan='2'";
             }
@@ -254,14 +253,11 @@ class DailyTimetablePrinter extends TimetablePrinter
             unset( $jamahTimes['sunrise'] );
         }
 
-        if ($this->todayIsFriday()) {
-            unset($jamahTimes['zuhr']);
-        }
         $tds = '';
         $nextPrayer =  $this->getNextPrayer( $row );
         foreach ($jamahTimes as $key => $azan) {
             $class = $nextPrayer == $key ? 'class=highlight' : 'class=jamah';
-            $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key )."</th>";
+            $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key, true )."</th>";
         }
 
         return $tds;
@@ -333,7 +329,7 @@ class DailyTimetablePrinter extends TimetablePrinter
 
             $trs .= '<tr>
                     <th class="prayerName ' .$class.'">' . $prayerName . '</th>';
-            if ( ($key == 'sunrise' || $prayerName == $this->getLocalHeaders()['jumuah']) && $display == 'both') {
+            if ( ($key == 'sunrise') && $display == 'both') {
                 $trs .= '<td colspan="2" class="' . $class . '">'.$this->getFormattedDateForPrayer($row[$jamah], $key).'</td>';
             } elseif ($display == 'azan') {
                 $trs .='<td class="begins '.$class.'">'.$this->getFormattedDateForPrayer($row[$begins], $key).'</td>
@@ -343,7 +339,7 @@ class DailyTimetablePrinter extends TimetablePrinter
                 </tr>';
             } else {
                 $trs .='<td class="begins '.$class.'">'.$this->getFormattedDateForPrayer($row[$begins], $key).'</td>
-                    <td class="jamah '.$highlightForJamah.'">'.$this->getFormattedDateForPrayer($row[$jamah], $key).'</td>
+                    <td class="jamah '.$highlightForJamah.'">'.$this->getFormattedDateForPrayer($row[$jamah], $key, true).'</td>
                 </tr>';
             }
         }
@@ -357,10 +353,10 @@ class DailyTimetablePrinter extends TimetablePrinter
         return $trs;
     }
 
-    private function getFormattedDateForPrayer($time, $prayerName)
+    private function getFormattedDateForPrayer($time, $prayerName, $isJamatTime=false)
     {
         $jumuahTime = get_option('jumuah');
-        if ( ($prayerName === 'zuhr' && $this->todayIsFriday()) && $jumuahTime) {
+        if ( ($prayerName === 'zuhr' && $this->todayIsFriday()) && $isJamatTime && $jumuahTime) {
             return $jumuahTime;
         }
         return $this->formatDateForPrayer($time);
