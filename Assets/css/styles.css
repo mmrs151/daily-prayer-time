@@ -288,9 +288,11 @@ div.dptScNextPrayer {
 span.minLeftText {
     text-transform: lowercase !important;
 }
-h2.dptScTime {
-    margin: 0px;
+
+span.green h2.dptScTime {
+    margin: unset !important;
 }
+
 h2.vertical div span h2.dptScTime {
     margin: 10px;
 }
