@@ -379,14 +379,14 @@ class DigitalScreen extends DailyShortCode
             $slides = array();
             
             foreach (range(1, 11) as $item) {
-                $slides[] = get_option('slider' . $item . 'Url');
+                $slides[] = get_option('slider' . $item);
             }
 
             $slides = array_filter($slides);
-            foreach ($slides as $i => $slideUrl) {
+            foreach ($slides as $i => $slide) {
                 $html .= '
                 <div class="item" >
-                    <img class="carousel-slide" src="' . $slideUrl . '">
+                    <a href="' . get_option("slider". ($i+1) . "Url") .'"><img class="carousel-slide" src="' . $slide . '"></a>
                 </div>
                 ';
 
