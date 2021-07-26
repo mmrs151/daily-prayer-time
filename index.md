@@ -1,37 +1,13 @@
-## Welcome to GitHub Pages
+# Daily Prayer Time for Mosques - Wordpress Plugin
+Display Yearly, Monthly and Daily prayer time vertically or horizontally, in any language.
 
-You can use the [editor on GitHub](https://github.com/mmrs151/daily-prayer-time/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Description 
+For video tutorial please follow these links:
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=ka5WxQfkFww" target="_blank"><img src="http://img.youtube.com/vi/ka5WxQfkFww/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>  
+[https://youtu.be/ka5WxQfkFww]
 
-### Markdown
+Alhamdulillah that you can display Yearly and Monthly prayer time with ajax month selector using shortcode [timetable]
+Daily prayer time can be displayed vertically or horizontally in your preferable widget area. Designed for any Mosque or Islamic institutes.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/mmrs151/daily-prayer-time/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+**You need to upload your masjid's timetable from plugin admin section.**
