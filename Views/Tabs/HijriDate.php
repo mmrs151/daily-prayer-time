@@ -13,7 +13,7 @@
                     <tr>
                         <td>Adjust day:</td>
                         <td>
-                            <input type="number" name="hijri-adjust" min="-2" max="2" value="<?=get_option('hijri-adjust')?>">
+                            <input type="number" name="hijri-adjust" min="-2" max="2" value="<?php echo get_option('hijri-adjust')?>">
                         </td>
                     </tr>
                 </table>

@@ -34,7 +34,7 @@ class Validator
         $count -= 1; // Remove header count
 
         if ($count == 0 || $count > 366 ) {
-            echo "<h3 class='ui-state-error dptCenter'>Invalid number of rows. Found $count days</h3>";
+            echo "<h3 class='ui-state-error dptCenter'>Invalid number of rows. Found" .  esc_html( $count ) . "days</h3>";
             return false;
         }
 
@@ -61,7 +61,7 @@ class Validator
             if ($c == 0) {
                 $date = $this->getDateAfterValidation($data[$c]);
                 if(! $date) {
-                    echo "<h3 class='ui-state-error dptCenter'>Invalid Date format ($data[$c]). Please use one of the following:
+                    echo "<h3 class='ui-state-error dptCenter'>Invalid Date format (". esc_html( $data[$c]) .")Please use one of the following:
                                 <ul class='green'>
                                     <li> YYYY-MM-DD <i class='smallFont'>(2023-10-20)</i></li>
                                     <li> YY-MM-DD <i class='smallFont'>(23-10-20)</i></li>
@@ -76,7 +76,7 @@ class Validator
                 }
             } else {
                 if(! $this->isValidateTimeFormat($data[$c])) {
-                    echo "<h3 class='ui-state-error dptCenter'>Invalid Time format in " . $data[$c] . " for " . $this->headers[$c] .
+                    echo "<h3 class='ui-state-error dptCenter'>Invalid Time format in " . esc_html( $data[$c] ) . " for " . $this->headers[$c] .
                         " on ". $data[0] .", valid time format is <span class='green'>HH:MM[24 hours]</span> </h3>";
                     print_r('<pre>');
                     print_r(array_combine($this->headers, $data));
@@ -177,7 +177,7 @@ class Validator
         foreach($afternoonPrayers as $time) {
             $firstPart = explode(':', $time);
             if ($firstPart[0] !== '00' && (int)$firstPart[0] < 12) {
-                echo "<h3 class='dptCenter ui-state-error'>$time is not in 24 hour time format for date:  $row[0]
+                echo "<h3 class='dptCenter ui-state-error'>$time is not in 24 hour time format for date: ". esc_html( $row[0] ) ."
                         </br> You must follow 24 hours time format, valid time format is <span class='green'>HH:MM</span></h3>";
                 return false;
             }

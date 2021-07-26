@@ -16,12 +16,12 @@ require_once(__DIR__.'/../Models/StartTime/WorldCities.php');
 ini_set('auto_detect_line_endings', true);
 
 if (isset($_POST['set-start-time'])) {
-    $startTimeProcessor = new StartTimeProcessor($_POST);
+    $startTimeProcessor = new DPTStartTimeProcessor($_POST);
     $startTimeProcessor->process();
 }
 
 if (isset($_POST['submit'])) {
-    $csvProcessor = new CsvProcessor($_FILES);
+    $csvProcessor = new DPTCsvProcessor($_FILES);
 
     if ( $csvProcessor->isValidFile() ) {
         $csvProcessor->process();
@@ -32,23 +32,23 @@ if (isset($_POST['submit'])) {
 }
 
 if (! empty($_POST['languageSettings'])) {
-    $languageProcessor = new LanguageProcessor($_POST);
+    $languageProcessor = new DPTLanguageProcessor($_POST);
     $languageProcessor->process();
 }
 
 if (! empty($_POST['hijriSettings'])) {
-    $hijri = new HijriProcessor($_POST);
+    $hijri = new DPTHijriProcessor($_POST);
     $hijri->process();
 }
 
 if (! empty($_POST['otherSettings'])) {
-    $otherProcessor = new OtherProcessor($_POST);
+    $otherProcessor = new DPTOtherProcessor($_POST);
     $otherProcessor->process();
 }
 
 if (! empty($_POST['quickUpdate'])) {
-    $otherProcessor = new QuickUpdateProcessor($_POST);
-    $otherProcessor->process();
+    $quickUpdateProcessor = new DPTQuickUpdateProcessor($_POST);
+    $quickUpdateProcessor->process();
 }
 
 if (! empty($_POST['themeSettings'])) {
@@ -57,7 +57,7 @@ if (! empty($_POST['themeSettings'])) {
 }
 
 if (! empty($_POST['digitalScreen'])) {
-    $themeSettings = new DigitalScreenProcessor($_POST);
+    $themeSettings = new DPTDigitalScreenProcessor($_POST);
     $themeSettings->process();
 }
     $path = plugin_dir_url( __FILE__ ); // I am in Models

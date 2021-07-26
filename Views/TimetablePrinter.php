@@ -127,6 +127,7 @@ class TimetablePrinter
             }
         }
 
+        $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
         return array_map('stripslashes', $localPrayerName);
     }
 
@@ -140,6 +141,8 @@ class TimetablePrinter
             delete_option( 'headersLocal' );
             return $this->headersLocal;
         }
+
+        $headers_local = array_map( 'sanitize_text_field', $headers_local);
 
         return array_map('stripslashes', $headers_local);
     }
@@ -158,12 +161,15 @@ class TimetablePrinter
             unset( $monthsLocal['ramadan'] );
         }
 
+        $monthsLocal = array_map( 'sanitize_text_field', $monthsLocal);
+
         return array_map('stripslashes', $monthsLocal);
     }
 
     public function getLocalNumbers()
     {
         $numbers_local = get_option('numbersLocal');
+        $numbers_local = array_map( 'sanitize_text_field', $numbers_local);
 
         return empty($numbers_local) ? $this->numbersLocal : $numbers_local;
     }
@@ -172,6 +178,7 @@ class TimetablePrinter
     public function getLocalTimes()
     {
         $times = get_option('timesLocal');
+        $times = array_map( 'sanitize_text_field', $times);
 
         if ( empty($times)) {
             return $this->timesLocal;

@@ -1,6 +1,4 @@
 var isTimerOn = false;
-var fajrAdhaanUrl = 'http://display.hockwellringmasjid.org.uk/wp/wp-content/uploads/2019/06/Fajr_Mecca.mp3';
-var otherAdhaanUrl = 'http://display.hockwellringmasjid.org.uk/wp/wp-content/uploads/2019/06/adhaan_Inani.mp3';
 
 DPT = {
     init: function() {
@@ -207,57 +205,6 @@ DPT = {
 
         DPT.executeFunctionOnTime('00', '00', '00', function() { window.location.reload(true); });
         DPT.executeFunctionOnTime('02', '00', '00', function() { window.location.reload(true); });
-    },
-
-    playOtherAdhaanBeforeIqamah: function() 
-    {
-        var iqamah = jQuery('#otherAdhanTimes').val();
-        if ( ! iqamah ) {
-            return;
-        }
-        iqamah = JSON.parse(iqamah);
-        for(var i = 0; i < iqamah.length; i ++)
-        {
-            var timeParts = iqamah[i].split(":");
-            DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(){
-                var audio = new Audio(otherAdhaanUrl);
-                var playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                      // Automatic playback started!
-                      // Show playing UI.
-                    })
-                    .catch(error => {
-                      // Auto-play was prevented
-                      // Show paused UI.
-                    })
-                }
-            });
-        }
-    },
-
-    playFajrAdhaanBeforeIqamah: function() 
-    {
-        var iqamah = jQuery('#fajrAdhanTime').val();
-        if ( ! iqamah ) {
-            return;
-        }
-        iqamah = JSON.parse(iqamah);
-        var timeParts = iqamah.split(":");
-        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(adhaan){
-            var audio = new Audio(fajrAdhaanUrl);
-            var playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                  // Automatic playback started!
-                  // Show playing UI.
-                })
-                .catch(error => {
-                  // Auto-play was prevented
-                  // Show paused UI.
-                })
-            }
-        });
     },
 
     digitialClock: function ()

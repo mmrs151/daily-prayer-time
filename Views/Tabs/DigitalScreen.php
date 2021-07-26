@@ -9,7 +9,7 @@
                 <table class="table">
                     <tr>
                         <td class="active-slider">Site Logo</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="65" value=<?= get_option("ds-logo") ?>></td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="65" value=<?php echo  get_option("ds-logo") ?>></td>
                     </tr>
                     <tr>
                         <td class="active-slider">Activate Slider</td>
@@ -17,7 +17,7 @@
                     </tr>
                     <tr class="ds-slides">
                         <td>Re-display Next Prayer</td>
-                        <td><input type="number" class="slider-text" placeholder=" after number of slides" name="nextPrayerSlide" min="0" value=<?= get_option("nextPrayerSlide") ?>>
+                        <td><input type="number" class="slider-text" placeholder=" after number of slides" name="nextPrayerSlide" min="0" value=<?php echo  get_option("nextPrayerSlide") ?>>
                             <i>0 to disable</i>
                         </td>
                     </tr>
@@ -34,95 +34,95 @@
                     </tr>
                     <tr class="ds-slides">
                         <td>Transition Speed</td>
-                        <td><input type="number" min="0" class="slider-text" name="transitionSpeed" placeholder="5" value=<?= get_option("transitionSpeed")/1000 ?>> seconds </td>
+                        <td><input type="number" min="0" class="slider-text" name="transitionSpeed" placeholder="5" value=<?php echo  get_option("transitionSpeed")/1000 ?>> seconds </td>
                     </tr>
 
                     <tr class="ds-slides">
                         <td>Slider #1</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider1" size="50" value=<?= get_option("slider1") ?>>
-                            <img src="<?= get_option("slider1") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider1" size="50" value=<?php echo  get_option("slider1") ?>>
+                            <img src="<?php echo  get_option("slider1") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider1Url" size="50" value=<?= get_option("slider1Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider1Url" size="50" value=<?php echo  get_option("slider1Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #2</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider2" size="50" value=<?= get_option("slider2") ?>>
-                            <img src="<?= get_option("slider2") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider2" size="50" value=<?php echo  get_option("slider2") ?>>
+                            <img src="<?php echo  get_option("slider2") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider2Url" size="50" value=<?= get_option("slider2Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider2Url" size="50" value=<?php echo  get_option("slider2Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #3</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider3" size="50" value=<?= get_option("slider3") ?>>
-                            <img src="<?= get_option("slider3") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider3" size="50" value=<?php echo  get_option("slider3") ?>>
+                            <img src="<?php echo  get_option("slider3") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider3Url" size="50" value=<?= get_option("slider3Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider3Url" size="50" value=<?php echo  get_option("slider3Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #4</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider4" size="50" value=<?= get_option("slider4") ?>>
-                            <img src="<?= get_option("slider4") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider4" size="50" value=<?php echo  get_option("slider4") ?>>
+                            <img src="<?php echo  get_option("slider4") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider4Url" size="50" value=<?= get_option("slider4Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider4Url" size="50" value=<?php echo  get_option("slider4Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #5</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider5" size="50" value=<?= get_option("slider5") ?>>
-                            <img src="<?= get_option("slider5") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider5" size="50" value=<?php echo  get_option("slider5") ?>>
+                            <img src="<?php echo  get_option("slider5") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider5Url" size="50" value=<?= get_option("slider5Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider5Url" size="50" value=<?php echo  get_option("slider5Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #6</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider6" size="50" value=<?= get_option("slider6") ?>>
-                            <img src="<?= get_option("slider6") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider6" size="50" value=<?php echo  get_option("slider6") ?>>
+                            <img src="<?php echo  get_option("slider6") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider6Url" size="50" value=<?= get_option("slider6Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider6Url" size="50" value=<?php echo  get_option("slider6Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #7</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider7" size="50" value=<?= get_option("slider7") ?>>
-                            <img src="<?= get_option("slider7") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider7" size="50" value=<?php echo  get_option("slider7") ?>>
+                            <img src="<?php echo  get_option("slider7") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider7Url" size="50" value=<?= get_option("slider7Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider7Url" size="50" value=<?php echo  get_option("slider7Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #8</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider8" size="50" value=<?= get_option("slider8") ?>>
-                            <img src="<?= get_option("slider8") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider8" size="50" value=<?php echo  get_option("slider8") ?>>
+                            <img src="<?php echo  get_option("slider8") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider8Url" size="50" value=<?= get_option("slider8Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider8Url" size="50" value=<?php echo  get_option("slider8Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #9</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider9" size="50" value=<?= get_option("slider9") ?>>
-                            <img src="<?= get_option("slider9") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider9" size="50" value=<?php echo  get_option("slider9") ?>>
+                            <img src="<?php echo  get_option("slider9") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider9Url" size="50" value=<?= get_option("slider9Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider9Url" size="50" value=<?php echo  get_option("slider9Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #10</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider10" size="50" value=<?= get_option("slider10") ?>>
-                            <img src="<?= get_option("slider10") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider10" size="50" value=<?php echo  get_option("slider10") ?>>
+                            <img src="<?php echo  get_option("slider10") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider10Url" size="50" value=<?= get_option("slider10Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider10Url" size="50" value=<?php echo  get_option("slider10Url") ?>>
                         </td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Slider #11</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider11" size="50" value=<?= get_option("slider11") ?>>
-                            <img src="<?= get_option("slider11") ?>" style="max-height: 25px;" class="grow">
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="slider11" size="50" value=<?php echo  get_option("slider11") ?>>
+                            <img src="<?php echo  get_option("slider11") ?>" style="max-height: 25px;" class="grow">
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider11Url" size="50" value=<?= get_option("slider11Url") ?>>
+                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider11Url" size="50" value=<?php echo  get_option("slider11Url") ?>>
                         </td>
                     </tr>
                     

@@ -1,92 +1,93 @@
 <?php
-
-class DigitalScreenProcessor
-{
-    /**
-     * @var array
-     */
-    private $data;
-
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data) {
-        $this->data = $data;
-    }
-
-    public function process()
+if ( !class_exists('DPTDigitalScreenProcessor')) {
+    class DPTDigitalScreenProcessor
     {
-        $dsLogo = $this->data['ds-logo'];
-        delete_option('ds-logo');
-        add_option('ds-logo', $dsLogo);
-        
-        $slider = $this->data['slider-chbox'];
-        delete_option('slider-chbox');
-        add_option('slider-chbox', $slider);
+        /**
+         * @var array
+         */
+        private $data;
     
-        $nextPrayerSlide = $this->data['nextPrayerSlide'];
-        update_option('nextPrayerSlide', $nextPrayerSlide);
+        /**
+         * @param array $data
+         */
+        public function __construct(array $data) {
+            $this->data = $data;
+        }
+    
+        public function process()
+        {
+            $dsLogo = sanitize_text_field($this->data['ds-logo']);
+            delete_option('ds-logo');
+            add_option('ds-logo', $dsLogo);
+            
+            $slider = sanitize_text_field($this->data['slider-chbox']);
+            delete_option('slider-chbox');
+            add_option('slider-chbox', $slider);
         
-        $transitionEffect = $this->data['transitionEffect'];
-        update_option('transitionEffect', $transitionEffect);
-
-        $transitionSpeed = $this->data['transitionSpeed'];
-        $transitionSpeed = (int)$transitionSpeed * 1000;
-        update_option('transitionSpeed', $transitionSpeed);
-
-        $slider1 = $this->data['slider1'];
-        update_option('slider1', $slider1);
-        $slider1Url = $this->data['slider1Url'];
-        update_option('slider1Url', $slider1Url);
-
-        $slider2 = $this->data['slider2'];
-        update_option('slider2', $slider2);
-        $slider2Url = $this->data['slider2Url'];
-        update_option('slider2Url', $slider2Url);
-
-        $slider3 = $this->data['slider3'];
-        update_option('slider3', $slider3);
-        $slider3Url = $this->data['slider3Url'];
-        update_option('slider3Url', $slider3Url);
-
-        $slider4 = $this->data['slider4'];
-        update_option('slider4', $slider4);
-        $slider4Url = $this->data['slider4Url'];
-        update_option('slider4Url', $slider4Url);
-
-        $slider5 = $this->data['slider5'];
-        update_option('slider5', $slider5);
-        $slider5Url = $this->data['slider5Url'];
-        update_option('slider5Url', $slider5Url);
-
-        $slider6 = $this->data['slider6'];
-        update_option('slider6', $slider6);
-        $slider6Url = $this->data['slider6Url'];
-        update_option('slider6Url', $slider6Url);
-
-        $slider7 = $this->data['slider7'];
-        update_option('slider7', $slider7);
-        $slider7Url = $this->data['slider7Url'];
-        update_option('slider7Url', $slider7Url);
-
-        $slider8 = $this->data['slider8'];
-        update_option('slider8', $slider8);
-        $slider8Url = $this->data['slider8Url'];
-        update_option('slider8Url', $slider8Url);
-
-        $slider9 = $this->data['slider9'];
-        update_option('slider9', $slider9);
-        $slider9Url = $this->data['slider9Url'];
-        update_option('slider9Url', $slider9Url);
-
-        $slider10 = $this->data['slider10'];
-        update_option('slider10', $slider10);
-        $slider10Url = $this->data['slider10Url'];
-        update_option('slider10Url', $slider10Url);
-
-        $slider11 = $this->data['slider11'];
-        update_option('slider11', $slider11);
-        $slider11Url = $this->data['slider11Url'];
-        update_option('slider11Url', $slider11Url);
-    }
+            $nextPrayerSlide = sanitize_text_field($this->data['nextPrayerSlide']);
+            update_option('nextPrayerSlide', $nextPrayerSlide);
+            
+            $transitionEffect = sanitize_text_field($this->data['transitionEffect']);
+            update_option('transitionEffect', $transitionEffect);
+    
+            $transitionSpeed = sanitize_text_field($this->data['transitionSpeed']);
+            $transitionSpeed = (int)$transitionSpeed * 1000;
+            update_option('transitionSpeed', $transitionSpeed);
+    
+            $slider1 = sanitize_text_field($this->data['slider1']);
+            update_option('slider1', $slider1);
+            $slider1Url = sanitize_text_field($this->data['slider1Url']);
+            update_option('slider1Url', $slider1Url);
+    
+            $slider2 = sanitize_text_field($this->data['slider2']);
+            update_option('slider2', $slider2);
+            $slider2Url = sanitize_text_field($this->data['slider2Url']);
+            update_option('slider2Url', $slider2Url);
+    
+            $slider3 = sanitize_text_field($this->data['slider3']);
+            update_option('slider3', $slider3);
+            $slider3Url = sanitize_text_field($this->data['slider3Url']);
+            update_option('slider3Url', $slider3Url);
+    
+            $slider4 = sanitize_text_field($this->data['slider4']);
+            update_option('slider4', $slider4);
+            $slider4Url = sanitize_text_field($this->data['slider4Url']);
+            update_option('slider4Url', $slider4Url);
+    
+            $slider5 = sanitize_text_field($this->data['slider5']);
+            update_option('slider5', $slider5);
+            $slider5Url = sanitize_text_field($this->data['slider5Url']);
+            update_option('slider5Url', $slider5Url);
+    
+            $slider6 = sanitize_text_field($this->data['slider6']);
+            update_option('slider6', $slider6);
+            $slider6Url = sanitize_text_field($this->data['slider6Url']);
+            update_option('slider6Url', $slider6Url);
+    
+            $slider7 = sanitize_text_field($this->data['slider7']);
+            update_option('slider7', $slider7);
+            $slider7Url = sanitize_text_field($this->data['slider7Url']);
+            update_option('slider7Url', $slider7Url);
+    
+            $slider8 = sanitize_text_field($this->data['slider8']);
+            update_option('slider8', $slider8);
+            $slider8Url = sanitize_text_field($this->data['slider8Url']);
+            update_option('slider8Url', $slider8Url);
+    
+            $slider9 = sanitize_text_field($this->data['slider9']);
+            update_option('slider9', $slider9);
+            $slider9Url = sanitize_text_field($this->data['slider9Url']);
+            update_option('slider9Url', $slider9Url);
+    
+            $slider10 = sanitize_text_field($this->data['slider10']);
+            update_option('slider10', $slider10);
+            $slider10Url = sanitize_text_field($this->data['slider10Url']);
+            update_option('slider10Url', $slider10Url);
+    
+            $slider11 = sanitize_text_field($this->data['slider11']);
+            update_option('slider11', $slider11);
+            $slider11Url = sanitize_text_field($this->data['slider11Url']);
+            update_option('slider11Url', $slider11Url);
+        }
+    }    
 }

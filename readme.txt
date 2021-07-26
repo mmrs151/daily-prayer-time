@@ -4,8 +4,8 @@ Donate link: http://www.uwt.org/
 Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, salat, namaz, fasting
 Requires at least: 4.5
 Requires PHP: 5.6
-Tested up to: 5.6
-Stable tag: 2021.03.28
+Tested up to: 5.8
+Stable tag: 2021.07.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,14 +124,10 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2021.03.28 =
-* Show Jumuah time if set 
-* Fixed margin on daily widgets
-* Slided are linkable
+= 2021.07.24 =
+* Security update 
 
 == Upgrade Notice ==
 
-= 2021.03.28 =
-* Show Jumuah time if set 
-* Fixed margin on daily widgets
-* Slided are linkable
+= 2021.07.24 =
+* Security update

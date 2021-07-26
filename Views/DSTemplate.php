@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href="<?php echo  plugin_dir_url(__FILE__) . '../Assets/css/google-font-ubuntu.css'; ?>">
+    <link rel="stylesheet" href="<?php echo  plugin_dir_url(__FILE__) . '../Assets/css/bootstrap.min-3.3.7.css'; ?>">
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <?php if ( ! get_theme_support( 'title-tag' ) ): ?>
         <title><?php wp_title(); ?></title>
@@ -27,6 +27,6 @@ while ( have_posts() ) : the_post(); ?>
 endwhile;
 ?>
 <?php wp_footer(); ?>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<?php echo  plugin_dir_url(__FILE__) . '../Assets/js/bootstrap.min-3.3.7.js'; ?>"></script>
 </body>
 </html>

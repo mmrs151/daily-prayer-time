@@ -86,7 +86,7 @@ class DSTemplateLoader
         if ( file_exists( $file ) ) {
             return $file;
         } else {
-            echo $file;
+            echo esc_attr( $file );
         }
 
         return $template;

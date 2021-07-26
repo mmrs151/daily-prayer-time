@@ -30,11 +30,11 @@ class MonthlyShortCode
         $heading = "Select other month";
 
         if (isset($attr['heading'])) {
-            $heading = $attr['heading'];
+            $heading = esc_attr($attr['heading']);
         }
 
         if (isset($attr['display'])) {
-            $hiddenInput = "<input type='hidden' name='display' id='display' value=".$attr['display']." />";
+            $hiddenInput = "<input type='hidden' name='display' id='display' value=" . esc_attr($attr['display']) . " />";
         }
         $month = date("m");
         $path = plugin_dir_url( __FILE__ ); // I am in Models
@@ -47,16 +47,16 @@ class MonthlyShortCode
             <div class='row'>
             <div id='printAndMonth'>
                 <div id='monthContainer'>
-                <h3 class='printSiteName'>".$siteName."</h3>
-                    <p class='monthHeading'> ".$heading ."</p>
+                <h3 class='printSiteName'>" . $siteName . "</h3>
+                    <p class='monthHeading'> " . $heading . "</p>
                     <span class='monthSelector'>
-                        <form id='monthAjax'>" .$hiddenInput. "
-                            <select class='otherMonth' id='month' name='month'>" .$this->getMonths($month). "</select>
+                        <form id='monthAjax'>" . $hiddenInput . "
+                            <select class='otherMonth' id='month' name='month'>" . $this->getMonths($month) . "</select>
                         </form>
                     </span>
                     <span class='printIcon'>
                         <a title='click to print' onclick='DPT.printDiv(\"printAndMonth\")'>
-                            <img src=".$path. 'Assets/images/print_icon.png'." alt='click to print'>
+                            <img src=" . $path . 'Assets/images/print_icon.png'." alt='click to print'>
                         </a>
                     </span>
                 </div>
@@ -94,8 +94,8 @@ class MonthlyShortCode
 
     public function get_monthly_timetable()
     {
-        $month = $_REQUEST["month"];
-        $display = $_REQUEST["display"];
+        $month = sanitize_text_field($_REQUEST["month"]);
+        $display = sanitize_text_field($_REQUEST["display"]);
         $timetable = new MonthlyTimeTable($month);
 
         $options = array();

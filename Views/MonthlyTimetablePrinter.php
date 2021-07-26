@@ -27,16 +27,16 @@ class MonthlyTimetablePrinter extends TimetablePrinter
     {
         if ($options['isRamadan']) {
             if ((int)get_option('imsaq') > 0 ) {
-                $fajrBegins = $this->localHeaders['begins'];
+                $fajrBegins = esc_attr($this->localHeaders['begins']);
                 $fajrColspan = 4;
             } else {
-                $fajrBegins = $this->localHeaders['fast_begins'];
+                $fajrBegins = esc_attr($this->localHeaders['fast_begins']);
                 $fajrColspan = 3;
             }
-            $maghribBegins = $this->localHeaders['fast_ends'];
+            $maghribBegins = esc_attr($this->localHeaders['fast_ends']);
         } else {
-            $fajrBegins = $this->localHeaders['begins'];
-            $maghribBegins = $this->localHeaders['begins'];
+            $fajrBegins = esc_attr($this->localHeaders['begins']);
+            $maghribBegins = esc_attr($this->localHeaders['begins']);
             $fajrColspan = 3;
         }
 
@@ -49,39 +49,39 @@ class MonthlyTimetablePrinter extends TimetablePrinter
              <th class='prayerName'></th>
              <th class='prayerName'></th>
 
-             <th class='prayerName' colspan='$fajrColspan'>" .$prayers['fajr']. "</th>
-             <th class='prayerName' colspan='2'>" .$prayers['zuhr']. "</th>";
-        $table .= "<th class='prayerName' colspan=".$this->getAsrMethodColspan().">" .$prayers['asr']. "</th>";
+             <th class='prayerName' colspan='$fajrColspan'>" . esc_attr($prayers['fajr']) . "</th>
+             <th class='prayerName' colspan='2'>" . esc_attr($prayers['zuhr']) . "</th>";
+        $table .= "<th class='prayerName' colspan=".$this->getAsrMethodColspan().">" . esc_attr($prayers['asr']) . "</th>";
         $table .= "
-             <th class='prayerName' colspan='2'>" .$prayers['maghrib']. "</th>
-             <th class='prayerName' colspan='2'>" .$prayers['isha']. "</th>
+             <th class='prayerName' colspan='2'>" . esc_attr($prayers['maghrib']) . "</th>
+             <th class='prayerName' colspan='2'>" . esc_attr($prayers['isha']) . "</th>
          </thead>
          <thead>
-            <th class='tableHeading'>".$this->localTimes['date']."</th>
-            <th class='tableHeading'>".$this->localTimes['day']."</th>
+            <th class='tableHeading'>" . esc_attr($this->localTimes['date']) . "</th>
+            <th class='tableHeading'>" . esc_attr($this->localTimes['day']) . "</th>
             ";
 
         if ($options['isRamadan'] && (int)get_option('imsaq') > 0) {
-            $table .="<th class='tableHeading ". $fastingClass ."'>" . $this->localHeaders['fast_begins'] . "</th>";
+            $table .="<th class='tableHeading ". $fastingClass ."'>" . esc_attr($this->localHeaders['fast_begins']) . "</th>";
         }
 
             $table.="
             <th class='tableHeading ". $fastingClass ."'>" . $fajrBegins . "</th>
-            <th class='tableHeading'>" .$this->localHeaders['iqamah']. "</th>
-            <th class='tableHeading'>" .$prayers['sunrise']. "</th>
+            <th class='tableHeading'>" . esc_attr($this->localHeaders['iqamah']) . "</th>
+            <th class='tableHeading'>" . esc_attr($prayers['sunrise']) . "</th>
 
-            <th class='tableHeading'>" .$this->localHeaders['begins']. "</th>
-            <th class='tableHeading'>" .$this->localHeaders['iqamah']. "</th>";
+            <th class='tableHeading'>" . esc_attr($this->localHeaders['begins']) . "</th>
+            <th class='tableHeading'>" . esc_attr($this->localHeaders['iqamah']) . "</th>";
 
         $table .= $this->getAsrMethodTh();
 
-        $table .= "<th class='tableHeading'>" .$this->localHeaders['iqamah']. "</th>
+        $table .= "<th class='tableHeading'>" . esc_attr($this->localHeaders['iqamah']) . "</th>
 
             <th class='tableHeading ". $fastingClass ."'>" . $maghribBegins . "</th>
-            <th class='tableHeading'>" .$this->localHeaders['iqamah']. "</th>
+            <th class='tableHeading'>" . esc_attr($this->localHeaders['iqamah']) . "</th>
 
-            <th class='tableHeading'>" .$this->localHeaders['begins']. "</th>
-            <th class='tableHeading'>" .$this->localHeaders['iqamah']. "</th>
+            <th class='tableHeading'>" . esc_attr($this->localHeaders['begins']) . "</th>
+            <th class='tableHeading'>" . esc_attr($this->localHeaders['iqamah']) . "</th>
         </thead>";
 
         return $table;
@@ -211,24 +211,24 @@ class MonthlyTimetablePrinter extends TimetablePrinter
 
         $prayers = $this->getLocalPrayerNames(true);
         if ($isAzanOnly) {
-            $fajr = $prayers['fajr'];
-            $maghrib = $prayers['maghrib'];
-            $sunrise =  "<th class='tableHeading'>" .$prayers['sunrise']. "</th>";
+            $fajr = esc_attr($prayers['fajr']);
+            $maghrib = esc_attr($prayers['maghrib']);
+            $sunrise =  "<th class='tableHeading'>" . esc_attr($prayers['sunrise']) . "</th>";
             $azanOnlyClass = 'azanOnly';
         } else {
-            $fajrJamah = "<th class='tableHeading'>" .$prayers['fajr']. "</th>";
-            $maghribJamah = "<th class='tableHeading'>" .$prayers['maghrib']. "</th>";
+            $fajrJamah = "<th class='tableHeading'>" . esc_attr($prayers['fajr']) . "</th>";
+            $maghribJamah = "<th class='tableHeading'>" . esc_attr($prayers['maghrib']) . "</th>";
         }
 
         if ($options['isRamadan'] && !$isAzanOnly) {
             $fajr = '';
             $maghrib = '';
-            $fajrHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" .$this->localHeaders['fast_begins']. $fajr . "</th>";
-            $maghribHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" .$this->localHeaders['fast_ends']. $maghrib . "</th>";
+            $fajrHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_begins']) . $fajr . "</th>";
+            $maghribHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_ends']) . $maghrib . "</th>";
         } elseif ($options['isRamadan'] && $isAzanOnly) {
-            $fajrHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" .$this->localHeaders['fast_begins'] . "</th>";
+            $fajrHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_begins']) . "</th>";
             $fajrHeading .= "<th class='tableHeading ".$azanOnlyClass."'>"  . $fajr . "</th>";
-            $maghribHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" .$this->localHeaders['fast_ends']. '/'. $maghrib . "</th>";
+            $maghribHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_ends']) . '/'. $maghrib . "</th>";
         } elseif ($isAzanOnly) {
             $fajrHeading = "<th class='tableHeading'>" . $fajr . "</th>";
             $maghribHeading = "<th class='tableHeading'>" . $maghrib . "</th>";;
@@ -237,16 +237,16 @@ class MonthlyTimetablePrinter extends TimetablePrinter
         $table = "
         <table class='dptTimetable customStyles'>
          <tr>
-            <th class='tableHeading'>".$this->localTimes['date']."</th>
-            <th class='tableHeading'>".$this->localTimes['day']."</th>"
+            <th class='tableHeading'>" . esc_attr($this->localTimes['date']) ."</th>
+            <th class='tableHeading'>" . esc_attr($this->localTimes['day']) ."</th>"
                  . $fajrHeading .""
                  .$fajrJamah.""
                  .$sunrise.
-             "<th class='tableHeading'>" .$prayers['zuhr']. "</th>
-             <th class='tableHeading'>" .$prayers['asr']. "</th>"
+             "<th class='tableHeading'>" . esc_attr($prayers['zuhr']) . "</th>
+             <th class='tableHeading'>" . esc_attr($prayers['asr']) . "</th>"
                  . $maghribHeading . ""
                  .$maghribJamah ."".
-             "<th class='tableHeading'>" .$prayers['isha']. "</th>
+             "<th class='tableHeading'>" . esc_attr($prayers['isha']) . "</th>
          </tr>";
 
         return $table;

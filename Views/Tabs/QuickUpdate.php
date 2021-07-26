@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ .'/../../Models/db.php');
 
-$quickMonth = $_POST["quickMonth"];
+$quickMonth = sanitize_text_field($_POST["quickMonth"]);
 $quickMonth = $quickMonth ?: date('m');
 $monthName = date('F');
 $futureMonths = [];
@@ -35,7 +35,7 @@ if ( empty($data)) {
             <div class='col-sm-2' style='padding-left:0px;'>Update Iqamah time for: </div>
             <div class='col-sm-1'>
                 <select name='quickMonth' class='form-control'>
-                     ". $options ." 
+                     ". esc_html($options) ." 
                 </select>               
             </div> 
             <div class='col-sm-2'>
@@ -53,11 +53,11 @@ if ( empty($data)) {
                 <tr>
                     <th>DATE</th>
                     <th>DAY</th>
-                    <th>". $prayerNames['fajr'] ."</th>
-                    <th>". $prayerNames['zuhr'] ."</th>
-                    <th>". $prayerNames['asr'] ."</th>
-                    <th>". $prayerNames['maghrib'] ."</th>
-                    <th>". $prayerNames['isha'] ."</th>
+                    <th>". esc_html($prayerNames['fajr']) ."</th>
+                    <th>". esc_html($prayerNames['zuhr']) ."</th>
+                    <th>". esc_html($prayerNames['asr']) ."</th>
+                    <th>". esc_html($prayerNames['maghrib']) ."</th>
+                    <th>". esc_html($prayerNames['isha']) ."</th>
                 </tr>
             </thead>
     ";
@@ -79,11 +79,11 @@ if ( empty($data)) {
                 <td class=" . $weekday . "><b>". $weekday ."</b></td>
 
                 <input type='hidden' name='thisMonth[".$key."][d_date]' value=". $date ." >
-                <td><input type='time' name='thisMonth[".$key."][fajr_jamah]' value=". date('H:i', strtotime($value['fajr_jamah'])) ." ></td>
-                <td><input type='time' name='thisMonth[".$key."][zuhr_jamah]' value=". date('H:i', strtotime($value['zuhr_jamah'])) ." ></td>
-                <td><input type='time' name='thisMonth[".$key."][asr_jamah]' value=". date('H:i', strtotime($value['asr_jamah'])) ."></td>
-                <td><input type='time' name='thisMonth[".$key."][maghrib_jamah]' value=". date('H:i', strtotime($value['maghrib_jamah'])) ." ></td>
-                <td><input type='time' name='thisMonth[".$key."][isha_jamah]' value=". date('H:i', strtotime($value['isha_jamah'])) ." ></td>
+                <td><input type='time' name='thisMonth[".$key."][fajr_jamah]' value=". date('H:i', strtotime(esc_attr($value['fajr_jamah']))) ." ></td>
+                <td><input type='time' name='thisMonth[".$key."][zuhr_jamah]' value=". date('H:i', strtotime(esc_attr($value['zuhr_jamah']))) ." ></td>
+                <td><input type='time' name='thisMonth[".$key."][asr_jamah]' value=". date('H:i', strtotime(esc_attr($value['asr_jamah']))) ."></td>
+                <td><input type='time' name='thisMonth[".$key."][maghrib_jamah]' value=". date('H:i', strtotime(esc_attr($value['maghrib_jamah']))) ." ></td>
+                <td><input type='time' name='thisMonth[".$key."][isha_jamah]' value=". date('H:i', strtotime(esc_attr($value['isha_jamah']))) ." ></td>
             </tr>
         ";
     }

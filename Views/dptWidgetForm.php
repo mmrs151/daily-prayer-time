@@ -51,7 +51,7 @@
             $days =  array('everyday','friday','saturday','sunday','monday','tuesday','wednesday','thursday');
 
             foreach ($days as $day) { ?>
-                <option value="<?= $day?>" <?php if($instance["announcementDay"] === $day){ echo 'selected="selected"'; } ?>><?= ucfirst($day); ?></option>
+                <option value="<?php echo  $day?>" <?php if($instance["announcementDay"] === $day){ echo 'selected="selected"'; } ?>><?php echo  ucfirst($day); ?></option>
             <?php }
             ?>
         </select>

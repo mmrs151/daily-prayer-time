@@ -21,7 +21,7 @@ services:
       - db
     image: wordpress:latest
     volumes:
-      - /home/muhammad/sites/wp-plugins/daily-prayer-time-for-mosques/trunk/:/var/www/html/wp-content/plugins/dpt
+      - /home/muhammad/sites/wpplugins/daily-prayer-time-for-mosques/trunk/:/var/www/html/wp-content/plugins/dpt
     ports:
       - "8888:80"
     restart: always
