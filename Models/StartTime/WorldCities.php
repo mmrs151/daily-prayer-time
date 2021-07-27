@@ -68,7 +68,7 @@
         public function getCities()
         {
             global $wpdb;
-            $sql = "SELECT * FROM " . $this->dbTable;
+            $sql = "SELECT * FROM " . $this->dbTable . " ORDER BY country, city ASC";
             return $wpdb->get_results($sql, ARRAY_A);
         }
     }

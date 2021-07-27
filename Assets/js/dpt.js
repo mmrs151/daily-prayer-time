@@ -12,8 +12,6 @@ DPT = {
         this.dsRefreshNextPrayer();
         this.refreshBeforeIqamah();
         this.digitialClock();
-        this.playFajrAdhaanBeforeIqamah();
-        this.playOtherAdhaanBeforeIqamah();
         this.displayCustomAngleFields();
     },
 

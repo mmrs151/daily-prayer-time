@@ -2,7 +2,7 @@
 <html <?php language_attributes(); ?>>
 <head>
     <link rel='stylesheet' href="<?php echo  plugin_dir_url(__FILE__) . '../Assets/css/google-font-ubuntu.css'; ?>">
-    <link rel="stylesheet" href="<?php echo  plugin_dir_url(__FILE__) . '../Assets/css/bootstrap.min-3.3.7.css'; ?>">
+    <link rel="stylesheet" href="<?php echo  plugin_dir_url(__FILE__) . '../Assets/css/bootstrap.min-5.0.2.css'; ?>">
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <?php if ( ! get_theme_support( 'title-tag' ) ): ?>
         <title><?php wp_title(); ?></title>
@@ -27,6 +27,6 @@ while ( have_posts() ) : the_post(); ?>
 endwhile;
 ?>
 <?php wp_footer(); ?>
-<script src="<?php echo  plugin_dir_url(__FILE__) . '../Assets/js/bootstrap.min-3.3.7.js'; ?>"></script>
+<script src="<?php echo  plugin_dir_url(__FILE__) . '../Assets/js/bootstrap.min-5.0.2.js'; ?>"></script>
 </body>
 </html>

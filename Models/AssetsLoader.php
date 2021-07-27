@@ -12,10 +12,9 @@
         {
             if ($hook == 'toplevel_page_dpt') {
                 wp_enqueue_script('dpt-admin', plugins_url( '../Assets/js/dpt-admin.js', __FILE__ ), array( 'jquery' ), DailyPrayerTime::VERSION);
-                wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.min-3.3.7.js', __FILE__ ), array( 'jquery' ), DailyPrayerTime::VERSION);
-                wp_enqueue_script("bootstrap-select", plugins_url( '../Assets/js/bootstrap-select.min-1.13.14.js', __FILE__ ), array( 'jquery' ), DailyPrayerTime::VERSION);
+                wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.min-5.0.2.js', __FILE__ ), array( 'jquery' ), DailyPrayerTime::VERSION);
     
-                wp_register_style( 'dpt_bootstrap', plugins_url('../Assets/css/bootstrap.min-3.3.7.css', __FILE__), array(), DailyPrayerTime::VERSION );
+                wp_register_style( 'dpt_bootstrap', plugins_url('../Assets/css/bootstrap.min-5.0.2.css', __FILE__), array(), DailyPrayerTime::VERSION );
                 wp_enqueue_style( 'dpt_bootstrap' );
             }
         }

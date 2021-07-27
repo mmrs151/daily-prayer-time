@@ -1,10 +1,6 @@
 <?php
-if (empty($cities = get_transient('dpt_cities'))) {
-    $worldCities = new WorldCities();
-    $cities = $worldCities->getCities();
-    set_transient('dpt_cities', $cities,YEAR_IN_SECONDS );
-}
-    
+$worldCities = new WorldCities();
+$cities = $worldCities->getCities();
 $adapter = new DatabaseConnection();
 $rows = $adapter->getRows();
 $header = (array_keys($rows[1]));
@@ -28,19 +24,19 @@ try {
             <form enctype="multipart/form-data" name="csvUpload" method="post" action="">
                 <div class="upload-step">
                     <label>Select your nearest city:</label>
-                    <select class="selectpicker" data-live-search="true" name="city">
+                    <select class="form-select" data-live-search="true" name="city">
                         <option></option>
                         <?php
                         foreach ($cities as $city) {
                             $selected = $city['id'] == get_transient('nearest_city') ? "selected" : null;
-                            echo "<option value=" . esc_attr($city['id']) . "  ". $selected.">" . esc_html($city["city"]) . ", " . esc_html($city['country']) . "</option>";
+                            echo "<option value=" . esc_attr($city['id']) . "  ". $selected.">" . esc_html($city["country"]) . ", " . esc_html($city['city']) . "</option>";
                         }
                         ?>
                     </select>
                 </div>
                 <div class="upload-step">
                     <label>Select calculation method:</label>
-                    <select class="selectpicker" name="method" id="calculationMethod">
+                    <select class="form-select" name="method" id="calculationMethod">
                         <option value="0" <?php if (get_option('calc-method') == 0){echo "selected='selected'";}?>>Ithna Ashari</option>
                         <option value="1" <?php if (get_option('calc-method') == 1){echo "selected='selected'";}?>>University of Islamic Sciences, Karachi</option>
                         <option value="2" <?php if (get_option('calc-method') == 2){echo "selected='selected'";}?>>Islamic Society of North America (ISNA)</option>
@@ -57,14 +53,14 @@ try {
                 </div>
                 <div class="upload-step">
                     <label>Select Asr juristic method:</label>
-                    <select class="selectpicker" name="asr-method">
+                    <select class="form-select" name="asr-method">
                         <option value="0">Standard</option>
                         <option value="1" <?php if (get_option('asr-method') == 1){echo "selected='selected'";}?>>Hanafi</option>
                     </select>
                 </div>
                 <div class="upload-step">
                     <label>Adjusting Methods for Higher Latitudes:</label>
-                    <select class="selectpicker" name="higher-lat">
+                    <select class="form-select" name="higher-lat">
                         <option value="3" <?php if (get_option('higher-lat') == 3){echo "selected='selected'";}?>>Angle Based</option>
                         <option value="2" <?php if (get_option('higher-lat') == 2){echo "selected='selected'";}?>>One Seventh of the Night</option>
                         <option value="1" <?php if (get_option('higher-lat') == 1){echo "selected='selected'";}?>>Middle of the Night</option>

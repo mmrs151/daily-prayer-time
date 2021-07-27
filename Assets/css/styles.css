@@ -12,12 +12,17 @@ div.upload-step {
     padding-bottom: 20px;
 }
 div.upload-step label{
-    width: 300px;
+    width: 350px;
     font-style: normal;
     font-weight: 200;
+    float: left;
 }
 div.upload-step select{
     padding-left: 10px;
+    width: 350px;
+}
+select.quickMonth{
+    width: 120px;
 }
 td.Sat, td.Sun{
     font-weight: bold;

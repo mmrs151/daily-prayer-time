@@ -16,7 +16,7 @@ foreach($futureMonths as $key=>$month_name){
     if($key == $quickMonth){
         $selected = " selected='selected'";
     }
-    $options .= "<option value='{$key}' {$selected}>{$month_name}</option>";
+    $options .= "<option value='" . esc_attr($key) . "' $selected>". esc_html($month_name) . "</option>";
 }
 
 $db = new DatabaseConnection();
@@ -32,24 +32,21 @@ if ( empty($data)) {
 <div class='container-fluid'>
     <form name='quickUpdateMonth' method='post'>
         <div class='row font-weight-bold' style='padding-bottom: 10px;'>
-            <div class='col-sm-2' style='padding-left:0px;'>Update Iqamah time for: </div>
-            <div class='col-sm-1'>
-                <select name='quickMonth' class='form-control'>
-                     ". esc_html($options) ." 
+            <div class='col-sm-4' style='padding-left:0px;'><p class='h4'>Update Iqamah time for:</p> </div>
+            <div class='col-sm-2'>
+                <select name='quickMonth' class='form-select-sm quickMonth'>
+                     ". $options ." 
                 </select>               
             </div> 
             <div class='col-sm-2'>
-                <input type='submit' value='Load month' class='button-secondary' style='float: left; margin-right: 20px;'>
-    </form>
-    <form name='quickUpdate' method='post'>
-                <input type='submit' name='quickUpdate' id='quickUpdate' class='button button-primary' value='Update changes'>
-            </div>
+                <input type='submit' value='Load month' class='btn btn-success' style='float: left; margin-right: 20px;'>
+                </div>
         </div>
+    </form>
     <div class='row'>
-        
-        
-        <table class='table table-condensed'>
-            <thead class='bg-primary text-white'>
+    <form name='quickUpdate' method='post'>        
+        <table class='table table-condensed '>
+            <thead class='bg-success text-white'>
                 <tr>
                     <th>DATE</th>
                     <th>DAY</th>
@@ -89,6 +86,7 @@ if ( empty($data)) {
     }
     echo "
         </table>
+            <input type='submit' name='quickUpdate' id='quickUpdate' class='btn btn-success' value='Update changes'>
         </form>
         </div>
         </div>

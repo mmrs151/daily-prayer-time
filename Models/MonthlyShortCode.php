@@ -111,7 +111,7 @@ class MonthlyShortCode
             $data = $timetable->displayTable($options);
         }
 
-        echo $data;
+        echo wp_kses($data, 'post');
         die();
     }
 }
