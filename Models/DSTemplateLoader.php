@@ -36,7 +36,8 @@ class DSTemplateLoader
 
         add_filter( 'template_include', array( $this, 'view_project_template' ) );
 
-        $this->templates = array( '../Views/DSTemplate.php' => 'Digital Screen Prayer Time', );
+        $this->templates = array( '../Views/DSTemplate.php' => 'Digital Screen Prayer Time', 
+        '../Views/DPTFullWidth.php' => 'Full Width Monthly Prayer Time', );
     }
 
 
