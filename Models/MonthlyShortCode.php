@@ -27,7 +27,7 @@ class MonthlyShortCode
      */
     private function getTimeTableHeading($attr)
     {
-        $heading = "Select other month";
+        $heading = "";
 
         if (isset($attr['heading'])) {
             $heading = esc_attr($attr['heading']);
