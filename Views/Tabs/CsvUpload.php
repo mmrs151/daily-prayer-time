@@ -48,8 +48,8 @@ try {
                     </select>
                 </div>
                 <div class="upload-step" id="customMethod" style="background: #f1f1f1; display: none;">
-                    <input type="number" value="<?php echo  get_option('fajr-angle')?>" placeholder="Fajr angle" name="fajr-angle" style="margin: 20px 0px 0px 300px">
-                    <input type="number" value="<?php echo  get_option('isha-angle')?>" placeholder="Isha angle" name="isha-angle">
+                    <input type="number" value="<?php echo esc_html( get_option('fajr-angle') )?>" placeholder="Fajr angle" name="fajr-angle" style="margin: 20px 0px 0px 300px">
+                    <input type="number" value="<?php echo esc_html( get_option('isha-angle') )?>" placeholder="Isha angle" name="isha-angle">
                 </div>
                 <div class="upload-step">
                     <label>Select Asr juristic method:</label>
@@ -67,19 +67,19 @@ try {
                     </select>
                 </div>
                 <div class="upload-step">
-                    <label>Fajr Iqamah delay:</label><input type="number" name="fajr-delay" min="1" max="120" value="<?php echo get_option('fajr-delay')?>"> mins
+                    <label>Fajr Iqamah delay:</label><input type="number" name="fajr-delay" min="1" max="120" value="<?php echo esc_html( get_option('fajr-delay') )?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Dhuhr Iqamah delay:</label><input type="number" name="zuhr-delay" min="1" max="120" value="<?php echo get_option('zuhr-delay')?>"> mins
+                    <label>Dhuhr Iqamah delay:</label><input type="number" name="zuhr-delay" min="1" max="120" value="<?php echo esc_html( get_option('zuhr-delay') )?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Asr Iqamah delay:</label><input type="number" name="asr-delay" min="1" max="120" value="<?php echo get_option('asr-delay')?>"> mins
+                    <label>Asr Iqamah delay:</label><input type="number" name="asr-delay" min="1" max="120" value="<?php echo esc_html( get_option('asr-delay') )?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Maghrib Iqamah delay:</label><input type="number" name="maghrib-delay" min="1" max="120" value="<?php echo get_option('maghrib-delay')?>"> mins
+                    <label>Maghrib Iqamah delay:</label><input type="number" name="maghrib-delay" min="1" max="120" value="<?php echo esc_html( get_option('maghrib-delay') )?>"> mins
                 </div>
                 <div class="upload-step">
-                    <label>Isha Iqamah delay:</label><input type="number" name="isha-delay" min="1" max="120" value="<?php echo get_option('isha-delay')?>"> mins
+                    <label>Isha Iqamah delay:</label><input type="number" name="isha-delay" min="1" max="120" value="<?php echo esc_html( get_option('isha-delay') )?>"> mins
                 </div>
                 <div class="upload-step">
                     <input type='submit' name="set-start-time" id="set-start-time" class='button button-primary' value='Set Prayer Time'>

@@ -15,7 +15,7 @@ $timetable = new TimetablePrinter();
                     <tr>
                         <?php $names = $timetable->getLocalPrayerNames();
                         foreach ($names as $key => $val) { ?>
-                            <th class="text-center"><?php echo ucfirst(esc_attr($key)) ?></th>
+                            <th class="text-center"><?php echo ucfirst(esc_html($key)) ?></th>
                         <?php } ?>
                     </tr>
                     <tr>

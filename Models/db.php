@@ -43,6 +43,26 @@ class DatabaseConnection
         return $result;
     }
 
+        /**
+     * @param int $jamahChanges
+     * @return array
+     */
+    public function getPrayerTimesForTomorrow($jamahChanges=null)
+    {
+        global $wpdb;
+
+        $today = user_current_time( 'Y-m-d' );
+        $sql = "SELECT * FROM  $this->dbTable WHERE d_date =  CURDATE()  + INTERVAL 1 DAY;";
+        $result = $wpdb->get_row($sql, ARRAY_A);
+        
+        if ( empty($result) ) {
+            $sql = "SELECT * FROM  $this->dbTable WHERE month (d_date) = ". date('m') ." and day(d_date)=". date('d') ." LIMIT 1";
+            $result = $wpdb->get_row($sql, ARRAY_A);
+        }
+
+        return $result;
+    }
+
     public function getIqamahTimeForToday()
     {
         $result = $this->getPrayerTimeForToday();

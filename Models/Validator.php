@@ -76,8 +76,8 @@ class Validator
                 }
             } else {
                 if(! $this->isValidateTimeFormat($data[$c])) {
-                    echo "<h3 class='ui-state-error dptCenter'>Invalid Time format in " . esc_html( $data[$c] ) . " for " . $this->headers[$c] .
-                        " on ". $data[0] .", valid time format is <span class='green'>HH:MM[24 hours]</span> </h3>";
+                    echo "<h3 class='ui-state-error dptCenter'>Invalid Time format in " . esc_html( $data[$c] ) . " for " . esc_html($this->headers[$c]) .
+                        " on ". esc_html($data[0]) .", valid time format is <span class='green'>HH:MM[24 hours]</span> </h3>";
                     print_r('<pre>');
                     print_r(array_combine($this->headers, $data));
                     print_r('</pre>');

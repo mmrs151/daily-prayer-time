@@ -36,7 +36,7 @@
         <li>hide_ramadan=true</li>
         <li>announcement="Any text" day=everyday/saturday/sunday/monday/tuesday/wednesday/thursday/friday</li>
         <li>heading="any text"</li>
-        <li>use_div_layout=true (restrictive, no other options)</li>
+        <li>use_div_layout=true (restrictive, works with horizontal, no other options)</li>
         <li>start_time=true (only for single prayer time)</li>
         <li>view='vertical' (only for digital_screen)</li>
     </ol>
