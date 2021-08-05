@@ -17,12 +17,10 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
         public function process()
         {
             $dsLogo = sanitize_text_field($this->data['ds-logo']);
-            delete_option('ds-logo');
-            add_option('ds-logo', $dsLogo);
+            update_option('ds-logo', $dsLogo);
             
             $slider = sanitize_text_field($this->data['slider-chbox']);
-            delete_option('slider-chbox');
-            add_option('slider-chbox', $slider);
+            update_option('slider-chbox', $slider);
         
             $nextPrayerSlide = sanitize_text_field($this->data['nextPrayerSlide']);
             update_option('nextPrayerSlide', $nextPrayerSlide);

@@ -9,7 +9,7 @@
                 <table class="table">
                     <tr>
                         <td class="active-slider">Site Logo</td>
-                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="30" value=<?php echo esc_html(get_option("ds-logo)") )?>></td>
+                        <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="30" value=<?php echo esc_html(get_option("ds-logo") )?>></td>
                     </tr>
                     <tr>
                         <td class="active-slider">Activate Slider</td>

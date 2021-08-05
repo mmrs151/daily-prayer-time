@@ -18,9 +18,8 @@ if (!class_exists('DPTQuickUpdateProcessor')) {
         public function process()
         {
             $db = new DatabaseConnection();
-            $rows = $this->data['thisMonth'];
-            $this->validate($rows);
-            $db->updateRow($rows);
+            $this->validate($this->data);
+            $db->updateRow($this->data);
         }
     
         /**

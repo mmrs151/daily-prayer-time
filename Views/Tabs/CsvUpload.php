@@ -26,7 +26,8 @@ try {
                     <label>Select your nearest city:</label>
                     <select class="form-select" data-live-search="true" name="city">
                         <option></option>
-                        <?php
+                        nearest city is <?php
+                        var_dump(get_transient('nearest_city'));
                         foreach ($cities as $city) {
                             $selected = $city['id'] == get_transient('nearest_city') ? "selected" : null;
                             echo "<option value=" . esc_attr($city['id']) . "  ". $selected.">" . esc_html($city["country"]) . ", " . esc_html($city['city']) . "</option>";
