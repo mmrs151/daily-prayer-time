@@ -17,19 +17,19 @@ ini_set('auto_detect_line_endings', true);
 
 if (isset($_POST['set-start-time'])) {
     $data = [
-        'city' => $_POST['city'],
-        'method' => $_POST['method'],
-        'fajr-delay' => $_POST['fajr-delay'],
-        'zuhr-delay' => $_POST['zuhr-delay'],
-        'asr-delay' => $_POST['asr-delay'],
-        'maghrib-delay' => $_POST['maghrib-delay'],
-        'isha-delay' => $_POST['isha-delay'],
-        'higher-lat' => $_POST['higher-lat'],
-        'calc-method' => $_POST['calc-method'],
-        'fajr-angle' => $_POST['fajr-angle'],
-        'isha-angle' => $_POST['isha-angle'],
-        'isha-angle' => $_POST['isha-angle'],
-        'asr-method' => $_POST['asr-method'],
+        'city' => sanitize_text_field($_POST['city']),
+        'method' => sanitize_text_field($_POST['method']),
+        'fajr-delay' => sanitize_text_field($_POST['fajr-delay']),
+        'zuhr-delay' => sanitize_text_field($_POST['zuhr-delay']),
+        'asr-delay' => sanitize_text_field($_POST['asr-delay']),
+        'maghrib-delay' => sanitize_text_field($_POST['maghrib-delay']),
+        'isha-delay' => sanitize_text_field($_POST['isha-delay']),
+        'higher-lat' => sanitize_text_field($_POST['higher-lat']),
+        'calc-method' => sanitize_text_field($_POST['calc-method']),
+        'fajr-angle' => sanitize_text_field($_POST['fajr-angle']),
+        'isha-angle' => sanitize_text_field($_POST['isha-angle']),
+        'isha-angle' => sanitize_text_field($_POST['isha-angle']),
+        'asr-method' => sanitize_text_field($_POST['asr-method']),
     ];
     $startTimeProcessor = new DPTStartTimeProcessor($data);
     $startTimeProcessor->process();
@@ -48,11 +48,11 @@ if (isset($_POST['submit'])) {
 
 if (! empty($_POST['languageSettings'])) {
     $data = [
-        'prayersLocal' => $_POST['prayersLocal'],
-        'headersLocal' => $_POST['headersLocal'],
-        'monthsLocal' => $_POST['monthsLocal'],
-        'numbersLocal' => $_POST['numbersLocal'],
-        'timesLocal' => $_POST['timesLocal'],
+        'prayersLocal' => array_map( 'sanitize_text_field', $_POST['prayersLocal']),
+        'headersLocal' => array_map( 'sanitize_text_field', $_POST['headersLocal']),
+        'monthsLocal' => array_map( 'sanitize_text_field', $_POST['monthsLocal']),
+        'numbersLocal' => array_map( 'sanitize_text_field', $_POST['numbersLocal']),
+        'timesLocal' => array_map( 'sanitize_text_field', $_POST['timesLocal']),
     ];
     $languageProcessor = new DPTLanguageProcessor($data);
     $languageProcessor->process();
@@ -60,8 +60,8 @@ if (! empty($_POST['languageSettings'])) {
 
 if (! empty($_POST['hijriSettings'])) {
     $data = [
-        'hijri-chbox' => $_POST['hijri-chbox'],
-        'hijri-adjust' => $_POST['hijri-adjust']
+        'hijri-chbox' => sanitize_text_field($_POST['hijri-chbox']),
+        'hijri-adjust' => sanitize_text_field($_POST['hijri-adjust'])
     ];
     $hijri = new DPTHijriProcessor($data);
     $hijri->process();
@@ -69,11 +69,11 @@ if (! empty($_POST['hijriSettings'])) {
 
 if (! empty($_POST['otherSettings'])) {
     $data = [
-        'jumuah' => $_POST['jumuah'],
-        'ramadan-chbox' => $_POST['ramadan-chbox'],
-        'asrSelect' => $_POST['asrSelect'],
-        'jamah_changes' => $_POST['jamah_changes'],
-        'imsaq' => $_POST['imsaq'],
+        'jumuah' => sanitize_text_field($_POST['jumuah']),
+        'ramadan-chbox' => sanitize_text_field($_POST['ramadan-chbox']),
+        'asrSelect' => sanitize_text_field($_POST['asrSelect']),
+        'jamah_changes' => sanitize_text_field($_POST['jamah_changes']),
+        'imsaq' => sanitize_text_field($_POST['imsaq']),
     ];
     $otherProcessor = new DPTOtherProcessor($data);
     $otherProcessor->process();
@@ -86,21 +86,21 @@ if (! empty($_POST['quickUpdate'])) {
 
 if (! empty($_POST['themeSettings'])) {
     $data = [
-        'hideTableBorder' => $_POST['hideTableBorder'],
-        'tableBackground' => $_POST['tableBackground'],
-        'tableHeading' => $_POST['tableHeading'],
-        'tableHeadingFont' => $_POST['tableHeadingFont'],
-        'evenRow' => $_POST['evenRow'],
-        'fontColor' => $_POST['fontColor'],
-        'highlight' => $_POST['highlight'],
-        'notificationBackground' => $_POST['notificationBackground'],
-        'notificationFont' => $_POST['notificationFont'],
-        'prayerName' => $_POST['prayerName'],
-        'prayerNameFont' => $_POST['prayerNameFont'],
-        'digitalScreenRed' => $_POST['digitalScreenRed'],
-        'digitalScreenLightRed' => $_POST['digitalScreenLightRed'],
-        'digitalScreenGreen' => $_POST['digitalScreenGreen'],
-        'digitalScreenPrayerName' => $_POST['digitalScreenPrayerName'],
+        'hideTableBorder' => sanitize_text_field($_POST['hideTableBorder']),
+        'tableBackground' => sanitize_text_field($_POST['tableBackground']),
+        'tableHeading' => sanitize_text_field($_POST['tableHeading']),
+        'tableHeadingFont' => sanitize_text_field($_POST['tableHeadingFont']),
+        'evenRow' => sanitize_text_field($_POST['evenRow']),
+        'fontColor' => sanitize_text_field($_POST['fontColor']),
+        'highlight' => sanitize_text_field($_POST['highlight']),
+        'notificationBackground' => sanitize_text_field($_POST['notificationBackground']),
+        'notificationFont' => sanitize_text_field($_POST['notificationFont']),
+        'prayerName' => sanitize_text_field($_POST['prayerName']),
+        'prayerNameFont' => sanitize_text_field($_POST['prayerNameFont']),
+        'digitalScreenRed' => sanitize_text_field($_POST['digitalScreenRed']),
+        'digitalScreenLightRed' => sanitize_text_field($_POST['digitalScreenLightRed']),
+        'digitalScreenGreen' => sanitize_text_field($_POST['digitalScreenGreen']),
+        'digitalScreenPrayerName' => sanitize_text_field($_POST['digitalScreenPrayerName']),
     ];
     $themeSettings = new ThemeSettingsProcessor($data);
     $themeSettings->process();
@@ -108,33 +108,33 @@ if (! empty($_POST['themeSettings'])) {
 
 if (! empty($_POST['digitalScreen'])) {
     $data = [
-        'ds-logo' => $_POST['ds-logo'],
-        'slider-chbox' => $_POST['slider-chbox'],
-        'nextPrayerSlide' => $_POST['nextPrayerSlide'],
-        'transitionEffect' => $_POST['transitionEffect'],
-        'transitionSpeed' => $_POST['transitionSpeed'],
-        'slider1' => $_POST['slider1'],
-        'slider1Url' => $_POST['slider1Url'],
-        'slider2' => $_POST['slider2'],
-        'slider2Url' => $_POST['slider2Url'],
-        'slider3' => $_POST['slider3'],
-        'slider3Url' => $_POST['slider3Url'],
-        'slider4' => $_POST['slider4'],
-        'slider4Url' => $_POST['slider4Url'],
-        'slider5' => $_POST['slider5'],
-        'slider5Url' => $_POST['slider5Url'],
-        'slider6' => $_POST['slider6'],
-        'slider6Url' => $_POST['slider6Url'],
-        'slider7' => $_POST['slider7'],
-        'slider7Url' => $_POST['slider7Url'],
-        'slider8' => $_POST['slider8'],
-        'slider8Url' => $_POST['slider8Url'],
-        'slider9' => $_POST['slider9'],
-        'slider9Url' => $_POST['slider9Url'],
-        'slider10' => $_POST['slider10'],
-        'slider10Url' => $_POST['slider10Url'],
-        'slider11' => $_POST['slider11'],
-        'slider11Url' => $_POST['slider11Url'],
+        'ds-logo' => sanitize_text_field($_POST['ds-logo']),
+        'slider-chbox' => sanitize_text_field($_POST['slider-chbox']),
+        'nextPrayerSlide' => sanitize_text_field($_POST['nextPrayerSlide']),
+        'transitionEffect' => sanitize_text_field($_POST['transitionEffect']),
+        'transitionSpeed' => sanitize_text_field($_POST['transitionSpeed']),
+        'slider1' => sanitize_text_field($_POST['slider1']),
+        'slider1Url' => sanitize_text_field($_POST['slider1Url']),
+        'slider2' => sanitize_text_field($_POST['slider2']),
+        'slider2Url' => sanitize_text_field($_POST['slider2Url']),
+        'slider3' => sanitize_text_field($_POST['slider3']),
+        'slider3Url' => sanitize_text_field($_POST['slider3Url']),
+        'slider4' => sanitize_text_field($_POST['slider4']),
+        'slider4Url' => sanitize_text_field($_POST['slider4Url']),
+        'slider5' => sanitize_text_field($_POST['slider5']),
+        'slider5Url' => sanitize_text_field($_POST['slider5Url']),
+        'slider6' => sanitize_text_field($_POST['slider6']),
+        'slider6Url' => sanitize_text_field($_POST['slider6Url']),
+        'slider7' => sanitize_text_field($_POST['slider7']),
+        'slider7Url' => sanitize_text_field($_POST['slider7Url']),
+        'slider8' => sanitize_text_field($_POST['slider8']),
+        'slider8Url' => sanitize_text_field($_POST['slider8Url']),
+        'slider9' => sanitize_text_field($_POST['slider9']),
+        'slider9Url' => sanitize_text_field($_POST['slider9Url']),
+        'slider10' => sanitize_text_field($_POST['slider10']),
+        'slider10Url' => sanitize_text_field($_POST['slider10Url']),
+        'slider11' => sanitize_text_field($_POST['slider11']),
+        'slider11Url' => sanitize_text_field($_POST['slider11Url']),
     ];
     $themeSettings = new DPTDigitalScreenProcessor($data);
     $themeSettings->process();
