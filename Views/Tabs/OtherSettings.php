@@ -15,7 +15,7 @@
                     <tr>
                         <td>Imsaq threshold:</td>
                         <td>
-                            <input type="number" name="imsaq" min="0" max="59" placeholder="15" value="<?php echo get_option('imsaq')?>">
+                            <input type="number" name="imsaq" min="0" max="59" placeholder="15" value="<?php echo esc_attr(get_option('imsaq'))?>">
                         </td>
                     </tr>
                     <tr>
@@ -31,7 +31,7 @@
                     <tr>
                         <td>Iqamah time change threshold:</td>
                         <td>
-                            <input type="number" name="jamah_changes" min="0" max="59" placeholder="0" value="<?php echo get_option('jamah_changes')?>">
+                            <input type="number" name="jamah_changes" min="0" max="59" placeholder="0" value="<?php echo esc_attr(get_option('jamah_changes'))?>">
                             <i>'0' to deactivate</i>
                         </td>
                     </tr>
