@@ -397,7 +397,7 @@ height: 70%;
 
 .x-board .bottom-row {
     height: 15%;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .x-board .table-borderless td,
@@ -412,6 +412,11 @@ height: 70%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+.x-board .align-middle-next-prayer {
+    position: relative;
+    top: 50%;
 }
 
 .x-board .green {
@@ -532,7 +537,7 @@ height: 70%;
     font-size: 6vh;
 }
 .x-board .vertical td span.dpt_start, .vertical td span.dpt_jamah {
-    font-size: 4vh;
+    font-size: 3vh;
 }
 .x-board table > tbody > tr:last-child > td {
     border: none;
@@ -647,7 +652,8 @@ h3.scrolling-vertical > marquee > div > span {
     max-height: 100%;
 }
 
-.x-board .carousel-inner .item img.carousel-slide{
+#carouselExampleIndicators > div > div > a > img
+{
     height: 100%;
     width: 100%;
 }
@@ -657,6 +663,7 @@ h3.scrolling-vertical > marquee > div > span {
 }
 
 .x-board .scrolling-vertical{
+    padding-top: 15%;
     font-size: 3vh;
 }
 

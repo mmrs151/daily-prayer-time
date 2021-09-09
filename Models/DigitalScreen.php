@@ -141,7 +141,7 @@ class DigitalScreen extends DailyShortCode
             <div class="row middle-row bg-red">
                 <div class="col-sm-12 col-xs-12 padding-null text-center bg-green height-100 padding-null">
                     <div id="text-carousel" class="carousel slide ' . $transitionEffect . '
-                        height-100" data-ride="carousel" data-interval="'. $transitionSpeed .'" data-pause="false">
+                        height-100" data-ride="carousel" data-bs-interval="'. $transitionSpeed .'" data-pause="false">
                         <div class="carousel-inner height-100">
                             ' . $this->getPresentationSlides() . '
                         </div>
@@ -263,18 +263,24 @@ class DigitalScreen extends DailyShortCode
         $transitionEffect = get_option('transitionEffect');
         $transitionSpeed = get_option('transitionSpeed');
         $html .='
-            <div class="'. $rightClass .'">
-                <div id="text-carousel" class="carousel slide ' . $transitionEffect . '
-                    height-100" data-ride="carousel" data-interval="'. $transitionSpeed .'" data-pause="false">
-                    <div class="carousel-inner height-100">
-                        <div class="item active height-100">
-                        ' . $this->getFirstSlide() . '
-                        </div>
-                        ' . $this->getOtherSlides() . '
-                    </div>
+        <div class="'. $rightClass .'">
+            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    ' . $this->getFirstSlide() . '
                 </div>
+                ' . $this->getOtherSlides($transitionSpeed) . '
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
         </div>
+      </div>
         ';
 
         return $html;
@@ -361,8 +367,8 @@ class DigitalScreen extends DailyShortCode
         }
 
         $html =  '
-            <div class="nextPrayer height-100">
-                <div class="align-middle">'
+            <div class="nextPrayer">
+                <div class="align-middle-next-prayer">'
                    . $h3 .
                     '<h2 id="dsNextPrayer" class="dsNextPrayer '.$verticalClass.'"></h2>
                 </div>
@@ -371,7 +377,7 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getOtherSlides()
+    private function getOtherSlides($transitionSpeed=5)
     {
         $isSlide = get_option('slider-chbox');
         if ( $isSlide ) {
@@ -385,8 +391,10 @@ class DigitalScreen extends DailyShortCode
             $slides = array_filter($slides);
             foreach ($slides as $i => $slide) {
                 $html .= '
-                <div class="item" >
-                    <a href="' . get_option("slider". ($i+1) . "Url") .'"><img class="carousel-slide" src="' . $slide . '"></a>
+                <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
+                    <a href="' . get_option("slider". ($i+1) . "Url") .'">
+                        <img class="carousel-slide" src="' . $slide . '">
+                    </a>
                 </div>
                 ';
 
@@ -395,7 +403,7 @@ class DigitalScreen extends DailyShortCode
                     $count = $i + 1;
                     if ( $count % $nextPrayerSlide == 0 ) {
                         $html .= '
-                        <div class="item">
+                        <div class="carousel-item">
                             ' . $this->getFirstSlide() . '
                         </div>
                     ';

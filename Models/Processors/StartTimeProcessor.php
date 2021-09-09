@@ -12,7 +12,7 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
         /** @var string[]  */
         private $prayerNames = array('fajr', 'sunrise', 'zuhr', 'asr', 'sunset', 'maghrib', 'isha' );
         
-        /** @var PrayTime */
+        /** @var DPTPrayTime */
         private $prayTime;
         
         /** @var array */
@@ -29,7 +29,7 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
         
             $this->db = new DatabaseConnection();
             $this->data = array_map( 'sanitize_text_field', $data);
-            $this->prayTime = new PrayTime();
+            $this->prayTime = new DPTPrayTime();
         }
         
         public function process()

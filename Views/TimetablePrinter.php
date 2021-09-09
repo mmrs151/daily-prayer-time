@@ -169,7 +169,9 @@ class TimetablePrinter
     public function getLocalNumbers()
     {
         $numbers_local = get_option('numbersLocal');
-        $numbers_local = array_map( 'sanitize_text_field', $numbers_local);
+        if (is_array($numbers_local)) {
+            $numbers_local = array_map( 'sanitize_text_field', $numbers_local);
+        }
 
         return empty($numbers_local) ? $this->numbersLocal : $numbers_local;
     }

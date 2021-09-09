@@ -71,7 +71,7 @@ http://praytimes.org/calculation
 
 //--------------------- PrayTime Class -----------------------
 
-class PrayTime
+class DPTPrayTime
 {
 
     //------------------------ Constants --------------------------
@@ -158,7 +158,7 @@ class PrayTime
     //----------------------- Constructors -------------------------
 
 
-    function PrayTime($methodID = 0)
+    function DPTPrayTime($methodID = 0)
     {
 
         $this->methodParams[$this->Jafari]    = array(16, 0, 4, 0, 14);
@@ -175,7 +175,7 @@ class PrayTime
 
     function __construct($methodID = 0)
     {
-        $this->PrayTime($methodID);
+        $this->DPTPrayTime($methodID);
     }
 
 
@@ -619,6 +619,6 @@ class PrayTime
 
 //---------------------- prayTime Object -----------------------
 
-$prayTime = new PrayTime();
+$prayTime = new DPTPrayTime();
 
 ?>
