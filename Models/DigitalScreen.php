@@ -41,6 +41,7 @@ class DigitalScreen extends DailyShortCode
             $this->screenTimeout = $attr['dim'];
         }
     
+        $this->scrollText = esc_html(get_option("ds-scroll-text"));
         if ( isset($attr['scroll']) ) {
             $this->scrollText = $attr['scroll'];
         }
@@ -49,6 +50,7 @@ class DigitalScreen extends DailyShortCode
             $this->scrollUrl = $attr['scroll_link'];
         }
     
+        $this->blinkText = esc_html(get_option("ds-blink-text"));
         if ( isset($attr['blink']) ) {
             $this->blinkText = $attr['blink'];
         }
@@ -193,30 +195,30 @@ class DigitalScreen extends DailyShortCode
                 <div class="'. $leftClass .'">
                     <table id="dsPrayerTimetable" class="table height-100 '. $verticalClass .'">
                     <thead class="bg-dark">
-                <tr>
-                    <th class="dsPrayerName">
-                        <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['prayer']) . '</span>
-                    </th>
-                    <th class="dsBegins">
-                        <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['begins']) . '</span>
-                    </th>
-                    <th class="dsIqamah">
-                        <span class="dpt_jamah">' . strtoupper($this->getLocalHeaders()['iqamah']) . '</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="prayerName">
-                        <span>' . $this->getLocalPrayerNames()['fajr'] . '</span>
-                    </td>
-                    <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
-                    <td>' . do_shortcode("[fajr_prayer]") . '</td>
-                </tr>
-                <tr>
-                    <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
-                    <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
-                </tr>';
+                    <tr>
+                        <th class="dsPrayerName">
+                            <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['prayer']) . '</span>
+                        </th>
+                        <th class="dsBegins">
+                            <span class="dpt_start">' . strtoupper($this->getLocalHeaders()['begins']) . '</span>
+                        </th>
+                        <th class="dsIqamah">
+                            <span class="dpt_jamah">' . strtoupper($this->getLocalHeaders()['iqamah']) . '</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="prayerName">
+                                <span>' . $this->getLocalPrayerNames()['fajr'] . '</span>
+                            </td>
+                            <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
+                            <td>' . do_shortcode("[fajr_prayer]") . '</td>
+                        </tr>
+                        <tr>
+                            <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
+                            <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
+                        </tr>';
 
         if ( get_option('jumuah') && $this->todayIsFriday() && $this->isJumahDisplay($this->row)) {
             $html .= '<tr>
@@ -258,29 +260,30 @@ class DigitalScreen extends DailyShortCode
         $html .= '
             </tbody>
                     </table>
-        </div>';
+        </div>'; //left class
 
         $transitionEffect = get_option('transitionEffect');
         $transitionSpeed = get_option('transitionSpeed');
         $html .='
-        <div class="'. $rightClass .'">
-            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    ' . $this->getFirstSlide() . '
+            <div class="'. $rightClass .'">
+                <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            ' . $this->getFirstSlide() . '
+                        </div>
+                        ' . $this->getOtherSlides($transitionSpeed) . '
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                ' . $this->getOtherSlides($transitionSpeed) . '
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-      </div>
+        </div> 
         ';
 
         return $html;

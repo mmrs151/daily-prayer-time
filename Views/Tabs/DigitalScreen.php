@@ -12,6 +12,14 @@
                         <td><input type="text" class="slider-text" placeholder="any valid image url" name="ds-logo" size="30" value=<?php echo esc_html(get_option("ds-logo") )?>></td>
                     </tr>
                     <tr>
+                        <td class="active-slider">Scrolling Text</td>
+                        <td><input type="text" class="" name="ds-scroll-text" size="30" value="<?php echo esc_html(get_option("ds-scroll-text") )?>"></td>
+                    </tr>
+                    <tr>
+                        <td class="active-slider">Blink Text</td>
+                        <td><input type="text" class="slider-text" name="ds-blink-text" size="30" value="<?php echo esc_html(get_option("ds-blink-text") )?>"></td>
+                    </tr>                                        
+                    <tr>
                         <td class="active-slider">Activate Slider</td>
                         <td><input type="checkbox" id="slider-chbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>></td>
                     </tr>

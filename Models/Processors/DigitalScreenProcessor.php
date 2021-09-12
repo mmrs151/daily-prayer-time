@@ -18,7 +18,13 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
         {
             $dsLogo = sanitize_text_field($this->data['ds-logo']);
             update_option('ds-logo', $dsLogo);
-            
+
+            $dsScrollText = sanitize_text_field($this->data['ds-scroll-text']);
+            update_option('ds-scroll-text', $dsScrollText);
+
+            $dsBlinkText = sanitize_text_field($this->data['ds-blink-text']);
+            update_option('ds-blink-text', $dsBlinkText);
+
             $slider = sanitize_text_field($this->data['slider-chbox']);
             update_option('slider-chbox', $slider);
         
