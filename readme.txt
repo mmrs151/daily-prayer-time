@@ -124,10 +124,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2021.08.10 =
-* Security update 
+= 2021.09.12 =
+* Fixed slided with bootstrap 5
+* scroll and blink in the UI
 
 == Upgrade Notice ==
 
-= 2021.08.10 =
-* Security update 
+= 2021.09.12 =
+* Fixed slided with bootstrap 5
+* scroll and blink in the UI
