@@ -127,8 +127,12 @@ class TimetablePrinter
             }
         }
 
-        $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
-        return array_map('stripslashes', $localPrayerName);
+        if (is_array($localPrayerName)) {
+            $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
+            $localPrayerName = array_map('stripslashes', $localPrayerName);
+        }
+
+        return $localPrayerName;
     }
 
     public function getLocalHeaders()
@@ -142,9 +146,12 @@ class TimetablePrinter
             return $this->headersLocal;
         }
 
-        $headers_local = array_map( 'sanitize_text_field', $headers_local);
+        if (is_array($headers_local)) {
+            $headers_local = array_map( 'sanitize_text_field', $headers_local);
+            $headers_local = array_map('stripslashes', $headers_local);
+        }
 
-        return array_map('stripslashes', $headers_local);
+        return $headers_local; 
     }
 
     public function getLocalMonths()
@@ -161,9 +168,12 @@ class TimetablePrinter
             unset( $monthsLocal['ramadan'] );
         }
 
-        $monthsLocal = array_map( 'sanitize_text_field', $monthsLocal);
+        if (is_array($monthsLocal)) {
+            $monthsLocal = array_map( 'sanitize_text_field', $monthsLocal);
+            $monthsLocal = array_map('stripslashes', $monthsLocal);
+        }
 
-        return array_map('stripslashes', $monthsLocal);
+        return $monthsLocal;
     }
 
     public function getLocalNumbers()
@@ -180,7 +190,9 @@ class TimetablePrinter
     public function getLocalTimes()
     {
         $times = get_option('timesLocal');
-        $times = array_map( 'sanitize_text_field', $times);
+        if (is_array($times)) {
+            $times = array_map( 'sanitize_text_field', $times);
+        }
 
         if ( empty($times)) {
             return $this->timesLocal;

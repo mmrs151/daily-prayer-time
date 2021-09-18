@@ -28,7 +28,9 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             $this->dbTable = "`".DB_NAME ."`.`" .$tableName."`";
         
             $this->db = new DatabaseConnection();
-            $this->data = array_map( 'sanitize_text_field', $data);
+            if (is_array($data)) {
+                $this->data = array_map( 'sanitize_text_field', $data);
+            }
             $this->prayTime = new DPTPrayTime();
         }
         

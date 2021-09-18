@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.8
-Stable tag: 2021.08.10
+Stable tag: 2021.09.12
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

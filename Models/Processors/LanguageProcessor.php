@@ -18,8 +18,10 @@ if ( !class_exists('DPTLanguageProcessor')) {
         {
             if (! empty($this->data['prayersLocal'])) {
                 $prayersLocal = $this->data['prayersLocal'];
-                $prayersLocal = array_map( 'sanitize_text_field', $prayersLocal );
-                $prayersLocal = array_map( array($this, 'cleanInput'), $prayersLocal );
+                if (is_array($prayersLocal)) {
+                    $prayersLocal = array_map( 'sanitize_text_field', $prayersLocal );
+                    $prayersLocal = array_map( array($this, 'cleanInput'), $prayersLocal );
+                }
     
                 delete_option('prayersLocal');
                 add_option('prayersLocal', $prayersLocal);
@@ -27,8 +29,10 @@ if ( !class_exists('DPTLanguageProcessor')) {
     
             if (! empty($this->data['headersLocal'])) {
                 $headersLocal = $this->data['headersLocal'];
-                $headersLocal = array_map( 'sanitize_text_field', $headersLocal );
-                $headersLocal = array_map( array($this, 'cleanInput'), $headersLocal );
+                if (is_array($headersLocal)) {
+                    $headersLocal = array_map( 'sanitize_text_field', $headersLocal );
+                    $headersLocal = array_map( array($this, 'cleanInput'), $headersLocal );
+                }
     
                 delete_option('headersLocal');
                 add_option('headersLocal', $headersLocal);
@@ -36,8 +40,10 @@ if ( !class_exists('DPTLanguageProcessor')) {
     
             if (! empty($this->data['monthsLocal'])) {
                 $monthsLocal = $this->data['monthsLocal'];
-                $monthsLocal = array_map( 'sanitize_text_field', $monthsLocal );
-                $monthsLocal = array_map( array($this, 'cleanInput'), $monthsLocal );
+                if (is_array($monthsLocal)) {
+                    $monthsLocal = array_map( 'sanitize_text_field', $monthsLocal );
+                    $monthsLocal = array_map( array($this, 'cleanInput'), $monthsLocal );
+                }
     
                 delete_option('monthsLocal');
                 add_option('monthsLocal', $monthsLocal);
@@ -45,8 +51,10 @@ if ( !class_exists('DPTLanguageProcessor')) {
     
             if ( ! empty($this->data['numbersLocal'])) {
                 $numbersLocal = $this->data['numbersLocal'];
-                $numbersLocal = array_map( 'sanitize_text_field', $numbersLocal );
-                $numbersLocal = array_map( array($this, 'cleanInput'), $numbersLocal );
+                if (is_array($numbersLocal)) {
+                    $numbersLocal = array_map( 'sanitize_text_field', $numbersLocal );
+                    $numbersLocal = array_map( array($this, 'cleanInput'), $numbersLocal );
+                }
     
                 delete_option('numbersLocal');
                 add_option('numbersLocal', $numbersLocal);
@@ -54,8 +62,10 @@ if ( !class_exists('DPTLanguageProcessor')) {
     
             if ( ! empty($this->data['timesLocal'])) {
                 $timesLocal = $this->data['timesLocal'];
-                $timesLocal = array_map( 'sanitize_text_field', $timesLocal );
-                $timesLocal = array_map( array($this, 'cleanInput'), $timesLocal );
+                if (is_array($timesLocal)) {
+                    $timesLocal = array_map( 'sanitize_text_field', $timesLocal );
+                    $timesLocal = array_map( array($this, 'cleanInput'), $timesLocal );
+                }
                 
                 delete_option('timesLocal');
                 add_option('timesLocal', $timesLocal);

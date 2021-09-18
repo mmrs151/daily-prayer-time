@@ -11,7 +11,9 @@ class ThemeSettingsProcessor
     function __construct(array $data)
     {
         $this->data = $data;
-        $this->data = array_map( 'sanitize_text_field', $data);
+        if (is_array($data)) {
+            $this->data = array_map( 'sanitize_text_field', $data);
+        }
     }
 
     public function process()
