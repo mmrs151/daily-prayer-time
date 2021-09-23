@@ -650,10 +650,17 @@ h3.scrolling-vertical > marquee > div > span {
 .x-board img.logo{
     max-width: 50%;
     max-height: 100%;
+    float: right;
 }
 
-#carouselExampleIndicators > div > div > a > img
-{
+#carouselExampleIndicators {
+    height: 100%;
+    width: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+#carouselExampleIndicators div  div  img {
     height: 100%;
     width: 100%;
 }

@@ -141,21 +141,18 @@ class DigitalScreen extends DailyShortCode
         
         $html ='
             <div class="row middle-row bg-red">
-                <div class="col-sm-12 col-xs-12 padding-null text-center bg-green height-100 padding-null">
-                    <div id="text-carousel" class="carousel slide ' . $transitionEffect . '
-                        height-100" data-ride="carousel" data-bs-interval="'. $transitionSpeed .'" data-pause="false">
-                        <div class="carousel-inner height-100">
-                            ' . $this->getPresentationSlides() . '
-                        </div>
-                    </div>
+            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    ' . $this->getPresentationSlides($transitionSpeed) . '
                 </div>
             </div>
+        </div>
         ';
     
         return $html;
     }
     
-    private function getPresentationSlides()
+    private function getPresentationSlides($transitionSpeed)
     {
         if (!$this->presentationSlides) {
             return "<h1>add slides option, ie. <br/>
@@ -163,14 +160,14 @@ class DigitalScreen extends DailyShortCode
         }
         
         $html = '
-                <div class="item active" >
+                <div class="carousel-item active height-100" data-bs-interval="'. $transitionSpeed .'">
                     <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
                 </div>';
         
         foreach ($this->presentationSlides as $i => $slideUrl) {
             $html .= '
-                <div class="item" >
-                    <img class="carousel-slide" src="' . $slideUrl . '">
+                <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
+                    <img class="carousel-slide " src="' . $slideUrl . '">
                 </div>
                 ';
         }
