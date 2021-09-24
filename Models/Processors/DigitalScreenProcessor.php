@@ -25,6 +25,9 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             $dsBlinkText = sanitize_text_field($this->data['ds-blink-text']);
             update_option('ds-blink-text', $dsBlinkText);
 
+            $dsAdditionalCss = sanitize_text_field($this->data['ds-additional-css']);
+            update_option('ds-additional-css', $dsAdditionalCss);
+
             $slider = sanitize_text_field($this->data['slider-chbox']);
             update_option('slider-chbox', $slider);
         

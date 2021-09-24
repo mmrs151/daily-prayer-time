@@ -651,6 +651,7 @@ h3.scrolling-vertical > marquee > div > span {
     max-width: 50%;
     max-height: 100%;
     float: right;
+    padding: 10px;
 }
 
 #carouselExampleIndicators {
@@ -679,6 +680,9 @@ h3.scrolling-vertical > marquee > div > span {
     margin: 20px;
 }
 
+.x-board marquee#dsIqamahUpdate a, .blink a {
+    text-decoration: none !important;
+}
 p.jumuah {
     margin: 40px;
 }

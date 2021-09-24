@@ -111,6 +111,7 @@ if (! empty($_POST['digitalScreen'])) {
         'ds-logo' => sanitize_text_field($_POST['ds-logo']),
         'ds-scroll-text' => sanitize_text_field($_POST['ds-scroll-text']),
         'ds-blink-text' => sanitize_text_field($_POST['ds-blink-text']),
+        'ds-additional-css' => sanitize_text_field($_POST['ds-additional-css']),
         'slider-chbox' => sanitize_text_field($_POST['slider-chbox']),
         'nextPrayerSlide' => sanitize_text_field($_POST['nextPrayerSlide']),
         'transitionEffect' => sanitize_text_field($_POST['transitionEffect']),

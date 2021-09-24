@@ -11,6 +11,9 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
 
     <?php //wp_head(); ?>
+    <style>
+<?php echo esc_html(get_option("ds-additional-css") )?>
+    </style>
 </head>
 
 <body class="google-font">

@@ -269,16 +269,18 @@ class DigitalScreen extends DailyShortCode
                             ' . $this->getFirstSlide() . '
                         </div>
                         ' . $this->getOtherSlides($transitionSpeed) . '
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    </div>';
+                if ( $this->isPortrait ) {
+                    $html .= '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+                    </button>';
+                }
+                $html .= '</div>
             </div>
         </div> 
         ';
@@ -338,7 +340,7 @@ class DigitalScreen extends DailyShortCode
     private function getIqamahUpdate()
     {
         if ( $this->scrollText ) {
-            return '<a target="_new" href="'. $this->scrollUrl .'">'. $this->scrollText .'</a>';
+            return '<a class="scroll" target="_new" href="'. $this->scrollUrl .'">'. $this->scrollText .'</a>';
         } else {
             return do_shortcode("[display_iqamah_update orientation='horizontal']");
         }
@@ -346,7 +348,7 @@ class DigitalScreen extends DailyShortCode
 
     private function getBlink()
     {
-        return '<a target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
+        return '<a class="blink" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
     }
 
     private function getFirstSlide()
