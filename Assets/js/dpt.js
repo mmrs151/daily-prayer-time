@@ -106,7 +106,7 @@ DPT = {
                 'action':'get_ds_next_prayer',
             },
             success: function(response){
-                setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60 * 1) );
+                setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60 * 1) ); // 60 seconds 
                 jQuery('.dsNextPrayer').html(response);
                 if (! isTimerOn ) {
                     DPT.startTimer();

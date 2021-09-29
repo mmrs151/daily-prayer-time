@@ -81,15 +81,11 @@ class DatabaseConnection
      */
     public function getFajrJamahForTomorrow()
     {
-        if (false === ( $result = $this->getTransient( 'fajrForTomorrow' )) ) {
-            global $wpdb;
+        global $wpdb;
 
-            $sql = "SELECT fajr_jamah FROM  $this->dbTable WHERE d_date =  CURDATE()  + INTERVAL 1 DAY;";
-            $row = $wpdb->get_row($sql, ARRAY_A);
-            $result = $row['fajr_jamah'];
-
-            set_transient('fajrForTomorrow', $result,DAY_IN_SECONDS );
-        }
+        $sql = "SELECT fajr_jamah FROM  $this->dbTable WHERE d_date =  CURDATE()  + INTERVAL 1 DAY;";
+        $row = $wpdb->get_row($sql, ARRAY_A);
+        $result = $row['fajr_jamah'];
 
         return $result;
     }
