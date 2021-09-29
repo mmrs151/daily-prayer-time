@@ -372,7 +372,7 @@ class DigitalScreen extends DailyShortCode
             <div class="nextPrayer">
                 <div class="align-middle-next-prayer">'
                    . $h3 .
-                    '<h2 id="dsNextPrayer" class="dsNextPrayer '.$verticalClass.'">' . do_shortcode("[daily_next_prayer]") . '</h2>
+                    '<h2 id="dsNextPrayer" class="dsNextPrayer '.$verticalClass.'"></h2>
                 </div>
             </div>';
 
