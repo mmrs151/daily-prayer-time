@@ -395,6 +395,18 @@ div.todaySpan {
 height: 70%;
 }
 
+.x-board td span.prayerFinished {
+    opacity: 50%;
+}
+
+.x-board div.dsScroll{
+    float: left;
+}
+
+.x-board div.jamahChanges {
+    color:red;
+}
+
 .x-board .bottom-row {
     height: 15%;
     flex-wrap: wrap;

@@ -36,6 +36,9 @@ class DailyShortCode extends TimetablePrinter
     /** $var db */
     protected $db;
 
+    /** @var bool */
+    protected $clsPrayerFinished = '';
+
     public function __construct()
     {
         $this->db = new DatabaseConnection();
@@ -178,79 +181,149 @@ class DailyShortCode extends TimetablePrinter
 
     public function scFajr($attr)
     {
-        $result = "<span class='dpt_jamah'>" . $this->formatDateForPrayer($this->row['fajr_jamah']) . "</span>";
+        $jamah = $this->row['fajr_jamah'];
+        $begins = $this->row['fajr_begins'];
+
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
+            $jamah = $this->row['tomorrow']['fajr_jamah'];
+            $begins = $this->row['tomorrow']['fajr_begins'];
+        }
+
+        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['fajr_begins']) . "</span>" . $result;
+            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
         }
         return $result;
     }
 
     public function scFajrStart($attr)
     {
-            return "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['fajr_begins']) . "</span>";
+        $begins = $this->row['fajr_begins'];
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            $begins = $this->row['tomorrow']['fajr_begins'];
+        }
+        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scSunrise($attr)
     {
-        return "<span class='dpt_sunrise'>" . $this->formatDateForPrayer($this->row['sunrise']) . "</span>";
+        $sunrise = $this->row['sunrise'];
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($sunrise) ) {
+            $sunrise = $this->row['tomorrow']['sunrise'];
+        }
+        return "<span class='dpt_sunrise " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($sunrise) . "</span>";
     }
 
     public function scZuhr($attr)
     {
-        $result = "<span class='dpt_jamah'>" . $this->formatDateForPrayer($this->row['zuhr_jamah']) . "</span>";
+        $jamah = $this->row['zuhr_jamah'];
+        $begins = $this->row['zuhr_begins'];
+
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
+            $jamah = $this->row['tomorrow']['zuhr_jamah'];
+            $begins = $this->row['tomorrow']['zuhr_begins'];
+        }
+        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['zuhr_begins']) . "</span>" . $result;
+            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
         }
         return $result;
     }
 
     public function scZuhrStart($attr)
     {
-            return "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['zuhr_begins']) . "</span>";
+        $begins = $this->row['zuhr_begins'];
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            $begins = $this->row['tomorrow']['zuhr_begins'];
+        }
+        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scAsr($attr)
     {
-        $result = "<span class='dpt_jamah'>" . $this->formatDateForPrayer($this->row['asr_jamah']) . "</span>";
+        $jamah = $this->row['asr_jamah'];
+        $begins = $this->row['asr_mithl_1'];
+
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
+            $jamah = $this->row['tomorrow']['asr_jamah'];
+            $begins = $this->row['tomorrow']['asr_mithl_1'];
+        }
+        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['asr_mithl_1']) . "</span>" . $result;
+            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
         }
         return $result;
     }
 
     public function scAsrStart($attr)
     {
-            return "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['asr_mithl_1']) . "</span>";
+        $begins = $this->row['asr_mithl_1'];
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            $begins = $this->row['tomorrow']['asr_mithl_1'];
+        }
+        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scMaghrib($attr)
     {
-        $result = "<span class='dpt_jamah'>" . $this->formatDateForPrayer($this->row['maghrib_jamah']) . "</span>";
+        $jamah = $this->row['maghrib_jamah'];
+        $begins = $this->row['maghrib_begins'];
+
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
+            $jamah = $this->row['tomorrow']['maghrib_jamah'];
+            $begins = $this->row['tomorrow']['maghrib_begins'];
+        }
+        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['maghrib_begins']) . "</span>" . $result;
+            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
         }
         return $result;
     }
 
     public function scMaghribStart($attr)
     {
-            return "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['maghrib_begins']) . "</span>";
+        $begins = $this->row['maghrib_begins'];
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            $begins = $this->row['tomorrow']['maghrib_begins'];
+        }
+        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scIsha($attr)
     {
-        $result = "<span class='dpt_jamah'>" . $this->formatDateForPrayer($this->row['isha_jamah']) . "</span>";
+        $jamah = $this->row['isha_jamah'];
+        $begins = $this->row['isha_begins'];
+
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
+            $jamah = $this->row['tomorrow']['isha_jamah'];
+            $begins = $this->row['tomorrow']['isha_begins'];
+        }
+        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['isha_begins']) . "</span>" . $result;
+            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
         }
         return $result;
     }
 
     public function scIshaStart($attr)
     {
-            return "<span class='dpt_start'>" . $this->formatDateForPrayer($this->row['isha_begins']) . "</span>";
+        $begins = $this->row['isha_begins'];
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            $begins = $this->row['tomorrow']['isha_begins'];
+        }
+        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
+    private function isPrayerFinished($time) 
+    {
+        $this->clsPrayerFinished = 'prayerFinished';
+
+        $curTime = current_time( 'timestamp' );
+        $prayerTime = strtotime($time);
+
+        return $curTime > $prayerTime;
+    }
+    
     public function scIqamahUpdate($attr)
     {
         $min = isset($attr['threshold']) ? (int) $attr['threshold'] : 1;

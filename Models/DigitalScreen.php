@@ -134,47 +134,6 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
     
-    private function getPresentationRow()
-    {
-        $transitionEffect = get_option('transitionEffect');
-        $transitionSpeed = get_option('transitionSpeed');
-        
-        $html ='
-            <div class="row middle-row bg-red">
-            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    ' . $this->getPresentationSlides($transitionSpeed) . '
-                </div>
-            </div>
-        </div>
-        ';
-    
-        return $html;
-    }
-    
-    private function getPresentationSlides($transitionSpeed)
-    {
-        if (!$this->presentationSlides) {
-            return "<h1>add slides option, ie. <br/>
-                <i><pre> [digital_screen view='presentation' slides=imageLink,imageLink,imageLink]</pre></i></h1>";
-        }
-        
-        $html = '
-                <div class="carousel-item active height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
-                </div>';
-        
-        foreach ($this->presentationSlides as $i => $slideUrl) {
-            $html .= '
-                <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <img class="carousel-slide " src="' . $slideUrl . '">
-                </div>
-                ';
-        }
-        
-        return $html;
-    }
-    
     private function getMiddleRow()
     {
         $leftClass = "col-sm-5 col-xs-12 bg-red height-100 padding-null text-center";
@@ -337,10 +296,55 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
+    private function getPresentationRow()
+    {
+        $transitionEffect = get_option('transitionEffect');
+        $transitionSpeed = get_option('transitionSpeed');
+        
+        $html ='
+            <div class="row middle-row bg-red">
+            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    ' . $this->getPresentationSlides($transitionSpeed) . '
+                </div>
+            </div>
+        </div>
+        ';
+    
+        return $html;
+    }
+    
+    private function getPresentationSlides($transitionSpeed)
+    {
+        if (!$this->presentationSlides) {
+            return "<h1>add slides option, ie. <br/>
+                <i><pre> [digital_screen view='presentation' slides=imageLink,imageLink,imageLink]</pre></i></h1>";
+        }
+        
+        $html = '
+                <div class="carousel-item active height-100" data-bs-interval="'. $transitionSpeed .'">
+                    <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
+                </div>';
+        
+        foreach ($this->presentationSlides as $i => $slideUrl) {
+            $html .= '
+                <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
+                    <img class="carousel-slide " src="' . $slideUrl . '">
+                </div>
+                ';
+        }
+        
+        return $html;
+    }
+
     private function getIqamahUpdate()
     {
         if ( $this->scrollText ) {
-            return '<a class="scroll" target="_new" href="'. $this->scrollUrl .'">'. $this->scrollText .'</a>';
+            return '
+            <div class="dsScroll">
+                <a class="scroll" target="_new" href="'. $this->scrollUrl .' " >'. $this->scrollText . '</a>
+            </div>
+            ' .do_shortcode("[display_iqamah_update orientation='horizontal']") ;
         } else {
             return do_shortcode("[display_iqamah_update orientation='horizontal']");
         }
