@@ -316,12 +316,16 @@ class DailyShortCode extends TimetablePrinter
 
     private function isPrayerFinished($time) 
     {
-        $this->clsPrayerFinished = 'prayerFinished';
-
         $curTime = current_time( 'timestamp' );
         $prayerTime = strtotime($time);
 
-        return $curTime > $prayerTime;
+        if ($curTime > $prayerTime) {
+            $this->clsPrayerFinished = 'prayerFinished';
+            return true;
+        }
+
+        $this->clsPrayerFinished = '';
+        return false;
     }
     
     public function scIqamahUpdate($attr)
