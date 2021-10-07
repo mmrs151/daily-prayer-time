@@ -11,6 +11,7 @@ DPT = {
         this.startTimer();
         this.dsRefreshNextPrayer();
         this.refreshBeforeIqamah();
+        this.continiousMarquee();
         this.digitialClock();
         this.displayCustomAngleFields();
     },
@@ -205,8 +206,26 @@ DPT = {
         DPT.executeFunctionOnTime('02', '00', '00', function() { window.location.reload(true); });
     },
 
+    continiousMarquee: function ()
+    {
+        var speed = jQuery('#scrollSpeed').val();
+        jQuery('.marquee').marquee({
+            //speed in milliseconds of the marquee
+            duration: parseInt(speed) * 1000,
+            //gap in pixels between the tickers
+            gap: 50,
+            //time in milliseconds before the marquee will start animating
+            delayBeforeStart: 0,
+            //'left' or 'right'
+            direction: 'left',
+            //true or false - should the marquee be duplicated to show an effect of continues flow
+            duplicated: true
+        });
+    },
+
     digitialClock: function ()
     {
+
         var newDate = new Date();
 
         newDate.setDate(newDate.getDate());

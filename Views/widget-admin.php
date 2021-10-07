@@ -110,6 +110,7 @@ if (! empty($_POST['digitalScreen'])) {
     $data = [
         'ds-logo' => sanitize_text_field($_POST['ds-logo']),
         'ds-scroll-text' => sanitize_text_field($_POST['ds-scroll-text']),
+        'ds-scroll-speed' => sanitize_text_field($_POST['ds-scroll-speed']),
         'ds-blink-text' => sanitize_text_field($_POST['ds-blink-text']),
         'ds-additional-css' => sanitize_text_field($_POST['ds-additional-css']),
         'slider-chbox' => sanitize_text_field($_POST['slider-chbox']),

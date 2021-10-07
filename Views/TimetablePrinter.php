@@ -59,7 +59,7 @@ class TimetablePrinter
         'day' => 'Day',
         'minute' => 'Minutes',
         'hours' => 'Hours',
-        'iqamah update' => 'IQAMAH UPDATE FOR TOMORROW',
+        'iqamah update' => 'IQAMAH CHANGES:',
         'next prayer' => 'Next ...'
     );
 
@@ -417,7 +417,8 @@ class TimetablePrinter
                 </h2> 
                 <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
                     '.  $timeLeftText .' 
-                </span><span class="minLeftText"> ' . $minLeftText .'</span>
+                </span>
+                <span class="minLeftText"> ' . $minLeftText .'</span>
         </div>';
         }
     }
@@ -494,8 +495,11 @@ class TimetablePrinter
 
         }
         $timeRelated = $this->getLocalTimes();
-        $print = "<div class='jamahChanges " . $digitalScreenClass . "'>
-            <span class='x-time-text'>" . stripslashes($timeRelated['iqamah update']) . "</span>";
+        $print = 
+        "<span class='jamahChanges " . $digitalScreenClass . "'>
+            <span class='x-time-text'>" 
+                . stripslashes($timeRelated['iqamah update']) . 
+            "</span>";
         $prayerNames = $this->getLocalPrayerNames();
 
         foreach($row['jamah_changes'] as $key=>$time) {
@@ -509,7 +513,7 @@ class TimetablePrinter
                 $print .= "<span " . $style . $timeClass ." >" . $prayerNames[$prayer[0]] . ": " .  $this->getTimeForIqamahUpdate($prayerNames[$prayer[0]], $time) . "</span>";
             }
         }
-        $print .= "</div>";
+        $print .= "</span>";
 
         return $print;
     }

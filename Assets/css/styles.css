@@ -8,6 +8,12 @@ span.scDate {
 span.scHijri {
     font-style: italic;
 }
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+  }
+
 div.upload-step {
     padding-bottom: 20px;
 }
@@ -403,7 +409,7 @@ height: 70%;
     float: left;
 }
 
-.x-board div.jamahChanges {
+.x-board span.jamahChanges {
     color:red;
 }
 
@@ -598,11 +604,15 @@ height: 70%;
     animation: blink 1s infinite;
     font-weight: bold;
     font-size: 4vh;
+    line-height: 1.2;
 }
 .x-board .blink-vertical{
     animation: blink 1s infinite;
     font-weight: bold;
-    font-size: 5vw;
+}
+
+.x-board .blink-vertical a{
+    font-size: 3vh;
 }
 
 .x-board span.tomorrow {
@@ -692,9 +702,10 @@ h3.scrolling-vertical > marquee > div > span {
     margin: 20px;
 }
 
-.x-board marquee#dsIqamahUpdate a, .blink a {
+.x-board .blink a,  div.dsScroll a {
     text-decoration: none !important;
 }
+
 p.jumuah {
     margin: 40px;
 }

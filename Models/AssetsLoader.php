@@ -36,6 +36,7 @@
             wp_enqueue_script( 'jquery-ui-dialog' );
             wp_enqueue_script("jquery-cookie", plugins_url( '../Assets/js/jquery.cookie.min-1.4.1.js', __FILE__ ), array( 'jquery' ), DailyPrayerTime::VERSION );
             wp_enqueue_script("jquery-blockUI", plugins_url( '../Assets/js/jquery.blockUI-2.70.js', __FILE__ ), array( 'jquery' ), DailyPrayerTime::VERSION );
+            wp_enqueue_script("jquery-marquee", plugins_url( '../Assets/js/jquery.marquee.min.js', __FILE__ ), array( 'jquery' ), DailyPrayerTime::VERSION );
         
             // Print the script to our page
             wp_localize_script( 'dpt', 'timetable_params', $params );

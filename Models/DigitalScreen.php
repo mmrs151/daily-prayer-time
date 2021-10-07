@@ -15,7 +15,10 @@ class DigitalScreen extends DailyShortCode
     
     /** @var string */
     private $scrollText;
-    
+
+    /** @var string */
+    private $scrollSpeed = 10;
+
     /** @var array */
     private $presentationSlides;
     
@@ -42,6 +45,8 @@ class DigitalScreen extends DailyShortCode
         }
     
         $this->scrollText = esc_html(get_option("ds-scroll-text"));
+        $this->scrollSpeed = esc_html(get_option("ds-scroll-speed"));
+        
         if ( isset($attr['scroll']) ) {
             $this->scrollText = $attr['scroll'];
         }
@@ -265,7 +270,9 @@ class DigitalScreen extends DailyShortCode
                     <div class="col-sm-9 col-xs-12 height-100">
                         <div class="align-middle">
                             <h3 class="text-primary scrolling">
-                                <marquee id="dsIqamahUpdate" scrollamount="11">' . $this->getIqamahUpdate() . '</marquee>
+                            <div class="marquee">
+                            <span>' . $this->getIqamahUpdate() . '</span>
+                            </div>
                             </h3>
                         </div>
                     </div>
@@ -279,7 +286,9 @@ class DigitalScreen extends DailyShortCode
                     <div class="col-sm-12 col-xs-12 height-24">
                         <div class="align-middle">
                             <h3 class="text-primary scrolling-vertical">
-                                <marquee id="dsIqamahUpdate" scrollamount="11">' . $this->getIqamahUpdate() . '</marquee>
+                            <div class="marquee">
+                            ' . $this->getIqamahUpdate() . '
+                            </div>
                             </h3>
                         </div>
                     </div>
@@ -339,20 +348,29 @@ class DigitalScreen extends DailyShortCode
 
     private function getIqamahUpdate()
     {
+        $orientation = 'horizontal';
+        if ($this->isPortrait) {
+            $orientation = 'vertical';
+        }
+
         if ( $this->scrollText ) {
             return '
             <div class="dsScroll">
+                <input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">
                 <a class="scroll" target="_new" href="'. $this->scrollUrl .' " >'. $this->scrollText . '</a>
-            </div>
-            ' .do_shortcode("[display_iqamah_update orientation='horizontal']") ;
+            </div>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
         } else {
-            return do_shortcode("[display_iqamah_update orientation='horizontal']");
+            return do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
         }
     }
 
     private function getBlink()
     {
-        return '<a class="blink" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
+        $orientation = '';
+        if ($this->isPortrait) {
+            $orientation = 'vertical';
+        }
+        return '<a class="blink-' .$orientation.'" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
     }
 
     private function getFirstSlide()

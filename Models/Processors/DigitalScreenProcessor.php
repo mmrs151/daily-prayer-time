@@ -22,6 +22,9 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             $dsScrollText = sanitize_text_field($this->data['ds-scroll-text']);
             update_option('ds-scroll-text', $dsScrollText);
 
+            $dsScrollSpeed = sanitize_text_field($this->data['ds-scroll-speed']);
+            update_option('ds-scroll-speed', $dsScrollSpeed);
+
             $dsBlinkText = sanitize_text_field($this->data['ds-blink-text']);
             update_option('ds-blink-text', $dsBlinkText);
 
