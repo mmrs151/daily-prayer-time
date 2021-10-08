@@ -105,6 +105,7 @@ class DigitalScreen extends DailyShortCode
 
         $html = '
         <div class="container-fluid x-board">
+            <input type="hidden" value="' . $this->canDimOvernight($this->getRow()) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">

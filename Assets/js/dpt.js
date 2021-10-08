@@ -14,6 +14,7 @@ DPT = {
         this.continiousMarquee();
         this.digitialClock();
         this.displayCustomAngleFields();
+        this.dimMonitorOvernight();
     },
 
     displayCustomAngleFields: function() {
@@ -163,6 +164,22 @@ DPT = {
             setTimeout(function() { window.location.reload() }, 1000 * 60 * parseInt(min) );
         } else {
             setTimeout(function() { window.location.reload() }, 1000 * 60 );
+        }
+    },
+
+    dimMonitorOvernight: function() {
+        // dim monitor between isha and fajr
+        var canDimOvernight = jQuery('#overnightDim').val()
+
+        if (canDimOvernight == '1') {
+            jQuery("body").append("<div id='overlay'></div>");
+            jQuery('#overlay').animate({
+                    opacity: 0.9,
+                }, (10000), function() {
+            });
+
+        } else {
+            setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 * parseInt(min) );
         }
     },
 

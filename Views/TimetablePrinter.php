@@ -577,4 +577,28 @@ class TimetablePrinter
     {
         return  !$forMonth && current_time('timestamp') > strtotime($dbRow['maghrib_begins']);
     }
+
+    /**
+     * dim display overnight between Isha and Fajr start
+     */
+    protected function canDimOvernight($dbRow)
+    {
+        $userTime = user_current_time( 'H:i');
+        $now = new DateTime();
+        $now->setTimestamp(strtotime($userTime));
+
+        $isha = new DateTime();
+        $isha->setTimestamp(strtotime($dbRow['isha_jamah']));
+        $isha->modify('+20 mins');
+
+        $fajr = new DateTime();
+        $fajr->setTimestamp(strtotime($dbRow['tomorrow']['fajr_begins']));
+        $fajr->modify('+1 day');
+        
+        if( $now > $isha && $now < $fajr) {
+            return 1;
+        }
+
+        return 0;
+    }
 }
