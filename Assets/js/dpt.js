@@ -220,7 +220,6 @@ DPT = {
         }
 
         DPT.executeFunctionOnTime('00', '00', '00', function() { window.location.reload(true); });
-        DPT.executeFunctionOnTime('02', '00', '00', function() { window.location.reload(true); });
     },
 
     continiousMarquee: function ()

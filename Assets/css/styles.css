@@ -589,6 +589,9 @@ height: 70%;
     font-size: 4vh !important;
     opacity: .8
 }
+.x-board tr.nextPrayer td{
+    background-color: red;
+}
 
 .x-board .dptScTime{
     color: inherit;

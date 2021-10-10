@@ -11,7 +11,7 @@ class DigitalScreen extends DailyShortCode
     private $isPresentation;
 
     /** @var int */
-    private $screenTimeout;
+    private $screenTimeout = 1;
     
     /** @var string */
     private $scrollText;
@@ -108,8 +108,6 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . $this->canDimOvernight($this->getRow()) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
             <div class="row top-row">
                 <div class="time ' . $timeClass . 'col-xs-12 text-center ' . $height . '">
                 <div class="clock align-middle">
@@ -170,7 +168,7 @@ class DigitalScreen extends DailyShortCode
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr ' . $this->getNextPrayerClass($this->row['isha_begins'], $this->row['fajr_jamah'], true) . '>
                             <td class="prayerName">
                                 <span>' . $this->getLocalPrayerNames()['fajr'] . '</span>
                             </td>
@@ -189,7 +187,7 @@ class DigitalScreen extends DailyShortCode
                         </tr>';
         } else {
             $html .= '
-            <tr>
+            <tr ' . $this->getNextPrayerClass($this->row['fajr_jamah'], $this->row['zuhr_jamah']) . '>
                 <td class="prayerName"><span>' . $this->getLocalPrayerNames()['zuhr'] . '</span></td>
                 <td class="l-red">' . do_shortcode("[zuhr_start]") . '</td>
                 <td>' . do_shortcode("[zuhr_prayer]") . '</td>
@@ -197,17 +195,18 @@ class DigitalScreen extends DailyShortCode
     ';
         }
 
-        $html .= '<tr>
+        $html .= 
+        '<tr ' . $this->getNextPrayerClass($this->row['zuhr_jamah'], $this->row['asr_jamah']) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['asr'] . '</span></td>
             <td class="l-red">' . do_shortcode("[asr_start]") . '</td>
             <td>' . do_shortcode("[asr_prayer]") . '</td>
         </tr>
-        <tr>
+        <tr ' . $this->getNextPrayerClass($this->row['asr_jamah'], $this->row['maghrib_jamah']) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['maghrib'] . '</span></td>
             <td class="l-red">' . do_shortcode("[maghrib_start]") . '</td>
             <td>' . do_shortcode("[maghrib_prayer]") . '</td>
         </tr>
-        <tr>
+        <tr ' . $this->getNextPrayerClass($this->row['maghrib_jamah'], $this->row['isha_jamah']) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['isha'] . '</span></td>
             <td class="l-red">' . do_shortcode("[isha_start]") . '</td>
             <td>' . do_shortcode("[isha_prayer]") . '</td>
@@ -451,32 +450,8 @@ class DigitalScreen extends DailyShortCode
         foreach($iqamahTimes as $iqamah) {
             $refreshPoints[] = date( "H:i:s", strtotime( $iqamah . "-16 minutes" ) );
         }
+        $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+20 minutes" ) ); // for dim screen overnight
 
         return $refreshPoints;
     }
-
-    private function getOtherAdhanTimes()
-    {
-        $result = $this->db->getPrayerTimeForToday();
-        $iqamahTimes =  array($result['zuhr_jamah'], $result['asr_jamah'], $result['maghrib_begins'], $result['isha_jamah']);
-
-        $adhanTimes = array();
-        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[0] . "-15 minutes" ) ); // zuhr
-        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[1] . "-15 minutes" ) ); // asr
-        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[2] . "0 minutes" ) ); // maghrib
-        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[3] . "-15 minutes" ) ); // isha
-
-        return $adhanTimes;
-    }
-
-    private function getFajrAdhanTime()
-    {
-        $result = $this->db->getPrayerTimeForToday();
-
-        return date( "H:i:s", strtotime( $result['fajr_jamah'] . "-15 minutes" ) ); // fajr
-    }
-
-    
-    
-
 }

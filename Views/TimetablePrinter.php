@@ -583,13 +583,17 @@ class TimetablePrinter
      */
     protected function canDimOvernight($dbRow)
     {
+        if (! isset($dbRow['tomorrow']['fajr_begins'])) {
+            return 0;
+        }
+
         $userTime = user_current_time( 'H:i');
         $now = new DateTime();
         $now->setTimestamp(strtotime($userTime));
 
         $isha = new DateTime();
         $isha->setTimestamp(strtotime($dbRow['isha_jamah']));
-        $isha->modify('+20 mins');
+        $isha->modify('+15 mins');
 
         $fajr = new DateTime();
         $fajr->setTimestamp(strtotime($dbRow['tomorrow']['fajr_begins']));
@@ -600,5 +604,28 @@ class TimetablePrinter
         }
 
         return 0;
+    }
+
+    protected function getNextPrayerClass($lastPrayerTime, $nextPrayerTime, $isFajr=false)
+    {
+        $userTime = user_current_time( 'H:i');
+        $now = new DateTime();
+        $now->setTimestamp(strtotime($userTime));
+
+        $lastPrayer = new DateTime();
+        $lastPrayer->setTimestamp(strtotime($lastPrayerTime));
+
+        $nextPrayer = new DateTime();
+        $nextPrayer->setTimestamp(strtotime($nextPrayerTime));
+        
+        if ($now < $nextPrayer && $isFajr) {
+            return 'class="nextPrayer"';
+        }
+        
+        if( $now > $lastPrayer && $now < $nextPrayer) {    
+            return 'class="nextPrayer"';
+        }
+
+        return '';
     }
 }
