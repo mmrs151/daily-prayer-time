@@ -376,6 +376,7 @@ class TimetablePrinter
         $now = current_time( 'H:i');
 
         $jamahTime = $this->getJamahTime( $row );
+
         foreach ($jamahTime as $jamah) {
             if ($jamah > $now ) {
                 $prayer = array_search( $jamah, $row ); // asr_jamah or asr_begins
@@ -583,7 +584,7 @@ class TimetablePrinter
      */
     protected function canDimOvernight($dbRow)
     {
-        if (! isset($dbRow['tomorrow']['fajr_begins'])) {
+        if (! isset($dbRow['tomorrow']['fajr_begins']) ) {
             return 0;
         }
 
@@ -606,23 +607,15 @@ class TimetablePrinter
         return 0;
     }
 
-    protected function getNextPrayerClass($lastPrayerTime, $nextPrayerTime, $isFajr=false)
+    protected function getNextPrayerClass($prayerName, $row, $isFajr=false)
     {
-        $userTime = user_current_time( 'H:i');
-        $now = new DateTime();
-        $now->setTimestamp(strtotime($userTime));
+        $nextPrayerName = $this->getNextPrayer($row);
 
-        $lastPrayer = new DateTime();
-        $lastPrayer->setTimestamp(strtotime($lastPrayerTime));
-
-        $nextPrayer = new DateTime();
-        $nextPrayer->setTimestamp(strtotime($nextPrayerTime));
-        
-        if ($now < $nextPrayer && $isFajr) {
+        if ($isFajr && is_null($nextPrayerName)) {
             return 'class="nextPrayer"';
         }
-        
-        if( $now > $lastPrayer && $now < $nextPrayer) {    
+
+        if (strpos($nextPrayerName, $prayerName) !== false) {
             return 'class="nextPrayer"';
         }
 

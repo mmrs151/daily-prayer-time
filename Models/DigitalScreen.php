@@ -21,10 +21,9 @@ class DigitalScreen extends DailyShortCode
 
     /** @var array */
     private $presentationSlides;
-    
-    
+
     /** @var string */
-    private $blinkText = 'WELCOME TO HOUSE OF ALLAH';
+    private $blinkText = 'SADAQA INCREASE YOUR WEALTH';
     
     /** @var string */
     private $blinkUrl;
@@ -168,14 +167,14 @@ class DigitalScreen extends DailyShortCode
                     </tr>
                     </thead>
                     <tbody>
-                        <tr ' . $this->getNextPrayerClass($this->row['isha_begins'], $this->row['fajr_jamah'], true) . '>
+                        <tr ' . $this->getNextPrayerClass('fajr', $this->row, true) . '>
                             <td class="prayerName">
                                 <span>' . $this->getLocalPrayerNames()['fajr'] . '</span>
                             </td>
                             <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
                             <td>' . do_shortcode("[fajr_prayer]") . '</td>
                         </tr>
-                        <tr>
+                        <tr ' . $this->getNextPrayerClass('sunrise', $this->row) . '>
                             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
                             <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
                         </tr>';
@@ -187,7 +186,7 @@ class DigitalScreen extends DailyShortCode
                         </tr>';
         } else {
             $html .= '
-            <tr ' . $this->getNextPrayerClass($this->row['fajr_jamah'], $this->row['zuhr_jamah']) . '>
+            <tr ' . $this->getNextPrayerClass('zuhr', $this->row) . '>
                 <td class="prayerName"><span>' . $this->getLocalPrayerNames()['zuhr'] . '</span></td>
                 <td class="l-red">' . do_shortcode("[zuhr_start]") . '</td>
                 <td>' . do_shortcode("[zuhr_prayer]") . '</td>
@@ -196,17 +195,17 @@ class DigitalScreen extends DailyShortCode
         }
 
         $html .= 
-        '<tr ' . $this->getNextPrayerClass($this->row['zuhr_jamah'], $this->row['asr_jamah']) . '>
+        '<tr ' . $this->getNextPrayerClass('asr', $this->row) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['asr'] . '</span></td>
             <td class="l-red">' . do_shortcode("[asr_start]") . '</td>
             <td>' . do_shortcode("[asr_prayer]") . '</td>
         </tr>
-        <tr ' . $this->getNextPrayerClass($this->row['asr_jamah'], $this->row['maghrib_jamah']) . '>
+        <tr ' . $this->getNextPrayerClass('maghrib', $this->row) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['maghrib'] . '</span></td>
             <td class="l-red">' . do_shortcode("[maghrib_start]") . '</td>
             <td>' . do_shortcode("[maghrib_prayer]") . '</td>
         </tr>
-        <tr ' . $this->getNextPrayerClass($this->row['maghrib_jamah'], $this->row['isha_jamah']) . '>
+        <tr ' . $this->getNextPrayerClass('isha', $this->row) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['isha'] . '</span></td>
             <td class="l-red">' . do_shortcode("[isha_start]") . '</td>
             <td>' . do_shortcode("[isha_prayer]") . '</td>
@@ -271,7 +270,7 @@ class DigitalScreen extends DailyShortCode
                         <div class="align-middle">
                             <h3 class="text-primary scrolling">
                             <div class="marquee">
-                            <span>' . $this->getIqamahUpdate() . '</span>
+                                <span>' . $this->getIqamahUpdate() . '</span>
                             </div>
                             </h3>
                         </div>
@@ -287,7 +286,7 @@ class DigitalScreen extends DailyShortCode
                         <div class="align-middle">
                             <h3 class="text-primary scrolling-vertical">
                             <div class="marquee">
-                            ' . $this->getIqamahUpdate() . '
+                                <span>' . $this->getIqamahUpdate() . '</span>
                             </div>
                             </h3>
                         </div>
@@ -360,7 +359,10 @@ class DigitalScreen extends DailyShortCode
                 <a class="scroll" target="_new" href="'. $this->scrollUrl .' " >'. $this->scrollText . '</a>
             </div>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
         } else {
-            return do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
+            return '
+            <div class="dsScroll">
+                <input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">
+            </div>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
         }
     }
 
