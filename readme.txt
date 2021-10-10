@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.8
-Stable tag: 2021.10.02
+Stable tag: 2021.10.10
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,14 +124,14 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2021.10.02 =
-* FIX Display tomorrow's time after each prayer finished 
-* FIX Dim finished prayer time 
-* Jamat update with scroll text 
+= 2021.10.10 =
+* Next prayer highlight 
+* dim screen between Isha and Fajr
+* control scroll message
 
 == Upgrade Notice ==
 
-= 2021.10.02 =
-* FIX Display tomorrow's time after each prayer finished 
-* FIX Dim finished prayer time 
-* Jamat update with scroll text  
+= 2021.10.10 =
+* Next prayer highlight 
+* dim screen between Isha and Fajr
+* control scroll message
