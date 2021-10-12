@@ -191,5 +191,5 @@ if (! empty($_POST['digitalScreen'])) {
         <?php include 'Tabs/APIdoc.php' ?>
     </div>
 </div>
-    <span class="dpt-donation"><a href="http://www.uwt.org/" target="_blank">Support The Ummah</a></span>
+    <span class="dpt-donation"><a href="https://donate.uwt.org/Account/Index.aspx" target="_blank">Support The Ummah</a></span>
     <span class="dpt-donation"><a href="https://wordpress.org/support/view/plugin-reviews/daily-prayer-time-for-mosques/reviews/#new-post" target="_blank">Write a Review </a></span>

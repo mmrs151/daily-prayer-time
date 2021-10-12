@@ -116,7 +116,7 @@ if ( ! class_exists('DPTCsvProcessor')) {
                     <li>“Give (in charity) and do not give reluctantly lest Allaah should give you in a limited amount; and do not withhold your money lest Allaah should withhold it from you.”<b><i>[Saheeh al-Bukhaaree (2590, 2591) and Saheeh Muslim (2244).]</i></b></li>
                     <li>“charity extinguishes (removes) sins just as water extinguishes fire”<b><i>[Sunan At-Tirmidhi, 2616]</i></b></li>
                 </div>
-                <div class="donation-link dptCenter"><a href="http://www.uwt.org//" target="_blank">Support The Ummah</a> </div>
+                <div class="donation-link dptCenter"><a href="https://donate.uwt.org/Account/Index.aspx" target="_blank">Support The Ummah</a> </div>
             </div>
             <?php
         }

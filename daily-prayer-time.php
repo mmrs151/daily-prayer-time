@@ -3,7 +3,7 @@
 Plugin Name: Daily Prayer Time
 Version: 2021.10.11
 Plugin URI: https://wordpress.org/plugins/daily-prayer-time-for-mosques/
-Description: Display yearly, monthly and daily prayer time, ramadan time vertically or horizontally, in any language
+Description: Masjid Prayer time in any language, in any screen
 Author: <a href="http://mmrs151.wordpress.com">mmrs151</a>
 Contributors: <a href="http://vergedesign.co.uk/">Hjeewa</a>, <a href="https://profiles.wordpress.org/kams01">kams01</a>
 */
@@ -19,7 +19,8 @@ require_once ('Models/StartTime/PrayTime.php');
 require_once ('Models/AdminMenu.php');
 require_once ('Models/Shortcodes.php');
 require_once ('API/v1/PrayerTimeController.php');
-    
+require_once ('Models/CustomPluginSettings.php');
+
     
 class DailyPrayerTime extends WP_Widget
 {
@@ -27,6 +28,8 @@ class DailyPrayerTime extends WP_Widget
 
     public function __construct()
     {
+        define('PLUGIN_FILE', plugin_basename(__FILE__));
+
         $widget_details = array(
             'className' => 'DailyPrayerTime',
             'description' => 'Show daily prayer time vertically or horizontally'
@@ -49,6 +52,8 @@ class DailyPrayerTime extends WP_Widget
         new DPTAjaxHandler();
         
         new Shortcodes();
+
+        new CustomPluginSettings();
     }
     
     public function form($instance)
@@ -63,7 +68,7 @@ class DailyPrayerTime extends WP_Widget
         <?php
         
         echo $args['after_widget'];
-        echo "<a href='http://www.uwt.org/' target='_blank'>Support The Ummah</a></br></br>";
+        echo "<a href='https://donate.uwt.org/Account/Index.aspx' target='_blank'>Support The Ummah</a></br></br>";
     }
     
     public function update( $new_instance, $old_instance ) {

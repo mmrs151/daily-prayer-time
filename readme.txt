@@ -1,6 +1,6 @@
 === Daily Prayer Time ===
 Contributors: mmrs151, Hjeewa, kams01
-Donate link: http://www.uwt.org/
+Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, salat, namaz, fasting
 Requires at least: 4.5
 Requires PHP: 5.6

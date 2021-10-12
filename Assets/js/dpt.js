@@ -179,7 +179,7 @@ DPT = {
             });
 
         } else {
-            setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 * parseInt(min) );
+            setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 );
         }
     },
 
@@ -218,8 +218,6 @@ DPT = {
             var timeParts = iqamah[i].split(":");
             DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function() { window.location.reload(true); });
         }
-
-        DPT.executeFunctionOnTime('00', '00', '00', function() { window.location.reload(true); });
     },
 
     continiousMarquee: function ()
