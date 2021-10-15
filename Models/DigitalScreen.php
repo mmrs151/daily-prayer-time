@@ -11,7 +11,7 @@ class DigitalScreen extends DailyShortCode
     private $isPresentation;
 
     /** @var int */
-    private $screenTimeout = 1;
+    private $screenTimeout = 5;
     
     /** @var string */
     private $scrollText;
@@ -418,8 +418,8 @@ class DigitalScreen extends DailyShortCode
             foreach ($slides as $i => $slide) {
                 $html .= '
                 <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <a href="' . get_option("slider". ($i+1) . "Url") .'">
-                        <img class="carousel-slide" src="' . $slide . '">
+                    <a href="' . get_option("slider". ($i+1) . "Url") .'" style="color:' . get_option('fontColor') .'">
+                        ' . $this->getImageOrMessage($slide) . '
                     </a>
                 </div>
                 ';
@@ -443,6 +443,21 @@ class DigitalScreen extends DailyShortCode
         return null;
     }
 
+
+    private function getImageOrMessage($slide)
+    {
+        if (filter_var($slide, FILTER_VALIDATE_URL) === FALSE) {
+            return '
+            <div class="nextPrayer">
+                <div class="align-middle-next-prayer">
+                    <h4 class="sliderMessage">' . $slide . '</h3>
+                </div>
+            </div>
+            ';
+        }
+        return '<img class="carousel-slide" src="' . $slide . '">';
+    }
+
     private function getRefreshPoints()
     {
         $result = $this->db->getPrayerTimeForToday();
@@ -452,7 +467,7 @@ class DigitalScreen extends DailyShortCode
         foreach($iqamahTimes as $iqamah) {
             $refreshPoints[] = date( "H:i:s", strtotime( $iqamah . "-16 minutes" ) );
         }
-        $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+20 minutes" ) ); // for dim screen overnight
+        $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+20 minutes" ) ); // to dim screen overnight
 
         return $refreshPoints;
     }

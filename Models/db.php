@@ -229,7 +229,7 @@ class DatabaseConnection
 
         $charset_collate = $wpdb->get_charset_collate();
 
-        $sql = "CREATE TABLE " . $this->dbTable. "(
+        $sql = "CREATE TABLE IF NOT EXISTS " . $this->dbTable. "(
                 d_date date NOT NULL,
                 fajr_begins time DEFAULT '00:00',
                 fajr_jamah time DEFAULT '00:00',

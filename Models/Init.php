@@ -29,8 +29,10 @@ class Init
     {
         $this->db = new DatabaseConnection();
         $this->importSampleCsv();
+
         $cities = new WorldCities();
         $cities->importCities();
+
     }
 
     private function importSampleCsv()

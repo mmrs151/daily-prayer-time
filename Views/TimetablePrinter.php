@@ -256,6 +256,22 @@ class TimetablePrinter
         return $intlDate;
     }
 
+    public function getIntlNumber($numbers)
+    {
+        $intlDate = '';
+
+        $this->localNumbers = $this->getLocalNumbers();
+        $result = str_split($numbers);
+        foreach ($result as $number) {
+            $intlDate .= $this->localNumbers[$number];
+            if (empty($this->localNumbers[$number]) && $number !== '0') {
+                $intlDate .= $number;
+            }
+        }
+    
+        return $intlDate;
+    }
+
     /**
      * @param  string $month
      * @param  string $day

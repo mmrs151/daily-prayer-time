@@ -3,7 +3,7 @@
     {
         public function __construct()
         {
-            add_filter( 'plugin_action_links_' . PLUGIN_FILE , array(&$this, 'dpt_plugin_action_links') );
+            add_filter( 'plugin_action_links_' . DPT_PLUGIN_FILE , array(&$this, 'dpt_plugin_action_links') );
             add_filter( 'plugin_row_meta', array( &$this, 'dpt_plugin_meta_links'), 10, 2 );
 
         }
@@ -26,7 +26,7 @@
 
 		    $plugin_file = 'svg-support/svg-support.php';
 
-		    if ( $file == PLUGIN_FILE) {
+		    if ( $file == DPT_PLUGIN_FILE) {
 			    return array_merge(
 				    $links,
 				    array(

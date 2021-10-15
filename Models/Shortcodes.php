@@ -33,5 +33,6 @@
             add_shortcode( 'isha_start', array($dailyShortCode, 'scIshaStart') );
             add_shortcode( 'display_iqamah_update', array($dailyShortCode, 'scIqamahUpdate') );
             add_shortcode( 'digital_screen', array($dailyShortCode, 'scDigitalScreen') );
+            add_shortcode( 'quran_verse', array($dailyShortCode, 'scQuranVarse') );
         }
     }

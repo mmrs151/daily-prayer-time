@@ -2,6 +2,8 @@
 require_once('db.php');
 require_once(__DIR__.'/../Views/DailyTimetablePrinter.php');
 require_once(__DIR__.'/../Views/TimetablePrinter.php' );
+require_once (__DIR__ .'/QuranADay/VersePrinter.php');
+
 
 
 class DailyShortCode extends TimetablePrinter
@@ -347,6 +349,13 @@ class DailyShortCode extends TimetablePrinter
         $ds =  new DigitalScreen($attr);
 
         return $ds->displayDigitalScreen();
+    }
+
+    public function scQuranVarse($attr)
+    {
+        $verse = new VersePrinter();
+        
+        return $verse->printVerse($attr);
     }
 
     protected function getRow($attr=array())

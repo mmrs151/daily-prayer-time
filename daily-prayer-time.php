@@ -20,16 +20,15 @@ require_once ('Models/AdminMenu.php');
 require_once ('Models/Shortcodes.php');
 require_once ('API/v1/PrayerTimeController.php');
 require_once ('Models/CustomPluginSettings.php');
+require_once ('Models/QuranADay/QuranDB.php');
 
+define('DPT_PLUGIN_VERSION', "2021.10.11");
+define('DPT_PLUGIN_FILE', plugin_basename(__FILE__));
     
 class DailyPrayerTime extends WP_Widget
 {
-    const VERSION = "2021.10.11";
-
     public function __construct()
     {
-        define('PLUGIN_FILE', plugin_basename(__FILE__));
-
         $widget_details = array(
             'className' => 'DailyPrayerTime',
             'description' => 'Show daily prayer time vertically or horizontally'
