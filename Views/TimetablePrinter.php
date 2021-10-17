@@ -612,11 +612,17 @@ class TimetablePrinter
         $isha->setTimestamp(strtotime($dbRow['isha_jamah']));
         $isha->modify('+15 mins');
 
-        $fajr = new DateTime();
-        $fajr->setTimestamp(strtotime($dbRow['tomorrow']['fajr_begins']));
-        $fajr->modify('+1 day');
+        $todayFajr = new DateTime();
+        $todayFajr->setTimestamp(strtotime($dbRow['fajr_begins']));
+
+        $tomorrowFajr = new DateTime();
+        $tomorrowFajr->setTimestamp(strtotime($dbRow['tomorrow']['fajr_begins']));
+        $tomorrowFajr->modify('+1 day');
         
-        if( $now > $isha && $now < $fajr) {
+        if ($now < $todayFajr ) {
+            return 1;
+        }
+        if( $now > $isha && $now < $tomorrowFajr) {
             return 1;
         }
 

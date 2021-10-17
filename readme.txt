@@ -1,15 +1,15 @@
 === Daily Prayer Time ===
 Contributors: mmrs151, Hjeewa, kams01
 Donate link: https://donate.uwt.org/Account/Index.aspx
-Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, salat, namaz, fasting
+Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, salat, namaz, fasting, Quran verse
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.8
-Stable tag: 2021.10.11
+Stable tag: 2021.10.15
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display Yearly, Monthly and Daily prayer time vertically or horizontally, in any language.
+Display prayer time in any screen, in any language and many more.
 
 == Description ==
 For video tutorial please follow these links:
@@ -64,6 +64,8 @@ Once the installation above is done, this will allow you
 
 - Display prayer time on big monitors in the masjid
 
+- Display Quran verse in a shortcode
+
 = shortcodes =
 1. **[monthlytable]** - Display Yearly and Monthly prayer time with ajax month selector
 2. **[dailytable_horizontal]** - Display daily timetable horizontally
@@ -75,6 +77,7 @@ Once the installation above is done, this will allow you
 8. **[monthlytable display=azan_only]** - Display Azan only for Yearly and Monthly prayer time with ajax month selector
 9. **[monthlytable heading="Månedlige Tidsplan"]** - Display monthly time table heading in any language, default is 'Monthly Time Table for'
 10. **[digital_screen]** - Display prayer time on big monitors in the masjid
+11. **[quran_verse]** - Display a random verse from the Holy Quran 
 ... and more. Check the 'helps-and-tips' page in plugin settings once you install it.
 
 == Installation ==
@@ -124,12 +127,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2021.10.11 =
-* Fixed sunrise highlighting
-* Fixed scroll without message
+= 2021.10.15 =
+* Custome message in digital screen slider 
+* Quran verse shortcode
 
 == Upgrade Notice ==
 
-= 2021.10.11 =
-* Fixed sunrise highlighting
-* Fixed scroll without message
+= 2021.10.15 =
+* Custome message in digital screen slider 
+* Quran verse shortcode

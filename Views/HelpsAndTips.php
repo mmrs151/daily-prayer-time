@@ -26,6 +26,7 @@
         <li>[isha_start]</li>
         <li>[digital_screen]</li>
         <li>[display_iqamah_update] <i>threshold={min}</i></li>
+        <li>[quran_verse]</li>
     </ol>
 
     <h3>Shortcode Options:</h3>
@@ -38,7 +39,8 @@
         <li>heading="any text"</li>
         <li>use_div_layout=true (restrictive, works with horizontal, no other options)</li>
         <li>start_time=true (only for single prayer time)</li>
-        <li>view='vertical' (only for digital_screen)</li>
+        <li>view='vertical' <i>(only for digital_screen)</i></li>
+        <li>min_word=20 max_word=30 language='bangla' <i>(only for quran_verse)</i></li>
     </ol>
 </p>
 <p>
@@ -63,6 +65,7 @@
         <li><b>[dailytable_vertical asr=hanafi announcement="First Khutbah: 1:15. Second Khutbah: 1:45" day=friday]</b> - Display announcement on your given day or everyday</li>
         <li><b>[digital_screen]</b> - Display prayer time on big monitors in the masjid</li>
         <li><b>[digital_screen view='vertical']</b> - Display prayer time in Portrait mode</li>
+        <li><b>[quran_verse min_word=20 max_word=30 language='bangla'] </b> - Display Quran verse in a shortcode</li>
 
     </ol>
         <a href="https://wordpress.org/plugins/daily-prayer-time-for-mosques/screenshots/" target="_new">Please check the screen shots <i class="fa fa-external-link" aria-hidden="true"></i></a>
