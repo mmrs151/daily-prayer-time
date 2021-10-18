@@ -24,6 +24,10 @@
                         <td><input type="text" class="slider-text" name="ds-blink-text" size="30" value="<?php echo esc_html(get_option("ds-blink-text") )?>"></td>
                     </tr>
                     <tr>
+                        <td class="active-slider">Display Quran verse</td>
+                        <td><input type="checkbox" id="quran-chbox" name="quran-chbox" value="displayQuran" <?php if(get_option("displayQuran") === 'displayQuran'){ echo 'checked'; } ?>></td>
+                    </tr>
+                    <tr>
                         <td class="active-slider">Activate Slider</td>
                         <td><input type="checkbox" id="slider-chbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>></td>
                     </tr>

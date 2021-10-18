@@ -14,9 +14,16 @@ class DPTAjaxHandler extends DailyShortCode
         die();
     }
 
+    public function get_ds_quran_verse()
+    {
+        echo do_shortcode("[quran_verse]");
+		die();
+    }
+
     private function addAjaxActions()
     {
         $f = new ReflectionClass('DPTAjaxHandler');
+        
         foreach ($f->getMethods() as $m) {
             if ($m->class == 'DPTAjaxHandler') {
                 add_action( 'wp_ajax_'.$m->name, array( $this, $m->name) );

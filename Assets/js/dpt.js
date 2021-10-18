@@ -15,6 +15,7 @@ DPT = {
         this.digitialClock();
         this.displayCustomAngleFields();
         this.dimMonitorOvernight();
+        // this.dsRefreshQuranVerse();
     },
 
     displayCustomAngleFields: function() {
@@ -114,6 +115,28 @@ DPT = {
                     DPT.startTimer();
                     isTimerOn = true;
                 }
+            },
+            error: function(responseObj, strError){
+                console.log(strError);
+            },
+            timeout: (1000 * 30) // 30 seconds
+        });
+    },
+
+
+    dsRefreshQuranVerse: function () {
+        if (! jQuery('.x-board')[0]) {
+            return;
+        }
+        console.log('asdfasdf');
+        jQuery.ajax({
+            url: timetable_params.ajaxurl,
+            data: {
+                'action':'get_ds_quran_verse',
+            },
+            success: function(response){
+                setTimeout(DPT.dsRefreshQuranVerse, (1000 * 10) ); // 10 seconds 
+                jQuery('#quranMesage').html('foo bar');
             },
             error: function(responseObj, strError){
                 console.log(strError);
