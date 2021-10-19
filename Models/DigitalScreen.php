@@ -8,6 +8,7 @@ class DigitalScreen extends DailyShortCode
     /** @var bool */
     private $isPortrait;
     
+    /** @var bool */
     private $isPresentation;
 
     /** @var int */
@@ -30,6 +31,8 @@ class DigitalScreen extends DailyShortCode
     
     /** @var string */
     private $scrollUrl;
+
+    private $verticalClass = '';
     
     public function __construct($attr=array())
     {
@@ -37,6 +40,11 @@ class DigitalScreen extends DailyShortCode
         if ( isset($attr['view']) ) {
             $this->isPortrait = ( strtolower($attr['view']) == 'vertical' );
             $this->isPresentation = ( strtolower($attr['view']) == 'presentation' );
+
+            if ( $this->isPortrait ) {
+                $this->verticalClass = "vertical";
+            }
+
         }
 
         if ( isset($attr['dim']) ) {
@@ -403,10 +411,19 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getOtherSlides($transitionSpeed=5)
+    private function getOtherSlides($transitionSpeed=10)
     {
-        $isSlide = get_option('slider-chbox');
-        if ( $isSlide ) {
+	    if ( get_option('quran-chbox') ) {
+		    return '<div class="carousel-item height-100" data-bs-interval="10000">
+	            <div class="nextPrayer">
+	                <div class="align-middle-next-prayer">
+	                    <h4 id="quranVerse" class="' . $this->verticalClass . '"></h4>
+	                </div>
+	            </div>
+	        </div>';
+	    }
+
+        if ( get_option('slider-chbox') ) {
             $html = "";
             $slides = array();
             
@@ -450,7 +467,7 @@ class DigitalScreen extends DailyShortCode
             return '
             <div class="nextPrayer">
                 <div class="align-middle-next-prayer">
-                    <h4 class="sliderMessage">' . $slide . '</h3>
+                    <h4 class="sliderMessage">' . $slide . '</h4>
                 </div>
             </div>
             ';

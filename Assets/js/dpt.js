@@ -7,7 +7,6 @@ DPT = {
         this.displaySliderOptions();
         this.changeInputBackground();
         this.printDiv();
-        this.bs3screenOptions();
         this.startTimer();
         this.dsRefreshNextPrayer();
         this.refreshBeforeIqamah();
@@ -15,7 +14,7 @@ DPT = {
         this.digitialClock();
         this.displayCustomAngleFields();
         this.dimMonitorOvernight();
-        // this.dsRefreshQuranVerse();
+        this.dsRefreshQuranVerse();
     },
 
     displayCustomAngleFields: function() {
@@ -60,6 +59,9 @@ DPT = {
     },
 
     displaySliderOptions: function () {
+        jQuery('input.oneChbox').on('change', function() {
+            jQuery('input.oneChbox').not(this).prop('checked', false);
+        });
         var sliderChbox = jQuery("input#slider-chbox");
 
         sliderChbox.on('click', function() {
@@ -88,15 +90,6 @@ DPT = {
 
             document.body.innerHTML = originalContents;
         }
-    },
-
-    bs3screenOptions: function( ) {
-        jQuery("#contextual-help-link").click(function () {
-            jQuery("#contextual-help-wrap").css("cssText", "display: block !important;");
-        });
-        jQuery("#show-settings-link").click(function () {
-            jQuery("#screen-options-wrap").css("cssText", "display: block !important;");
-        });
     },
 
     dsRefreshNextPrayer: function () {
@@ -128,15 +121,14 @@ DPT = {
         if (! jQuery('.x-board')[0]) {
             return;
         }
-        console.log('asdfasdf');
         jQuery.ajax({
             url: timetable_params.ajaxurl,
             data: {
                 'action':'get_ds_quran_verse',
             },
             success: function(response){
-                setTimeout(DPT.dsRefreshQuranVerse, (1000 * 10) ); // 10 seconds 
-                jQuery('#quranMesage').html('foo bar');
+                setTimeout(DPT.dsRefreshQuranVerse, (1000 * 30) );
+                jQuery('#quranVerse').html(response);
             },
             error: function(responseObj, strError){
                 console.log(strError);

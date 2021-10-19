@@ -363,6 +363,11 @@ div.quranVerse p{
     font-style: italic;
     display: inline;
 }
+div.quranVerse p.vertical{
+    font-style: italic;
+    display: inline;
+    font-size: 3vw;
+}
 div.quranVerse span.sura{
     font-size: 0.9rem;
 }
@@ -400,15 +405,12 @@ div.quranVerse span.sura{
     height: 24%;
     top: 10% !important;
 }
-
 .x-board .top-row {
     height: 15%;
 }
-
 .x-board .middle-row {
 height: 70%;
 }
-
 .x-board td span.prayerFinished {
     opacity: 50%;
 }
@@ -594,6 +596,17 @@ height: 70%;
     font-size: 8vh;
     opacity: .8
 }
+
+.x-board .nextPrayer h4.vertical {
+    padding: 30px;
+    font-size: 6vw;
+    opacity: .8
+}
+.x-board .nextPrayer h4.vertical span.sura{
+    font-size: 3vw;
+    opacity: .8;
+    padding-top: 10px;
+}
 .x-board .nextPrayer h2.vertical {
     font-size: 4vh !important;
 }
@@ -721,6 +734,12 @@ h3.scrolling-vertical > marquee > div > span {
     text-decoration: none !important;
 }
 
+.x-board div.quranVerse span.sura {
+    font-size: 3rem;
+    color: #000;
+    display: block;
+    padding-top: 10px;
+}
 p.jumuah {
     margin: 40px;
 }

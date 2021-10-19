@@ -25,11 +25,11 @@
                     </tr>
                     <tr>
                         <td class="active-slider">Display Quran verse</td>
-                        <td><input type="checkbox" id="quran-chbox" name="quran-chbox" value="displayQuran" <?php if(get_option("displayQuran") === 'displayQuran'){ echo 'checked'; } ?>></td>
+                        <td><input class="oneChbox" type="checkbox" id="quran-chbox" name="quran-chbox" value="displayQuran" <?php if(get_option("quran-chbox") === 'displayQuran'){ echo 'checked'; } ?>></td>
                     </tr>
                     <tr>
                         <td class="active-slider">Activate Slider</td>
-                        <td><input type="checkbox" id="slider-chbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>></td>
+                        <td><input class="oneChbox" type="checkbox" id="slider-chbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>></td>
                     </tr>
                     <tr class="ds-slides">
                         <td>Re-display Next Prayer</td>

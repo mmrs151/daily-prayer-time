@@ -113,6 +113,7 @@ if (! empty($_POST['digitalScreen'])) {
         'ds-scroll-speed' => sanitize_text_field($_POST['ds-scroll-speed']),
         'ds-blink-text' => sanitize_text_field($_POST['ds-blink-text']),
         'ds-additional-css' => sanitize_text_field($_POST['ds-additional-css']),
+        'quran-chbox' => sanitize_text_field($_POST['quran-chbox']),
         'slider-chbox' => sanitize_text_field($_POST['slider-chbox']),
         'nextPrayerSlide' => sanitize_text_field($_POST['nextPrayerSlide']),
         'transitionEffect' => sanitize_text_field($_POST['transitionEffect']),
