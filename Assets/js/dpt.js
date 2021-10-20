@@ -190,7 +190,7 @@ DPT = {
             jQuery("body").append("<div id='overlay'></div>");
             jQuery('#overlay').animate({
                     opacity: 0.9,
-                }, (10000), function() {
+                }, (1000*60*2), function() {
             });
 
         } else {

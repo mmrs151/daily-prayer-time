@@ -336,7 +336,7 @@ class QuranRandomizer
             ),
         67 => array(
                 "verse" => 30,
-                "english" => "Al-Mulk –",
+                "english" => "Al-Mulk",
                 "bangla" => "আল-মুলক"
             ),
         68 => array(
