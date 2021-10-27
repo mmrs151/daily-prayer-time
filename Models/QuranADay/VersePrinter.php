@@ -24,7 +24,7 @@ class VersePrinter
         "
         <div class='quranVerse'>
             <blockquote>
-                <p>" . $quote['text'] . "</p> 
+                <p>" . stripslashes($quote['text']) . "</p> 
                 <span class='link'>
                     <a target='_new' href='http://quran.com/" . $quote['sura']. "/" . $quote['ayat']. "'>
                         <span class='sura'> ~ ". $quote['name']. ": " . $this->timetablePrinter->getIntlNumber($quote['ayat']). " ~ </span>

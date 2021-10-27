@@ -51,11 +51,11 @@ class DigitalScreen extends DailyShortCode
             $this->screenTimeout = $attr['dim'];
         }
     
-        $this->scrollText = esc_html(get_option("ds-scroll-text"));
+        $this->scrollText = esc_html(stripslashes(get_option("ds-scroll-text")));
         $this->scrollSpeed = esc_html(get_option("ds-scroll-speed"));
         
         if ( isset($attr['scroll']) ) {
-            $this->scrollText = $attr['scroll'];
+            $this->scrollText = stripslashes($attr['scroll']);
         }
     
         if ( isset($attr['scroll_link']) ) {
@@ -467,7 +467,7 @@ class DigitalScreen extends DailyShortCode
             return '
             <div class="nextPrayer">
                 <div class="align-middle-next-prayer">
-                    <h4 class="sliderMessage">' . $slide . '</h4>
+                    <h4 class="sliderMessage">' . stripslashes($slide) . '</h4>
                 </div>
             </div>
             ';
