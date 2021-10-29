@@ -598,8 +598,12 @@ class TimetablePrinter
     /**
      * dim display overnight between Isha and Fajr start
      */
-    protected function canDimOvernight($dbRow)
+    protected function canDimOvernight($dbRow, $disableOvernightDim=false)
     {
+        if ($disableOvernightDim) {
+            return 0;
+        }
+
         $userTime = user_current_time( 'H:i');
         $now = new DateTime();
         $now->setTimestamp(strtotime($userTime));

@@ -18,7 +18,7 @@ class DigitalScreen extends DailyShortCode
     private $scrollText;
 
     /** @var string */
-    private $scrollSpeed = 10;
+    private $scrollSpeed = 20;
 
     /** @var array */
     private $presentationSlides;
@@ -33,6 +33,8 @@ class DigitalScreen extends DailyShortCode
     private $scrollUrl;
 
     private $verticalClass = '';
+
+    private $disableOvernightDim = false;
     
     public function __construct($attr=array())
     {
@@ -50,10 +52,14 @@ class DigitalScreen extends DailyShortCode
         if ( isset($attr['dim']) ) {
             $this->screenTimeout = $attr['dim'];
         }
+
+        if ( isset($attr['disable_overnight_dim'])) {
+            $this->disableOvernightDim = true;
+        }
     
         $this->scrollText = esc_html(stripslashes(get_option("ds-scroll-text")));
-        $this->scrollSpeed = esc_html(get_option("ds-scroll-speed"));
-        
+        $this->scrollSpeed = empty(get_option("ds-scroll-speed")) ? $this->scrollSpeed : get_option("ds-scroll-speed");
+
         if ( isset($attr['scroll']) ) {
             $this->scrollText = stripslashes($attr['scroll']);
         }
@@ -62,9 +68,9 @@ class DigitalScreen extends DailyShortCode
             $this->scrollUrl = $attr['scroll_link'];
         }
     
-        $this->blinkText = esc_html(get_option("ds-blink-text"));
+        $this->blinkText = esc_html(stripslashes(get_option("ds-blink-text")));
         if ( isset($attr['blink']) ) {
-            $this->blinkText = $attr['blink'];
+            $this->blinkText = stripslashes($attr['blink']);
         }
     
         if ( isset($attr['blink_link']) ) {
@@ -112,7 +118,7 @@ class DigitalScreen extends DailyShortCode
 
         $html = '
         <div class="container-fluid x-board">
-            <input type="hidden" value="' . $this->canDimOvernight($this->getRow()) . '" id="overnightDim">
+            <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             <div class="row top-row">
