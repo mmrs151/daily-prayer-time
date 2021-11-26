@@ -49,7 +49,7 @@ try {
                     </select>
                 </div>
                 <div class="upload-step" id="customMethod" style="background: #f1f1f1; display: none;">
-                    <input type="number" value="<?php echo esc_html( get_option('fajr-angle') )?>" placeholder="Fajr angle" name="fajr-angle" style="margin: 20px 0px 0px 300px">
+                    <input type="number" value="<?php echo esc_html( get_option('fajr-angle') )?>" placeholder="Fajr angle" name="fajr-angle" style="margin: 20px 0px 0px 30px">
                     <input type="number" value="<?php echo esc_html( get_option('isha-angle') )?>" placeholder="Isha angle" name="isha-angle">
                 </div>
                 <div class="upload-step">

@@ -610,7 +610,7 @@ class TimetablePrinter
 
         $isha = new DateTime();
         $isha->setTimestamp(strtotime($dbRow['isha_jamah']));
-        $isha->modify('+15 mins');
+        $isha->modify('+30 mins');
 
         $fajr = new DateTime();
         $fajr->setTimestamp(strtotime($dbRow['fajr_begins']));
