@@ -4,8 +4,8 @@ Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, salat, namaz, fasting, Quran verse
 Requires at least: 4.5
 Requires PHP: 5.6
-Tested up to: 5.8
-Stable tag: 2021.10.29
+Tested up to: 5.9
+Stable tag: 2022.03.01
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,12 +127,10 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2021.10.29 =
-* Default scroll speed 
-* disable_overnight_dim
+= 2022.03.01 =
+* Securing db call 
 
 == Upgrade Notice ==
 
-= 2021.10.29 =
-* Default scroll speed 
-* disable_overnight_dim
+= 2022.03.01 =
+* Securing db call 

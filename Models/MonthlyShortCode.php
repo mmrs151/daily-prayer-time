@@ -96,7 +96,9 @@ class MonthlyShortCode
     {
         $month = sanitize_text_field($_REQUEST["month"]);
         $display = sanitize_text_field($_REQUEST["display"]);
-        $timetable = new MonthlyTimeTable($month);
+
+        preg_match("/\d+/", $month, $match);
+        $timetable = new MonthlyTimeTable($match[0]);
 
         $options = array();
         if ($month == 13) {
