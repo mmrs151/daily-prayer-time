@@ -107,6 +107,7 @@ class Validator
      */
     public function checkHeader(array $header)
     {
+        
         if ( count($header) != count($this->headers)) {
             echo "<h3 class='dptCenter ui-state-error'>Do not remove any column header";
             return false;

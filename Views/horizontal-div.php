@@ -23,7 +23,7 @@ if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
                  if($row['displayHijriDate']) echo ' - '. $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true)
             ?>
         </h3>
-        <?php echo  $nextIqamah ?>
+        <?php echo esc_html($nextIqamah) ?>
     </div>
     <div class="dpt-wrapper-container">
 
