@@ -33,6 +33,5 @@ while ( have_posts() ) : the_post(); ?>
 endwhile;
 ?>
 <?php wp_footer(); ?>
-<script src="<?php echo plugin_dir_url(__FILE__) . '../Assets/js/bootstrap.bundle.min.js'; ?>"></script>
 </body>
 </html>

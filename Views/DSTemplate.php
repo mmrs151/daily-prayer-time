@@ -1,8 +1,17 @@
+<?php
+if (is_page_template( '../Views/DSTemplate.php' )) {
+
+    wp_enqueue_script('dpt-admin', plugins_url( '../Assets/js/dpt-admin.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
+    wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.bundle.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
+
+    wp_register_style( 'dpt_bootstrap', plugins_url('../Assets/css/bootstrap.min.css', __FILE__), array(), DPT_PLUGIN_VERSION );
+    wp_enqueue_style( 'dpt_bootstrap' );
+}
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <link rel='stylesheet' href="<?php echo plugin_dir_url(__FILE__) . '../Assets/css/google-font-ubuntu.css'; ?>">
-    <link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__) . '../Assets/css/bootstrap.min.css'; ?>">
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <?php if ( ! get_theme_support( 'title-tag' ) ): ?>
         <title><?php wp_title(); ?></title>
@@ -30,6 +39,5 @@ while ( have_posts() ) : the_post(); ?>
 endwhile;
 ?>
 <?php wp_footer(); ?>
-<script src="<?php echo  plugin_dir_url(__FILE__) . '../Assets/js/bootstrap.bundle.min.js'; ?>"></script>
 </body>
 </html>
