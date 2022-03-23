@@ -3,18 +3,22 @@ $worldCities = new WorldCities();
 $cities = $worldCities->getCities();
 $adapter = new DatabaseConnection();
 $rows = $adapter->getRows();
-$header = (array_keys($rows[1]));
-$writeFile = plugin_dir_path(__FILE__) . '../../Assets/prayer-time-'.date('Y'). '.csv';
-try {
-    $f = fopen($writeFile, "w");
-    fputcsv($f, $header);
-    foreach ($rows as $line) {
-        fputcsv($f, array_values($line));
+
+if ( isset($rows[1])) {
+    $header = (array_keys($rows[1]));
+
+    $writeFile = plugin_dir_path(__FILE__) . '../../Assets/prayer-time-'.date('Y'). '.csv';
+    try {
+        $f = fopen($writeFile, "w");
+        fputcsv($f, $header);
+        foreach ($rows as $line) {
+            fputcsv($f, array_values($line));
+        }
+        fclose($f);
+        $readFile = plugins_url('../../Assets/prayer-time-'.date('Y').'.csv', __FILE__);
+    } catch (\Exception $e) {
+        die($e->getMessage());
     }
-    fclose($f);
-    $readFile = plugins_url('../../Assets/prayer-time-'.date('Y').'.csv', __FILE__);
-} catch (\Exception $e) {
-    die($e->getMessage());
 }
 ?>
 <h3 style="padding-bottom: 30px;" xmlns="http://www.w3.org/1999/html">Set Prayer Times Automatically</h3>

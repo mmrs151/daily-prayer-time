@@ -4,14 +4,16 @@
         private $citiesFile;
         
         private $dbTable;
+
+        private $tableName;
         
         public function __construct()
         {
             global $wpdb;
     
             $this->citiesFile = plugin_dir_path(__FILE__) . '../../Assets/world-cities.csv';
-            $tableName = $wpdb->prefix . "timetable_cities";
-            $this->dbTable = "`".DB_NAME ."`.`" .$tableName."`";
+            $this->tableName = $wpdb->prefix . "timetable_cities";
+            $this->dbTable = "`".DB_NAME ."`.`" .$this->tableName."`";
             
             $this->createTable();
         }

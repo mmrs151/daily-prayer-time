@@ -1,10 +1,11 @@
 <?php
 require_once(__DIR__ .'/../../Models/db.php');
-
-$quickMonth = (int)sanitize_text_field($_POST["quickMonth"]);
-preg_match("/\d+/", $quickMonth, $match);
-$quickMonth = $match[0];
-$quickMonth = $quickMonth ?: date('m');
+if ( isset($_POST["quickMonth"])) {
+    $quickMonth = (int)sanitize_text_field($_POST["quickMonth"]);
+    preg_match("/\d+/", $quickMonth, $match);
+    $quickMonth = $match[0];
+}
+$quickMonth = empty($quickMonth) ?: date('m');
 $monthName = date('F');
 $futureMonths = [];
 for($i=date('m'); $i<=12; $i++) {
