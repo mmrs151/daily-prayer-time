@@ -419,4 +419,13 @@ class DailyShortCode extends TimetablePrinter
             $this->displayHijriDate();
         }
     }
+
+    public function getFajrBegins()
+    {
+        $begins = $this->row['fajr_begins'];
+        if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            $begins = $this->row['tomorrow']['fajr_begins'];
+        }
+        return $begins;
+    }
 }
