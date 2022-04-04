@@ -31,6 +31,7 @@
                 array(
                     'methods'             => WP_REST_Server::READABLE,
                     'callback'            => array( $this, 'get_prayer_times' ),
+                    'permission_callback' => function() { return ''; }
                 ),
             ));
         }

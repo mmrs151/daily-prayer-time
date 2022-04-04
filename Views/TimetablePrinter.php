@@ -247,8 +247,12 @@ class TimetablePrinter
         $intlDate = '';
         $this->localNumbers = $this->getLocalNumbers();
         foreach ($result as $number) {
-            $intlDate .= $this->localNumbers[$number];
-            if (empty($this->localNumbers[$number]) && $number !== '0') {
+            if (in_array($number, $this->localNumbers)) {
+                $intlDate .= $this->localNumbers[$number];
+                if (empty($this->localNumbers[$number]) && $number !== '0') {
+                    $intlDate .= $number;
+                }
+            } else {
                 $intlDate .= $number;
             }
         }

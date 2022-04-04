@@ -31,6 +31,7 @@ class DatabaseConnection
         global $wpdb;
 
         $today = user_current_time( 'Y-m-d' );
+    
         $sql = "SELECT * FROM  $this->dbTable WHERE d_date = '$today' LIMIT 1";
         $result = $wpdb->get_row($sql, ARRAY_A);
         
@@ -40,7 +41,11 @@ class DatabaseConnection
         }
         $result['jamah_changes'] = $this->getJamahChanges($jamahChanges);
 
-        if ( !empty($tomorrowPrayerTimes = $this->getPrayerTimesForTomorrow()) ) {
+        $date = strtotime($today);
+        $date = strtotime("+1 day", $date);
+        $tomorrow = date('Y-m-d', $date);
+        
+        if ( !empty($tomorrowPrayerTimes = $this->getPrayerTimesForTomorrow($tomorrow)) ) {
             $result['tomorrow'] = $tomorrowPrayerTimes;            
         }
 
@@ -51,11 +56,11 @@ class DatabaseConnection
      * @param int $jamahChanges
      * @return array
      */
-    public function getPrayerTimesForTomorrow()
+    public function getPrayerTimesForTomorrow($tomorrow)
     {
         global $wpdb;
 
-        $sql = "SELECT * FROM  $this->dbTable WHERE d_date =  CURDATE()  + INTERVAL 1 DAY;";
+        $sql = "SELECT * FROM  $this->dbTable WHERE d_date =  '$tomorrow' LIMIT 1";
         $result = $wpdb->get_row($sql, ARRAY_A);
         
         return $result;

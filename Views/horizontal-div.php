@@ -6,9 +6,6 @@ foreach ($this->localPrayerNames as $name) {
         $highlight = 'highlight';
     }
 }
-if (! $row['hideTimeRemaining']) {
-    $nextIqamah = $isAzanOnly == true ? '' : $this->getNextIqamahTime( $row );
-}
 if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
     $announcement = "<tr><th colspan='7' style='text-align:center' class='notificationBackground'>".$row['announcement']. "</th></tr>";
 }
@@ -23,7 +20,6 @@ if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
                  if($row['displayHijriDate']) echo ' - '. $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true)
             ?>
         </h3>
-        <?php echo esc_html($nextIqamah) ?>
     </div>
     <div class="dpt-wrapper-container">
 

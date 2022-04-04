@@ -293,6 +293,7 @@ class DailyTimetablePrinter extends TimetablePrinter
             ';
         }
         $table = "";
+        $announcement = '';
         if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
             $announcement = "<tr><th colspan=".$colspan." style='text-align:center' class='notificationBackground'>".$row['announcement']. "</th></tr>";
         }

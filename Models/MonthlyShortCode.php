@@ -33,6 +33,7 @@ class MonthlyShortCode
             $heading = esc_attr($attr['heading']);
         }
 
+        $hiddenInput = '';
         if (isset($attr['display'])) {
             $hiddenInput = "<input type='hidden' name='display' id='display' value=" . esc_attr($attr['display']) . " />";
         }
