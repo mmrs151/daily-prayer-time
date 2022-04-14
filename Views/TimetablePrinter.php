@@ -19,8 +19,8 @@ class TimetablePrinter
         "iqamah" => "Iqamah",
         "standard" => "Standard",
         "hanafi" => "Hanafi",
-        "fast_begins" => "Fast Begins",
-        "fast_ends" => "Fast Ends",
+        "fast_begins" => "Suhoor End",
+        "fast_ends" => "Iftar Start",
         "jumuah" => "Jumuah"
     );
 

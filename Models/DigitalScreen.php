@@ -121,6 +121,9 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
+
             <div class="row top-row">
                 <div class="time ' . $timeClass . 'col-xs-12 text-center ' . $height . '">
                 <div class="clock align-middle">
@@ -493,5 +496,31 @@ class DigitalScreen extends DailyShortCode
         $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+20 minutes" ) ); // to dim screen overnight
 
         return $refreshPoints;
+    }
+
+    private function getOtherAdhanTimes()
+    {
+
+        $result = $this->db->getPrayerTimeForToday();
+        $iqamahTimes =  array($result['zuhr_jamah'], $result['asr_jamah'], $result['maghrib_begins'], $result['isha_jamah']);
+
+        $adhanTimes = array();
+        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[0] . "-15 minutes" ) ); // zuhr
+        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[1] . "-15 minutes" ) ); // asr
+        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[2] . "0 minutes" ) ); // maghrib
+        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[3] . "-15 minutes" ) ); // isha
+
+        return $adhanTimes;
+    }
+
+    private function getFajrAdhanTime()
+    {
+        $result = $this->db->getPrayerTimeForToday();
+
+        if ( !empty(get_option('ramadan-chbox')) ) { 
+            return date( "H:i:s", strtotime( $result['fajr_begins'] . "0 minutes" ) ); // fajr start
+        }
+
+        return date( "H:i:s", strtotime( $result['fajr_jamah'] . "-15 minutes" ) ); // fajr iqamah
     }
 }

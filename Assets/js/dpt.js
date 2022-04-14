@@ -2,6 +2,8 @@ var isTimerOn = false;
 
 DPT = {
     init: function() {
+        console.log(DPTURLS.fajrAdhan);
+        console.log(DPTURLS.otherAdhan);
 
         this.monthlyCalendarChange();
         this.displaySliderOptions();
@@ -15,6 +17,10 @@ DPT = {
         this.displayCustomAngleFields();
         this.dimMonitorOvernight();
         this.dsRefreshQuranVerse();
+
+        this.playFajrAdhan();
+        this.playOtherAdhan();
+
     },
 
     displayCustomAngleFields: function() {
@@ -277,7 +283,58 @@ DPT = {
             var ampm = new Date().getHours() < 12 ? 'AM' : 'PM';
             jQuery("#ampm").html( ampm );
             }, 1000);
-    }
+    },
+
+    playFajrAdhan: function() 
+    {
+        var iqamah = jQuery('#fajrAdhanTime').val();
+        if ( ! iqamah ) {
+            return;
+        }
+        iqamah = JSON.parse(iqamah);
+        var timeParts = iqamah.split(":");
+        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(adhaan){
+            var audio = new Audio(DPTURLS.fajrAdhan);
+            var playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                  // Automatic playback started!
+                  // Show playing UI.
+                })
+                .catch(error => {
+                  // Auto-play was prevented
+                  // Show paused UI.
+                })
+            }
+        });
+    },
+
+    playOtherAdhan: function() 
+    {
+        var iqamah = jQuery('#otherAdhanTimes').val();
+        if ( ! iqamah ) {
+            return;
+        }
+        iqamah = JSON.parse(iqamah);
+        for(var i = 0; i < iqamah.length; i ++)
+        {
+            var timeParts = iqamah[i].split(":");
+            DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(){
+                var audio = new Audio(DPTURLS.otherAdhan);
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                      // Automatic playback started!
+                      // Show playing UI.
+                    })
+                    .catch(error => {
+                      // Auto-play was prevented
+                      // Show paused UI.
+                    })
+                }
+            });
+        }
+    },
 };
 jQuery(document).ready(function() { DPT.init(); });
 
