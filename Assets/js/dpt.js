@@ -2,8 +2,6 @@ var isTimerOn = false;
 
 DPT = {
     init: function() {
-        console.log(DPTURLS.fajrAdhan);
-        console.log(DPTURLS.otherAdhan);
 
         this.monthlyCalendarChange();
         this.displaySliderOptions();
@@ -30,7 +28,6 @@ DPT = {
         }
         jQuery('#calculationMethod').on('change',function(){
             if( jQuery(this).val() === '6'){ //custom settings
-                console.log(jQuery(this).val());
                 jQuery("#customMethod").show()
             } else{
                 jQuery("#customMethod").hide()
@@ -287,12 +284,12 @@ DPT = {
 
     playFajrAdhan: function() 
     {
-        var iqamah = jQuery('#fajrAdhanTime').val();
-        if ( ! iqamah ) {
+        var adhan = jQuery('#fajrAdhanTime').val();
+        if ( ! adhan ) {
             return;
         }
-        iqamah = JSON.parse(iqamah);
-        var timeParts = iqamah.split(":");
+        adhan = JSON.parse(adhan);
+        var timeParts = adhan.split(":");
         DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(adhaan){
             var audio = new Audio(DPTURLS.fajrAdhan);
             var playPromise = audio.play();

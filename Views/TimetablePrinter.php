@@ -618,7 +618,7 @@ class TimetablePrinter
 
         $fajr = new DateTime();
         $fajr->setTimestamp(strtotime($dbRow['fajr_begins']));
-        
+
         if ($now < $fajr || $now > $isha) {
             return 1;
         }
