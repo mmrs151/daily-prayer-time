@@ -78,6 +78,7 @@ Once the installation above is done, this will allow you
 9. **[monthlytable heading="Månedlige Tidsplan"]** - Display monthly time table heading in any language, default is 'Monthly Time Table for'
 10. **[digital_screen]** - Display prayer time on big monitors in the masjid
 11. **[quran_verse]** - Display a random verse from the Holy Quran 
+12. **[disable_overnight_dim] - disable dimming overnight dimming of the digital screen 
 ... and more. Check the 'helps-and-tips' page in plugin settings once you install it.
 
 == Installation ==

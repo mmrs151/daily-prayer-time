@@ -56,6 +56,12 @@ class DigitalScreen extends DailyShortCode
         if ( isset($attr['disable_overnight_dim'])) {
             $this->disableOvernightDim = true;
         }
+
+        if ( isset($attr['deactivate_tomorrow'])) {
+            add_option('deactivate_tomorrow', true);
+        } else {
+            delete_option('deactivate_tomorrow');
+        }
     
         $this->scrollText = esc_html(stripslashes(get_option("ds-scroll-text")));
         $this->scrollSpeed = empty(get_option("ds-scroll-speed")) ? $this->scrollSpeed : get_option("ds-scroll-speed");

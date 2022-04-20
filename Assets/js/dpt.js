@@ -3,6 +3,11 @@ var isTimerOn = false;
 DPT = {
     init: function() {
 
+
+        jQuery(document).ready(function() {
+            jQuery('.form-select').selectpicker();
+        });
+
         this.monthlyCalendarChange();
         this.displaySliderOptions();
         this.changeInputBackground();

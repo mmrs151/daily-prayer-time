@@ -2,6 +2,9 @@
 -body {
     font-family: 'Ubuntu', sans-serif;
 }
+div.dropdown {
+    width: 300px !important;
+}
 span.scDate {
     font-weight: 800;
 }

@@ -24,9 +24,9 @@
         <li>[asr_start]</li>
         <li>[maghrib_start]</li>
         <li>[isha_start]</li>
-        <li>[digital_screen]</li>
         <li>[display_iqamah_update] <i>threshold={min}</i></li>
         <li>[quran_verse]</li>
+        <li>[digital_screen]</li>
     </ol>
 
     <h3>Shortcode Options:</h3>
@@ -39,8 +39,16 @@
         <li>heading="any text"</li>
         <li>use_div_layout=true (restrictive, works with horizontal, no other options)</li>
         <li>start_time=true (only for single prayer time)</li>
-        <li>view='vertical' <i>(only for digital_screen)</i></li>
         <li>min_word=20 max_word=30 language='bangla' <i>(only for quran_verse)</i></li>
+    </ol>
+    <ol><p><strong>[digital_screen ]</strong></p>
+        <li>view='vertical/presentation' </li>
+        <li>view='presentation' slides='image1,image2,image_n'</li>
+        <li>dim=number of minutes to dim the screen after Jamaat start</li>
+        <li>scroll=any text scroll_link=url to make the text clickable</li>
+        <li>blink=any text blink_link=url to make the text clickable</li>
+        <li>disable_overnight_dim=true <i>(disable dimming overnight dimming of the digital screen )</i></li>
+        <li>deactivate_tomorrow=true <i>(Deactivate tomorrow's prayer time after a prayer finished)</i></li>
     </ol>
 </p>
 <p>

@@ -13,9 +13,13 @@
             if ($hook == 'toplevel_page_dpt') {
                 wp_enqueue_script('dpt-admin', plugins_url( '../Assets/js/dpt-admin.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
                 wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.bundle.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
+                wp_enqueue_script( 'bs_select_js', plugins_url( '../Assets/js/bootstrap-select.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
     
                 wp_register_style( 'dpt_bootstrap', plugins_url('../Assets/css/bootstrap.min.css', __FILE__), array(), DPT_PLUGIN_VERSION );
                 wp_enqueue_style( 'dpt_bootstrap' );
+
+                wp_register_style( 'bs_select_css', plugins_url('../Assets/css/bootstrap-select.min.css', __FILE__), array(), DPT_PLUGIN_VERSION );
+                wp_enqueue_style( 'bs_select_css' );
             }
         }
     
@@ -30,7 +34,6 @@
                 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
             );
         
-            // bootstrap js from CDN
             wp_enqueue_script( 'dpt_popper_js', plugins_url( '../Assets/js/popper.min-1.12.9.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
             wp_enqueue_script("jquery-ui-tabs");
             wp_enqueue_script( 'jquery-ui-dialog' );

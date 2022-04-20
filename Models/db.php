@@ -134,6 +134,7 @@ class DatabaseConnection
 
         // get jamah name that has changes more than x min
         $jamahNamesArray = array();
+
         foreach($result as $key=>$time) {
             if ((int)$time >= (int)$xmin) {
                 $diff = (int)$time - (int)$xmin;

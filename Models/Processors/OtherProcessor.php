@@ -30,13 +30,20 @@ if ( ! class_exists('DPTOtherProcessor')) {
                 add_option('asrSelect', $asrSelect);
             }
     
-            $jamahChanges = sanitize_text_field($this->data['jamah_changes']);
+            $jamahChanges = $this->data['jamah_changes'] ?? '';
+            $jamahChanges = sanitize_text_field($jamahChanges);
             delete_option('jamah_changes');
             add_option('jamah_changes', $jamahChanges);
     
-            $imsaq = sanitize_text_field($this->data['imsaq']);
+            $imsaq = $this->data['imsaq'] ?? '';
+            $imsaq = sanitize_text_field($imsaq);
             delete_option('imsaq');
             add_option('imsaq', $imsaq);
+
+            $tomorrowTime = $this->data['tomorrow_time'] ?? '';
+            $tomorrowTime = sanitize_text_field($tomorrowTime);
+            delete_option('tomorrow_time');
+            add_option('tomorrow_time', $tomorrowTime);
         }
     }
     

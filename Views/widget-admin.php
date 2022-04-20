@@ -25,7 +25,7 @@ if (isset($_POST['set-start-time'])) {
         'maghrib-delay' => sanitize_text_field($_POST['maghrib-delay']),
         'isha-delay' => sanitize_text_field($_POST['isha-delay']),
         'higher-lat' => sanitize_text_field($_POST['higher-lat']),
-        'calc-method' => sanitize_text_field($_POST['calc-method']),
+        'method' => sanitize_text_field($_POST['method']),
         'fajr-angle' => sanitize_text_field($_POST['fajr-angle']),
         'isha-angle' => sanitize_text_field($_POST['isha-angle']),
         'isha-angle' => sanitize_text_field($_POST['isha-angle']),
@@ -70,10 +70,11 @@ if (! empty($_POST['hijriSettings'])) {
 if (! empty($_POST['otherSettings'])) {
     $data = [
         'jumuah' => sanitize_text_field($_POST['jumuah']),
-        'ramadan-chbox' => sanitize_text_field($_POST['ramadan-chbox']),
+        'ramadan-chbox' => sanitize_text_field($_POST['ramadan-chbox'] ?? ''),
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
-        'jamah_changes' => sanitize_text_field($_POST['jamah_changes']),
+        'jamah_chas' => sanitize_text_field($_POST['jamah_changes']),
         'imsaq' => sanitize_text_field($_POST['imsaq']),
+        'tomorrow_time' => sanitize_text_field($_POST['tomorrow_time'] ?? ''),
     ];
     $otherProcessor = new DPTOtherProcessor($data);
     $otherProcessor->process();

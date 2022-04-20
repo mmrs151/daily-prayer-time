@@ -35,6 +35,10 @@
                             <i>'0' to deactivate</i>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Deactivate Tomorrow:</td>
+                            <td><input  type="checkbox" name="tomorrow_time" value="tomorrow" <?php if(get_option("tomorrow_time") === 'tomorrow'){ echo 'checked'; } ?>></td>
+                    </tr>
                 </table>
                 <?php submit_button('Save changes', 'primary', 'otherSettings'); ?>
             </form>

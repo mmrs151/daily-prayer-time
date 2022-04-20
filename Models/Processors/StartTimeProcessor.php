@@ -49,6 +49,13 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
                 $ishaAngle = (int)$this->data['isha-angle'];
                 $this->prayTime->setFajrAngle($fajrAngle);
                 $this->prayTime->setIshaAngle($ishaAngle);
+
+                delete_option('fajr-angle');
+                delete_option('isha-angle');
+
+                add_option('fajr-angle', $fajrAngle);
+                add_option('isha-angle', $ishaAngle);
+    
             }
         
             delete_option('fajr-delay');
@@ -58,9 +65,6 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             delete_option('isha-delay');
             delete_option('higher-lat');
             delete_option('calc-method');
-            delete_option('fajr-angle');
-            delete_option('isha-angle');
-            delete_option('isha-angle');
             delete_option('asr-method');
             
             add_option('fajr-delay', $this->data['fajr-delay']);
@@ -70,8 +74,6 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             add_option('isha-delay', $this->data['isha-delay']);
             add_option('higher-lat', $higherLatMethod);
             add_option('calc-method', $calcMethod);
-            add_option('fajr-angle', $fajrAngle);
-            add_option('isha-angle', $ishaAngle);
             add_option('asr-method', $asrMethod);
             
             $this->prayTime->setCalcMethod($calcMethod);

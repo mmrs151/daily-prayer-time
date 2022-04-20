@@ -505,22 +505,28 @@ class TimetablePrinter
     protected function getJamahChange(array $row, $isDigitalScreen=false, $orientation="")
     {
         $style = null;
+
         if ($this->isVertical && ! $isDigitalScreen) {
             $style = "style='display: block;'";
         }
+        
         $timeClass = "";
         $digitalScreenClass = "";
+        
         if ($isDigitalScreen) {
             $timeClass = "class='x-time-change'";
             $digitalScreenClass = "jamahChanges-" . $orientation;
 
         }
+        
         $timeRelated = $this->getLocalTimes();
+        
         $print = 
-        "<span class='jamahChanges " . $digitalScreenClass . "'>
-            <span class='x-time-text'>" 
-                . stripslashes($timeRelated['iqamah update']) . 
-            "</span>";
+            "<span class='jamahChanges " . $digitalScreenClass . "'>
+                <span class='x-time-text'>" 
+                    . stripslashes($timeRelated['iqamah update']) . 
+                "</span>";
+        
         $prayerNames = $this->getLocalPrayerNames();
 
         foreach($row['jamah_changes'] as $key=>$time) {
