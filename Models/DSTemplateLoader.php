@@ -74,7 +74,7 @@ class DSTemplateLoader
 
         global $post;
 
-        if ( ! isset( $this->templates[ get_post_meta(
+        if ( isset($post->ID) && ! isset( $this->templates[ get_post_meta(
                 $post->ID, '_wp_page_template', true
             ) ] )
         ) {

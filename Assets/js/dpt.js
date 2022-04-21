@@ -2,12 +2,7 @@ var isTimerOn = false;
 
 DPT = {
     init: function() {
-
-
-        jQuery(document).ready(function() {
-            jQuery('.form-select').selectpicker();
-        });
-
+    
         this.monthlyCalendarChange();
         this.displaySliderOptions();
         this.changeInputBackground();
@@ -24,6 +19,18 @@ DPT = {
         this.playFajrAdhan();
         this.playOtherAdhan();
 
+        this.makeCitySearchable();
+        // this.keepScreenOn();
+
+    },
+
+
+    makeCitySearchable: function() {
+        var id = jQuery( "#csvUpload" ).html();
+        if (typeof id != 'undefined') {
+    
+            jQuery('.form-select').selectpicker();
+        }
     },
 
     displayCustomAngleFields: function() {
@@ -100,10 +107,20 @@ DPT = {
         }
     },
 
+    keepScreenOn: function () {
+        if (jQuery('div.x-board')[0]) {
+
+            var noSleep = new NoSleep();
+            noSleep.enable();
+            console.log('alhamdulillah');
+        }
+    },
+
     dsRefreshNextPrayer: function () {
         if (! jQuery('.x-board')[0]) {
             return;
         }
+
         jQuery.ajax({
             url: timetable_params.ajaxurl,
             data: {

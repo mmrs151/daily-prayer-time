@@ -25,7 +25,7 @@ if ( isset($rows[1])) {
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-xs-12">
-            <form enctype="multipart/form-data" name="csvUpload" method="post" action="">
+            <form enctype="multipart/form-data" id="csvUpload" name="csvUpload" method="post" action="">
                 <div class="upload-step">
                     <label>Select your nearest city:</label>
                     <select class="form-select" data-live-search="true" name="city">
