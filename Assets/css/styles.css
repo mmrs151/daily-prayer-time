@@ -246,7 +246,6 @@ select.otherMonth  {
 }
 
 span.dpt-donation {
-    float: right;
     width: auto;
     color: #000000;
     background-color: maroon;

@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.9
-Stable tag: 2022.04.15
+Stable tag: 2022.04.22
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,14 +128,14 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2022.04.15 =
-* Introducing Adhan playback 15 minutes before iqamah 
-* In Ramadan Fajr adhan will be played on the Fajr start time instead
-* Fix JS error
+= 2022.04.22 =
+* Option for deactivating tomorrow time 
+* Load City with search option 
+* Fix quick update times
 
 == Upgrade Notice ==
 
-= 2022.04.15 =
-* Introducing Adhan playback 15 minutes before iqamah 
-* In Ramadan Fajr adhan will be played on the Fajr start time instead
-* Fix JS error
+= 2022.04.22 =
+* Option for deactivating tomorrow time 
+* Load City with search option 
+* Fix quick update times

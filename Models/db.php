@@ -272,10 +272,15 @@ class DatabaseConnection
             $wpdb->update(
                 $this->tableName,
                 array(
+                    'fajr_begins' => $day['fajr_begins'],
                     'fajr_jamah' => $day['fajr_jamah'],
+                    'zuhr_begins' => $day['zuhr_begins'],
                     'zuhr_jamah' => $day['zuhr_jamah'],
+                    'asr_mithl_1' => $day['asr_begins'],
                     'asr_jamah' => $day['asr_jamah'],
+                    'maghrib_begins' => $day['maghrib_begins'],
                     'maghrib_jamah' => $day['maghrib_jamah'],
+                    'isha_begins' => $day['isha_begins'],
                     'isha_jamah' => $day['isha_jamah']
                 ),
                 array('d_date' => $day['d_date'])

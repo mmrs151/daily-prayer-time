@@ -20,7 +20,7 @@ DPT = {
         this.playOtherAdhan();
 
         this.makeCitySearchable();
-        // this.keepScreenOn();
+        this.keepScreenOn();
 
     },
 
@@ -342,6 +342,7 @@ DPT = {
                 var audio = new Audio(DPTURLS.otherAdhan);
                 var playPromise = audio.play();
                 if (playPromise !== undefined) {
+                    console.log(DPTURLS.otherAdhan);
                     playPromise.then(_ => {
                       // Automatic playback started!
                       // Show playing UI.
