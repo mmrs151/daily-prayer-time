@@ -109,22 +109,16 @@ Please check/update your timezone settings in Settings > General
 Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Screenshots ==
-1. Upload timetable
-2. Translate in any language
-3. Hijri date settings
-4. Change timetable look and feel
-5. Update monthly prayer time from admin section
-6. Digital screen settings
-7. Jumuah, Ramadan, Asr and Iqamah notification settings
-8. API docs
-9. Widget settings
-10. Example 1: daily prayer times
-11. Example 2: monthly prayer times
-12. Digital screen or mobile screen
-13. Example1: Using individual shortcode
-14. Example2: Using individual shortcode
-15. API response
-16. Iqamah change notification for tomorrow
+1. Masjid and Mobile display
+2. Display time remaining for next prayer
+3. Random Quran verse
+4. Add hadith or your own message
+5. Design anyway you like
+6. Design anyway you like
+7. Design anyway you like
+8. Default Website daily view
+9. Default Website monthly view
+10. Settings page
 
 == Changelog ==
 

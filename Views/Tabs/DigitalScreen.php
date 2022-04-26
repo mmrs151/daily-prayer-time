@@ -1,5 +1,4 @@
 <?php
-//var_dump(get_option("slider1Url")); exit;
 function displayImage($slide){
     if (filter_var($slide, FILTER_VALIDATE_URL)) {
         return  '<img src="' . esc_html($slide ) . '" style="max-height: 25px;" class="grow">';
@@ -7,7 +6,7 @@ function displayImage($slide){
     return '';
 }
 ?>
-<h3>Digital screen settings</h3>
+<h3>Masjid/Mobile screen settings</h3>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-xs-12">
@@ -159,9 +158,9 @@ function displayImage($slide){
             <h3 class="pt-2"><code>INSTRUCTIONS</code></h3>
             <li><a class="url" href="post-new.php?post_type=page">Create a new page</a></li>
             <li>Select page template <code>Digital Screen Prayer Time</code></li>
-            <li>Use shortcode <code>[digital_screen]</code> to display horizontally/Landscape</li>
+            <li>Use shortcode <code>[digital_screen]</code> to display in Monitor</li>
+            <li><code>[digital_screen view='vertical']</code> for Mobile diaplay</li>
             <li><code>[digital_screen view='presentation' slides=image,image,...]</code> display slides only, hiding prayer time</li>
-            <li><code>[digital_screen view='vertical']</code> to display vertically/Portrait</li>
             <li><code>[digital_screen view='vertical' dim=10]</code> to dim vertically screen for 10 mins when prayer starts</li>
             <li><code>[digital_screen view='vertical' dim=10 scroll='any text']</code> to override scrolling message</li>
             <li><code>[digital_screen view='vertical' dim=10 blink='any text']</code> to override blinking alert message</li>

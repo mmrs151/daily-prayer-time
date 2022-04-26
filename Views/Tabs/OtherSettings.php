@@ -9,16 +9,6 @@
                         <td><input style="width: 300px;" type="text" class="jumuah" name="jumuah" size="60" value='<?php echo  get_option("jumuah") ?>'></td>
                     </tr>
                     <tr>
-                        <td>Activate Ramadan timetable</td>
-                        <td><input  type="checkbox" name="ramadan-chbox" value="ramadan" <?php if(get_option("ramadan-chbox") === 'ramadan'){ echo 'checked'; } ?>></td>
-                    </tr>
-                    <tr>
-                        <td>Imsaq threshold:</td>
-                        <td>
-                            <input type="number" name="imsaq" min="0" max="59" placeholder="15" value="<?php echo esc_attr(get_option('imsaq'))?>">
-                        </td>
-                    </tr>
-                    <tr>
                         <td>Set Asr start time for monthly calendar</td>
                         <td>
                             <select name="asrSelect" class="form-control">

@@ -60,8 +60,11 @@ if (! empty($_POST['languageSettings'])) {
 
 if (! empty($_POST['hijriSettings'])) {
     $data = [
-        'hijri-chbox' => sanitize_text_field($_POST['hijri-chbox']),
-        'hijri-adjust' => sanitize_text_field($_POST['hijri-adjust'])
+        'hijri-chbox' => sanitize_text_field($_POST['hijri-chbox'] ?? ''),
+        'hijri-arabic-chbox' => sanitize_text_field($_POST['hijri-arabic-chbox'] ?? ''),
+        'hijri-adjust' => sanitize_text_field($_POST['hijri-adjust']),
+        'imsaq' => sanitize_text_field($_POST['imsaq']),
+
     ];
     $hijri = new DPTHijriProcessor($data);
     $hijri->process();
@@ -70,10 +73,8 @@ if (! empty($_POST['hijriSettings'])) {
 if (! empty($_POST['otherSettings'])) {
     $data = [
         'jumuah' => sanitize_text_field($_POST['jumuah']),
-        'ramadan-chbox' => sanitize_text_field($_POST['ramadan-chbox'] ?? ''),
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
         'jamah_chas' => sanitize_text_field($_POST['jamah_changes']),
-        'imsaq' => sanitize_text_field($_POST['imsaq']),
         'tomorrow_time' => sanitize_text_field($_POST['tomorrow_time'] ?? ''),
     ];
     $otherProcessor = new DPTOtherProcessor($data);
@@ -115,7 +116,7 @@ if (! empty($_POST['digitalScreen'])) {
         'ds-blink-text' => sanitize_text_field($_POST['ds-blink-text']),
         'ds-additional-css' => sanitize_text_field($_POST['ds-additional-css']),
         'quran-chbox' => sanitize_text_field($_POST['quran-chbox'] ?? ''),
-        'slider-chbox' => sanitize_text_field($_POST['slider-chbox']),
+        'slider-chbox' => sanitize_text_field($_POST['slider-chbox'] ?? ''),
         'nextPrayerSlide' => sanitize_text_field($_POST['nextPrayerSlide']),
         'transitionEffect' => sanitize_text_field($_POST['transitionEffect']),
         'transitionSpeed' => sanitize_text_field($_POST['transitionSpeed']),
@@ -153,8 +154,8 @@ if (! empty($_POST['digitalScreen'])) {
     <ul>
         <li><a href="#tabs-1" data-tab-index="0">Set Prayer Times</a></li>
         <li><a href="#tabs-5" data-tab-index="1">Quick Update Times</a></li>
-        <li><a href="#tabs-6" data-tab-index="2">Monitor/mobile Setup</a></li>
-        <li><a href="#tabs-3" data-tab-index="4">Hijri Settings</a></li>
+        <li><a href="#tabs-6" data-tab-index="2">Mobile/Masjid Display</a></li>
+        <li><a href="#tabs-3" data-tab-index="4">Arabic Month</a></li>
         <li><a href="#tabs-4" data-tab-index="3">Theme Settings</a></li>
         <li><a href="#tabs-2" data-tab-index="2">Language Settings</a></li>
         <li><a href="#tabs-7" data-tab-index="7">Misc</a></li>
@@ -193,5 +194,5 @@ if (! empty($_POST['digitalScreen'])) {
         <?php include 'Tabs/APIdoc.php' ?>
     </div>
 </div>
-    <span class="dpt-donation"><a href="https://donate.uwt.org/Account/Index.aspx" target="_blank">🤲Sadaqa for your grave⚰</a></span>
-    <span class="dpt-donation"><a href="https://wordpress.org/support/view/plugin-reviews/daily-prayer-time-for-mosques/reviews/#new-post" target="_blank">💚👍 Like it? </a></span>
+    <span class="dpt-donation"><a href="https://donate.uwt.org/Account/Index.aspx" target="_blank">Send Sadaqa to my GRAVE</a></span>
+    <span class="dpt-donation"><a href="https://wordpress.org/support/view/plugin-reviews/daily-prayer-time-for-mosques/reviews/#new-post" target="_blank">👍 Like it? </a></span>

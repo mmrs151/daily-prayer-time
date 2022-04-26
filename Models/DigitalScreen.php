@@ -405,9 +405,9 @@ class DigitalScreen extends DailyShortCode
             $verticalClass = "vertical";
         }
 
-        if (get_option('ramadan-chbox')) {
-            $h3 = '<div class="dsRamadan">
-
+        if ($this->isRamadan()) {
+            $h3 = '
+            <div class="dsRamadan">
                 <div class="sehri">' . $this->getLocalHeaders()['fast_begins'] . ': ' . $this->formatDateForPrayer($this->getFajrBegins(), true) . '</div>
                 <div class="iftar pull-right">' . $this->getLocalHeaders()['fast_ends']. ': ' . do_shortcode("[maghrib_start]") . '</div>
             </div>';
@@ -523,7 +523,7 @@ class DigitalScreen extends DailyShortCode
     {
         $result = $this->db->getPrayerTimeForToday();
 
-        if ( !empty(get_option('ramadan-chbox')) ) { 
+        if ( $this->isRamadan() ) { 
             return date( "H:i:s", strtotime( $result['fajr_begins'] . "0 minutes" ) ); // fajr start
         }
 

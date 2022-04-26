@@ -90,9 +90,6 @@ class TimetablePrinter
     /** $var bool */
     protected $isHorizontal = false;
 
-    /**
-     * TimetablePrinter constructor.
-     */
     public function __construct()
     {
         $this->localPrayerNames = $this->getLocalPrayerNames();
@@ -162,7 +159,7 @@ class TimetablePrinter
             $monthsLocal = $this->monthsLocal;
         }
 
-        if ( get_option("ramadan-chbox") ) {
+        if ( $this->isRamadan() ) {
             $monthsLocal['ramadan'] = 'Ramadan';
         } else {
             unset( $monthsLocal['ramadan'] );
@@ -298,15 +295,15 @@ class TimetablePrinter
     {
         $html = "";
 
-        if  ($isRamadan && ! $azanOnly && $imsaq) {
+        if  ($this->isRamadan() && ! $azanOnly && $imsaq) {
             $html = "<td class='fasting'>" . $this->formatDateForPrayer($data, $imsaq) . "</td>";
-        } elseif ($isRamadan && $imsaq) {
+        } elseif ($this->isRamadan() && $imsaq) {
             $html = "<td class='fasting'>" . $this->formatDateForPrayer($data, $imsaq). "</td>";
             $html .= "<td>" . $this->formatDateForPrayer($data). "</td>";
 
-        } elseif  ($isRamadan && ! $imsaq) {
+        } elseif  ($this->isRamadan() && ! $imsaq) {
             $html = "<td class='fasting'>" . $this->formatDateForPrayer($data). "</td>";
-        } elseif  ($isRamadan && ! $azanOnly && $imsaq) {
+        } elseif  ($this->isRamadan() && ! $azanOnly && $imsaq) {
             $html = "<td class='fasting'>" . $this->formatDateForPrayer($data). "</td>";
         } elseif ($azanOnly) {
             $html = "<td>" . $this->formatDateForPrayer($data). "</td>";
@@ -645,5 +642,10 @@ class TimetablePrinter
         }
 
         return '';
+    }
+
+    public function isRamadan()
+    {
+        return str_contains($this->hijridateString, 'Ramadan');
     }
 }

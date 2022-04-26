@@ -1,4 +1,8 @@
 <?php
+
+require_once('TimetablePrinter.php');
+$timetablePrinter = new TimetablePrinter();
+
 $nextPrayer = ucfirst( $this->getNextPrayer( $row ) );
 
 foreach ($this->localPrayerNames as $name) {
@@ -78,7 +82,7 @@ if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
 
 <?php
 
-if (get_option('ramadan-chbox') && ! $row['hideRamadan']) { ?>
+if ( $timetablePrinter->isRamadan() && ! $row['hideRamadan']) { ?>
 
 <script>
 

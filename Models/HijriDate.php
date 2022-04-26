@@ -2,7 +2,33 @@
 
 class HijriDate
 {
-    private $hijriMonth = array ("Muharram", "Safar", "Rabī al-Awwal", "Rabī ath-Thānī ", "Jumādā al-Ula", "Jumādā ath-Thāniya", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhū al-Qa'da", "Dhū al-Hijjah");
+    private $hijriMonth = array ("Muharram", "Safar", "Rabī al-Awwal", "Rabī ath-Thānī", "Jumādā al-Ula", "Jumādā ath-Thāniya", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhū al-Qa'da", "Dhū al-Hijjah");
+    private $arabicMonth = array (
+        "Muharram" => "ٱلْمُحَرَّم",  
+        "Safar" => "صَفَر",  
+        "Rabī al-Awwal" => "رَبِيع ٱلْأَوَّل",
+        "Rabī ath-Thānī" => "رَبِيع ٱلثَّانِي",
+        "Jumādā al-Ula" => "جُمَادَىٰ ٱلْأُولَىٰ",
+        "Jumādā ath-Thāniya" => "جُمَادَىٰ ٱلثَّانِيَة",
+        "Rajab" => "رَجَب",
+        "Sha'ban" => "شَعْبَان",
+        "Ramadan" => "رَمَضَان",
+        "Shawwal" => "شَوَّال",
+        "Dhū al-Qa'da" => "ذُو ٱلْقَعْدَة",
+        "Dhū al-Hijja" => "ذُو ٱلْحِجَّة"
+    );
+    private $arabicNumbers = [
+        0 => '٠',
+        1 => '١',
+        2 => '٢',
+        3 => '٣',
+        4 => '٤',
+        5 => '٥',
+        6 => '٦',
+        7 => '٧',
+        8 => '٨',
+        9 => '٩'
+    ];
 
     /**
      * @param $day
@@ -13,7 +39,7 @@ class HijriDate
      *
      * @return array|string
      */
-    public function getDate($day, $month, $year, $stringDate=false, $sunset=false)
+    public function getDate($day, $month, $year, $stringDate=false, $sunset=false, $arabic=false)
     {
         if ($sunset == true) {
             $dt = new DateTime('tomorrow');
@@ -30,8 +56,14 @@ class HijriDate
         $month = $this->hijriMonth[(int) $date['month'] - 1];
         $year = $date['year'];
 
+        if ( !empty(get_option('hijri-arabic-chbox')) ) {
+            $day = $this->getArabicNumber($day);
+            $month = $this->getArabicMonth($month);
+            $year = $this->getArabicNumber($year);
+        }
+
         if ($stringDate) {
-            return "{$month} {$day}, {$year}";
+            return "{$day} {$month} {$year}";
         }
 
         return array(
@@ -39,6 +71,10 @@ class HijriDate
             'month' => $month,
             'year' => $year
         );
+    }
+
+    public function getToday($arabic=false) {
+        return $this->getDate(date("d"), date("m"), date("Y"), true, false, $arabic);
     }
 
     /**
@@ -95,5 +131,21 @@ class HijriDate
         else
             return floor($float + 0.0000001);
 
+    }
+
+    private function getArabicNumber($number)
+    {
+        $arabicNumber = '';
+        $numbers = str_split($number);
+        foreach($numbers as $key) {
+            $arabicNumber .= $this->arabicNumbers[$key];
+        }
+
+        return $arabicNumber;
+    }
+
+    private function getArabicMonth($month)
+    {
+        return $this->arabicMonth[$month];
     }
 }

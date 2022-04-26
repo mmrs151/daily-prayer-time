@@ -37,7 +37,9 @@ class MonthlyShortCode
         if (isset($attr['display'])) {
             $hiddenInput = "<input type='hidden' name='display' id='display' value=" . esc_attr($attr['display']) . " />";
         }
+        
         $month = date("m");
+
         $path = plugin_dir_url( __FILE__ ); // I am in Models
         $path .= '../';
 
@@ -105,7 +107,7 @@ class MonthlyShortCode
         if ($month == 13) {
             $options['isRamadan'] = true;
         }
-
+        
         if ($display === 'iqamah_only') {
             $data = $timetable->displayTableJamahOnly($options);
         } elseif ($display === 'azan_only') {

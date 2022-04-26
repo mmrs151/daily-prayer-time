@@ -13,7 +13,6 @@ delete_option('prayersLocal');
 delete_option('headersLocal');
 delete_option('numbersLocal');
 delete_option('monthsLocal');
-delete_option('ramadan-chbox');
 delete_option('timesLocal');
 delete_option('hijri-chbox');
 delete_option('hijri-adjust');

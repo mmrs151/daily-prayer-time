@@ -1,3 +1,8 @@
+<?php
+
+require_once('TimetablePrinter.php');
+$timetablePrinter = new TimetablePrinter();
+?>
 <div xmlns="http://www.w3.org/1999/html">
     <span>
     </br></br>
@@ -36,7 +41,7 @@
             <?php if($instance["hideTimeRemaining"] === 'hideTimeRemaining'){ echo 'checked="checked"'; } ?>
         /> Hide time remaining for next IQAMAH</br></br>
 
-        <?php if (get_option('ramadan-chbox')) { ?>
+        <?php if ( $timetablePrinter->isRamadan() ) { ?>
         <input
             type="checkbox"
             name="<?php echo esc_attr($this->get_field_name( 'hideRamadan' )); ?>"

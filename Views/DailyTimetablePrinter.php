@@ -162,7 +162,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         $colspan = 7;
         $ramadanTds = '<td></td>';
 
-        if (get_option('ramadan-chbox') && ! $row['hideRamadan']) {
+        if ($this->isRamadan() && ! $row['hideRamadan']) {
             $ramadan = '
                 <tr class="">
                     <td colspan="3" class="highlight">'. $this->localHeaders['fast_begins'].': '.$this->formatDateForPrayer($row['fajr_begins'], true).'</td>
@@ -280,7 +280,8 @@ class DailyTimetablePrinter extends TimetablePrinter
         $colspanRamadan = $isFullTable == true ? "colspan='2'" : '';
 
 
-        if (get_option('ramadan-chbox') && ! $row['hideRamadan']) {
+        $ramadan = '';
+        if ($this->isRamadan() && ! $row['hideRamadan']) {
             $ramadan = '
             <tr>
              <th class="highlight">' .$this->localHeaders['fast_begins']. '</th>

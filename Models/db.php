@@ -1,6 +1,7 @@
 <?php
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+require_once('HijriDate.php');
 
 class DatabaseConnection
 {
@@ -13,12 +14,16 @@ class DatabaseConnection
     /** @var array */
     private $transients = array('prayerTimeForToday', 'fajrJamahForTomorrow', 'jamahChanges', 'fajrForTomorrow');
 
+    /** @var HijriDate */
+    private $hijriDate;
+
     public function __construct()
     {
         global $wpdb;
 
         $this->tableName = $wpdb->prefix . "timetable";
         $this->dbTable = "`".DB_NAME ."`.`" .$this->tableName."`";
+        $this->hijriDate = new HijriDate();
         $this->createTableIfNotExist();
     }
     
@@ -197,8 +202,10 @@ class DatabaseConnection
         $result = $wpdb->get_results($sql, ARRAY_A);
         
         if ( empty($result) ){
-            $sql = "SELECT * FROM  $this->dbTable WHERE is_ramadan = 1 ORDER BY d_date ASC";
-            $result = $wpdb->get_results($sql, ARRAY_A);
+            $dates = $this->getRamadanDaysFromCalendar();
+            $this->updateRamadanDays($dates);
+            return $wpdb->get_results($sql, ARRAY_A);
+
         }
  
         return $result;
@@ -309,6 +316,36 @@ class DatabaseConnection
         foreach( $this->transients as $transientName ) {
             delete_transient($transientName);
         }
+    }
+
+    private function getRamadanDaysFromCalendar()
+    {
+        $data = [];
+        $year = (int)date('Y');
+        $daysOfMonths = [];
+        foreach(range(1, 12) as $month){
+            $daysOfMonths[] = (int)date('d', strtotime('Last day of ' . date('F', strtotime($year . '-' . $month . '-01')) . $year)) . PHP_EOL;        
+        }
+        foreach($daysOfMonths as $monthId => $daysOfMonth) {
+            for($day = 1; $day <= $daysOfMonth; $day++) {
+                echo $monthId+1;
+                if ( str_contains($this->hijriDate->getDate($day, $monthId+1, $year, true), 'Ramadan') ) {
+                    $data [] = $year . '-' . trim($monthId+1) . '-' . trim($day);                                
+                }
+            }
+        }
+
+        return $data;
+    }
+
+    private function updateRamadanDays(array $dates)
+    {
+        global $wpdb;
+
+        $datesString = "'" . implode("','", $dates) . "'";
+        $sql = "UPDATE " . $this->dbTable . 'SET is_ramadan=1 WHERE d_date IN (' . $datesString . ')';
+        
+        return $wpdb->query($sql);
     }
 }
 
