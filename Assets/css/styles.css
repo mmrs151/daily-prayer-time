@@ -893,7 +893,10 @@ ul.clock li#sec {
 div.carousel-item a{
     text-decoration: none;
 }
-
+p.adhan-copy{
+    color: blue;
+    font-family: monospace;
+}
 /*Print*/
 @media print {
     * {

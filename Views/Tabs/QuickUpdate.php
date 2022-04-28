@@ -28,6 +28,7 @@ foreach($futureMonths as $key=>$month_name){
 $db = new DatabaseConnection();
 $data = $db->getPrayerTimeForMonth( $quickMonth );
 
+$timetable = new TimetablePrinter();
 $prayerNames = $timetable->getLocalPrayerNames();
 
 if ( empty($data)) {

@@ -2,7 +2,10 @@
 
 class HijriDate
 {
+    private $isRamadan = false;
+
     private $hijriMonth = array ("Muharram", "Safar", "Rabī al-Awwal", "Rabī ath-Thānī", "Jumādā al-Ula", "Jumādā ath-Thāniya", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhū al-Qa'da", "Dhū al-Hijjah");
+    
     private $arabicMonth = array (
         "Muharram" => "ٱلْمُحَرَّم",  
         "Safar" => "صَفَر",  
@@ -17,6 +20,7 @@ class HijriDate
         "Dhū al-Qa'da" => "ذُو ٱلْقَعْدَة",
         "Dhū al-Hijja" => "ذُو ٱلْحِجَّة"
     );
+    
     private $arabicNumbers = [
         0 => '٠',
         1 => '١',
@@ -39,7 +43,7 @@ class HijriDate
      *
      * @return array|string
      */
-    public function getDate($day, $month, $year, $stringDate=false, $sunset=false, $arabic=false)
+    public function getDate($day, $month, $year, $stringDate=false, $sunset=false)
     {
         if ($sunset == true) {
             $dt = new DateTime('tomorrow');
@@ -56,7 +60,9 @@ class HijriDate
         $month = $this->hijriMonth[(int) $date['month'] - 1];
         $year = $date['year'];
 
-        if ( !empty(get_option('hijri-arabic-chbox')) ) {
+        $this->isRamadan = str_contains($month, 'Ramadan');
+
+        if ( get_option('hijri-arabic-chbox') ) {
             $day = $this->getArabicNumber($day);
             $month = $this->getArabicMonth($month);
             $year = $this->getArabicNumber($year);
@@ -74,7 +80,12 @@ class HijriDate
     }
 
     public function getToday($arabic=false) {
-        return $this->getDate(date("d"), date("m"), date("Y"), true, false, $arabic);
+        return $this->getDate(date("d"), date("m"), date("Y"), true, false);
+    }
+
+    public function isRamadan()
+    {
+        return $this->isRamadan;
     }
 
     /**

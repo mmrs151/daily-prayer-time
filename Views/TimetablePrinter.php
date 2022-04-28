@@ -646,6 +646,6 @@ class TimetablePrinter
 
     public function isRamadan()
     {
-        return str_contains($this->hijridateString, 'Ramadan');
+        return $this->hijriDate->isRamadan();
     }
 }

@@ -16,7 +16,7 @@ if ( ! class_exists('DPTOtherProcessor')) {
     
         public function process()
         {
-            $jumuah = sanitize_text_field($this->data['jumuah']);
+            $jumuah = sanitize_text_field($this->data['jumuah'] ?? '');
             delete_option('jumuah');
             add_option('jumuah', $jumuah);
         

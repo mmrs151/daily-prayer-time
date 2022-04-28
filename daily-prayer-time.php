@@ -67,7 +67,7 @@ class DailyPrayerTime extends WP_Widget
         <?php
         
         echo $args['after_widget'];
-        echo "<a href='https://donate.uwt.org/Account/Index.aspx' target='_blank'>Support The Ummah</a></br></br>";
+        echo "<a href='https://donate.uwt.org/Account/Index.aspx' target='_blank'>Send Sadaqa to my Grave</a></br></br>";
     }
     
     public function update( $new_instance, $old_instance ) {

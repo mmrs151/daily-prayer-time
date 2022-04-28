@@ -2,6 +2,7 @@
 require_once(__DIR__.'/../Models/Processors/CsvProcessor.php');
 require_once(__DIR__.'/../Models/Processors/LanguageProcessor.php');
 require_once(__DIR__.'/../Models/Processors/OtherProcessor.php');
+require_once(__DIR__.'/../Models/Processors/AdhanProcessor.php');
 require_once(__DIR__.'/../Models/Processors/HijriProcessor.php');
 require_once(__DIR__.'/../Models/Processors/QuickUpdateProcessor.php');
 require_once(__DIR__.'/../Models/Processors/ThemeSettingsProcessor.php');
@@ -11,6 +12,7 @@ require_once(__DIR__.'/../Models/DailyShortCode.php');
 require_once(__DIR__.'/../Models/db.php');
 require_once(__DIR__.'/../Models/HijriDate.php');
 require_once(__DIR__.'/../Models/StartTime/WorldCities.php');
+require_once( 'TimetablePrinter.php' );
 
 
 ini_set('auto_detect_line_endings', true);
@@ -68,6 +70,19 @@ if (! empty($_POST['hijriSettings'])) {
     ];
     $hijri = new DPTHijriProcessor($data);
     $hijri->process();
+}
+
+if (! empty($_POST['adhanSettings'])) {
+    $data = [
+        'fajrAdhanUrl' => sanitize_text_field($_POST['fajrAdhanUrl']),
+        'otherAdhanUrl' => sanitize_text_field($_POST['otherAdhanUrl']),
+        'fajrAdhanBefore' => sanitize_text_field($_POST['fajrAdhanBefore']),
+        'zuhrAdhanBefore' => sanitize_text_field($_POST['zuhrAdhanBefore']),
+        'asrAdhanBefore' => sanitize_text_field($_POST['asrAdhanBefore']),
+        'ishaAdhanBefore' => sanitize_text_field($_POST['ishaAdhanBefore'])
+    ];
+    $adhanProcessor = new DPTAdhanProcessor($data);
+    $adhanProcessor->process();
 }
 
 if (! empty($_POST['otherSettings'])) {
@@ -146,20 +161,22 @@ if (! empty($_POST['digitalScreen'])) {
     $themeSettings = new DPTDigitalScreenProcessor($data);
     $themeSettings->process();
 }
-    $path = plugin_dir_url( __FILE__ ); // I am in Models
+    $path = plugin_dir_url( __FILE__ ); // I am in Views
     $path .= '../';
+    $newImage = esc_url( $path . 'Assets/images/new.jpg');
 ?>
 
 <div id="tabs" style="display: none;">
     <ul>
         <li><a href="#tabs-1" data-tab-index="0">Set Prayer Times</a></li>
-        <li><a href="#tabs-5" data-tab-index="1">Quick Update Times</a></li>
-        <li><a href="#tabs-6" data-tab-index="2">Mobile/Masjid Display</a></li>
-        <li><a href="#tabs-3" data-tab-index="4">Arabic Month</a></li>
-        <li><a href="#tabs-4" data-tab-index="3">Theme Settings</a></li>
-        <li><a href="#tabs-2" data-tab-index="2">Language Settings</a></li>
-        <li><a href="#tabs-7" data-tab-index="7">Misc</a></li>
-        <li><a href="#tabs-8" data-tab-index="8">API Doc</a></li>
+        <li><a href="#tabs-2" data-tab-index="1">Quick Update Times</a></li>
+        <li><a href="#tabs-3" data-tab-index="2">Mobile/Masjid Display</a></li>
+        <li><a href="#tabs-4" data-tab-index="3">Hijri</a></li>
+        <li><a href="#tabs-5" data-tab-index="4">Theme</a></li>
+        <li><a href="#tabs-6" data-tab-index="5">Translate</a></li>
+        <li><a href="#tabs-7" data-tab-index="6">Adhan<img style="width:30px" src="<?php echo $newImage;?>"></a></li>
+        <li><a href="#tabs-8" data-tab-index="7">Misc</a></li>
+        <li><a href="#tabs-9" data-tab-index="8">API Doc</a></li>
     </ul>
 
     <div id="tabs-1" class="wrap" xmlns="http://www.w3.org/1999/html">
@@ -167,30 +184,34 @@ if (! empty($_POST['digitalScreen'])) {
     </div>
 
     <div id="tabs-2">
-        <?php include 'Tabs/ChangeLanguage.php' ?>
-    </div>
-
-    <div id="tabs-3">
-        <?php include 'Tabs/HijriDate.php' ?>
-    </div>
-
-    <div id="tabs-4">
-        <?php include 'Tabs/ThemeSettings.php' ?>
-    </div>
-
-    <div id="tabs-5">
         <?php include 'Tabs/QuickUpdate.php' ?>
     </div>
 
-    <div id="tabs-6">
+    <div id="tabs-3">
         <?php include 'Tabs/DigitalScreen.php' ?>
     </div>
 
+    <div id="tabs-4">
+        <?php include 'Tabs/HijriDate.php' ?>
+    </div>
+
+    <div id="tabs-5">
+        <?php include 'Tabs/ThemeSettings.php' ?>
+    </div>
+
+    <div id="tabs-6">
+        <?php include 'Tabs/ChangeLanguage.php' ?>
+    </div>
+
     <div id="tabs-7">
+        <?php include 'Tabs/Adhan.php' ?>
+    </div>
+
+    <div id="tabs-8">
         <?php include 'Tabs/OtherSettings.php' ?>
     </div>
     
-    <div id="tabs-8">
+    <div id="tabs-9">
         <?php include 'Tabs/APIdoc.php' ?>
     </div>
 </div>

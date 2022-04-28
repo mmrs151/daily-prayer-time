@@ -511,10 +511,18 @@ class DigitalScreen extends DailyShortCode
         $iqamahTimes =  array($result['zuhr_jamah'], $result['asr_jamah'], $result['maghrib_begins'], $result['isha_jamah']);
 
         $adhanTimes = array();
-        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[0] . "-15 minutes" ) ); // zuhr
-        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[1] . "-15 minutes" ) ); // asr
+        
+        $zuhrAdhanBefore = empty($min = get_option('zuhrAdhanBefore')) ? 15 : $min;
+        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[0] . "-" . $zuhrAdhanBefore . " minutes" ) ); // zuhr
+
+        $asrAdhanBefore = empty($min = get_option('asrAdhanBefore')) ? 15 : $min;
+        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[1] . "-" . $asrAdhanBefore . " minutes" ) ); // asr
+
         $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[2] . "0 minutes" ) ); // maghrib
-        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[3] . "-15 minutes" ) ); // isha
+
+        $ishaAdhanBefore = empty($min = get_option('ishaAdhanBefore')) ? 15 : $min;
+
+        $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[3] . "-" . $ishaAdhanBefore . " minutes" ) ); // isha
 
         return $adhanTimes;
     }
@@ -527,6 +535,8 @@ class DigitalScreen extends DailyShortCode
             return date( "H:i:s", strtotime( $result['fajr_begins'] . "0 minutes" ) ); // fajr start
         }
 
-        return date( "H:i:s", strtotime( $result['fajr_jamah'] . "-15 minutes" ) ); // fajr iqamah
+        $fajrAdhanBefore = empty($min = get_option('fajrAdhanBefore')) ? 15 : $min;
+
+        return date( "H:i:s", strtotime( $result['fajr_jamah'] . "-" . $fajrAdhanBefore . " minutes ") ); // fajr iqamah
     }
 }

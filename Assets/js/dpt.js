@@ -2,7 +2,7 @@ var isTimerOn = false;
 
 DPT = {
     init: function() {
-    
+
         this.monthlyCalendarChange();
         this.displaySliderOptions();
         this.changeInputBackground();
@@ -316,6 +316,7 @@ DPT = {
             var audio = new Audio(DPTURLS.fajrAdhan);
             var playPromise = audio.play();
             if (playPromise !== undefined) {
+                console.log(DPTURLS.fajrAdhan);
                 playPromise.then(_ => {
                   // Automatic playback started!
                   // Show playing UI.
