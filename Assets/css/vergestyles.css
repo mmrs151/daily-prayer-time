@@ -8,13 +8,26 @@ Template: vergeFramework
 /*@import url("../css/vergestyles.css");*/
 /* Fonts start here */
 .dpt-horizontal-wrapper.customStyles .dpt-heading {
-  font-size: 0;
+  border-bottom: 1px solid #3e605c;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-heading h3, .dpt-horizontal-wrapper.customStyles .dpt-heading p {
   display: inline-block;
+  background-color: #134a43;
+  padding-bottom: 0px;
+  font-size: 18px;
+  padding: 10px 30px;
+  color: #e2e2e2;
+}
+
+.dpt-heading .side-by-side {
   width: 50%;
-  margin: 5px 0;
+  float: left;
+  border-bottom: 1px solid #3e605c;
+}
+
+h3.timetable-link {
+  text-align: right;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-heading p {
@@ -23,17 +36,16 @@ Template: vergeFramework
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container {
-  background-color: #eeeeee;
+  background-color: #134a43;
   text-align: center;
-  font-size: 0;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time {
-  width: calc(100%/6);
+  width: 16.2%;
   height: 90px;
   display: inline-table;
-  border-right: 1px solid #e2e2e2;
-  padding: 15px 0;
+  border-right: 1px solid #3e605c;
+  padding: 10px 0;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time:last-child {
@@ -41,13 +53,13 @@ Template: vergeFramework
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time.highlight {
-  background-color: #a9b9c9;
+  background-color: #00302a;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time h3 {
-  text-align: center;
-  margin: 10px;
   font-size: 18px;
+  color:#e2e2e2;
+  padding-bottom: 0px;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time div {
@@ -66,6 +78,16 @@ Template: vergeFramework
   font-size: 14px;
   color: white;
   text-align: center;
+}
+
+.prayer-jamaat {
+  color: #e2e2e2;
+  font-weight: 800;
+}
+
+.icon{
+  color: yellow;
+  font-size: 25px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -88,7 +110,9 @@ Template: vergeFramework
     display: block;
     width: 100%;
   }
-  .dpt-horizontal-wrapper.customStyles .dpt-heading p {
-    text-align: left;
+  .side-by-side {
+    text-align: left !important;
+    float: none !important;
+    border: 0px !important;
   }
 }

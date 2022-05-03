@@ -34,5 +34,6 @@
             add_shortcode( 'display_iqamah_update', array($dailyShortCode, 'scIqamahUpdate') );
             add_shortcode( 'digital_screen', array($dailyShortCode, 'scDigitalScreen') );
             add_shortcode( 'quran_verse', array($dailyShortCode, 'scQuranVarse') );
+            add_shortcode( 'hijri_date', array($dailyShortCode, 'scHijriDate') );
         }
     }

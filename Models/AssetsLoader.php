@@ -41,6 +41,7 @@
             wp_enqueue_script("jquery-blockUI", plugins_url( '../Assets/js/jquery.blockUI-2.70.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION );
             wp_enqueue_script("jquery-marquee", plugins_url( '../Assets/js/jquery.marquee.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION );
             wp_enqueue_script("dpt-noSleep", plugins_url( '../Assets/js/NoSleep.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION );
+            wp_enqueue_script("dpt-iconify", plugins_url( '../Assets/js/iconify.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION );
         
             // Print the script to our page
             wp_localize_script( 'dpt', 'timetable_params', $params );

@@ -428,6 +428,11 @@ class DailyShortCode extends TimetablePrinter
         return $verse->printVerse($attr);
     }
 
+    public function scHijriDate($attr)
+    {
+        return "<span class='scHijriDate'>" . $this->hijriDate->getToday() . "</span>";        
+    }
+
     protected function getRow($attr=array())
     {
 

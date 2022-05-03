@@ -79,7 +79,7 @@ class HijriDate
         );
     }
 
-    public function getToday($arabic=false) {
+    public function getToday() {
         return $this->getDate(date("d"), date("m"), date("Y"), true, false);
     }
 

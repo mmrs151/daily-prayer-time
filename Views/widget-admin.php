@@ -103,7 +103,7 @@ if (! empty($_POST['quickUpdate'])) {
 
 if (! empty($_POST['themeSettings'])) {
     $data = [
-        'hideTableBorder' => sanitize_text_field($_POST['hideTableBorder']),
+        'hideTableBorder' => sanitize_text_field($_POST['hideTableBorder'] ?? ''),
         'tableBackground' => sanitize_text_field($_POST['tableBackground']),
         'tableHeading' => sanitize_text_field($_POST['tableHeading']),
         'tableHeadingFont' => sanitize_text_field($_POST['tableHeadingFont']),
