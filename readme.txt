@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 5.9
-Stable tag: 2022.04.22
+Stable tag: 2022.05.04
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,17 +119,23 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 8. Default Website daily view
 9. Default Website monthly view
 10. Settings page
+11. Sample 1
+12. Sample 2
 
 == Changelog ==
 
-= 2022.04.22 =
-* Option for deactivating tomorrow time 
-* Load City with search option 
-* Fix quick update times
+= 2022.05.04 =
+* Quick update monthly prayer time
+* Adhan settings 
+* Arabic month in arabic 
+* Automatic ramadan display 
+* New div layout
 
 == Upgrade Notice ==
 
-= 2022.04.22 =
-* Option for deactivating tomorrow time 
-* Load City with search option 
-* Fix quick update times
+= 2022.05.04 =
+* Quick update monthly prayer time
+* Adhan settings 
+* Arabic month in arabic 
+* Automatic ramadan display 
+* New div layout
