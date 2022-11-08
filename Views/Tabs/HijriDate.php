@@ -17,6 +17,12 @@ $hijri = new HijriDate();
                         </td>
                     </tr>
                     <tr>
+                        <td>Use Ummul Qura Calendar:</td>
+                        <td>
+                            <input type="checkbox" name="hijri-ummul-qura" value="qura" <?php if(get_option("hijri-ummul-qura") === 'qura'){ echo 'checked'; } ?>>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Display in Arabic:</td>
                         <td>
                             <input type="checkbox" name="hijri-arabic-chbox" value="hijri-arabic" <?php if(get_option("hijri-arabic-chbox") === 'hijri-arabic'){ echo 'checked'; } ?>>

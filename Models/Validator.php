@@ -86,9 +86,20 @@ class Validator
             }
         }
 
+        $data = $this->sanitizeHijridate($data);
         $this->setValidData($data);
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    private function sanitizeHijridate(array $data) 
+    {
+        $unquote = addslashes($data[14]); // hijridate 
+        $data[14] = $unquote;
+        return $data;
     }
 
     /**

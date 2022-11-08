@@ -21,6 +21,10 @@ if ( !class_exists('DPTHijriProcessor')) {
             delete_option('hijri-chbox');
             add_option('hijri-chbox', $hijri);
 
+            $hijriUmmulQura = sanitize_text_field($this->data['hijri-ummul-qura']);
+            delete_option('hijri-ummul-qura');
+            add_option('hijri-ummul-qura', $hijriUmmulQura);
+
             $hijriArabic = sanitize_text_field($this->data['hijri-arabic-chbox']);
             delete_option('hijri-arabic-chbox');
             add_option('hijri-arabic-chbox', $hijriArabic);

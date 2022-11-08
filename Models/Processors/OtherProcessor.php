@@ -35,6 +35,11 @@ if ( ! class_exists('DPTOtherProcessor')) {
             $tomorrowTime = sanitize_text_field($tomorrowTime);
             delete_option('tomorrow_time');
             add_option('tomorrow_time', $tomorrowTime);
+
+            $isRamadan = $this->data['ramadan_chbox'] ?? '';
+            $isRamadan = sanitize_text_field($isRamadan);
+            delete_option('ramadan_chbox');
+            add_option('ramadan_chbox', $isRamadan);
         }
     }
     

@@ -1,4 +1,6 @@
 <?php
+/* Template Name: Digital Screen Prayer Time */
+
 if (is_page_template( '../Views/DSTemplate.php' )) {
 
     $fajrAdhanUrl = get_option('fajrAdhanUrl') ?: plugin_dir_url(__FILE__) . '../Assets/files/fajr.mp3';
@@ -31,9 +33,11 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
     <link rel="profile" href="http://gmpg.org/xfn/11">
 
     <?php //wp_head(); ?>
+
     <style>
-<?php echo esc_html(get_option("ds-additional-css") )?>
+        <?php echo esc_html(get_option("ds-additional-css") )?>
     </style>
+    
 </head>
 
 <body class="google-font">

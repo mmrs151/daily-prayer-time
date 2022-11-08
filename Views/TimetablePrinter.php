@@ -315,12 +315,21 @@ class TimetablePrinter
     /**
      * @param array $row
      * @param bool $displayDates
+     * @param bool $apiCall
      * @return string
      */
-    protected function getNextIqamahTime(array $row, $displayDates=false)
+    public function getNextIqamahTime(array $row, $displayDates=false, $apiCall=false)
     {
         $diff = $this->getNextIqamahTimeDiff($row);
         $nextPrayer = $this->getNextPrayer($row);
+        if ($apiCall) {
+            return [
+                'prayerName' => $nextPrayer,
+                'timeLeft' => $diff
+            ];
+        }
+        
+        $hijriDate = '';
         if($row['displayHijriDate']) {
             $hijriDate = $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true);
         }

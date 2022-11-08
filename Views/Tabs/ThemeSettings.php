@@ -17,7 +17,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Table background</td>
+                        <td>Background color</td>
                         <td><input type="text" name="tableBackground" value="<?php echo esc_attr(get_option('tableBackground')) ?>" class="color-field"></td>
                     </tr>
                     <tr>

@@ -11,9 +11,15 @@ Ramadan Fajr Adhan will play at fajr start time.
 </p>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6 col-xs-12">
-            <form name="otherSettings" method="post" class="form-group">
+        <div class="col-sm-8 col-xs-12">
+            <form name="adhanSettings" method="post" class="form-group">
                 <table class="table">
+                <tr>
+                        <td>Activate Adhan:</td>
+                        <td>
+                            <input type="checkbox" name="activateAdhan" value="adhan" <?php if(get_option("activateAdhan") === 'adhan'){ echo 'checked'; } ?>>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Fajr Adhan URL</td>
                         <td><input type="text" placeholder="url or leave empty to use default Adhan" name="fajrAdhanUrl" size="50" value=<?php echo esc_html(get_option("fajrAdhanUrl") )?>></td>

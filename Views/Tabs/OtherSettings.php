@@ -29,6 +29,10 @@
                         <td>Deactivate Tomorrow:</td>
                             <td><input  type="checkbox" name="tomorrow_time" value="tomorrow" <?php if(get_option("tomorrow_time") === 'tomorrow'){ echo 'checked'; } ?>></td>
                     </tr>
+                    <tr>
+                        <td>Activate Ramadan:</td>
+                            <td><input  type="checkbox" name="ramadan_chbox" value="isRamadan" <?php if(get_option("ramadan_chbox") === 'isRamadan'){ echo 'checked'; } ?>></td>
+                    </tr>
                 </table>
                 <?php submit_button('Save changes', 'primary', 'otherSettings'); ?>
             </form>

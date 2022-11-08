@@ -51,7 +51,7 @@
             wp_register_style( 'timetable-style', plugins_url('../Assets/css/styles.css', __FILE__), array(), DPT_PLUGIN_VERSION );
             wp_enqueue_style( 'timetable-style' );
             
-            wp_register_style( 'verge-style', plugins_url('../Assets/css/vergestyles.css', __FILE__) );
+            wp_register_style( 'verge-style', plugins_url('../Assets/css/vergestyles.css', __FILE__), array(),  DPT_PLUGIN_VERSION );
             wp_enqueue_style( 'verge-style' );
             
             wp_register_style( 'jquery-ui_css', plugins_url('../Assets/css/jquery-ui-1.12.1.css', __FILE__), array(), DPT_PLUGIN_VERSION );

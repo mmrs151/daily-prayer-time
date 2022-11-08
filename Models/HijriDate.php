@@ -1,4 +1,5 @@
 <?php
+require_once "Hijri/hijri.class.php";
 
 class HijriDate
 {
@@ -54,13 +55,18 @@ class HijriDate
             $year = $parts[2];
         }
 
+        $isUmmulQura = get_option('hijri-ummul-qura');
         $date = $this->greg2Hijri($day, $month, $year);
+        if ($isUmmulQura) {
+            $date = $this->getUmmulQuraDate($day, $month, $year);
+        }
+
 
         $day = $date['day'];
         $month = $this->hijriMonth[(int) $date['month'] - 1];
         $year = $date['year'];
 
-        $this->isRamadan = str_contains($month, 'Ramadan');
+        $this->isRamadan = strpos($month, 'Ramadan');
 
         if ( get_option('hijri-arabic-chbox') ) {
             $day = $this->getArabicNumber($day);
@@ -85,7 +91,7 @@ class HijriDate
 
     public function isRamadan()
     {
-        return $this->isRamadan;
+        return $this->isRamadan OR get_option('ramadan_chbox');
     }
 
     /**
@@ -158,5 +164,20 @@ class HijriDate
     private function getArabicMonth($month)
     {
         return $this->arabicMonth[$month];
+    }
+
+    private function getUmmulQuraDate(int $day, int $month, int $year)
+    {
+
+        $settings['umalqura'] = false; //get from settings 
+        $d = new hijri\Calendar($settings);
+
+        $hijri = $d->GregorianToHijri($year, $month,$day);
+
+        return array(
+            'day' => $hijri["d"],
+            'month' => $hijri["m"],
+            'year' => $hijri['y']
+        );
     }
 }

@@ -1,11 +1,15 @@
 <?php
     require_once (__DIR__. '/../../Models/db.php');
     require_once (__DIR__. '/../../Models/HijriDate.php');
+    require_once (__DIR__. '/../../Views/TimetablePrinter.php');
     
     class PrayerTimeController extends WP_REST_Controller
     {
         /** @var DatabaseConnection */
         private $db;
+
+        /** @var TimetablePrinter */
+        private $timetablePrinter; 
 
         /** @var int */
         private  $version;
@@ -17,6 +21,7 @@
         public function __construct()
         {
             $this->db = new DatabaseConnection();
+            $this->timetablePrinter = new TimetablePrinter();
             $this->version = '1';
             $this->namespace = 'dpt/v' . $this->version;
             $this->base = 'prayertime';
@@ -49,6 +54,8 @@
                 $response = $this->db->getPrayerTimeForToday(1);
                 $hijriDate = new HijriDate();
                 $response['hijri_date_convert'] = $hijriDate->getDate(date("d"), date("m"), date("Y"), true);
+                $response['jumuah'] = get_option('jumuah');
+                $response['next_prayer'] = $this->timetablePrinter->getNextIqamahTime($this->db->getPrayerTimeForToday(), false, true);
             } elseif ( $filter == 'month'){
                 $response = $this->db->getPrayerTimeForMonth(date('m'));
             } elseif ( $filter == 'ramadan'){

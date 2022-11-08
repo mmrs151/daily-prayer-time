@@ -7,13 +7,16 @@ Template: vergeFramework
 */
 /*@import url("../css/vergestyles.css");*/
 /* Fonts start here */
+
+.dpt-horizontal-wrapper.customStyles {
+  background-color: #134a43;
+}
 .dpt-horizontal-wrapper.customStyles .dpt-heading {
   border-bottom: 1px solid #3e605c;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-heading h3, .dpt-horizontal-wrapper.customStyles .dpt-heading p {
   display: inline-block;
-  background-color: #134a43;
   padding-bottom: 0px;
   font-size: 18px;
   padding: 10px 30px;
@@ -22,8 +25,11 @@ Template: vergeFramework
 
 .dpt-heading .side-by-side {
   width: 50%;
-  float: left;
   border-bottom: 1px solid #3e605c;
+}
+
+h3.date {
+  float: left;
 }
 
 h3.timetable-link {
@@ -36,7 +42,6 @@ h3.timetable-link {
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container {
-  background-color: #134a43;
   text-align: center;
 }
 
@@ -80,6 +85,10 @@ h3.timetable-link {
   text-align: center;
 }
 
+.prayer-start {
+  color: #999999;;
+}
+
 .prayer-jamaat {
   color: #e2e2e2;
   font-weight: 800;
@@ -105,7 +114,7 @@ h3.timetable-link {
   }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 500px) {
   .dpt-horizontal-wrapper.customStyles .dpt-heading h3, .dpt-horizontal-wrapper.customStyles .dpt-heading p {
     display: block;
     width: 100%;

@@ -16,6 +16,10 @@ if ( ! class_exists('DPTAdhanProcessor')) {
     
         public function process()
         {
+            $activateAdhan = sanitize_text_field($this->data['activateAdhan']);
+            delete_option('activateAdhan');
+            add_option('activateAdhan', $activateAdhan);
+
             $fajrAdhanUrl = wp_http_validate_url($this->data['fajrAdhanUrl']);
             delete_option('fajrAdhanUrl');
             add_option('fajrAdhanUrl', $fajrAdhanUrl);

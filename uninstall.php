@@ -15,6 +15,7 @@ delete_option('numbersLocal');
 delete_option('monthsLocal');
 delete_option('timesLocal');
 delete_option('hijri-chbox');
+delete_option('hijri-ummul-qura');
 delete_option('hijri-adjust');
 delete_option('tableBackground');
 delete_option('tableHeading');

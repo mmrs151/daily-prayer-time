@@ -41,7 +41,11 @@ class UpdateStyles
             $css = "
                 table.customStyles {
                     background-color: ". $tableBackground
-                ."}";
+                ."}
+                .customStyles {
+                    background-color: ". $tableBackground . " !important"
+                ."}
+                ";
         }
 
         $tableHeading = get_option('tableHeading');
@@ -78,7 +82,9 @@ class UpdateStyles
             $css .= "
                 table.customStyles {
                     color:" . get_option('fontColor')
-                ."}";
+                ."}
+                
+                ";
         }
 
         $prayerName = get_option('prayerName');
@@ -94,7 +100,7 @@ class UpdateStyles
         $highlight = get_option('highlight');
         if (! empty($highlight)) {
             $css .= "
-                table.customStyles tr.highlight, th.highlight, td.highlight{
+                table.customStyles tr.highlight, th.highlight, td.highlight, div.highlight{
                     font-weight: bold;
                     background:" . get_option('highlight') ."!important"
                 ."}";

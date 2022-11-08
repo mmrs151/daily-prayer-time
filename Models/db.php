@@ -329,7 +329,7 @@ class DatabaseConnection
         foreach($daysOfMonths as $monthId => $daysOfMonth) {
             for($day = 1; $day <= $daysOfMonth; $day++) {
                 echo $monthId+1;
-                if ( str_contains($this->hijriDate->getDate($day, $monthId+1, $year, true), 'Ramadan') ) {
+                if ( strpos($this->hijriDate->getDate($day, $monthId+1, $year, true), 'Ramadan') ) {
                     $data [] = $year . '-' . trim($monthId+1) . '-' . trim($day);                                
                 }
             }

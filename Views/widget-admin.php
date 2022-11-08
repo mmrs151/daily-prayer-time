@@ -63,6 +63,7 @@ if (! empty($_POST['languageSettings'])) {
 if (! empty($_POST['hijriSettings'])) {
     $data = [
         'hijri-chbox' => sanitize_text_field($_POST['hijri-chbox'] ?? ''),
+        'hijri-ummul-qura' => sanitize_text_field($_POST['hijri-ummul-qura'] ?? ''),
         'hijri-arabic-chbox' => sanitize_text_field($_POST['hijri-arabic-chbox'] ?? ''),
         'hijri-adjust' => sanitize_text_field($_POST['hijri-adjust']),
         'imsaq' => sanitize_text_field($_POST['imsaq']),
@@ -74,6 +75,7 @@ if (! empty($_POST['hijriSettings'])) {
 
 if (! empty($_POST['adhanSettings'])) {
     $data = [
+        'activateAdhan' => sanitize_text_field($_POST['activateAdhan'] ?? ''),
         'fajrAdhanUrl' => sanitize_text_field($_POST['fajrAdhanUrl']),
         'otherAdhanUrl' => sanitize_text_field($_POST['otherAdhanUrl']),
         'fajrAdhanBefore' => sanitize_text_field($_POST['fajrAdhanBefore']),
@@ -91,6 +93,7 @@ if (! empty($_POST['otherSettings'])) {
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
         'jamah_chas' => sanitize_text_field($_POST['jamah_changes']),
         'tomorrow_time' => sanitize_text_field($_POST['tomorrow_time'] ?? ''),
+        'ramadan_chbox' => sanitize_text_field($_POST['ramadan_chbox'] ?? ''),
     ];
     $otherProcessor = new DPTOtherProcessor($data);
     $otherProcessor->process();
@@ -174,7 +177,7 @@ if (! empty($_POST['digitalScreen'])) {
         <li><a href="#tabs-4" data-tab-index="3">Hijri</a></li>
         <li><a href="#tabs-5" data-tab-index="4">Theme</a></li>
         <li><a href="#tabs-6" data-tab-index="5">Translate</a></li>
-        <li><a href="#tabs-7" data-tab-index="6">Adhan<img style="width:30px" src="<?php echo $newImage;?>"></a></li>
+        <li><a href="#tabs-7" data-tab-index="6">Adhan</a></li>
         <li><a href="#tabs-8" data-tab-index="7">Misc</a></li>
         <li><a href="#tabs-9" data-tab-index="8">API Doc</a></li>
     </ul>

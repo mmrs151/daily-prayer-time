@@ -1,0 +1,5 @@
+FROM wordpress:latest
+
+RUN apt-get update && apt-get install calendar
+
+RUN docker-php-ext-configure calendar && docker-php-ext-install calendar

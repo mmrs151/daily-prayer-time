@@ -112,7 +112,6 @@ DPT = {
 
             var noSleep = new NoSleep();
             noSleep.enable();
-            console.log('alhamdulillah');
         }
     },
 
@@ -306,6 +305,11 @@ DPT = {
 
     playFajrAdhan: function() 
     {
+        var activateAdhan = jQuery('#activateAdhan').val();
+        if ( ! activateAdhan ) {
+            return;
+        }
+
         var adhan = jQuery('#fajrAdhanTime').val();
         if ( ! adhan ) {
             return;
@@ -316,7 +320,6 @@ DPT = {
             var audio = new Audio(DPTURLS.fajrAdhan);
             var playPromise = audio.play();
             if (playPromise !== undefined) {
-                console.log(DPTURLS.fajrAdhan);
                 playPromise.then(_ => {
                   // Automatic playback started!
                   // Show playing UI.
@@ -331,6 +334,12 @@ DPT = {
 
     playOtherAdhan: function() 
     {
+        var activateAdhan = jQuery('#activateAdhan').val();
+
+        if ( ! activateAdhan ) {
+            return;
+        }
+
         var iqamah = jQuery('#otherAdhanTimes').val();
         if ( ! iqamah ) {
             return;
@@ -343,7 +352,6 @@ DPT = {
                 var audio = new Audio(DPTURLS.otherAdhan);
                 var playPromise = audio.play();
                 if (playPromise !== undefined) {
-                    console.log(DPTURLS.otherAdhan);
                     playPromise.then(_ => {
                       // Automatic playback started!
                       // Show playing UI.
