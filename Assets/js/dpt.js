@@ -298,8 +298,10 @@ DPT = {
             }, 1000);
 
         setInterval( function() {
+            var s = new Date().getSeconds();
+            s = (s < 10) ? "0" + s : s;
             var ampm = new Date().getHours() < 12 ? 'AM' : 'PM';
-            jQuery("#ampm").html( ampm );
+            jQuery("#ampm").html(s);
             }, 1000);
     },
 

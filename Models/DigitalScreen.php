@@ -138,8 +138,9 @@ class DigitalScreen extends DailyShortCode
                 <div class="clock align-middle">
                   <ul class="clock">
                       <li id="hours"></li>
-                      <li id="point">:</li>
+                      <li id="pointx">:</li>
                       <li id="min"></li>
+                      <li id="pointx">:</li>
                       <li id="ampm"></li>
                   </ul>
                 </div>

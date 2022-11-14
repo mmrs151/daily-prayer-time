@@ -168,6 +168,7 @@ class HijriDate
 
     private function getUmmulQuraDate(int $day, int $month, int $year)
     {
+        $day = $day + (int) get_option('hijri-adjust');
 
         $settings['umalqura'] = false; //get from settings 
         $d = new hijri\Calendar($settings);
