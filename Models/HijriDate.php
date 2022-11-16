@@ -171,7 +171,7 @@ class HijriDate
         $day = $day + (int) get_option('hijri-adjust');
 
         $settings['umalqura'] = false; //get from settings 
-        $d = new hijri\Calendar($settings);
+        $d = new dpt\Calendar($settings);
 
         $hijri = $d->GregorianToHijri($year, $month,$day);
 

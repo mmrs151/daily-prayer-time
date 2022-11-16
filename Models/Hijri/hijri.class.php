@@ -19,7 +19,7 @@
  *
  */
 
-namespace hijri;
+namespace dpt;
 
 /**
  * Hijri Date custom extensions to the PHP DateTime class
