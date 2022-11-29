@@ -27,6 +27,7 @@
         <li>[display_iqamah_update] <i>threshold={min}</i></li>
         <li>[quran_verse]</li>
         <li>[digital_screen]</li>
+        <li>[jummah_prayer]</li>
     </ol>
 
     <h3>Shortcode Options:</h3>

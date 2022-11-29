@@ -18,8 +18,10 @@
             $dailyShortCode = new DailyShortCode();
             add_shortcode( 'dailytable_vertical', array($dailyShortCode, 'verticalTime') );
             add_shortcode( 'dailytable_horizontal', array($dailyShortCode, 'horizontalTime') );
+
             add_shortcode( 'display_ramadan_time', array($dailyShortCode, 'scRamadanTime') );
             add_shortcode( 'daily_next_prayer', array($dailyShortCode, 'scNextPrayer') );
+
             add_shortcode( 'fajr_prayer', array($dailyShortCode, 'scFajr') );
             add_shortcode( 'sunrise', array($dailyShortCode, 'scSunrise') );
             add_shortcode( 'zuhr_prayer', array($dailyShortCode, 'scZuhr') );
@@ -31,6 +33,8 @@
             add_shortcode( 'asr_start', array($dailyShortCode, 'scAsrStart') );
             add_shortcode( 'maghrib_start', array($dailyShortCode, 'scMaghribStart') );
             add_shortcode( 'isha_start', array($dailyShortCode, 'scIshaStart') );
+            add_shortcode( 'jummah_prayer', array($dailyShortCode, 'scJummahPrayer') );
+
             add_shortcode( 'display_iqamah_update', array($dailyShortCode, 'scIqamahUpdate') );
             add_shortcode( 'digital_screen', array($dailyShortCode, 'scDigitalScreen') );
             add_shortcode( 'quran_verse', array($dailyShortCode, 'scQuranVarse') );

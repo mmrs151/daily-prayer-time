@@ -21,30 +21,54 @@
             <span>
                 Sample output for the <code>today</code> filter:
 <pre>
-  {
-    "d_date": "2020-05-17",
-    "fajr_begins": "02:48:00",
-    "fajr_jamah": "03:48:00",
-    "sunrise": "05:05:00",
-    "zuhr_begins": "12:57:00",
-    "zuhr_jamah": "14:27:00",
-    "asr_mithl_1": "17:10:00",
-    "asr_mithl_2": "17:10:00",
-    "asr_jamah": "17:55:00",
-    "maghrib_begins": "20:49:00",
-    "maghrib_jamah": "20:54:00",
-    "isha_begins": "23:07:00",
-    "isha_jamah": "23:22:00",
-    "is_ramadan": "0",
-    "hijri_date": "0",
-    "jamah_changes": {
-      "fajr_jamah": "03:45:00",
-      "asr_jamah": "17:56:00",
-      "maghrib_jamah": "20:56:00",
-      "isha_jamah": "23:25:00"
-    },
-    "hijri_date_convert": "Ramadan 24, 1441"
+{
+  d_date: "2022-11-29",
+  fajr_begins: "05:44:00",
+  fajr_jamah: "06:30:00",
+  sunrise: "07:28:00",
+  zuhr_begins: "12:00:00",
+  zuhr_jamah: "12:30:00",
+  asr_mithl_1: "14:48:00",
+  asr_mithl_2: "14:48:00",
+  asr_jamah: "15:00:00",
+  maghrib_begins: "16:33:00",
+  maghrib_jamah: "16:33:00",
+  isha_begins: "17:59:00",
+  isha_jamah: "22:45:00",
+  is_ramadan: "0",
+  hijri_date: "Jumada Al-Awwal 4, 1444",
+
+  jamah_changes: {
+    maghrib_jamah: "16:32:00",
+    isha_jamah: "19:30:00"
+  },
+
+  tomorrow: {
+    d_date: "2022-11-30",
+    fajr_begins: "05:45:00",
+    fajr_jamah: "06:30:00",
+    sunrise: "07:29:00",
+    zuhr_begins: "12:01:00",
+    zuhr_jamah: "12:30:00",
+    asr_mithl_1: "14:47:00",
+    asr_mithl_2: "14:47:00",
+    asr_jamah: "15:00:00",
+    maghrib_begins: "16:32:00",
+    maghrib_jamah: "16:32:00",
+    isha_begins: "17:59:00",
+    isha_jamah: "19:30:00",
+    is_ramadan: "0",
+    hijri_date: "Jumada Al-Awwal 5, 1444"
+  },
+
+  hijri_date_convert: "6 Jumādā al-Ula 1444",
+  jumuah: "1:30, 2:15, 2:45",
+  
+  next_prayer: {
+    prayerName: "isha",
+    timeLeft: 11
   }
+}
 </pre>
             </span>
         </div>

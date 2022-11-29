@@ -61,7 +61,6 @@ class HijriDate
             $date = $this->getUmmulQuraDate($day, $month, $year);
         }
 
-
         $day = $date['day'];
         $month = $this->hijriMonth[(int) $date['month'] - 1];
         $year = $date['year'];

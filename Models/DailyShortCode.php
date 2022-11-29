@@ -383,6 +383,19 @@ class DailyShortCode extends TimetablePrinter
         return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
+    public function scJummahPrayer($attr)
+    {
+        return "
+        <span class='jummahShortcode'>
+            <span class='jummahHeading'>" 
+                . stripslashes($this->getLocalHeaders()['jumuah']) . "
+            </span>
+            <span class='jummahPrayer'>" 
+                . get_option('jumuah') . "
+            </span>
+        </span>";
+    }
+
     private function isPrayerFinished($time) 
     {
         $userTime = user_current_time( 'H:i');
