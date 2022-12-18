@@ -174,12 +174,12 @@ class DatabaseConnection
      * @param int $monthNumber
      * @return array
      */
-    public function getPrayerTimeForMonth($monthNumber)
+    public function getPrayerTimeForMonth($monthNumber, $year)
     {
         global $wpdb;
 
-        $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = %d AND YEAR(d_date) = YEAR(CURDATE()) ORDER BY d_date ASC";
-        $prepared = $wpdb->prepare( $sql, array( (int)$monthNumber ) );
+        $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = %d AND YEAR(d_date) = %d ORDER BY d_date ASC";
+        $prepared = $wpdb->prepare( $sql, array( (int)$monthNumber, (int)$year ) );
         $result = $wpdb->get_results($prepared, ARRAY_A);
 
         if ( empty($result) ) {
@@ -293,6 +293,13 @@ class DatabaseConnection
                 array('d_date' => $day['d_date'])
             );
         }
+    }
+
+    public function getYers()
+    {
+        global $wpdb;
+        $sql = "select distinct year(d_date) as year from wp_timetable;";
+        return  $wpdb->get_results($sql, ARRAY_A);
     }
 
     public function getRows()

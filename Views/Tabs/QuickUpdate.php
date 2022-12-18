@@ -2,6 +2,7 @@
 require_once(__DIR__ .'/../../Models/db.php');
 
 $quickMonth = date('m');
+$quickYear = date('Y');
 
 if ( isset($_POST["quickMonth"])) {
     $quickMonth = (int)sanitize_text_field($_POST["quickMonth"]);
@@ -9,24 +10,41 @@ if ( isset($_POST["quickMonth"])) {
     $quickMonth = $match[0];
 }
 
+if ( isset($_POST["quickYear"])) {
+    $quickYear = (int)sanitize_text_field($_POST["quickYear"]);
+    preg_match("/\d+/", $quickYear, $match);
+    $quickYear = $match[0];
+}
+
 $monthName = date('F');
 $futureMonths = [];
-for($i=date('m'); $i<=12; $i++) {
-    $dateObj   = DateTime::createFromFormat('!m', $i);
+for($i=1; $i<=12; $i++) {
+    $dateObj = DateTime::createFromFormat('!m', $i);
     $futureMonths[$i] = $dateObj->format('F');
 }
 
-$options = "";
+$optionsMonth = "";
 foreach($futureMonths as $key=>$month_name){
     $selected = "";
     if($key == $quickMonth){
         $selected = " selected='selected'";
     }
-    $options .= "<option value='" . esc_attr($key) . "' $selected>". esc_html($month_name) . "</option>";
+    $optionsMonth .= "<option value='" . esc_attr($key) . "' $selected>". esc_html($month_name) . "</option>";
+}
+$db = new DatabaseConnection();
+
+$years = $db->getYers();
+$optionsYear = "";
+foreach($years as $year){
+    $year = $year['year'];
+    $selected = "";
+    if($year == $quickYear){
+        $selected = " selected='selected'";
+    }
+    $optionsYear .= "<option value='" . esc_attr($year) . "' $selected>". esc_html($year) . "</option>";
 }
 
-$db = new DatabaseConnection();
-$data = $db->getPrayerTimeForMonth( $quickMonth );
+$data = $db->getPrayerTimeForMonth( $quickMonth, $quickYear );
 
 $timetable = new TimetablePrinter();
 $prayerNames = $timetable->getLocalPrayerNames();
@@ -39,10 +57,15 @@ if ( empty($data)) {
 <div class='container-fluid'>
     <form name='quickUpdateMonth' method='post'>
         <div class='row font-weight-bold' style='padding-bottom: 10px;'>
-            <div class='col-sm-2' style='padding-left:0px;'><p class='h4'>Update Prayer time for:</p> </div>
+            <div class='col-sm-4' style='padding-left:0px;'><p class='h4'>Update Prayer time for:</p> </div>
             <div class='col-sm-2'>
                 <select name='quickMonth' class='form-select-sm quickMonth'>
-                     ". $options ." 
+                     ". $optionsMonth ." 
+                </select>               
+            </div> 
+            <div class='col-sm-2'>
+                <select name='quickYear' class='form-select-sm quickMonth'>
+                     ". $optionsYear ." 
                 </select>               
             </div> 
             <div class='col-sm-2'>
