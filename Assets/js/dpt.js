@@ -116,28 +116,27 @@ DPT = {
     },
 
     dsRefreshNextPrayer: function () {
-        if (! jQuery('.x-board')[0]) {
-            return;
-        }
+        if (jQuery('.x-board')[0] || jQuery('.x-board-modern')[0]) {        
 
-        jQuery.ajax({
-            url: timetable_params.ajaxurl,
-            data: {
-                'action':'get_ds_next_prayer',
-            },
-            success: function(response){
-                setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60 * 1) ); // 60 seconds 
-                jQuery('.dsNextPrayer').html(response);
-                if (! isTimerOn ) {
-                    DPT.startTimer();
-                    isTimerOn = true;
-                }
-            },
-            error: function(responseObj, strError){
-                console.log(strError);
-            },
-            timeout: (1000 * 30) // 30 seconds
-        });
+            jQuery.ajax({
+                url: timetable_params.ajaxurl,
+                data: {
+                    'action':'get_ds_next_prayer',
+                },
+                success: function(response){
+                    setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60 * 1) ); // 60 seconds 
+                    jQuery('.dsNextPrayer').html(response);
+                    if (! isTimerOn ) {
+                        DPT.startTimer();
+                        isTimerOn = true;
+                    }
+                },
+                error: function(responseObj, strError){
+                    console.log(strError);
+                },
+                timeout: (1000 * 30) // 30 seconds
+            });
+        }
     },
 
 

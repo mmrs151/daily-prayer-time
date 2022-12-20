@@ -57,7 +57,7 @@
                 $response['jumuah'] = get_option('jumuah');
                 $response['next_prayer'] = $this->timetablePrinter->getNextIqamahTime($this->db->getPrayerTimeForToday(), false, true);
             } elseif ( $filter == 'month'){
-                $response = $this->db->getPrayerTimeForMonth(date('m'));
+                $response = $this->db->getPrayerTimeForMonth(date('m'), date('Y'));
             } elseif ( $filter == 'ramadan'){
                 $response = $this->db->getPrayerTimeForRamadan();
             } elseif ( $filter == 'year'){

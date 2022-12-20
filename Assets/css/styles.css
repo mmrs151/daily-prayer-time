@@ -897,6 +897,577 @@ p.adhan-copy{
     color: blue;
     font-family: monospace;
 }
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+} 
+
+.x-board-modern #top-section {
+    width: 100%;
+}
+.x-board-modern #top-section .row{
+    margin-right: 0 !important;
+}
+.x-board-modern .mosque-name{
+    padding-top: 15px;
+    height: 20px;
+}
+.x-board-modern .mosque-name h2{
+     font-family: 'Merriweather', serif ;
+     color: rgb(20,74,67);
+     font-size: 50px;
+     font-weight: 800;
+     letter-spacing: 7px;
+     display: inline;
+}
+.x-board-modern .logo img{
+    height: 110px;
+    padding-left: 50px;
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+.x-board-modern .time{
+    padding-right: 20px;
+    padding-top: 10px;
+    text-align: right;
+}
+.x-board-modern .time h3{
+    font-family: 'Merriweather', serif;
+    font-size: 55px;
+    font-weight: 800;
+    color: rgb(20,74,67);
+    display: inline;
+}
+.x-board-modern .date-english-arabic{
+    background-color: rgb(20,74,67);
+}
+.x-board-modern .date-english-arabic p{
+    font-family: 'Merriweather', serif;
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 0;
+    letter-spacing: 3px;
+}
+.x-board-modern .english-date p{
+    padding-left: 45px;
+}
+.x-board-modern #banner-section img{
+    width: 2000px;
+    height: 455px;
+}
+
+.x-board-modern #time-table-section{
+    background-color: rgb(20,74,67);
+    padding-bottom: 12px;
+    padding-top: 8px;
+    height: 318px;
+}
+.x-board-modern #time-table-section .row{
+    width: 100%;
+    padding-left: 10px;
+    margin: 0;
+
+}
+.x-board-modern .icon{
+    font-size: 30px;
+    color: yellow;
+}
+.x-board-modern #time-table-section h4{
+    font-size: 40px;
+    color: #e2e2e2;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 3px;
+    margin-top: 7px;
+}
+.x-board-modern .prayer-start p{
+    margin-top: 14px;
+    margin-bottom: 0;
+    font-size: 54px;
+    color: #e2e2e2;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 6px;
+    opacity: 0.6;
+}
+.x-board-modern .prayer-jamaat p{ 
+    font-size: 54px;
+    font-family: 'Lato',sans-serif;
+    color: #e2e2e2;
+    font-weight: 900;
+    letter-spacing: 6px;
+}
+.x-board-modern .sunrise p , .x-board-modern .jummah-prayer p{
+    margin-top: 15px;
+}
+
+.x-board-modern .fajr-prayer ,.x-board-modern .sunrise, .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer, .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer{
+    border-right: 1px solid #3e605c;
+}
+.x-board-modern #time-table-section .col-md-2{
+    flex: 1 0 0%;
+    max-width: 15.666667%;
+}
+
+
+
+
+
+
+@media(max-width: 1349px){
+    .x-board-modern .mosque-name h2{
+        font-size: 46px;
+        letter-spacing: 6px;
+    }
+    .x-board-modern .time h3{
+        font-size: 52px;
+
+    }
+}
+
+@media (max-width: 1298px) {
+    .x-board-modern .mosque-name h2{
+        letter-spacing: 5px;
+        font-size: 44px;
+    }
+    .x-board-modern .time{
+        padding-right: 15px;
+    }
+    .x-board-modern .time h3{
+        font-size: 48px;
+    }
+    .x-board-modern .logo img{
+        height: 105px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 28px;
+    }
+    .x-board-modern #banner-section img{
+        height: 395px;
+    }
+    .x-board-modern .icon{
+        font-size: 25px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 34px;
+        letter-spacing: 2px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 49px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 49px;
+    }
+}
+
+@media (max-width: 1170px){
+    .x-board-modern .mosque-name h2{
+        font-size: 41px;
+    }
+    .x-board-modern .time h3{
+        font-size: 44px;
+    }
+    .x-board-modern .logo img{
+        height: 102px;
+        padding-left: 60px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 25px;
+    }
+    .x-board-modern #banner-section img{
+        height: 370px;
+    }
+    .x-board-modern .icon{
+        font-size: 23px;
+    }
+    .x-board-modern #time-table-section{
+        height: 300px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 30px;
+        letter-spacing: 2px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 40px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 40px;
+    }
+}
+@media(max-width: 1079px){
+    .x-board-modern .mosque-name h2{
+        letter-spacing: 4px;
+        font-size: 38px;
+    }
+    .x-board-modern .time h3{
+        font-size: 41px;
+    }
+    .x-board-modern .logo img{
+        height: 99px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 1048px){
+    .x-board-modern .mosque-name h2{
+        letter-spacing: 4px;
+        font-size: 35px;
+    }
+    .x-board-modern .time h3{
+        font-size: 38px;
+    }
+    .x-board-modern .logo img{
+        height: 97px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 22px;
+    }
+    .x-board-modern #banner-section img{
+        height: 350px;
+    }
+    .x-board-modern .icon{
+        font-size: 22px;
+    }
+    .x-board-modern #time-table-section{
+        height: 290px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 27px;
+        letter-spacing: 2px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 35px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 35px;
+    }
+    
+}
+
+@media (max-width: 972px){
+    .x-board-modern .mosque-name h2{
+        letter-spacing: 3px;
+        font-size: 33px;
+    }
+    .x-board-modern .time h3{
+        font-size: 36px;
+    }
+    .x-board-modern .logo img{
+        height: 95px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
+    .x-board-modern #banner-section img{
+        height: 330px;
+    }
+    .x-board-modern .icon{
+        font-size: 22px;
+    }
+    .x-board-modern #time-table-section{
+        height: 275px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 25px;
+        letter-spacing: 1px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 32px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 32px;
+    }
+   
+}
+
+@media (max-width: 906px){
+    .x-board-modern .time h3{
+        font-size: 34px;
+    }
+    .x-board-modern .logo img{
+        height: 89px;
+        padding-left: 35px;
+    }
+    .x-board-modern #banner-section img{
+        height: 320px;
+    }
+    .x-board-modern .icon{
+        font-size: 20px;
+    }
+    .x-board-modern #time-table-section{
+        height: 270px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 22px;
+        letter-spacing: 0px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 30px;
+        letter-spacing: 3px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 30px;
+        letter-spacing: 3px;
+    }
+   
+}
+@media(max-width: 880px){
+    .x-board-modern .mosque-name h2{
+        letter-spacing: 3px;
+        font-size: 29px;
+    }
+    .x-board-modern .time{
+        padding-top: 15px;
+    }
+    .x-board-modern .time h3{
+        font-size: 32px;
+    }
+    .x-board-modern .logo img{
+        height: 89px;
+        padding-left: 35px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 787px){
+    .x-board-modern .mosque-name h2{
+        letter-spacing: 2px;
+        font-size: 29px;
+    }
+    .x-board-modern .time{
+        padding-top: 20px;
+    }
+    .x-board-modern .time h3{
+        font-size: 30px;
+    }
+    .x-board-modern .logo img{
+        height: 83px;
+        padding-left: 40px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 16px;
+    }
+    .x-board-modern #banner-section img{
+        height: 300px;
+    }
+    .x-board-modern .icon{
+        font-size: 17px;
+    }
+    .x-board-modern #time-table-section{
+        height: 240px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 19px;
+        letter-spacing: 0px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 26px;
+        letter-spacing: 3px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 26px;
+        letter-spacing: 3px;
+    }
+}
+@media(max-width: 765px){
+    .x-board-modern .time {
+        padding-right: 5px;
+    }
+    .x-board-modern .time h3{
+        font-size: 29px;
+    }
+}
+
+@media (max-width: 718px){
+    .x-board-modern .mosque-name{
+        height: 80px;
+    } 
+    .x-board-modern .mosque-name h2{
+        font-size: 27px;
+        letter-spacing: 4px;
+    }
+    .x-board-modern .logo img{
+        height: 90px;
+        padding-left: 35px;
+    }
+    .x-board-modern .time{
+        text-align: center;
+        padding-top: 0;
+    }
+    .x-board-modern .time h3{
+        font-size: 50px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 14px;
+    }
+    .x-board-modern #time-table-section .row{
+        padding-top: 0;
+    }
+    .x-board-modern #time-table-section .pt-4{
+        padding-top: 1rem !important;
+    }
+    .x-board-modern #time-table-section .col-md-2{
+        flex: 0 0 100%;
+        max-width: 100.666667%;
+    }
+    .x-board-modern #time-table-section .col-sm-6{
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .x-board-modern #time-table-section{
+        height: 980px;
+    }
+    .x-board-modern .fajr-prayer , .x-board-modern .sunrise, .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer, .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer{
+        border-right: 0;
+    }
+    .x-board-modern #banner-section img{
+        height: 300px;
+    }
+    .x-board-modern .icon{
+        font-size: 25px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 30px;
+        letter-spacing: 3px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 35px;
+        letter-spacing: 3px;
+        margin-top: 10px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 35px;
+        letter-spacing: 3px;
+    }
+    .x-board-modern .fajr-prayer , .x-board-modern .sunrise, .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer, .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer{
+        border-bottom: 1px solid #3e605c;
+    }
+    .x-board-modern .zuhr-prayer , .x-board-modern .asr-prayer , .x-board-modern .maghrib-prayer , .x-board-modern .isha-prayer , .x-board-modern .jummah-prayer{
+        padding-top: 20px;
+    }
+    .x-board-modern .fajr-prayer , .x-board-modern .zuhr-prayer , .x-board-modern .maghrib-prayer{
+        border-right: 1px solid #3e605c;
+    }
+}
+
+@media (max-width: 609px){
+    .x-board-modern .time h3{
+        font-size: 47px;
+    }
+    .x-board-modern .mosque-name h2{
+        font-size: 27px;
+        letter-spacing: 2px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 12px;
+    }
+  
+}
+
+@media (max-width: 550px){
+    .x-board-modern .mosque-name h2{
+        font-size: 23px;
+        letter-spacing: 2px;
+    }
+    .x-board-modern .logo img{
+        height: 75px;
+        padding-left: 25px;
+    }
+    .x-board-modern .time h3{
+        font-size: 40px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 10px;
+    }
+    .x-board-modern #time-table-section .row{
+        padding-top: 0;
+    }
+    .x-board-modern #time-table-section{
+        height: 770px;
+    } 
+    .x-board-modern #banner-section img{
+        height: 230px;
+    }
+    .x-board-modern .icon{
+        font-size: 15px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 22px;
+        letter-spacing: 2px;
+        margin-top: 10px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+   
+}
+
+@media (max-width: 488px){
+    .x-board-modern .mosque-name{
+        height: 70px;
+    }
+    .x-board-modern .mosque-name h2{
+        font-size: 21px;
+        letter-spacing: 1px;
+    }
+    .x-board-modern .logo img{
+        height: 60px;
+        padding-left: 20px;
+    }
+    .x-board-modern .time h3{
+        font-size: 35px;
+    }
+    .x-board-modern .date-english-arabic p{
+        font-size: 7px;
+    }
+    .x-board-modern #time-table-section .row{
+        padding-top: 0;
+    }
+    .x-board-modern #time-table-section{
+        height: 600px;
+    } 
+    .x-board-modern #time-table-section h4{
+        margin-top: 0;
+    }
+    .x-board-modern #banner-section img{
+        height: 190px;
+    }
+    .x-board-modern .icon{
+        font-size: 16px;
+    }
+    .x-board-modern #time-table-section h4{
+        font-size: 19px;
+        letter-spacing: 1px;
+    }
+    .x-board-modern .prayer-start p{
+        font-size: 22px;
+        letter-spacing: 2px;
+        margin: 0px;
+    }
+    .x-board-modern .prayer-jamaat p{
+        font-size: 22px;
+        letter-spacing: 1px;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+    .x-board-modern .zuhr-prayer , .x-board-modern .asr-prayer , .x-board-modern .maghrib-prayer , .x-board-modern .isha-prayer{
+        padding-top: 5px;
+    }
+    .x-board-modern .jummah-prayer{
+        padding-top: 30px;
+    }
+
 /*Print*/
 @media print {
     * {

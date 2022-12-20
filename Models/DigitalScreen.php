@@ -90,6 +90,7 @@ class DigitalScreen extends DailyShortCode
 
     public function displayDigitalScreen()
     {
+        // return $this->getModernTheme();
         $html = $this->getTopRow();
         
         if ($this->isPresentation) {
@@ -101,6 +102,11 @@ class DigitalScreen extends DailyShortCode
         $html .= $this->getBottomRow();
 
         return $html;
+    }
+
+    private function getModernTheme()
+    {
+        include 'themes/modern-theme.php';
     }
 
     private function getTopRow()

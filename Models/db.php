@@ -177,7 +177,7 @@ class DatabaseConnection
     public function getPrayerTimeForMonth($monthNumber, $year)
     {
         global $wpdb;
-
+        
         $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = %d AND YEAR(d_date) = %d ORDER BY d_date ASC";
         $prepared = $wpdb->prepare( $sql, array( (int)$monthNumber, (int)$year ) );
         $result = $wpdb->get_results($prepared, ARRAY_A);

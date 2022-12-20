@@ -62,6 +62,6 @@ class MonthlyTimeTable
         if ( $month == 13 ) {
             return $db->getPrayerTimeForRamadan();
         }
-        return $db->getPrayerTimeForMonth($month);
+        return $db->getPrayerTimeForMonth($month, date('Y'));
     }
 }
