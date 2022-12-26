@@ -952,6 +952,11 @@ p.adhan-copy{
 .x-board-modern .english-date p{
     padding-left: 45px;
 }
+
+.x-board-modern #banner-section {
+    height: 455px;
+}
+
 .x-board-modern #banner-section img{
     width: 2000px;
     height: 455px;

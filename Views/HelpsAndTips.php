@@ -28,6 +28,7 @@
         <li>[quran_verse]</li>
         <li>[digital_screen]</li>
         <li>[jummah_prayer]</li>
+        <li>[hijri_date]</li>
     </ol>
 
     <h3>Shortcode Options:</h3>

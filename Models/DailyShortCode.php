@@ -60,7 +60,7 @@ class DailyShortCode extends TimetablePrinter
 
     public function setAnnouncement($text, $day)
     {
-        $this->row['announcement'] =  $this->getAnnouncement( $text, $day);
+        $this->row['announcement'] =  $this->getAnnouncement($day, $text);
 
     }
 
@@ -144,7 +144,7 @@ class DailyShortCode extends TimetablePrinter
      * @param  string $widgetNotice
      * @return string
      */
-    public function getAnnouncement($widgetNotice="", $day)
+    public function getAnnouncement($day, $widgetNotice="")
     {
         $widgetNotice = trim( $widgetNotice );
         $day = trim($day);
@@ -463,7 +463,7 @@ class DailyShortCode extends TimetablePrinter
 
         if (isset($attr['announcement'])) {
             $day = isset($attr['day']) ? $attr['day'] : 'everyday';
-            $row['announcement'] = $this->getAnnouncement($attr['announcement'], $day);
+            $row['announcement'] = $this->getAnnouncement($day, $attr['announcement']);
         }
 
         if ( $row['jamah_changes']) {
