@@ -183,7 +183,7 @@ class DatabaseConnection
         $result = $wpdb->get_results($prepared, ARRAY_A);
 
         if ( empty($result) ) {
-            $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = %d ORDER BY d_date ASC";
+            $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = %d and year(d_date) = (select max(year(d_date)) from ". $this->dbTable .") ORDER BY d_date ASC";
             $prepared = $wpdb->prepare( $sql, array( (int)$monthNumber ) );
             $result = $wpdb->get_results($prepared, ARRAY_A);
         }
