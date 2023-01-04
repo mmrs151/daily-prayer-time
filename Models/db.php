@@ -305,7 +305,7 @@ class DatabaseConnection
     public function getRows()
     {
         global $wpdb;
-        $sql = "SELECT * FROM ". $this->dbTable ." WHERE year(d_date) = YEAR(CURDATE())";
+        $sql = "SELECT * FROM ". $this->dbTable ." WHERE year(d_date) = (select max(year(d_date)) from ". $this->dbTable .")";
         return  $wpdb->get_results($sql, ARRAY_A);
     }
 

@@ -7,7 +7,7 @@ $rows = $adapter->getRows();
 if ( isset($rows[1])) {
     $header = (array_keys($rows[1]));
 
-    $writeFile = plugin_dir_path(__FILE__) . '../../Assets/prayer-time-'.date('Y'). '.csv';
+    $writeFile = plugin_dir_path(__FILE__) . '../../Assets/prayer-time-latest.csv';
     try {
         $f = fopen($writeFile, "w");
         fputcsv($f, $header);
@@ -15,7 +15,7 @@ if ( isset($rows[1])) {
             fputcsv($f, array_values($line));
         }
         fclose($f);
-        $readFile = plugins_url('../../Assets/prayer-time-'.date('Y').'.csv', __FILE__);
+        $readFile = plugins_url('../../Assets/prayer-time-latest.csv', __FILE__);
     } catch (\Exception $e) {
         die($e->getMessage());
     }
