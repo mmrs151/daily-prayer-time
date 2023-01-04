@@ -58,13 +58,14 @@ if ( isset($rows[1])) {
                 <div class="upload-step">
                     <label>Select Asr juristic method:</label>
                     <select class="form-select" name="asr-method">
-                        <option value="0">Standard</option>
+                        <option value="0" <?php if (get_option('asr-method') == 0){echo "selected='selected'";}?>>Standard</option>
                         <option value="1" <?php if (get_option('asr-method') == 1){echo "selected='selected'";}?>>Hanafi</option>
                     </select>
                 </div>
                 <div class="upload-step">
                     <label>Adjusting Methods for Higher Latitudes:</label>
                     <select class="form-select" name="higher-lat">
+                        <option></option>
                         <option value="3" <?php if (get_option('higher-lat') == 3){echo "selected='selected'";}?>>Angle Based</option>
                         <option value="2" <?php if (get_option('higher-lat') == 2){echo "selected='selected'";}?>>One Seventh of the Night</option>
                         <option value="1" <?php if (get_option('higher-lat') == 1){echo "selected='selected'";}?>>Middle of the Night</option>

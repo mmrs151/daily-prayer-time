@@ -898,11 +898,6 @@ p.adhan-copy{
     font-family: monospace;
 }
 
-.container-fluid {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-} 
-
 .x-board-modern #top-section {
     width: 100%;
 }

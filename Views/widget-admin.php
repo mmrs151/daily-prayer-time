@@ -42,6 +42,15 @@ if (isset($_POST['submit'])) {
 
     if ( $csvProcessor->isValidFile() ) {
         $csvProcessor->process();
+        delete_transient('nearest_city');
+        delete_option('fajr-delay');
+        delete_option('zuhr-delay');
+        delete_option('asr-delay');
+        delete_option('maghrib-delay');
+        delete_option('isha-delay');
+        delete_option('higher-lat');
+        delete_option('calc-method');
+        delete_option('asr-method');
     } else {
         echo "<p class='ui-state-error dptCenter'><b>Invalid csv file ?</b>";
         echo "</br>Found: <i>(". $csvProcessor->getFileType() .")</i></p>";

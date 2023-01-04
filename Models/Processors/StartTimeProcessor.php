@@ -37,7 +37,6 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
         public function process()
         {
             set_transient('nearest_city', $this->data['city']);
-    
             $calcMethod = $this->data['method'];
             $asrMethod = $this->data['asr-method'];
             $latLong = $this->getLatLong($this->data['city']);
@@ -57,7 +56,6 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
                 add_option('isha-angle', $ishaAngle);
     
             }
-        
             delete_option('fajr-delay');
             delete_option('zuhr-delay');
             delete_option('asr-delay');
