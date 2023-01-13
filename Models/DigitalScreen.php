@@ -7,13 +7,13 @@ class DigitalScreen extends DailyShortCode
 
     /** @var bool */
     private $isPortrait;
-    
+
     /** @var bool */
     private $isPresentation;
 
     /** @var int */
     private $screenTimeout = 5;
-    
+
     /** @var string */
     private $scrollText;
 
@@ -25,17 +25,17 @@ class DigitalScreen extends DailyShortCode
 
     /** @var string */
     private $blinkText = 'SADAQA INCREASE YOUR WEALTH';
-    
+
     /** @var string */
     private $blinkUrl;
-    
+
     /** @var string */
     private $scrollUrl;
 
     private $verticalClass = '';
 
     private $disableOvernightDim = false;
-    
+
     public function __construct($attr=array())
     {
         parent::__construct();
@@ -62,27 +62,27 @@ class DigitalScreen extends DailyShortCode
         } else {
             delete_option('deactivate_tomorrow');
         }
-    
+
         $this->scrollText = esc_html(stripslashes(get_option("ds-scroll-text")));
         $this->scrollSpeed = empty(get_option("ds-scroll-speed")) ? $this->scrollSpeed : get_option("ds-scroll-speed");
 
         if ( isset($attr['scroll']) ) {
             $this->scrollText = stripslashes($attr['scroll']);
         }
-    
+
         if ( isset($attr['scroll_link']) ) {
             $this->scrollUrl = $attr['scroll_link'];
         }
-    
+
         $this->blinkText = esc_html(stripslashes(get_option("ds-blink-text")));
         if ( isset($attr['blink']) ) {
             $this->blinkText = stripslashes($attr['blink']);
         }
-    
+
         if ( isset($attr['blink_link']) ) {
             $this->blinkUrl = $attr['blink_link'];
         }
-        
+
         if ( isset($attr['slides']) ) {
             $this->presentationSlides = explode(',', $attr['slides']);
         }
@@ -92,13 +92,13 @@ class DigitalScreen extends DailyShortCode
     {
         // return $this->getModernTheme();
         $html = $this->getTopRow();
-        
+
         if ($this->isPresentation) {
             $html .= $this->getPresentationRow();
         } else {
             $html .= $this->getMiddleRow();
         }
-        
+
         $html .= $this->getBottomRow();
 
         return $html;
@@ -169,7 +169,7 @@ class DigitalScreen extends DailyShortCode
             </div>';
         return $html;
     }
-    
+
     private function getMiddleRow()
     {
         $leftClass = "col-sm-5 col-xs-12 bg-red height-100 padding-null text-center";
@@ -212,12 +212,7 @@ class DigitalScreen extends DailyShortCode
                             <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
                         </tr>';
 
-        if ( get_option('jumuah') && $this->todayIsFriday() && $this->isJumahDisplay($this->row)) {
-            $html .= '<tr>
-                            <td class="prayerName nextPrayer"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
-                            <td colspan="2" class="prayerName sunrise nextPrayer"><span>' . get_option('jumuah') . '</span></td>
-                        </tr>';
-        } else {
+
             $html .= '
             <tr ' . $this->getNextPrayerClass('zuhr', $this->row) . '>
                 <td class="prayerName"><span>' . $this->getLocalPrayerNames()['zuhr'] . '</span></td>
@@ -225,9 +220,8 @@ class DigitalScreen extends DailyShortCode
                 <td>' . do_shortcode("[zuhr_prayer]") . '</td>
             </tr>
     ';
-        }
 
-        $html .= 
+        $html .=
         '<tr ' . $this->getNextPrayerClass('asr', $this->row) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['asr'] . '</span></td>
             <td class="l-red">' . do_shortcode("[asr_start]") . '</td>
@@ -243,13 +237,11 @@ class DigitalScreen extends DailyShortCode
             <td class="l-red">' . do_shortcode("[isha_start]") . '</td>
             <td>' . do_shortcode("[isha_prayer]") . '</td>
         </tr>';
-        if ( get_option('jumuah') && (! $this->todayIsFriday() || ! $this->isJumahDisplay($this->row)) ) {
             $html .= '
-                <tr>
+                <tr ' . $this->getNextPrayerClass('jumuah', $this->row) . '>
                     <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
-                    <td colspan="2" class="prayerName sunrise"><span>' . get_option('jumuah') . '</span></td>
+                    <td colspan="2" class="prayerName l-red"><span>' . get_option('jumuah') . '</span></td>
                 </tr>';
-            }
         $html .= '
             </tbody>
                     </table>
@@ -341,7 +333,7 @@ class DigitalScreen extends DailyShortCode
     {
         $transitionEffect = get_option('transitionEffect');
         $transitionSpeed = get_option('transitionSpeed');
-        
+
         $html ='
             <div class="row middle-row bg-red">
             <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
@@ -351,22 +343,22 @@ class DigitalScreen extends DailyShortCode
             </div>
         </div>
         ';
-    
+
         return $html;
     }
-    
+
     private function getPresentationSlides($transitionSpeed)
     {
         if (!$this->presentationSlides) {
             return "<h1>add slides option, ie. <br/>
                 <i><pre> [digital_screen view='presentation' slides=imageLink,imageLink,imageLink]</pre></i></h1>";
         }
-        
+
         $html = '
                 <div class="carousel-item active height-100" data-bs-interval="'. $transitionSpeed .'">
                     <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
                 </div>';
-        
+
         foreach ($this->presentationSlides as $i => $slideUrl) {
             $html .= '
                 <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
@@ -374,7 +366,7 @@ class DigitalScreen extends DailyShortCode
                 </div>
                 ';
         }
-        
+
         return $html;
     }
 
@@ -451,7 +443,7 @@ class DigitalScreen extends DailyShortCode
         if ( get_option('slider-chbox') ) {
             $html = "";
             $slides = array();
-            
+
             foreach (range(1, 11) as $item) {
                 $slides[] = get_option('slider' . $item);
             }
@@ -521,7 +513,7 @@ class DigitalScreen extends DailyShortCode
         $iqamahTimes =  array($result['zuhr_jamah'], $result['asr_jamah'], $result['maghrib_begins'], $result['isha_jamah']);
 
         $adhanTimes = array();
-        
+
         $zuhrAdhanBefore = empty($min = get_option('zuhrAdhanBefore')) ? 15 : $min;
         $adhanTimes[] = date( "H:i:s", strtotime( $iqamahTimes[0] . "-" . $zuhrAdhanBefore . " minutes" ) ); // zuhr
 
@@ -541,7 +533,7 @@ class DigitalScreen extends DailyShortCode
     {
         $result = $this->db->getPrayerTimeForToday();
 
-        if ( $this->isRamadan() ) { 
+        if ( $this->isRamadan() ) {
             return date( "H:i:s", strtotime( $result['fajr_begins'] . "0 minutes" ) ); // fajr start
         }
 

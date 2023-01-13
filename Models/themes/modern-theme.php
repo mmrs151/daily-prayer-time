@@ -1,4 +1,6 @@
-<div class="container-fluid x-board-modern">
+<div class="x-board-modern">
+
+<div class="container-fluid">
 
 <!--TOP SECTION-->
 
@@ -16,16 +18,26 @@
         </div>
         <div class="col-md-8 col-sm-8 col-8 time-column">
             <div class="time">
-                <h3>11 : 20 : 54</h3>
+                <h3>
+                <div class="clock align-middle">
+                  <ul class="clock">
+                      <li id="hours"></li>
+                      <li id="pointx">:</li>
+                      <li id="min"></li>
+                      <li id="pointx">:</li>
+                      <li id="ampm"></li>
+                  </ul>
+                </div>
+                </h3>
             </div>
         </div>
     </div>
     <div class="row date-english-arabic">
         <div class="col-md-6 col-sm-6 col-6 english-date text-center px-0">
-            <p>Monday, December 5, 2022</p>
+            <p><?php echo date_i18n( 'l ' . get_option( 'date_format' ) ) ?></p>
         </div>
         <div class="col-md-6 col-sm-6 col-6 arabic-date text-center px-0">
-            <p>Jumada I 11, 1444 AH</p>
+            <p><?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) ?></p>
         </div>
     </div>
 </div>
@@ -34,92 +46,96 @@
 <!--BANNER SECTION-->
 
 <div id="banner-section">
-    <?php 
-        $transitionEffect = get_option('transitionEffect');
-        $transitionSpeed = get_option('transitionSpeed');
-        $html .='
-            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        ' . $this->getFirstSlide() . '
-                    </div>
-                    ' . $this->getOtherSlides($transitionSpeed) . '
-                </div>';
-                $html .= '
-            </div>
-        ';
+        <div class="banner-text-img text-center">
+        <?php 
+            $transitionEffect = get_option('transitionEffect');
+            $transitionSpeed = get_option('transitionSpeed');
+            $html .='
+                <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            ' . $this->getFirstSlide() . '
+                        </div>
+                        ' . $this->getOtherSlides($transitionSpeed) . '
+                    </div>';
+                    $html .= '
+                </div>
+            ';
         echo $html;
         ?>
+        </div>
+</div>
 
 <!--TIMETABLE SECTION-->
 
 <div id="time-table-section" class="text-center">
-    <div class="row pt-4">
-        <div class="col-md-2 col-sm-6 fajr-prayer">
-            <iconify-icon icon="lucide:sunrise" class="icon"></iconify-icon>
-            <h4>Fajr</h4>
-            <div class="prayer-start">
-                <p>5:14</p>
+        <div class="row pt-4">
+            <div class="col-md-2 col-sm-6 fajr-prayer">
+            <span class="iconify-inline icon" data-icon="lucide:sunrise"></span>
+                <h4>Fajr</h4>
+                <div class="prayer-start">
+                    <p>5:14</p>
+                </div>
+                <div class="prayer-jamaat">
+                    <p>6:30</p>
+                </div>
             </div>
-            <div class="prayer-jamaat">
-                <p>6:30</p>
+            <div class="col-md-2 col-sm-6 sunrise">
+            <span class="iconify-inline icon" data-icon="bi:sunrise-fill"></span>
+                <h4>Sunrise</h4>
+                <div class="prayer-jamaat">
+                    <p>7:11</p>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 zuhr-prayer">
+            <span class="iconify-inline icon" data-icon="emojione:sun"></span>
+                <h4>Zuhr</h4>
+                <div class="prayer-start">
+                    <p>11:54</p>
+                </div>
+                <div class="prayer-jamaat">
+                    <p>12:30</p>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 asr-prayer">
+            <span class="iconify-inline icon" data-icon="bi:sun"></span>
+                <h4>Asr</h4>
+                <div class="prayer-start">
+                    <p>2:31</p>
+                </div>
+                <div class="prayer-jamaat">
+                    <p>3:00</p>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 maghrib-prayer">
+            <span class="iconify-inline icon" data-icon="carbon:sunset"></span>
+                <h4>Maghrib</h4>
+                <div class="prayer-start">
+                    <p>4:26</p>
+                </div>
+                <div class="prayer-jamaat">
+                    <p>4:26</p>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 isha-prayer">
+            <span class="iconify-inline icon" data-icon="bi:moon-stars-fill"></span>
+                <h4>Isha</h4>
+                <div class="prayer-start">
+                    <p>5:37</p>
+                </div>
+                <div class="prayer-jamaat">
+                    <p>7:30</p>
+                </div>
+            </div>
+            <div class="col-md-2 jummah-prayer">
+            <span class="iconify-inline icon" data-icon="la:mosque"></span>
+                <h4>Jummah</h4>
+                <div class="prayer-jamaat">
+                    <p class="mb-0 time1">12:45</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-2 col-sm-6 sunrise">
-            <iconify-icon icon="bi:sunrise-fill" class="icon"></iconify-icon>
-            <h4>Sunrise</h4>
-            <div class="prayer-jamaat">
-                <p>7:11</p>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-6 zuhr-prayer">
-            <iconify-icon icon="emojione:sun" class="icon"></iconify-icon>
-            <h4>Zuhr</h4>
-            <div class="prayer-start">
-                <p>11:54</p>
-            </div>
-            <div class="prayer-jamaat">
-                <p>12:30</p>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-6 asr-prayer">
-            <iconify-icon icon="bi:sun" class="icon"></iconify-icon>
-            <h4>Asr</h4>
-            <div class="prayer-start">
-                <p>2:31</p>
-            </div>
-            <div class="prayer-jamaat">
-                <p>3:00</p>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-6 maghrib-prayer">
-            <iconify-icon icon="carbon:sunset" class="icon"></iconify-icon>
-            <h4>Maghrib</h4>
-            <div class="prayer-start">
-                <p>4:26</p>
-            </div>
-            <div class="prayer-jamaat">
-                <p>4:26</p>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-6 isha-prayer">
-            <iconify-icon icon="bi:moon-stars-fill" class="icon"></iconify-icon>
-            <h4>Isha</h4>
-            <div class="prayer-start">
-                <p>5:37</p>
-            </div>
-            <div class="prayer-jamaat">
-                <p>7:30</p>
-            </div>
-        </div>
-        <div class="col-md-2 jummah-prayer">
-            <iconify-icon icon="la:mosque" class="icon"></iconify-icon>
-            <h4>Jummah</h4>
-            <div class="prayer-jamaat">
-                <p class="mb-0 time1">12:45</p>
-            </div>
-        </div>
-    </div>
 </div>
 
+</div>
 </div>
