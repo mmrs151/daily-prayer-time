@@ -240,7 +240,7 @@ class DigitalScreen extends DailyShortCode
             $html .= '
                 <tr ' . $this->getNextPrayerClass('jumuah', $this->row) . '>
                     <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
-                    <td colspan="2" class="prayerName l-red"><span>' . get_option('jumuah') . '</span></td>
+                    <td colspan="2" class="prayerName l-red sunrise"><span>' . get_option('jumuah') . '</span></td>
                 </tr>';
         $html .= '
             </tbody>

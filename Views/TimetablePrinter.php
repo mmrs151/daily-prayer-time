@@ -646,14 +646,13 @@ class TimetablePrinter
     protected function getNextPrayerClass($prayerName, $row, $isFajr=false)
     {
         $nextPrayerName = $this->getNextPrayer($row);
-        if ($this->todayIsFriday()) {
+        if ($this->todayIsFriday() && $nextPrayerName == 'zuhr') {
             $nextPrayerName = 'jumuah';
         }
 
         if ($isFajr && is_null($nextPrayerName)) {
             return 'class="nextPrayer"';
         }
-
 
         if (strpos($nextPrayerName, $prayerName) !== false) {
             return 'class="nextPrayer"';
