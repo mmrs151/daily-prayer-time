@@ -899,8 +899,13 @@ p.adhan-copy{
     font-family: monospace;
 }
 
+/*
+##########################
+x-board-modern start 
+##########################
+*/
 
-/* x-board-modern start */
+/* CLOCK START */
 .x-board-modern .clock {
     margin: 0 auto;
     color: #000;
@@ -923,6 +928,7 @@ p.adhan-copy{
 .x-board-modern ul.clock li#sec {
     font-size: 20px !important;
 }
+/* CLOCK END */
 
 .x-board-modern .container-fluid{
     padding-left: 0 !important;
@@ -979,38 +985,27 @@ p.adhan-copy{
     padding-left: 45px;
 }
 .x-board-modern #banner-section{
-    height: 445px;
+    height: 425px;
     background-color: #fff !important;
     text-align: center;
 }
 .x-board-modern #banner-section img{
     width: 2000px;
-    height: 445px;
+    height: 425px;
 }
-.x-board-modern #banner-section h5{
-    padding-top: 70px;
-    font-size: 45px;
+.x-board-modern #banner-section .prayer-time{
+    font-size: 30px;
     font-family: 'Merriweather', serif;
 }
-.x-board-modern #banner-section h3{
+.x-board-modern #banner-section .time-metrics{
     font-size: 60px;
-    display: inline;
     color: rgb(20,74,67);
     font-weight: bolder;
     font-family: 'Merriweather', serif;
 }
-.x-board-modern #banner-section h1{
-    font-size: 65px;
-    color: rgb(20,74,67);
-    font-weight: bold;
-    font-family: 'Merriweather', serif;
+.x-board-modern #banner-section .next-prayer-time{
+    padding-top: 130px;
 }
-.x-board-modern #banner-section p{
-    font-size: 30px;
-    display: inline;
-    font-family: 'Merriweather', serif;
-}
-
 .x-board-modern #time-table-section{
     background-color: rgb(20,74,67);
     padding-top: 5px;
@@ -1098,10 +1093,10 @@ p.adhan-copy{
         font-size: 28px;
     }
     .x-board-modern #banner-section{
-        height: 390px;
+        height: 370px;
     }
     .x-board-modern #banner-section img{
-        height: 390px;
+        height: 370px;
     }
     .x-board-modern .icon{
         font-size: 25px;
@@ -1133,33 +1128,23 @@ p.adhan-copy{
         font-size: 25px;
     }
     .x-board-modern #banner-section{
-        height: 365px;
+        height: 345px;
     }
     .x-board-modern #banner-section img{
-        height: 365px;
+        height: 345px;
     }
-    .x-board-modern #banner-section h5{
-        padding-top: 65px;
-        font-size: 40px;
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 25px;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h3{
+    .x-board-modern #banner-section .time-metrics{
         font-size: 50px;
-        display: inline;
         color: rgb(20,74,67);
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h1{
-        font-size: 55px;
-        color: rgb(20,74,67);
-        font-weight: bold;
-        font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section p{
-        font-size: 20px;
-        display: inline;
-        font-family: 'Merriweather', serif;
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 130px;
     }
     .x-board-modern .icon{
         font-size: 23px;
@@ -1213,33 +1198,23 @@ p.adhan-copy{
         font-size: 22px;
     }
     .x-board-modern #banner-section{
-        height: 345px;
+        height: 325px;
     }
     .x-board-modern #banner-section img{
-        height: 345px;
+        height: 325px;
     }
-    .x-board-modern #banner-section h5{
-        padding-top: 55px;
-        font-size: 40px;
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 20px;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h3{
-        font-size: 40px;
-        display: inline;
+    .x-board-modern #banner-section .time-metrics{
+        font-size: 45px;
         color: rgb(20,74,67);
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h1{
-        font-size: 50px;
-        color: rgb(20,74,67);
-        font-weight: bold;
-        font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section p{
-        font-size: 20px;
-        display: inline;
-        font-family: 'Merriweather', serif;
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 125px;
     }
     .x-board-modern .icon{
         font-size: 22px;
@@ -1276,10 +1251,23 @@ p.adhan-copy{
         letter-spacing: 2px;
     }
     .x-board-modern #banner-section{
-        height: 325px;
+        height: 305px;
     }
     .x-board-modern #banner-section img{
-        height: 325px;
+        height: 305px;
+    }
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 17px;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .time-metrics{
+        font-size: 42px;
+        color: rgb(20,74,67);
+        font-weight: bolder;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 122px;
     }
     .x-board-modern .icon{
         font-size: 22px;
@@ -1313,10 +1301,23 @@ p.adhan-copy{
         padding-left: 35px;
     }
     .x-board-modern #banner-section{
-        height: 315px;
+        height: 295px;
     }
     .x-board-modern #banner-section img{
-        height: 315px;
+        height: 295px;
+    }
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 15px;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .time-metrics{
+        font-size: 40px;
+        color: rgb(20,74,67);
+        font-weight: bolder;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 122px;
     }
     .x-board-modern .icon{
         font-size: 20px;
@@ -1356,28 +1357,18 @@ p.adhan-copy{
     .x-board-modern .date-english-arabic p{
         font-size: 18px;
     }
-    .x-board-modern #banner-section h5{
-        padding-top: 52px;
-        font-size: 40px;
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 13px;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h3{
+    .x-board-modern #banner-section .time-metrics{
         font-size: 37px;
-        display: inline;
         color: rgb(20,74,67);
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h1{
-        font-size: 47px;
-        color: rgb(20,74,67);
-        font-weight: bold;
-        font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section p{
-        font-size: 18px;
-        display: inline;
-        font-family: 'Merriweather', serif;
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 117px;
     }
 }
 
@@ -1400,10 +1391,23 @@ p.adhan-copy{
         font-size: 16px;
     }
     .x-board-modern #banner-section{
-        height: 295px;
+        height: 285px;
     }
     .x-board-modern #banner-section img{
-        height: 295px;
+        height: 285px;
+    }
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 10px;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .time-metrics{
+        font-size: 35px;
+        color: rgb(20,74,67);
+        font-weight: bolder;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 110px;
     }
     .x-board-modern .icon{
         font-size: 17px;
@@ -1483,10 +1487,23 @@ p.adhan-copy{
         border-right: 0;
     }
     .x-board-modern #banner-section{
-        height: 300px;
+        height: 200px;
     }
     .x-board-modern #banner-section img{
-        height: 300px;
+        height: 200px;
+    }
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 10px;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .time-metrics{
+        font-size: 35px;
+        color: rgb(20,74,67);
+        font-weight: bolder;
+        font-family: 'Merriweather', serif;
+    }
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 80px;
     }
     .x-board-modern .icon{
         font-size: 25px;
@@ -1535,29 +1552,6 @@ p.adhan-copy{
     .x-board-modern .date-english-arabic p{
         font-size: 12px;
     }
-    .x-board-modern #banner-section h5{
-        padding-top: 57px;
-        font-size: 35px;
-        font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section h3{
-        font-size: 32px;
-        display: inline;
-        color: rgb(20,74,67);
-        font-weight: bolder;
-        font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section h1{
-        font-size: 42px;
-        color: rgb(20,74,67);
-        font-weight: bold;
-        font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section p{
-        font-size: 15px;
-        display: inline;
-        font-family: 'Merriweather', serif;
-    }
   
 }
 
@@ -1583,33 +1577,23 @@ p.adhan-copy{
         height: 770px;
     }
     .x-board-modern #banner-section{
-        height: 230px;
+        height: 190px;
     } 
     .x-board-modern #banner-section img{
-        height: 230px;
+        height: 190px;
     }
-    .x-board-modern #banner-section h5{
-        padding-top: 27px;
-        font-size: 25px;
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 10px;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h3{
-        font-size: 27px;
-        display: inline;
+    .x-board-modern #banner-section .time-metrics{
+        font-size: 30px;
         color: rgb(20,74,67);
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section h1{
-        font-size: 37px;
-        color: rgb(20,74,67);
-        font-weight: bold;
-        font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section p{
-        font-size: 10px;
-        display: inline;
-        font-family: 'Merriweather', serif;
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 70px;
     }
     .x-board-modern .icon{
         font-size: 15px;
@@ -1644,122 +1628,97 @@ p.adhan-copy{
     }
 }
 
-@media (max-width: 488px) {
-    .x-board-modern .mosque-name {
+@media (max-width: 488px){
+    .x-board-modern .mosque-name{
         height: 70px;
     }
-
-    .x-board-modern .mosque-name h2 {
+    .x-board-modern .mosque-name h2{
         font-size: 21px;
         letter-spacing: 1px;
     }
-
-    .x-board-modern .logo img {
+    .x-board-modern .logo img{
         height: 60px;
         padding-left: 20px;
     }
-
-    .x-board-modern .time h3 {
+    .x-board-modern .time h3{
         font-size: 35px;
     }
-
-    .x-board-modern .date-english-arabic p {
+    .x-board-modern .date-english-arabic p{
         font-size: 7px;
     }
-
-    .x-board-modern #time-table-section .row {
+    .x-board-modern #time-table-section .row{
         padding-top: 0;
     }
-
-    .x-board-modern #time-table-section {
+    .x-board-modern #time-table-section{
         height: 600px;
-    }
-
-    .x-board-modern #time-table-section h4 {
+    } 
+    .x-board-modern #time-table-section h4{
         margin-top: 0;
     }
-
-    .x-board-modern #banner-section {
-        height: 190px;
+    .x-board-modern #banner-section{
+        height: 130px;
     }
-
-    .x-board-modern #banner-section img {
-        height: 190px;
+    .x-board-modern #banner-section img{
+        height: 130px;
     }
-
-    .x-board-modern #banner-section h5 {
-        padding-top: 27px;
-        font-size: 15px;
+    .x-board-modern #banner-section .prayer-time{
+        font-size: 7px;
         font-family: 'Merriweather', serif;
     }
-
-    .x-board-modern #banner-section h3 {
-        font-size: 17px;
-        display: inline;
-        color: rgb(20, 74, 67);
+    .x-board-modern #banner-section .time-metrics{
+        font-size: 20px;
+        color: rgb(20,74,67);
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-
-    .x-board-modern #banner-section h1 {
-        font-size: 27px;
-        color: rgb(20, 74, 67);
-        font-weight: bold;
-        font-family: 'Merriweather', serif;
+    .x-board-modern #banner-section .next-prayer-time{
+        padding-top: 50px;
     }
-
-    .x-board-modern #banner-section p {
-        font-size: 10px;
-        display: inline;
-        font-family: 'Merriweather', serif;
-    }
-
-    .x-board-modern .icon {
+    .x-board-modern .icon{
         font-size: 16px;
     }
-
-    .x-board-modern #time-table-section h4 {
+    .x-board-modern #time-table-section h4{
         font-size: 19px;
         letter-spacing: 1px;
     }
-
-    .x-board-modern .prayer-start p {
+    .x-board-modern .prayer-start p{
         font-size: 22px;
         letter-spacing: 2px;
         margin: 0px;
     }
-
-    .x-board-modern .prayer-jamaat p {
+    .x-board-modern .prayer-jamaat p{
         font-size: 22px;
         letter-spacing: 1px;
         margin-top: 0;
         margin-bottom: 5px;
     }
-
-    .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer, .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer {
+    .x-board-modern .zuhr-prayer , .x-board-modern .asr-prayer , .x-board-modern .maghrib-prayer , .x-board-modern .isha-prayer{
         padding-top: 10px;
     }
-
-    .x-board-modern .jummah-prayer {
-        padding-top: 30px;
+    .x-board-modern .jummah-prayer{
+        padding-top: 10px;
     }
-
-    .x-board-modern .fajr-prayer, .x-board-modern .sunrise {
+    .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
         height: 130px;
         border-bottom: 1px solid #3e605c;
     }
-
-    .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer {
+    .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer{
         height: 150px;
         border-bottom: 1px solid #3e605c;
     }
-
-    .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer {
+    .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer{
         height: 150px;
         border-bottom: 1px solid #3e605c;
     }
+   
+}
 
-    /* x-board-modern finish */
+    /*
+    ######################## 
+    x-board-modern finish 
+    ########################
+    */
+    
     /*Print*/
     @media print {
         * {
@@ -1808,4 +1767,3 @@ p.adhan-copy{
             display: none;
         }
     }
-}

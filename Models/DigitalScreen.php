@@ -90,7 +90,8 @@ class DigitalScreen extends DailyShortCode
 
     public function displayDigitalScreen()
     {
-        // return $this->getModernTheme();
+        return $this->getModernTheme();
+        
         $html = $this->getTopRow();
 
         if ($this->isPresentation) {

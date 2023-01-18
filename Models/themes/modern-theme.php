@@ -47,22 +47,24 @@
 
 <div id="banner-section">
         <div class="banner-text-img text-center">
-        <?php 
-            $transitionEffect = get_option('transitionEffect');
-            $transitionSpeed = get_option('transitionSpeed');
-            $html .='
-                <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            ' . $this->getFirstSlide() . '
-                        </div>
-                        ' . $this->getOtherSlides($transitionSpeed) . '
-                    </div>';
-                    $html .= '
-                </div>
-            ';
-        echo $html;
-        ?>
+            <div class="next-prayer-time">
+            <?php 
+                $transitionEffect = get_option('transitionEffect');
+                $transitionSpeed = get_option('transitionSpeed');
+                $html .='
+                    <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                ' . $this->getFirstSlide() . '
+                            </div>
+                            ' . $this->getOtherSlides($transitionSpeed) . '
+                        </div>';
+                        $html .= '
+                    </div>
+                ';
+            echo $html;
+            ?>
+            </div>
         </div>
 </div>
 

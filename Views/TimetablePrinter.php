@@ -378,13 +378,13 @@ class TimetablePrinter
         $jamahTime = $this->getJamahTime( $row );
         $now = current_time( 'H:i');
         foreach ($jamahTime as $key=>$jamah) {
-            $this->nextIqamah = $this->localPrayerNames[lcfirst($key)] . ' ' . $this->localHeaders['iqamah'] . ':';
+            $this->localPrayerNames[lcfirst($key)] . ' ' . $this->localHeaders['iqamah'] . ':';
             if ($jamah >$now ) {
                 if ($key == 'Sunrise') {
-                    $this->nextIqamah = $this->localPrayerNames[lcfirst($key)] . ':';
+                    $this->localPrayerNames[lcfirst($key)] . ':';
                 }
                 if ($key == 'Zuhr' && $this->isJumahDisplay($row)) {
-                    $this->nextIqamah = $this->localPrayerNames[lcfirst($key)] . ':';
+                    $this->localPrayerNames[lcfirst($key)] . ':';
                 }
                 $toTime = strtotime( $jamah );
                 $fromTime = strtotime( $now );
