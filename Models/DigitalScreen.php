@@ -32,9 +32,14 @@ class DigitalScreen extends DailyShortCode
     /** @var string */
     private $scrollUrl;
 
+    /** @var string */
     private $verticalClass = '';
 
+    /** @var boolean */
     private $disableOvernightDim = false;
+
+    /** @var string */
+    private $theme;
 
     public function __construct($attr=array())
     {
@@ -86,12 +91,19 @@ class DigitalScreen extends DailyShortCode
         if ( isset($attr['slides']) ) {
             $this->presentationSlides = explode(',', $attr['slides']);
         }
+
+        if ( isset($attr['theme']) ) {
+            $this->theme = $attr['theme'];
+        }
     }
 
     public function displayDigitalScreen()
     {
-        return $this->getModernTheme();
-        
+        // $this->theme = 'modern';
+        if ($this->theme == 'modern') {
+            return $this->getModernTheme();
+        }
+
         $html = $this->getTopRow();
 
         if ($this->isPresentation) {
