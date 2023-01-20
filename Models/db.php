@@ -298,7 +298,7 @@ class DatabaseConnection
     public function getYers()
     {
         global $wpdb;
-        $sql = "select distinct year(d_date) as year from wp_timetable;";
+        $sql = "SELECT DISTINCT year(d_date) as year FROM ". $this->dbTable;
         return  $wpdb->get_results($sql, ARRAY_A);
     }
 
