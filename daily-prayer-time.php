@@ -24,11 +24,12 @@ require_once ('Models/QuranADay/QuranDB.php');
 
 define('DPT_PLUGIN_VERSION', "2022.12.20");
 define('DPT_PLUGIN_FILE', plugin_basename(__FILE__));
-    
+
 class DailyPrayerTime extends WP_Widget
 {
     public function __construct()
     {
+        update_option('dpt_dubug', true);
         $widget_details = array(
             'className' => 'DailyPrayerTime',
             'description' => 'Show daily prayer time vertically or horizontally'

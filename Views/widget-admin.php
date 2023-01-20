@@ -3,6 +3,7 @@ require_once(__DIR__.'/../Models/Processors/CsvProcessor.php');
 require_once(__DIR__.'/../Models/Processors/LanguageProcessor.php');
 require_once(__DIR__.'/../Models/Processors/OtherProcessor.php');
 require_once(__DIR__.'/../Models/Processors/AdhanProcessor.php');
+require_once(__DIR__.'/../Models/Processors/DebugProcessor.php');
 require_once(__DIR__.'/../Models/Processors/HijriProcessor.php');
 require_once(__DIR__.'/../Models/Processors/QuickUpdateProcessor.php');
 require_once(__DIR__.'/../Models/Processors/ThemeSettingsProcessor.php');
@@ -173,6 +174,15 @@ if (! empty($_POST['digitalScreen'])) {
     $themeSettings = new DPTDigitalScreenProcessor($data);
     $themeSettings->process();
 }
+
+if (! empty($_POST['debugLogSettings'])) {
+    $data = [
+        'debugLog' => sanitize_text_field($_POST['debugLog'] ?? '')
+    ];
+    $debugProcessor = new DPTdebugProcessor($data);
+    $debugProcessor->process();
+}
+
     $path = plugin_dir_url( __FILE__ ); // I am in Views
     $path .= '../';
     $newImage = esc_url( $path . 'Assets/images/new.jpg');
@@ -189,6 +199,7 @@ if (! empty($_POST['digitalScreen'])) {
         <li><a href="#tabs-7" data-tab-index="6">Adhan</a></li>
         <li><a href="#tabs-8" data-tab-index="7">Misc</a></li>
         <li><a href="#tabs-9" data-tab-index="8">API Doc</a></li>
+        <li><a href="#tabs-10" data-tab-index="8">Debug</a></li>
     </ul>
 
     <div id="tabs-1" class="wrap" xmlns="http://www.w3.org/1999/html">
@@ -225,6 +236,10 @@ if (! empty($_POST['digitalScreen'])) {
     
     <div id="tabs-9">
         <?php include 'Tabs/APIdoc.php' ?>
+    </div>
+
+    <div id="tabs-10">
+        <?php include 'Tabs/Debug.php' ?>
     </div>
 </div>
     <span class="dpt-donation"><a href="https://donate.uwt.org/Account/Index.aspx" target="_blank">Send Sadaqa to my GRAVE</a></span>
