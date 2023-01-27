@@ -2,6 +2,8 @@
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 require_once('HijriDate.php');
+require_once('Processors/DebugProcessor.php');
+
 
 class DatabaseConnection
 {
@@ -17,6 +19,9 @@ class DatabaseConnection
     /** @var HijriDate */
     private $hijriDate;
 
+    /** @var DebugProcessor */
+    private $logger;
+
     public function __construct()
     {
         global $wpdb;
@@ -24,6 +29,8 @@ class DatabaseConnection
         $this->tableName = $wpdb->prefix . "timetable";
         $this->dbTable = "`".DB_NAME ."`.`" .$this->tableName."`";
         $this->hijriDate = new HijriDate();
+
+        $this->logger = new DPTDebugProcessor();
         $this->createTableIfNotExist();
     }
     
@@ -38,10 +45,13 @@ class DatabaseConnection
         $today = user_current_time( 'Y-m-d' );
     
         $sql = "SELECT * FROM  $this->dbTable WHERE d_date = '$today' LIMIT 1";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
         $result = $wpdb->get_row($sql, ARRAY_A);
         
         if ( empty($result) ) {
             $sql = "SELECT * FROM  $this->dbTable WHERE month (d_date) = ". date('m') ." and day(d_date)=". date('d') ." LIMIT 1";
+            $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
             $result = $wpdb->get_row($sql, ARRAY_A);
         }
         $result['jamah_changes'] = $this->getJamahChanges($jamahChanges);
@@ -66,6 +76,8 @@ class DatabaseConnection
         global $wpdb;
 
         $sql = "SELECT * FROM  $this->dbTable WHERE d_date =  '$tomorrow' LIMIT 1";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
         $result = $wpdb->get_row($sql, ARRAY_A);
         
         return $result;
@@ -92,6 +104,8 @@ class DatabaseConnection
         global $wpdb;
 
         $sql = "SELECT fajr_jamah FROM  $this->dbTable WHERE d_date =  CURDATE()  + INTERVAL 1 DAY;";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
         $row = $wpdb->get_row($sql, ARRAY_A);
         $result = $row['fajr_jamah'];
 
@@ -124,12 +138,16 @@ class DatabaseConnection
             ON today.d_date = tomorrow.d_date + INTERVAL 1 DAY";
         
         $sql = $baseSql . " WHERE today.d_date = CURDATE() + INTERVAL 1 DAY;";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
 
         $result = $wpdb->get_row($sql, ARRAY_A);
         if ( empty($result) ) {
             $sql = $baseSql . "
             WHERE today.d_date = (select d_date from $this->dbTable
             WHERE month(d_date) = ". date('m') ." AND day(d_date) = ". date('d') .") + INTERVAL 1 DAY;";
+            $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
             $result = $wpdb->get_row($sql, ARRAY_A);
         }
         
@@ -156,6 +174,7 @@ class DatabaseConnection
         $sql = "SELECT " . $jamahNamesString . "
             FROM $this->dbTable
             WHERE d_date = CURDATE() + INTERVAL 1 DAY;";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
 
         $result = $wpdb->get_row($sql, ARRAY_A);
 
@@ -164,6 +183,8 @@ class DatabaseConnection
             FROM $this->dbTable
             WHERE d_date = (select d_date from $this->dbTable
             WHERE month(d_date) = ". date('m') ." AND day(d_date) = ". date('d') .") + INTERVAL 1 DAY;";
+            $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
             $result = $wpdb->get_row($sql, ARRAY_A);
         }
         
@@ -179,11 +200,15 @@ class DatabaseConnection
         global $wpdb;
         
         $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = %d AND YEAR(d_date) = %d ORDER BY d_date ASC";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
         $prepared = $wpdb->prepare( $sql, array( (int)$monthNumber, (int)$year ) );
         $result = $wpdb->get_results($prepared, ARRAY_A);
 
         if ( empty($result) ) {
             $sql = "SELECT * FROM  $this->dbTable WHERE month(d_date) = %d and year(d_date) = (select max(year(d_date)) from ". $this->dbTable .") ORDER BY d_date ASC";
+            $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+            
             $prepared = $wpdb->prepare( $sql, array( (int)$monthNumber ) );
             $result = $wpdb->get_results($prepared, ARRAY_A);
         }
@@ -199,6 +224,8 @@ class DatabaseConnection
         global $wpdb;
 
         $sql = "SELECT * FROM  $this->dbTable WHERE is_ramadan = 1 AND YEAR(d_date) = YEAR(CURDATE()) ORDER BY d_date ASC";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
         $result = $wpdb->get_results($sql, ARRAY_A);
         
         if ( empty($result) ){
@@ -263,6 +290,8 @@ class DatabaseConnection
                 PRIMARY KEY  (d_date)
                 ) $charset_collate;";
 
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
         $wpdb->get_var("SHOW TABLES LIKE '". $this->tableName . "'");
         if($wpdb->num_rows != 1) {
             dbDelta( $sql );
@@ -299,6 +328,8 @@ class DatabaseConnection
     {
         global $wpdb;
         $sql = "SELECT DISTINCT year(d_date) as year FROM ". $this->dbTable;
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
         return  $wpdb->get_results($sql, ARRAY_A);
     }
 
@@ -306,6 +337,11 @@ class DatabaseConnection
     {
         global $wpdb;
         $sql = "SELECT * FROM ". $this->dbTable ." WHERE year(d_date) = (select max(year(d_date)) from ". $this->dbTable .")";
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+
+        if (get_option('debugActivated')) {
+            
+        }
         return  $wpdb->get_results($sql, ARRAY_A);
     }
 
@@ -351,6 +387,7 @@ class DatabaseConnection
 
         $datesString = "'" . implode("','", $dates) . "'";
         $sql = "UPDATE " . $this->dbTable . 'SET is_ramadan=1 WHERE d_date IN (' . $datesString . ')';
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
         
         return $wpdb->query($sql);
     }
