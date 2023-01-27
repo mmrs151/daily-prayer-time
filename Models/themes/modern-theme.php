@@ -13,7 +13,7 @@
     <div class="row middle-logo-time">
         <div class="col-md-4 col-sm-4 col-4 logo-column">
             <div class="logo">
-                <img src="assets/Screenshot from 2022-11-07 22-07-01.png" class="img-fluid" alt="logo">
+                <img src="<?php echo get_option('ds-logo');?>" class="img-fluid" alt="logo">
             </div>
         </div>
         <div class="col-md-8 col-sm-8 col-8 time-column">

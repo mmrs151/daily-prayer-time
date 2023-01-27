@@ -13,15 +13,21 @@ if ( ! class_exists('DPTDebugProcessor')) {
         /** @var Resource */
         private static $fp = null;
 
+        /** @var bool */
+        private $isDebug = false;
+
         /**
          * @param array $data
          */
         public function __construct(array $data=null) {
             $this->data = $data;
             $this->filePath = plugin_dir_path(__FILE__) . '../../Assets/debug.csv';
+
             if ($this->fp == null) {
                 $this->fp = fopen($this->filePath, 'a');
             }
+
+            $this->isDebug = get_option('debugActivated');
         }
     
         public function process()
@@ -34,7 +40,9 @@ if ( ! class_exists('DPTDebugProcessor')) {
         public function log($data)
         {
             $data = date("Y-m-d H:i:s ") . $data . PHP_EOL;
-            fwrite($this->fp, $data);
+            if (!empty($this->isDebug)) {
+                fwrite($this->fp, $data);                
+            }
         }
 
         public function getFilePath()
