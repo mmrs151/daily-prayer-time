@@ -899,6 +899,11 @@ p.adhan-copy{
     font-family: monospace;
 }
 
+.qtime {
+    width: 90px;
+    text-align: center;
+}
+
 /*
 ##########################
 x-board-modern start 

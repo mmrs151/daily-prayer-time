@@ -11,7 +11,7 @@ if ( ! class_exists('DPTDebugProcessor')) {
         private $filePath = '';
     
         /** @var Resource */
-        private static $fp = null;
+        private $fp = null;
 
         /** @var bool */
         private $isDebug = false;

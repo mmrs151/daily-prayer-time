@@ -19,7 +19,7 @@ if (!class_exists('DPTQuickUpdateProcessor')) {
         {
             $db = new DatabaseConnection();
             $this->validate($this->data);
-            $db->updateRow($this->data);
+            $db->quickUpdateRow($this->data);
         }
     
         /**

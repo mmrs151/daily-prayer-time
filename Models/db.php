@@ -27,7 +27,7 @@ class DatabaseConnection
         global $wpdb;
 
         $this->tableName = $wpdb->prefix . "timetable";
-        $this->dbTable = "`".DB_NAME ."`.`" .$this->tableName."`";
+        $this->dbTable = "`" . DB_NAME . "`.`" . $this->tableName."`";
         $this->hijriDate = new HijriDate();
 
         $this->logger = new DPTDebugProcessor();
@@ -298,7 +298,7 @@ class DatabaseConnection
         }
     }
 
-    public function updateRow($monthData)
+    public function quickUpdateRow($monthData)
     {
         $this->deleteTransients();
 
@@ -310,6 +310,7 @@ class DatabaseConnection
                 array(
                     'fajr_begins' => $day['fajr_begins'],
                     'fajr_jamah' => $day['fajr_jamah'],
+                    'sunrise' => $day['sunrise'],
                     'zuhr_begins' => $day['zuhr_begins'],
                     'zuhr_jamah' => $day['zuhr_jamah'],
                     'asr_mithl_1' => $day['asr_begins'],
@@ -345,13 +346,14 @@ class DatabaseConnection
         return  $wpdb->get_results($sql, ARRAY_A);
     }
 
-    private function getTransient($transientName)
+    public function resetOtherYears()
     {
-        if (date_i18n( 'g:ia' ) === '12:00am') {
-            delete_transient($transientName);
-        }
-
-        return get_transient($transientName);
+        global $wpdb;
+    
+        $sql = "DELETE FROM " . $this->dbTable . 'WHERE YEAR(d_date) !=' . date('Y');
+        $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+        
+        return $wpdb->query($sql);
     }
 
     private function deleteTransients()
