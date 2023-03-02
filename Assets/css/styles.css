@@ -107,7 +107,11 @@ table.dptTimetable tr, table.dptTimetable th{
      width: 100px;
      white-space: nowrap;
 }
-table.dptTimetable tr td.jamah{
+table.dptTimetable tr td.jamah, td.jamah{
+    font-weight: bold;
+    background-color: #FFE;
+}
+td.dptMonthlyIqamah{
     font-weight: bold;
 }
 table.dptTimetable th.tableHeading{

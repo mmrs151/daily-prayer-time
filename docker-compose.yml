@@ -20,7 +20,7 @@ services:
     build: ./docker
     volumes:
       - wp_data:/var/www/html
-      - /Users/mmrs151/work/wpplugins/daily-prayer-time-for-mosques/trunk:/var/www/html/wp-content/plugins/dpt
+      - ./:/var/www/html/wp-content/plugins/dpt
     ports:
       - 80:80
     restart: always

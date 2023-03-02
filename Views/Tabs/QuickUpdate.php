@@ -121,20 +121,20 @@ if ( empty($data)) {
                 <input type='hidden' name='thisMonth[".$key."][d_date]' value=". $date ." >
 
                 <td><input class='qtime' name='thisMonth[".$key."][fajr_begins]' value=". date('H:i', strtotime(esc_attr($value['fajr_begins']))) ." ></td>
-                <td><input class='qtime' name='thisMonth[".$key."][fajr_jamah]' value=". date('H:i', strtotime(esc_attr($value['fajr_jamah']))) ." ></td>
+                <td class='dptMonthlyIqamah'><input class='qtime' name='thisMonth[".$key."][fajr_jamah]' value=". date('H:i', strtotime(esc_attr($value['fajr_jamah']))) ." ></td>
                 <td><input class='qtime' name='thisMonth[".$key."][sunrise]' value=". date('H:i', strtotime(esc_attr($value['sunrise']))) ." ></td>
 
                 <td><input class='qtime' name='thisMonth[".$key."][zuhr_begins]' value=". date('H:i', strtotime(esc_attr($value['zuhr_begins']))) ." ></td>
-                <td><input class='qtime' name='thisMonth[".$key."][zuhr_jamah]' value=". date('H:i', strtotime(esc_attr($value['zuhr_jamah']))) ." ></td>
+                <td class='dptMonthlyIqamah'><input class='qtime' name='thisMonth[".$key."][zuhr_jamah]' value=". date('H:i', strtotime(esc_attr($value['zuhr_jamah']))) ." ></td>
 
                 <td><input class='qtime' name='thisMonth[".$key."][asr_begins]' value=". date('H:i', strtotime(esc_attr($value['asr_mithl_1']))) ."></td>
-                <td><input class='qtime' name='thisMonth[".$key."][asr_jamah]' value=". date('H:i', strtotime(esc_attr($value['asr_jamah']))) ."></td>
+                <td class='dptMonthlyIqamah'><input class='qtime' name='thisMonth[".$key."][asr_jamah]' value=". date('H:i', strtotime(esc_attr($value['asr_jamah']))) ."></td>
 
                 <td><input class='qtime' name='thisMonth[".$key."][maghrib_begins]' value=". date('H:i', strtotime(esc_attr($value['maghrib_begins']))) ." ></td>
-                <td><input class='qtime' name='thisMonth[".$key."][maghrib_jamah]' value=". date('H:i', strtotime(esc_attr($value['maghrib_jamah']))) ." ></td>
+                <td class='dptMonthlyIqamah'><input class='qtime' name='thisMonth[".$key."][maghrib_jamah]' value=". date('H:i', strtotime(esc_attr($value['maghrib_jamah']))) ." ></td>
 
                 <td><input class='qtime' name='thisMonth[".$key."][isha_begins]' value=". date('H:i', strtotime(esc_attr($value['isha_begins']))) ." ></td>
-                <td><input class='qtime' name='thisMonth[".$key."][isha_jamah]' value=". date('H:i', strtotime(esc_attr($value['isha_jamah']))) ." ></td>
+                <td class='dptMonthlyIqamah'><input class='qtime' name='thisMonth[".$key."][isha_jamah]' value=". date('H:i', strtotime(esc_attr($value['isha_jamah']))) ." ></td>
 
             </tr>
         ";
