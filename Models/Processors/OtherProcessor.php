@@ -19,6 +19,10 @@ if ( ! class_exists('DPTOtherProcessor')) {
             $jumuah = sanitize_text_field($this->data['jumuah'] ?? '');
             delete_option('jumuah');
             add_option('jumuah', $jumuah);
+
+            $khutbahDim = sanitize_text_field($this->data['khutbahDim'] ?? '');
+            delete_option('khutbahDim');
+            add_option('khutbahDim', $khutbahDim);
         
             if (! empty($this->data['asrSelect'])) {
                 $asrSelect = sanitize_text_field($this->data['asrSelect']);

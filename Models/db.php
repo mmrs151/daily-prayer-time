@@ -79,6 +79,15 @@ class DatabaseConnection
         $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
 
         $result = $wpdb->get_row($sql, ARRAY_A);
+
+        if (empty($result)) {
+            $tomorrow = new DateTime('tomorrow');
+            $sql = "SELECT * FROM  $this->dbTable " . 
+            "WHERE month(d_date) = ". $tomorrow->format('m') . " AND day(d_date) = ". $tomorrow->format('d');
+            $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+    
+            $result = $wpdb->get_row($sql, ARRAY_A);
+        }
         
         return $result;
     }
@@ -107,7 +116,20 @@ class DatabaseConnection
         $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
 
         $row = $wpdb->get_row($sql, ARRAY_A);
-        $result = $row['fajr_jamah'];
+        if (isset($row['fajr_jamah'])) {
+            $result = $row['fajr_jamah'];
+        }
+
+        if (empty($result)) {
+            $tomorrow = new DateTime('tomorrow');
+            $sql = "SELECT fajr_jamah FROM  $this->dbTable " .
+            "WHERE month(d_date) = ". $tomorrow->format('m') . " AND day(d_date) = ". $tomorrow->format('d');
+            $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
+    
+            $row = $wpdb->get_row($sql, ARRAY_A);
+            $result = $row['fajr_jamah'];
+    
+        }
 
         return $result;
     }

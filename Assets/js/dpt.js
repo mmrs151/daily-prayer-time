@@ -192,6 +192,12 @@ DPT = {
 
     timeoutScreen: function() {
         var min = jQuery('#screenTimeout').val()
+        var khutbahTimeout = jQuery('#khutbahDim').val()
+        
+        if (khutbahTimeout) {
+            min = khutbahTimeout;
+        }
+
         if (min) {
             jQuery("body").append("<div id='overlay'></div>");
             jQuery('#overlay').animate({

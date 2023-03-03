@@ -100,6 +100,7 @@ if (! empty($_POST['adhanSettings'])) {
 if (! empty($_POST['otherSettings'])) {
     $data = [
         'jumuah' => sanitize_text_field($_POST['jumuah']),
+        'khutbahDim' => sanitize_text_field($_POST['khutbahDim']),
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
         'jamah_chas' => sanitize_text_field($_POST['jamah_changes']),
         'tomorrow_time' => sanitize_text_field($_POST['tomorrow_time'] ?? ''),
@@ -146,7 +147,7 @@ if (! empty($_POST['digitalScreen'])) {
         'quran-chbox' => sanitize_text_field($_POST['quran-chbox'] ?? ''),
         'slider-chbox' => sanitize_text_field($_POST['slider-chbox'] ?? ''),
         'nextPrayerSlide' => sanitize_text_field($_POST['nextPrayerSlide']),
-        'transitionEffect' => sanitize_text_field($_POST['transitionEffect']),
+        'transitionEffect' => sanitize_text_field($_POST['transitionEffect'] ?? ''),
         'transitionSpeed' => sanitize_text_field($_POST['transitionSpeed']),
         'slider1' => sanitize_text_field($_POST['slider1']),
         'slider1Url' => sanitize_text_field($_POST['slider1Url']),

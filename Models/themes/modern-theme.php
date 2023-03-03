@@ -1,3 +1,6 @@
+<?php 
+$html = '';
+?>
 <div class="x-board-modern">
 
 <div class="container-fluid">

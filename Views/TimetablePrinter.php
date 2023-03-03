@@ -405,7 +405,6 @@ class TimetablePrinter
         $now = current_time( 'H:i');
 
         $jamahTime = $this->getJamahTime( $row );
-
         foreach ($jamahTime as $jamah) {
             if ($jamah > $now ) {
                 $prayer = array_search( $jamah, $row ); // asr_jamah or asr_begins
@@ -638,6 +637,33 @@ class TimetablePrinter
 
         if ($now < $fajr || $now > $isha) {
             return 1;
+        }
+
+        return 0;
+    }
+
+    /**
+     * set khutbah dimming time on friday between sunrise and Asr 
+     */
+    protected function getKhutbahDim(array $dbRow): int
+    {
+        if (! $this->todayIsFriday()) {
+            return 0;
+        }
+
+        $userTime = user_current_time( 'H:i');
+        $now = new DateTime();
+        $now->setTimestamp(strtotime($userTime));
+
+        $sunrise = new DateTime();
+        $sunrise->setTimestamp(strtotime($dbRow['sunrise']));
+
+        $asr = new DateTime();
+        $asr->setTimestamp(strtotime($dbRow['asr_begins']));
+
+        if ($now > $sunrise && $now < $asr) {
+            return (int)get_option('khutbahDim');
+
         }
 
         return 0;

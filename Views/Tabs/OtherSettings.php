@@ -9,6 +9,10 @@
                         <td><input style="width: 300px;" type="text" class="jumuah" name="jumuah" size="60" value='<?php echo  get_option("jumuah") ?>'></td>
                     </tr>
                     <tr>
+                        <td class="active-slider" style="width: 300px;">Screen Timeout during Khutbah</td>
+                        <td><input style="width: 50px;" type="text" class="jumuah" name="khutbahDim" size="10" value='<?php echo  get_option("khutbahDim") ?>'></td>
+                    </tr>
+                    <tr>
                         <td>Set Asr start time for monthly calendar</td>
                         <td>
                             <select name="asrSelect" class="form-control">

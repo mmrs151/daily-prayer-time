@@ -160,7 +160,8 @@ function displayImage($slide){
             <li>Select page template <code>Digital Screen Prayer Time</code></li>
             <li>Use shortcode <code>[digital_screen]</code> to display in Monitor</li>
             <li><code>[digital_screen view='vertical']</code> for Mobile diaplay</li>
-            <li><code>[digital_screen view='presentation' slides=image,image,...]</code> display slides only, hiding prayer time</li>
+            <li><code>[digital_screen view='presentation']</code> display slides only, hiding prayer time</li>
+            <li><code>[digital_screen slides="image1Url,image2Url,...image11Url"]</code> Override slides</li>
             <li><code>[digital_screen view='vertical' dim=10]</code> to dim vertically screen for 10 mins when prayer starts</li>
             <li><code>[digital_screen view='vertical' dim=10 scroll='any text']</code> to override scrolling message</li>
             <li><code>[digital_screen view='vertical' dim=10 blink='any text']</code> to override blinking alert message</li>

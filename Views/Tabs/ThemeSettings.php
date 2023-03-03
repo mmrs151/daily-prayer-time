@@ -5,7 +5,7 @@
             <form name="themeSettings" method="post">
                 <div style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center; margin-bottom: 30px;">
                     <span style="font-size: 20px; background-color: #F3F5F6; padding: 10px;">
-                        Prayer time table
+                        Daily Prayer time table
                     </span>
                 </div>
                 <table class='table-sm'>

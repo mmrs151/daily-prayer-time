@@ -145,6 +145,9 @@ class DigitalScreen extends DailyShortCode
         <div class="container-fluid x-board">
             <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
+            
+            <input type="hidden" value="' . $this->getKhutbahDim($this->getRow()) . '" id="khutbahDim">
+            
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             
             <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
@@ -362,20 +365,17 @@ class DigitalScreen extends DailyShortCode
 
     private function getPresentationSlides($transitionSpeed)
     {
-        if (!$this->presentationSlides) {
-            return "<h1>add slides option, ie. <br/>
-                <i><pre> [digital_screen view='presentation' slides=imageLink,imageLink,imageLink]</pre></i></h1>";
-        }
-
+        $this->presentationSlides = $this->getSliderUrls();
         $html = '
                 <div class="carousel-item active height-100" data-bs-interval="'. $transitionSpeed .'">
                     <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
                 </div>';
 
         foreach ($this->presentationSlides as $i => $slideUrl) {
+            if (empty($slideUrl))  continue;
             $html .= '
                 <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <img class="carousel-slide " src="' . $slideUrl . '">
+                    <img class="carousel-slide " src="' . trim($slideUrl) . '">
                 </div>
                 ';
         }
@@ -455,17 +455,13 @@ class DigitalScreen extends DailyShortCode
 
         if ( get_option('slider-chbox') ) {
             $html = "";
-            $slides = array();
+            $slides = $this->getSliderUrls();
 
-            foreach (range(1, 11) as $item) {
-                $slides[] = get_option('slider' . $item);
-            }
-
-            $slides = array_filter($slides);
+            $slides = array_filter(array_map('trim', $slides));
             foreach ($slides as $i => $slide) {
                 $html .= '
                 <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <a href="' . get_option("slider". ($i+1) . "Url") .'" style="color:' . get_option('fontColor') .'">
+                    <a href="' . $slides[$i] . '" style="color:' . get_option('fontColor') .'">
                         ' . $this->getImageOrMessage($slide) . '
                     </a>
                 </div>
@@ -490,6 +486,19 @@ class DigitalScreen extends DailyShortCode
         return null;
     }
 
+    private function getSliderUrls(): array
+    {
+        $slides = [];
+        if ($this->presentationSlides) {
+            return $this->presentationSlides;
+        }
+
+        foreach (range(1, 11) as $item) {
+            $slides[] = get_option('slider' . $item);
+        }
+
+        return $slides;
+    }
 
     private function getImageOrMessage($slide)
     {

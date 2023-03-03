@@ -939,6 +939,11 @@ x-board-modern start
 }
 /* CLOCK END */
 
+.x-board-modern .align-middle-next-prayer {
+    position: relative;
+    top: 50%;
+}
+
 .x-board-modern .container-fluid{
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -993,6 +998,7 @@ x-board-modern start
 .x-board-modern .english-date p{
     padding-left: 45px;
 }
+
 .x-board-modern #banner-section{
     height: 425px;
     background-color: #fff !important;
@@ -1012,13 +1018,10 @@ x-board-modern start
     font-weight: bolder;
     font-family: 'Merriweather', serif;
 }
-.x-board-modern #banner-section .next-prayer-time{
-    padding-top: 130px;
-}
 .x-board-modern #time-table-section{
     background-color: rgb(20,74,67);
-    padding-top: 5px;
-    height: 288px;
+    padding-top: 15px;
+    height: 340px;
 }
 .x-board-modern #time-table-section .row{
     width: 100%;
@@ -1152,9 +1155,6 @@ x-board-modern start
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 130px;
-    }
     .x-board-modern .icon{
         font-size: 23px;
     }
@@ -1222,9 +1222,6 @@ x-board-modern start
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 125px;
-    }
     .x-board-modern .icon{
         font-size: 22px;
     }
@@ -1275,9 +1272,6 @@ x-board-modern start
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 122px;
-    }
     .x-board-modern .icon{
         font-size: 22px;
     }
@@ -1324,9 +1318,6 @@ x-board-modern start
         color: rgb(20,74,67);
         font-weight: bolder;
         font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 122px;
     }
     .x-board-modern .icon{
         font-size: 20px;
@@ -1376,9 +1367,6 @@ x-board-modern start
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 117px;
-    }
 }
 
 @media (max-width: 787px){
@@ -1414,9 +1402,6 @@ x-board-modern start
         color: rgb(20,74,67);
         font-weight: bolder;
         font-family: 'Merriweather', serif;
-    }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 110px;
     }
     .x-board-modern .icon{
         font-size: 17px;
@@ -1511,9 +1496,6 @@ x-board-modern start
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 80px;
-    }
     .x-board-modern .icon{
         font-size: 25px;
     }
@@ -1601,9 +1583,6 @@ x-board-modern start
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 70px;
-    }
     .x-board-modern .icon{
         font-size: 15px;
     }
@@ -1680,9 +1659,6 @@ x-board-modern start
         font-weight: bolder;
         font-family: 'Merriweather', serif;
     }
-    .x-board-modern #banner-section .next-prayer-time{
-        padding-top: 50px;
-    }
     .x-board-modern .icon{
         font-size: 16px;
     }
@@ -1719,60 +1695,4 @@ x-board-modern start
         height: 150px;
         border-bottom: 1px solid #3e605c;
     }
-   
 }
-
-    /*
-    ######################## 
-    x-board-modern finish 
-    ########################
-    */
-    
-    /*Print*/
-    @media print {
-        * {
-            background: initial !important;
-            -webkit-print-color-adjust: exact;
-        }
-
-        body {
-            -webkit-print-color-adjust: exact;
-            background-color: #c30;
-        }
-
-        #monthlyTimetable, #monthlyTimetable * {
-            visibility: visible;
-            font-size: 10px;
-        }
-
-        .monthHeading, .printIcon {
-            display: none;
-            visibility: hidden;
-        }
-
-        span.monthSelector {
-            display: none;
-            visibility: hidden;
-        }
-
-        select.otherMonth {
-            display: none;
-            visibility: hidden;
-        }
-
-        h3.printSiteName {
-            display: block;
-            color: grey !important;
-            font-size: 30px;
-            visibility: visible;
-            margin: 0px !important;
-        }
-
-        table.customStyles tr.highlight, th.highlight, td.highlight {
-            background: transparent !important;
-        }
-
-        p.hijriDate {
-            display: none;
-        }
-    }
