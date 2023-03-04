@@ -76,7 +76,8 @@ if (! empty($_POST['hijriSettings'])) {
         'hijri-ummul-qura' => sanitize_text_field($_POST['hijri-ummul-qura'] ?? ''),
         'hijri-arabic-chbox' => sanitize_text_field($_POST['hijri-arabic-chbox'] ?? ''),
         'hijri-adjust' => sanitize_text_field($_POST['hijri-adjust']),
-        'imsaq' => sanitize_text_field($_POST['imsaq']),
+        'ramadan_chbox' => sanitize_text_field($_POST['ramadan_chbox'] ?? ''),
+        'imsaq' => sanitize_text_field($_POST['imsaq'] ?? ''),
 
     ];
     $hijri = new DPTHijriProcessor($data);
@@ -104,7 +105,6 @@ if (! empty($_POST['otherSettings'])) {
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
         'jamah_chas' => sanitize_text_field($_POST['jamah_changes']),
         'tomorrow_time' => sanitize_text_field($_POST['tomorrow_time'] ?? ''),
-        'ramadan_chbox' => sanitize_text_field($_POST['ramadan_chbox'] ?? ''),
     ];
     $otherProcessor = new DPTOtherProcessor($data);
     $otherProcessor->process();

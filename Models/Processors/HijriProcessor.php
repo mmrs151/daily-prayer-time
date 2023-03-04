@@ -33,6 +33,11 @@ if ( !class_exists('DPTHijriProcessor')) {
             delete_option('hijri-adjust');
             add_option('hijri-adjust', $hijriAdjust);
 
+            $isRamadan = $this->data['ramadan_chbox'] ?? '';
+            $isRamadan = sanitize_text_field($isRamadan);
+            delete_option('ramadan_chbox');
+            add_option('ramadan_chbox', $isRamadan);
+            
             $imsaq = $this->data['imsaq'] ?? '';
             $imsaq = sanitize_text_field($imsaq);
             delete_option('imsaq');

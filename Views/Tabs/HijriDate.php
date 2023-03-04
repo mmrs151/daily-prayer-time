@@ -35,11 +35,21 @@ $hijri = new HijriDate();
                         </td>
                     </tr>
                     <tr>
-                        <td>Imsaq threshold:</td>
-                        <td>
-                            <input type="number" name="imsaq" min="0" max="59" placeholder="15" value="<?php echo esc_attr(get_option('imsaq'))?>">
-                        </td>
+                        <td>Activate Ramadan:</td>
+                            <td><input  type="checkbox" name="ramadan_chbox" value="isRamadan" <?php if(get_option("ramadan_chbox") === 'isRamadan'){ echo 'checked'; } ?>></td>
                     </tr>
+                    <?php if (get_option("ramadan_chbox") === 'isRamadan'): ?>
+                        <tr>
+                            <td class="active-slider" style="width: 300px;">Screen Timeout during Taraweeh</td>
+                            <td><input style="width: 50px;" type="text" class="jumuah" name="taraweehDim" size="10" value='<?php echo  get_option("taraweehDim") ?>'></td>
+                        </tr> 
+                        <tr>
+                            <td>Imsaq threshold:</td>
+                            <td>
+                                <input type="number" name="imsaq" min="0" max="59" placeholder="15" value="<?php echo esc_attr(get_option('imsaq'))?>">
+                            </td>
+                        </tr>
+                    <?php endif ?> 
                 </table>
                 <?php submit_button('Save changes', 'primary', 'hijriSettings'); ?>
             </form>
