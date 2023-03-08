@@ -147,6 +147,7 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
             
             <input type="hidden" value="' . $this->getKhutbahDim($this->getRow()) . '" id="khutbahDim">
+            <input type="hidden" value="' . $this->getTaraweehDim($this->getRow()) . '" id="taraweehDim">
             
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             

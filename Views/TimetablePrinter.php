@@ -669,6 +669,30 @@ class TimetablePrinter
         return 0;
     }
 
+    /**
+     * get diming time for taraweeh during ramadan after isha and before fajr
+     */
+    protected function getTaraweehDim(array $dbRow): int
+    {
+        if (! $this->isRamadan()) {
+            return 0;
+        }
+
+        $userTime = user_current_time( 'H:i');
+        $now = new DateTime();
+        $now->setTimestamp(strtotime($userTime));
+
+        $maghrib = new DateTime();
+        $maghrib->setTimestamp(strtotime($dbRow['maghrib_jamah']));
+
+        if ($now > $maghrib) {
+            return (int)get_option('taraweehDim');
+
+        }
+
+        return 0;
+    }
+
     protected function getNextPrayerClass($prayerName, $row, $isFajr=false)
     {
         $nextPrayerName = $this->getNextPrayer($row);

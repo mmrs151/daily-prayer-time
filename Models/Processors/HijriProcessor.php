@@ -38,6 +38,10 @@ if ( !class_exists('DPTHijriProcessor')) {
             delete_option('ramadan_chbox');
             add_option('ramadan_chbox', $isRamadan);
             
+            $taraweehDim = sanitize_text_field($this->data['taraweehDim'] ?? '');
+            delete_option('taraweehDim');
+            add_option('taraweehDim', $taraweehDim);
+
             $imsaq = $this->data['imsaq'] ?? '';
             $imsaq = sanitize_text_field($imsaq);
             delete_option('imsaq');

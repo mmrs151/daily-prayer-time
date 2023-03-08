@@ -666,6 +666,7 @@ height: 70%;
     font-size: 3vh;
     background: red;
     font-weight: 800;
+    text-align: right;
 }
 
 div.jamahChanges-horizontal span{

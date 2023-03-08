@@ -193,9 +193,14 @@ DPT = {
     timeoutScreen: function() {
         var min = jQuery('#screenTimeout').val()
         var khutbahTimeout = jQuery('#khutbahDim').val()
+        var taraweehTimeout = jQuery('#taraweehDim').val()
         
         if (khutbahTimeout) {
-            min = khutbahTimeout;
+            min = khutbahTimeout; // khutbah is the prayer
+        }
+
+        if (taraweehTimeout) {
+            min += taraweehTimeout; // taraweeh is the additional prayer
         }
 
         if (min) {
