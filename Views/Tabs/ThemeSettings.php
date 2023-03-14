@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-sm-6 col-xs-12">
             <form name="themeSettings" method="post">
+            <?php echo wp_nonce_field( 'themeSettings'); ?>
                 <div style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center; margin-bottom: 30px;">
                     <span style="font-size: 20px; background-color: #F3F5F6; padding: 10px;">
                         Daily Prayer time table

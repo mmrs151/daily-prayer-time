@@ -13,6 +13,7 @@ Ramadan Fajr Adhan will play at fajr start time.
     <div class="row">
         <div class="col-sm-8 col-xs-12">
             <form name="adhanSettings" method="post" class="form-group">
+            <?php echo wp_nonce_field( 'adhanSettings'); ?>
                 <table class="table">
                 <tr>
                         <td>Activate Adhan:</td>

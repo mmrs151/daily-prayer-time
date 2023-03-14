@@ -26,6 +26,7 @@ if ( isset($rows[1])) {
     <div class="row">
         <div class="col-sm-6 col-xs-12">
             <form enctype="multipart/form-data" id="csvUpload" name="csvUpload" method="post" action="">
+            <?php echo wp_nonce_field( 'csvUpload'); ?>
                 <div class="upload-step">
                     <label>Select your nearest city:</label>
                     <select class="form-select" data-live-search="true" name="city">
@@ -33,7 +34,7 @@ if ( isset($rows[1])) {
                         <?php                    
                         foreach ($cities as $city) {
                             $selected = $city['id'] == get_transient('nearest_city') ? "selected" : null;
-                            echo "<option class='auto-settings' value=" . esc_attr($city['id']) . "  ". $selected.">" . esc_html($city["country"]) . ", " . esc_html($city['city']) . "</option>";
+                            echo "<option class='auto-settings' value=" . esc_attr($city['id']) . "  ". $selected.">" . esc_html($city["country"]) . ", " . esc_html($city['city']) . " (Lat:" . esc_html($city['lat']) .")</option>";
                         }
                         ?>
                     </select>

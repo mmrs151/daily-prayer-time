@@ -11,6 +11,7 @@ function displayImage($slide){
     <div class="row">
         <div class="col-sm-6 col-xs-12">
             <form class="form-group" name="digitalScreen" method="post">
+            <?php echo wp_nonce_field( 'digitalScreen'); ?>
                 <table class="table">
                     <tr>
                         <td class="active-slider">Site Logo</td>

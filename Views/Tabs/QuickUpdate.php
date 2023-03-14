@@ -81,7 +81,9 @@ if ( empty($data)) {
         </div>
     </form>
     <div class='row'>
-    <form name='quickUpdate' method='post'>        
+    <form name='quickUpdate' method='post'>
+    " . wp_nonce_field( 'quickUpdate') . "
+    
         <table class='table table-condensed '>
             <thead class='bg-success text-white'>
                 <tr>

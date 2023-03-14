@@ -119,11 +119,11 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             
                 $table .= "
                 <td ". $classFasting .">" . $this->formatDateForPrayer($day['fajr_begins']). "</td>
-                <td class='jamah'>" . $this->formatDateForPrayer($day['fajr_jamah']). "</td>
+                <td class='jamahMonth'>" . $this->formatDateForPrayer($day['fajr_jamah']). "</td>
                 <td>" . $this->formatDateForPrayer($day['sunrise']). "</td>
 
                 <td>" . $this->formatDateForPrayer($day['zuhr_begins']). "</td>
-                <td class='jamah'>" . $this->formatDateForPrayer($day['zuhr_jamah']). "</td>";
+                <td class='jamahMonth'>" . $this->formatDateForPrayer($day['zuhr_jamah']). "</td>";
 
             if ($asrMethod != 'both') {
                 $table .= "<td>" . $this->formatDateForPrayer($day['asr_begins']). "</td>";
@@ -132,13 +132,13 @@ class MonthlyTimetablePrinter extends TimetablePrinter
                     <td>" . $this->formatDateForPrayer($day['asr_mithl_2']). "</td>";
             }
             $table .= "
-                <td class='jamah'>" . $this->formatDateForPrayer($day['asr_jamah']). "</td>
+                <td class='jamahMonth'>" . $this->formatDateForPrayer($day['asr_jamah']). "</td>
 
                 <td ". $classFasting .">" . $this->formatDateForPrayer($day['maghrib_begins']). "</td>
-                <td class='jamah'>" . $this->formatDateForPrayer($day['maghrib_jamah']). "</td>
+                <td class='jamahMonth'>" . $this->formatDateForPrayer($day['maghrib_jamah']). "</td>
 
                 <td>" . $this->formatDateForPrayer($day['isha_begins']). "</td>
-                <td class='jamah'>" . $this->formatDateForPrayer($day['isha_jamah']). "</td>
+                <td class='jamahMonth'>" . $this->formatDateForPrayer($day['isha_jamah']). "</td>
                 </tr>";
         }
 

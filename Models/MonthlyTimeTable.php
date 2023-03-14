@@ -59,7 +59,7 @@ class MonthlyTimeTable
     {
 
         $db = new DatabaseConnection();
-        if ( $month == 13 ) {
+        if ( empty($month) && $this->timetablePrinter->isRamadan() ) {
             return $db->getPrayerTimeForRamadan();
         }
         return $db->getPrayerTimeForMonth($month, date('Y'));

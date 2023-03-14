@@ -8,6 +8,8 @@ $timetable = new TimetablePrinter();
     <div class="row">
         <div class="col-sm-6 col-xs-12">
             <form name="languageSettings" method="post">
+            <?php echo wp_nonce_field( 'languageSettings'); ?>
+
                 <table class="table table-stri table-bordered table-primary">
                     <tr>
                         <th colspan="6" class="text-center">Display prayer name in your language</th>

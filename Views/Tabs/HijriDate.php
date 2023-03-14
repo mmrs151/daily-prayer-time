@@ -9,6 +9,7 @@ $hijri = new HijriDate();
     <div class="row">
         <div class="col-sm-6 col-xs-12">
             <form name="hijriSettings" method="post">
+            <?php echo wp_nonce_field( 'hijriSettings'); ?>
                 <table class="table">
                     <tr>
                         <td>Display Hijri date:</td>

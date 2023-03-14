@@ -9,6 +9,7 @@ $debug = new DPTDebugProcessor();
     <div class="row">
         <div class="col-sm-4 col-xs-2">
             <form name="debugLogSettings" method="post" class="form-group">
+            <?php echo wp_nonce_field( 'debugLogSettings'); ?>
                 <table class="table">
                     <tr>
                         <td>Activate:(experimental)</td>

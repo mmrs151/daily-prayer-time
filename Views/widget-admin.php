@@ -18,7 +18,7 @@ require_once( 'TimetablePrinter.php' );
 
 ini_set('auto_detect_line_endings', true);
 
-if (isset($_POST['set-start-time'])) {
+if (isset($_POST['set-start-time'])  && check_admin_referer( 'csvUpload' )) {
     $data = [
         'city' => sanitize_text_field($_POST['city']),
         'method' => sanitize_text_field($_POST['method']),
@@ -38,7 +38,7 @@ if (isset($_POST['set-start-time'])) {
     $startTimeProcessor->process();
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && check_admin_referer( 'csvUpload' )) {
     $csvProcessor = new DPTCsvProcessor($_FILES);
 
     if ( $csvProcessor->isValidFile() ) {
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-if (! empty($_POST['languageSettings'])) {
+if (! empty($_POST['languageSettings'])  && check_admin_referer( 'languageSettings' )) {
     $data = [
         'prayersLocal' => array_map( 'sanitize_text_field', $_POST['prayersLocal']),
         'headersLocal' => array_map( 'sanitize_text_field', $_POST['headersLocal']),
@@ -70,7 +70,7 @@ if (! empty($_POST['languageSettings'])) {
     $languageProcessor->process();
 }
 
-if (! empty($_POST['hijriSettings'])) {
+if (! empty($_POST['hijriSettings']) && check_admin_referer( 'hijriSettings' )) {
     $data = [
         'hijri-chbox' => sanitize_text_field($_POST['hijri-chbox'] ?? ''),
         'hijri-ummul-qura' => sanitize_text_field($_POST['hijri-ummul-qura'] ?? ''),
@@ -85,7 +85,7 @@ if (! empty($_POST['hijriSettings'])) {
     $hijri->process();
 }
 
-if (! empty($_POST['adhanSettings'])) {
+if (! empty($_POST['adhanSettings']) && check_admin_referer( 'adhanSettings' )) {
     $data = [
         'activateAdhan' => sanitize_text_field($_POST['activateAdhan'] ?? ''),
         'fajrAdhanUrl' => sanitize_text_field($_POST['fajrAdhanUrl']),
@@ -99,7 +99,7 @@ if (! empty($_POST['adhanSettings'])) {
     $adhanProcessor->process();
 }
 
-if (! empty($_POST['otherSettings'])) {
+if (! empty($_POST['otherSettings']) && check_admin_referer( 'otherSettings' )) {
     $data = [
         'jumuah' => sanitize_text_field($_POST['jumuah']),
         'khutbahDim' => sanitize_text_field($_POST['khutbahDim']),
@@ -111,12 +111,12 @@ if (! empty($_POST['otherSettings'])) {
     $otherProcessor->process();
 }
 
-if (! empty($_POST['quickUpdate'])) {
+if (! empty($_POST['quickUpdate']) && check_admin_referer( 'quickUpdate' )) {
     $quickUpdateProcessor = new DPTQuickUpdateProcessor($_POST['thisMonth']);
     $quickUpdateProcessor->process();
 }
 
-if (! empty($_POST['themeSettings'])) {
+if (! empty($_POST['themeSettings']) && check_admin_referer( 'themeSettings' )) {
     $data = [
         'hideTableBorder' => sanitize_text_field($_POST['hideTableBorder'] ?? ''),
         'tableBackground' => sanitize_text_field($_POST['tableBackground']),
@@ -138,7 +138,7 @@ if (! empty($_POST['themeSettings'])) {
     $themeSettings->process();
 }
 
-if (! empty($_POST['digitalScreen'])) {
+if (! empty($_POST['digitalScreen']) && check_admin_referer( 'digitalScreen' )) {
     $data = [
         'ds-logo' => sanitize_text_field($_POST['ds-logo']),
         'ds-scroll-text' => sanitize_text_field($_POST['ds-scroll-text']),
@@ -177,7 +177,7 @@ if (! empty($_POST['digitalScreen'])) {
     $themeSettings->process();
 }
 
-if (! empty($_POST['debugLogSettings'])) {
+if (! empty($_POST['debugLogSettings']) && check_admin_referer( 'debugLogSettings' )) {
     $data = [
         'debugLog' => sanitize_text_field($_POST['debugLog'] ?? '')
     ];
