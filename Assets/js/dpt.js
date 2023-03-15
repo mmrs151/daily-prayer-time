@@ -12,6 +12,7 @@ DPT = {
         this.refreshBeforeIqamah();
         this.continiousMarquee();
         this.digitialClock();
+
         this.displayCustomAngleFields();
         this.dimMonitorOvernight();
         this.dsRefreshQuranVerse();
@@ -195,21 +196,21 @@ DPT = {
         var khutbahTimeout = jQuery('#khutbahDim').val()
         var taraweehTimeout = jQuery('#taraweehDim').val()
         
-        if (khutbahTimeout) {
+        if (khutbahTimeout > 0) {
             min = khutbahTimeout; // khutbah is the prayer
         }
 
-        if (taraweehTimeout) {
+        if (taraweehTimeout > 0) {
             min += taraweehTimeout; // taraweeh is the additional prayer
         }
 
-        if (min) {
+        if (min > 0) {
             jQuery("body").append("<div id='overlay'></div>");
             jQuery('#overlay').animate({
                 opacity: 0.9,
             }, (10000), function() {
             });
-            // setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 * parseInt(min) );
+            setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 * parseInt(min) );
             setTimeout(function() { window.location.reload() }, 1000 * 60 * parseInt(min) );
         } else {
             setTimeout(function() { window.location.reload() }, 1000 * 60 );
@@ -227,8 +228,6 @@ DPT = {
                 }, (1000*60*2), function() {
             });
 
-        } else {
-            setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 );
         }
     },
 
@@ -288,7 +287,6 @@ DPT = {
 
     digitialClock: function ()
     {
-
         var newDate = new Date();
 
         newDate.setDate(newDate.getDate());

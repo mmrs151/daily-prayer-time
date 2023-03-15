@@ -57,9 +57,8 @@ class MonthlyTimeTable
      */
     private function getMonthlyCalendar($month)
     {
-
         $db = new DatabaseConnection();
-        if ( empty($month) && $this->timetablePrinter->isRamadan() ) {
+        if ( $month == 13 ) { // ramadan
             return $db->getPrayerTimeForRamadan();
         }
         return $db->getPrayerTimeForMonth($month, date('Y'));

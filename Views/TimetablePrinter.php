@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/../Models/HijriDate.php');
+require_once(__DIR__ . '/../Models/DPTHelper.php');
 
 class TimetablePrinter
 {
@@ -90,13 +91,16 @@ class TimetablePrinter
     /** $var bool */
     protected $isHorizontal = false;
 
+    /** @var DPTHelper */
+    private $dptHelper;
+
     public function __construct()
     {
         $this->localPrayerNames = $this->getLocalPrayerNames();
         $this->localHeaders = $this->getLocalHeaders();
         $this->localNumbers = $this->getLocalNumbers();
         $this->localTimes = $this->getLocalTimes();
-
+        $this->dptHelper = new DPTHelper();
         $this->hijriDate = new HijriDate();
         $this->hijridateString = $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true);
     }
@@ -404,7 +408,7 @@ class TimetablePrinter
     {
         $now = current_time( 'H:i');
 
-        $jamahTime = $this->getJamahTime( $row );
+        $jamahTime = $this->dptHelper->getJamahTime( $row );
         foreach ($jamahTime as $jamah) {
             if ($jamah > $now ) {
                 $prayer = array_search( $jamah, $row ); // asr_jamah or asr_begins

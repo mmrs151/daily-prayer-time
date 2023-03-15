@@ -2,6 +2,7 @@
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 require_once('HijriDate.php');
+require_once('DPTHelper.php');
 require_once('Processors/DebugProcessor.php');
 
 
@@ -19,8 +20,8 @@ class DatabaseConnection
     /** @var HijriDate */
     private $hijriDate;
 
-    /** @var TimetablePrinter */
-    private $timetablePrinter;
+    /** @var DPTHelper */
+    private $dptHelper;
 
     /** @var DebugProcessor */
     private $logger;
@@ -32,7 +33,7 @@ class DatabaseConnection
         $this->tableName = $wpdb->prefix . "timetable";
         $this->dbTable = "`" . DB_NAME . "`.`" . $this->tableName."`";
         $this->hijriDate = new HijriDate();
-        $this->timetablePrinter = new TimetablePrinter();
+        $this->dptHelper = new DPTHelper();
 
         $this->logger = new DPTDebugProcessor();
         $this->createTableIfNotExist();
@@ -68,16 +69,8 @@ class DatabaseConnection
             $result['tomorrow'] = $tomorrowPrayerTimes;            
         }
 
-        /**
-         * if today is friday
-         *  and now is before zuhr then set zuhr to jummah 1
-         *  if now is > jummah1 and now is < jummah 3, then set zuhr to jummah2
-         *  if now is > jummah2 and now is < asr, then set zuhr to jummah3
-         * 
-         * if tomorrow is friday, then set tomorrow zuhr to jummah1
-         */
-var_dump($result);
-var_dump($result['zuhr_jamah']);
+        $result = $this->dptHelper->updateZuhrWithJummahTimes($result);
+        
         return $result;
     }
 
@@ -263,7 +256,7 @@ var_dump($result['zuhr_jamah']);
         $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
 
         $result = $wpdb->get_results($sql, ARRAY_A);
-        
+
         if ( empty($result) ){
             $dates = $this->getRamadanDaysFromCalendar();
             $this->updateRamadanDays($dates);
@@ -430,7 +423,6 @@ var_dump($result['zuhr_jamah']);
         return $wpdb->query($sql);
     }
 }
-
 
 function user_current_time($format="")
 {
