@@ -518,7 +518,6 @@ class DigitalScreen extends DailyShortCode
     private function getRefreshPoints()
     {
 	    $result = $this->db->getPrayerTimeForToday();
-	    var_dump($result);
         $iqamahTimes =  array($result['fajr_jamah'], $result['sunrise'], $result['zuhr_jamah'], $result['asr_jamah'], $result['maghrib_jamah'], $result['isha_jamah']);
 
         $refreshPoints = array();
