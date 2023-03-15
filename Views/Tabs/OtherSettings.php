@@ -7,9 +7,9 @@
                 <table class="table">
                     <tr>
                         <td class="active-slider" style="width: 300px;">Jumu'ah</td>
-                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah" value='<?php echo  get_option("jumuah") ?>'></td>
-                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah" value='<?php echo  get_option("jumuah") ?>'></td>
-                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah" value='<?php echo  get_option("jumuah") ?>'></td>
+                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah1" value='<?php echo  get_option("jumuah1") ?>'></td>
+                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah2" value='<?php echo  get_option("jumuah2") ?>'></td>
+                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah3" value='<?php echo  get_option("jumuah3") ?>'></td>
                     </tr>
                     <tr>
                         <td class="active-slider" style="width: 300px;">Screen Timeout during Khutbah</td>

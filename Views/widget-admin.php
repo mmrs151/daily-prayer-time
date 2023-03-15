@@ -101,7 +101,9 @@ if (! empty($_POST['adhanSettings']) && check_admin_referer( 'adhanSettings' )) 
 
 if (! empty($_POST['otherSettings']) && check_admin_referer( 'otherSettings' )) {
     $data = [
-        'jumuah' => sanitize_text_field($_POST['jumuah']),
+        'jumuah1' => sanitize_text_field($_POST['jumuah1']),
+        'jumuah2' => sanitize_text_field($_POST['jumuah2']),
+        'jumuah3' => sanitize_text_field($_POST['jumuah3']),
         'khutbahDim' => sanitize_text_field($_POST['khutbahDim']),
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
         'jamah_chas' => sanitize_text_field($_POST['jamah_changes']),

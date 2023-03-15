@@ -16,9 +16,17 @@ if ( ! class_exists('DPTOtherProcessor')) {
     
         public function process()
         {
-            $jumuah = sanitize_text_field($this->data['jumuah'] ?? '');
-            delete_option('jumuah');
-            add_option('jumuah', $jumuah);
+            $jumuah1 = sanitize_text_field($this->data['jumuah1'] ?? '');
+            delete_option('jumuah1');
+            add_option('jumuah1', $jumuah1);
+
+            $jumuah2 = sanitize_text_field($this->data['jumuah2'] ?? '');
+            delete_option('jumuah2');
+            add_option('jumuah2', $jumuah2);
+
+            $jumuah3 = sanitize_text_field($this->data['jumuah3'] ?? '');
+            delete_option('jumuah3');
+            add_option('jumuah3', $jumuah3);
 
             $khutbahDim = sanitize_text_field($this->data['khutbahDim'] ?? '');
             delete_option('khutbahDim');
@@ -41,5 +49,4 @@ if ( ! class_exists('DPTOtherProcessor')) {
             add_option('tomorrow_time', $tomorrowTime);
         }
     }
-    
 }

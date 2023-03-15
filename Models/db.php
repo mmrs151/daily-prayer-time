@@ -64,6 +64,7 @@ class DatabaseConnection
             $result['tomorrow'] = $tomorrowPrayerTimes;            
         }
 
+var_dump($result);
         return $result;
     }
 
