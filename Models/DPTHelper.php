@@ -243,6 +243,10 @@ class DPTHelper
      */
     public function updateZuhrWithJummahTimes(array $row)
     {
+        $jumuah1 =get_option('jumuah1');
+        $jumuah2 = get_option('jumuah2');
+        $jumuah3 = get_option('jumuah3');
+
         // if($this->dptHelper->todayIsFriday()) {
             $userTime = user_current_time( 'H:i');
             $now = new DateTime();
@@ -254,21 +258,21 @@ class DPTHelper
             $asr = new DateTime();
             $asr->setTimestamp(strtotime($row['asr_jamah']));
             
-            $jumuah1 = new DateTime();
-            $jumuah1->setTimestamp(strtotime(get_option('jumuah1')));
+            $jumuah1dt = new DateTime();
+            $jumuah1dt->setTimestamp(strtotime($jumuah1));
 
-            $jumuah2 = new DateTime();
-            $jumuah2->setTimestamp(strtotime(get_option('jumuah2')));
+            $jumuah2dt = new DateTime();
+            $jumuah2dt->setTimestamp(strtotime($jumuah2));
             
-            $jumuah3 = new DateTime();
-            $jumuah3->setTimestamp(strtotime(get_option('jumuah3')));
+            $jumuah3dt = new DateTime();
+            $jumuah3dt->setTimestamp(strtotime($jumuah3));
 
-            if ($now < $zuhr) {
-                $row['zuhr_jamah'] = $jumuah1->format('H:i:s');
-            } else if ($now > $jumuah1 && $now < $jumuah2) {
-                $row['zuhr_jamah'] = $jumuah2->format('H:i:s');
-            } else if ( $now > $jumuah2 && $now < $asr) {
-                $row['zuhr_jamah'] = $jumuah3->format('H:i:s');
+            if (!empty($jumuah1) && $now < $zuhr) {
+                $row['zuhr_jamah'] = $jumuah1dt->format('H:i:s');
+            } else if (!empty($jumuah2) && ($now > $jumuah1dt && $now < $jumuah2dt)) {
+                $row['zuhr_jamah'] = $jumuah2dt->format('H:i:s');
+            } else if (!empty($jumuah3) && ($now > $jumuah2dt && $now < $asr)) {
+                $row['zuhr_jamah'] = $jumuah3dt->format('H:i:s');
             }
         // }
 
