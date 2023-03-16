@@ -1,10 +1,8 @@
 <?php
 require_once('db.php');
-require_once(__DIR__.'/../Views/DailyTimetablePrinter.php');
-require_once(__DIR__.'/../Views/TimetablePrinter.php' );
-require_once (__DIR__ .'/QuranADay/VersePrinter.php');
-
-
+require_once(__DIR__ .'/../Views/DailyTimetablePrinter.php');
+require_once(__DIR__ .'/../Views/TimetablePrinter.php' );
+require_once(__DIR__ .'/QuranADay/VersePrinter.php');
 
 class DailyShortCode extends TimetablePrinter
 {

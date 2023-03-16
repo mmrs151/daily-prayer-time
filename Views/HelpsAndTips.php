@@ -49,7 +49,7 @@
         <li>dim=number of minutes to dim the screen after Jamaat start</li>
         <li>scroll=any text scroll_link=url to make the text clickable</li>
         <li>blink=any text blink_link=url to make the text clickable</li>
-        <li>disable_overnight_dim=true <i>(disable dimming overnight dimming of the digital screen )</i></li>
+        <li>disable_overnight_dim=true <i>(disable overnight dimming of the digital screen )</i></li>
         <li>deactivate_tomorrow=true <i>(Deactivate tomorrow's prayer time after a prayer finished)</i></li>
     </ol>
 </p>

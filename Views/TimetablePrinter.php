@@ -222,14 +222,7 @@ class TimetablePrinter
      */
     public function formatDate($mysqlDate, $format=null)
     {
-        $phpDate = strtotime($mysqlDate);
-
-        $date =  date( get_option('date_format'), $phpDate );
-        if ($format) {
-            $date = date($format, $phpDate);
-        }
-
-        return $date;
+        return $this->dptHelper->formatDate($mysqlDate, $format);
     }
 
     /**
@@ -507,13 +500,7 @@ class TimetablePrinter
      */
     protected function getIqamahClass($number)
     {
-        if ( $number > 30 ) {
-            return 'green';
-        } elseif ( $number > 15 ) {
-            return 'orange';
-        }
-
-        return 'red';
+        return $this->dptHelper->getIqamahClass($number);
     }
 
     protected function getJamahChange(array $row, $isDigitalScreen=false, $orientation="")
@@ -575,48 +562,22 @@ class TimetablePrinter
 
     protected function tomorrowIsFriday()
     {
-        return date_i18n('D') == 'Thu';
+        return $this->dptHelper->tomorrowIsFriday();
     }
 
-    /**
-     * @param $day
-     * @param $month
-     * @param $year
-     * @param array $dbRow
-     * @param bool $forMonth
-     * @return string
-     */
     public function getHijriDate($day, $month, $year, $dbRow, $forMonth=false)
     {
-        $hijriCheckbox = get_option('hijri-chbox');
-        if ( ! empty($hijriCheckbox) ) {
-            if( ! empty($dbRow['hijri_date']) ) {
-                $hijriDate = $dbRow['hijri_date'];
-            } else {
-                $hijridateArray = $this->hijriDate->getDate($day, $month, $year, false, $this->isSunset($dbRow, $forMonth));
-                $hijriDate = $hijridateArray['day']. ' '. $hijridateArray['month'] . ' ' . $hijridateArray['year'];
-            }
-
-            return '<p class="hijriDate"> '. $hijriDate .'</p>';
-        }
-        return;
+        return $this->dptHelper->getHijriDate($day, $month, $year, $dbRow, $forMonth);
     }
 
     public function isJumahDisplay($dbRow)
     {
-        if ( date_i18n('D') == 'Fri' &&
-            current_time('timestamp') > strtotime($dbRow['sunrise']) &&
-            current_time('timestamp') <= strtotime($dbRow['zuhr_jamah']) + 60
-        ) {
-            return true;
-        }
-
-        return false;
+        return $this->dptHelper->isJumahDisplay($dbRow);
     }
 
     private function isSunset($dbRow, $forMonth=false)
     {
-        return  !$forMonth && current_time('timestamp') > strtotime($dbRow['maghrib_begins']);
+        return $this->dptHelper->isSunset($dbRow, $forMonth);
     }
 
     /**
@@ -624,26 +585,7 @@ class TimetablePrinter
      */
     protected function canDimOvernight($dbRow, $disableOvernightDim=false)
     {
-        if ($disableOvernightDim) {
-            return 0;
-        }
-
-        $userTime = user_current_time( 'H:i');
-        $now = new DateTime();
-        $now->setTimestamp(strtotime($userTime));
-
-        $isha = new DateTime();
-        $isha->setTimestamp(strtotime($dbRow['isha_jamah']));
-        $isha->modify('+30 mins');
-
-        $fajr = new DateTime();
-        $fajr->setTimestamp(strtotime($dbRow['fajr_begins']));
-
-        if ($now < $fajr || $now > $isha) {
-            return 1;
-        }
-
-        return 0;
+        return $this->dptHelper->canDimOvernight($dbRow, $disableOvernightDim);
     }
 
     /**
@@ -651,26 +593,7 @@ class TimetablePrinter
      */
     protected function getKhutbahDim(array $dbRow): int
     {
-        if (! $this->todayIsFriday()) {
-            return 0;
-        }
-
-        $userTime = user_current_time( 'H:i');
-        $now = new DateTime();
-        $now->setTimestamp(strtotime($userTime));
-
-        $sunrise = new DateTime();
-        $sunrise->setTimestamp(strtotime($dbRow['sunrise']));
-
-        $asr = new DateTime();
-        $asr->setTimestamp(strtotime($dbRow['asr_begins']));
-
-        if ($now > $sunrise && $now < $asr) {
-            return (int)get_option('khutbahDim');
-
-        }
-
-        return 0;
+        return $this->dptHelper->getKhutbahDim($dbRow);
     }
 
     /**
@@ -678,45 +601,16 @@ class TimetablePrinter
      */
     protected function getTaraweehDim(array $dbRow): int
     {
-        if (! $this->isRamadan()) {
-            return 0;
-        }
-
-        $userTime = user_current_time( 'H:i');
-        $now = new DateTime();
-        $now->setTimestamp(strtotime($userTime));
-
-        $maghrib = new DateTime();
-        $maghrib->setTimestamp(strtotime($dbRow['maghrib_jamah']));
-
-        if ($now > $maghrib) {
-            return (int)get_option('taraweehDim');
-
-        }
-
-        return 0;
+        return $this->dptHelper->getTaraweehDim($dbRow);
     }
 
     protected function getNextPrayerClass($prayerName, $row, $isFajr=false)
     {
-        $nextPrayerName = $this->getNextPrayer($row);
-        if ($this->todayIsFriday() && $nextPrayerName == 'zuhr') {
-            $nextPrayerName = 'jumuah';
-        }
-
-        if ($isFajr && is_null($nextPrayerName)) {
-            return 'class="nextPrayer"';
-        }
-
-        if (strpos($nextPrayerName, $prayerName) !== false) {
-            return 'class="nextPrayer"';
-        }
-
-        return '';
+        return $this->dptHelper->getNextPrayerClass($prayerName, $row, $isFajr);
     }
 
     public function isRamadan()
     {
-        return $this->hijriDate->isRamadan();
+        return $this->dptHelper->isRamadan();
     }
 }

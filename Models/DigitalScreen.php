@@ -44,57 +44,12 @@ class DigitalScreen extends DailyShortCode
     public function __construct($attr=array())
     {
         parent::__construct();
-        if ( isset($attr['view']) ) {
-            $this->isPortrait = ( strtolower($attr['view']) == 'vertical' );
-            $this->isPresentation = ( strtolower($attr['view']) == 'presentation' );
-
-            if ( $this->isPortrait ) {
-                $this->verticalClass = "vertical";
-            }
-
-        }
-
-        if ( isset($attr['dim']) ) {
-            $this->screenTimeout = $attr['dim'];
-        }
-
-        if ( isset($attr['disable_overnight_dim'])) {
-            $this->disableOvernightDim = true;
-        }
-
-        if ( isset($attr['deactivate_tomorrow'])) {
-            add_option('deactivate_tomorrow', true);
-        } else {
-            delete_option('deactivate_tomorrow');
-        }
 
         $this->scrollText = esc_html(stripslashes(get_option("ds-scroll-text")));
         $this->scrollSpeed = empty(get_option("ds-scroll-speed")) ? $this->scrollSpeed : get_option("ds-scroll-speed");
-
-        if ( isset($attr['scroll']) ) {
-            $this->scrollText = stripslashes($attr['scroll']);
-        }
-
-        if ( isset($attr['scroll_link']) ) {
-            $this->scrollUrl = $attr['scroll_link'];
-        }
-
         $this->blinkText = esc_html(stripslashes(get_option("ds-blink-text")));
-        if ( isset($attr['blink']) ) {
-            $this->blinkText = stripslashes($attr['blink']);
-        }
 
-        if ( isset($attr['blink_link']) ) {
-            $this->blinkUrl = $attr['blink_link'];
-        }
-
-        if ( isset($attr['slides']) ) {
-            $this->presentationSlides = explode(',', $attr['slides']);
-        }
-
-        if ( isset($attr['theme']) ) {
-            $this->theme = $attr['theme'];
-        }
+        $this->setAttributes($attr);
     }
 
     public function displayDigitalScreen()
@@ -577,5 +532,55 @@ class DigitalScreen extends DailyShortCode
         $fajrAdhanBefore = empty($min = get_option('fajrAdhanBefore')) ? 15 : $min;
 
         return date( "H:i:s", strtotime( $result['fajr_jamah'] . "-" . $fajrAdhanBefore . " minutes ") ); // fajr iqamah
+    }
+
+    private function setAttributes($attr=array())
+    {
+        if ( isset($attr['view']) ) {
+            $this->isPortrait = ( strtolower($attr['view']) == 'vertical' );
+            $this->isPresentation = ( strtolower($attr['view']) == 'presentation' );
+
+            if ( $this->isPortrait ) {
+                $this->verticalClass = "vertical";
+            }
+        }
+
+        if ( isset($attr['dim']) ) {
+            $this->screenTimeout = $attr['dim'];
+        }
+
+        if ( isset($attr['disable_overnight_dim'])) {
+            $this->disableOvernightDim = true;
+        }
+
+        if ( isset($attr['deactivate_tomorrow'])) {
+            add_option('deactivate_tomorrow', true);
+        } else {
+            delete_option('deactivate_tomorrow');
+        }
+
+        if ( isset($attr['scroll']) ) {
+            $this->scrollText = stripslashes($attr['scroll']);
+        }
+
+        if ( isset($attr['scroll_link']) ) {
+            $this->scrollUrl = $attr['scroll_link'];
+        }
+
+        if ( isset($attr['blink']) ) {
+            $this->blinkText = stripslashes($attr['blink']);
+        }
+
+        if ( isset($attr['blink_link']) ) {
+            $this->blinkUrl = $attr['blink_link'];
+        }
+
+        if ( isset($attr['slides']) ) {
+            $this->presentationSlides = explode(',', $attr['slides']);
+        }
+
+        if ( isset($attr['theme']) ) {
+            $this->theme = $attr['theme'];
+        }
     }
 }

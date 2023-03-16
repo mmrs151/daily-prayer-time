@@ -131,14 +131,6 @@ class DPTHelper
         return $date;
     }
 
-    /**
-     * @param $day
-     * @param $month
-     * @param $year
-     * @param array $dbRow
-     * @param bool $forMonth
-     * @return string
-     */
     public function getHijriDate($day, $month, $year, $dbRow, $forMonth=false)
     {
         $hijriCheckbox = get_option('hijri-chbox');
@@ -152,7 +144,7 @@ class DPTHelper
 
             return '<p class="hijriDate"> '. $hijriDate .'</p>';
         }
-        return;
+        return '';
     }
 
     public function isJumahDisplay($dbRow)
@@ -167,12 +159,12 @@ class DPTHelper
         return false;
     }
 
-    private function isSunset($dbRow, $forMonth=false)
+    public function isSunset($dbRow, $forMonth=false)
     {
         return  !$forMonth && current_time('timestamp') > strtotime($dbRow['maghrib_begins']);
     }
 
-    protected function getNextPrayerClass($prayerName, $row, $isFajr=false)
+    public function getNextPrayerClass($prayerName, $row, $isFajr=false)
     {
         $nextPrayerName = $this->getNextPrayer($row);
         if ($this->todayIsFriday() && $nextPrayerName == 'zuhr') {
@@ -209,34 +201,22 @@ class DPTHelper
         }
     }
 
-    	/**
-     * @param array $row
-     *
-     * @return array
-     */
     public function getJamahTime(array $row)
     {
         $row = $this->updateZuhrWithJummahTimes($row);
 
         $value = array( $row["fajr_jamah"], $row['sunrise'], $row["zuhr_jamah"], $row["asr_jamah"], $row["maghrib_jamah"], $row["isha_jamah"]);
 
-        $prayerName = array(
-            "fajr",
-            "sunrise",
-            "zuhr",
-            "asr",
-            "maghrib",
-            "isha"
-        );
+        $prayerName = ["fajr", "sunrise", "zuhr", "asr", "maghrib", "isha"];
 
-        return array_combine( array_keys($prayerName), $value );
+        return array_combine( $prayerName, $value );
 
     }
 
-        /**
+    /**
      * if today is friday
      *  and now is before zuhr then set zuhr to jummah 1
-     *  if now is > jummah1 and now is < jummah 3, then set zuhr to jummah2
+     *  if now is > jummah1 and now is < jummah 2, then set zuhr to jummah2
      *  if now is > jummah2 and now is < asr, then set zuhr to jummah3
      * 
      * if tomorrow is friday, then set tomorrow zuhr to jummah1
@@ -247,7 +227,7 @@ class DPTHelper
         $jumuah2 = get_option('jumuah2');
         $jumuah3 = get_option('jumuah3');
 
-        // if($this->dptHelper->todayIsFriday()) {
+         if($this->todayIsFriday()) {
             $userTime = user_current_time( 'H:i');
             $now = new DateTime();
             $now->setTimestamp(strtotime($userTime));
@@ -274,7 +254,7 @@ class DPTHelper
             } else if (!empty($jumuah3) && ($now > $jumuah2dt && $now < $asr)) {
                 $row['zuhr_jamah'] = $jumuah3dt->format('H:i:s');
             }
-        // }
+         }
 
         return $row;
     }
