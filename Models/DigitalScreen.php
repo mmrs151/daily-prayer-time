@@ -122,6 +122,18 @@ class DigitalScreen extends DailyShortCode
         include 'themes/modern-theme.php';
     }
 
+    private function getJumuahTimesArray()
+    {
+        $jumuahText = [];
+        $jumuahArray = [get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3')];
+        $jumuahArray = array_filter($jumuahArray);
+        foreach ($jumuahArray as $jumuah) {
+            $jumuahText[] = '<span class="dsJumuah">' . $jumuah . '</span>';
+        }
+        return implode(' | ', $jumuahText);
+
+    }
+
     private function getTopRow()
     {
         $timeClass = "col-sm-3 ";
@@ -257,7 +269,9 @@ class DigitalScreen extends DailyShortCode
             $html .= '
                 <tr ' . $this->getNextPrayerClass('jumuah', $this->row) . '>
                     <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
-                    <td colspan="2" class="prayerName l-red sunrise"><span>' . get_option('jumuah') . '</span></td>
+                    <td colspan="2" class="prayerName l-red sunrise">                    
+                        ' . $this->getJumuahTimesArray() . '                        
+                    </td>
                 </tr>';
         $html .= '
             </tbody>
