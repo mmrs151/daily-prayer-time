@@ -45,7 +45,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         if ( get_option('jumuah1') && ! $this->todayIsFriday() ) {
             $table .= '<tr>
                             <th class="tableHeading">' . stripslashes($this->getLocalHeaders()['jumuah']) . '</th>
-                            <td colspan="6" class="jamah">' . $this->dptHelper->getJumuahTimesArray() . '</td>
+                            <td colspan="6" class="jamah">' . $this->getJumuahTimesArray() . '</td>
                         </tr>';
         }
 
@@ -239,7 +239,7 @@ class DailyTimetablePrinter extends TimetablePrinter
             {
                 $rowspan = "rowspan='2'";
             }
-            $tds .= "<td ". $rowspan ." ".$class.">".$this->getFormattedDateForPrayer( $azan, $key )."</th>";
+            $tds .= "<td ". $rowspan ." ".$class.">".$this->getFormattedDateForPrayer( $azan, $key)."</th>";
         }
 
         return $tds;
@@ -342,7 +342,7 @@ class DailyTimetablePrinter extends TimetablePrinter
                 $trs .='<td class="begins '.$class.'">'.$this->getFormattedDateForPrayer($row[$begins], $key).'</td>
                 </tr>';
             } elseif ($display == 'iqamah') {
-                $trs .='<td class="begins '.$class.'">'.$this->getFormattedDateForPrayer($row[$jamah], $key).'</td>
+                $trs .='<td class="begins '.$class.'">'.$this->getFormattedDateForPrayer($row[$jamah], $key, true).'</td>
                 </tr>';
             } else {
                 $trs .='<td class="begins '.$class.'">'.$this->getFormattedDateForPrayer($row[$begins], $key).'</td>
@@ -354,7 +354,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         if ( get_option('jumuah1') && ! $this->todayIsFriday() ) {
             $trs .= '<tr>
                             <th class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
-                            <td colspan="2" class="jamah">' . $this->dptHelper->getJumuahTimesArray() . '</td>
+                            <td colspan="2" class="jamah">' . $this->getJumuahTimesArray() . '</td>
                         </tr>';
         }
 
@@ -365,7 +365,7 @@ class DailyTimetablePrinter extends TimetablePrinter
     {
         $jumuahTime = get_option('jumuah1');
         if ( ($prayerName === 'zuhr' && $this->todayIsFriday()) && $isJamatTime && $jumuahTime) {
-            return $jumuahTime;
+            return $this->getJumuahTimesArray();
         }
         return $this->formatDateForPrayer($time);
     }

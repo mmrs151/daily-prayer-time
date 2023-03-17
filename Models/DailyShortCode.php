@@ -394,7 +394,7 @@ class DailyShortCode extends TimetablePrinter
                 . stripslashes($this->getLocalHeaders()['jumuah']) . "
             </span>
             <span class='jummahPrayer'>" 
-                . $this->dptHelper->getJumuahTimesArray() . "
+                . $this->getJumuahTimesArray() . "
             </span>
         </span>";
     }

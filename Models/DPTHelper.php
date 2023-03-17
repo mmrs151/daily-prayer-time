@@ -3,11 +3,10 @@ class DPTHelper
 {
     /** @var  HijriDate */
     private $hijriDate;
-    
+
     function __construct()
     {
         $this->hijriDate = new HijriDate();
-        
     }
 
     function todayIsFriday()
@@ -223,7 +222,7 @@ class DPTHelper
      */
     public function updateZuhrWithJummahTimes(array $row)
     {
-        $jumuah1 =get_option('jumuah1');
+        $jumuah1 = get_option('jumuah1');
         $jumuah2 = get_option('jumuah2');
         $jumuah3 = get_option('jumuah3');
 
@@ -259,17 +258,5 @@ class DPTHelper
          }
 
         return $row;
-    }
-
-    public function getJumuahTimesArray()
-    {
-        $jumuahText = [];
-        $jumuahArray = [get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3')];
-        $jumuahArray = array_filter($jumuahArray);
-        foreach ($jumuahArray as $jumuah) {
-            $jumuahText[] = '<span class="dsJumuah">' . $jumuah . '</span>';
-        }
-        return implode(' | ', $jumuahText);
-
     }
 }

@@ -38,6 +38,11 @@ delete_option('zuhr-delay');
 delete_option('asr-delay');
 delete_option('maghrib-delah');
 delete_option('isha-delay');
+
+delete_option('jumuah1');
+delete_option('jumuah2');
+delete_option('jumuah3');
+
 delete_transient('dpt_cities');
 
 $wpdb->query("DROP TABLE IF EXISTS $table");
