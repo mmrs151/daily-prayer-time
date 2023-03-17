@@ -62,7 +62,12 @@
   },
 
   hijri_date_convert: "6 Jumādā al-Ula 1444",
-  jumuah: "1:30, 2:15, 2:45",
+
+  jumuah: [
+    "15:23",
+    "15:30",
+    "15:54"
+    ],
   
   next_prayer: {
     prayerName: "isha",
