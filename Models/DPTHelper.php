@@ -247,12 +247,14 @@ class DPTHelper
             $jumuah3dt = new DateTime();
             $jumuah3dt->setTimestamp(strtotime($jumuah3));
 
-            if (!empty($jumuah1) && $now < $zuhr) {
+            if (!empty($jumuah1) && $now < $jumuah1dt) {
                 $row['zuhr_jamah'] = $jumuah1dt->format('H:i:s');
             } else if (!empty($jumuah2) && ($now > $jumuah1dt && $now < $jumuah2dt)) {
                 $row['zuhr_jamah'] = $jumuah2dt->format('H:i:s');
             } else if (!empty($jumuah3) && ($now > $jumuah2dt && $now < $asr)) {
                 $row['zuhr_jamah'] = $jumuah3dt->format('H:i:s');
+            } else if (!empty($jumuah3) && ($now > $jumuah3dt)) {
+                $row['zuhr_jamah'] = $row['tomorrow']['zuhr_jamah'];
             }
          }
 
