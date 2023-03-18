@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . '/DPTHelper.php');
 
 class DigitalScreen extends DailyShortCode
 {
@@ -41,6 +42,9 @@ class DigitalScreen extends DailyShortCode
     /** @var string */
     private $theme;
 
+    /** @var DPTHelper */
+    private $dptHelper;
+
     public function __construct($attr=array())
     {
         parent::__construct();
@@ -48,7 +52,7 @@ class DigitalScreen extends DailyShortCode
         $this->scrollText = esc_html(stripslashes(get_option("ds-scroll-text")));
         $this->scrollSpeed = empty(get_option("ds-scroll-speed")) ? $this->scrollSpeed : get_option("ds-scroll-speed");
         $this->blinkText = esc_html(stripslashes(get_option("ds-blink-text")));
-
+        $this->dptHelper = new DPTHelper();
         $this->setAttributes($attr);
     }
 
@@ -75,18 +79,6 @@ class DigitalScreen extends DailyShortCode
     private function getModernTheme()
     {
         include 'themes/modern-theme.php';
-    }
-
-    private function getJumuahTimesArray()
-    {
-        $jumuahText = [];
-        $jumuahArray = [get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3')];
-        $jumuahArray = array_filter($jumuahArray);
-        foreach ($jumuahArray as $jumuah) {
-            $jumuahText[] = '<span class="dsJumuah">' . $jumuah . '</span>';
-        }
-        return implode(' | ', $jumuahText);
-
     }
 
     private function getTopRow()
@@ -225,7 +217,7 @@ class DigitalScreen extends DailyShortCode
                 <tr ' . $this->getNextPrayerClass('jumuah', $this->row) . '>
                     <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
                     <td colspan="2" class="prayerName l-red sunrise">                    
-                        ' . $this->getJumuahTimesArray() . '                        
+                        ' . $this->dptHelper->getJumuahTimesArray() . '                        
                     </td>
                 </tr>';
         $html .= '

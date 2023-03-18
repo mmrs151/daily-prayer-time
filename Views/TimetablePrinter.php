@@ -548,7 +548,7 @@ class TimetablePrinter
 
     private function getTimeForIqamahUpdate($key, $time)
     {
-        $jumuahTime = get_option('jumuah');
+        $jumuahTime = get_option('jumuah1');
         if ( $key === $this->getLocalHeaders()['jumuah'] && $jumuahTime) {
             return $jumuahTime;
         }
@@ -557,7 +557,7 @@ class TimetablePrinter
 
     protected function todayIsFriday()
     {
-        return date_i18n('D') == 'Fri';
+        return $this->dptHelper->todayIsFriday();
     }
 
     protected function tomorrowIsFriday()

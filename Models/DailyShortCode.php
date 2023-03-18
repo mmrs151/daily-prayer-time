@@ -3,6 +3,7 @@ require_once('db.php');
 require_once(__DIR__ .'/../Views/DailyTimetablePrinter.php');
 require_once(__DIR__ .'/../Views/TimetablePrinter.php' );
 require_once(__DIR__ .'/QuranADay/VersePrinter.php');
+require_once(__DIR__ .'/DPTHelper.php');
 
 class DailyShortCode extends TimetablePrinter
 {
@@ -42,12 +43,17 @@ class DailyShortCode extends TimetablePrinter
     /** @var bool */
     protected $clsPrayerFinished = '';
 
+    /** @var DPTHelper */
+    private $dptHelper;
+
     public function __construct()
     {
         $this->db = new DatabaseConnection();
         $this->row = $this->db->getPrayerTimeForToday();
         $this->timetablePrinter = new DailyTimetablePrinter();
         $this->deactivateTomorrow = get_option('tomorrow_time');
+        $this->dptHelper = new DPTHelper();
+
         parent::__construct();
     }
 
@@ -59,7 +65,6 @@ class DailyShortCode extends TimetablePrinter
     public function setAnnouncement($text, $day)
     {
         $this->row['announcement'] =  $this->getAnnouncement($day, $text);
-
     }
 
     public function setJamahOnly()
@@ -389,7 +394,7 @@ class DailyShortCode extends TimetablePrinter
                 . stripslashes($this->getLocalHeaders()['jumuah']) . "
             </span>
             <span class='jummahPrayer'>" 
-                . get_option('jumuah') . "
+                . $this->dptHelper->getJumuahTimesArray() . "
             </span>
         </span>";
     }

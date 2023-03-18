@@ -1,13 +1,17 @@
 <?php
 require_once( 'TimetablePrinter.php' );
+require_once(__DIR__ . '/../Models/DPTHelper.php');
 
 class DailyTimetablePrinter extends TimetablePrinter
 {
+    /** @var DPTHelper */
+    private $dptHelper;
 
     public function __construct()
     {
         parent::__construct();
         $this->localPrayerNames = $this->getLocalPrayerNames(false, true);
+        $this->dptHelper = new DPTHelper();
     }
 
     public function horizontalTimeDiv($row)
@@ -38,10 +42,10 @@ class DailyTimetablePrinter extends TimetablePrinter
                   .$this->printJamahTime($row, false).
             '</tr>';
 
-        if ( get_option('jumuah') && ! $this->todayIsFriday() ) {
+        if ( get_option('jumuah1') && ! $this->todayIsFriday() ) {
             $table .= '<tr>
                             <th class="tableHeading">' . stripslashes($this->getLocalHeaders()['jumuah']) . '</th>
-                            <td colspan="6" class="jamah">' . get_option('jumuah') . '</td>
+                            <td colspan="6" class="jamah">' . $this->dptHelper->getJumuahTimesArray() . '</td>
                         </tr>';
         }
 
@@ -346,10 +350,11 @@ class DailyTimetablePrinter extends TimetablePrinter
                 </tr>';
             }
         }
-        if ( get_option('jumuah') && ! $this->todayIsFriday() ) {
+
+        if ( get_option('jumuah1') && ! $this->todayIsFriday() ) {
             $trs .= '<tr>
                             <th class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
-                            <td colspan="2" class="jamah">' . get_option('jumuah') . '</td>
+                            <td colspan="2" class="jamah">' . $this->dptHelper->getJumuahTimesArray() . '</td>
                         </tr>';
         }
 
@@ -358,7 +363,7 @@ class DailyTimetablePrinter extends TimetablePrinter
 
     private function getFormattedDateForPrayer($time, $prayerName, $isJamatTime=false)
     {
-        $jumuahTime = get_option('jumuah');
+        $jumuahTime = get_option('jumuah1');
         if ( ($prayerName === 'zuhr' && $this->todayIsFriday()) && $isJamatTime && $jumuahTime) {
             return $jumuahTime;
         }
