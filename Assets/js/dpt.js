@@ -184,7 +184,6 @@ DPT = {
                         document.getElementsByClassName('timeLeftCountDown')[i].innerHTML = m + ":" + s;
                     }
                 }
-
                 if(m == 0 && s == 0) {
                     DPT.timeoutScreen();
                 }
@@ -197,23 +196,24 @@ DPT = {
         var min = jQuery('#screenTimeout').val()
         var khutbahTimeout = jQuery('#khutbahDim').val()
         var taraweehTimeout = jQuery('#taraweehDim').val()
-        
+        min = parseInt(min);
+
         if (khutbahTimeout > 0) {
-            min = khutbahTimeout; // khutbah is the prayer
+            min = parseInt(khutbahTimeout); // khutbah is the prayer
         }
 
         if (taraweehTimeout > 0) {
-            min += taraweehTimeout; // taraweeh is the additional prayer
+            min += parseInt(taraweehTimeout); // taraweeh is the additional prayer
         }
 
         if (min > 0) {
-            jQuery("body").append("<div id='overlay'></div>");
+            jQuery("body").append("<div id='overlay' class='iqamah'></div>");
             jQuery('#overlay').animate({
                 opacity: 0.9,
             }, (10000), function() {
             });
-            setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 * parseInt(min) );
-            setTimeout(function() { window.location.reload() }, 1000 * 60 * parseInt(min) );
+            setTimeout(function() { jQuery('#overlay').remove(); }, 1000 * 60 * min );
+            setTimeout(function() { window.location.reload() }, 1000 * 60 * min );
         } else {
             setTimeout(function() { window.location.reload() }, 1000 * 60 );
         }
@@ -224,7 +224,7 @@ DPT = {
         var canDimOvernight = jQuery('#overnightDim').val()
 
         if (canDimOvernight == '1') {
-            jQuery("body").append("<div id='overlay'></div>");
+            jQuery("body").append("<div id='overlay' class='overnight'></div>");
             jQuery('#overlay').animate({
                     opacity: 0.9,
                 }, (1000*60*2), function() {

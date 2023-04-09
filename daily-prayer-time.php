@@ -22,7 +22,7 @@ require_once ('API/v1/PrayerTimeController.php');
 require_once ('Models/CustomPluginSettings.php');
 require_once ('Models/QuranADay/QuranDB.php');
 
-define('DPT_PLUGIN_VERSION', "2023.03.20");
+define('DPT_PLUGIN_VERSION', "2023.03.21");
 define('DPT_PLUGIN_FILE', plugin_basename(__FILE__));
 
 class DailyPrayerTime extends WP_Widget
