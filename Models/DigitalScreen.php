@@ -219,7 +219,7 @@ class DigitalScreen extends DailyShortCode
                 <tr ' . $this->getNextPrayerClass('jumuah', $this->row) . '>
                     <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
                     <td colspan="2" class="prayerName l-red sunrise">                    
-                        ' . $this->getJumuahTimesArray() . '                        
+                        ' . $this->getJumuahTimesArray($this->isPortrait) . '                        
                     </td>
                 </tr>';
         $html .= '

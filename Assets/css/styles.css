@@ -504,7 +504,9 @@ height: 70%;
 .x-board span.verticalhijri p{
     font-size: 2vh !important;
 }
-
+.x-board span.dsJumuah-vertical{
+    font-size: 2.5vh !important;
+}
 .x-board h3 {
     font-weight: bold;
     margin-bottom: 0px;
