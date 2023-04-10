@@ -386,9 +386,9 @@ DPT = {
 
         var i = 0;
         function fade() {
-            jQuery('#date-section').fadeOut(5000, function() {
-                jQuery('#date-section').html(msg[i++ % msg.length]);
-                jQuery('#date-section').fadeIn(1000)
+            jQuery('.date-eng').fadeOut(5000, function() {
+                jQuery('.date-eng').html(msg[i++ % msg.length]);
+                jQuery('.date-eng').fadeIn(1000)
             });
         }
     },

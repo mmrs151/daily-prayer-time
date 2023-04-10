@@ -130,9 +130,10 @@ class DigitalScreen extends DailyShortCode
                 </div>
                 <div class="' . $dateClass . ' col-xs-12 text-center bg-white ' . $height . '">
                     <div class="align-middle" id="date-section">
-                        <span id="dsDate" class="date-eng h6 ' . $verticalClass . '">' . $date. '</span>
-                        <span id="dsHijriDate" class="'. $verticalClass . 'hijri">
-                        ' . $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) . '
+                        <span id="dsDate" class="date-eng h6 ' . $verticalClass . '">' . $date. '
+                            <span id="dsHijriDate" class="'. $verticalClass . 'hijri">
+                                ' . $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) . '
+                            </span>
                         </span>
                     </div>
                 </div>
