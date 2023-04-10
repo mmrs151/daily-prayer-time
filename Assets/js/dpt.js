@@ -23,6 +23,8 @@ DPT = {
         this.makeCitySearchable();
         this.keepScreenOn();
 
+        this.fadingMessages();
+
     },
 
 
@@ -371,6 +373,22 @@ DPT = {
                       // Show paused UI.
                     })
                 }
+            });
+        }
+    },
+
+    fadingMessages: function(){
+        var msg = jQuery('#fadingMessages').val();
+        msg = JSON.parse(msg);
+
+        fade();
+        setInterval(fade, 10000);
+
+        var i = 0;
+        function fade() {
+            jQuery('#date-section').fadeOut(5000, function() {
+                jQuery('#date-section').html(msg[i++ % msg.length]);
+                jQuery('#date-section').fadeIn(1000)
             });
         }
     },

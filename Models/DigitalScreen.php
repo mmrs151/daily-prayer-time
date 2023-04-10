@@ -114,6 +114,7 @@ class DigitalScreen extends DailyShortCode
 
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
 
             <div class="row top-row">
                 <div class="time ' . $timeClass . 'col-xs-12 text-center ' . $height . '">
@@ -128,7 +129,7 @@ class DigitalScreen extends DailyShortCode
                 </div>
                 </div>
                 <div class="' . $dateClass . ' col-xs-12 text-center bg-white ' . $height . '">
-                    <div class="align-middle">
+                    <div class="align-middle" id="date-section">
                         <span id="dsDate" class="date-eng h6 ' . $verticalClass . '">' . $date. '</span>
                         <span id="dsHijriDate" class="'. $verticalClass . 'hijri">
                         ' . $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) . '
@@ -574,5 +575,15 @@ class DigitalScreen extends DailyShortCode
         if ( isset($attr['theme']) ) {
             $this->theme = $attr['theme'];
         }
+    }
+
+    private function getFadingMessages()
+    {
+        return [
+            get_bloginfo( 'name' ),
+            network_site_url( '/' ),
+            date_i18n( 'l ' . get_option( 'date_format' )),
+            $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()),
+        ];
     }
 }
