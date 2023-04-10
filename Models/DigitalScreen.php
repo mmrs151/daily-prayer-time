@@ -483,14 +483,14 @@ class DigitalScreen extends DailyShortCode
 
         $refreshPoints = array();
         foreach($iqamahTimes as $iqamah) {
-            $refreshPoints[] = date( "H:i:s", strtotime( $iqamah . "-16 minutes" ) );
+            $refreshPoints[] = date( "H:i:s", strtotime( $iqamah . "-15 minutes" ) );
         }
-        $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+20 minutes" ) ); // to dim screen overnight
+        $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+31 minutes" ) ); // after 30 min overnight dim is true 
 
         return $refreshPoints;
     }
 
-    private function getOtherAdhanTimes()
+    private function getOtherAdhanTimes()   
     {
 
         $result = $this->db->getPrayerTimeForToday();

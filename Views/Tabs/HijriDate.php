@@ -41,7 +41,7 @@ $hijri = new HijriDate();
                     </tr>
                     <?php if (get_option("ramadan_chbox") === 'isRamadan'): ?>
                         <tr>
-                            <td class="active-slider" style="width: 300px;">Screen Timeout during Taraweeh</td>
+                            <td>Screen Timeout during Taraweeh</td>
                             <td><input style="width: 50px;" type="text" class="jumuah" name="taraweehDim" size="10" value='<?php echo  get_option("taraweehDim") ?>'></td>
                         </tr> 
                         <tr>

@@ -77,7 +77,7 @@ if (! empty($_POST['hijriSettings']) && check_admin_referer( 'hijriSettings' )) 
         'hijri-arabic-chbox' => sanitize_text_field($_POST['hijri-arabic-chbox'] ?? ''),
         'hijri-adjust' => sanitize_text_field($_POST['hijri-adjust']),
         'ramadan_chbox' => sanitize_text_field($_POST['ramadan_chbox'] ?? ''),
-        'taraweehDim' => sanitize_text_field($_POST['taraweehDim']),
+        'taraweehDim' => sanitize_text_field($_POST['taraweehDim'] ?? ''),
         'imsaq' => sanitize_text_field($_POST['imsaq'] ?? ''),
 
     ];
