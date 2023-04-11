@@ -487,7 +487,13 @@ class DigitalScreen extends DailyShortCode
         foreach($iqamahTimes as $iqamah) {
             $refreshPoints[] = date( "H:i:s", strtotime( $iqamah . "-15 minutes" ) );
         }
-        $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+31 minutes" ) ); // after 30 min overnight dim is true 
+
+        $minsAfterIsha = 31;
+        if($this->isRamadan()) {
+            $minsAfterIsha += (int)get_option('taraweehDim');
+        }
+
+        $refreshPoints[] = date( "H:i:s", strtotime( end($iqamahTimes) . "+" . $minsAfterIsha . " minutes" ) ); // after 30 min overnight dim is true
 
         return $refreshPoints;
     }
@@ -580,11 +586,16 @@ class DigitalScreen extends DailyShortCode
 
     private function getFadingMessages()
     {
-        return [
-            get_bloginfo( 'name' ),
-            network_site_url( '/' ),
+        if (empty(get_option('ds-fading-msg'))) {
+            return null;
+        }
+        $messages = explode('.', get_option('ds-fading-msg'));
+
+        array_push($messages,
             date_i18n( 'l ' . get_option( 'date_format' )),
-            $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()),
-        ];
+            $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow())
+        );
+
+        return $messages;
     }
 }

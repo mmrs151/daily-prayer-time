@@ -146,6 +146,7 @@ if (! empty($_POST['digitalScreen']) && check_admin_referer( 'digitalScreen' )) 
         'ds-scroll-text' => sanitize_text_field($_POST['ds-scroll-text']),
         'ds-scroll-speed' => sanitize_text_field($_POST['ds-scroll-speed']),
         'ds-blink-text' => sanitize_text_field($_POST['ds-blink-text']),
+        'ds-fading-msg' => sanitize_text_field($_POST['ds-fading-msg']),
         'ds-additional-css' => sanitize_text_field($_POST['ds-additional-css']),
         'quran-chbox' => sanitize_text_field($_POST['quran-chbox'] ?? ''),
         'slider-chbox' => sanitize_text_field($_POST['slider-chbox'] ?? ''),

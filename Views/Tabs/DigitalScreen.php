@@ -14,6 +14,12 @@ function displayImage($slide){
             <?php echo wp_nonce_field( 'digitalScreen'); ?>
                 <table class="table">
                     <tr>
+                        <td class="active-slider">Fading Messages </br><i><sub>seperated by full stop.</sub></i></td>
+                        <td>
+                            <textarea name="ds-fading-msg" cols="30"><?php echo esc_html(get_option("ds-fading-msg") )?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="active-slider">Site Logo</td>
                         <td><input type="text" class="slider-text" placeholder="Any message or image url" name="ds-logo" size="30" value=<?php echo esc_html(get_option("ds-logo") )?>></td>
                     </tr>
@@ -149,7 +155,7 @@ function displayImage($slide){
                     </tr>
                     <tr>
                         <td class="active-slider">Additional CSS</td>
-                        <td><textarea class="slider-text" name="ds-additional-css"><?php echo esc_html(get_option("ds-additional-css") )?></textarea></td>
+                        <td><textarea name="ds-additional-css" cols="30"><?php echo esc_html(get_option("ds-additional-css") )?></textarea></td>
                     </tr>   
                 </table>
                 <?php submit_button('Save changes', 'primary', 'digitalScreen'); ?>

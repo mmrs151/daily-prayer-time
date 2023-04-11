@@ -40,6 +40,11 @@ class DPTHelper
      */
     function canDimOvernight($dbRow, $disableOvernightDim=false)
     {
+        $minsAfterIsha = 30;
+        if($this->isRamadan()) {
+            $minsAfterIsha += (int)get_option('taraweehDim');
+        }
+        error_log('min after isha ' . $minsAfterIsha);
         if ($disableOvernightDim) {
             return 0;
         }
@@ -50,7 +55,7 @@ class DPTHelper
 
         $isha = new DateTime();
         $isha->setTimestamp(strtotime($dbRow['isha_jamah']));
-        $isha->modify('+30 mins');
+        $isha->modify('+'.$minsAfterIsha. ' mins');
 
         $fajr = new DateTime();
         $fajr->setTimestamp(strtotime($dbRow['fajr_begins']));

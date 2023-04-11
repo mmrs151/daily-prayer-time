@@ -31,7 +31,10 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             $dsAdditionalCss = sanitize_text_field($this->data['ds-additional-css']);
             update_option('ds-additional-css', $dsAdditionalCss);
 
-	        $quran = sanitize_text_field($this->data['quran-chbox']);
+            $dsFadingMsg = sanitize_text_field($this->data['ds-fading-msg']);
+            update_option('ds-fading-msg', $dsFadingMsg);
+
+            $quran = sanitize_text_field($this->data['quran-chbox']);
 	        update_option('quran-chbox', $quran);
 
             $slider = sanitize_text_field($this->data['slider-chbox']);
