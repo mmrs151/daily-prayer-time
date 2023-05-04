@@ -587,10 +587,10 @@ class DigitalScreen extends DailyShortCode
     private function getFadingMessages()
     {
         if (empty(get_option('ds-fading-msg'))) {
-            return null;
+            return 0;
         }
         $messages = explode('.', get_option('ds-fading-msg'));
-
+        $messages = array_filter($messages);
         array_push($messages,
             date_i18n( 'l ' . get_option( 'date_format' )),
             $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow())

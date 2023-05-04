@@ -380,7 +380,9 @@ DPT = {
     fadingMessages: function(){
         var msg = jQuery('#fadingMessages').val();
         msg = JSON.parse(msg);
-
+        if (! msg ) {
+            return;
+        }
         fade();
         setInterval(fade, 10000);
 
@@ -388,7 +390,7 @@ DPT = {
         function fade() {
             jQuery('.date-eng').fadeOut(5000, function() {
                 jQuery('.date-eng').html(msg[i++ % msg.length]);
-                jQuery('.date-eng').fadeIn(1000)
+                jQuery('.date-eng').fadeIn(500)
             });
         }
     },
