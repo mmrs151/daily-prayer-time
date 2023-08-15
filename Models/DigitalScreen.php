@@ -537,8 +537,8 @@ class DigitalScreen extends DailyShortCode
     private function setAttributes($attr=array())
     {
         if ( isset($attr['view']) ) {
-            $this->isPortrait = ( strtolower($attr['view']) == 'vertical' );
-            $this->isPresentation = ( strtolower($attr['view']) == 'presentation' );
+            $this->isPortrait = ( strtolower(esc_attr($attr['view'])) == 'vertical' );
+            $this->isPresentation = ( strtolower(esc_attr($attr['view'])) == 'presentation' );
 
             if ( $this->isPortrait ) {
                 $this->verticalClass = "vertical";
@@ -546,7 +546,7 @@ class DigitalScreen extends DailyShortCode
         }
 
         if ( isset($attr['dim']) ) {
-            $this->screenTimeout = $attr['dim'];
+            $this->screenTimeout = esc_attr($attr['dim']);
         }
 
         if ( isset($attr['disable_overnight_dim'])) {
@@ -560,27 +560,27 @@ class DigitalScreen extends DailyShortCode
         }
 
         if ( isset($attr['scroll']) ) {
-            $this->scrollText = stripslashes($attr['scroll']);
+            $this->scrollText = esc_attr($attr['scroll']);
         }
 
         if ( isset($attr['scroll_link']) ) {
-            $this->scrollUrl = $attr['scroll_link'];
+            $this->scrollUrl = esc_attr($attr['scroll_link']);
         }
 
         if ( isset($attr['blink']) ) {
-            $this->blinkText = stripslashes($attr['blink']);
+            $this->blinkText = esc_attr($attr['blink']);
         }
 
         if ( isset($attr['blink_link']) ) {
-            $this->blinkUrl = $attr['blink_link'];
+            $this->blinkUrl = esc_attr($attr['blink_link']);
         }
 
         if ( isset($attr['slides']) ) {
-            $this->presentationSlides = explode(',', $attr['slides']);
+            $this->presentationSlides = explode(',', esc_attr($attr['slides']));
         }
 
         if ( isset($attr['theme']) ) {
-            $this->theme = $attr['theme'];
+            $this->theme = esc_attr($attr['theme']);
         }
     }
 

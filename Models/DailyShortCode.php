@@ -459,14 +459,14 @@ class DailyShortCode extends TimetablePrinter
         }
 
         if (isset($attr['heading'])) {
-            $this->setTitle($attr['heading']);
+            $this->setTitle(esc_attr($attr['heading']));
         }
 
         $row = $this->row;
 
         if (isset($attr['announcement'])) {
             $day = isset($attr['day']) ? $attr['day'] : 'everyday';
-            $row['announcement'] = $this->getAnnouncement($day, $attr['announcement']);
+            $row['announcement'] = $this->getAnnouncement($day, esc_attr($attr['announcement']));
         }
 
         if ( $row['jamah_changes']) {
