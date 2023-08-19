@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 5.6
 Tested up to: 6.2
-Stable tag: 2023.05.05
+Stable tag: 2023.08.16
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,10 +124,10 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2023.05.05 =
-* Fix XSS vulnerability 
+= 2023.08.16 =
+* Bug fix for search function  
 
 == Upgrade Notice ==
 
-= 2023.05.05 =
-* Fix XSS vulnerability 
+= 2023.08.16 =
+* Bug fix for search function  
