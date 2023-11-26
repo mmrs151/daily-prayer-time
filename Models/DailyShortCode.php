@@ -425,7 +425,7 @@ class DailyShortCode extends TimetablePrinter
 
         if (empty($row['jamah_changes'])) { return; }
 
-        $orientation =  isset($attr['orientation']) ? $attr['orientation'] : '';
+        $orientation =  isset($attr['orientation']) ? esc_attr($attr['orientation']) : '';
         
         return $this->getJamahChange($row, true, $orientation);
     }
@@ -465,7 +465,7 @@ class DailyShortCode extends TimetablePrinter
         $row = $this->row;
 
         if (isset($attr['announcement'])) {
-            $day = isset($attr['day']) ? $attr['day'] : 'everyday';
+            $day = isset($attr['day']) ? esc_attr($attr['day']) : 'everyday';
             $row['announcement'] = $this->getAnnouncement($day, esc_attr($attr['announcement']));
         }
 

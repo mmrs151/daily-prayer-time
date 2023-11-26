@@ -915,6 +915,11 @@ p.adhan-copy{
     text-align: center;
 }
 
+h2.eict-donation a{
+    color: red;
+    font-weight: 800;
+}
+
 /*
 ##########################
 x-board-modern start 

@@ -79,17 +79,18 @@ class DSTemplateLoader
             ) ] )
         ) {
 
-            $file = plugin_dir_path( __FILE__ ) . get_post_meta( $post->ID, '_wp_page_template', true );
+            return $template;
+        }
 
+        if (isset($post->ID)) {
+            $file = plugin_dir_path( __FILE__ ) . get_post_meta( $post->ID, '_wp_page_template', true );
             if ( file_exists( $file ) ) {
                 return $file;
             } else {
                 echo esc_attr( $file );
             }
-
-            return $template;
+    
         }
-
 
 
         return $template;

@@ -22,6 +22,14 @@ if ( isset($rows[1])) {
 }
 ?>
 <h3 style="padding-bottom: 30px;" xmlns="http://www.w3.org/1999/html">Set Prayer Times Automatically</h3>
+<h2 class="eict-donation">
+    <marquee width=300 behavior='alternate'>
+        <a target="_new" 
+        href="https://www.justgiving.com/page/mustafiz151"> 
+            URGENT APPEAL
+        </a>
+    </marquee>
+</h2>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-xs-12">

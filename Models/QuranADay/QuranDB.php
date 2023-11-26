@@ -8,6 +8,9 @@ class DPTQuranDB
     /** @var string */
     private $dbTable = '';
 
+    /** $var QuranRandomizer */
+    private $rand;
+
     /** @var string */
     private $tableName = '';
 
@@ -68,9 +71,9 @@ class DPTQuranDB
      */
     public function getQuote($attr=array(), $lang = 'english')
     {
-        $minWord = isset($attr['min_word']) ? $attr['min_word'] : 11;
-        $maxWord = isset($attr['max_word']) ? $attr['max_word'] : 20;
-        $lang = isset($attr['language']) ? $attr['language'] : 'english';
+        $minWord = isset($attr['min_word']) ? esc_attr($attr['min_word']) : 11;
+        $maxWord = isset($attr['max_word']) ? esc_attr($attr['max_word']) : 20;
+        $lang = isset($attr['language']) ? esc_attr($attr['language']) : 'english';
 
         $sql = 'SELECT *, (length(text)-LENGTH(REPLACE(text, " ", "")) + 1) as size FROM '.$this->tableName.
             ' WHERE lang =  "' . $lang .'" having size >' . $minWord . ' and size < ' . $maxWord . ' order by rand() limit 1;';

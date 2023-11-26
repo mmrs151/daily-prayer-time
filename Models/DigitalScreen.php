@@ -94,11 +94,7 @@ class DigitalScreen extends DailyShortCode
             $verticalClass = "vertical";
         }
 
-        if ( get_option('hijri-chbox')) {
-            $date = date_i18n( 'D jS  M' );
-        } else {
-            $date = date_i18n( 'l ' . get_option( 'date_format' ) );
-        }
+        $date = date_i18n( 'l ' . get_option( 'date_format' ) );
 
         $html = '
         <div class="container-fluid x-board">
@@ -132,7 +128,7 @@ class DigitalScreen extends DailyShortCode
                     <div class="align-middle" id="date-section">
                         <span id="dsDate" class="date-eng h6 ' . $verticalClass . '">' . $date. '
                             <span id="dsHijriDate" class="'. $verticalClass . 'hijri">
-                                ' . $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) . '
+                                </br>' . $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) . '
                             </span>
                         </span>
                     </div>
