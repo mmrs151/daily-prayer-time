@@ -107,7 +107,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             $day['asr_begins'] = ($asrMethod == 'hanafi') ? $day['asr_mithl_2'] : $day['asr_mithl_1'];
 
             $today = explode('-', $day['d_date']);
-            $weekday = wp_date("D", strtotime($day['d_date']));
+            $weekday = date_i18n("l", strtotime($day['d_date']), wp_timezone_string());
 
             $table .= "
              <tr " . $this->getClass($today[1], $today[2]) . ">
