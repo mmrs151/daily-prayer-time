@@ -108,7 +108,7 @@ class MonthlyShortCode
             $options['isRamadan'] = true;
         }
         $options['monthNumber'] = $month;
-        
+
         if ($display === 'iqamah_only') {
             $data = $timetable->displayTableJamahOnly($options);
         } elseif ($display === 'azan_only') {

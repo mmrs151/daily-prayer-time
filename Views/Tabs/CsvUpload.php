@@ -21,7 +21,8 @@ if ( isset($rows[1])) {
     }
 }
 ?>
-<h3 style="padding-bottom: 30px;" xmlns="http://www.w3.org/1999/html">Set Prayer Times Automatically</h3>
+<h3 style="padding-bottom: 30px;" xmlns="http://www.w3.org/1999/html">Set Prayer Times Automatically
+    <sup><span style="color: red;">(Please check and correct your time before publishing)</span></sup></h3>
 <h2 class="eict-donation">
     <marquee width=300 behavior='alternate'>
         <a target="_new" 
@@ -99,7 +100,7 @@ if ( isset($rows[1])) {
                     <input type='submit' name="set-start-time" id="set-start-time" class='button button-primary' value='Set Prayer Time'>
                 </div>
         </div>
-        <div class="col-sm-6 col-xs-12 highlight">
+        <div class="col-sm-6 col-xs-12" style="background: lightgrey;">
             <h3>Upload Prayer Times Manually</h3>
             <div class="row" style="padding-bottom:10px;">
                 <div class="form-group col-sm-6">

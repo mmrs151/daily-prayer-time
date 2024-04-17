@@ -167,6 +167,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         $colspan = 7;
         $ramadanTds = '<td></td>';
 
+        $ramadan = '';
         if ($this->isRamadan() && ! $row['hideRamadan']) {
             $ramadan = '
                 <tr class="">
@@ -177,7 +178,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
 
         if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
-            $announcement = "<tr><th colspan='".$colspan."' style='text-align:center' class='notificationBackground'>".$row['announcement']. "</th></tr>";
+            $announcement = "<tr><th colspan='".$colspan."' style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
         }
 
         $table = "";
@@ -301,7 +302,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         $table = "";
         $announcement = '';
         if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
-            $announcement = "<tr><th colspan=".$colspan." style='text-align:center' class='notificationBackground'>".$row['announcement']. "</th></tr>";
+            $announcement = "<tr><th colspan=".$colspan." style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
         }
 
         $table .=

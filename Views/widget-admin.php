@@ -16,8 +16,6 @@ require_once(__DIR__.'/../Models/StartTime/WorldCities.php');
 require_once( 'TimetablePrinter.php' );
 
 
-ini_set('auto_detect_line_endings', true);
-
 if (isset($_POST['set-start-time'])  && check_admin_referer( 'csvUpload' )) {
     $data = [
         'city' => sanitize_text_field($_POST['city']),

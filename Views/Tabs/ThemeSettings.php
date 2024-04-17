@@ -45,6 +45,7 @@
                         <td>Alternate row</td>
                         <td><input type="text" name="evenRow" value="<?php echo esc_attr(get_option('evenRow')) ?>" class="color-field"></td>
                     </tr>
+                    <tr><td><hr></td><td><strong>DIGITAL SCREEN</strong></td></tr>
                     <tr>
                         <td>Highlight next prayer</td>
                         <td><input type="text" name="highlight" value="<?php echo esc_attr(get_option('highlight')) ?>" class="color-field"></td>
@@ -57,13 +58,7 @@
                         <td>Announcement/Blink Font</td>
                         <td><input type="text" name="notificationFont" value="<?php echo esc_attr(get_option('notificationFont')) ?>" class="color-field"></td>
                     </tr>
-                </table>
-                <div style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center; margin: 30px 0px 35px 0px;">
-                    <span style="font-size: 20px; background-color: #F3F5F6; padding: 10px;">
-                        Digital Screen backgrounds
-                    </span>
-                </div>
-                <table class="table-sm">
+
                     <tr>
                         <td style="width: 70%">Prayer name</td>
                         <td><input type="text" name="digitalScreenPrayerName" value="<?php echo esc_attr(get_option('digitalScreenPrayerName')) ?>" class="color-field"></td>

@@ -289,6 +289,7 @@ DPT = {
 
     digitialClock: function ()
     {
+
         var newDate = new Date();
 
         newDate.setDate(newDate.getDate());
@@ -299,11 +300,17 @@ DPT = {
             },1000);
             
         setInterval( function() {
+            var wpHour = jQuery('#clockHour').val();
             var date = new Date();
-            var hours = date.getHours() == 0
+            if (wpHour > 12 ) {
+                var hours = date.getHours();
+            } else {
+                var hours = date.getHours() == 0
                 ? 12 : date.getHours() > 12
                 ? date.getHours() - 12
                 : date.getHours();
+
+            }
             jQuery("#hours").html(hours);
             }, 1000);
 

@@ -1,5 +1,4 @@
-<?php
-/* Template Name: Digital Screen Prayer Time */
+<?php /* Template Name: Digital Screen Prayer Time */
 
 if (is_page_template( '../Views/DSTemplate.php' )) {
 

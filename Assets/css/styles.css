@@ -1,4 +1,4 @@
-/*Default styling*/
+pt/*Default styling*/
 -body {
     font-family: 'Ubuntu', sans-serif;
 }
@@ -33,11 +33,16 @@ div.upload-step select{
 select.quickMonth{
     width: 120px;
 }
-td.Sat, td.Sun{
+td.Fri, td.Friday{
     font-weight: bold;
     color: red;
 }
-
+td input.Fri{
+    color: red;
+}
+td.Sat, td.Sun, td input.Sat, td input.Sun{
+    color: green;
+}
 tr.today {
     font-size: large;
     font-weight: bold;
@@ -133,7 +138,7 @@ table.dptTimetable tr:hover {
     background: #eee;
 }
 table.dptTimetable th.highlight, tr.highlight, td.highlight {
-    background-color: #F5FF92;
+    background-color: #F5FF92 !important;
     font-weight: bold;
 }
 
@@ -381,6 +386,10 @@ div.quranVerse span.sura{
     font-size: 0.9rem;
 }
 
+.friday {
+    color: red;
+}
+
 /* X BOARD */
 .x-board {
     color: #000;
@@ -462,14 +471,16 @@ height: 70%;
 }
 
 .x-board .bg-dark {
-    background-color: #000 !important;
+    background-color: #000;
     color: #eee;
 }
 .x-board .bg-white {
-    background-color: #fff !important;
+    background-color: #fff;
+}
+.x-board div.notificationFont a{
+    color: #000;
 }
 .x-board .time{
-    background-color: #000;
     color: #fff;
     font-size: 8vh;
     font-weight:bold;
@@ -484,9 +495,9 @@ height: 70%;
 
 .x-board .date-eng{
     font-weight: bold;
-    color: maroon;
     padding-left: 5px;
     font-size: 6vh;
+    text-shadow: 0 0 5px #00c6ff;
 }
 
 .x-board span.vertical {
@@ -694,7 +705,6 @@ h3.scrolling-vertical > marquee > div > span {
 
 .x-time-change{
     word-spacing: 10px;
-    background: #565656;
     color: #ffffff;
     padding-left: 10px;
     padding-right: 10px;

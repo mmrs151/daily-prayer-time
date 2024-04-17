@@ -16,7 +16,7 @@ function displayImage($slide){
                     <tr>
                         <td class="active-slider">Fading Messages </br><i><sub>seperated by full stop.</sub></i></td>
                         <td>
-                            <textarea name="ds-fading-msg" cols="30"><?php echo esc_html(get_option("ds-fading-msg") )?></textarea>
+                            <textarea name="ds-fading-msg" cols="30"><?php echo esc_html(stripslashes(get_option("ds-fading-msg")) )?></textarea>
                         </td>
                     </tr>
                     <tr>

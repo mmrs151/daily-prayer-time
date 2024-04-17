@@ -275,10 +275,12 @@ class TimetablePrinter
      * @param  string $day
      * @return string
      */
-    protected function getClass($month, $day)
+    protected function getClass($month, $day, $weekday)
     {
         if ($day == user_current_time('j') && $month == user_current_time('m')){
             return "class = highlight";
+        } elseif($weekday=='Friday') {
+            return "class = Fri";
         }
     }
 
@@ -515,7 +517,7 @@ class TimetablePrinter
         $digitalScreenClass = "";
 
         if ($isDigitalScreen) {
-            $timeClass = "class='x-time-change'";
+            $timeClass = "class='x-time-change bg-dark'";
             $digitalScreenClass = "jamahChanges-" . $orientation;
 
         }
@@ -535,9 +537,7 @@ class TimetablePrinter
                 $prayer = explode('_', $key);
                 if ( $this->tomorrowIsFriday() ) {
                     $prayerNames['zuhr'] = $this->getLocalHeaders()['jumuah'];
-                } else {
-                    $prayerNames['zuhr'] = $this->prayerLocal['zuhr'];
-                }
+                } 
                 $print .= "<span " . $style . $timeClass ." >" . $prayerNames[$prayer[0]] . ": " .  $this->getTimeForIqamahUpdate($prayerNames[$prayer[0]], $time) . "</span>";
             }
         }

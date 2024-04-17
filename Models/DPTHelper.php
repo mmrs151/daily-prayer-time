@@ -44,7 +44,6 @@ class DPTHelper
         if($this->isRamadan()) {
             $minsAfterIsha += (int)get_option('taraweehDim');
         }
-        error_log('min after isha ' . $minsAfterIsha);
         if ($disableOvernightDim) {
             return 0;
         }
@@ -179,7 +178,7 @@ class DPTHelper
             return 'class="nextPrayer"';
         }
 
-        if (strpos($nextPrayerName, $prayerName) !== false) {
+        if ($nextPrayerName && (strpos($nextPrayerName, $prayerName) !== false)) {
             return 'class="nextPrayer"';
         }
 

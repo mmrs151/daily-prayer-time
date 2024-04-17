@@ -69,6 +69,16 @@ class UpdateStyles
                     "color: " . get_option( 'notificationFont' ) ."}";
         }
 
+        $notificationFont = get_option('notificationFont');
+        if (! empty($notificationFont)) {
+            $css .= "
+                table.customStyles th.notificationFont{ " .            
+                    "color: " . get_option( 'notificationFont' )
+                ."}" .
+                ".notificationFont{ " .
+                    "color: " . get_option( 'notificationFont' ) ."}";
+        }
+
         $evenRow = get_option('evenRow');
         if (! empty($evenRow)) {
             $css .= "
@@ -103,7 +113,11 @@ class UpdateStyles
                 table.customStyles tr.highlight, th.highlight, td.highlight, div.highlight{
                     font-weight: bold;
                     background:" . get_option('highlight') ."!important"
-                ."}";
+                ."}
+                
+                .x-board tr.nextPrayer td{
+                    background-color: " . get_option('highlight') ."!important" ."
+                }";
         }
 
         $digitalScreenRed = get_option('digitalScreenRed');

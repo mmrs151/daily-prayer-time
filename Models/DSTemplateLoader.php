@@ -62,7 +62,7 @@ class DSTemplateLoader
         add_filter( 'theme_page_templates', function( $page_templates ) use ( $templates ) {
             return $templates;
         });
-
+        
         return $atts;
 
     }

@@ -94,7 +94,12 @@ class DigitalScreen extends DailyShortCode
             $verticalClass = "vertical";
         }
 
-        $date = date_i18n( 'l ' . get_option( 'date_format' ) );
+        if ( get_option('hijri-chbox')) {
+            $date = date_i18n( 'D jS  M' );
+        } else {
+            $date = date_i18n( 'l ' . get_option( 'date_format' ) );
+        }
+
 
         $html = '
         <div class="container-fluid x-board">
@@ -107,13 +112,14 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             
             <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
+            <input type="hidden" value="' . $this->getWpHour() . '" id="clockHour">
 
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
 
-            <div class="row top-row">
-                <div class="time ' . $timeClass . 'col-xs-12 text-center ' . $height . '">
+            <div class="row top-row dpt-bg">
+                <div class="time bg-dark ' . $timeClass . 'col-xs-12 text-center ' . $height . '">
                 <div class="clock align-middle">
                   <ul class="clock">
                       <li id="hours"></li>
@@ -124,11 +130,11 @@ class DigitalScreen extends DailyShortCode
                   </ul>
                 </div>
                 </div>
-                <div class="' . $dateClass . ' col-xs-12 text-center bg-white ' . $height . '">
+                <div class="' . $dateClass . ' col-xs-12 text-center ' . $height . '">
                     <div class="align-middle" id="date-section">
                         <span id="dsDate" class="date-eng h6 ' . $verticalClass . '">' . $date. '
                             <span id="dsHijriDate" class="'. $verticalClass . 'hijri">
-                                </br>' . $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) . '
+                            ' . $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()) . '
                             </span>
                         </span>
                     </div>
@@ -267,7 +273,7 @@ class DigitalScreen extends DailyShortCode
                                 <span id="dsBlink" class="blink">' . $this->getBlink() . '</span>
                         </div>
                     </div>
-                    <div class="col-sm-9 col-xs-12 height-100">
+                    <div class="col-sm-9 col-xs-12 height-100 dpt-bg">
                         <div class="align-middle">
                             <h3 class="text-primary scrolling">
                             <div class="marquee">
@@ -292,7 +298,7 @@ class DigitalScreen extends DailyShortCode
                             </h3>
                         </div>
                     </div>
-                    <div class="notificationBackground col-sm-12 col-xs-12 text-center height-50 align-middle">
+                    <div class="notificationBackground notificationFont col-sm-12 col-xs-12 text-center height-50 align-middle">
                         <div class="align-middle">
                                 <span id="dsBlink" class="blink-'.$verticalClass.'">' . $this->getBlink() . '</span>
                         </div>
@@ -370,7 +376,7 @@ class DigitalScreen extends DailyShortCode
         if ($this->isPortrait) {
             $orientation = 'vertical';
         }
-        return '<a class="blink-' .$orientation.'" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
+        return '<a class="notificationFont blink-' .$orientation.'" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
     }
 
     private function getFirstSlide()
@@ -421,7 +427,7 @@ class DigitalScreen extends DailyShortCode
             foreach ($slides as $i => $slide) {
                 $html .= '
                 <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <a href="' . $slides[$i] . '" style="color:' . get_option('fontColor') .'">
+                    <a href="' . get_option("slider". ($i+1) . "Url") . '" style="color:' . get_option('fontColor') .'">
                         ' . $this->getImageOrMessage($slide) . '
                     </a>
                 </div>
@@ -586,12 +592,27 @@ class DigitalScreen extends DailyShortCode
             return 0;
         }
         $messages = explode('.', get_option('ds-fading-msg'));
+        $messages = array_map('stripslashes', $messages);
         $messages = array_filter($messages);
-        array_push($messages,
-            date_i18n( 'l ' . get_option( 'date_format' )),
-            $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow())
-        );
+        
+        $hijriCheckbox = get_option('hijri-chbox');
+        if ( ! empty($hijriCheckbox) ) {
+            array_push($messages,
+                date_i18n( 'l ' . get_option( 'date_format' )),
+                $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow())
+            );
+        }
+
+
 
         return $messages;
+    }
+
+    private function getWpHour()
+    {
+        $wpTimeFormat = explode(' ', date_i18n( 'l ' . get_option( 'time_format' ) ))[1];
+        $clockHour = explode(':', $wpTimeFormat);
+
+        return $clockHour[0];
     }
 }

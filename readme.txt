@@ -5,7 +5,7 @@ Tags: prayer time, ramadan time, salah time, mosque timetable, islam, muslim, sa
 Requires at least: 4.5
 Requires PHP: 8
 Tested up to: 6.4
-Stable tag: 2023.11.26
+Stable tag: 2024.03.30
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,12 +25,12 @@ Daily prayer time can be displayed vertically or horizontally in your preferable
 Add your commit and make a pull request. Please describe your feature, I will add it to the core.
 Also, feel free to release my code with a new plugin name with your exiting new ideas added to it.
 My sole intention is to support the ummah.
-So I have absolutely no complain as long as you have the same intention, fi sabilillah.
+So I have absolutely no complain as long as you have the same intention, Fi Sabilillah.
 
 Mustafiz.
 
 = Features =
-Once the installation above is done, this will allow you
+Once the installation above is done, this will allow the **Admin/Editor**
 
 - To display prayer start and jamah time
 
@@ -124,10 +124,10 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2023.11.26 =
-* Display weekday in site language
+= 2024.03.30 =
+* Fix zuhr translation
 
 == Upgrade Notice ==
 
-= 2023.11.26 =
-* Display weekday in site language
+= 2024.03.30 =
+* Fix zuhr translation

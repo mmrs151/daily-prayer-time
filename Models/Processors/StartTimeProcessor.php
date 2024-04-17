@@ -113,10 +113,15 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
         private function getJamahTime($date, $time, $mins)
         {
             $mins = empty($mins) ? 3 : $mins;
-            $dt = new DateTime($date . ' ' . $time);
-            $dt->add(new DateInterval('PT' . $mins . 'M'));
-        
-            return $dt->format('H:i');
+            try{
+                $dt = new DateTime($date . ' ' . $time);
+                $dt->add(new DateInterval('PT' . $mins . 'M'));
+            
+                return $dt->format('H:i');
+            } catch(\Exception $e) {
+                error_log('dpt-: ' . $e->getMessage());
+            }
+            return '';
         }
         
         private function getLatLong($cityId)

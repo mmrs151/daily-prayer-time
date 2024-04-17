@@ -11,7 +11,7 @@ foreach ($this->localPrayerNames as $name) {
     }
 }
 if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
-    $announcement = "<tr><th colspan='7' style='text-align:center' class='notificationBackground'>".$row['announcement']. "</th></tr>";
+    $announcement = "<tr><th colspan='7' style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
 }
 
 ?>

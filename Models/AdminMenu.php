@@ -11,7 +11,7 @@
             add_menu_page(
                 'Daily Prayer Time',
                 'Prayer time',
-                'manage_options',
+                'publish_pages',
                 'dpt',
                 array(&$this, 'renderMainPage'),
                 plugins_url('../Assets/images/icon19.png', __FILE__)
@@ -20,7 +20,7 @@
             add_submenu_page('dpt',
                 'Settings',
                 'Settings',
-                'manage_options',
+                'publish_pages',
                 'dpt',
                 array(&$this, 'renderMainPage')
             );
@@ -29,7 +29,7 @@
                 'dpt',
                 'Helps and Tips',
                 'Helps and Tips',
-                'manage_options',
+                'publish_pages',
                 'helps-and-tips',
                 array(&$this, 'helps_and_tips')
             );
