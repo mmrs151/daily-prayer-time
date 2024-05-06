@@ -194,15 +194,13 @@ if (! empty($_POST['debugLogSettings']) && check_admin_referer( 'debugLogSetting
 <div id="tabs" style="display: none;">
     <ul>
         <li><a href="#tabs-1" data-tab-index="0">Set Prayer Times</a></li>
-        <li><a href="#tabs-2" data-tab-index="1">Quick Update Times</a></li>
+        <li><a href="#tabs-2" data-tab-index="1">Update Times</a></li>
         <li><a href="#tabs-3" data-tab-index="2">Mobile/Masjid Display</a></li>
         <li><a href="#tabs-4" data-tab-index="3">Hijri</a></li>
         <li><a href="#tabs-5" data-tab-index="4">Theme</a></li>
         <li><a href="#tabs-6" data-tab-index="5">Translate</a></li>
         <li><a href="#tabs-7" data-tab-index="6">Adhan</a></li>
         <li><a href="#tabs-8" data-tab-index="7">Misc</a></li>
-        <li><a href="#tabs-9" data-tab-index="8">API Doc</a></li>
-        <li><a href="#tabs-10" data-tab-index="8">Debug</a></li>
     </ul>
 
     <div id="tabs-1" class="wrap" xmlns="http://www.w3.org/1999/html">
@@ -235,14 +233,6 @@ if (! empty($_POST['debugLogSettings']) && check_admin_referer( 'debugLogSetting
 
     <div id="tabs-8">
         <?php include 'Tabs/OtherSettings.php' ?>
-    </div>
-    
-    <div id="tabs-9">
-        <?php include 'Tabs/APIdoc.php' ?>
-    </div>
-
-    <div id="tabs-10">
-        <?php include 'Tabs/Debug.php' ?>
     </div>
 </div>
     <span class="dpt-donation"><a href="https://donate.uwt.org/Account/Index.aspx" target="_blank">Send Sadaqa to my GRAVE</a></span>

@@ -60,19 +60,19 @@
                     </tr>
 
                     <tr>
-                        <td style="width: 70%">Prayer name</td>
+                        <td style="width: 70%">Prayer name background</td>
                         <td><input type="text" name="digitalScreenPrayerName" value="<?php echo esc_attr(get_option('digitalScreenPrayerName')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Prayer begins</td>
+                        <td>Prayer begins background</td>
                         <td><input type="text" name="digitalScreenLightRed" value="<?php echo esc_attr(get_option('digitalScreenLightRed')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Iqamah</td>
+                        <td>Iqamah background</td>
                         <td><input type="text" name="digitalScreenRed" value="<?php echo esc_attr(get_option('digitalScreenRed')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Next prayer section</td>
+                        <td>Next prayer background</td>
                         <td><input type="text" name="digitalScreenGreen" value="<?php echo esc_attr(get_option('digitalScreenGreen')) ?>" class="color-field"></td>
                     </tr>
                     <tr>

@@ -37,7 +37,10 @@ class DSTemplateLoader
         add_filter( 'template_include', array( $this, 'view_project_template' ) );
 
         $this->templates = 
-            array( '../Views/DSTemplate.php' => 'Digital Screen Prayer Time', );
+            array( 
+                '../Views/DSTemplate.php' => 'Digital Screen Prayer Time', 
+                '../Views/templates/masjid-e-usman.php' => 'Masjid-E-Usman', 
+            );
     }
 
 

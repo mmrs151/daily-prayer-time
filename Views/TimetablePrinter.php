@@ -275,7 +275,7 @@ class TimetablePrinter
      * @param  string $day
      * @return string
      */
-    protected function getClass($month, $day, $weekday)
+    protected function getClass($month, $day, $weekday='')
     {
         if ($day == user_current_time('j') && $month == user_current_time('m')){
             return "class = highlight";
@@ -285,12 +285,11 @@ class TimetablePrinter
     }
 
     /**
-     * @param  bool $isRamadan
      * @param  array $data
      * @param  bool $azanOnly
      * @return string|null
      */
-    protected function getFastingTdWithData($isRamadan, $data, $azanOnly=null, $imsaq=false)
+    protected function getFastingTdWithData($data, $azanOnly=null, $imsaq=false)
     {
         $html = "";
 
@@ -614,7 +613,7 @@ class TimetablePrinter
         return $this->dptHelper->isRamadan();
     }
 
-    public function getJumuahTimesArray($isVertical=false)
+    public function getJumuahTimesArray($isVertical = false, $separator = " | ")
     {
         $class = 'dsJumuah';
         if ($isVertical) {
@@ -626,7 +625,7 @@ class TimetablePrinter
         foreach ($jumuahArray as $jumuah) {
             $jumuahText[] = '<span class="' . $class . '">' . $this->formatDateForPrayer($jumuah) . '</span>';
         }
-        return implode(' | ', $jumuahText);
+        return implode($separator, $jumuahText);
 
     }
 }

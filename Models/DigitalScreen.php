@@ -81,6 +81,26 @@ class DigitalScreen extends DailyShortCode
         include 'themes/modern-theme.php';
     }
 
+    private function getHiddenVariables()
+    {
+        return '
+            <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
+            <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
+            
+            <input type="hidden" value="' . $this->getKhutbahDim($this->getRow()) . '" id="khutbahDim">
+            <input type="hidden" value="' . $this->getTaraweehDim($this->getRow()) . '" id="taraweehDim">
+            
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
+            
+            <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
+            <input type="hidden" value="' . $this->getWpHour() . '" id="clockHour">
+
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
+        ';
+    }
+
     private function getTopRow()
     {
         $timeClass = "col-sm-3 ";
@@ -103,20 +123,7 @@ class DigitalScreen extends DailyShortCode
 
         $html = '
         <div class="container-fluid x-board">
-            <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
-            <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
-            
-            <input type="hidden" value="' . $this->getKhutbahDim($this->getRow()) . '" id="khutbahDim">
-            <input type="hidden" value="' . $this->getTaraweehDim($this->getRow()) . '" id="taraweehDim">
-            
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
-            
-            <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
-            <input type="hidden" value="' . $this->getWpHour() . '" id="clockHour">
-
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
+            ' . $this->getHiddenVariables() . '
 
             <div class="row top-row dpt-bg">
                 <div class="time bg-dark ' . $timeClass . 'col-xs-12 text-center ' . $height . '">
@@ -140,14 +147,25 @@ class DigitalScreen extends DailyShortCode
                     </div>
                 </div>
                 <div class="col-sm-2 col-xs-12 text-right align-middle padding-null">';
-        $isLogo = get_option('ds-logo');
-        if ( $isLogo && ! $this->isPortrait) {
-            $html .= '<img class="logo" src="' . $isLogo . '">';
-        }
+
+        $html .= $this->getLogoUrl();
+        
         $html .=
             '</div>
             </div>';
         return $html;
+    }
+
+    private function getLogoUrl()
+    {
+        $isLogo = get_option('ds-logo');
+        if ( $isLogo && ! $this->isPortrait) {
+            return '<img class="logo" src="' . $isLogo . '">';
+        } else {
+            $custom_logo_id = get_theme_mod( 'custom_logo' );
+            $image_url = wp_get_attachment_image_url ( $custom_logo_id , 'full' );    
+            return '<img class="logo" src="' . $image_url . '">';
+        }
     }
 
     private function getMiddleRow()
@@ -180,21 +198,21 @@ class DigitalScreen extends DailyShortCode
                     </tr>
                     </thead>
                     <tbody>
-                        <tr ' . $this->getNextPrayerClass('fajr', $this->row, true) . '>
+                        <tr class=' . $this->getNextPrayerClass('fajr', $this->row, true) . '>
                             <td class="prayerName">
                                 <span>' . $this->getLocalPrayerNames()['fajr'] . '</span>
                             </td>
                             <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
                             <td>' . do_shortcode("[fajr_prayer]") . '</td>
                         </tr>
-                        <tr ' . $this->getNextPrayerClass('sunrise', $this->row) . '>
+                        <tr class=' . $this->getNextPrayerClass('sunrise', $this->row) . '>
                             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
                             <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
                         </tr>';
 
 
             $html .= '
-            <tr ' . $this->getNextPrayerClass('zuhr', $this->row) . '>
+            <tr class=' . $this->getNextPrayerClass('zuhr', $this->row) . '>
                 <td class="prayerName"><span>' . $this->getLocalPrayerNames()['zuhr'] . '</span></td>
                 <td class="l-red">' . do_shortcode("[zuhr_start]") . '</td>
                 <td>' . do_shortcode("[zuhr_prayer]") . '</td>
@@ -202,23 +220,23 @@ class DigitalScreen extends DailyShortCode
     ';
 
         $html .=
-        '<tr ' . $this->getNextPrayerClass('asr', $this->row) . '>
+        '<tr class=' . $this->getNextPrayerClass('asr', $this->row) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['asr'] . '</span></td>
             <td class="l-red">' . do_shortcode("[asr_start]") . '</td>
             <td>' . do_shortcode("[asr_prayer]") . '</td>
         </tr>
-        <tr ' . $this->getNextPrayerClass('maghrib', $this->row) . '>
+        <tr class=' . $this->getNextPrayerClass('maghrib', $this->row) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['maghrib'] . '</span></td>
             <td class="l-red">' . do_shortcode("[maghrib_start]") . '</td>
             <td>' . do_shortcode("[maghrib_prayer]") . '</td>
         </tr>
-        <tr ' . $this->getNextPrayerClass('isha', $this->row) . '>
+        <tr class=' . $this->getNextPrayerClass('isha', $this->row) . '>
             <td class="prayerName"><span>' . $this->getLocalPrayerNames()['isha'] . '</span></td>
             <td class="l-red">' . do_shortcode("[isha_start]") . '</td>
             <td>' . do_shortcode("[isha_prayer]") . '</td>
         </tr>';
             $html .= '
-                <tr ' . $this->getNextPrayerClass('jumuah', $this->row) . '>
+                <tr class=' . $this->getNextPrayerClass('jumuah', $this->row) . '>
                     <td class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></td>
                     <td colspan="2" class="prayerName l-red sunrise">                    
                         ' . $this->getJumuahTimesArray($this->isPortrait) . '                        
@@ -307,6 +325,25 @@ class DigitalScreen extends DailyShortCode
             </div>
         ';
         }
+
+        return $html;
+    }
+
+
+    private function getQuranSlides()
+    {
+        $transitionEffect = get_option('transitionEffect');
+        $transitionSpeed = get_option('transitionSpeed');
+
+        $html ='
+            <div class="row middle-row bg-red">
+            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    ' . $this->getOtherSlides($transitionSpeed) . '
+                </div>
+            </div>
+        </div>
+        ';
 
         return $html;
     }
@@ -595,15 +632,14 @@ class DigitalScreen extends DailyShortCode
         $messages = array_map('stripslashes', $messages);
         $messages = array_filter($messages);
         
+        array_push($messages, date_i18n( 'l ' . get_option( 'date_format' )));
+
         $hijriCheckbox = get_option('hijri-chbox');
         if ( ! empty($hijriCheckbox) ) {
             array_push($messages,
-                date_i18n( 'l ' . get_option( 'date_format' )),
                 $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow())
             );
         }
-
-
 
         return $messages;
     }

@@ -144,9 +144,9 @@ DPT = {
 
 
     dsRefreshQuranVerse: function () {
-        if (! jQuery('.x-board')[0]) {
-            return;
-        }
+        // if (! jQuery('.x-board')[0]) {
+        //     return;
+        // }
         jQuery.ajax({
             url: timetable_params.ajaxurl,
             data: {
@@ -205,7 +205,8 @@ DPT = {
         if (taraweehTimeout > 0) {
             min += parseInt(taraweehTimeout); // taraweeh is the additional prayer
         }
-
+console.log(min);
+console.log('min')
         if (min > 0) {
             jQuery("body").append("<div id='overlay' class='iqamah'></div>");
             jQuery('#overlay').animate({

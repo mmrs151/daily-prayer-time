@@ -8,11 +8,29 @@ function displayImage($slide){
 ?>
 <h3>Masjid/Mobile screen settings</h3>
 <div class="container-fluid">
+    <div class="row ds-template">
+        <table class="table">
+            <tr>
+                <td class="align-middle"><img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" width="200px"></td>
+                <td><img src="<?php echo plugins_url('../../Assets/images/new-template.png', __FILE__)?>" width="200px"></td>
+                <td><img src="<?php echo plugins_url('../../Assets/images/new-template.png', __FILE__)?>" width="200px"></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="ds-template"><strong>Masjid-E-Usman</strong></td>
+                <td><input type="radio" name="ds-template" disabled><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new">Add Your Design</a></td>
+                <td><input type="radio" name="ds-template" disabled><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new">Add Your Design</a></td>
+            </tr>
+        </table>
+    </div>
     <div class="row">
         <div class="col-sm-6 col-xs-12">
             <form class="form-group" name="digitalScreen" method="post">
             <?php echo wp_nonce_field( 'digitalScreen'); ?>
                 <table class="table">
+                    <tr>
+                        <td class="active-slider">Select Template</td>
+                        <td><input class="oneChbox" type="checkbox" id="template-chbox" name="template-chbox" value="template" <?php if(get_option("template-chbox") === 'template'){ echo 'checked'; } ?>></td>
+                    </tr>
                     <tr>
                         <td class="active-slider">Fading Messages </br><i><sub>seperated by full stop.</sub></i></td>
                         <td>
@@ -20,7 +38,7 @@ function displayImage($slide){
                         </td>
                     </tr>
                     <tr>
-                        <td class="active-slider">Site Logo</td>
+                        <td class="active-slider">Custom Site Logo</td>
                         <td><input type="text" class="slider-text" placeholder="Any message or image url" name="ds-logo" size="30" value=<?php echo esc_html(get_option("ds-logo") )?>></td>
                     </tr>
                     <tr>
@@ -46,7 +64,6 @@ function displayImage($slide){
                     <tr class="ds-slides">
                         <td>Re-display Next Prayer</td>
                         <td><input type="number" class="slider-text" placeholder=" after number of slides" name="nextPrayerSlide" min="0" value=<?php echo esc_html(get_option("nextPrayerSlide") )?>>
-                            <i>0 to disable</i>
                         </td>
                     </tr>
                     <tr class="ds-slides">
@@ -161,7 +178,7 @@ function displayImage($slide){
                 <?php submit_button('Save changes', 'primary', 'digitalScreen'); ?>
             </form>
         </div>
-        <div class="col-sm-6 col-xs-12 highlight">
+        <div class="col-sm-6 col-xs-12" style="background-color: #eeeeee;">
             <h3 class="pt-2"><code>INSTRUCTIONS</code></h3>
             <li><a class="url" href="post-new.php?post_type=page">Create a new page</a></li>
             <li>Select page template <code>Digital Screen Prayer Time</code></li>

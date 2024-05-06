@@ -98,7 +98,10 @@ class MonthlyShortCode
     public function get_monthly_timetable()
     {
         $month = sanitize_text_field($_REQUEST["month"]);
-        $display = sanitize_text_field($_REQUEST["display"]);
+        $display = "";
+        if (isset($_REQUEST["display"])) {
+            $display = sanitize_text_field($_REQUEST["display"]);
+        }
 
         preg_match("/\d+/", $month, $match);
         $timetable = new MonthlyTimeTable($match[0]);

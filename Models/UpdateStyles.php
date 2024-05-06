@@ -45,6 +45,15 @@ class UpdateStyles
                 .customStyles {
                     background-color: ". $tableBackground . " !important"
                 ."}
+                .x-board-modern #time-table-section {
+                    background-color: $tableBackground 
+                }
+                .x-board-modern .date-english-arabic {
+                    background-color: $tableBackground 
+                }
+                .green {
+                    color: $tableBackground 
+                }
                 ";
         }
 
@@ -101,10 +110,20 @@ class UpdateStyles
         if (! empty($prayerName)) {
             $css .= "
                 table.customStyles th.prayerName{
-                    background:" . get_option('prayerName')  . ";" .
-                    "color: " . get_option( 'prayerNameFont' )
+                    background:" . get_option('prayerName')  . 
+                "}";
+        }
 
-                ."}";
+        $prayerNameFont = get_option('prayerNameFont');
+        if (! empty($prayerNameFont)) {
+            $css .= "
+                table.customStyles th.prayerName{
+                    color: " . get_option( 'prayerNameFont' )
+                ."}
+
+                .x-board-modern #time-table-section h4{
+                    color: " . get_option( 'prayerNameFont' ) .
+                "}";
         }
 
         $highlight = get_option('highlight');
@@ -117,7 +136,13 @@ class UpdateStyles
                 
                 .x-board tr.nextPrayer td{
                     background-color: " . get_option('highlight') ."!important" ."
-                }";
+                }
+
+                .x-board-modern h4.nextPrayer, p.nextPrayer {
+                    color: " . get_option('highlight') ."!important" ."
+                }
+                
+                ";
         }
 
         $digitalScreenRed = get_option('digitalScreenRed');

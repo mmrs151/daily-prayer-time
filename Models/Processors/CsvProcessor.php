@@ -109,7 +109,7 @@ if ( ! class_exists('DPTCsvProcessor')) {
         public function donationLink()
         {
             ?>
-            <div class="donation" xmlns="http://www.w3.org/1999/html"><h2>Donation Appeal</h2>
+            <div class="donation" xmlns="http://www.w3.org/1999/html"><h2 class="text-danger">Appeal to Send Sadaqa to my GRAVE</h2>
                 <div class="donation-text"><i><b>Surat Al-Baqarah [2:261]</b></i></br>“The likeness of those who spend for Allah’s sake is as the likeness of a grain of corn, it grows seven ears every single ear has a hundred grains, and Allah multiplies (increases the reward of) for whom He wills, and Allah is sufficient for His creatures’ needs, All-Knower).”</div>
                 <div class="donation-text">
                     <li>“Giving in charity doesn’t decrease you wealth in the slightest.” <b><i>[Narrated by Muslim 2588]</i></b></li>

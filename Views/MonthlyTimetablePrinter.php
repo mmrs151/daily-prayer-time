@@ -25,7 +25,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
      */
     private function printFullTableTop($options)
     {
-        if ($options['isRamadan']) {
+        if ($this->isRamadan()) {
             $monthName = 'Ramadan';
             if ((int)get_option('imsaq') > 0 ) {
                 $fajrBegins = esc_attr($this->localHeaders['begins']);
@@ -63,7 +63,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             <th class='tableHeading'>" . esc_attr($this->localTimes['day']) . "</th>
             ";
 
-        if ($options['isRamadan'] && (int)get_option('imsaq') > 0) {
+        if ($this->isRamadan() && (int)get_option('imsaq') > 0) {
             $table .="<th class='tableHeading ". $fastingClass ."'>" . esc_attr($this->localHeaders['fast_begins']) . "</th>";
         }
 
@@ -102,20 +102,21 @@ class MonthlyTimetablePrinter extends TimetablePrinter
         $table = '';
         $asrMethod = get_option('asrSelect');
         $classFasting = $this->getClassFasting( $options );
-
+        
         foreach($rows as $day) {
             $day['asr_begins'] = ($asrMethod == 'hanafi') ? $day['asr_mithl_2'] : $day['asr_mithl_1'];
 
             $today = explode('-', $day['d_date']);
             $weekday = date_i18n("l", strtotime($day['d_date']), wp_timezone_string());
+            $classFriday = $this->getClass($today[1], $today[2], $weekday);
 
             $table .= "
-             <tr " . $this->getClass($today[1], $today[2], $weekday) . ">
+             <tr " . $classFriday . ">
                 <td>" . date_i18n(get_option( 'date_format' ), strtotime($day['d_date'])). ' '. $this->getHijriDate($today[2], $today[1], $today[0], $day, true) ."</td>
                 <td class=" . $weekday . ">" . $weekday . "</td>
 ";
             
-            if ($options['isRamadan'] && (int)get_option('imsaq') > 0) {
+            if ($this->isRamadan() && (int)get_option('imsaq') > 0) {
                 $table .="<td ". $classFasting .">" . $this->formatDateForPrayer($day['fajr_begins'], true). "</td>";
             }
             
@@ -178,18 +179,19 @@ class MonthlyTimetablePrinter extends TimetablePrinter
 
             $today = explode('-', $day['d_date']);
             $weekday = date_i18n("l", strtotime($day['d_date']), wp_timezone_string());
+            $classFriday = $this->getClass($today[1], $today[2], $weekday);
 
 
             $table .= "
-             <tr " . $this->getClass($today[1], $today[2]) . ">
+             <tr " . $classFriday . ">
                 <td>" . date_i18n(get_option( 'date_format' ), strtotime($day['d_date'])). ' '. $this->getHijriDate($today[2], $today[1], $today[0], $day, true) ."</td>
 
                 <td class=" . $weekday . ">" . $weekday . "</td>"
-                      . $this->getFastingTdWithData($options['isRamadan'], $day['fajr_begins'], true, true )."
+                      . $this->getFastingTdWithData($day['fajr_begins'], true, true )."
                 <td>" . $this->formatDateForPrayer($day['sunrise']). "</td>
                 <td>" . $this->formatDateForPrayer($day['zuhr_begins']). "</td>
                 <td>" . $this->formatDateForPrayer($day['asr_begins']). "</td>"
-                      . $this->getFastingTdWithData($options['isRamadan'], $day['maghrib_begins'], true )."
+                      . $this->getFastingTdWithData($day['maghrib_begins'], true )."
                 <td>" . $this->formatDateForPrayer($day['isha_begins']). "</td>
                 </tr>";
         }
@@ -223,12 +225,12 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             $maghribJamah = "<th class='tableHeading'>" . esc_attr($prayers['maghrib']) . "</th>";
         }
 
-        if ($options['isRamadan'] && !$isAzanOnly) {
+        if ($this->isRamadan() && !$isAzanOnly) {
             $fajr = '';
             $maghrib = '';
             $fajrHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_begins']) . $fajr . "</th>";
             $maghribHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_ends']) . $maghrib . "</th>";
-        } elseif ($options['isRamadan'] && $isAzanOnly) {
+        } elseif ($this->isRamadan() && $isAzanOnly) {
             $fajrHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_begins']) . "</th>";
             $fajrHeading .= "<th class='tableHeading ".$azanOnlyClass."'>"  . $fajr . "</th>";
             $maghribHeading = "<th class='tableHeading fasting ".$azanOnlyClass."'>" . esc_attr($this->localHeaders['fast_ends']) . '/'. $maghrib . "</th>";
@@ -269,17 +271,18 @@ class MonthlyTimetablePrinter extends TimetablePrinter
 
             $today = explode('-', $day['d_date']);
             $weekday = date_i18n("l", strtotime($day['d_date']), wp_timezone_string());
+            $classFriday = $this->getClass($today[1], $today[2], $weekday);
 
             $table .= "
-             <tr " . $this->getClass($today[1], $today[2]) . ">
+             <tr " . $classFriday . ">
                 <td>" . date_i18n(get_option( 'date_format' ), strtotime($day['d_date'])). ' '. $this->getHijriDate($today[2], $today[1], $today[0], $day, true) ."</td>
 
                 <td class=" . $weekday . ">" . $weekday . "</td>"
-                      . $this->getFastingTdWithData($options['isRamadan'], $day['fajr_begins'], false, true ) . "
+                      . $this->getFastingTdWithData($day['fajr_begins'], false, true ) . "
                 <td>" . $this->formatDateForPrayer($day['fajr_jamah']). "</td>
                 <td>" . $this->formatDateForPrayer($day['zuhr_jamah']). "</td>
                 <td>" . $this->formatDateForPrayer($day['asr_jamah']). "</td>"
-                      . $this->getFastingTdWithData($options['isRamadan'], $day['maghrib_begins'] ) . "
+                      . $this->getFastingTdWithData($day['maghrib_begins'] ) . "
                 <td>" . $this->formatDateForPrayer($day['maghrib_jamah']). "</td>
                 <td>" . $this->formatDateForPrayer($day['isha_jamah']). "</td>
                 </tr>";
@@ -295,7 +298,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
      */
     private function getFastingClass($options)
     {
-        if ( $options['isRamadan'] ) {
+        if ( $this->isRamadan() ) {
             return 'fasting';
         }
         return '';
@@ -308,7 +311,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
      */
     private function getClassFasting($options)
     {
-        if ( $options['isRamadan'] ) {
+        if ( $this->isRamadan() ) {
             return "class='fasting'";
         }
         return '';

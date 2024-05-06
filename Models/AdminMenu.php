@@ -27,6 +27,15 @@
     
             add_submenu_page(
                 'dpt',
+                'API Doc',
+                'API Doc',
+                'publish_pages',
+                'dpt-api-doc',
+                array(&$this, 'dpt_api_doc')
+            );
+
+            add_submenu_page(
+                'dpt',
                 'Helps and Tips',
                 'Helps and Tips',
                 'publish_pages',
@@ -43,6 +52,11 @@
         public function helps_and_tips()
         {
             include __DIR__ . '/../Views/HelpsAndTips.php';
+        }
+
+        public function dpt_api_doc()
+        {
+            include __DIR__ . '/../Views/DptApiDoc.php';
         }
     
     }

@@ -1,18 +1,18 @@
 <h3>Other settings</h3>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-sm-8 col-xs-8">
             <form name="otherSettings" method="post" class="form-group">
             <?php echo wp_nonce_field( 'otherSettings'); ?>
                 <table class="table">
                     <tr>
-                        <td class="active-slider" style="width: 300px;">Jumu'ah</td>
-                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah1" value='<?php echo  get_option("jumuah1") ?>'></td>
-                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah2" value='<?php echo  get_option("jumuah2") ?>'></td>
-                        <td><input type="time" style="width: 120px;" class="jumuah" name="jumuah3" value='<?php echo  get_option("jumuah3") ?>'></td>
+                        <td>Jumu'ah</td>
+                        <td><input type="time" class="jumuah" name="jumuah1" value='<?php echo  get_option("jumuah1") ?>'></td>
+                        <td><input type="time" class="jumuah" name="jumuah2" value='<?php echo  get_option("jumuah2") ?>'></td>
+                        <td><input type="time" class="jumuah" name="jumuah3" value='<?php echo  get_option("jumuah3") ?>'></td>
                     </tr>
                     <tr>
-                        <td class="active-slider" style="width: 300px;">Screen Timeout during Khutbah</td>
+                        <td>Screen Timeout during Khutbah</td>
                         <td colspan="3"><input style="width: 50px;" type="text" class="jumuah" name="khutbahDim" size="10" value='<?php echo  get_option("khutbahDim") ?>'></td>
                     </tr>
                     <tr>
@@ -36,6 +36,10 @@
                         <td>Deactivate Tomorrow:</td>
                         <td colspan="3"><input  type="checkbox" name="tomorrow_time" value="tomorrow" <?php if(get_option("tomorrow_time") === 'tomorrow'){ echo 'checked'; } ?>></td>
                     </tr> 
+                    <tr>
+                        <td>Display Zawal:</td>
+                        <td colspan="3"><input  type="checkbox" name="zawal_time" value="zawal" <?php if(get_option("zawal_time") === 'zawal'){ echo 'checked'; } ?>></td>
+                    </tr>                 
                 </table>
                 <?php submit_button('Save changes', 'primary', 'otherSettings'); ?>
             </form>

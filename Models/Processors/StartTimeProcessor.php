@@ -119,7 +119,7 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             
                 return $dt->format('H:i');
             } catch(\Exception $e) {
-                error_log('dpt-: ' . $e->getMessage());
+                error_log('!Failed to Set Prayer Times Automatically - : ' . $e->getMessage());
             }
             return '';
         }

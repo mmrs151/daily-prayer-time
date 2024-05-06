@@ -40,6 +40,9 @@ td.Fri, td.Friday{
 td input.Fri{
     color: red;
 }
+tr.Fri {
+    color: red;
+}
 td.Sat, td.Sun, td input.Sat, td input.Sun{
     color: green;
 }
@@ -138,7 +141,7 @@ table.dptTimetable tr:hover {
     background: #eee;
 }
 table.dptTimetable th.highlight, tr.highlight, td.highlight {
-    background-color: #F5FF92 !important;
+    background-color: #F5FF92;
     font-weight: bold;
 }
 
@@ -280,11 +283,6 @@ span.dpt-donation a:hover{
     font-weight: bold;
 }
 
-span.timeLeft {
-    font-size: 17px;
-    font-weight: bold;
-}
-
 .button {
     font-weight: bold;
 }
@@ -311,18 +309,18 @@ div.dptScNextPrayer {
     text-transform: uppercase;
 }
 span.minLeftText {
-    text-transform: lowercase !important;
+    text-transform: lowercase;
 }
 
 span.green h2.dptScTime {
-    margin: unset !important;
+    margin: unset;
 }
 
 h2.vertical div span h2.dptScTime {
     margin: 10px;
 }
 h2#dsNextPrayer div span h2.dptScTime {
-    font-size: 2em !important;
+    font-size: 2em;
     font-weight: 700;
 }
 
@@ -400,7 +398,9 @@ div.quranVerse span.sura{
 
 #overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; opacity: 0; z-index: 99;}
 
-
+.height-100 {
+    height: 100%;
+}
 .x-board .height-100 {
     height: 100%;
 }
@@ -462,7 +462,7 @@ height: 70%;
 
 .x-board .align-middle-next-prayer {
     position: relative;
-    top: 50%;
+    top:50%
 }
 
 .x-board .green {
@@ -476,9 +476,6 @@ height: 70%;
 }
 .x-board .bg-white {
     background-color: #fff;
-}
-.x-board div.notificationFont a{
-    color: #000;
 }
 .x-board .time{
     color: #fff;
@@ -931,10 +928,29 @@ h2.eict-donation a{
 }
 
 /*
-##########################
-x-board-modern start 
-##########################
+##############################################################################
+*
+*
+*
+*
+*
+*
+                            x-board-modern start 
+*
+*
+*
+*
+*
+*
+##############################################################################
 */
+
+.x-board-modern {
+    color: rgb(20,74,67);
+    height: 100vh;
+    text-align: center;
+    font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+}
 
 /* CLOCK START */
 .x-board-modern .clock {
@@ -971,12 +987,11 @@ x-board-modern start
     padding-right: 0 !important;
 }
 .x-board-modern #top-section {
+    height: 20%;
     width: 100%;
     background-color: #fff !important;
 }
-.x-board-modern #top-section .row{
-    margin-right: 0 !important;
-}
+
 .x-board-modern .mosque-name{
     padding-top: 15px;
     height: 20px;
@@ -990,12 +1005,11 @@ x-board-modern start
      display: inline;
 }
 .x-board-modern .logo img{
-    height: 110px;
-    padding-left: 50px;
-    padding-top: 0;
-    padding-bottom: 10px;
+    padding: 10px;
 }
 .x-board-modern .time{
+    font-size: 8vh;
+    font-weight: 800;
     padding-right: 20px;
     padding-top: 10px;
     text-align: right;
@@ -1012,7 +1026,7 @@ x-board-modern start
 }
 .x-board-modern .date-english-arabic p{
     font-family: 'Merriweather', serif;
-    font-size: 30px;
+    font-size: 25px;
     color: #fff;
     margin-bottom: 0;
     letter-spacing: 3px;
@@ -1022,13 +1036,27 @@ x-board-modern start
 }
 
 .x-board-modern #banner-section{
-    height: 425px;
+    height: 40%;
     background-color: #fff !important;
     text-align: center;
 }
+.x-board-modern #carouselExampleIndicators {
+    height: 100%;
+    width: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+.x-board-modern .carousel-inner {
+    height:100%;
+}
+.x-board-modern #carouselExampleIndicators div  div  img {
+    object-fit: fill !important;
+}
+.x-board-modern .carousel-inner .carousel-item image{
+    height:325px;
+}
 .x-board-modern #banner-section img{
-    width: 2000px;
-    height: 425px;
+    height: 325px;
 }
 .x-board-modern #banner-section .prayer-time{
     font-size: 30px;
@@ -1043,7 +1071,7 @@ x-board-modern start
 .x-board-modern #time-table-section{
     background-color: rgb(20,74,67);
     padding-top: 15px;
-    height: 340px;
+    height: 40%;
 }
 .x-board-modern #time-table-section .row{
     width: 100%;
@@ -1056,8 +1084,8 @@ x-board-modern start
     color: yellow;
 }
 .x-board-modern #time-table-section h4{
-    font-size: 40px;
-    color: #e2e2e2;
+    font-size: 6vh;
+    color: lightyellow;
     font-weight: 700;
     font-family: 'Lato', sans-serif;
     letter-spacing: 3px;
@@ -1066,15 +1094,25 @@ x-board-modern start
 .x-board-modern .prayer-start p{
     margin-top: 14px;
     margin-bottom: 0;
-    font-size: 54px;
+    font-size: 4vh;
     color: #e2e2e2;
     font-weight: 900;
     font-family: 'Lato', sans-serif;
     letter-spacing: 6px;
-    opacity: 0.6;
+    opacity: 0.4;
 }
+
 .x-board-modern .prayer-jamaat p{ 
-    font-size: 54px;
+    font-size: 6vh;
+    font-family: 'Lato',sans-serif;
+    color: #e2e2e2;
+    font-weight: 900;
+    letter-spacing: 6px;
+    padding-top: 20px;
+}
+
+.x-board-modern .prayer-jamaat-jummah p{ 
+    font-size: 5vh;
     font-family: 'Lato',sans-serif;
     color: #e2e2e2;
     font-weight: 900;
@@ -1085,12 +1123,16 @@ x-board-modern start
 }
 
 .x-board-modern .fajr-prayer ,.x-board-modern .sunrise, .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer, .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer{
-    height: 250px;
     border-right: 1px solid #3e605c;
 }
 .x-board-modern #time-table-section .col-md-2{
     flex: 1 0 0%;
     max-width: 15.666667%;
+}
+
+.x-board-modern #quranVerse {
+    margin-top: 10%;
+    padding: 10px;
 }
 
 
@@ -1321,6 +1363,12 @@ x-board-modern start
     .x-board-modern .time h3{
         font-size: 34px;
     }
+    .x-board-modern ul.clock li {
+        display: inline;
+        font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+        text-shadow: 0 0 2px #00c6ff;
+    }
+    
     .x-board-modern .logo img{
         height: 89px;
         padding-left: 35px;
@@ -1419,6 +1467,22 @@ x-board-modern start
         font-size: 10px;
         font-family: 'Merriweather', serif;
     }
+    .x-board-modern .align-middle-next-prayer h3{
+        font-size: 15px;
+    }    
+    .x-board-modern .green .nextPrayer, h2.dptScTime, .timeLeftCountDown, .minLeftText {
+        font-size: 15px;
+    }
+    .x-board-modern .minLeftText {
+        font-size: 10px;
+    }
+    .x-board-modern #quranVerse {
+        margin-top: 10%;
+        padding: 10px;
+    }
+    .x-board-modern h2#dsNextPrayer div span h2.dptScTime {
+        font-size: 20px;
+    }
     .x-board-modern #banner-section .time-metrics{
         font-size: 35px;
         color: rgb(20,74,67);
@@ -1449,8 +1513,12 @@ x-board-modern start
     }
 }
 @media(max-width: 765px){
+    .x-board-modern #top-section{
+        height: auto;
+    }
     .x-board-modern .time {
         padding-right: 5px;
+        font-size: 2vh;
     }
     .x-board-modern .time h3{
         font-size: 29px;
@@ -1471,7 +1539,7 @@ x-board-modern start
     }
     .x-board-modern .time{
         text-align: center;
-        padding-top: 0;
+        padding-top: 25%;
     }
     .x-board-modern .time h3{
         font-size: 50px;
@@ -1547,7 +1615,7 @@ x-board-modern start
         border-bottom: 1px solid #3e605c;
     }
     .x-board-modern .zuhr-prayer , .x-board-modern .asr-prayer , .x-board-modern .maghrib-prayer , .x-board-modern .isha-prayer , .x-board-modern .jummah-prayer{
-        padding-top: 20px;
+        padding-top: 0px;
     }
     .x-board-modern .fajr-prayer , .x-board-modern .zuhr-prayer , .x-board-modern .maghrib-prayer{
         border-right: 1px solid #3e605c;
@@ -1666,10 +1734,10 @@ x-board-modern start
         margin-top: 0;
     }
     .x-board-modern #banner-section{
-        height: 130px;
+        height: auto;
     }
     .x-board-modern #banner-section img{
-        height: 130px;
+        height: auto;
     }
     .x-board-modern #banner-section .prayer-time{
         font-size: 7px;

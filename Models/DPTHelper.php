@@ -175,11 +175,11 @@ class DPTHelper
         }
 
         if ($isFajr && is_null($nextPrayerName)) {
-            return 'class="nextPrayer"';
+            return 'nextPrayer';
         }
 
         if ($nextPrayerName && (strpos($nextPrayerName, $prayerName) !== false)) {
-            return 'class="nextPrayer"';
+            return 'nextPrayer';
         }
 
         return '';
