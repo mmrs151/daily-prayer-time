@@ -8,23 +8,35 @@ function displayImage($slide){
 ?>
 <h3>Masjid/Mobile screen settings</h3>
 <div class="container-fluid">
-    <div class="row ds-template">
+    <form class="form-group" name="digitalScreen" method="post">
+    <div class="row ds-templates">
         <table class="table">
             <tr>
-                <td class="align-middle"><img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" width="200px"></td>
-                <td><img src="<?php echo plugins_url('../../Assets/images/new-template.png', __FILE__)?>" width="200px"></td>
+                <td class="align-middle">
+                <?php $template = plugins_url('../../Assets/images/EICT.png', __FILE__)?>
+                    <a href="<?php echo $template ?>" target="_new">
+                        <img src="<?php echo $template ?>" width="200px">
+                    </a>
+                    <br/>or use shortcode <code>template='eict'</code>
+                </td>
+                <td>
+                    <?php $template = plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>
+                    <a href="<?php echo $template ?>" target="_new">
+                        <img src="<?php echo $template ?>" width="200px">
+                    </a>
+                    <br/>or use shortcode <code>template='usman'</code>
+                </td>
                 <td><img src="<?php echo plugins_url('../../Assets/images/new-template.png', __FILE__)?>" width="200px"></td>
             </tr>
             <tr>
-                <td><input type="radio" name="ds-template"><strong>Masjid-E-Usman</strong></td>
-                <td><input type="radio" name="ds-template" disabled><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new">Add Your Design</a></td>
-                <td><input type="radio" name="ds-template" disabled><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new">Add Your Design</a></td>
+                <td style="width: 33%;"><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>><strong>Edgware Islamic Cultural Trust</strong></td>
+                <td><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new"><strong>Masjid-E-Usman</strong></a></td>
+                <td><input type="radio" name="ds-template" value="" disabled><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new">Add Your Design</a></td>
             </tr>
         </table>
     </div>
     <div class="row">
         <div class="col-sm-6 col-xs-12">
-            <form class="form-group" name="digitalScreen" method="post">
             <?php echo wp_nonce_field( 'digitalScreen'); ?>
                 <table class="table">
                     <tr>
@@ -176,7 +188,6 @@ function displayImage($slide){
                     </tr>   
                 </table>
                 <?php submit_button('Save changes', 'primary', 'digitalScreen'); ?>
-            </form>
         </div>
         <div class="col-sm-6 col-xs-12" style="background-color: #eeeeee;">
             <h3 class="pt-2"><code>INSTRUCTIONS</code></h3>
@@ -192,5 +203,6 @@ function displayImage($slide){
             <li><code>[digital_screen view='vertical' blink='any text' blnk_link='https://valid.url' scroll='any text' scroll_link='https://valid.url']</code> Allows mobile user to click on the text and possibly pay donation</li>
         </div>
     </div>
+    </form>
 </div>
 

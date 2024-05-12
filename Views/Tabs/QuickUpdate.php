@@ -77,7 +77,7 @@ if ( empty($data)) {
             </div> 
             <div class='col-sm-4'>
                 <input type='submit' name='action' value='Load Month' class='btn btn-success' style='float: left; margin-right: 20px;'>
-                <input type='submit' name='action' value='RESET YEARS' class='btn btn-danger' title='Remove other years, only keep current year'  style='float: left; margin-right: 20px;'>
+                <input data-toggle='tooltip' type='submit' name='action' value='RESET YEARS' class='btn btn-danger' title='Will remove other years, only keep current year'  style='float: left; margin-right: 20px;'>
                 </div>
         </div>
     </form>

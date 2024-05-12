@@ -11,7 +11,8 @@ class TimetablePrinter
         "zuhr" => "Zuhr",
         "asr" => "Asr",
         "maghrib" => "Maghrib",
-        "isha" => "Isha"
+        "isha" => "Isha",
+        "zawal" => "Zawal"
     );
 
     protected $headersLocal = array(
@@ -131,6 +132,10 @@ class TimetablePrinter
         if (is_array($localPrayerName)) {
             $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
             $localPrayerName = array_map('stripslashes', $localPrayerName);
+        }
+
+        if (empty(get_option('zawal'))) {
+            unset($localPrayerName['zawal']);
         }
 
         return $localPrayerName;
@@ -377,7 +382,7 @@ class TimetablePrinter
         $now = current_time( 'H:i');
         foreach ($jamahTime as $key=>$jamah) {
             $this->localPrayerNames[lcfirst($key)] . ' ' . $this->localHeaders['iqamah'] . ':';
-            if ($jamah >$now ) {
+            if ($jamah > $now ) {
                 if ($key == 'Sunrise') {
                     $this->localPrayerNames[lcfirst($key)] . ':';
                 }
@@ -460,9 +465,10 @@ class TimetablePrinter
      */
     protected function getJamahTime(array $row)
     {
-        $value = array( $row["fajr_jamah"], $row['sunrise'], $row["zuhr_jamah"], $row["asr_jamah"], $row["maghrib_jamah"], $row["isha_jamah"]);
-
-        return array_combine( array_keys($this->prayerLocal), $value );
+        $jamahTimes = array( $row["fajr_jamah"], $row['sunrise'], $row["zuhr_jamah"], $row["asr_jamah"], $row["maghrib_jamah"], $row["isha_jamah"]);
+        $jamahNames = array_keys($this->prayerLocal);
+        array_pop($jamahNames); // remove zawal
+        return array_combine( $jamahNames, $jamahTimes );
 
     }
 
@@ -473,9 +479,10 @@ class TimetablePrinter
      */
     protected function getAzanTime(array $row)
     {
-        $value = array( $row["fajr_begins"], $row['sunrise'], $row["zuhr_begins"], $row["asr_begins"], $row["maghrib_begins"], $row["isha_begins"]);
-
-        return array_combine( array_keys($this->prayerLocal), $value );
+        $jamahTimes = array( $row["fajr_begins"], $row['sunrise'], $row["zuhr_begins"], $row["asr_begins"], $row["maghrib_begins"], $row["isha_begins"]);
+        $jamahNames = array_keys($this->prayerLocal);
+        array_pop($jamahNames); // remove zawal
+        return array_combine( $jamahNames, $jamahTimes );
     }
 
     /**

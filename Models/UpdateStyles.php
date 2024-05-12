@@ -38,13 +38,7 @@ class UpdateStyles
         $css = '';
         $tableBackground = get_option('tableBackground');
         if (! empty($tableBackground)) {
-            $css = "
-                table.customStyles {
-                    background-color: ". $tableBackground
-                ."}
-                .customStyles {
-                    background-color: ". $tableBackground . " !important"
-                ."}
+            $css = "        
                 .x-board-modern #time-table-section {
                     background-color: $tableBackground 
                 }
@@ -52,6 +46,12 @@ class UpdateStyles
                     background-color: $tableBackground 
                 }
                 .green {
+                    color: $tableBackground 
+                }
+                .x-board-modern .mosque-name h2 {
+                    color: $tableBackground 
+                }
+                .x-board-modern .clock {
                     color: $tableBackground 
                 }
                 ";

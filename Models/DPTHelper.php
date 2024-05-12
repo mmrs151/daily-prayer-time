@@ -216,6 +216,13 @@ class DPTHelper
 
     }
 
+    public function getZawalTime($zuhrBegins)
+    {
+        $zawalMinutes = get_option('zawal');   
+
+        return date( "H:i:s", strtotime( $zuhrBegins. "-$zawalMinutes minute") ); 
+    }
+
     /**
      * if today is friday
      *  and now is before zuhr then set zuhr to jummah 1
@@ -262,5 +269,23 @@ class DPTHelper
          }
 
         return $row;
+    }
+
+    public function isZawalTimeNext($row)
+    {
+        $userTime = user_current_time( 'H:i');
+        $now = new DateTime();
+        $now->setTimestamp(strtotime($userTime));
+
+        $sunrise = new DateTime();
+        $sunrise->setTimestamp(strtotime($row['sunrise']));
+
+        $zuhr = new DateTime();
+        $zuhr->setTimestamp(strtotime($row['zuhr_begins']));
+
+        if ($now > $sunrise && $now < $zuhr) { 
+            return true;
+        }
+        return false;
     }
 }

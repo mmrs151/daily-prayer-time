@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../Models/DPTHelper.php');
 class DailyTimetablePrinter extends TimetablePrinter
 {
     /** @var DPTHelper */
-    private $dptHelper;
+    protected $dptHelper;
 
     public function __construct()
     {
@@ -213,12 +213,29 @@ class DailyTimetablePrinter extends TimetablePrinter
         $ths = '';
         $nextPrayer = $this->getNextPrayer( $row );
 
-        foreach ($this->localPrayerNames as $key=>$prayerName) {
+        $localPrayerNames = $this->localPrayerNames;
+        
+        if (get_option('zawal')) {
+            $localPrayerNames = $this->toggleSunriseZawal($row, $localPrayerNames);
+        }
+        foreach ($localPrayerNames as $key=>$prayerName) {
             $class = $nextPrayer == $key ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
 
         return $ths;
+    }
+
+    private function toggleSunriseZawal($row, $prayerNames)
+    {
+        if ($this->dptHelper->isZawalTimeNext($row)) {
+            $prayerNames['sunrise'] = $prayerNames['zawal'];
+            unset($prayerNames['zawal']);
+        } 
+
+        unset($prayerNames['zawal']);
+
+        return $prayerNames;
     }
 
     /**
@@ -231,6 +248,13 @@ class DailyTimetablePrinter extends TimetablePrinter
         $tds = '';
         $nextPrayer = $this->getNextPrayer( $row );
         $azanTimings = $this->getAzanTime( $row );
+
+
+        if (get_option('zawal')) {
+            if ($this->dptHelper->isZawalTimeNext($row)) {
+                $azanTimings['sunrise'] = $this->dptHelper->getZawalTime($azanTimings['zuhr']);
+            }
+        }
 
         foreach ($azanTimings as $key => $azan) {
 
@@ -255,6 +279,11 @@ class DailyTimetablePrinter extends TimetablePrinter
     private function printJamahTime($row, $isSunrise=true)
     {
         $jamahTimes = $this->getJamahTime( $row );
+        if (get_option('zawal')) {
+            if ($this->dptHelper->isZawalTimeNext($row)) {
+                $jamahTimes['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
+            }
+        }
         if (! $isSunrise) {
             unset( $jamahTimes['sunrise'] );
         }
@@ -328,7 +357,12 @@ class DailyTimetablePrinter extends TimetablePrinter
         $trs = '';
         $nextPrayer = $this->getNextPrayer( $row );
 
-        foreach ($this->localPrayerNames as $key=>$prayerName) {
+        $localPrayerNames = $this->localPrayerNames;
+        if (get_option('zawal')) {
+            $localPrayerNames = $this->toggleSunriseZawal($row, $localPrayerNames);
+            $row['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
+        }
+        foreach ($localPrayerNames as $key=>$prayerName) {
             $begins =  $key != 'sunrise' ? lcfirst( $key ).'_begins' : 'sunrise';
             $jamah =  $key != 'sunrise' ? lcfirst( $key ).'_jamah' : 'sunrise';
 

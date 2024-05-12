@@ -5,6 +5,8 @@ DPT = {
 
         this.monthlyCalendarChange();
         this.displaySliderOptions();
+        this.displaytemplateOptions();
+
         this.changeInputBackground();
         this.printDiv();
         this.startTimer();
@@ -88,6 +90,21 @@ DPT = {
 
         if (! sliderChbox.is(':checked')) {
             jQuery(".ds-slides").hide();
+        }
+    },
+
+    displaytemplateOptions: function () {
+        jQuery('input.oneChbox').on('change', function() {
+            jQuery('input.oneChbox').not(this).prop('checked', false);
+        });
+        var templateChbox = jQuery("input#template-chbox");
+
+        templateChbox.on('click', function() {
+            jQuery(".ds-templates").toggle("slow");
+        });
+
+        if (! templateChbox.is(':checked')) {
+            jQuery(".ds-templates").hide();
         }
     },
 

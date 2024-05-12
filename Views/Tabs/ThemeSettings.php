@@ -18,10 +18,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Background color</td>
-                        <td><input type="text" name="tableBackground" value="<?php echo esc_attr(get_option('tableBackground')) ?>" class="color-field"></td>
-                    </tr>
-                    <tr>
                         <td>Font color</td>
                         <td><input type="text" name="fontColor" value="<?php echo esc_attr(get_option('fontColor')) ?>" class="color-field"></td>
                     </tr>
@@ -46,6 +42,10 @@
                         <td><input type="text" name="evenRow" value="<?php echo esc_attr(get_option('evenRow')) ?>" class="color-field"></td>
                     </tr>
                     <tr><td><hr></td><td><strong>DIGITAL SCREEN</strong></td></tr>
+                    <tr>
+                        <td>Background color</td>
+                        <td><input type="text" name="tableBackground" value="<?php echo esc_attr(get_option('tableBackground')) ?>" class="color-field"></td>
+                    </tr>
                     <tr>
                         <td>Highlight next prayer</td>
                         <td><input type="text" name="highlight" value="<?php echo esc_attr(get_option('highlight')) ?>" class="color-field"></td>

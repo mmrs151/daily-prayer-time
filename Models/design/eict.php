@@ -14,7 +14,7 @@ $html = '';
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-6 mosque-name text-center">
-                <h2>Leagrave Hall Masjid</h2>
+                <h2>Edgware Islamic Cultural Trust</h2>
             </div>
             <div class="col-md-3 col-sm-3 col-3 time-column">
                 <div class="time">
@@ -60,7 +60,6 @@ $html = '';
                 $slides = $this->getPresentationRow($transitionSpeed);
             }
         }
-
     ?>
     <div id="banner-section">
         <div class="row">
@@ -75,7 +74,6 @@ $html = '';
             <?php if (!empty($rightClass)) : ?>
             <div class="col-md-8 col-sm-8 col-8 banner-img text-center px-0 height-100">
                 <?php 
-
                     $slidesHtml ='
                         <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
                             <div class="carousel-inner">
@@ -98,12 +96,12 @@ $html = '';
             <div class="row pt-4">
                 <div class="col-md-2 col-sm-6 fajr-prayer">
                 <span class="iconify-inline icon" data-icon="lucide:sunrise"></span>
-                    <h4 class='<?php echo $this->getNextPrayerClass('fajr', $this->row) ?>'><?php echo $this->getLocalPrayerNames()['fajr'] ?></h4>
+                    <h4 class='<?php echo $this->getNextPrayerClass('fajr', $this->row, true) ?>'><?php echo $this->getLocalPrayerNames()['fajr'] ?></h4>
                     <div class="prayer-start">
-                        <p class='<?php echo $this->getNextPrayerClass('fajr', $this->row) ?>'><?php echo do_shortcode("[fajr_start]") ?></p>
+                        <p class='<?php echo $this->getNextPrayerClass('fajr', $this->row, true) ?>'><?php echo do_shortcode("[fajr_start]") ?></p>
                     </div>
                     <div class="prayer-jamaat">
-                        <p class='<?php echo $this->getNextPrayerClass('fajr', $this->row) ?>'><?php echo do_shortcode("[fajr_prayer]") ?></p>
+                        <p class='<?php echo $this->getNextPrayerClass('fajr', $this->row, true) ?>'><?php echo do_shortcode("[fajr_prayer]") ?></p>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-6 sunrise">

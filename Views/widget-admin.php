@@ -104,7 +104,8 @@ if (! empty($_POST['otherSettings']) && check_admin_referer( 'otherSettings' )) 
         'jumuah3' => sanitize_text_field($_POST['jumuah3']),
         'khutbahDim' => sanitize_text_field($_POST['khutbahDim']),
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
-        'jamah_chas' => sanitize_text_field($_POST['jamah_changes']),
+        'jamah_changes' => sanitize_text_field($_POST['jamah_changes']),
+        'zawal' => sanitize_text_field($_POST['zawal']),
         'tomorrow_time' => sanitize_text_field($_POST['tomorrow_time'] ?? ''),
     ];
     $otherProcessor = new DPTOtherProcessor($data);
@@ -146,9 +147,11 @@ if (! empty($_POST['digitalScreen']) && check_admin_referer( 'digitalScreen' )) 
         'ds-blink-text' => sanitize_text_field($_POST['ds-blink-text']),
         'ds-fading-msg' => sanitize_text_field($_POST['ds-fading-msg']),
         'ds-additional-css' => sanitize_text_field($_POST['ds-additional-css']),
+        'template-chbox' => sanitize_text_field($_POST['template-chbox'] ?? ''),
         'quran-chbox' => sanitize_text_field($_POST['quran-chbox'] ?? ''),
         'slider-chbox' => sanitize_text_field($_POST['slider-chbox'] ?? ''),
         'nextPrayerSlide' => sanitize_text_field($_POST['nextPrayerSlide']),
+        'ds-template' => sanitize_text_field($_POST['ds-template'] ?? ''),
         'transitionEffect' => sanitize_text_field($_POST['transitionEffect'] ?? ''),
         'transitionSpeed' => sanitize_text_field($_POST['transitionSpeed']),
         'slider1' => sanitize_text_field($_POST['slider1']),

@@ -47,6 +47,11 @@ if ( ! class_exists('DPTOtherProcessor')) {
             $tomorrowTime = sanitize_text_field($tomorrowTime);
             delete_option('tomorrow_time');
             add_option('tomorrow_time', $tomorrowTime);
+
+            $zawal = $this->data['zawal'] ?? '';
+            $zawal = sanitize_text_field($zawal);
+            delete_option('zawal');
+            add_option('zawal', $zawal);
         }
     }
 }

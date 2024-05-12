@@ -12,7 +12,7 @@ $timetable = new TimetablePrinter();
 
                 <table class="table table-stri table-bordered table-primary">
                     <tr>
-                        <th colspan="6" class="text-center">Display prayer name in your language</th>
+                        <th colspan="7" class="text-center">Display prayer name in your language</th>
                     </tr>
                     <tr>
                         <?php $names = $timetable->getLocalPrayerNames();
@@ -23,7 +23,7 @@ $timetable = new TimetablePrinter();
                     <tr>
                         <?php $prayers = $timetable->getLocalPrayerNames(true);
                         foreach ($prayers as $key => $val) { ?>
-                            <td><input style="width:215px;" type="text" name="prayersLocal[<?php echo esc_attr($key); ?>]" value="<?php echo stripslashes(esc_attr($val)); ?>" /></td>
+                            <td><input style="width:175px;" type="text" name="prayersLocal[<?php echo esc_attr($key); ?>]" value="<?php echo stripslashes(esc_attr($val)); ?>" /></td>
                         <?php } ?>
                     </tr>
                 </table>

@@ -40,10 +40,10 @@ class DigitalScreen extends DailyShortCode
     private $disableOvernightDim = false;
 
     /** @var string */
-    private $theme;
+    private $template;
 
     /** @var DPTHelper */
-    private $dptHelper;
+    protected $dptHelper;
 
     public function __construct($attr=array())
     {
@@ -58,9 +58,8 @@ class DigitalScreen extends DailyShortCode
 
     public function displayDigitalScreen()
     {
-        // $this->theme = 'modern';
-        if ($this->theme == 'modern') {
-            return $this->getModernTheme();
+        if ($this->template || get_option('template-chbox')) {
+            return $this->getTemplate();
         }
 
         $html = $this->getTopRow();
@@ -76,9 +75,14 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getModernTheme()
+    private function getTemplate()
     {
-        include 'themes/modern-theme.php';
+        if ($template = get_option('dsTemplate')) {
+            $this->template = $template;
+        }
+        
+        include "design/$this->template.php";
+        $this->template = null;
     }
 
     private function getHiddenVariables()
@@ -158,8 +162,12 @@ class DigitalScreen extends DailyShortCode
 
     private function getLogoUrl()
     {
+        if ($this->isPortrait ) {
+            return;
+        }
+
         $isLogo = get_option('ds-logo');
-        if ( $isLogo && ! $this->isPortrait) {
+        if ( $isLogo) {
             return '<img class="logo" src="' . $isLogo . '">';
         } else {
             $custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -204,12 +212,8 @@ class DigitalScreen extends DailyShortCode
                             </td>
                             <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
                             <td>' . do_shortcode("[fajr_prayer]") . '</td>
-                        </tr>
-                        <tr class=' . $this->getNextPrayerClass('sunrise', $this->row) . '>
-                            <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
-                            <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
                         </tr>';
-
+            $html .= $this->getSunriseOrZawal();
 
             $html .= '
             <tr class=' . $this->getNextPrayerClass('zuhr', $this->row) . '>
@@ -274,6 +278,25 @@ class DigitalScreen extends DailyShortCode
         ';
 
         return $html;
+    }
+
+    private function getSunriseOrZawal()
+    {
+        if (get_option('zawal')) {
+            if($this->getNextPrayerClass('zuhr', $this->row)){
+                '
+                <tr class="zawal">
+                    <td class="prayerName"><span>' . $this->getLocalPrayerNames()['zawal'] . '</span></td>
+                    <td class="prayerName sunrise" colspan="2">' . do_shortcode("[zawal]") . '</td>
+                </tr>';
+            } 
+        }
+        return '
+            <tr class=' . $this->getNextPrayerClass('sunrise', $this->row) . '>
+                <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
+                <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
+            </tr>'
+        ;
     }
 
     private function getBottomRow()
@@ -618,8 +641,8 @@ class DigitalScreen extends DailyShortCode
             $this->presentationSlides = explode(',', esc_attr($attr['slides']));
         }
 
-        if ( isset($attr['theme']) ) {
-            $this->theme = esc_attr($attr['theme']);
+        if ( isset($attr['template']) ) {
+            $this->template = esc_attr($attr['template']);
         }
     }
 

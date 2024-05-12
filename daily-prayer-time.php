@@ -9,6 +9,41 @@ Contributors: <a href="http://vergedesign.co.uk/">Hjeewa</a>, <a href="https://p
 Text Domain: daily-prayer-time
 Domain Path: /languages
 */
+if ( ! function_exists( 'dpt_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function dpt_fs() {
+        global $dpt_fs;
+
+        if ( ! isset( $dpt_fs ) ) {
+            // Include Freemius SDK.
+            require_once dirname(__FILE__) . '/freemius/start.php';
+
+            $dpt_fs = fs_dynamic_init( array(
+                'id'                  => '15569',
+                'slug'                => 'daily-prayer-time-for-mosques',
+                'premium_slug'        => 'daily-prayer-time-premium',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_9fc9f990dae6915c3d494a59d644d',
+                'is_premium'          => false,
+                'has_addons'          => false,
+                'has_paid_plans'      => false,
+                'menu'                => array(
+                    'slug'           => 'dpt',
+                    'account'        => false,
+                    'contact'        => false,
+                ),
+            ) );
+        }
+
+        return $dpt_fs;
+    }
+
+    // Init Freemius.
+    dpt_fs();
+    // Signal that SDK was initiated.
+    do_action( 'dpt_fs_loaded' );
+}
+
 require_once ('Models/Init.php');
 require_once ('Models/DailyShortCode.php');
 require_once ('Models/MonthlyShortCode.php');

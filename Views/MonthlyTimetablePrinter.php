@@ -3,6 +3,17 @@ require_once( 'TimetablePrinter.php' );
 
 class MonthlyTimetablePrinter extends TimetablePrinter
 {
+
+        /** @var DPTHelper */
+        protected $dptHelper;
+
+        public function __construct()
+        {
+            $this->dptHelper = new DPTHelper();
+    
+            parent::__construct();
+        }
+    
     /**
      * @param $rows
      * @param $options
@@ -70,9 +81,12 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             $table.="
             <th class='tableHeading ". $fastingClass ."'>" . $fajrBegins . "</th>
             <th class='tableHeading'>" . esc_attr($this->localHeaders['iqamah']) . "</th>
-            <th class='tableHeading'>" . esc_attr($prayers['sunrise']) . "</th>
+            <th class='tableHeading'>" . esc_attr($prayers['sunrise']) . "</th>";
 
-            <th class='tableHeading'>" . esc_attr($this->localHeaders['begins']) . "</th>
+            if (get_option('zawal')) {
+                $table .=" <th class='tableHeading'>" . esc_attr($prayers['zawal']) . "</th>";
+            }
+            $table .="<th class='tableHeading'>" . esc_attr($this->localHeaders['begins']) . "</th>
             <th class='tableHeading'>" . esc_attr($this->localHeaders['iqamah']) . "</th>";
 
         $table .= $this->getAsrMethodTh();
@@ -113,8 +127,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             $table .= "
              <tr " . $classFriday . ">
                 <td>" . date_i18n(get_option( 'date_format' ), strtotime($day['d_date'])). ' '. $this->getHijriDate($today[2], $today[1], $today[0], $day, true) ."</td>
-                <td class=" . $weekday . ">" . $weekday . "</td>
-";
+                <td class=" . $weekday . ">" . $weekday . "</td>";
             
             if ($this->isRamadan() && (int)get_option('imsaq') > 0) {
                 $table .="<td ". $classFasting .">" . $this->formatDateForPrayer($day['fajr_begins'], true). "</td>";
@@ -123,9 +136,13 @@ class MonthlyTimetablePrinter extends TimetablePrinter
                 $table .= "
                 <td ". $classFasting .">" . $this->formatDateForPrayer($day['fajr_begins']). "</td>
                 <td class='highlight'>" . $this->formatDateForPrayer($day['fajr_jamah']). "</td>
-                <td>" . $this->formatDateForPrayer($day['sunrise']). "</td>
+                <td>" . $this->formatDateForPrayer($day['sunrise']). "</td>";
 
-                <td>" . $this->formatDateForPrayer($day['zuhr_begins']). "</td>
+                if (get_option('zawal')) {
+                    $table .="<td>" . $this->formatDateForPrayer($this->dptHelper->getZawalTime($day['zuhr_begins'])). "</td>";
+                }
+                
+                $table .="<td>" . $this->formatDateForPrayer($day['zuhr_begins']). "</td>
                 <td class='highlight'>" . $this->formatDateForPrayer($day['zuhr_jamah']). "</td>";
 
             if ($asrMethod != 'both') {

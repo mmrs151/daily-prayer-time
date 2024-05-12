@@ -24,6 +24,7 @@
 
             add_shortcode( 'fajr_prayer', array($dailyShortCode, 'scFajr') );
             add_shortcode( 'sunrise', array($dailyShortCode, 'scSunrise') );
+            add_shortcode( 'zawal', array($dailyShortCode, 'scZawal') );
             add_shortcode( 'zuhr_prayer', array($dailyShortCode, 'scZuhr') );
             add_shortcode( 'asr_prayer', array($dailyShortCode, 'scAsr') );
             add_shortcode( 'maghrib_prayer', array($dailyShortCode, 'scMaghrib') );

@@ -44,7 +44,7 @@ class DailyShortCode extends TimetablePrinter
     protected $clsPrayerFinished = '';
 
     /** @var DPTHelper */
-    private $dptHelper;
+    protected $dptHelper;
 
     public function __construct()
     {
@@ -399,6 +399,27 @@ class DailyShortCode extends TimetablePrinter
         </span>";
     }
 
+    public function scZawal($attr)
+    {
+        $zuhrBegins = $this->row['zuhr_begins'];
+        if (isset($attr['zuhr_begins'])) {
+            $zuhrBegins = $attr['zuhr_begins'];
+        }
+        $zawal = $this->dptHelper->getZawalTime($zuhrBegins);
+
+        if (! $this->deactivateTomorrow) {
+        
+            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($zuhrBegins) ) {
+                $zuhrBegins = $this->row['tomorrow']['zuhr_begins'];
+
+                $zawal = $this->dptHelper->getZawalTime($zuhrBegins);
+
+            }
+        }
+
+        return "<span class='dpt_sunrise " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($zawal) . "</span>";
+    }
+
     private function isPrayerFinished($time) 
     {
         $userTime = user_current_time( 'H:i');
@@ -492,9 +513,14 @@ class DailyShortCode extends TimetablePrinter
         if (isset($attr['display'])) {
             if ( $attr['display'] === 'iqamah_only' ) {
                 $this->setJamahOnly();
+                $this->isAzanOnly = false;
             } elseif ( $attr['display'] === 'azan_only' ) {
                 $this->setAzanOnly();
+                $this->isJamahOnly = false;
             }
+        } else {
+            $this->isJamahOnly = false;
+            $this->isAzanOnly = false;
         }
 
         if (isset($attr['hide_time_remaining'])) {

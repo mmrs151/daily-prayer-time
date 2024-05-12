@@ -34,6 +34,9 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             $dsFadingMsg = sanitize_text_field($this->data['ds-fading-msg']);
             update_option('ds-fading-msg', $dsFadingMsg);
 
+            $template = sanitize_text_field($this->data['template-chbox']);
+	        update_option('template-chbox', $template);
+
             $quran = sanitize_text_field($this->data['quran-chbox']);
 	        update_option('quran-chbox', $quran);
 
@@ -43,6 +46,12 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             $nextPrayerSlide = sanitize_text_field($this->data['nextPrayerSlide']);
             update_option('nextPrayerSlide', $nextPrayerSlide);
             
+            $dsTemplate = sanitize_text_field($this->data['ds-template']);
+            update_option('dsTemplate', $dsTemplate);
+            if (empty($template)) {
+                delete_option('dsTemplate');
+            }
+
             $transitionEffect = sanitize_text_field($this->data['transitionEffect']);
             update_option('transitionEffect', $transitionEffect);
     

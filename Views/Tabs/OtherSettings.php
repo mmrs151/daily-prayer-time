@@ -29,7 +29,7 @@
                         <td>Iqamah time change threshold:</td>
                         <td colspan="3">
                             <input type="number" name="jamah_changes" min="0" max="59" placeholder="0" value="<?php echo esc_attr(get_option('jamah_changes'))?>">
-                            <i>'0' to deactivate</i>
+                            <i>'0' = disabled</i>
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +38,10 @@
                     </tr> 
                     <tr>
                         <td>Display Zawal:</td>
-                        <td colspan="3"><input  type="checkbox" name="zawal_time" value="zawal" <?php if(get_option("zawal_time") === 'zawal'){ echo 'checked'; } ?>></td>
+                        <td colspan="3">
+                            <input data-toggle="tooltip" title="set minutes to subtract from Zuhr start time" type="number" name="zawal" min="0" max="59" placeholder="0" value="<?php echo esc_attr(get_option('zawal'))?>">
+                            <i>'0' = disabled</i>
+                        </td>
                     </tr>                 
                 </table>
                 <?php submit_button('Save changes', 'primary', 'otherSettings'); ?>
