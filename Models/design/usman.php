@@ -119,7 +119,7 @@
                     </div>
 
                     <div class="col-md-3 zawaal-section">
-                        <p class="zawaal-title"><?php echo $this->getLocalPrayerNames()['zawal'] ?></p><br>
+                        <p class="zawaal-title"><?php if (get_option('zawal')) {echo $this->getLocalPrayerNames()['zawal']; }?></p><br>
                         <h4 class="zawaal-time"><?php echo do_shortcode("[zawal]") ?></h4>
                     </div>
 
