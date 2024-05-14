@@ -336,7 +336,8 @@ console.log('min')
             var s = new Date().getSeconds();
             s = (s < 10) ? "0" + s : s;
             var ampm = new Date().getHours() < 12 ? 'AM' : 'PM';
-            jQuery("#ampm").html(s);
+            jQuery("#sec").html(s);
+            jQuery("#ampm").html(ampm);
             }, 1000);
     },
 

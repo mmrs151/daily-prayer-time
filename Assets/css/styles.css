@@ -397,7 +397,7 @@ div.quranVerse span.sura{
     color: #000;
     height: 100vh;
     text-align: center;
-    font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; opacity: 0; z-index: 99;}
@@ -482,9 +482,8 @@ height: 70%;
     background-color: #fff;
 }
 .x-board .time{
-    font-family: "DSDIGI", sans-serif;
     color: #fff;
-    font-size: 8vh;
+    font-size: 9vh;
     font-weight:bold;
 }
 .x-board .vertical-time{
@@ -866,14 +865,12 @@ ul.clock {
 
 ul.clock li {
     display: inline;
-    font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
     text-shadow: 0 0 5px #00c6ff;
+    font-family: "DSDIGI", sans-serif;
 }
-
 ul.clock li#sec {
-    font-size: 20px !important;
+    font-size: 50%;
 }
-
 #point {
     position: relative;
     -moz-animation: mymove 1s ease infinite;

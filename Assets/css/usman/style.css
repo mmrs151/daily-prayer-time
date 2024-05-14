@@ -46,7 +46,6 @@
     display: inline-block;
     text-shadow: 7px 7px black;
     line-height: 140px;
-    padding-right: 55px;
     margin-left: -10px;
 }
 
@@ -174,7 +173,7 @@
 }
 
 .d-masjid-e-usman .left-main-col-sun-times p , .d-masjid-e-usman .left-main-col-sun-times h4{
-    color: rgb(238,159,121) ;
+    color: #fff;
     margin: 0;
     text-shadow: 3px 3px black;
     text-transform: uppercase;
@@ -202,7 +201,12 @@
     padding: 15px 0 0 0;
     text-align: left;
 }
-
 .d-masjid-e-usman .carousel-inner{
     height: 690px;
+}
+.d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer .dsJumuah {
+    color: rgb(86,247,79);
+}
+.d-masjid-e-usman  .left-main-col-sun-times h4{
+    color: rgb(86,247,79);
 }

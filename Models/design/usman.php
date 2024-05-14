@@ -12,11 +12,11 @@
 
                 <div class="row left-main-col-dateandtime">
                     <div class="col-md-4 digital-clock">
-                        <h2>3:01</h2>
+                        <h2 id="hours"></h2><h2>:</h2><h2 id="min"></h2>
                     </div>
                     <div class="col-md-2 seconds-count">
-                        <h4>42</h4>
-                        <p>PM</p>
+                        <h4 id="sec">42</h4>
+                        <p id="ampm">PM</p>
                     </div>
                     <div class="col-md-6 english-arabic-date">
                         <p class="english-date"><?php echo date_i18n( 'l ' . get_option( 'date_format' ) ) ?></p> 

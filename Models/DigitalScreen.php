@@ -124,7 +124,6 @@ class DigitalScreen extends DailyShortCode
             $date = date_i18n( 'l ' . get_option( 'date_format' ) );
         }
 
-
         $html = '
         <div class="container-fluid x-board">
             ' . $this->getHiddenVariables() . '
@@ -137,7 +136,7 @@ class DigitalScreen extends DailyShortCode
                       <li id="pointx">:</li>
                       <li id="min"></li>
                       <li id="pointx">:</li>
-                      <li id="ampm"></li>
+                      <li id="sec"></li>
                   </ul>
                 </div>
                 </div>
