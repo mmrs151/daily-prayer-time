@@ -108,9 +108,11 @@
     font-size: 33px;
 }
 
-.d-masjid-e-usman .arabic-date{
+.d-masjid-e-usman .hijriDate{
     font-size: 32px;
     padding-top: 20px;
+    font-style: normal;
+    text-align: right;
 }
 
 .d-masjid-e-usman .lmc-heading h3{
@@ -127,9 +129,19 @@
 .d-masjid-e-usman .time-value{
     text-align: right;
 }
+.d-masjid-e-usman .jummah{
+    font-family: "DSDIGI" , sans-serif;
+    font-size: 7vh;
+    color: #fff;
+    font-weight: bolder;
+    margin: 0;
+    display: inline;
+    text-shadow: 5px 5px black;
+    text-align: right;
+}
 .d-masjid-e-usman .time-value h3{
     font-family: "DSDIGI" , sans-serif;
-    font-size: 65px;
+    font-size: 7vh;
     color: #fff;
     font-weight: bolder;
     margin: 0;
@@ -148,10 +160,10 @@
 
 .d-masjid-e-usman .title-value{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 35px;
+    font-size: 5vh;
     color: #fff;
     text-shadow: 3px 2px black;
-    padding-top: 15px;
+    padding-top: 10px;
     /* padding: 18px 0 30px 0; */
 }
 
@@ -161,16 +173,11 @@
     height: 65%;
 }
 
-.d-masjid-e-usman .asr-title , .d-masjid-e-usman .asr-section h3{
-    color: rgb(86,247,79); ;
-}
-
-
-
 .d-masjid-e-usman .left-main-col-sun-times p , .d-masjid-e-usman .left-main-col-sun-times h4{
     color: rgb(238,159,121) ;
     margin: 0;
     text-shadow: 3px 3px black;
+    text-transform: uppercase;
 }
 
 

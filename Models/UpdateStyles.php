@@ -129,19 +129,25 @@ class UpdateStyles
         $highlight = get_option('highlight');
         if (! empty($highlight)) {
             $css .= "
-                table.customStyles tr.highlight, th.highlight, td.highlight, div.highlight{
+                table.customStyles tr.highlight, th.highlight, td.highlight{
                     font-weight: bold;
-                    background:" . get_option('highlight') ."!important"
+                    background:" . $highlight ."!important"
                 ."}
                 
                 .x-board tr.nextPrayer td{
-                    background-color: " . get_option('highlight') ."!important" ."
+                    background-color: " . $highlight ."!important" ."
                 }
 
                 .x-board-modern h4.nextPrayer, p.nextPrayer {
-                    color: " . get_option('highlight') ."!important" ."
+                    color: " . $highlight ."!important" ."
                 }
-                
+
+                .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer .dsJumuah {
+                    color: " . $highlight ."!important" ."
+                }
+                .d-masjid-e-usman  .left-main-col-sun-times h4, .left-main-col-sun-times p {
+                    color: " . $highlight ."!important" ."
+                }
                 ";
         }
 

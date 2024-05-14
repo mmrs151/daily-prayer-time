@@ -1,6 +1,7 @@
 <?php 
+    $html = '';
+    $sunriseOrZawal = $this->getSunriseOrZawal();
 
-$html = '';
 ?>
 <div class="container-fluid x-board-modern">
 
@@ -106,9 +107,9 @@ $html = '';
                 </div>
                 <div class="col-md-2 col-sm-6 sunrise">
                 <span class="iconify-inline icon" data-icon="bi:sunrise-fill"></span>
-                    <h4 class='<?php echo $this->getNextPrayerClass('sunrise', $this->row) ?>'><?php echo $this->getLocalPrayerNames()['sunrise'] ?></h4>
+                    <h4 class='<?php echo $this->getNextPrayerClass('sunrise', $this->row) ?>'><?php echo $this->getLocalPrayerNames()[$sunriseOrZawal] ?></h4>
                     <div class="prayer-jamaat">
-                        <p class='<?php echo $this->getNextPrayerClass('sunrise', $this->row) ?>'><?php echo do_shortcode("[sunrise]") ?></p>
+                        <p class='<?php echo $this->getNextPrayerClass($sunriseOrZawal, $this->row) ?>'><?php echo do_shortcode("[$sunriseOrZawal]") ?></p>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-6 zuhr-prayer">

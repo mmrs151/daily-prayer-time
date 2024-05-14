@@ -633,6 +633,5 @@ class TimetablePrinter
             $jumuahText[] = '<span class="' . $class . '">' . $this->formatDateForPrayer($jumuah) . '</span>';
         }
         return implode($separator, $jumuahText);
-
     }
 }

@@ -305,7 +305,7 @@ h3.printSiteName {
     font-style: italic;
     display: block;
     margin-bottom: 0px;
-    text-align: center !important;
+    text-align: center;
 }
 
 div.dptScNextPrayer {
@@ -482,6 +482,7 @@ height: 70%;
     background-color: #fff;
 }
 .x-board .time{
+    font-family: "DSDIGI", sans-serif;
     color: #fff;
     font-size: 8vh;
     font-weight:bold;

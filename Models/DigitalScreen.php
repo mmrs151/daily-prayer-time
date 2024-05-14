@@ -181,6 +181,7 @@ class DigitalScreen extends DailyShortCode
         $leftClass = "col-sm-5 col-xs-12 bg-red height-100 padding-null text-center";
         $rightClass = "col-sm-7 col-xs-12 padding-null text-center bg-green height-100 padding-null";
         $verticalClass = "";
+        $sunriseOrZawal = $this->getSunriseOrZawal();
 
         if ( $this->isPortrait ) {
             $verticalClass = "vertical";
@@ -212,8 +213,12 @@ class DigitalScreen extends DailyShortCode
                             </td>
                             <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
                             <td>' . do_shortcode("[fajr_prayer]") . '</td>
+                        </tr>
+                        <tr class=' . $this->getNextPrayerClass($sunriseOrZawal, $this->row) . '>
+                            <td class="prayerName"><span>' . $this->getLocalPrayerNames()[$sunriseOrZawal] . '</span></td>
+                            <td class="prayerName sunrise" colspan="2">' . do_shortcode("[$sunriseOrZawal]") . '</td>
                         </tr>';
-            $html .= $this->getSunriseOrZawal();
+
 
             $html .= '
             <tr class=' . $this->getNextPrayerClass('zuhr', $this->row) . '>
@@ -284,19 +289,10 @@ class DigitalScreen extends DailyShortCode
     {
         if (get_option('zawal')) {
             if($this->getNextPrayerClass('zuhr', $this->row)){
-                '
-                <tr class="zawal">
-                    <td class="prayerName"><span>' . $this->getLocalPrayerNames()['zawal'] . '</span></td>
-                    <td class="prayerName sunrise" colspan="2">' . do_shortcode("[zawal]") . '</td>
-                </tr>';
+                return 'zawal';
             } 
         }
-        return '
-            <tr class=' . $this->getNextPrayerClass('sunrise', $this->row) . '>
-                <td class="prayerName"><span>' . $this->getLocalPrayerNames()['sunrise'] . '</span></td>
-                <td class="prayerName sunrise" colspan="2">' . do_shortcode("[sunrise]") . '</td>
-            </tr>'
-        ;
+        return 'sunrise';
     }
 
     private function getBottomRow()
