@@ -100,8 +100,7 @@
                             <span class="title"><?php echo stripslashes($this->getLocalHeaders()['jumuah']) ?></span>
                         </div>
                         <div class="col-md-8 jummah-jamah-time time-value jummah">
-                            <?php //echo $this->getJumuahTimesArray(); ?>
-                            <h3>1:00</h3>
+                            <?php echo $this->getJumuahTimesArray(); ?>
                         </div>
                     </div>
                     </div>
@@ -119,7 +118,7 @@
                     </div>
 
                     <div class="col-md-3 zawaal-section">
-                        <p class="zawaal-title"><?php if (get_option('zawal')) {echo $this->getLocalPrayerNames()['zawal']; }?></p><br>
+                        <p class="zawaal-title"><?php echo $this->prayerLocal['zawal']; ?></p><br>
                         <h4 class="zawaal-time"><?php echo do_shortcode("[zawal]") ?></h4>
                     </div>
 
