@@ -63,7 +63,7 @@
         }
     ?>
     <div id="banner-section">
-        <div class="row">
+        <div class="row height-100">
             <div class="<?php echo $leftClass ?> banner-text text-center">
                 <div class="next-prayer-time">
                     <?php 
@@ -77,7 +77,7 @@
                 <?php 
                     $slidesHtml ='
                         <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                            <div class="carousel-inner">
+                            <div class="carousel-inner height-100">
                                 <div class="carousel-item active"></div>
                                 ' . $slides . '
                             </div>';

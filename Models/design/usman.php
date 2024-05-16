@@ -154,8 +154,7 @@
                 <?php 
                     $slidesHtml ='
                         <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item"></div>
+                            <div class="carousel-inner height-100">
                                 ' . $slides . '
                             </div>';
                             $slidesHtml .= '

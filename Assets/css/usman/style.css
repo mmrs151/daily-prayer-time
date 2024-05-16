@@ -207,8 +207,8 @@
     padding: 25px 0 0 0;
     text-align: left;
 }
-.d-masjid-e-usman .carousel-inner{
-    height: 690px;
+.d-masjid-e-usman img.carousel-slide{
+    object-fit: fill;
 }
 .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer .dsJumuah {
     color: rgb(86,247,79);

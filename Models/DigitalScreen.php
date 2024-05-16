@@ -372,9 +372,9 @@ class DigitalScreen extends DailyShortCode
         $transitionSpeed = get_option('transitionSpeed');
 
         $html ='
-            <div class="row middle-row bg-red">
+            <div class="row middle-row bg-red height-100">
             <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                <div class="carousel-inner">
+                <div class="carousel-inner height-100">
                     ' . $this->getPresentationSlides($transitionSpeed) . '
                 </div>
             </div>
