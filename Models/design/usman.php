@@ -11,14 +11,14 @@
         <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
 
                 <div class="row left-main-col-dateandtime">
-                    <div class="col-md-4 digital-clock">
+                    <div class="col-md-3 digital-clock">
                         <h2 id="hours"></h2><h2>:</h2><h2 id="min"></h2>
                     </div>
                     <div class="col-md-2 seconds-count">
                         <h4 id="sec">42</h4>
                         <p id="ampm">PM</p>
                     </div>
-                    <div class="col-md-6 english-arabic-date">
+                    <div class="col-md-7 english-arabic-date">
                         <p class="english-date"><?php echo date_i18n( 'l ' . get_option( 'date_format' ) ) ?></p> 
                         <?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?>
                     </div>
