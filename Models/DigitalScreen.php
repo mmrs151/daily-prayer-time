@@ -384,6 +384,27 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
+    // private function getPresentationSlides($transitionSpeed)
+    // {
+    //     $this->presentationSlides = $this->getSliderUrls();
+    //     $html = '
+    //             <div class="carousel-item active height-100 width-100" data-bs-interval="'. $transitionSpeed .'">
+    //                 <div class="carousel-slide" style="background-image: url(' . array_shift($this->presentationSlides) . ')" />
+    //             </div>';
+    //             // <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
+
+    //     foreach ($this->presentationSlides as $i => $slideUrl) {
+    //         if (empty($slideUrl))  continue;
+    //         $html .= '
+    //             <div class="carousel-item height-100 width-100" data-bs-interval="'. $transitionSpeed .'">
+    //                 <div class="carousel-slide" style="background-image: url(' . trim($slideUrl) . ')" />
+    //             </div>
+    //             ';
+    //             // <img class="carousel-slide " src="' . trim($slideUrl) . '">
+    //     }
+
+    //     return $html;
+    // }
     private function getPresentationSlides($transitionSpeed)
     {
         $this->presentationSlides = $this->getSliderUrls();

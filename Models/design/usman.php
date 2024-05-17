@@ -5,14 +5,14 @@
 <!-- MASJID DESIGN -->
 <div class="usman-body">
     <div class="container-fluid d-masjid-e-usman">
-        <div class="row height-100">
+        <div class="row height-100vh">
             <div class="col-md-6 left-main-column">
 
         <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
 
                 <div class="row left-main-col-dateandtime">
                     <div class="col-md-4 digital-clock">
-                        <h2 id="hours"></h2><h2>:</h2><h2 id="min"></h2>
+                        <h2 id="hours"></h2><h2 id="colon">:</h2><h2 id="min"></h2>
                     </div>
                     <div class="col-md-2 seconds-count">
                         <h4 id="sec">42</h4>
@@ -149,7 +149,7 @@
                 }
             }
         ?>
-            <div class="col-md-6 right-main-column">
+            <div class="col-md-6 right-main-column height-100">
                 <div class="row banner-section">
                 <?php 
                     $slidesHtml ='
