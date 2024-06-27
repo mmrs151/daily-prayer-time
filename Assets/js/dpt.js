@@ -94,8 +94,8 @@ DPT = {
     },
 
     displaytemplateOptions: function () {
-        jQuery('input.oneChbox').on('change', function() {
-            jQuery('input.oneChbox').not(this).prop('checked', false);
+        jQuery('input.templateChbox').on('change', function() {
+            jQuery('input.templateChbox').not(this).prop('checked', false);
         });
         var templateChbox = jQuery("input#template-chbox");
 

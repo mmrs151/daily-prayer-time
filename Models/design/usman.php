@@ -15,16 +15,9 @@
         <div class="row height-100">
             <div class="col-md-6 col-sm-12 col-12 left-main-column">
 
-        <div class="row height-100vh">
-            <div class="col-md-6 left-main-column">
-
-
-        <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
-
+                <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
                 <div class="row left-main-col-dateandtime">
                     <div class="col-md-4 col-sm-4 col-4 digital-clock">
-                        <h2 id="hours"></h2><h2>:</h2><h2 id="min"></h2>
-                    <div class="col-md-4 digital-clock">
                         <h2 id="hours"></h2><h2 id="colon">:</h2><h2 id="min"></h2>
                     </div>
                     <div class="col-md-2 col-sm-2 col-2 seconds-count">
@@ -154,9 +147,9 @@
             </div>
 
 
-        <!-- RIGHT SIDE BANNER AND MASJID NAME -->
+            <!-- RIGHT SIDE BANNER AND MASJID NAME -->
 
-        <?php 
+         <?php 
             $transitionEffect = get_option('transitionEffect');
             $transitionSpeed = get_option('transitionSpeed');
             $leftClass = 'col-md-12 col-sm-12 col-12';
@@ -172,7 +165,7 @@
                     $slides = $this->getPresentationRow($transitionSpeed);
                 }
             }
-        ?>
+         ?>
             <div class="col-md-6 col-sm-12 col-12 right-main-column">
             <div class="col-md-6 right-main-column height-100">
                 <div class="row banner-section">

@@ -41,7 +41,7 @@ function displayImage($slide){
                 <table class="table">
                     <tr>
                         <td class="active-slider">Select Template</td>
-                        <td><input class="oneChbox" type="checkbox" id="template-chbox" name="template-chbox" value="template" <?php if(get_option("template-chbox") === 'template'){ echo 'checked'; } ?>></td>
+                        <td><input class="templateChbox" type="checkbox" id="template-chbox" name="template-chbox" value="template" <?php if(get_option("template-chbox") === 'template'){ echo 'checked'; } ?>></td>
                     </tr>
                     <tr>
                         <td class="active-slider">Fading Messages </br><i><sub>seperated by full stop.</sub></i></td>
