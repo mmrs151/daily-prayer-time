@@ -59,6 +59,7 @@
 }
 .x-board-modern .logo img{
     padding: 10px;
+    max-width: 200px;
 }
 .x-board-modern .time{
     font-size: 8vh;
@@ -104,12 +105,7 @@
 }
 .x-board-modern #carouselExampleIndicators div  div  img {
     object-fit: fill !important;
-}
-.x-board-modern .carousel-inner .carousel-item image{
-    height:325px;
-}
-.x-board-modern #banner-section img{
-    height: 325px;
+    width: auto;
 }
 .x-board-modern #banner-section .prayer-time{
     font-size: 30px;

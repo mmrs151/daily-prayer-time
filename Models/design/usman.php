@@ -4,6 +4,8 @@
 ?>
 <!-- MASJID DESIGN -->
 <div class="usman-body">
+    <?php echo $this->getHiddenVariables(); ?>
+
     <div class="container-fluid d-masjid-e-usman">
         <div class="row mobile-logo-row">
             <div class="col-sm-12 mobile-logo-column">
@@ -13,11 +15,17 @@
         <div class="row height-100">
             <div class="col-md-6 col-sm-12 col-12 left-main-column">
 
+        <div class="row height-100vh">
+            <div class="col-md-6 left-main-column">
+
+
         <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
 
                 <div class="row left-main-col-dateandtime">
                     <div class="col-md-4 col-sm-4 col-4 digital-clock">
                         <h2 id="hours"></h2><h2>:</h2><h2 id="min"></h2>
+                    <div class="col-md-4 digital-clock">
+                        <h2 id="hours"></h2><h2 id="colon">:</h2><h2 id="min"></h2>
                     </div>
                     <div class="col-md-2 col-sm-2 col-2 seconds-count">
                         <h4 id="sec">42</h4>
@@ -107,6 +115,8 @@
                         <div class="col-md-8 col-sm-8 col-8 jummah-jamah-time time-value jummah">
                             <?php //echo $this->getJumuahTimesArray(); ?>
                             <h3>1:00</h3>
+                        <div class="col-md-8 jummah-jamah-time time-value jummah">
+                            <?php echo $this->getJumuahTimesArray(); ?>
                         </div>
                     </div>
                     </div>
@@ -122,15 +132,23 @@
                         <p class="sunrise-tittle"><?php echo $this->getLocalPrayerNames()['sunrise'] ?></p> <br>
                         <h4 class="sunrise-time"><?php echo do_shortcode("[sunrise]") ?></h4>
                     </div>
-
                     <div class="col-md-3 col-sm-3 col-3 zawaal-section">
                         <p class="zawaal-title"><?php if (get_option('zawal')) {echo $this->getLocalPrayerNames()['zawal']; }?></p><br>
+                    <div class="col-md-3 zawaal-section">
+                        <p class="zawaal-title"><?php echo $this->prayerLocal['zawal']; ?></p><br>
                         <h4 class="zawaal-time"><?php echo do_shortcode("[zawal]") ?></h4>
                     </div>
 
                     <div class="col-md-3 col-sm-3 col-3 sunset-section">
                         <p class="sunset-title">SUNSET</p><br>
                         <h4 class="sunset-time"><?php echo do_shortcode("[maghrib_start]") ?></h4>
+                    </div>
+                </div>
+
+                <div class="row left-main-col-sun-times-2nd pt-md-3 text-center">
+
+                    <div class="col-md-3 next-prayer-section">
+                        <?php echo $this->getFirstSlide(); ?>
                     </div>
                 </div>
             </div>
@@ -156,12 +174,12 @@
             }
         ?>
             <div class="col-md-6 col-sm-12 col-12 right-main-column">
+            <div class="col-md-6 right-main-column height-100">
                 <div class="row banner-section">
                 <?php 
                     $slidesHtml ='
                         <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active"></div>
+                            <div class="carousel-inner height-100">
                                 ' . $slides . '
                             </div>';
                             $slidesHtml .= '

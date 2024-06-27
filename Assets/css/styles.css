@@ -405,6 +405,15 @@ div.quranVerse span.sura{
 .height-100 {
     height: 100%;
 }
+
+.width-100 {
+    width: 100%;
+}
+
+.height-100vh {
+    height: 100vh;
+}
+
 .x-board .height-100 {
     height: 100%;
 }

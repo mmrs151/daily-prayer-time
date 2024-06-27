@@ -136,7 +136,11 @@ DPT = {
     },
 
     dsRefreshNextPrayer: function () {
-        if (jQuery('.x-board')[0] || jQuery('.x-board-modern')[0]) {        
+        if (
+            jQuery('.x-board')[0] 
+            || jQuery('.x-board-modern')[0]
+            || jQuery('.d-masjid-e-usman')[0]
+        ) {        
 
             jQuery.ajax({
                 url: timetable_params.ajaxurl,
@@ -405,10 +409,11 @@ console.log('min')
 
     fadingMessages: function(){
         var msg = jQuery('#fadingMessages').val();
-        msg = JSON.parse(msg);
         if (! msg ) {
             return;
         }
+        msg = JSON.parse(msg);
+
         fade();
         setInterval(fade, 10000);
 
