@@ -136,7 +136,11 @@ DPT = {
     },
 
     dsRefreshNextPrayer: function () {
-        if (jQuery('.x-board')[0] || jQuery('.x-board-modern')[0]) {        
+        if (
+            jQuery('.x-board')[0] 
+            || jQuery('.x-board-modern')[0]
+            || jQuery('.d-masjid-e-usman')[0]
+        ) {        
 
             jQuery.ajax({
                 url: timetable_params.ajaxurl,

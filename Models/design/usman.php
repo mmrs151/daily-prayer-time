@@ -4,6 +4,8 @@
 ?>
 <!-- MASJID DESIGN -->
 <div class="usman-body">
+    <?php echo $this->getHiddenVariables(); ?>
+
     <div class="container-fluid d-masjid-e-usman">
         <div class="row height-100vh">
             <div class="col-md-6 left-main-column">
@@ -125,6 +127,13 @@
                     <div class="col-md-3 sunset-section">
                         <p class="sunset-title">SUNSET</p><br>
                         <h4 class="sunset-time"><?php echo do_shortcode("[maghrib_start]") ?></h4>
+                    </div>
+                </div>
+
+                <div class="row left-main-col-sun-times-2nd pt-md-3 text-center">
+
+                    <div class="col-md-3 next-prayer-section">
+                        <?php echo $this->getFirstSlide(); ?>
                     </div>
                 </div>
             </div>
