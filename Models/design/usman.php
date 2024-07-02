@@ -8,29 +8,27 @@
 
     <div class="container-fluid d-masjid-e-usman">
         <div class="row mobile-logo-row">
-            <div class="col-sm-12 mobile-logo-column">
-
-            </div>
+            <div class="col-sm-12 mobile-logo-column"></div>
         </div>
         <div class="row height-100">
-            <div class="col-md-6 col-sm-12 col-12 left-main-column">
-
-                <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
-                <div class="row left-main-col-dateandtime">
-                    <div class="col-md-4 col-sm-4 col-4 digital-clock">
-                        <h2 id="hours"></h2><h2 id="colon">:</h2><h2 id="min"></h2>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-2 seconds-count">
-                        <h4 id="sec">42</h4>
-                        <p id="ampm">PM</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-6 english-arabic-date">
-                        <p class="english-date"><?php echo date_i18n( 'l ' . get_option( 'date_format' ) ) ?></p> 
-                        <?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?>
-                    </div>
+        <div class="col-md-6 col-sm-12 col-12 left-main-column">
+            <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
+            <div class="row left-main-col-dateandtime">
+                <div class="col-md-4 col-sm-4 col-4 digital-clock">
+                    <h2 id="hours"></h2><h2 id="colon">:</h2><h2 id="min"></h2>
                 </div>
-                <div class="row left-main-col-prayernames">
-                    <div class="col-md-12 col-sm-12 col-12  prayernames-column">
+                <div class="col-md-2 col-sm-2 col-2 seconds-count">
+                    <h4 id="sec">42</h4>
+                    <p id="ampm">PM</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-6 english-arabic-date">
+                    <p class="english-date"><?php echo date_i18n( 'l ' . get_option( 'date_format' ) ) ?></p> 
+                    <?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?>
+                </div>
+            </div>
+
+            <div class="row left-main-col-prayernames">
+                <div class="col-md-12 col-sm-12 col-12  prayernames-column">
                     <div class="row lmc-heading pt-2">
                         <div class="col-md-4 col-sm-4 col-4 empty-space"></div>
                         <div class="col-md-4 col-sm-4 col-4">
@@ -112,39 +110,38 @@
                             <?php echo $this->getJumuahTimesArray(); ?>
                         </div>
                     </div>
-                    </div>
-                </div>
-                <div class="row left-main-col-sun-times pt-md-3 text-center highlight">
-
-                    <div class="col-md-3 col-sm-3 col-3 sub-sadiq-section">
-                        <p class="sub-sadiq-title">SUBH-SADIQ</p><br>
-                        <h4 class="sub-sadiq-time"><?php echo do_shortcode("[fajr_start]") ?></h4>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-3 sunrise-section">
-                        <p class="sunrise-tittle"><?php echo $this->getLocalPrayerNames()['sunrise'] ?></p> <br>
-                        <h4 class="sunrise-time"><?php echo do_shortcode("[sunrise]") ?></h4>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-3 zawaal-section">
-                        <p class="zawaal-title"><?php if (get_option('zawal')) {echo $this->getLocalPrayerNames()['zawal']; }?></p><br>
-                    <div class="col-md-3 zawaal-section">
-                        <p class="zawaal-title"><?php echo $this->prayerLocal['zawal']; ?></p><br>
-                        <h4 class="zawaal-time"><?php echo do_shortcode("[zawal]") ?></h4>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-3 sunset-section">
-                        <p class="sunset-title">SUNSET</p><br>
-                        <h4 class="sunset-time"><?php echo do_shortcode("[maghrib_start]") ?></h4>
-                    </div>
-                </div>
-
-                <div class="row left-main-col-sun-times-2nd pt-md-3 text-center">
-
-                    <div class="col-md-3 next-prayer-section">
-                        <?php echo $this->getFirstSlide(); ?>
-                    </div>
                 </div>
             </div>
+        </div>            
+
+        <div class="row left-main-col-sun-times pt-md-3 text-center highlight">
+
+            <div class="col-md-3 col-sm-3 col-3 sub-sadiq-section">
+                <p class="sub-sadiq-title">SUBH-SADIQ</p><br>
+                <h4 class="sub-sadiq-time"><?php echo do_shortcode("[fajr_start]") ?></h4>
+            </div>
+
+            <div class="col-md-3 col-sm-3 col-3 sunrise-section">
+                <p class="sunrise-tittle"><?php echo $this->getLocalPrayerNames()['sunrise'] ?></p> <br>
+                <h4 class="sunrise-time"><?php echo do_shortcode("[sunrise]") ?></h4>
+            </div>
+            <div class="col-md-3 zawaal-section">
+                <p class="zawaal-title"><?php echo $this->prayerLocal['zawal']; ?></p><br>
+                <h4 class="zawaal-time"><?php echo do_shortcode("[zawal]") ?></h4>
+            </div>
+
+            <div class="col-md-3 col-sm-3 col-3 sunset-section">
+                <p class="sunset-title">SUNSET</p><br>
+                <h4 class="sunset-time"><?php echo do_shortcode("[maghrib_start]") ?></h4>
+            </div>
+        </div>
+
+        <div class="row left-main-col-sun-times-2nd pt-md-3 text-center">
+            <div class="col-md-3 next-prayer-section">
+                <?php //echo $this->getFirstSlide(); ?>
+            </div>
+        </div>
+    </div>
 
 
             <!-- RIGHT SIDE BANNER AND MASJID NAME -->
@@ -166,7 +163,6 @@
                 }
             }
          ?>
-            <div class="col-md-6 col-sm-12 col-12 right-main-column">
             <div class="col-md-6 right-main-column height-100">
                 <div class="row banner-section">
                 <?php 
