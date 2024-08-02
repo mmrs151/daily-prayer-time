@@ -4,7 +4,7 @@
 ?>
 <!-- MASJID DESIGN -->
 <div class="usman-body">
-    <?php echo $this->getHiddenVariables(); ?>
+    <?php //echo $this->getHiddenVariables(); ?>
 
     <div class="container-fluid d-masjid-e-usman">
         <div class="row mobile-logo-row">
@@ -125,7 +125,7 @@
                 <p class="sunrise-tittle"><?php echo $this->getLocalPrayerNames()['sunrise'] ?></p> <br>
                 <h4 class="sunrise-time"><?php echo do_shortcode("[sunrise]") ?></h4>
             </div>
-            <div class="col-md-3 zawaal-section">
+            <div class="col-md-3 col-sm-3 col-3 zawaal-section">
                 <p class="zawaal-title"><?php echo $this->prayerLocal['zawal']; ?></p><br>
                 <h4 class="zawaal-time"><?php echo do_shortcode("[zawal]") ?></h4>
             </div>
