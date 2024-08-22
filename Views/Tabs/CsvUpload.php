@@ -24,7 +24,7 @@ if ( isset($rows[1])) {
     <h2 class="eict-donation">
         <marquee width=250 behavior='alternate'>
             <a target="_new" 
-            href="https://www.justgiving.com/page/mustafiz151"> 
+            href="https://www.justgiving.com/page/muhammad-rahman-151"> 
                 URGENT APPEAL
             </a>
         </marquee>
