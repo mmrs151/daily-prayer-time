@@ -5,10 +5,10 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
     $fajrAdhanUrl = get_option('fajrAdhanUrl') ?: plugin_dir_url(__FILE__) . '../Assets/files/fajr.mp3';
     $otherAdhanUrl = get_option('otherAdhanUrl') ?: plugin_dir_url(__FILE__) . '../Assets/files/adhan.mp3';
 
-    wp_enqueue_script('dpt-admin', plugins_url( '../Assets/js/dpt-admin.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
+    wp_enqueue_script('dpt', plugins_url( '../Assets/js/dpt.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
     wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.bundle.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
 
-    wp_add_inline_script( 'dpt-admin', 'DPTURLS = ' . json_encode( 
+    wp_add_inline_script( 'dpt', 'DPTURLS = ' . json_encode( 
         array( 
             'fajrAdhan' => $fajrAdhanUrl,
             'otherAdhan' => $otherAdhanUrl

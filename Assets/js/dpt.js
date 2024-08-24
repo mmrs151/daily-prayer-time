@@ -4,8 +4,6 @@ DPT = {
     init: function() {
 
         this.monthlyCalendarChange();
-        this.displaySliderOptions();
-        this.displaytemplateOptions();
 
         this.changeInputBackground();
         this.printDiv();
@@ -15,41 +13,15 @@ DPT = {
         this.continiousMarquee();
         this.digitialClock();
 
-        this.displayCustomAngleFields();
         this.dimMonitorOvernight();
         this.dsRefreshQuranVerse();
 
         this.playFajrAdhan();
         this.playOtherAdhan();
 
-        this.makeCitySearchable();
         this.keepScreenOn();
-
         this.fadingMessages();
 
-    },
-
-
-    makeCitySearchable: function() {
-        var id = jQuery( "#csvUpload" ).html();
-        if (typeof id != 'undefined') {
-    
-            jQuery('.form-select').selectpicker();
-        }
-    },
-
-    displayCustomAngleFields: function() {
-        var id = jQuery( "#calculationMethod option:selected" ).val();
-        if ( id === '6') {
-            jQuery("#customMethod").show()
-        }
-        jQuery('#calculationMethod').on('change',function(){
-            if( jQuery(this).val() === '6'){ //custom settings
-                jQuery("#customMethod").show()
-            } else{
-                jQuery("#customMethod").hide()
-            }
-        });
     },
 
     monthlyCalendarChange: function () {
@@ -76,36 +48,6 @@ DPT = {
         });
 
         jQuery('#month').trigger('change');
-    },
-
-    displaySliderOptions: function () {
-        jQuery('input.oneChbox').on('change', function() {
-            jQuery('input.oneChbox').not(this).prop('checked', false);
-        });
-        var sliderChbox = jQuery("input#slider-chbox");
-
-        sliderChbox.on('click', function() {
-            jQuery(".ds-slides").toggle("slow");
-        });
-
-        if (! sliderChbox.is(':checked')) {
-            jQuery(".ds-slides").hide();
-        }
-    },
-
-    displaytemplateOptions: function () {
-        jQuery('input.templateChbox').on('change', function() {
-            jQuery('input.templateChbox').not(this).prop('checked', false);
-        });
-        var templateChbox = jQuery("input#template-chbox");
-
-        templateChbox.on('click', function() {
-            jQuery(".ds-templates").toggle("slow");
-        });
-
-        if (! templateChbox.is(':checked')) {
-            jQuery(".ds-templates").hide();
-        }
     },
 
     changeInputBackground: function () {
@@ -226,8 +168,7 @@ DPT = {
         if (taraweehTimeout > 0) {
             min += parseInt(taraweehTimeout); // taraweeh is the additional prayer
         }
-console.log(min);
-console.log('min')
+
         if (min > 0) {
             jQuery("body").append("<div id='overlay' class='iqamah'></div>");
             jQuery('#overlay').animate({
@@ -347,6 +288,7 @@ console.log('min')
 
     playFajrAdhan: function() 
     {
+        console.log(DPTURLS.fajrAdhan);
         var activateAdhan = jQuery('#activateAdhan').val();
         if ( ! activateAdhan ) {
             return;

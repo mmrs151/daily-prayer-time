@@ -30,7 +30,7 @@ function displayImage($slide){
             </tr>
             <tr>
                 <td style="width: 33%;"><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>><strong>Edgware Islamic Cultural Trust</strong></td>
-                <td><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new"><strong>Masjid-E-Usman</strong></a></td>
+                <td><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>><strong>Masjid-E-Usman</strong></td>
                 <td><input type="radio" name="ds-template" value="" disabled><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new">Add Your Design</a></td>
             </tr>
         </table>

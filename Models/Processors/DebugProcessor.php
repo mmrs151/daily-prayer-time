@@ -21,10 +21,12 @@ if ( ! class_exists('DPTDebugProcessor')) {
          */
         public function __construct(array $data=null) {
             $this->data = $data;
-            $this->filePath = plugin_dir_path(__FILE__) . '../../Assets/debug.csv';
+            // $this->filePath = plugin_dir_path(__FILE__) . '../../Assets/debug.csv';
+            $this->filePath = fopen('php://memory', 'rw+');
 
             if ($this->fp == null) {
-                $this->fp = fopen($this->filePath, 'a');
+                // $this->fp = fopen($this->filePath, 'a');
+                $this->fp = $this->filePath;
             }
 
             $this->isDebug = get_option('debugActivated');

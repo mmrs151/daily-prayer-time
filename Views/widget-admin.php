@@ -195,25 +195,25 @@ if (! empty($_POST['debugLogSettings']) && check_admin_referer( 'debugLogSetting
 ?>
 <nav>
   <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-    <button class="nav-link" id="nav-quickUpdate-tab" data-bs-toggle="tab" data-bs-target="#nav-quickUpdate" type="button" role="tab" aria-controls="nav-quickUpdate" aria-selected="false">Quick Update</button>
-    <button class="nav-link" id="nav-digitalScreen-tab" data-bs-toggle="tab" data-bs-target="#nav-digitalScreen" type="button" role="tab" aria-controls="nav-digitalScreen" aria-selected="false">Digital Screen</button>
-    <button class="nav-link" id="nav-hijri-tab" data-bs-toggle="tab" data-bs-target="#nav-hijri" type="button" role="tab" aria-controls="nav-hijri" aria-selected="false">Hijri</button>
-    <button class="nav-link" id="nav-theme-tab" data-bs-toggle="tab" data-bs-target="#nav-theme" type="button" role="tab" aria-controls="nav-theme" aria-selected="false">Theme</button>
-    <button class="nav-link" id="nav-language-tab" data-bs-toggle="tab" data-bs-target="#nav-language" type="button" role="tab" aria-controls="nav-language" aria-selected="false">Translate</button>
-    <button class="nav-link" id="nav-adhan-tab" data-bs-toggle="tab" data-bs-target="#nav-adhan" type="button" role="tab" aria-controls="nav-adhan" aria-selected="false">Adhan</button>
-    <button class="nav-link" id="nav-misc-tab" data-bs-toggle="tab" data-bs-target="#nav-misc" type="button" role="tab" aria-controls="nav-misc" aria-selected="false">Misc</button>
+    <a href="nav-home" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+    <a href="nav-quickUpdate" class="nav-link" id="nav-quickUpdate-tab" data-bs-toggle="tab" data-bs-target="#nav-quickUpdate" type="button" role="tab" aria-controls="nav-quickUpdate" aria-selected="false">Quick Update</a>
+    <a href="nav-digitalScreen" class="nav-link" id="nav-digitalScreen-tab" data-bs-toggle="tab" data-bs-target="#nav-digitalScreen" type="button" role="tab" aria-controls="nav-digitalScreen" aria-selected="false">Digital Screen</a>
+    <a href="nav-hijri" class="nav-link" id="nav-hijri-tab" data-bs-toggle="tab" data-bs-target="#nav-hijri" type="button" role="tab" aria-controls="nav-hijri" aria-selected="false">Hijri</a>
+    <a href="nav-theme" class="nav-link" id="nav-theme-tab" data-bs-toggle="tab" data-bs-target="#nav-theme" type="button" role="tab" aria-controls="nav-theme" aria-selected="false">Theme</a>
+    <a href="nav-language" class="nav-link" id="nav-language-tab" data-bs-toggle="tab" data-bs-target="#nav-language" type="button" role="tab" aria-controls="nav-language" aria-selected="false">Translate</a>
+    <a href="nav-adhan" class="nav-link" id="nav-adhan-tab" data-bs-toggle="tab" data-bs-target="#nav-adhan" type="button" role="tab" aria-controls="nav-adhan" aria-selected="false">Adhan</a>
+    <a href="nav-misc" class="nav-link" id="nav-misc-tab" data-bs-toggle="tab" data-bs-target="#nav-misc" type="button" role="tab" aria-controls="nav-misc" aria-selected="false">Misc</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><?php include 'Tabs/CsvUpload.php' ?></div>
-  <div class="tab-pane fade" id="nav-quickUpdate" role="tabpanel" aria-labelledby="nav-quickUpdate-tab"><?php include 'Tabs/QuickUpdate.php' ?></div>
-  <div class="tab-pane fade" id="nav-digitalScreen" role="tabpanel" aria-labelledby="nav-digitalScreen-tab"><?php include 'Tabs/DigitalScreen.php' ?></div>
-  <div class="tab-pane fade" id="nav-hijri" role="tabpanel" aria-labelledby="nav-hijri-tab"><?php include 'Tabs/HijriDate.php' ?></div>
-  <div class="tab-pane fade" id="nav-theme" role="tabpanel" aria-labelledby="nav-theme-tab"><?php include 'Tabs/ThemeSettings.php' ?></div>
-  <div class="tab-pane fade" id="nav-language" role="tabpanel" aria-labelledby="nav-language-tab"><?php include 'Tabs/ChangeLanguage.php' ?></div>
-  <div class="tab-pane fade" id="nav-adhan" role="tabpanel" aria-labelledby="nav-adhan-tab"><?php include 'Tabs/Adhan.php' ?></div>
-  <div class="tab-pane fade" id="nav-misc" role="tabpanel" aria-labelledby="nav-misc-tab"><?php include 'Tabs/OtherSettings.php' ?></div>
+  <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><?php include 'Tabs/CsvUpload.php' ?></div>
+  <div class="tab-pane" id="nav-quickUpdate" role="tabpanel" aria-labelledby="nav-quickUpdate-tab"><?php include 'Tabs/QuickUpdate.php' ?></div>
+  <div class="tab-pane" id="nav-digitalScreen" role="tabpanel" aria-labelledby="nav-digitalScreen-tab"><?php include 'Tabs/DigitalScreen.php' ?></div>
+  <div class="tab-pane" id="nav-hijri" role="tabpanel" aria-labelledby="nav-hijri-tab"><?php include 'Tabs/HijriDate.php' ?></div>
+  <div class="tab-pane" id="nav-theme" role="tabpanel" aria-labelledby="nav-theme-tab"><?php include 'Tabs/ThemeSettings.php' ?></div>
+  <div class="tab-pane" id="nav-language" role="tabpanel" aria-labelledby="nav-language-tab"><?php include 'Tabs/ChangeLanguage.php' ?></div>
+  <div class="tab-pane" id="nav-adhan" role="tabpanel" aria-labelledby="nav-adhan-tab"><?php include 'Tabs/Adhan.php' ?></div>
+  <div class="tab-pane" id="nav-misc" role="tabpanel" aria-labelledby="nav-misc-tab"><?php include 'Tabs/OtherSettings.php' ?></div>
 </div>
 <div class="pt-3">
     <span class="dpt-donation"><a href="https://donate.uwt.org/Account/Index.aspx" target="_blank">Send Sadaqa to my GRAVE</a></span>
