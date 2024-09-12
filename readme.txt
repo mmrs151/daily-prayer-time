@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.5
-Stable tag: 2024.08.24
+Stable tag: 2024.08.26
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,14 +124,14 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2024.08.24 =
+= 2024.08.26 =
 * New Tab 
 * New themes (experimental)
 * Freemius sites and feature update
 
 == Upgrade Notice ==
 
-= 2024.08.24 =
+= 2024.08.26 =
 * New Tab 
 * New themes (experimental)
 * Freemius sites and feature update

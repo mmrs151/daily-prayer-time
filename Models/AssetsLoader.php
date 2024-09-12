@@ -11,7 +11,7 @@
         function load_admin_scripts($hook)
         {
             if ($hook == 'toplevel_page_dpt') {
-                wp_enqueue_script('dpt-admin', plugins_url( '../Assets/js/dpt-admin.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION, true);
+                wp_enqueue_script('dpt-admin', plugins_url( '../Assets/js/dpt-admin.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
                 wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.bundle.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
                 wp_enqueue_script( 'bs_select_js', plugins_url( '../Assets/js/bootstrap-select.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
     

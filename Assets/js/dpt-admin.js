@@ -1,4 +1,4 @@
-DPT = {
+DPTAdmin = {
     init: function() {
         this.enableTooltip();
         this.displaySliderOptions();
@@ -33,7 +33,7 @@ DPT = {
         jQuery('input.oneChbox').on('change', function() {
             jQuery('input.oneChbox').not(this).prop('checked', false);
         });
-        
+
         var templateChbox = jQuery("input#template-chbox");
         if (! templateChbox.is(':checked')) {
             jQuery(".ds-templates").hide();
@@ -81,4 +81,4 @@ DPT = {
         }
       },
 };
-jQuery(document).ready(function() { DPT.init(); });
+jQuery(document).ready(function() { DPTAdmin.init(); });

@@ -114,14 +114,11 @@ class TimetablePrinter
     public function getLocalPrayerNames($forAdmin=false, $enableJumuah=false)
     {
         $prayers_local = get_option('prayersLocal');
-
         $localPrayerName =  $prayers_local;
+        
         if ( empty($prayers_local)) {
             $localPrayerName =  $this->prayerLocal;
-        } elseif (count($prayers_local) != count($this->prayerLocal)) {
-            delete_option( 'prayersLocal' );
-            $localPrayerName = $this->prayerLocal;
-        }
+        } 
 
         if (! $forAdmin && $enableJumuah){
             if ($this->todayIsFriday()) {
@@ -132,10 +129,6 @@ class TimetablePrinter
         if (is_array($localPrayerName)) {
             $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
             $localPrayerName = array_map('stripslashes', $localPrayerName);
-        }
-
-        if (empty(get_option('zawal'))) {
-            unset($localPrayerName['zawal']);
         }
 
         return $localPrayerName;

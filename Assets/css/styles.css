@@ -875,7 +875,7 @@ ul.clock {
 ul.clock li {
     display: inline;
     text-shadow: 0 0 5px #00c6ff;
-    font-family: "DSDIGI", sans-serif;
+    /* font-family: "DSDIGI", sans-serif; */
 }
 ul.clock li#sec {
     font-size: 50%;

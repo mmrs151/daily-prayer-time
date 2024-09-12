@@ -28,7 +28,12 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
     <?php if ( ! get_theme_support( 'title-tag' ) ): ?>
         <title><?php wp_title(); ?></title>
     <?php endif; ?>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
     <link rel="profile" href="http://gmpg.org/xfn/11">
 
     <?php //wp_head(); ?>
