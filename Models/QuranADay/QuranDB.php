@@ -71,17 +71,37 @@ class DPTQuranDB
      */
     public function getQuote($attr=array(), $lang = 'english')
     {
-        $minWord = isset($attr['min_word']) ? esc_attr($attr['min_word']) : 11;
-        $maxWord = isset($attr['max_word']) ? esc_attr($attr['max_word']) : 20;
-        $lang = isset($attr['language']) ? esc_attr($attr['language']) : 'english';
+        $minWord = 11;
+        $maxWord = 20;
+        $lang = 'english';
 
-        $sql = 'SELECT *, (length(text)-LENGTH(REPLACE(text, " ", "")) + 1) as size FROM '.$this->tableName.
-            ' WHERE lang =  "' . $lang .'" having size >' . $minWord . ' and size < ' . $maxWord . ' order by rand() limit 1;';
+        if (isset($attr['min_word']) && is_numeric($attr['min_word'])) {
+            $minWord = intval($attr['min_word']);
+        } 
 
-        $result = $this->getQuoteWithText($sql);
-        $result['name'] = $this->rand->getSuraName($result['sura'], $lang);
+        if (isset($attr['max_word']) && is_numeric($attr['max_word'])) {
+            $maxWord = intval($attr['max_word']);
+        }
+
+        if (isset($attr['language']) && in_array($attr['language'], ['english', 'bangla'])) {
+            $lang = $attr['language'];
+        } 
+
+        // $sql = 'SELECT *, (length(text)-LENGTH(REPLACE(text, " ", "")) + 1) as size FROM '.$this->tableName.
+        //     ' WHERE lang =  "' . $lang .'" having size >' . $minWord . ' and size < ' . $maxWord . ' order by rand() limit 1;';
+
+        global $wpdb;
+
+        $prepared = $wpdb->prepare(
+            'SELECT *, (length(text)-LENGTH(REPLACE(text, " ", "")) + 1) as size FROM '.$this->tableName.
+            ' WHERE lang =  %s having size > %d and size <  %d  order by rand() limit 1;',
+            array( $lang, $minWord, $maxWord )
+        );
+            
+        $result = $wpdb->get_results($prepared, ARRAY_A);
+        $result[0]['name'] = $this->rand->getSuraName($result[0]['sura'], $lang);
         
-        return $result;
+        return $result[0];
     }
 
     /**
