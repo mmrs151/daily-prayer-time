@@ -131,6 +131,10 @@ class TimetablePrinter
             $localPrayerName = array_map('stripslashes', $localPrayerName);
         }
 
+        if (empty(get_option('zawal'))) {
+            unset($localPrayerName['zawal']);
+        }
+        
         return $localPrayerName;
     }
 

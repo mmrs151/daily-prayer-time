@@ -63,7 +63,7 @@ class MonthlyTimetablePrinter extends TimetablePrinter
              <th class='prayerName' colspan='2'>" . $monthName . "</th>
 
              <th class='prayerName' colspan='$fajrColspan'>" . esc_attr($prayers['fajr']) . "</th>
-             <th class='prayerName' colspan='2'>" . esc_attr($prayers['zuhr']) . "</th>";
+             <th class='prayerName' colspan=".$this->getZuhrColspan().">" . esc_attr($prayers['zuhr']) . "</th>";
         $table .= "<th class='prayerName' colspan=".$this->getAsrMethodColspan().">" . esc_attr($prayers['asr']) . "</th>";
         $table .= "
              <th class='prayerName' colspan='2'>" . esc_attr($prayers['maghrib']) . "</th>
@@ -344,6 +344,17 @@ class MonthlyTimetablePrinter extends TimetablePrinter
             return 2;
         }
         return 3;
+    }
+
+        /**
+     * @return int
+     */
+    private function getZuhrColspan()
+    {
+        if (!empty(get_option('zawal'))) {
+            return 3;
+        }
+        return 2;
     }
 
     /**
