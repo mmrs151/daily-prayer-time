@@ -359,8 +359,12 @@ class DailyTimetablePrinter extends TimetablePrinter
 
         $localPrayerNames = $this->localPrayerNames;
         if (get_option('zawal')) {
-            $localPrayerNames = $this->toggleSunriseZawal($row, $localPrayerNames);
-            $row['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
+            if ($this->dptHelper->isZawalTimeNext($row)) {
+                $localPrayerNames = $this->toggleSunriseZawal($row, $localPrayerNames);
+                $row['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
+            } else {
+                unset($localPrayerNames['zawal']);
+            }
         }
         foreach ($localPrayerNames as $key=>$prayerName) {
             $begins =  $key != 'sunrise' ? lcfirst( $key ).'_begins' : 'sunrise';

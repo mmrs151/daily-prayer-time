@@ -232,7 +232,7 @@
     height: 100%;
 }
 
-.d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer .dsJumuah {
+.d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .d-masjid-e-usman .nextPrayer .dsJumuah {
     color: rgb(86,247,79);
 }
 .d-masjid-e-usman  .left-main-col-sun-times h4{

@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.6
-Stable tag: 2024.09.12
+Stable tag: 2024.12.29
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,10 +124,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2024.09.12 =
-* Fix https://wordpress.org/support/topic/translation-of-the-prayers-names-are-not-working/ 
+= 2024.12.29 =
+* Fix Asr start time in digital screen 
+* Fix Asr start time in quick 
 
 == Upgrade Notice ==
 
-= 2024.09.12 =
-* Fix https://wordpress.org/support/topic/translation-of-the-prayers-names-are-not-working/ 
+= 2024.12.29 =
+* Fix Asr start time in digital screen 
+* Fix Asr start time in quick 

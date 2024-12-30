@@ -105,12 +105,14 @@ if ( empty($data)) {
             </thead>
     ";
 
+    $asrMethod = get_option('asrSelect');
     foreach ($data as $key => $value) {
         $date = $value['d_date'];
         $displayDate = date("m/d", strtotime($date));
         $todayDate = date("m/d", strtotime(date('Y-m-d')));
         $weekday = date("D", strtotime($date));
         $today = '';
+        $asr_begins = ($asrMethod == 'hanafi') ? $value['asr_mithl_2'] : $value['asr_mithl_1'];
 
         if ($displayDate == $todayDate) {
             $today = 'highlight';
@@ -134,7 +136,7 @@ if ( empty($data)) {
                 <td><input class='qtime $weekday' name='thisMonth[".$key."][zuhr_begins]' value=". date('H:i', strtotime(esc_attr($value['zuhr_begins']))) ." ></td>
                 <td class='dptMonthlyIqamah'><input class='qtime $weekday' name='thisMonth[".$key."][zuhr_jamah]' value=". date('H:i', strtotime(esc_attr($value['zuhr_jamah']))) ." ></td>
 
-                <td><input class='qtime $weekday' name='thisMonth[".$key."][asr_begins]' value=". date('H:i', strtotime(esc_attr($value['asr_mithl_1']))) ."></td>
+                <td><input class='qtime $weekday' name='thisMonth[".$key."][asr_begins]' value=". date('H:i', strtotime(esc_attr($asr_begins))) ."></td>
                 <td class='dptMonthlyIqamah'><input class='qtime $weekday' name='thisMonth[".$key."][asr_jamah]' value=". date('H:i', strtotime(esc_attr($value['asr_jamah']))) ."></td>
 
                 <td><input class='qtime $weekday' name='thisMonth[".$key."][maghrib_begins]' value=". date('H:i', strtotime(esc_attr($value['maghrib_begins']))) ." ></td>

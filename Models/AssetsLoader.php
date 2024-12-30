@@ -32,7 +32,10 @@
             $protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
             $params = array(
                 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
+                'fajrAdhanUrl' => 'https://example.com/fajr.mp3',
+                'otherAdhanUrl' => 'https://example.com/other.mp3'
             );
+            
         
             wp_enqueue_script( 'dpt_popper_js', plugins_url( '../Assets/js/popper.min-1.12.9.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
             wp_enqueue_script("jquery-ui-tabs");

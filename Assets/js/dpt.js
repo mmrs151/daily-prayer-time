@@ -2,7 +2,6 @@ var isTimerOn = false;
 
 DPT = {
     init: function() {
-
         this.monthlyCalendarChange();
 
         this.changeInputBackground();
@@ -288,7 +287,6 @@ DPT = {
 
     playFajrAdhan: function() 
     {
-        console.log(DPTURLS.fajrAdhan);
         var activateAdhan = jQuery('#activateAdhan').val();
         if ( ! activateAdhan ) {
             return;
@@ -301,7 +299,7 @@ DPT = {
         adhan = JSON.parse(adhan);
         var timeParts = adhan.split(":");
         DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(adhaan){
-            var audio = new Audio(DPTURLS.fajrAdhan);
+            var audio = new Audio(timetable_params.fajrAdhan);
             var playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
@@ -333,7 +331,7 @@ DPT = {
         {
             var timeParts = iqamah[i].split(":");
             DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(){
-                var audio = new Audio(DPTURLS.otherAdhan);
+                var audio = new Audio(timetable_params.otherAdhan);
                 var playPromise = audio.play();
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {

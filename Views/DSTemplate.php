@@ -2,23 +2,20 @@
 
 if (is_page_template( '../Views/DSTemplate.php' )) {
 
-    $fajrAdhanUrl = get_option('fajrAdhanUrl') ?: plugin_dir_url(__FILE__) . '../Assets/files/fajr.mp3';
-    $otherAdhanUrl = get_option('otherAdhanUrl') ?: plugin_dir_url(__FILE__) . '../Assets/files/adhan.mp3';
+    function enqueue_dpt_scripts() {
+        wp_enqueue_script('dpt', plugin_dir_url(__FILE__) . 'js/dpt.js', array('jquery'), '1.0', true);
+    }
 
-    wp_enqueue_script('dpt', plugins_url( '../Assets/js/dpt.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
+    add_action('wp_enqueue_scripts', 'enqueue_dpt_scripts');
+
     wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.bundle.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
 
-    wp_add_inline_script( 'dpt', 'DPTURLS = ' . json_encode( 
-        array( 
-            'fajrAdhan' => $fajrAdhanUrl,
-            'otherAdhan' => $otherAdhanUrl
-        )), 'before' );
-
     wp_register_style( 'dpt_bootstrap', plugins_url('../Assets/css/bootstrap.min.css', __FILE__), array(), DPT_PLUGIN_VERSION );
+    
     wp_enqueue_style( 'dpt_bootstrap' );
 
-
 }
+
 ?>
 
 <!DOCTYPE html>
