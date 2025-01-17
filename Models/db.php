@@ -333,6 +333,8 @@ class DatabaseConnection
 
         global $wpdb;
 
+        $asrStartField = get_option('asrSelect') == 'hanafi' ? 'asr_mithl_2' : 'asr_mithl_1';
+
         foreach ($monthData as $day) {
             $wpdb->update(
                 $this->tableName,
@@ -342,7 +344,7 @@ class DatabaseConnection
                     'sunrise' => $day['sunrise'],
                     'zuhr_begins' => $day['zuhr_begins'],
                     'zuhr_jamah' => $day['zuhr_jamah'],
-                    'asr_mithl_1' => $day['asr_begins'],
+                    $asrStartField => $day['asr_begins'],
                     'asr_jamah' => $day['asr_jamah'],
                     'maghrib_begins' => $day['maghrib_begins'],
                     'maghrib_jamah' => $day['maghrib_jamah'],

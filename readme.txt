@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.6
-Stable tag: 2024.12.29
+Stable tag: 2025.01.17
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,9 +21,11 @@ Daily prayer time can be displayed vertically or horizontally in your preferable
 **You need to upload your masjid's timetable from plugin admin section.**
 
 = PULL REQUEST =
-[GIT Repository] https://bitbucket.org/daily-prayer-time/daily-prayer-time.bitbucket.io/src/master/
+[GIT HUB] https://github.com/mmrs151/daily-prayer-time/pulls
 Add your commit and make a pull request. Please describe your feature, I will add it to the core.
-Also, feel free to release my code with a new plugin name with your exiting new ideas added to it.
+
+[IMPORTANT]
+If you don't see any update of this plugin for over a year, please feel free to copy the whole code and relase in a different name.
 My sole intention is to support the ummah.
 So I have absolutely no complain as long as you have the same intention, Fi Sabilillah.
 
@@ -124,12 +126,10 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2024.12.29 =
-* Fix Asr start time in digital screen 
-* Fix Asr start time in quick 
+= 2025.01.17 =
+* Fix Asr start update bug 
 
 == Upgrade Notice ==
 
-= 2024.12.29 =
-* Fix Asr start time in digital screen 
-* Fix Asr start time in quick 
+= 2025.01.17 =
+* Fix Asr start update bug 

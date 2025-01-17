@@ -486,7 +486,7 @@ class DailyShortCode extends TimetablePrinter
 
         $this->setDisplayForShortCode($attr);
         
-        $this->setHanafiAsr();
+        $this->isHanafiAsr = isset($attr['asr']) ? true : $this->setHanafiAsr();
 
         if (isset($attr['heading'])) {
             $this->setTitle(esc_attr($attr['heading']));
