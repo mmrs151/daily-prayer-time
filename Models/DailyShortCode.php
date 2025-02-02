@@ -208,11 +208,15 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
+        $result = "<span class='scFajr " . $this->dptHelper->getNextPrayerClass('fajr', $this->row, true) ."'>";
+
+        $start = '';
+        $jamah = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
+            $start = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
         }
-        return $result;
+
+        return $result . $start . $jamah . "</span>";
     }
 
     public function scFajrStart($attr)
@@ -226,7 +230,7 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
+        return "<span class='dpt_start " . $this->clsPrayerFinished . " " . $this->dptHelper->getNextPrayerClass('fajr', $this->row, true) ."'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scSunrise($attr)
@@ -240,7 +244,7 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_sunrise " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($sunrise) . "</span>";
+        return "<span class='dpt_sunrise " . $this->clsPrayerFinished . " ". $this->getNextPrayerClass($this->dptHelper->getSunriseOrZawal($this->row), $this->row) ."'>" . $this->formatDateForPrayer($sunrise) . "</span>";
     }
 
     public function scZuhr($attr)
@@ -256,13 +260,16 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
+        $result = "<span class='scZuhr " . $this->dptHelper->getNextPrayerClass('zuhr', $this->row) ."'>";
+        $start = '';
+        $jamah = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
+            $start = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
         }
         
-        return $result;
+        return $result . $start . $jamah . "</span>";
+
     }
 
     public function scZuhrStart($attr)
@@ -276,12 +283,12 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
+        return "<span class='dpt_start " . $this->clsPrayerFinished . " " . $this->dptHelper->getNextPrayerClass('zuhr', $this->row) ."'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scAsr($attr)
     {
-        $method = $this->getAsrMethod();
+        $method = $this->getAsrMethod($attr);
         $jamah = $this->row['asr_jamah'];
         $begins = $this->row[$method];
 
@@ -294,18 +301,20 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
+        $result = "<span class='scAsr " . $this->dptHelper->getNextPrayerClass('asr', $this->row) ."'>";
+        $start = '';
+        $jamah = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
 
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
+            $start = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
         }
 
-        return $result;
+        return $result . $start . $jamah . "</span>";
     }
 
     public function scAsrStart($attr)
     {
-        $method = $this->getAsrMethod();
+        $method = $this->getAsrMethod($attr);
         
         $begins = $this->row[$method];
 
@@ -316,11 +325,14 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
+        return "<span class='dpt_start " . $this->clsPrayerFinished . " " . $this->dptHelper->getNextPrayerClass('asr', $this->row) ."'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
-    private function getAsrMethod() 
+    private function getAsrMethod($attr=array()) 
     {
+        if (isset($attr['asr'])) {
+            return 'asr_mithl_2';
+        }
         return get_option('asrSelect') == 'hanafi' ? 'asr_mithl_2' : 'asr_mithl_1';
 
     }
@@ -338,13 +350,15 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
+        $result = "<span class='scMaghrib " . $this->dptHelper->getNextPrayerClass('maghrib', $this->row) ."'>";
+        $start = '';
+        $jamah = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
         
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
+            $start = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
         }
         
-        return $result;
+        return $result . $start . $jamah . "</span>";
     }
 
     public function scMaghribStart($attr)
@@ -358,7 +372,7 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
+        return "<span class='dpt_start " . $this->clsPrayerFinished . " " . $this->dptHelper->getNextPrayerClass('maghrib', $this->row) ."'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scIsha($attr)
@@ -374,13 +388,15 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        $result = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
+        $result = "<span class='scIsha " . $this->dptHelper->getNextPrayerClass('isha', $this->row) ."'>";
+        $start = '';
+        $jamah = "<span class='dpt_jamah " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($jamah) . "</span>";
 
         if ( isset($attr['start_time']) ) {
-            $result = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>" . $result;
+            $start = "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
         }
 
-        return $result;
+        return $result . $start . $jamah . "</span>";
     }
 
     public function scIshaStart($attr)
@@ -394,7 +410,7 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_start " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($begins) . "</span>";
+        return "<span class='dpt_start " . $this->clsPrayerFinished . " " . $this->dptHelper->getNextPrayerClass('isha', $this->row) ."'>" . $this->formatDateForPrayer($begins) . "</span>";
     }
 
     public function scJummahPrayer($attr)
@@ -428,7 +444,11 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_sunrise " . $this->clsPrayerFinished . "'>" . $this->formatDateForPrayer($zawal) . "</span>";
+        return "<span class='dpt_sunrise " 
+                    . $this->clsPrayerFinished . " " 
+                    . $this->dptHelper->getNextPrayerClass($this->dptHelper->getSunriseOrZawal($this->row), $this->row) ."'>" 
+                    . $this->formatDateForPrayer($zawal) 
+                . "</span>";
     }
 
     private function isPrayerFinished($time) 

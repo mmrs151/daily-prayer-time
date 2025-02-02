@@ -133,7 +133,10 @@ class UpdateStyles
                     font-weight: bold;
                     background:" . $highlight ."!important"
                 ."}
-                
+                span.nextPrayer{
+                    font-weight: bold;
+                    color:" . $highlight  ."
+                }
                 .x-board tr.nextPrayer td{
                     background-color: " . $highlight ."!important" ."
                 }

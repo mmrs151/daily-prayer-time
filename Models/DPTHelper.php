@@ -204,6 +204,16 @@ class DPTHelper
         }
     }
 
+    public function getSunriseOrZawal($row)
+    {
+        if (get_option('zawal')) {
+            if($this->getNextPrayerClass('zuhr', $row)){
+                return 'zawal';
+            } 
+        }
+        return 'sunrise';
+    }
+
     public function getJamahTime(array $row)
     {
         $row = $this->updateZuhrWithJummahTimes($row);

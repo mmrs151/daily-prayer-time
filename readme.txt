@@ -21,11 +21,12 @@ Daily prayer time can be displayed vertically or horizontally in your preferable
 **You need to upload your masjid's timetable from plugin admin section.**
 
 = PULL REQUEST =
-[GIT HUB] https://github.com/mmrs151/daily-prayer-time/pulls
+[GITHUB https://github.com/mmrs151/daily-prayer-time/pulls]
 Add your commit and make a pull request. Please describe your feature, I will add it to the core.
 
 [IMPORTANT]
-If you don't see any update of this plugin for over a year, please feel free to copy the whole code and relase in a different name.
+If you don't see any update of this plugin for over a year, I might have deparated. 
+Please feel free to copy the whole code and relase in a different name, so the masajid can be served. 
 My sole intention is to support the ummah.
 So I have absolutely no complain as long as you have the same intention, Fi Sabilillah.
 
