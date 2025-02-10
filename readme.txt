@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.6
-Stable tag: 2025.01.17
+Stable tag: 2025.02.02
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,10 +127,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2025.01.17 =
-* Fix Asr start update bug 
+= 2025.02.02 =
+* Set Asr meethod from shortcode
+* Highlight individual shortcode if it is the next prayer
 
 == Upgrade Notice ==
 
-= 2025.01.17 =
-* Fix Asr start update bug 
+= 2025.02.02 =
+* Set Asr meethod from shortcode
+* Highlight individual shortcode if it is the next prayer

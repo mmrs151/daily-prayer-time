@@ -244,7 +244,7 @@ class DailyShortCode extends TimetablePrinter
             }
         }
 
-        return "<span class='dpt_sunrise " . $this->clsPrayerFinished . " ". $this->getNextPrayerClass($this->dptHelper->getSunriseOrZawal($this->row), $this->row) ."'>" . $this->formatDateForPrayer($sunrise) . "</span>";
+        return "<span class='dpt_sunrise " . $this->clsPrayerFinished . " ". $this->getNextPrayerClass('sunrise', $this->row) ."'>" . $this->formatDateForPrayer($sunrise) . "</span>";
     }
 
     public function scZuhr($attr)
@@ -446,7 +446,7 @@ class DailyShortCode extends TimetablePrinter
 
         return "<span class='dpt_sunrise " 
                     . $this->clsPrayerFinished . " " 
-                    . $this->dptHelper->getNextPrayerClass($this->dptHelper->getSunriseOrZawal($this->row), $this->row) ."'>" 
+                    . $this->dptHelper->getNextPrayerClass('zawal', $this->row) ."'>" 
                     . $this->formatDateForPrayer($zawal) 
                 . "</span>";
     }

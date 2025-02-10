@@ -192,6 +192,10 @@ class DPTHelper
      */
     protected function getNextPrayer($row)
     {
+        if ( $this->isZawalTimeNext($row) ) {
+            return 'zawal';
+        }
+
         $now = current_time( 'H:i');
 
         $jamahTime = $this->getJamahTime( $row );
@@ -207,7 +211,7 @@ class DPTHelper
     public function getSunriseOrZawal($row)
     {
         if (get_option('zawal')) {
-            if($this->getNextPrayerClass('zuhr', $row)){
+            if($this->isZawalTimeNext($row)){
                 return 'zawal';
             } 
         }

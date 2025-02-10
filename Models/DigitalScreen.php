@@ -180,7 +180,7 @@ class DigitalScreen extends DailyShortCode
         $leftClass = "col-sm-5 col-xs-12 bg-red height-100 padding-null text-center";
         $rightClass = "col-sm-7 col-xs-12 padding-null text-center bg-green height-100 padding-null";
         $verticalClass = "";
-        $sunriseOrZawal = $this->getSunriseOrZawal();
+        $sunriseOrZawal = $this->dptHelper->getSunriseOrZawal($this->row);
 
         if ( $this->isPortrait ) {
             $verticalClass = "vertical";
