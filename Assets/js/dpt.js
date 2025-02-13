@@ -1,7 +1,11 @@
 var isTimerOn = false;
 
 DPT = {
+    isFirstMin: true,
+    diffMin: 59,
+
     init: function() {
+        console.log(timetable_params);
         this.monthlyCalendarChange();
 
         this.changeInputBackground();
@@ -89,10 +93,15 @@ DPT = {
                     'action':'get_ds_next_prayer',
                 },
                 success: function(response){
-                    setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60 * 1) ); // 60 seconds 
+                    setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60) ); // 60 seconds
                     jQuery('.dsNextPrayer').html(response);
                     if (! isTimerOn ) {
-                        DPT.startTimer();
+                        document.getElementById('playBeepButton')
+                            .addEventListener('click', function() {
+                            DPT.beep();
+                        });
+                        min = parseInt(jQuery('#nextPrayerTimeDifff').text() - 1);
+                        DPT.startTimer(min);
                         isTimerOn = true;
                     }
                 },
@@ -125,33 +134,88 @@ DPT = {
         });
     },
 
-    startTimer: function () {
+    startTimer: function (min) {
         var presentTime = '';
-
         if (document.getElementsByClassName('timeLeftCountDown')[0]) {
             presentTime = document.getElementsByClassName('timeLeftCountDown')[0].innerHTML.trim();
             presentTime = presentTime.split(' ')[0];
 
             var timeArray = presentTime.split(/[:]+/);
-            if (timeArray && timeArray.length === 2) {
+            if (timeArray && timeArray.length == 2) {
+                if (DPT.isFirstMin) {
+                    DPT.diffMin = timeArray[0] - 1;
+                }
 
-                var m = timeArray[0];
-                var s = DPT.checkSecond((timeArray[1] - 1));
+                var s = DPT.getRemainingSecond(); //DPT.checkSecond(timeArray[1] - 1); 
+                if(s == "00"){
+                    DPT.diffMin = DPT.diffMin - 1;
+                }
 
-                if(s == "59"){ m = m - 1;}
-
-                if ( m >= 0) {
+                if ( DPT.diffMin >= 0) {
                     var timeLeftCountDownElement = document.getElementsByClassName('timeLeftCountDown');
                     for(var i = 0; i < timeLeftCountDownElement.length; i++) {
-                        document.getElementsByClassName('timeLeftCountDown')[i].innerHTML = m + ":" + s;
+                        document.getElementsByClassName('timeLeftCountDown')[i].innerHTML = DPT.diffMin + ":" + s;
                     }
                 }
-                if(m == 0 && s == 0) {
+                if(DPT.diffMin == 0 && s == 1) {
+                    document.getElementById('playBeepButton').click();
                     DPT.timeoutScreen();
                 }
             }
-            setTimeout(DPT.startTimer, 1000);
+
+            DPT.isFirstMin = false;
+
+            setTimeout(DPT.startTimer, 1000); // 1 second
         }
+    },
+
+    checkSecond: function (sec) {
+            if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+            if (sec < 0) {sec = "59"};
+            return sec;
+        },
+
+    getRemainingSecond: function () {
+
+        const now = new Date();
+        const seconds = now.getSeconds();
+        sec = 0;
+        if (seconds > 0) {
+            sec =  60 - seconds;
+        }
+        if (sec < 10 && sec >= 0) {
+            sec = "0" + sec;
+        };
+
+        return sec;
+    },
+
+    beep: function() {
+        var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        var oscillator = audioContext.createOscillator();
+        var gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.type = 'triangle'; // You can change the type to 'square', 'sawtooth', 'triangle'
+        oscillator.frequency.setValueAtTime(940, audioContext.currentTime); // Frequency in Hz
+        gainNode.gain.setValueAtTime(1, audioContext.currentTime); // Volume
+
+        oscillator.start();
+
+        var playPromise = new Promise((resolve) => {
+            setTimeout(function() {
+                oscillator.stop();
+                resolve();
+            }, 1000); // Beep duration in milliseconds (5000ms = 5 seconds)
+        });
+
+        playPromise.then(() => {
+            console.log('Beep sound played successfully');
+        }).catch((error) => {
+            console.error('Error playing beep sound:', error);
+        });
     },
 
     timeoutScreen: function() {
@@ -193,12 +257,6 @@ DPT = {
             });
 
         }
-    },
-
-    checkSecond: function (sec) {
-        if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
-        if (sec < 0) {sec = "59"};
-        return sec;
     },
 
     executeFunctionOnTime: function (hours, minutes, seconds, func) {
@@ -298,7 +356,7 @@ DPT = {
         }
         adhan = JSON.parse(adhan);
         var timeParts = adhan.split(":");
-        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(adhaan){
+        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(adhan){
             var audio = new Audio(timetable_params.fajrAdhan);
             var playPromise = audio.play();
             if (playPromise !== undefined) {

@@ -102,6 +102,7 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
+            <button id="playBeepButton"> P L A Y </button> 
         ';
     }
 
@@ -431,6 +432,7 @@ class DigitalScreen extends DailyShortCode
         if ($this->isPortrait) {
             $orientation = 'vertical';
         }
+        
         return '<a class="notificationFont blink-' .$orientation.'" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
     }
 

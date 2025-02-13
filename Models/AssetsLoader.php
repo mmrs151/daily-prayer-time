@@ -32,8 +32,9 @@
             $protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
             $params = array(
                 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
-                'fajrAdhanUrl' => 'https://example.com/fajr.mp3',
-                'otherAdhanUrl' => 'https://example.com/other.mp3'
+                'fajrAdhanUrl' => plugins_url( '../Assets/sounds/fajr.mp3', __FILE__ ),
+                'otherAdhanUrl' => plugins_url( '../Assets/sounds/adhan.mp3', __FILE__ ),
+                'beep' => plugins_url( '../Assets/sounds/beep.mp3', __FILE__ ),
             );
             
         

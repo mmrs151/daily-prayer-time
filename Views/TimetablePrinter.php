@@ -440,12 +440,11 @@ class TimetablePrinter
         if ( is_null($nextPrayer) ) {
             $nextPrayerName = $dbRow['nextFajr'];
         }
-
-
             return
                 '<h2 class="dptScTime">' .
                 $this->formatDateForPrayer($nextPrayerName). '
-                </h2> 
+                </h2>
+                <p id="nextPrayerTimeDifff" style="display:none;">'. (int)$timeLeftText .'</p>
                 <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
                     '.  $timeLeftText .' 
                 </span>
