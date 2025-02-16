@@ -1,0 +1,106 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "32b9e0cb57366a501a805f4674964427",
+    "packages": [
+        {
+            "name": "islamic-network/prayer-times",
+            "version": "1.0.29",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/islamic-network/prayer-times.git",
+                "reference": "f7ed3a2467fbced252a0914c8b202c8b61ca58b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/islamic-network/prayer-times/zipball/f7ed3a2467fbced252a0914c8b202c8b61ca58b9",
+                "reference": "f7ed3a2467fbced252a0914c8b202c8b61ca58b9",
+                "shasum": ""
+            },
+            "require": {
+                "islamic-network/prayer-times-moonsighting": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "IslamicNetwork\\PrayerTimes\\": "src/PrayerTimes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Precise and Powerful PHP Prayer Times Library",
+            "support": {
+                "issues": "https://github.com/islamic-network/prayer-times/issues",
+                "source": "https://github.com/islamic-network/prayer-times/tree/1.0.29"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/islamicnetwork",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/islamicnetwork",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-03-17T08:24:32+00:00"
+        },
+        {
+            "name": "islamic-network/prayer-times-moonsighting",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/islamic-network/prayer-times-moonsighting.git",
+                "reference": "73f2b0ee9d41fa145f262d372a06cb9a9dae353e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/islamic-network/prayer-times-moonsighting/zipball/73f2b0ee9d41fa145f262d372a06cb9a9dae353e",
+                "reference": "73f2b0ee9d41fa145f262d372a06cb9a9dae353e",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "IslamicNetwork\\MoonSighting\\": "src/MoonSighting/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "PHP Prayer Times Library to Calculate Fajr and Isha times per moonsighting.com",
+            "homepage": "https://flarum.org/",
+            "keywords": [
+                "islam",
+                "moonsighting.com",
+                "prayer times"
+            ],
+            "support": {
+                "issues": "https://github.com/islamic-network/prayer-times-moonsighting/issues",
+                "source": "https://github.com/islamic-network/prayer-times-moonsighting/tree/master"
+            },
+            "time": "2020-07-22T06:16:24+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}

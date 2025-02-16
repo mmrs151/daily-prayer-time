@@ -1,6 +1,6 @@
 <?php
-
-require_once(__DIR__. '/../StartTime/PrayTime.php');
+use IslamicNetwork\PrayerTimes\PrayerTimes;
+use IslamicNetwork\PrayerTimes\Method as PrayerTimesMethod;
 require_once(__DIR__. '/../db.php');
 
 if ( ! class_exists('DPTStartTimeProcessor')) {
@@ -11,9 +11,8 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
         
         /** @var string[]  */
         private $prayerNames = array('fajr', 'sunrise', 'zuhr', 'asr', 'sunset', 'maghrib', 'isha' );
-        
-        /** @var DPTPrayTime */
-        private $prayTime;
+
+        private PrayerTimes $islamicNetworkPrayerTimes;
         
         /** @var array */
         private $data;
@@ -31,7 +30,6 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             if (is_array($data)) {
                 $this->data = array_map( 'sanitize_text_field', $data);
             }
-            $this->prayTime = new DPTPrayTime();
         }
         
         public function process()
@@ -40,22 +38,31 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             $calcMethod = $this->data['method'];
             $asrMethod = $this->data['asr-method'];
             $latLong = $this->getLatLong($this->data['city']);
-            $timeZone =  get_option('gmt_offset');
             $higherLatMethod = (int)$this->data['higher-lat'];
-            
-            if ($calcMethod == 6) { // custom settings
+
+            $this->islamicNetworkPrayerTimes = new PrayerTimes($calcMethod);
+            if ($calcMethod == 23) { // custom settings
+                $method = new PrayerTimesMethod('My Custom Method');
                 $fajrAngle = (int)$this->data['fajr-angle'];
                 $ishaAngle = (int)$this->data['isha-angle'];
-                $this->prayTime->setFajrAngle($fajrAngle);
-                $this->prayTime->setIshaAngle($ishaAngle);
+
+                $method->setFajrAngle((int)$this->data['fajr-angle']);
+                $method->setIshaAngleOrMins((int)$this->data['isha-angle']);
+
+                $this->islamicNetworkPrayerTimes->setMethod($method);
+
 
                 delete_option('fajr-angle');
                 delete_option('isha-angle');
 
                 add_option('fajr-angle', $fajrAngle);
                 add_option('isha-angle', $ishaAngle);
-    
             }
+            $this->islamicNetworkPrayerTimes->setAsrJuristicMethod($asrMethod);
+            $this->islamicNetworkPrayerTimes->setSchool($asrMethod);
+            $this->islamicNetworkPrayerTimes->setLatitudeAdjustmentMethod($higherLatMethod);
+
+
             delete_option('fajr-delay');
             delete_option('zuhr-delay');
             delete_option('asr-delay');
@@ -73,24 +80,29 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             add_option('higher-lat', $higherLatMethod);
             add_option('calc-method', $calcMethod);
             add_option('asr-method', $asrMethod);
-            
-            $this->prayTime->setCalcMethod($calcMethod);
-            $this->prayTime->setAsrMethod($asrMethod);
-            $this->prayTime->setHighLatsMethod($higherLatMethod);
-            
+
             $year = date('Y');
-            $date = strtotime($year. '-1-1');
-            $endDate = strtotime(($year+ 1). '-1-1');
+            $date = new DateTime($year . '-1-1');
+            $endDate = new DateTime(($year + 1) . '-1-1');
             
             while ($date < $endDate)
             {
-                $day = date('Y-m-d', $date);
-                $times = $this->prayTime->getPrayerTimes($date, $latLong['lat'], $latLong['lng'], $timeZone);
+                $day = date('Y-m-d');
+                $times = $this->islamicNetworkPrayerTimes->getTimes($date, $latLong['lat'], $latLong['lng']);
+                $times = [
+                    'fajr' => $times['Fajr'],
+                    'sunrise' => $times['Sunrise'],
+                    'zuhr' => $times['Dhuhr'],
+                    'asr' => $times['Asr'],
+                    'sunset' => $times['Sunset'],
+                    'maghrib' => $times['Maghrib'],
+                    'isha' => $times['Isha']
+                ];
+
                 $times = array_combine($this->prayerNames, $times);
-                $date += 24* 60* 60;  // next day
-        
+
                 $row = array (
-                    'd_date' => $day,
+                    'd_date' => $date->format('Y-m-d'),
                     'fajr_begins' => $times['fajr'],
                     'fajr_jamah' => $this->getJamahTime($day, $times['fajr'], $this->data['fajr-delay']),
                     'sunrise' => $times['sunrise'],
@@ -107,6 +119,7 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
                     'hijri_date' => 0
                 );
                 $this->db->insertRow($row);
+                $date->modify('+1 day'); // next day
             }
         }
         

@@ -87,7 +87,19 @@ class DigitalScreen extends DailyShortCode
 
     private function getHiddenVariables()
     {
-        return '
+        $localNumbers = $this->getLocalNumbers();
+        $localNumbers = array_combine(array_keys($localNumbers), $localNumbers);
+        $localNumbersJson = json_encode($localNumbers, JSON_UNESCAPED_UNICODE);
+
+        $timesLocal = json_encode([
+                'minute' => $this->getLocalTimes()['minute'],
+                'minutes' => $this->getLocalTimes()['minute'],
+                'hour' => $this->getLocalTimes()['hours'],
+                'hours' => $this->getLocalTimes()['hours'],
+            ],
+            JSON_UNESCAPED_UNICODE);
+
+        $hiddenVariables = '
             <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
             
@@ -97,13 +109,23 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             
             <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
+            <input type="hidden" value="' . get_option('quran-chbox') . '" id="quranCheckbox">
             <input type="hidden" value="' . $this->getWpHour() . '" id="clockHour">
 
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes())) . '" id="otherAdhanTimes">
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFajrAdhanTime())) . '" id="fajrAdhanTime">
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
+            <input type="hidden" value="' . htmlentities($localNumbersJson) . '" id="localizedNumbers">
+            <input type="hidden" value="' . htmlentities($timesLocal) . '" id="localizedTimes">           
             <button id="playBeepButton"> P L A Y </button> 
         ';
+
+        if (get_option("activateAdhan") === 'adhan') {
+            $hiddenVariables .= '
+                <input type="hidden" value="' . get_option('fajrAdhanUrl') . '" id="fajrAdhanUrl">
+                <input type="hidden" value="' . get_option('otherAdhanUrl') . '" id="otherAdhanUrl">
+            ';
+        }
+
+        return $hiddenVariables;
     }
 
     private function getTopRow()
@@ -283,16 +305,6 @@ class DigitalScreen extends DailyShortCode
         ';
 
         return $html;
-    }
-
-    private function getSunriseOrZawal()
-    {
-        if (get_option('zawal')) {
-            if($this->getNextPrayerClass('zuhr', $this->row)){
-                return 'zawal';
-            } 
-        }
-        return 'sunrise';
     }
 
     private function getBottomRow()

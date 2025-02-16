@@ -323,11 +323,15 @@ span.green h2.dptScTime {
 }
 
 h2.vertical div span h2.dptScTime {
-    margin: 10px;
+    margin: 1px;
 }
 h2#dsNextPrayer div span h2.dptScTime {
     font-size: 2em;
     font-weight: 700;
+}
+.timeLeftCountDown {
+    display: inline;
+    text-transform: lowercase;
 }
 
 .jamahChanges span{
@@ -659,10 +663,6 @@ height: 70%;
 .x-board .timeLeft {
     font-size: 0.8em;
 }
-.x-board .timeLeftCountDown {
-    display: inline;
-}
-
 .x-board .blink{
     animation: blink 1s infinite;
     font-weight: bold;

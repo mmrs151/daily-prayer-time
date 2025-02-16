@@ -10,11 +10,10 @@ DPT = {
 
         this.changeInputBackground();
         this.printDiv();
-        this.startTimer();
         this.dsRefreshNextPrayer();
         this.refreshBeforeIqamah();
         this.continiousMarquee();
-        this.digitialClock();
+        this.digitalClock();
 
         this.dimMonitorOvernight();
         this.dsRefreshQuranVerse();
@@ -25,6 +24,7 @@ DPT = {
         this.keepScreenOn();
         this.fadingMessages();
 
+        this.updateTimeDifference();
     },
 
     monthlyCalendarChange: function () {
@@ -82,10 +82,10 @@ DPT = {
 
     dsRefreshNextPrayer: function () {
         if (
-            jQuery('.x-board')[0] 
+            jQuery('.x-board')[0]
             || jQuery('.x-board-modern')[0]
             || jQuery('.d-masjid-e-usman')[0]
-        ) {        
+        ) {
 
             jQuery.ajax({
                 url: timetable_params.ajaxurl,
@@ -93,15 +93,13 @@ DPT = {
                     'action':'get_ds_next_prayer',
                 },
                 success: function(response){
-                    setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60) ); // 60 seconds
+                    setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60 * 15) ); // 15 minutes
                     jQuery('.dsNextPrayer').html(response);
                     if (! isTimerOn ) {
                         document.getElementById('playBeepButton')
                             .addEventListener('click', function() {
                             DPT.beep();
                         });
-                        min = parseInt(jQuery('#nextPrayerTimeDifff').text() - 1);
-                        DPT.startTimer(min);
                         isTimerOn = true;
                     }
                 },
@@ -115,79 +113,27 @@ DPT = {
 
 
     dsRefreshQuranVerse: function () {
-        // if (! jQuery('.x-board')[0]) {
-        //     return;
-        // }
+
+        if ( ! jQuery('#quranCheckbox').val() ) {
+            return;
+        }
+
+            // Your code here
         jQuery.ajax({
             url: timetable_params.ajaxurl,
             data: {
-                'action':'get_ds_quran_verse',
+                'action': 'get_ds_quran_verse',
             },
-            success: function(response){
-                setTimeout(DPT.dsRefreshQuranVerse, (1000 * 30) );
+            success: function (response) {
+                console.log(response);
+                setTimeout(DPT.dsRefreshQuranVerse, (1000 * 30));
                 jQuery('#quranVerse').html(response);
             },
-            error: function(responseObj, strError){
+            error: function (responseObj, strError) {
                 console.log(strError);
             },
             timeout: (1000 * 30) // 30 seconds
         });
-    },
-
-    startTimer: function (min) {
-        var presentTime = '';
-        if (document.getElementsByClassName('timeLeftCountDown')[0]) {
-            presentTime = document.getElementsByClassName('timeLeftCountDown')[0].innerHTML.trim();
-            presentTime = presentTime.split(' ')[0];
-
-            var timeArray = presentTime.split(/[:]+/);
-            if (timeArray && timeArray.length == 2) {
-                if (DPT.isFirstMin) {
-                    DPT.diffMin = timeArray[0] - 1;
-                }
-
-                var s = DPT.getRemainingSecond(); //DPT.checkSecond(timeArray[1] - 1); 
-                if(s == "00"){
-                    DPT.diffMin = DPT.diffMin - 1;
-                }
-
-                if ( DPT.diffMin >= 0) {
-                    var timeLeftCountDownElement = document.getElementsByClassName('timeLeftCountDown');
-                    for(var i = 0; i < timeLeftCountDownElement.length; i++) {
-                        document.getElementsByClassName('timeLeftCountDown')[i].innerHTML = DPT.diffMin + ":" + s;
-                    }
-                }
-                if(DPT.diffMin == 0 && s == 1) {
-                    document.getElementById('playBeepButton').click();
-                    DPT.timeoutScreen();
-                }
-            }
-
-            DPT.isFirstMin = false;
-
-            setTimeout(DPT.startTimer, 1000); // 1 second
-        }
-    },
-
-    checkSecond: function (sec) {
-            if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
-            if (sec < 0) {sec = "59"};
-            return sec;
-        },
-
-    getRemainingSecond: function () {
-
-        const now = new Date();
-        const seconds = now.getSeconds();
-        sec = 0;
-        if (seconds > 0) {
-            sec =  60 - seconds;
-        }
-        if (sec < 10 && sec >= 0) {
-            sec = "0" + sec;
-        };
-
-        return sec;
     },
 
     beep: function() {
@@ -262,7 +208,7 @@ DPT = {
     executeFunctionOnTime: function (hours, minutes, seconds, func) {
         var now = new Date();
         var then = new Date();
-    
+
         if(now.getHours() > hours ||
            (now.getHours() == hours && now.getMinutes() > minutes) ||
             now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
@@ -271,7 +217,7 @@ DPT = {
         then.setHours(hours);
         then.setMinutes(minutes);
         then.setSeconds(seconds);
-    
+
         var timeout = (then.getTime() - now.getTime());
         setTimeout(func, timeout);
     },
@@ -307,9 +253,8 @@ DPT = {
         });
     },
 
-    digitialClock: function ()
+    digitalClock: function ()
     {
-
         var newDate = new Date();
 
         newDate.setDate(newDate.getDate());
@@ -318,7 +263,7 @@ DPT = {
             var minutes = new Date().getMinutes();
             jQuery("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
             },1000);
-            
+
         setInterval( function() {
             var wpHour = jQuery('#clockHour').val();
             var date = new Date();
@@ -343,7 +288,7 @@ DPT = {
             }, 1000);
     },
 
-    playFajrAdhan: function() 
+    playFajrAdhan: function()
     {
         var activateAdhan = jQuery('#activateAdhan').val();
         if ( ! activateAdhan ) {
@@ -372,7 +317,7 @@ DPT = {
         });
     },
 
-    playOtherAdhan: function() 
+    playOtherAdhan: function()
     {
         var activateAdhan = jQuery('#activateAdhan').val();
 
@@ -423,6 +368,91 @@ DPT = {
             });
         }
     },
+
+    updateTimeDifference: function () {
+
+        setInterval(() => updateTimeDifferenceInterval(), 1000);
+
+        function updateTimeDifferenceInterval() {
+            var now = new Date();
+            var targetTime = new Date();
+
+            var dptScTimeValue = jQuery('#dptNextPrayerTime').text();
+            var timeParts = dptScTimeValue.split(':');
+            var hours = parseInt(timeParts[0]);
+            var minutes = parseInt(timeParts[1]);
+
+            targetTime.setHours(hours, minutes, 0, 0);
+
+            // Calculate the time difference in milliseconds
+            var timeDifference = targetTime - now;
+
+            // If the target time is in the past, add 24 hours to it
+            if (timeDifference < 0) {
+                return;
+            }
+
+            // Convert time difference to hours, minutes, and seconds
+            var diffHours = Math.floor(timeDifference / (1000 * 60 * 60));
+            var diffMinutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            var diffSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Update the dptScTime class element
+            // Update the dptScTime class element
+            var timeDifferenceText;
+            hourText = "hour" + (diffHours > 1 ? "s" : "");
+            minuteText = "minute" + (diffMinutes > 1 ? "s" : "");
+            if (diffHours > 0) {
+                timeDifferenceText = diffHours + " " + DPT.getLocalizedTime(hourText) + " " + diffMinutes + " " + DPT.getLocalizedTime(minuteText);
+            } else if (diffMinutes > 0) {
+                timeDifferenceText = diffMinutes + " " + DPT.getLocalizedTime(minuteText) + " " + diffSeconds + " s";
+            } else {
+                timeDifferenceText = diffSeconds + " s";
+            }
+
+            timeDifferenceText = DPT.getLocalizedNumber(timeDifferenceText);
+
+            var timeLeftCountDownElements = document.getElementsByClassName('timeLeftCountDown');
+            for (var i = 0; i < timeLeftCountDownElements.length; i++) {
+                document.getElementsByClassName('timeLeftCountDown')[i].innerHTML = timeDifferenceText;
+
+                timeLeftCountDownElements[i].classList.remove('green', 'orange', 'red');
+
+                // Add appropriate class based on diffMinutes
+                if (diffHours < 1) {
+                    if (diffMinutes >= 15 && diffMinutes <= 29) {
+                        timeLeftCountDownElements[i].classList.add('orange');
+                    } else if (diffMinutes < 15) {
+                        timeLeftCountDownElements[i].classList.add('red');
+                    } else {
+                        timeLeftCountDownElements[i].classList.add('green');
+                    }
+                }
+            }
+
+            if (diffHours == 0 && diffMinutes == 0 && diffSeconds == 1) {
+                document.getElementById('playBeepButton').click();
+                DPT.timeoutScreen();
+            }
+        }
+    },
+
+    getLocalizedNumber: function (numbers) {
+        var localNumbers  = jQuery('#localizedNumbers').val();
+        if (! localNumbers) {
+            return numbers;
+        }
+        localNumbers = JSON.parse(localNumbers);
+        return numbers.split('').map(function(char) {
+            return localNumbers[char] || char;
+        }).join('');
+    },
+
+    getLocalizedTime: function (time) {
+        var localTimes  = jQuery('#localizedTimes').val();
+        localTimes = JSON.parse(localTimes);
+        return localTimes[time] || time;
+    }
 };
 jQuery(document).ready(function() { DPT.init(); });
 

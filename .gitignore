@@ -1,3 +1,5 @@
 .idea/
 *.csv
 *.DS_Store
+
+/vendor/

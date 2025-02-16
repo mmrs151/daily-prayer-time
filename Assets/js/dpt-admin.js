@@ -50,11 +50,11 @@ DPTAdmin = {
 
     displayCustomAngleFields: function() {
         var id = jQuery( "#calculationMethod option:selected" ).val();
-        if ( id === '6') {
+        if ( id === '23') {
             jQuery("#customMethod").show()
         }
         jQuery('#calculationMethod').on('change',function(){
-            if( jQuery(this).val() === '6'){ //custom settings
+            if( jQuery(this).val() === '23'){ //custom settings
                 jQuery("#customMethod").show()
             } else{
                 jQuery("#customMethod").hide()
@@ -66,7 +66,7 @@ DPTAdmin = {
         var id = jQuery( "#csvUpload" ).html();
         if (typeof id != 'undefined') {
     
-            jQuery('.form-select').selectpicker();
+            jQuery('.form-select').selectpicker('render');
         }
     },
 

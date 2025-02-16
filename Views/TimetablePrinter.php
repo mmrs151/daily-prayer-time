@@ -242,14 +242,12 @@ class TimetablePrinter
         $result = str_split($wpDate);
         $intlDate = '';
         $this->localNumbers = $this->getLocalNumbers();
-        foreach ($result as $number) {
-            if (in_array($number, $this->localNumbers)) {
-                $intlDate .= $this->localNumbers[$number];
-                if (empty($this->localNumbers[$number]) && $number !== '0') {
-                    $intlDate .= $number;
-                }
+
+        foreach ($result as $char) {
+            if (array_key_exists($char, $this->localNumbers)) {
+                $intlDate .= $this->localNumbers[$char];
             } else {
-                $intlDate .= $number;
+                $intlDate .= $char;
             }
         }
 
@@ -434,21 +432,24 @@ class TimetablePrinter
         $key = ($nextPrayer == 'sunrise') ? $nextPrayer : strtolower($nextPrayer.'_jamah');
 
         if (isset($dbRow[$key])) {
-            $nextPrayerName = $dbRow[$key];
+            $nextPrayerTime = $dbRow[$key];
         }
 
         if ( is_null($nextPrayer) ) {
-            $nextPrayerName = $dbRow['nextFajr'];
+            $nextPrayerTime = $dbRow['nextFajr'];
         }
             return
-                '<h2 class="dptScTime">' .
-                $this->formatDateForPrayer($nextPrayerName). '
+                '<p id="dptNextPrayerTime" style="display: none">' . $nextPrayerTime . '</p> 
+                <h2 class="dptScTime">' .
+                $this->formatDateForPrayer($nextPrayerTime). '
                 </h2>
                 <p id="nextPrayerTimeDifff" style="display:none;">'. (int)$timeLeftText .'</p>
+                <span class="timeLeftCountDownIntl" style="display:none;"> 
+                    '.  $timeLeftText .' 
+                </span>
                 <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
                     '.  $timeLeftText .' 
                 </span>
-                <span class="minLeftText"> ' . $minLeftText .'</span>
         </div>';
 
     }

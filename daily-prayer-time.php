@@ -9,6 +9,8 @@ Contributors: <a href="http://vergedesign.co.uk/">Hjeewa</a>, <a href="https://p
 Text Domain: daily-prayer-time
 Domain Path: /languages
 */
+require_once(__DIR__ . "/vendor/autoload.php");
+
 if ( ! function_exists( 'dpt_fs' ) ) {
     // Create a helper function for easy SDK access.
     function dpt_fs() {
