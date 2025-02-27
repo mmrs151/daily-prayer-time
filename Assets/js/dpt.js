@@ -377,7 +377,7 @@ DPT = {
             var now = new Date();
             var targetTime = new Date();
 
-            var dptScTimeValue = jQuery('#dptNextPrayerTime').text();
+            var dptScTimeValue = jQuery('.dptScTime').text();
             var timeParts = dptScTimeValue.split(':');
             var hours = parseInt(timeParts[0]);
             var minutes = parseInt(timeParts[1]);
@@ -450,6 +450,9 @@ DPT = {
 
     getLocalizedTime: function (time) {
         var localTimes  = jQuery('#localizedTimes').val();
+        if (! localTimes) {
+            return time;
+        }
         localTimes = JSON.parse(localTimes);
         return localTimes[time] || time;
     }

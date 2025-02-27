@@ -2,9 +2,14 @@
 use IslamicNetwork\PrayerTimes\Method;
 
 $loadCities = false;
-$loadCities = !empty($_POST['activate-automatic']);
 $worldCities = new WorldCities();
-$cities = $worldCities->getCities();
+$city = $worldCities->getCityById(get_transient('nearest_city'));
+
+if (!empty($_POST['activate-automatic'])) {
+    $loadCities = true;
+    $cities = $worldCities->getCities();
+}
+
 $adapter = new DatabaseConnection();
 $rows = $adapter->getRows();
 
@@ -46,7 +51,7 @@ if ( isset($rows[1])) {
             <div class="upload-step">
                 <label>Select your nearest city:</label>
                     <select class="form-select" data-live-search="true" name="city">
-                        <option></option>
+                        <option><?php echo $city ?></option>
                         <?php
                         if ($loadCities) {
                             foreach ($cities as $city) {

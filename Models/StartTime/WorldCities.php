@@ -73,4 +73,11 @@
             $sql = "SELECT * FROM " . $this->dbTable . " ORDER BY country, city ASC";
             return $wpdb->get_results($sql, ARRAY_A);
         }
+
+        public function getCityById($id)
+        {
+            global $wpdb;
+            $sql = $wpdb->prepare("SELECT city FROM " . $this->dbTable . " WHERE id = %d", $id);
+            return $wpdb->get_var($sql);
+        }
     }
