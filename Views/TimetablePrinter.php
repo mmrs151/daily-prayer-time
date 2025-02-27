@@ -439,14 +439,10 @@ class TimetablePrinter
             $nextPrayerTime = $dbRow['nextFajr'];
         }
             return
-                '<p id="dptNextPrayerTime" style="display: none">' . $nextPrayerTime . '</p> 
+                '
                 <h2 class="dptScTime">' .
                 $this->formatDateForPrayer($nextPrayerTime). '
-                </h2>
-                <p id="nextPrayerTimeDifff" style="display:none;">'. (int)$timeLeftText .'</p>
-                <span class="timeLeftCountDownIntl" style="display:none;"> 
-                    '.  $timeLeftText .' 
-                </span>
+                </h2>                                
                 <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
                     '.  $timeLeftText .' 
                 </span>
