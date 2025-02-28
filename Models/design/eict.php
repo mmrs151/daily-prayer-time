@@ -1,6 +1,6 @@
 <?php 
     $html = '';
-    $sunriseOrZawal = $this->getSunriseOrZawal();
+    $sunriseOrZawal = $this->dptHelper->getSunriseOrZawal($this->row);
 
 ?>
 <div class="container-fluid x-board-modern">

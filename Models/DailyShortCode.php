@@ -503,9 +503,10 @@ class DailyShortCode extends TimetablePrinter
 
     protected function getRow($attr=array())
     {
+        if (!$this->isAzanOnly && !$this->isJamahOnly) {
+            $this->setDisplayForShortCode($attr);
+        }
 
-        $this->setDisplayForShortCode($attr);
-        
         $this->isHanafiAsr = isset($attr['asr']) ? true : $this->setHanafiAsr();
 
         if (isset($attr['heading'])) {
