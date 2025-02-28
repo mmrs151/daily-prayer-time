@@ -5,6 +5,7 @@ DPT = {
     diffMin: 59,
 
     init: function() {
+        this.enableAudio();
         // console.log(timetable_params);
         this.monthlyCalendarChange();
 
@@ -137,31 +138,26 @@ DPT = {
     },
 
     beep: function() {
-        var audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        var oscillator = audioContext.createOscillator();
-        var gainNode = audioContext.createGain();
+        if (!DPT.audioContext) {
+            console.error('AudioContext is not initialized. Please enable audio first.');
+            return;
+        }
+
+        var oscillator = DPT.audioContext.createOscillator();
+        var gainNode = DPT.audioContext.createGain();
 
         oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
+        gainNode.connect(DPT.audioContext.destination);
 
         oscillator.type = 'triangle'; // You can change the type to 'square', 'sawtooth', 'triangle'
-        oscillator.frequency.setValueAtTime(940, audioContext.currentTime); // Frequency in Hz
-        gainNode.gain.setValueAtTime(1, audioContext.currentTime); // Volume
+        oscillator.frequency.setValueAtTime(940, DPT.audioContext.currentTime); // Frequency in Hz
+        gainNode.gain.setValueAtTime(1, DPT.audioContext.currentTime); // Volume
 
         oscillator.start();
 
-        var playPromise = new Promise((resolve) => {
-            setTimeout(function() {
-                oscillator.stop();
-                resolve();
-            }, 1000); // Beep duration in milliseconds (5000ms = 5 seconds)
-        });
-
-        playPromise.then(() => {
-            console.log('Beep sound played successfully');
-        }).catch((error) => {
-            console.error('Error playing beep sound:', error);
-        });
+        setTimeout(function() {
+            oscillator.stop();
+        }, 1000); // Beep duration in milliseconds (1000ms = 1 second)
     },
 
     timeoutScreen: function() {
@@ -288,71 +284,85 @@ DPT = {
             }, 1000);
     },
 
-    playFajrAdhan: function()
-    {
+    enableAudio: function() {
+        // Create a button element for user interaction
+        var button = document.createElement('button');
+        button.innerHTML = 'Enable Audio';
+        button.id = 'enableAudioButton';
+        document.body.appendChild(button);
+
+        // Add click event listener to the button
+        button.addEventListener('click', function() {
+            // Initialize the AudioContext
+            DPT.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            alert('Audio enabled. The adhan will play at the specified times.');
+            button.style.display = 'none'; // Hide the button after enabling audio
+        });
+
+    },
+
+    playFajrAdhan: function() {
         var activateAdhan = jQuery('#activateAdhan').val();
-        if ( ! activateAdhan ) {
+        if (!activateAdhan) {
             return;
         }
 
         var adhan = jQuery('#fajrAdhanTime').val();
-        if ( ! adhan ) {
+        if (!adhan) {
             return;
         }
 
         var timeParts = adhan.split(":");
-        adhanUrl = timetable_params.fajrAdhanUrl
-        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(){
+        var adhanUrl = timetable_params.fajrAdhanUrl;
+
+        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function() {
             console.log('Playing Fajr adhan: ' + adhanUrl);
-            var audio = new Audio(adhanUrl);
-            var playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                  // Automatic playback started!
-                  // Show playing UI.
-                })
-                .catch(error => {
-                    console.error('Auto-play was prevented:', error);
-                    // Show paused UI.
-                })
-            }
+            DPT.playAudio(adhanUrl);
         });
     },
 
-    playOtherAdhan: function()
-    {
+    playOtherAdhan: function() {
         var activateAdhan = jQuery('#activateAdhan').val();
-
-        if ( ! activateAdhan ) {
+        if (!activateAdhan) {
             return;
         }
 
         var iqamah = jQuery('#otherAdhanTimes').val();
-        if ( ! iqamah ) {
+        if (!iqamah) {
             return;
         }
         iqamah = JSON.parse(iqamah);
-        console.log(iqamah.length);
-        for(var i = 0; i < iqamah.length; i ++)
-        {
+
+        for (var i = 0; i < iqamah.length; i++) {
             var timeParts = iqamah[i].split(":");
-            adhanUrl = timetable_params.otherAdhanUrl
-            DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(){
-                console.log('Playing : ' + adhanUrl);
-                var audio = new Audio(adhanUrl);
-                var playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                      // Automatic playback started!
-                      // Show playing UI.
-                    })
-                    .catch(error => {
-                        console.error('Auto-play was prevented:', error);
-                        // Show paused UI.
-                    })
-                }
+            var adhanUrl = timetable_params.otherAdhanUrl;
+
+            DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function() {
+                console.log('Playing Adhan: ' + adhanUrl);
+                DPT.playAudio(adhanUrl);
             });
         }
+    },
+
+    playAudio: function(url) {
+        var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        var source = audioContext.createBufferSource();
+        var request = new XMLHttpRequest();
+
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        request.onload = function() {
+            audioContext.decodeAudioData(request.response, function(buffer) {
+                source.buffer = buffer;
+                source.connect(audioContext.destination);
+                source.start(0);
+            }, function(error) {
+                console.error('Error decoding audio data:', error);
+            });
+        };
+
+        request.send();
     },
 
     fadingMessages: function(){
