@@ -96,13 +96,7 @@ DPT = {
                 success: function(response){
                     setTimeout(DPT.dsRefreshNextPrayer, (1000 * 60 * 15) ); // 15 minutes
                     jQuery('.dsNextPrayer').html(response);
-                    if (! isTimerOn ) {
-                        document.getElementById('playBeepButton')
-                            .addEventListener('click', function() {
-                            DPT.beep();
-                        });
-                        isTimerOn = true;
-                    }
+
                 },
                 error: function(responseObj, strError){
                     console.log(strError);
@@ -285,6 +279,11 @@ DPT = {
     },
 
     enableAudio: function() {
+        var activateAdhan = jQuery('#activateAdhan').val();
+        if (!activateAdhan) {
+            return;
+        }
+
         // Create a button element for user interaction
         var button = document.createElement('button');
         button.innerHTML = 'Enable Audio';
@@ -446,7 +445,7 @@ DPT = {
             }
 
             if (diffHours == 0 && diffMinutes == 0 && diffSeconds == 1) {
-                document.getElementById('playBeepButton').click();
+                DPT.beep();
                 DPT.timeoutScreen();
             }
         }
