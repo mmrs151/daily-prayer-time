@@ -3,6 +3,7 @@ var isTimerOn = false;
 DPT = {
     isFirstMin: true,
     diffMin: 59,
+    audioContext: null,
 
     init: function() {
         this.enableAudio();
@@ -290,20 +291,35 @@ DPT = {
             return;
         }
 
+        if (localStorage.getItem('audioEnabled') === 'true') {
+            this.initializeAudioContext();
+            return;
+        }
+
+
         // Create a button element for user interaction
         var button = document.createElement('button');
         button.innerHTML = 'Enable Audio';
         button.id = 'enableAudioButton';
         document.body.appendChild(button);
+        button.style.position = 'fixed';
+        button.style.top = '50%';
+        button.style.left = '50%';
+        button.style.transform = 'translateX(-50%)';
+        button.style.zIndex = '1000';
 
         // Add click event listener to the button
         button.addEventListener('click', function() {
-            // Initialize the AudioContext
-            DPT.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            DPT.initializeAudioContext();
+            localStorage.setItem('audioEnabled', 'true'); // Store the flag in localStorage
             alert('Audio enabled. The adhan will play at the specified times.');
             button.style.display = 'none'; // Hide the button after enabling audio
         });
 
+    },
+
+    initializeAudioContext: function() {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     },
 
     playFajrAdhan: function() {
