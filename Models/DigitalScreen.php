@@ -109,6 +109,7 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             
             <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
+            <input type="hidden" value="' . get_option('activateBeep') . '" id="activateBeep">           
             <input type="hidden" value="' . get_option('quran-chbox') . '" id="quranCheckbox">
             <input type="hidden" value="' . $this->getWpHour() . '" id="clockHour">
 

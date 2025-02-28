@@ -132,6 +132,11 @@ DPT = {
     },
 
     beep: function() {
+        var activateBeep = jQuery('#activateBeep').val();
+        if (!activateBeep) {
+            return;
+        }
+
         if (!DPT.audioContext) {
             console.error('AudioContext is not initialized. Please enable audio first.');
             return;
@@ -280,7 +285,8 @@ DPT = {
 
     enableAudio: function() {
         var activateAdhan = jQuery('#activateAdhan').val();
-        if (!activateAdhan) {
+        var activateBeep = jQuery('#activateBeep').val();
+        if (!activateAdhan && !activateBeep) {
             return;
         }
 
@@ -301,11 +307,6 @@ DPT = {
     },
 
     playFajrAdhan: function() {
-        var activateAdhan = jQuery('#activateAdhan').val();
-        if (!activateAdhan) {
-            return;
-        }
-
         var adhan = jQuery('#fajrAdhanTime').val();
         if (!adhan) {
             return;
@@ -321,11 +322,6 @@ DPT = {
     },
 
     playOtherAdhan: function() {
-        var activateAdhan = jQuery('#activateAdhan').val();
-        if (!activateAdhan) {
-            return;
-        }
-
         var iqamah = jQuery('#otherAdhanTimes').val();
         if (!iqamah) {
             return;
@@ -344,6 +340,11 @@ DPT = {
     },
 
     playAudio: function(url) {
+        var activateAdhan = jQuery('#activateAdhan').val();
+        if (!activateAdhan) {
+            return;
+        }
+
         var audioContext = new (window.AudioContext || window.webkitAudioContext)();
         var source = audioContext.createBufferSource();
         var request = new XMLHttpRequest();

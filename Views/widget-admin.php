@@ -85,6 +85,7 @@ if (! empty($_POST['hijriSettings']) && check_admin_referer( 'hijriSettings' )) 
 
 if (! empty($_POST['adhanSettings']) && check_admin_referer( 'adhanSettings' )) {
     $data = [
+        'activateBeep' => sanitize_text_field($_POST['activateBeep'] ?? ''),
         'activateAdhan' => sanitize_text_field($_POST['activateAdhan'] ?? ''),
         'fajrAdhanUrl' => sanitize_text_field($_POST['fajrAdhanUrl']),
         'otherAdhanUrl' => sanitize_text_field($_POST['otherAdhanUrl']),

@@ -16,6 +16,10 @@ if ( ! class_exists('DPTAdhanProcessor')) {
     
         public function process()
         {
+            $activateBeep = sanitize_text_field($this->data['activateBeep']);
+            delete_option('activateBeep');
+            add_option('activateBeep', $activateBeep);
+
             $activateAdhan = sanitize_text_field($this->data['activateAdhan']);
             delete_option('activateAdhan');
             add_option('activateAdhan', $activateAdhan);

@@ -15,7 +15,13 @@ Ramadan Fajr Adhan will play at fajr start time.
             <form name="adhanSettings" method="post" class="form-group">
             <?php echo wp_nonce_field( 'adhanSettings'); ?>
                 <table class="table">
-                <tr>
+                    <tr>
+                        <td>Activate Beep:</td>
+                        <td>
+                            <input type="checkbox" name="activateBeep" value="beep" <?php if(get_option("activateBeep") === 'beep'){ echo 'checked'; } ?>>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Activate Adhan:</td>
                         <td>
                             <input type="checkbox" name="activateAdhan" value="adhan" <?php if(get_option("activateAdhan") === 'adhan'){ echo 'checked'; } ?>>
