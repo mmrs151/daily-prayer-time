@@ -366,6 +366,7 @@ class DailyTimetablePrinter extends TimetablePrinter
                 unset($localPrayerNames['zawal']);
             }
         }
+
         foreach ($localPrayerNames as $key=>$prayerName) {
             $begins =  $key != 'sunrise' ? lcfirst( $key ).'_begins' : 'sunrise';
             $jamah =  $key != 'sunrise' ? lcfirst( $key ).'_jamah' : 'sunrise';
@@ -390,7 +391,7 @@ class DailyTimetablePrinter extends TimetablePrinter
             }
         }
 
-        if ( get_option('jumuah1') && ! $this->todayIsFriday() ) {
+        if ( get_option('jumuah1') && $display != 'azan' ) {
             $trs .= '<tr>
                             <th class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
                             <td colspan="2" class="jamah">' . $this->getJumuahTimesArray() . '</td>
@@ -402,10 +403,10 @@ class DailyTimetablePrinter extends TimetablePrinter
 
     private function getFormattedDateForPrayer($time, $prayerName, $isJamatTime=false)
     {
-        $jumuahTime = get_option('jumuah1');
-        if ( ($prayerName === 'zuhr' && $this->todayIsFriday()) && $isJamatTime && $jumuahTime) {
-            return $this->getJumuahTimesArray();
-        }
+//        $jumuahTime = get_option('jumuah1');
+//        if ( ($prayerName === 'zuhr' && $this->todayIsFriday()) && $isJamatTime && $jumuahTime) {
+//            return $this->getJumuahTimesArray();
+//        }
         return $this->formatDateForPrayer($time);
     }
 

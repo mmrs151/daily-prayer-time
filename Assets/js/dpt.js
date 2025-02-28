@@ -5,7 +5,7 @@ DPT = {
     diffMin: 59,
 
     init: function() {
-        console.log(timetable_params);
+        // console.log(timetable_params);
         this.monthlyCalendarChange();
 
         this.changeInputBackground();
@@ -299,10 +299,12 @@ DPT = {
         if ( ! adhan ) {
             return;
         }
-        adhan = JSON.parse(adhan);
+
         var timeParts = adhan.split(":");
-        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(adhan){
-            var audio = new Audio(timetable_params.fajrAdhan);
+        adhanUrl = timetable_params.fajrAdhanUrl
+        DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(){
+            console.log('Playing Fajr adhan: ' + adhanUrl);
+            var audio = new Audio(adhanUrl);
             var playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
@@ -310,8 +312,8 @@ DPT = {
                   // Show playing UI.
                 })
                 .catch(error => {
-                  // Auto-play was prevented
-                  // Show paused UI.
+                    console.error('Auto-play was prevented:', error);
+                    // Show paused UI.
                 })
             }
         });
@@ -330,11 +332,14 @@ DPT = {
             return;
         }
         iqamah = JSON.parse(iqamah);
+        console.log(iqamah.length);
         for(var i = 0; i < iqamah.length; i ++)
         {
             var timeParts = iqamah[i].split(":");
+            adhanUrl = timetable_params.otherAdhanUrl
             DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function(){
-                var audio = new Audio(timetable_params.otherAdhan);
+                console.log('Playing : ' + adhanUrl);
+                var audio = new Audio(adhanUrl);
                 var playPromise = audio.play();
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {
@@ -342,8 +347,8 @@ DPT = {
                       // Show playing UI.
                     })
                     .catch(error => {
-                      // Auto-play was prevented
-                      // Show paused UI.
+                        console.error('Auto-play was prevented:', error);
+                        // Show paused UI.
                     })
                 }
             });

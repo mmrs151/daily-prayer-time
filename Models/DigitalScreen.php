@@ -93,9 +93,9 @@ class DigitalScreen extends DailyShortCode
 
         $timesLocal = json_encode([
                 'minute' => $this->getLocalTimes()['minute'],
-                'minutes' => $this->getLocalTimes()['minute'],
+                'minutes' => $this->getLocalTimes()['minute'] . 's',
                 'hour' => $this->getLocalTimes()['hours'],
-                'hours' => $this->getLocalTimes()['hours'],
+                'hours' => $this->getLocalTimes()['hours'] . 's',
             ],
             JSON_UNESCAPED_UNICODE);
 
@@ -114,8 +114,10 @@ class DigitalScreen extends DailyShortCode
 
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
             <input type="hidden" value="' . htmlentities($localNumbersJson) . '" id="localizedNumbers">
-            <input type="hidden" value="' . htmlentities($timesLocal) . '" id="localizedTimes">           
-            <button id="playBeepButton"> P L A Y </button> 
+            <input type="hidden" value="' . htmlentities($timesLocal) . '" id="localizedTimes">    
+            <input type="hidden" value="' . htmlspecialchars($this->getFajrAdhanTime(), JSON_UNESCAPED_UNICODE) . '" id="fajrAdhanTime">    
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes(), JSON_UNESCAPED_UNICODE)) . '" id="otherAdhanTimes">   
+            <button id="playBeepButton" style="display: none"> B E E P </button> 
         ';
 
         if (get_option("activateAdhan") === 'adhan') {

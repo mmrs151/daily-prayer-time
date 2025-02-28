@@ -120,11 +120,11 @@ class TimetablePrinter
             $localPrayerName =  $this->prayerLocal;
         } 
 
-        if (! $forAdmin && $enableJumuah){
-            if ($this->todayIsFriday()) {
-                $localPrayerName['zuhr'] = $this->getLocalHeaders()['jumuah'];
-            }
-        }
+//        if (! $forAdmin && $enableJumuah){
+//            if ($this->todayIsFriday()) {
+//                $localPrayerName['zuhr'] = $this->getLocalHeaders()['jumuah'];
+//            }
+//        }
 
         if (is_array($localPrayerName)) {
             $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
