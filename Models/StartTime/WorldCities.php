@@ -21,19 +21,27 @@
         public function importCities()
         {
             global $wpdb;
-    
+
             $file = fopen($this->citiesFile, "r");
             $columns = $row = fgetcsv($file, 10000, ",");
             $sqlInsert = "INSERT INTO " . $this->dbTable. " (" . implode(',', $columns) . ") VALUES ";
             $values = "";
-            while (($row = fgetcsv($file, 10000, ",")) !== FALSE)
-            {
-                $values .= "('". implode("','", $this->getEscapedRow($row)) . "'),";
+            while (($row = fgetcsv($file, 10000, ",")) !== FALSE) {
+                $city = esc_sql($row[0]); // Assuming the city is the first column
+                $country = esc_sql($row[3]); // Assuming the country is the fourth column
+
+                // Check if the city already exists in the database
+                $exists = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM " . $this->dbTable . " WHERE city = %s AND country = %s", $city, $country));
+                if ($exists == 0) {
+                    $values .= "('". implode("','", $this->getEscapedRow($row)) . "'),";
+                }
             }
             $values = rtrim($values, ",");
-            $sqlInsert .= $values . ';';
-            $wpdb->query($sqlInsert);
-            
+            if (!empty($values)) {
+                $sqlInsert .= $values . ';';
+                $wpdb->query($sqlInsert);
+            }
+
             fclose($file);
         }
         
@@ -58,7 +66,9 @@
                 lat VARCHAR(64) NULL,
                 lng VARCHAR(64) NULL,
                 country VARCHAR(64) NULL,
-                PRIMARY KEY  (id)
+                PRIMARY KEY  (id),
+                INDEX (lat),
+                INDEX (lng)
                 ) $charset_collate;";
     
             $wpdb->get_var("SHOW TABLES LIKE '". $this->tableName . "'");

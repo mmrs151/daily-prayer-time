@@ -84,7 +84,7 @@ class DailyPrayerTime extends WP_Widget
         if (get_option('dpt-init') != 1) {
             new Init();
         }
-//        delete_option('dpt-init'); // RESET EVERY REFRESH, ONLY AVAILABLE FOR TESTING
+//        delete_option('dpt-init'); // RESET EVERY REFRESH, ONLY ENABLE FOR TESTING
         
         new AdminMenu();
     
