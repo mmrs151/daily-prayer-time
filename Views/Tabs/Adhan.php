@@ -9,6 +9,7 @@ You can modify the default Adhan by uploading your own adhan and update the Adha
 </br>
 Ramadan Fajr Adhan will play at fajr start time.
 </p>
+<span class="alert-warning">Remember to ALLOW sound/audio in your browser settings</span>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-8 col-xs-12">

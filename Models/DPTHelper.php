@@ -177,7 +177,6 @@ class DPTHelper
         if ($isFajr && is_null($nextPrayerName)) {
             return 'nextPrayer';
         }
-
         if ($nextPrayerName && (strpos($nextPrayerName, $prayerName) !== false)) {
             return 'nextPrayer';
         }
@@ -190,9 +189,9 @@ class DPTHelper
      *
      * @return string
      */
-    protected function getNextPrayer($row)
+    public function getNextPrayer($row)
     {
-        if ( $this->isZawalTimeNext($row) ) {
+        if ( get_option('zawal') && $this->isZawalTimeNext($row) ) {
             return 'zawal';
         }
 

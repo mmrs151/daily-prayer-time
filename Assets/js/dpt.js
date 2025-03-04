@@ -1,5 +1,3 @@
-var isTimerOn = false;
-
 DPT = {
     isFirstMin: true,
     diffMin: 59,
@@ -319,7 +317,12 @@ DPT = {
     },
 
     initializeAudioContext: function() {
-        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        if (!this.audioContext) {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (this.audioContext.state === 'suspended') {
+            this.audioContext.resume();
+        }
     },
 
     playFajrAdhan: function() {
@@ -347,7 +350,6 @@ DPT = {
         for (var i = 0; i < iqamah.length; i++) {
             var timeParts = iqamah[i].split(":");
             var adhanUrl = timetable_params.otherAdhanUrl;
-
             DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function() {
                 console.log('Playing Adhan: ' + adhanUrl);
                 DPT.playAudio(adhanUrl);
@@ -408,14 +410,20 @@ DPT = {
             var now = new Date();
             var targetTime = new Date();
 
-            var dptScTimeValue = jQuery('.dptScTime').text();
+            var dptScTimeValue = jQuery('.dptScTime').text().trim()
             var timeParts = dptScTimeValue.split(':');
             var hours = parseInt(timeParts[0]);
             var minutes = parseInt(timeParts[1]);
+            var ampm = dptScTimeValue.slice(-2).toUpperCase(); // Extract AM/PM
+
+            if (ampm == 'PM' && hours < 12) {
+                hours += 12;
+            } else if (ampm == 'AM' && hours === 12) {
+                hours = 0;
+            }
 
             targetTime.setHours(hours, minutes, 0, 0);
 
-            // Calculate the time difference in milliseconds
             var timeDifference = targetTime - now;
 
             // If the target time is in the past, add 24 hours to it
@@ -438,11 +446,10 @@ DPT = {
             } else if (diffMinutes > 0) {
                 timeDifferenceText = diffMinutes + " " + DPT.getLocalizedTime(minuteText) + " " + diffSeconds + " s";
             } else {
-                timeDifferenceText = diffSeconds + " s";
+                timeDifferenceText = diffSeconds + "s";
             }
 
             timeDifferenceText = DPT.getLocalizedNumber(timeDifferenceText);
-
             var timeLeftCountDownElements = document.getElementsByClassName('timeLeftCountDown');
             for (var i = 0; i < timeLeftCountDownElements.length; i++) {
                 document.getElementsByClassName('timeLeftCountDown')[i].innerHTML = timeDifferenceText;

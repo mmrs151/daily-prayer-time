@@ -1,10 +1,5 @@
 <?php
-
-require_once('TimetablePrinter.php');
-$timetablePrinter = new TimetablePrinter();
-
-$nextPrayer = ucfirst( $this->getNextPrayer( $row ) );
-
+$nextPrayer = ucfirst($this->getNextPrayer($row));
 foreach ($this->localPrayerNames as $name) {
     if ($nextPrayer == $name) {
         $highlight = 'highlight';
@@ -13,8 +8,15 @@ foreach ($this->localPrayerNames as $name) {
 if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
     $announcement = "<tr><th colspan='7' style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
 }
-
+$sunriseOrZawal = $this->dptHelper->getSunriseOrZawal($row);
+if ($sunriseOrZawal == 'zawal') {
+    $sunriseOrZawalTime = $this->dptHelper->getZawalTime($row['zuhr_begins']);
+} else {
+    $sunriseOrZawalTime = $this->formatDateForPrayer($row['sunrise']);
+}
 ?>
+
+
 <div class="dpt-horizontal-wrapper customStyles">
     <div class="dpt-heading">
         <h3 class="date side-by-side">
@@ -41,15 +43,15 @@ if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
             <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["fajr_jamah"]) );?></div>
 
         </div> <!-- END of prayer time-->
-        <div class="prayer-time prayer-sunrise <?php if ($nextPrayer == $this->localPrayerNames['sunrise']) echo "highlight"; ?>">
+        <div class="prayer-time prayer-sunrise <?php if ($nextPrayer == ucfirst($sunriseOrZawal)) echo "highlight"; ?>">
         <span class="iconify-inline icon" data-icon="bi:sunrise-fill"></span>
 
-            <h3><?php echo esc_html( $this->localPrayerNames['sunrise'] )?></h3>
-            <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["sunrise"]) );?></div>
+            <h3><?php echo esc_html( ucfirst($sunriseOrZawal) )?></h3>
+            <div class="prayer-jamaat"><?php echo  esc_html( $sunriseOrZawalTime );?></div>
             <div>&nbsp;</div>
 
         </div> <!-- END of prayer time-->
-        <div class="prayer-time prayer-dhuhr <?php if ($nextPrayer == $this->localPrayerNames['zuhr']) echo "highlight"; ?>">
+        <div class="prayer-time prayer-dhuhr <?php if ('nextPrayer' ==  $this->getNextPrayerClass('zuhr', $row)) echo "highlight"; ?>">
         <span class="iconify-inline icon" data-icon="emojione:sun"></span>
 
             <h3><?php echo esc_html( $this->localPrayerNames['zuhr'] )?></h3>
@@ -81,6 +83,14 @@ if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
             <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["isha_jamah"]) );?></div>
 
         </div> <!-- END of prayer time-->
+        <div class="prayer-time prayer-jumuah <?php if ('nextPrayer' ==  $this->getNextPrayerClass('jumuah', $row)) echo "highlight"; ?>">
+            <span class="iconify-inline icon" data-icon="fa-solid:mosque""></span>
+
+            <h3><?php echo esc_html( $this->headersLocal['jumuah'] )?></h3>
+            <div class="prayer-jamaat"><?php echo   $this->getJumuahTimesArray(true);?></div>
+            <div>&nbsp;</div>
+
+        </div> <!-- END of prayer time-->
 
     </div> <!-- END of wrapper container-->
 
@@ -91,7 +101,7 @@ if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
 
 <?php
 
-if ( $timetablePrinter->isRamadan() && ! $row['hideRamadan']) { ?>
+if ( $this->dptHelper->isRamadan() && ! $row['hideRamadan']) { ?>
 
 <script>
 

@@ -145,7 +145,7 @@ class UpdateStyles
                     color: " . $highlight ."!important" ."
                 }
 
-                .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer .dsJumuah {
+                .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer {
                     color: " . $highlight ."!important" ."
                 }
                 .d-masjid-e-usman  .left-main-col-sun-times h4, .left-main-col-sun-times p {

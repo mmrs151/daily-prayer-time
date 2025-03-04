@@ -115,10 +115,10 @@ class TimetablePrinter
     {
         $prayers_local = get_option('prayersLocal');
         $localPrayerName =  $prayers_local;
-        
+
         if ( empty($prayers_local)) {
             $localPrayerName =  $this->prayerLocal;
-        } 
+        }
 
 //        if (! $forAdmin && $enableJumuah){
 //            if ($this->todayIsFriday()) {
@@ -131,10 +131,10 @@ class TimetablePrinter
             $localPrayerName = array_map('stripslashes', $localPrayerName);
         }
 
-        if (empty(get_option('zawal'))) {
-            unset($localPrayerName['zawal']);
-        }
-        
+//        if (empty(get_option('zawal'))) {
+//            unset($localPrayerName['zawal']);
+//        }
+
         return $localPrayerName;
     }
 
@@ -400,16 +400,7 @@ class TimetablePrinter
      */
     protected function getNextPrayer($row)
     {
-        $now = current_time( 'H:i');
-
-        $jamahTime = $this->dptHelper->getJamahTime( $row );
-        foreach ($jamahTime as $jamah) {
-            if ($jamah > $now ) {
-                $prayer = array_search( $jamah, $row ); // asr_jamah or asr_begins
-                $prayer = explode( '_', $prayer);
-                return $prayer[0]; // asr
-            }
-        }
+        return $this->dptHelper->getNextPrayer($row);
     }
 
     protected function getHeading($dbRow, $nextPrayer)
@@ -536,7 +527,7 @@ class TimetablePrinter
                 $prayer = explode('_', $key);
                 if ( $this->tomorrowIsFriday() ) {
                     $prayerNames['zuhr'] = $this->getLocalHeaders()['jumuah'];
-                } 
+                }
                 $print .= "<span " . $style . $timeClass ." >" . $prayerNames[$prayer[0]] . ": " .  $this->getTimeForIqamahUpdate($prayerNames[$prayer[0]], $time) . "</span>";
             }
         }
@@ -588,7 +579,7 @@ class TimetablePrinter
     }
 
     /**
-     * set khutbah dimming time on friday between sunrise and Asr 
+     * set khutbah dimming time on friday between sunrise and Asr
      */
     protected function getKhutbahDim(array $dbRow): int
     {
