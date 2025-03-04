@@ -16,7 +16,6 @@ if ($sunriseOrZawal == 'zawal') {
 }
 ?>
 
-
 <div class="dpt-horizontal-wrapper customStyles">
     <div class="dpt-heading">
         <h3 class="date side-by-side">
