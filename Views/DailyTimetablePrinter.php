@@ -365,6 +365,8 @@ class DailyTimetablePrinter extends TimetablePrinter
             } else {
                 unset($localPrayerNames['zawal']);
             }
+        } else {
+            unset($localPrayerNames['zawal']);
         }
 
         foreach ($localPrayerNames as $key=>$prayerName) {

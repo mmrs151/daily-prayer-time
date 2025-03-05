@@ -86,8 +86,11 @@ $timetable = new TimetablePrinter();
                         <th colspan="10" class="text-center">Time related values</th>
                     </tr>
                     <tr>
-                        <?php $names = $timetable->getLocalTimes();
-                        foreach ($names as $key => $val) { ?>
+                        <?php
+                        $keys = $timetable->getLocalTimesKeys();
+                        $value = array_values($timetable->getLocalTimes());
+                        $names = array_combine($keys, $value);
+                        foreach ($names as $key=>$value) { ?>
                             <th class="text-center"><?php echo ucfirst(esc_html($key)) ?></th>
                         <?php } ?>
                     </tr>

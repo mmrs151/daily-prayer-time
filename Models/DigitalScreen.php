@@ -94,8 +94,8 @@ class DigitalScreen extends DailyShortCode
         $timesLocal = json_encode([
                 'minute' => $this->getLocalTimes()['minute'],
                 'minutes' => $this->getLocalTimes()['minute'] . 's',
-                'hour' => $this->getLocalTimes()['hours'],
-                'hours' => $this->getLocalTimes()['hours'] . 's',
+                'hour' => $this->getLocalTimes()['hour'],
+                'hours' => $this->getLocalTimes()['hour'] . 's',
             ],
             JSON_UNESCAPED_UNICODE);
 
@@ -453,15 +453,19 @@ class DigitalScreen extends DailyShortCode
     private function getFirstSlide()
     {
         $verticalClass = "";
+        $sehriClass = "sehri";
+        $iftarClass = "iftar";
         if ( $this->isPortrait ) {
             $verticalClass = "vertical";
+            $sehriClass = "sehri sehri-vertical";
+            $iftarClass = "iftar iftar-vertical";
         }
 
         if ($this->isRamadan()) {
             $h3 = '
             <div class="dsRamadan">
-                <div class="sehri">' . $this->getLocalHeaders()['fast_begins'] . ': ' . $this->formatDateForPrayer($this->getFajrBegins(), true) . '</div>
-                <div class="iftar pull-right">' . $this->getLocalHeaders()['fast_ends']. ': ' . do_shortcode("[maghrib_start]") . '</div>
+                <div class="' . $sehriClass . '">' . $this->getLocalHeaders()['fast_begins'] . ': ' . $this->formatDateForPrayer($this->getFajrBegins(), true) . '</div>
+                <div class="' . $iftarClass . ' pull-right">' . $this->getLocalHeaders()['fast_ends']. ': ' . do_shortcode("[maghrib_start]") . '</div>
             </div>';
         } else {
             $h3 = '<h3 class="'.$verticalClass.'">'. $this->getLocalTimes()['next prayer'] . '</h3>';

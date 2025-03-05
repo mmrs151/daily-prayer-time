@@ -685,17 +685,21 @@ height: 70%;
 .x-board div.sehri  {
     float: left;
     padding: 0px 30px 0px 30px;
-    font-size: 3vh;
+    font-size: 4vh;
     background: red;
     font-weight: 800;
 }
 
 .x-board div.iftar  {
     padding: 0px 30px 0px 30px;
-    font-size: 3vh;
+    font-size: 4vh;
     background: red;
     font-weight: 800;
     text-align: right;
+}
+
+.x-board div.sehri-vertical, .x-board div.iftar-vertical  {
+    font-size: 2vh;
 }
 
 div.jamahChanges-horizontal span{
@@ -717,7 +721,7 @@ h3.scrolling-vertical > marquee > div > span {
 
 .x-time-change{
     word-spacing: 10px;
-    color: #ffffff;
+
     padding-left: 10px;
     padding-right: 10px;
 }

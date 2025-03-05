@@ -59,8 +59,8 @@ class TimetablePrinter
     protected $timesLocal = array(
         'date' => 'Date',
         'day' => 'Day',
-        'minute' => 'Minutes',
-        'hours' => 'Hours',
+        'minute' => 'Minute',
+        'hour' => 'Hour',
         'iqamah update' => 'IQAMAH CHANGES:',
         'next prayer' => 'Next ...'
     );
@@ -120,20 +120,10 @@ class TimetablePrinter
             $localPrayerName =  $this->prayerLocal;
         }
 
-//        if (! $forAdmin && $enableJumuah){
-//            if ($this->todayIsFriday()) {
-//                $localPrayerName['zuhr'] = $this->getLocalHeaders()['jumuah'];
-//            }
-//        }
-
         if (is_array($localPrayerName)) {
             $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
             $localPrayerName = array_map('stripslashes', $localPrayerName);
         }
-
-//        if (empty(get_option('zawal'))) {
-//            unset($localPrayerName['zawal']);
-//        }
 
         return $localPrayerName;
     }
@@ -205,6 +195,11 @@ class TimetablePrinter
         }
 
         return $times;
+    }
+
+    public function getLocalTimesKeys()
+    {
+            return array_keys($this->timesLocal);
     }
 
     public function setVertical($value=true)
@@ -364,7 +359,7 @@ class TimetablePrinter
                 $hours = (int)$hours;
                 $mins = $nextIqamah % 60;
                 $mins = (int)$mins;
-                $timeLeftText = $this->getLocalizedNumber( $hours ) .' '.$this->localTimes["hours"] .' '. $this->getLocalizedNumber( $mins );
+                $timeLeftText = $this->getLocalizedNumber( $hours ) .' '.$this->localTimes["hour"] .' '. $this->getLocalizedNumber( $mins );
             }
 
         }
