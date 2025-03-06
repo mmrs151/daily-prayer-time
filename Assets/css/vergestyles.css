@@ -14,7 +14,29 @@ Template: vergeFramework
 .dpt-horizontal-wrapper.customStyles .dpt-heading {
   border-bottom: 1px solid #3e605c;
 }
+.dpt-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3e605c;
+}
 
+.dpt-heading h3 {
+  margin: 0;
+  padding: 10px 30px;
+  font-size: 18px;
+  color: #e2e2e2;
+}
+
+.dpt-heading .date {
+  flex: 1;
+  text-align: left;
+}
+
+.dpt-heading .timetable-link {
+  flex: 1;
+  text-align: right;
+}
 .dpt-horizontal-wrapper.customStyles .dpt-heading h3, .dpt-horizontal-wrapper.customStyles .dpt-heading p {
   display: inline-block;
   padding-bottom: 0px;
@@ -43,6 +65,11 @@ h3.timetable-link {
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container {
   text-align: center;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time {

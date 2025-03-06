@@ -249,6 +249,15 @@ class TimetablePrinter
         return $intlDate;
     }
 
+    public function formatDateForPrayer24Hour($mysqlDate, $imsak=false)
+    {
+        $phpDate = strtotime($mysqlDate);
+        if ($imsak) {
+            $phpDate = $phpDate - ((int)get_option('imsaq') * 60);
+        }
+        return date('H:i', $phpDate);
+    }
+
     public function getIntlNumber($numbers)
     {
         $intlDate = '';
@@ -371,7 +380,6 @@ class TimetablePrinter
         $jamahTime = $this->getJamahTime( $row );
         $now = current_time( 'H:i');
         foreach ($jamahTime as $key=>$jamah) {
-            $this->localPrayerNames[lcfirst($key)] . ' ' . $this->localHeaders['iqamah'] . ':';
             if ($jamah > $now ) {
                 if ($key == 'Sunrise') {
                     $this->localPrayerNames[lcfirst($key)] . ':';
@@ -401,6 +409,9 @@ class TimetablePrinter
     protected function getHeading($dbRow, $nextPrayer)
     {
         $iqamah = ($nextPrayer == 'sunrise') ? '' : $this->localHeaders['iqamah'];
+        if ($nextPrayer == 'zawal') {
+            return $this->localPrayerNames['zuhr'].' '. $iqamah;
+        }
         if ( is_null($nextPrayer)) {
             return $this->localPrayerNames['fajr'].' '. $iqamah;
         }
@@ -415,6 +426,10 @@ class TimetablePrinter
     {
         $nextPrayer = $this->getNextPrayer($dbRow);
 
+        if ($nextPrayer == 'zawal') {
+            $nextPrayer = 'zuhr';
+        }
+
         $key = ($nextPrayer == 'sunrise') ? $nextPrayer : strtolower($nextPrayer.'_jamah');
 
         if (isset($dbRow[$key])) {
@@ -424,8 +439,10 @@ class TimetablePrinter
         if ( is_null($nextPrayer) ) {
             $nextPrayerTime = $dbRow['nextFajr'];
         }
+        $nextPrayerTime24Hours = $this->formatDateForPrayer24Hour($nextPrayerTime);
             return
                 '
+                <h2 id="dptScTimeCountDown" style="display: none">' . $nextPrayerTime24Hours. '</h2> 
                 <h2 class="dptScTime">' .
                 $this->formatDateForPrayer($nextPrayerTime). '
                 </h2>                                

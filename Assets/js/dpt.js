@@ -410,17 +410,10 @@ DPT = {
             var now = new Date();
             var targetTime = new Date();
 
-            var dptScTimeValue = jQuery('.dptScTime').text().trim()
+            var dptScTimeValue = jQuery('#dptScTimeCountDown').text().trim()
             var timeParts = dptScTimeValue.split(':');
             var hours = parseInt(timeParts[0]);
             var minutes = parseInt(timeParts[1]);
-            var ampm = dptScTimeValue.slice(-2).toUpperCase(); // Extract AM/PM
-
-            if (ampm == 'PM' && hours < 12) {
-                hours += 12;
-            } else if (ampm == 'AM' && hours === 12) {
-                hours = 0;
-            }
 
             targetTime.setHours(hours, minutes, 0, 0);
 
@@ -436,8 +429,6 @@ DPT = {
             var diffMinutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
             var diffSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-            // Update the dptScTime class element
-            // Update the dptScTime class element
             var timeDifferenceText;
             hourText = "hour" + (diffHours > 1 ? "s" : "");
             minuteText = "minute" + (diffMinutes > 1 ? "s" : "");

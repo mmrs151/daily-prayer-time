@@ -126,33 +126,37 @@ class UpdateStyles
                 "}";
         }
 
-        $highlight = get_option('highlight');
-        if (! empty($highlight)) {
-            $css .= "
-                table.customStyles tr.highlight, th.highlight, td.highlight{
-                    font-weight: bold;
-                    background:" . $highlight ."!important"
-                ."}
-                span.nextPrayer{
-                    font-weight: bold;
-                    color:" . $highlight  ."
-                }
-                .x-board tr.nextPrayer td{
-                    background-color: " . $highlight ."!important" ."
-                }
+        $highlight = get_option('highlight') ?? 'red';
+        $highlightFont = get_option('highlightFont') ?? 'white';
+        
+        $css .= "
+            table.customStyles tr.highlight, th.highlight, td.highlight{
+                font-weight: bold;
+                background:" . $highlight ."!important;" .";
+                color : " . $highlightFont ."!important;"
+            ."}
+            span.nextPrayer{
+                font-weight: bold;
+                color:" . $highlight  ."
+            }
+            .x-board tr.nextPrayer td{
+                background-color: " . $highlight ." !important;" ."
+                color: " . $highlightFont ." !important;" ."                  
+            }
 
-                .x-board-modern h4.nextPrayer, p.nextPrayer {
-                    color: " . $highlight ."!important" ."
-                }
+            .x-board-modern h4.nextPrayer, p.nextPrayer {
+                background: " . $highlight ."!important;" ."
+                color: " . $highlightFont ."!important;" ."
+            }
 
-                .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer {
-                    color: " . $highlight ."!important" ."
-                }
-                .d-masjid-e-usman  .left-main-col-sun-times h4, .left-main-col-sun-times p {
-                    color: " . $highlight ."!important" ."
-                }
-                ";
-        }
+            .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer {
+                background: " . $highlight ."!important;" ."
+                color: " . $highlightFont ."!important;" ."
+            }
+            .d-masjid-e-usman  .left-main-col-sun-times h4, .left-main-col-sun-times p {
+                color: " . $highlight ."!important;" ."
+            }
+            ";
 
         $digitalScreenRed = get_option('digitalScreenRed');
         if (! empty($digitalScreenRed)) {

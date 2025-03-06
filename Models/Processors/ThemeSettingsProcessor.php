@@ -46,6 +46,10 @@ class ThemeSettingsProcessor
         delete_option('highlight');
         add_option('highlight', $highlight);
 
+        $highlightFont = $this->data['highlightFont'];
+        delete_option('highlightFont');
+        add_option('highlightFont', $highlightFont);
+
         $notificationBackground = $this->data['notificationBackground'];
         delete_option('notificationBackground');
         add_option('notificationBackground', $notificationBackground);

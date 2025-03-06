@@ -615,7 +615,7 @@ height: 70%;
 }
 
 .x-board .nextPrayer {
-    color: #fff !important;
+    color: #fff;
 }
 .x-board span.nextPrayer {
     display: inline-block;

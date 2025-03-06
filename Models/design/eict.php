@@ -24,8 +24,7 @@
                             <li id="hours"></li>
                             <li id="pointx">:</li>
                             <li id="min"></li>
-                            <li id="pointx">:</li>
-                            <li id="ampm"></li>
+                            <li id="sec"></li>
                         </ul>
                     </div>
 

@@ -127,6 +127,7 @@ if (! empty($_POST['themeSettings']) && check_admin_referer( 'themeSettings' )) 
         'evenRow' => sanitize_text_field($_POST['evenRow']),
         'fontColor' => sanitize_text_field($_POST['fontColor']),
         'highlight' => sanitize_text_field($_POST['highlight']),
+        'highlightFont' => sanitize_text_field($_POST['highlightFont']),
         'notificationBackground' => sanitize_text_field($_POST['notificationBackground']),
         'notificationFont' => sanitize_text_field($_POST['notificationFont']),
         'prayerName' => sanitize_text_field($_POST['prayerName']),

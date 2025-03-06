@@ -47,9 +47,14 @@
                         <td><input type="text" name="tableBackground" value="<?php echo esc_attr(get_option('tableBackground')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Highlight next prayer</td>
+                        <td>Highlight background</td>
                         <td><input type="text" name="highlight" value="<?php echo esc_attr(get_option('highlight')) ?>" class="color-field"></td>
                     </tr>
+                    <tr>
+                        <td>Highlight Font</td>
+                        <td><input type="text" name="highlightFont" value="<?php echo esc_attr(get_option('highlightFont')) ?>" class="color-field"></td>
+                    </tr>
+
                     <tr>
                         <td>Announcement/Blink Background</td>
                         <td><input type="text" name="notificationBackground" value="<?php echo esc_attr(get_option('notificationBackground')) ?>" class="color-field"></td>
