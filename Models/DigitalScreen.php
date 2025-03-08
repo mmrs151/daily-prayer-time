@@ -92,10 +92,10 @@ class DigitalScreen extends DailyShortCode
         $localNumbersJson = json_encode($localNumbers, JSON_UNESCAPED_UNICODE);
 
         $timesLocal = json_encode([
-                'minute' => $this->getLocalTimes()['minute'],
-                'minutes' => $this->getLocalTimes()['minute'] . 's',
-                'hour' => $this->getLocalTimes()['hour'],
-                'hours' => $this->getLocalTimes()['hour'] . 's',
+                'minute' => $this->getLocalTimes()['minute'] ?? 'minute',
+                'minutes' => ($this->getLocalTimes()['minute'] ?? 'minute') . 's',
+                'hour' => $this->getLocalTimes()['hour'] ?? 'hour',
+                'hours' => ($this->getLocalTimes()['hour'] ?? 'hour') . 's',
             ],
             JSON_UNESCAPED_UNICODE);
 
@@ -146,7 +146,7 @@ class DigitalScreen extends DailyShortCode
         if ( get_option('hijri-chbox')) {
             $date = date_i18n( 'D jS  M' );
         } else {
-            $date = date_i18n( 'l ' . get_option( 'date_format' ) );
+            $date = date_i18n(get_option( 'date_format'));
         }
 
         $html = '

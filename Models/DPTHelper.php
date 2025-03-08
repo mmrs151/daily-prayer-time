@@ -233,7 +233,7 @@ class DPTHelper
     {
         $zawalMinutes = get_option('zawal');   
 
-        return date( "H:i:s", strtotime( $zuhrBegins. "-$zawalMinutes minute") ); 
+        return date( "H:i", strtotime( $zuhrBegins. "-$zawalMinutes minute") );
     }
 
     /**

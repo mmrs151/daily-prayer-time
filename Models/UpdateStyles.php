@@ -128,7 +128,7 @@ class UpdateStyles
 
         $highlight = get_option('highlight') ?? 'red';
         $highlightFont = get_option('highlightFont') ?? 'white';
-        
+
         $css .= "
             table.customStyles tr.highlight, th.highlight, td.highlight{
                 font-weight: bold;
@@ -149,7 +149,7 @@ class UpdateStyles
                 color: " . $highlightFont ."!important;" ."
             }
 
-            .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, .nextPrayer {
+            .d-masjid-e-usman  .nextPrayer h3, .nextPrayer .title, tr.nextPrayer, td span.nextPrayer {
                 background: " . $highlight ."!important;" ."
                 color: " . $highlightFont ."!important;" ."
             }

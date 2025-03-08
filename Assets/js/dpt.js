@@ -384,12 +384,12 @@ DPT = {
     },
 
     fadingMessages: function(){
-        var msg = jQuery('#fadingMessages').val();
-        if (! msg ) {
+        var msg = jQuery('#fadingMessages').val().trim();
+
+        if (msg == 0) {
             return;
         }
         msg = JSON.parse(msg);
-
         fade();
         setInterval(fade, 10000);
 

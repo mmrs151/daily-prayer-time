@@ -13,7 +13,7 @@
                     </tr>
                     <tr>
                         <td>Screen Timeout during Khutbah</td>
-                        <td colspan="3"><input style="width: 50px;" type="text" class="jumuah" name="khutbahDim" size="10" value='<?php echo  get_option("khutbahDim") ?>'></td>
+                        <td colspan="3"><input style="width: 50px;" type="text" class="jumuah" name="khutbahDim" size="10" value='<?php echo  get_option("khutbahDim") ?>'> mins</td>
                     </tr>
                     <tr>
                         <td>Set Asr start time for monthly calendar</td>

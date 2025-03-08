@@ -10,25 +10,6 @@ if (!empty($_POST['activate-automatic'])) {
     $cities = $worldCities->getCities();
 }
 
-$adapter = new DatabaseConnection();
-$rows = $adapter->getRows();
-
-if ( isset($rows[1])) {
-    $header = (array_keys($rows[1]));
-
-    $writeFile = plugin_dir_path(__FILE__) . '../../Assets/prayer-time-latest.csv';
-    try {
-        $f = fopen($writeFile, "w");
-        fputcsv($f, $header);
-        foreach ($rows as $line) {
-            fputcsv($f, array_values($line));
-        }
-        fclose($f);
-        $readFile = plugins_url('../../Assets/prayer-time-latest.csv', __FILE__);
-    } catch (\Exception $e) {
-        die($e->getMessage());
-    }
-}
 ?>
     <h2 class="eict-donation">
         <marquee width=250 behavior='alternate'>
@@ -130,7 +111,11 @@ if ( isset($rows[1])) {
             <div class="instructions">
                 <h3 class="pt-2"><code>INSTRUCTIONS</code></h3>
                 <ol>
-                    <li><a class="url" href="<?php echo  $readFile ?>"> Download current timetable <i class="fa fa-cloud-download" aria-hidden="true"></i></a> (<i>do not change the column heading</i>)</li>
+                    <li>
+                        <a class="url" href="<?php echo esc_url( home_url( '/wp-json/dpt/v1/prayertime?filter=download_timetable' ) ); ?>">
+                            Download current timetable <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                        </a>
+                    </li>
                     <li><a class="url" target="_blank" href="https://www.salahtimes.com/search"> Get prayer start time for your city <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                     <li>Valid date formats are:
                         <ul class='green' style="padding-left: 20px;">

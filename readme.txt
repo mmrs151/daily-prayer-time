@@ -1,11 +1,11 @@
 === Daily Prayer Time ===
-Contributors: mmrs151
+Contributors: mmrs151, yasin84
 Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.7
-Stable tag: 2025.03.04
+Stable tag: 2025.03.08
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,20 +127,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2025.03.04 =
-* New: Beep sound
-* New: Adhan sound
-* Fixed: Faster page load
-* Fixed: Fixed the issue of not showing the Jumuah time
-* Fixed: Adhan only widget
-* Fixed: Keep Zuhr and display Jumuah time separately
+= 2025.03.08 =
+* Fix: Next prayer time background
+* Fix: Smaller gregorian date
 
 == Upgrade Notice ==
 
-= 2025.03.04 =
-* New: Beep sound
-* New: Adhan sound
-* Fixed: Faster page load
-* Fixed: Fixed the issue of not showing the Jumuah time
-* Fixed: Adhan only widget
-* Fixed: Keep Zuhr and display Jumuah time separately
+= 2025.03.08 =
+* Fix: Next prayer time background
+* Fix: Smaller gregorian date
