@@ -89,6 +89,7 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             {
                 $day = date('Y-m-d');
                 $times = $this->islamicNetworkPrayerTimes->getTimes($date, $latLong['lat'], $latLong['lng']);
+                $this->setTimezone($date);
                 $times = [
                     'fajr' => $times['Fajr'],
                     'sunrise' => $times['Sunrise'],
@@ -122,6 +123,26 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
                 $date->modify('+1 day'); // next day
             }
         }
+
+        private function setTimezone(DateTime $date): bool
+        {
+            $timezone_string = get_option('timezone_string');
+
+            if ($timezone_string) {
+                $timezone = new DateTimeZone($timezone_string);
+            } else {
+                // Fallback to the offset if timezone string is not set
+                $offset = get_option('gmt_offset');
+                $timezone = timezone_name_from_abbr('', $offset * 3600, 0);
+                if ($timezone === false) {
+                    $timezone = 'UTC';
+                }
+                $timezone = new DateTimeZone($timezone);
+            }
+            $dateTime = $date->setTimezone($timezone);
+
+            return $timezone->getTransitions($dateTime->getTimestamp(), $dateTime->getTimestamp())[0]['isdst'];
+        }
         
         private function getJamahTime($date, $time, $mins)
         {
@@ -151,7 +172,6 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
                 'lng' => $row['lng']
             );
         }
-        
     }
     
 }
