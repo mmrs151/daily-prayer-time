@@ -60,7 +60,10 @@ class TimetablePrinter
         'date' => 'Date',
         'day' => 'Day',
         'minute' => 'Minute',
+        'minutes' => 'Minutes',
         'hour' => 'Hour',
+        'hours' => 'Hours',
+        'second' => 's',
         'iqamah update' => 'IQAMAH CHANGES:',
         'next prayer' => 'Next ...'
     );

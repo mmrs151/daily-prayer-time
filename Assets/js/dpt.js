@@ -408,15 +408,14 @@ DPT = {
 
         function updateTimeDifferenceInterval() {
             var now = new Date();
-            var targetTime = new Date();
 
             var dptScTimeValue = jQuery('#dptScTimeCountDown').text().trim()
             var timeParts = dptScTimeValue.split(':');
             var hours = parseInt(timeParts[0]);
             var minutes = parseInt(timeParts[1]);
 
+            var targetTime = new Date();
             targetTime.setHours(hours, minutes, 0, 0);
-
             var timeDifference = targetTime - now;
 
             // If the target time is in the past, add 24 hours to it
@@ -427,17 +426,18 @@ DPT = {
             // Convert time difference to hours, minutes, and seconds
             var diffHours = Math.floor(timeDifference / (1000 * 60 * 60));
             var diffMinutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-            var diffSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            var diffSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000) + 1; // Add 1 second to prevent showing 0 seconds
 
             var timeDifferenceText;
             hourText = "hour" + (diffHours > 1 ? "s" : "");
             minuteText = "minute" + (diffMinutes > 1 ? "s" : "");
+            secondText = "second";
             if (diffHours > 0) {
                 timeDifferenceText = diffHours + " " + DPT.getLocalizedTime(hourText) + " " + diffMinutes + " " + DPT.getLocalizedTime(minuteText);
             } else if (diffMinutes > 0) {
-                timeDifferenceText = diffMinutes + " " + DPT.getLocalizedTime(minuteText) + " " + diffSeconds + " s";
+                timeDifferenceText = diffMinutes + " " + DPT.getLocalizedTime(minuteText) + " " + diffSeconds + " " + DPT.getLocalizedTime(secondText);
             } else {
-                timeDifferenceText = diffSeconds + "s";
+                timeDifferenceText = diffSeconds + " " + DPT.getLocalizedTime(secondText);
             }
 
             timeDifferenceText = DPT.getLocalizedNumber(timeDifferenceText);
@@ -483,7 +483,7 @@ DPT = {
             return time;
         }
         localTimes = JSON.parse(localTimes);
-        return localTimes[time] || time;
+        return localTimes[time] || '';
     }
 };
 jQuery(document).ready(function() { DPT.init(); });

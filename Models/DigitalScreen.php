@@ -93,9 +93,10 @@ class DigitalScreen extends DailyShortCode
 
         $timesLocal = json_encode([
                 'minute' => $this->getLocalTimes()['minute'] ?? 'minute',
-                'minutes' => ($this->getLocalTimes()['minute'] ?? 'minute') . 's',
+                'minutes' => $this->getLocalTimes()['minutes'],
                 'hour' => $this->getLocalTimes()['hour'] ?? 'hour',
-                'hours' => ($this->getLocalTimes()['hour'] ?? 'hour') . 's',
+                'hours' => $this->getLocalTimes()['hours'],
+                'second' => $this->getLocalTimes()['second'],
             ],
             JSON_UNESCAPED_UNICODE);
 

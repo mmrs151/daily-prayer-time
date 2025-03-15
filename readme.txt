@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.7
-Stable tag: 2025.03.08
+Stable tag: 2025.03.15
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,12 +127,14 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2025.03.08 =
-* Fix: Next prayer time background
-* Fix: Smaller gregorian date
+= 2025.03.15 =
+* Fix: Daylight saving time on automatic calculation
+* Fix: 1 second delay on digital screen
+* Fix: Adhan playing on digital screen
 
 == Upgrade Notice ==
 
-= 2025.03.08 =
-* Fix: Next prayer time background
-* Fix: Smaller gregorian date
+= 2025.03.15 =
+* Fix: Daylight saving time on automatic calculation
+* Fix: 1 second delay on digital screen
+* Fix: Adhan playing on digital screen

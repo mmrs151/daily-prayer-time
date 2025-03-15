@@ -42,7 +42,7 @@ $timetable = new TimetablePrinter();
                     <tr>
                         <?php $months = $timetable->getLocalMonths();
                         foreach ($months as $key => $val) { ?>
-                            <td class="months"><input style="width:100px;" type="text" name="monthsLocal[<?php echo esc_attr($key); ?>]" value="<?php echo esc_attr($val); ?>" /></td>
+                            <td class="months"><input style="width:85px;" type="text" name="monthsLocal[<?php echo esc_attr($key); ?>]" value="<?php echo esc_attr($val); ?>" /></td>
                         <?php } ?>
                     </tr>
                 </table>
@@ -96,7 +96,7 @@ $timetable = new TimetablePrinter();
                     </tr>
                     <tr>
                         <?php foreach ($names as $key => $val) { ?>
-                            <td><input style="width:210px;" type="text" name="timesLocal[<?php echo esc_attr($key); ?>]" value="<?php echo stripslashes(esc_attr($val)); ?>" /></td>
+                            <td><input style="width:140px;" type="text" name="timesLocal[<?php echo esc_attr($key); ?>]" value="<?php echo stripslashes(esc_attr($val)); ?>" /></td>
                         <?php } ?>
                     </tr>
                 </table>
