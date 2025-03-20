@@ -124,7 +124,10 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
             }
         }
 
-        private function setTimezone(DateTime $date): bool
+        /**
+         * @throws DateInvalidTimeZoneException
+         */
+        private function setTimezone(DateTime $date): void
         {
             $timezone_string = get_option('timezone_string');
 
@@ -139,9 +142,7 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
                 }
                 $timezone = new DateTimeZone($timezone);
             }
-            $dateTime = $date->setTimezone($timezone);
-
-            return $timezone->getTransitions($dateTime->getTimestamp(), $dateTime->getTimestamp())[0]['isdst'];
+            $date->setTimezone($timezone);
         }
         
         private function getJamahTime($date, $time, $mins)

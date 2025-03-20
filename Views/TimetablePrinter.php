@@ -175,6 +175,7 @@ class TimetablePrinter
     public function getLocalNumbers()
     {
         $numbers_local = get_option('numbersLocal');
+
         if (is_array($numbers_local)) {
             $numbers_local = array_map( 'sanitize_text_field', $numbers_local);
         }
@@ -443,10 +444,13 @@ class TimetablePrinter
             $nextPrayerTime = $dbRow['nextFajr'];
         }
         $nextPrayerTime24Hours = $this->formatDateForPrayer24Hour($nextPrayerTime);
+
             return
                 '
                 <h2 id="dptScTimeCountDown" style="display: none">' . $nextPrayerTime24Hours. '</h2> 
-                <h2 class="dptScTime">' .
+                <h2 class="dptScTime">
+                <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedNumbers">
+            <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedTimes">    ' .
                 $this->formatDateForPrayer($nextPrayerTime). '
                 </h2>                                
                 <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
@@ -632,5 +636,25 @@ class TimetablePrinter
             $jumuahText[] = '<span class="' . $class . '">' . $this->formatDateForPrayer($jumuah) . '</span>';
         }
         return implode($separator, $jumuahText);
+    }
+
+    public function getTimesLocalJson(): string
+    {
+        return
+        json_encode([
+            'minute' => $this->getLocalTimes()['minute'] ?? 'minute',
+            'minutes' => $this->getLocalTimes()['minutes'],
+            'hour' => $this->getLocalTimes()['hour'] ?? 'hour',
+            'hours' => $this->getLocalTimes()['hours'],
+            'second' => $this->getLocalTimes()['second'],
+        ],
+            JSON_UNESCAPED_UNICODE);
+    }
+
+    public function getNumbersLocalJson(): string
+    {
+        $localNumbers = $this->getLocalNumbers();
+        $localNumbers = array_combine(array_keys($localNumbers), $localNumbers);
+        return json_encode($localNumbers, JSON_UNESCAPED_UNICODE);
     }
 }

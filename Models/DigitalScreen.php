@@ -87,19 +87,6 @@ class DigitalScreen extends DailyShortCode
 
     private function getHiddenVariables()
     {
-        $localNumbers = $this->getLocalNumbers();
-        $localNumbers = array_combine(array_keys($localNumbers), $localNumbers);
-        $localNumbersJson = json_encode($localNumbers, JSON_UNESCAPED_UNICODE);
-
-        $timesLocal = json_encode([
-                'minute' => $this->getLocalTimes()['minute'] ?? 'minute',
-                'minutes' => $this->getLocalTimes()['minutes'],
-                'hour' => $this->getLocalTimes()['hour'] ?? 'hour',
-                'hours' => $this->getLocalTimes()['hours'],
-                'second' => $this->getLocalTimes()['second'],
-            ],
-            JSON_UNESCAPED_UNICODE);
-
         $hiddenVariables = '
             <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
@@ -115,8 +102,6 @@ class DigitalScreen extends DailyShortCode
             <input type="hidden" value="' . $this->getWpHour() . '" id="clockHour">
 
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
-            <input type="hidden" value="' . htmlentities($localNumbersJson) . '" id="localizedNumbers">
-            <input type="hidden" value="' . htmlentities($timesLocal) . '" id="localizedTimes">    
             <input type="hidden" value="' . htmlspecialchars($this->getFajrAdhanTime(), JSON_UNESCAPED_UNICODE) . '" id="fajrAdhanTime">    
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes(), JSON_UNESCAPED_UNICODE)) . '" id="otherAdhanTimes">   
         ';
