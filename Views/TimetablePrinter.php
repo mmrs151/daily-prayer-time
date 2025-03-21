@@ -372,7 +372,9 @@ class TimetablePrinter
                 $hours = (int)$hours;
                 $mins = $nextIqamah % 60;
                 $mins = (int)$mins;
-                $timeLeftText = $this->getLocalizedNumber( $hours ) .' '.$this->localTimes["hour"] .' '. $this->getLocalizedNumber( $mins );
+                $timeLeftText = $this->getLocalizedNumber( $hours ) .' '.$this->localTimes["hour"] .' '
+                    . $this->getLocalizedNumber( $mins ) .' '
+                    .$this->localTimes["minute"];
             }
 
         }
@@ -450,7 +452,7 @@ class TimetablePrinter
                 <h2 id="dptScTimeCountDown" style="display: none">' . $nextPrayerTime24Hours. '</h2> 
                 <h2 class="dptScTime">
                 <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedNumbers">
-            <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedTimes">    ' .
+                <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedTimes">    ' .
                 $this->formatDateForPrayer($nextPrayerTime). '
                 </h2>                                
                 <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
