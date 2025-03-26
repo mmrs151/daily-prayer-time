@@ -116,11 +116,12 @@ class DigitalScreen extends DailyShortCode
         return $hiddenVariables;
     }
 
-    private function getTopRow()
+    private function getTopRow(): string
     {
         $timeClass = "col-sm-3 ";
         $dateClass = "col-sm-7 ";
         $height = "height-100";
+        $width = $this->isPresentation ? "width-100" : "width-25";
         $verticalClass = "";
         if (  $this->isPortrait  ) {
             $timeClass = "col-xs-12 vertical-time ";
@@ -140,7 +141,7 @@ class DigitalScreen extends DailyShortCode
             ' . $this->getHiddenVariables() . '
 
             <div class="row top-row dpt-bg">
-                <div class="time bg-dark ' . $timeClass . 'col-xs-12 text-center ' . $height . '">
+                <div class="time bg-dark ' . $timeClass . 'col-xs-12 text-center ' . $height . ' ' . $width . '">
                 <div class="clock align-middle">
                   <ul class="clock">
                       <li id="hours"></li>
@@ -151,6 +152,10 @@ class DigitalScreen extends DailyShortCode
                   </ul>
                 </div>
                 </div>
+                ';
+
+        if (!$this->isPresentation) {
+            $html .= '
                 <div class="' . $dateClass . ' col-xs-12 text-center ' . $height . '">
                     <div class="align-middle" id="date-section">
                         <span id="dsDate" class="date-eng h6 ' . $verticalClass . '">' . $date. '
@@ -161,12 +166,14 @@ class DigitalScreen extends DailyShortCode
                     </div>
                 </div>
                 <div class="col-sm-2 col-xs-12 text-right align-middle padding-null">';
+                    $html .= $this->getLogoUrl();
+            $html .=
+                '</div>';
+        }
 
-        $html .= $this->getLogoUrl();
-        
         $html .=
-            '</div>
-            </div>';
+            '</div>';
+
         return $html;
     }
 
@@ -295,8 +302,12 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getBottomRow()
+    private function getBottomRow(): string
     {
+        if ($this->isPresentation) {
+            return '';
+        }
+
         $verticalClass = "";
 
         if ( $this->isPortrait ) {
@@ -348,32 +359,15 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-
-    private function getQuranSlides()
-    {
-        $transitionEffect = get_option('transitionEffect');
-        $transitionSpeed = get_option('transitionSpeed');
-
-        $html ='
-            <div class="row middle-row bg-red">
-            <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    ' . $this->getOtherSlides($transitionSpeed) . '
-                </div>
-            </div>
-        </div>
-        ';
-
-        return $html;
-    }
-
     private function getPresentationRow()
     {
         $transitionEffect = get_option('transitionEffect');
         $transitionSpeed = get_option('transitionSpeed');
 
+        $middleRow = $this->isPresentation ? 'middle-row85' : 'middle-row';
+
         $html ='
-            <div class="row middle-row bg-red height-100">
+            <div class="row ' . $middleRow . ' bg-red height-100">
             <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
                 <div class="carousel-inner height-100">
                     ' . $this->getPresentationSlides($transitionSpeed) . '
@@ -385,7 +379,7 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getPresentationSlides($transitionSpeed)
+    private function getPresentationSlides($transitionSpeed): string
     {
         $this->presentationSlides = $this->getSliderUrls();
         $html = '
@@ -405,7 +399,7 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getIqamahUpdate()
+    private function getIqamahUpdate(): string
     {
         $orientation = 'horizontal';
         if ($this->isPortrait) {
@@ -426,7 +420,7 @@ class DigitalScreen extends DailyShortCode
         }
     }
 
-    private function getBlink()
+    private function getBlink(): string
     {
         $orientation = '';
         if ($this->isPortrait) {
@@ -436,7 +430,7 @@ class DigitalScreen extends DailyShortCode
         return '<a class="notificationFont blink-' .$orientation.'" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
     }
 
-    private function getFirstSlide()
+    private function getFirstSlide(): string
     {
         $verticalClass = "";
         $sehriClass = "sehri";
@@ -468,7 +462,7 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getOtherSlides($transitionSpeed=10)
+    private function getOtherSlides($transitionSpeed=10): ?string
     {
 	    if ( get_option('quran-chbox') ) {
 		    return '<div class="carousel-item height-100" data-bs-interval="10000">
@@ -522,12 +516,15 @@ class DigitalScreen extends DailyShortCode
 
         foreach (range(1, 11) as $item) {
             $slides[] = get_option('slider' . $item);
+            $slides = array_filter($slides, function($slide) {
+                return filter_var($slide, FILTER_VALIDATE_URL);
+            });
         }
 
         return $slides;
     }
 
-    private function getImageOrMessage($slide)
+    private function getImageOrMessage($slide): string
     {
         if (filter_var($slide, FILTER_VALIDATE_URL) === FALSE) {
             return '
