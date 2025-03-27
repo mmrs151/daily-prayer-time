@@ -121,7 +121,12 @@ class DigitalScreen extends DailyShortCode
         $timeClass = "col-sm-3 ";
         $dateClass = "col-sm-7 ";
         $height = "height-100";
-        $width = $this->isPresentation ? "width-100" : "width-25";
+        $width = "width-25";
+        if ($this->isPresentation || $this->isPortrait) {
+            $timeClass = "col-sm-4 ";
+            $dateClass = "col-sm-8 ";
+            $width = "width-100";
+        }
         $verticalClass = "";
         if (  $this->isPortrait  ) {
             $timeClass = "col-xs-12 vertical-time ";
