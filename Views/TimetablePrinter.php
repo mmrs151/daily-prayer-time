@@ -442,26 +442,25 @@ class TimetablePrinter
             $nextPrayerTime = $dbRow[$key];
         }
 
-        if ( is_null($nextPrayer) ) {
+        if (is_null($nextPrayer)) {
             $nextPrayerTime = $dbRow['nextFajr'];
         }
         $nextPrayerTime24Hours = $this->formatDateForPrayer24Hour($nextPrayerTime);
 
-            return
-                '
-                <h2 id="dptScTimeCountDown" style="display: none">' . $nextPrayerTime24Hours. '</h2> 
-                <h2 class="dptScTime">
-                <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedNumbers">
-                <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedTimes">    ' .
-                $this->formatDateForPrayer($nextPrayerTime). '
-                </h2>                                
-                <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'"> 
-                    '.  $timeLeftText .' 
-                </span>
+        return
+            '
+            <input type="hidden" id="timezoneOffset" value="' . get_option('gmt_offset') .'">
+            <h2 id="dptScTimeCountDown" style="display: none">' . $nextPrayerTime24Hours. '</h2>
+            <h2 class="dptScTime">
+            <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedNumbers">
+            <input type="hidden" value="' . htmlentities($this->getTimesLocalJson()) . '" id="localizedTimes">    ' .
+            $this->formatDateForPrayer($nextPrayerTime). '
+            </h2>
+            <span class="timeLeftCountDown timeLeft '.$this->getIqamahClass( $nextIqamah ).'">
+                '.  $timeLeftText .'
+            </span>
         </div>';
-
     }
-
 
 	/**
      * @param array $row

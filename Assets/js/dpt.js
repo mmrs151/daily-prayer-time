@@ -407,7 +407,9 @@ DPT = {
         setInterval(() => updateTimeDifferenceInterval(), 1000);
 
         function updateTimeDifferenceInterval() {
+            var timezoneOffset = parseFloat(document.getElementById('timezoneOffset').value) * 60; // Convert hours to minutes
             var now = new Date();
+            now.setMinutes(now.getMinutes() + now.getTimezoneOffset() + timezoneOffset); // Adjust to WordPress timezone
 
             var dptScTimeValue = jQuery('#dptScTimeCountDown').text().trim()
             var timeParts = dptScTimeValue.split(':');
