@@ -44,6 +44,7 @@ class DigitalScreen extends DailyShortCode
 
     /** @var DPTHelper */
     protected $dptHelper;
+    private ?string $adhan = 'adhan';
 
     public function __construct($attr=array())
     {
@@ -96,15 +97,21 @@ class DigitalScreen extends DailyShortCode
             
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             
-            <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
             <input type="hidden" value="' . get_option('activateBeep') . '" id="activateBeep">           
             <input type="hidden" value="' . get_option('quran-chbox') . '" id="quranCheckbox">
             <input type="hidden" value="' . $this->getWpHour() . '" id="clockHour">
 
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getFadingMessages())) . '" id="fadingMessages">
-            <input type="hidden" value="' . htmlspecialchars($this->getFajrAdhanTime(), JSON_UNESCAPED_UNICODE) . '" id="fajrAdhanTime">    
-            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes(), JSON_UNESCAPED_UNICODE)) . '" id="otherAdhanTimes">   
         ';
+
+        if ($this->adhan) {
+            $hiddenVariables .= '
+            <input type="hidden" value="' . get_option('activateAdhan') . '" id="activateAdhan">
+            <input type="hidden" value="' . htmlspecialchars($this->getFajrAdhanTime(), JSON_UNESCAPED_UNICODE) . '" id="fajrAdhanTime">    
+            <input type="hidden" value="' . htmlspecialchars(json_encode($this->getOtherAdhanTimes(), JSON_UNESCAPED_UNICODE)) . '" id="otherAdhanTimes">
+            ';
+
+        }
 
         if (get_option("activateAdhan") === 'adhan') {
             $hiddenVariables .= '
@@ -601,6 +608,10 @@ class DigitalScreen extends DailyShortCode
 
     private function setAttributes($attr=array())
     {
+        if (isset($attr['mute_adhan'])) {
+            $this->adhan = null;
+        }
+
         if ( isset($attr['view']) ) {
             $this->isPortrait = ( strtolower(esc_attr($attr['view'])) == 'vertical' );
             $this->isPresentation = ( strtolower(esc_attr($attr['view'])) == 'presentation' );
