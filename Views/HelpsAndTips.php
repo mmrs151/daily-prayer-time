@@ -51,6 +51,7 @@
         <li>blink=any text blink_link=url to make the text clickable</li>
         <li>disable_overnight_dim=true <i>(disable overnight dimming of the digital screen )</i></li>
         <li>deactivate_tomorrow=true <i>(Deactivate tomorrow's prayer time after a prayer finished)</i></li>
+        <li>mute_adhan=true <i>Disable Adhan on a screen</i></li>
     </ol>
 </p>
 <p>
