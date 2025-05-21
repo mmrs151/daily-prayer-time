@@ -307,9 +307,7 @@ h3.printSiteName {
     margin-bottom: 0px;
     text-align: center;
 }
-span.nextPrayer {
-    color: red;
-}
+
 div.dptScNextPrayer {
     font-weight: bold;
     text-transform: uppercase;

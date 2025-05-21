@@ -32,7 +32,7 @@ if ($sunriseOrZawal == 'zawal') {
     <div class="dpt-wrapper-container">
 
         <div class="prayer-time prayer-fajr <?php if ($nextPrayer == $this->localPrayerNames['fajr']) echo "highlight"; ?>">
-        <span class="iconify-inline icon" data-icon="lucide:sunrise"></span>
+        <span class="iconify-inline dptPrayerIcon" data-icon="lucide:sunrise"></span>
 
             <h3 id="fajrRamadhan"><?php echo esc_html($this->localPrayerNames['fajr']) ?></h3>
             <div
@@ -43,7 +43,7 @@ if ($sunriseOrZawal == 'zawal') {
 
         </div> <!-- END of prayer time-->
         <div class="prayer-time prayer-sunrise <?php if ($nextPrayer == ucfirst($sunriseOrZawal)) echo "highlight"; ?>">
-        <span class="iconify-inline icon" data-icon="bi:sunrise-fill"></span>
+        <span class="iconify-inline dptPrayerIcon" data-icon="bi:sunrise-fill"></span>
 
             <h3><?php echo esc_html( ucfirst($sunriseOrZawal) )?></h3>
             <div class="prayer-jamaat"><?php echo  esc_html( $sunriseOrZawalTime );?></div>
@@ -51,7 +51,7 @@ if ($sunriseOrZawal == 'zawal') {
 
         </div> <!-- END of prayer time-->
         <div class="prayer-time prayer-dhuhr <?php if ('nextPrayer' ==  $this->getNextPrayerClass('zuhr', $row)) echo "highlight"; ?>">
-        <span class="iconify-inline icon" data-icon="emojione:sun"></span>
+        <span class="iconify-inline dptPrayerIcon" data-icon="emojione:sun"></span>
 
             <h3><?php echo esc_html( $this->localPrayerNames['zuhr'] )?></h3>
             <div class="prayer-start"><?php echo  esc_html( $this->formatDateForPrayer($row["zuhr_begins"]) );?></div>
@@ -59,7 +59,7 @@ if ($sunriseOrZawal == 'zawal') {
 
         </div> <!-- END of prayer time-->
         <div class="prayer-time prayer-asr <?php if ($nextPrayer == $this->localPrayerNames['asr']) echo "highlight"; ?>">
-        <span class="iconify-inline icon" data-icon="bi:sun"></span>
+        <span class="iconify-inline dptPrayerIcon" data-icon="bi:sun"></span>
 
             <h3><?php echo esc_html( $this->localPrayerNames['asr'] )?></h3>
             <div class="prayer-start"><?php echo  esc_html( $this->formatDateForPrayer($row["asr_begins"]) );?></div>
@@ -67,7 +67,7 @@ if ($sunriseOrZawal == 'zawal') {
 
         </div> <!-- END of prayer time-->
         <div class="prayer-time prayer-maghrib <?php if ($nextPrayer == $this->localPrayerNames['maghrib']) echo "highlight"; ?>">
-        <span class="iconify-inline icon" data-icon="carbon:sunset"></span>
+        <span class="iconify-inline dptPrayerIcon" data-icon="carbon:sunset"></span>
 
             <h3 id="maghribRamadhan"><?php echo esc_html( $this->localPrayerNames['maghrib'] )?></h3>
             <div class="prayer-start"><?php echo  esc_html( $this->formatDateForPrayer($row["maghrib_begins"]) );?></div>
@@ -75,7 +75,7 @@ if ($sunriseOrZawal == 'zawal') {
 
         </div> <!-- END of prayer time-->
         <div class="prayer-time prayer-isha <?php if ($nextPrayer == $this->localPrayerNames['isha']) echo "highlight"; ?>">
-        <span class="iconify-inline icon" data-icon="bi:moon-stars-fill"></span>
+        <span class="iconify-inline dptPrayerIcon" data-icon="bi:moon-stars-fill"></span>
 
             <h3><?php echo esc_html( $this->localPrayerNames['isha'] )?></h3>
             <div class="prayer-start"><?php echo  esc_html( $this->formatDateForPrayer($row["isha_begins"]) );?></div>
@@ -83,7 +83,7 @@ if ($sunriseOrZawal == 'zawal') {
 
         </div> <!-- END of prayer time-->
         <div class="prayer-time prayer-jumuah <?php if ('nextPrayer' ==  $this->getNextPrayerClass('jumuah', $row)) echo "highlight"; ?>">
-            <span class="iconify-inline icon" data-icon="fa-solid:mosque""></span>
+            <span class="iconify-inline dptPrayerIcon" data-icon="fa-solid:mosque""></span>
 
             <h3><?php echo esc_html( $this->headersLocal['jumuah'] )?></h3>
             <div class="prayer-jamaat"><?php echo   $this->getJumuahTimesArray(true);?></div>
