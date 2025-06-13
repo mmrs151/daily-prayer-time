@@ -4,7 +4,7 @@ Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 2025.04.03
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

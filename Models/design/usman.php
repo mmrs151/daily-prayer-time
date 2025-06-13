@@ -5,7 +5,10 @@ $html = '';
 <div class="usman-body">
     <div class="container-fluid d-masjid-e-usman">
         <div class="row mobile-logo-row">
-            <div class="col-sm-12 mobile-logo-column"></div>
+            <div class="col-sm-12 mobile-logo-column">
+                <img src="<?php echo esc_url( wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' )[0] ); ?>" alt="">
+            
+            </div>
         </div>
         <div class="row height-100">
             <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
@@ -28,7 +31,7 @@ $html = '';
 
                 <div class="row left-main-col-prayernames">
                     <div class="col-md-12 col-sm-12 col-12 prayernames-column">
-                        <div class="row lmc-heading pt-2">
+                        <div class="row lmc-heading">
                             <div class="col-md-4 col-sm-4 col-4 empty-space"></div>
                             <div class="col-md-4 col-sm-4 col-4">
                                 <h3 class="start-title"><?php echo strtoupper($this->getLocalHeaders()['begins']); ?></h3>
