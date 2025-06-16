@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.8
-Stable tag: 2025.04.03
+Stable tag: 2025.06.16
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,10 +127,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
-= 2025.04.03 =
-* Fix: Prayer time countdown timer for UTC
+= 2025.06.16 =
+* Fix: Mobile view in usman theme
+* Fix: theme styling
 
 == Upgrade Notice ==
 
-= 2025.04.03 =
-* Fix: Prayer time countdown timer for UTC
+= 2025.06.16 =
+* Fix: Mobile view in usman theme
+* Fix: theme styling
