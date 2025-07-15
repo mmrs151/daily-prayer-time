@@ -82,14 +82,15 @@ if ($sunriseOrZawal == 'zawal') {
             <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["isha_jamah"]) );?></div>
 
         </div> <!-- END of prayer time-->
-        <div class="prayer-time prayer-jumuah <?php if ('nextPrayer' ==  $this->getNextPrayerClass('jumuah', $row)) echo "highlight"; ?>">
-            <span class="iconify-inline dptPrayerIcon" data-icon="fa-solid:mosque""></span>
+        <?php if (get_option('jumuah1')) { ?>
+            <div class="prayer-time prayer-jumuah <?php if ('nextPrayer' ==  $this->getNextPrayerClass('jumuah', $row)) echo "highlight"; ?>">
+                <span class="iconify-inline dptPrayerIcon" data-icon="fa-solid:mosque""></span>
 
-            <h3><?php echo esc_html( $this->headersLocal['jumuah'] )?></h3>
-            <div class="prayer-jamaat"><?php echo   $this->getJumuahTimesArray(true);?></div>
-            <div>&nbsp;</div>
-
-        </div> <!-- END of prayer time-->
+                <h3><?php echo esc_html( $this->headersLocal['jumuah'] )?></h3>
+                <div class="prayer-jamaat"><?php echo $this->getJumuahTimesArray(true);?></div>
+                <div>&nbsp;</div>
+            </div> <!-- END of prayer time-->
+        <?php } ?>
 
     </div> <!-- END of wrapper container-->
 
