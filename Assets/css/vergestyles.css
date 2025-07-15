@@ -73,7 +73,7 @@ h3.timetable-link {
 }
 
 .dpt-horizontal-wrapper.customStyles .dpt-wrapper-container .prayer-time {
-  width: 14%;
+  flex: 1;
   height: 90px;
   display: inline-table;
   border-right: 1px solid #3e605c;

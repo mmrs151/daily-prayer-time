@@ -5,8 +5,8 @@ $html = '';
 <div class="usman-body">
     <div class="container-fluid d-masjid-e-usman">
         <div class="row mobile-logo-row">
-            <div class="col-sm-12 mobile-logo-column">
-                <img src="<?php echo esc_url( wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' )[0] ); ?>" alt="">
+            <div class="col-sm-12 mobile-logo-column text-center" >
+                <?php echo $this->getLogoUrl(); ?>
             
             </div>
         </div>
