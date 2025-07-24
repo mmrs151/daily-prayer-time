@@ -496,7 +496,7 @@
         height: 40%;
     }
     .d-masjid-e-usman{
-        height: 180vh;
+        height: 120vh;
     }
      .d-masjid-e-usman .jummah-jamah-time {
         line-height: 0;
@@ -511,6 +511,9 @@
     }
     .d-masjid-e-usman .title-value{
         padding-top: 4px;
+    }
+    .d-masjid-e-usman .height-100{
+        height: auto;
     }
   
 }
@@ -573,14 +576,14 @@
     }
     .d-masjid-e-usman .banner-section {
         height: 40%;
+        padding-top: 0;
     }
     .d-masjid-e-usman{
-        height: 130vh;
+        height: 108vh;
     }
     .d-masjid-e-usman .mobile-logo-column img{
         height: 100px;
         position: relative;
-        left: 117px;
         top: 20px;
     }
     .d-masjid-e-usman .left-main-col-dateandtime {
@@ -632,9 +635,5 @@
     }
 }
 
-@media(max-width : 390px){
-    .d-masjid-e-usman .mobile-logo-column img{
-        left: 95px;
-    }
-}
+
 
