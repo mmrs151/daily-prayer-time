@@ -515,7 +515,6 @@
     .d-masjid-e-usman .height-100{
         height: auto;
     }
-  
 }
 
 @media(max-width : 460px){
@@ -635,5 +634,9 @@
     }
 }
 
-
+@media(max-width : 390px){
+    .d-masjid-e-usman .mobile-logo-column img{
+        left: 95px;
+    }
+}
 
