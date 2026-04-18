@@ -53,7 +53,7 @@
             if ( $filter == 'today' ) {
                 $response = $this->db->getPrayerTimeForToday(1);
                 $hijriDate = new HijriDate();
-                $response['hijri_date_convert'] = $hijriDate->getDate(date("d"), date("m"), date("Y"), true);
+                $response['hijri_date_convert'] = $hijriDate->getDate(date("d"), date("m"), date("Y"), true, true);
                 $response['jumuah'] = array_filter([get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3')]);
                 $response['next_prayer'] = $this->timetablePrinter->getNextIqamahTime($this->db->getPrayerTimeForToday(), false, true);
             } elseif ( $filter == 'month'){

@@ -106,7 +106,7 @@ class TimetablePrinter
         $this->localTimes = $this->getLocalTimes();
         $this->dptHelper = new DPTHelper();
         $this->hijriDate = new HijriDate();
-        $this->hijridateString = $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true);
+        $this->hijridateString = $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true, true);
     }
 
     public function getTableClass()
@@ -343,7 +343,7 @@ class TimetablePrinter
 
         $hijriDate = '';
         if($row['displayHijriDate']) {
-            $hijriDate = $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true);
+            $hijriDate = $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true, true);
         }
 
         $printDates = '';

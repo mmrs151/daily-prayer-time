@@ -22,7 +22,7 @@ if ($sunriseOrZawal == 'zawal') {
             <?php
                 echo esc_html($row['widgetTitle']) .
                 ' ' . date_i18n( get_option( 'date_format' ) );
-                 if($row['displayHijriDate']) echo ' - '. $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true)
+                 if($row['displayHijriDate']) echo ' - '. $this->hijriDate->getDate(date("d"), date("m"), date("Y"), true, true)
             ?>
         </h3>
         <h3 class="timetable-link side-by-side">
