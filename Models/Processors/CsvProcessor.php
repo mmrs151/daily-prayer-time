@@ -56,8 +56,10 @@ if ( ! class_exists('DPTCsvProcessor')) {
                     $this->goBack();
                     exit;
                 }
+
+                $inserted = [];
+                $updated = [];
     
-                $total = 0;
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                     if (! $validator->isValidData($data)) {
                         $this->goBack();
@@ -65,18 +67,58 @@ if ( ! class_exists('DPTCsvProcessor')) {
                     } else {
                         $row++;
                         $data = $validator->getValidData();
-                        $count = $db->insertRow($data);
-                        if ($count == 1) {
-                            $total += $count;
-                        } elseif ($count == 2) {
-                            $total += 1;
+                        $result = $db->insertRow($data);
+                        $date = $result['date'];
+                        
+                        if ($result['result'] == 1) {
+                            $inserted[] = $date;
+                        } elseif ($result['result'] == 2) {
+                            $updated[] = $date;
                         }
                     }
                 }
             }
-            echo "<div class='donation-link dptCenter'>" . esc_html($row) . " Rows processed </br> " . esc_html($total) . " Rows affected </div>";
-            $this->donationLink();
+            $this->displayResults($row, $inserted, $updated);
             fclose($handle);
+        }
+
+        private function displayResults($totalProcessed, $inserted, $updated)
+        {
+            $insertedCount = count($inserted);
+            $updatedCount = count($updated);
+            
+            echo "<div class='donation-link dptCenter'>" . esc_html($totalProcessed) . " Rows processed</div>";
+            echo "<div class='dptCenter' style='margin-bottom: 15px;'>📥 " . $insertedCount . " Inserted &nbsp;|&nbsp; 🔄 " . $updatedCount . " Updated</div>";
+            
+            echo '<div class="dpt-csv-results" style="max-width: 600px; margin: 20px auto;">';
+            
+            if ($insertedCount > 0) {
+                echo '<details style="margin-bottom: 10px;">';
+                echo '<summary style="cursor: pointer; padding: 10px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; font-weight: bold;">';
+                echo '📥 INSERTED (' . $insertedCount . ' rows) - Click to view</summary>';
+                echo '<div style="padding: 10px; background: #f8f9fa; border: 1px solid #dee2e6; margin-top: 5px;">';
+                echo '<ul style="columns: 3; column-gap: 20px; list-style: none; margin: 0; padding: 0;">';
+                foreach ($inserted as $date) {
+                    echo '<li>• ' . esc_html($date) . '</li>';
+                }
+                echo '</ul></div></details>';
+            }
+            
+            if ($updatedCount > 0) {
+                echo '<details style="margin-bottom: 10px;">';
+                echo '<summary style="cursor: pointer; padding: 10px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; font-weight: bold;">';
+                echo '🔄 UPDATED (' . $updatedCount . ' rows) - Click to view</summary>';
+                echo '<div style="padding: 10px; background: #f8f9fa; border: 1px solid #dee2e6; margin-top: 5px;">';
+                echo '<ul style="columns: 3; column-gap: 20px; list-style: none; margin: 0; padding: 0;">';
+                foreach ($updated as $date) {
+                    echo '<li>• ' . esc_html($date) . '</li>';
+                }
+                echo '</ul></div></details>';
+            }
+            
+            echo '</div>';
+            
+            $this->donationLink();
         }
     
         /**

@@ -269,7 +269,7 @@ class DatabaseConnection
 
     /**
      * @param array $row
-     * @return int|bool
+     * @return array
      */
     public function insertRow($row)
     {
@@ -291,7 +291,14 @@ class DatabaseConnection
         $createIfNotUpdate = rtrim($createIfNotUpdate, ', ');
         $createIfNotUpdate .= ';';
 
-        return $wpdb->query($createIfNotUpdate);
+        $result = $wpdb->query($createIfNotUpdate);
+        
+        $date = $row['d_date'] ?? 'Unknown';
+        
+        return [
+            'result' => $result,
+            'date' => $date
+        ];
     }
 
     private function createTableIfNotExist()
