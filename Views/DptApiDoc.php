@@ -71,7 +71,9 @@
   
   next_prayer: {
     prayerName: "isha",
-    timeLeft: 11
+    timeLeft: 11,
+    iqamahTime: "22:45:00",
+    azanTime: "17:59:00"
   }
 }
 </pre>

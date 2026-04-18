@@ -330,9 +330,14 @@ class TimetablePrinter
         $nextPrayer = $this->getNextPrayer($row);
 
         if ($apiCall) {
+            $nextPrayerTime = $this->getNextPrayerActualTime($row, $nextPrayer);
+            $nextAzanTime = $this->getNextAzanActualTime($row, $nextPrayer);
+            
             return [
                 'prayerName' => $nextPrayer,
-                'timeLeft' => $diff
+                'timeLeft' => $diff,
+                'iqamahTime' => $nextPrayerTime,
+                'azanTime' => $nextAzanTime
             ];
         }
 
@@ -474,6 +479,36 @@ class TimetablePrinter
         array_pop($jamahNames); // remove zawal
         return array_combine( $jamahNames, $jamahTimes );
 
+    }
+
+    protected function getNextPrayerActualTime(array $row, $nextPrayer)
+    {
+        if ($nextPrayer == 'zawal' || $nextPrayer == 'sunrise') {
+            return $row['sunrise'];
+        }
+
+        $key = strtolower($nextPrayer . '_jamah');
+        
+        if (isset($row[$key])) {
+            return $row[$key];
+        }
+        
+        return null;
+    }
+
+    protected function getNextAzanActualTime(array $row, $nextPrayer)
+    {
+        if ($nextPrayer == 'zawal' || $nextPrayer == 'sunrise') {
+            return $row['sunrise'];
+        }
+
+        $key = strtolower($nextPrayer . '_begins');
+        
+        if (isset($row[$key])) {
+            return $row[$key];
+        }
+        
+        return null;
     }
 
     /**
