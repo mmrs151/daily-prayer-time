@@ -94,6 +94,11 @@ class DigitalScreen extends DailyShortCode
             
             <input type="hidden" value="' . $this->getKhutbahDim($this->getRow()) . '" id="khutbahDim">
             <input type="hidden" value="' . $this->getTaraweehDim($this->getRow()) . '" id="taraweehDim">
+            <input type="hidden" value="' . get_option('ishraq') . '" id="ishraqOption">
+            <input type="hidden" value="' . get_option('zawal') . '" id="zawalOption">
+            <input type="hidden" value="' . ($this->dptHelper->getIshraqTime($this->row['sunrise']) ? date_i18n(get_option('time_format'), strtotime($this->dptHelper->getIshraqTime($this->row['sunrise']))) : '') . '" id="ishraqTime">
+            <input type="hidden" value="' . date_i18n(get_option('time_format'), strtotime($this->row['sunrise'])) . '" id="sunriseTime">
+            <input type="hidden" value="' . date_i18n(get_option('time_format'), strtotime($this->dptHelper->getZawalTime($this->row['zuhr_begins']))) . '" id="zawalTime">
             
             <input type="hidden" value="' . htmlspecialchars(json_encode($this->getRefreshPoints())) . '" id="refreshPoint">
             
@@ -243,7 +248,7 @@ class DigitalScreen extends DailyShortCode
                             <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
                             <td>' . do_shortcode("[fajr_prayer]") . '</td>
                         </tr>
-                        <tr class=' . $this->getNextPrayerClass($sunriseOrZawal, $this->row) . '>
+                        <tr class=' . ($sunriseOrZawal == 'zuhr' ? '' : $this->getNextPrayerClass($sunriseOrZawal, $this->row)) . '>
                             <td class="prayerName"><span>' . $this->getLocalPrayerNames()[$sunriseOrZawal] . '</span></td>
                             <td class="prayerName sunrise" colspan="2">' . do_shortcode("[$sunriseOrZawal]") . '</td>
                         </tr>';

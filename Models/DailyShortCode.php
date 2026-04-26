@@ -425,7 +425,7 @@ class DailyShortCode extends TimetablePrinter
             </span>
         </span>";
     }
-
+    
     public function scZawal($attr)
     {
         $zuhrBegins = $this->row['zuhr_begins'];

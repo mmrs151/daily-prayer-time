@@ -167,11 +167,53 @@ class DPTHelper
         return  !$forMonth && current_time('timestamp') > strtotime($dbRow['maghrib_begins']);
     }
 
+    public function getIshraqTime($sunrise)
+    {
+        $ishraqMins = get_option('ishraq');
+        if (!$ishraqMins || $ishraqMins == '0') {
+            return null;
+        }
+        return date("H:i", strtotime($sunrise . " +" . intval($ishraqMins) . " minutes"));
+    }
+
+    public function isIshraqTimeNext($row)
+    {
+        $ishraqMins = get_option('ishraq');
+        if (!$ishraqMins || $ishraqMins == '0') {
+            return false;
+        }
+        
+        $sunrise = $row['sunrise'];
+        $ishraqTime = $this->getIshraqTime($sunrise);
+        $now = user_current_time('H:i');
+        
+        $nowTs = strtotime($now);
+        $ishraqTs = strtotime($ishraqTime);
+        
+        return $nowTs >= $ishraqTs;
+    }
+
     public function getNextPrayerClass($prayerName, $row, $isFajr=false)
     {
         $nextPrayerName = $this->getNextPrayer($row);
+        
         if ($this->todayIsFriday() && $nextPrayerName == 'zuhr') {
             $nextPrayerName = 'jumuah';
+        }
+
+        // If ishraq is next, highlight sunrise row (which shows ishraq)
+        if ($nextPrayerName == 'ishraq' && ($prayerName == 'sunrise' || $prayerName == 'ishraq')) {
+            return 'nextPrayer';
+        }
+
+        // If zawal time is next, highlight zuhr row (not sunrise row)
+        if ($this->isZawalTimeNext($row) && $prayerName == 'zuhr') {
+            return 'nextPrayer';
+        }
+        
+        // If next prayer is zuhr or later, don't highlight sunrise/ishraq rows
+        if (in_array($prayerName, ['sunrise', 'ishraq']) && in_array($nextPrayerName, ['zuhr', 'asr', 'maghrib', 'isha', 'jumuah'])) {
+            return '';
         }
 
         if ($isFajr && is_null($nextPrayerName)) {
@@ -191,29 +233,63 @@ class DPTHelper
      */
     public function getNextPrayer($row)
     {
-        if ( get_option('zawal') && $this->isZawalTimeNext($row) ) {
-            return 'zawal';
+        $ishraqMins = get_option('ishraq');
+        $now = current_time('H:i');
+        
+        if ($ishraqMins && $ishraqMins != '0') {
+            $sunrise = $row['sunrise'];
+            $ishraqTime = $this->getIshraqTime($sunrise);
+            $zuhrTs = strtotime($row['zuhr_begins']);
+            
+            $nowTs = strtotime($now);
+            $ishraqTs = strtotime($ishraqTime);
+            
+            // After ishraq starts but before zuhr, next prayer is zuhr
+            if ($nowTs >= $ishraqTs && $nowTs < $zuhrTs) {
+                return 'zuhr';
+            }
         }
 
-        $now = current_time( 'H:i');
+        if (get_option('zawal') && $this->isZawalTimeNext($row)) {
+            return 'zuhr';
+        }
 
         $jamahTime = $this->getJamahTime( $row );
-        foreach ($jamahTime as $jamah) {
-            if ($jamah > $now ) {
-                $prayer = array_search( $jamah, $row ); // asr_jamah or asr_begins
+        $nowTs = strtotime($now);
+        foreach ($jamahTime as $key => $jamah) {
+            $jamahTs = strtotime($jamah);
+            if ($jamahTs > $nowTs) {
+                // If next would be sunrise and ishraq is set, show ishraq instead
+                if ($key === 'sunrise' && $ishraqMins && $ishraqMins != '0') {
+                    return 'ishraq';
+                }
+                $prayer = array_search( $jamah, $row ); 
                 $prayer = explode( '_', $prayer);
-                return $prayer[0]; // asr
+                return $prayer[0]; 
             }
         }
     }
 
     public function getSunriseOrZawal($row)
     {
-        if (get_option('zawal')) {
-            if($this->isZawalTimeNext($row)){
-                return 'zawal';
-            } 
+        if ($this->isIshraqTimeNext($row)) {
+            $zuhrTs = strtotime($row['zuhr_begins']);
+            $nowTs = strtotime(current_time('H:i'));
+            
+            if ($nowTs < $zuhrTs) {
+                return 'zuhr';
+            }
+            return 'sunrise';
         }
+        
+        if (get_option('zawal') && $this->isZawalTimeNext($row)) {
+            return 'zawal';
+        }
+        
+        if (get_option('ishraq')) {
+            return 'ishraq';
+        }
+        
         return 'sunrise';
     }
 

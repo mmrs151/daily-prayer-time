@@ -42,6 +42,13 @@
                             <input data-toggle="tooltip" title="set minutes to subtract from Zuhr start time" type="number" name="zawal" min="0" max="59" placeholder="0" value="<?php echo esc_attr(get_option('zawal'))?>">
                             <i>'0' = disabled</i>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>Ishraq (mins after sunrise):</td>
+                        <td colspan="3">
+                            <input data-toggle="tooltip" title="set minutes after sunrise for Ishraq" type="number" name="ishraq" min="0" max="60" placeholder="15" value="<?php echo esc_attr(get_option('ishraq'))?>">
+                            <i>'0' = disabled</i>
+                        </td>
                     </tr>                 
                 </table>
                 <?php submit_button('Save changes', 'primary', 'otherSettings'); ?>

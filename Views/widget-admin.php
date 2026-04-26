@@ -107,6 +107,7 @@ if (! empty($_POST['otherSettings']) && check_admin_referer( 'otherSettings' )) 
         'asrSelect' => sanitize_text_field($_POST['asrSelect']),
         'jamah_changes' => sanitize_text_field($_POST['jamah_changes']),
         'zawal' => sanitize_text_field($_POST['zawal']),
+        'ishraq' => sanitize_text_field($_POST['ishraq']),
         'tomorrow_time' => sanitize_text_field($_POST['tomorrow_time'] ?? ''),
     ];
     $otherProcessor = new DPTOtherProcessor($data);
