@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.8
-Stable tag: 2025.10.26
+Stable tag: 2026.04.26
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,10 +127,18 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
+= 2026.04.26 =
+* Feat: show detailed CSV upload results - inserted and updated rows in accordion
+* Fix: change Hijri date to update after Maghrib (sunset) instead of midnight
+* Feat: add iqamahTime and azanTime to next_prayer API response
+
 = 2025.10.26 =
 * Fix: Fix JS bug
 
 == Upgrade Notice ==
+
+= 2026.04.26 =
+* Improvements: CSV upload results display, Hijri date calculation, and API enhancements
 
 = 2025.10.26 =
 * Fix: Fix JS bug
