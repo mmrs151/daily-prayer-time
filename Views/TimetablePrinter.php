@@ -130,7 +130,7 @@ class TimetablePrinter
         }
 
         if (!isset($localPrayerName['ishraq'])) {
-            $localPrayerName['ishraq'] = 'Ishraq';
+            $localPrayerName['ishraq'] = 'Israq';
         }
 
         return $localPrayerName;

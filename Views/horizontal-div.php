@@ -6,7 +6,7 @@ foreach ($this->localPrayerNames as $name) {
     }
 }
 if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
-    $announcement = "<tr><th colspan='7' style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
+    $announcement = "<tr><th colspan='8' style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
 }
 $sunriseOrZawal = $this->dptHelper->getSunriseOrZawalOrIshraq($row);
 if ($sunriseOrZawal == 'zawal') {
@@ -44,10 +44,10 @@ if ($sunriseOrZawal == 'zawal') {
             <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["fajr_jamah"]) );?></div>
 
         </div> <!-- END of prayer time-->
-        <div class="prayer-time prayer-sunrise <?php if ($nextPrayer == ucfirst($sunriseOrZawal)) echo "highlight"; ?>">
+        <div class="prayer-time prayer-sunrise <?php if ($nextPrayer == $sunriseOrZawal) echo "highlight"; ?>">
         <span class="iconify-inline dptPrayerIcon" data-icon="bi:sunrise-fill"></span>
 
-            <h3><?php echo esc_html( ucfirst($sunriseOrZawal) )?></h3>
+            <h3><?php echo esc_html( $this->localPrayerNames[$sunriseOrZawal] )?></h3>
             <div class="prayer-jamaat"><?php echo  esc_html( $sunriseOrZawalTime );?></div>
             <div>&nbsp;</div>
 

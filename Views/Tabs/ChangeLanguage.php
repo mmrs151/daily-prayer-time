@@ -12,7 +12,7 @@ $timetable = new TimetablePrinter();
 
                 <table class="table table-stri table-bordered table-primary">
                     <tr>
-                        <th colspan="7" class="text-center">Display prayer name in your language</th>
+                        <th colspan="<?php echo count($names); ?>" class="text-center">Display prayer name in your language</th>
                     </tr>
                     <tr>
                         <?php $names = $timetable->getLocalPrayerNames();
