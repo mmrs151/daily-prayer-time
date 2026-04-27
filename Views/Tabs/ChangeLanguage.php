@@ -9,13 +9,14 @@ $timetable = new TimetablePrinter();
         <div class="col-sm-6 col-xs-12">
             <form name="languageSettings" method="post">
             <?php echo wp_nonce_field( 'languageSettings'); ?>
+            <?php $names = $timetable->getLocalPrayerNames(); ?>
 
                 <table class="table table-stri table-bordered table-primary">
                     <tr>
                         <th colspan="<?php echo count($names); ?>" class="text-center">Display prayer name in your language</th>
                     </tr>
                     <tr>
-                        <?php $names = $timetable->getLocalPrayerNames();
+                        <?php
                         foreach ($names as $key => $val) { ?>
                             <th class="text-center"><?php echo ucfirst(esc_html($key)) ?></th>
                         <?php } ?>
