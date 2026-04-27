@@ -64,11 +64,16 @@ $presets = [
     border-radius: 4px; cursor: pointer; font-weight: 500;
 }
 .dpt-lang-presets button:hover { background: #2271b1; color: #fff; }
-.dpt-lang-inputs { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+.dpt-lang-inputs { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
 .dpt-lang-inputs .input-group { display: flex; flex-direction: column; }
 .dpt-lang-inputs .input-group label { font-weight: 600; margin-bottom: 5px; font-size: 13px; }
-.dpt-lang-inputs .input-group input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-.dpt-lang-inputs.narrow { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+.dpt-lang-inputs .input-group input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; }
+.dpt-lang-inputs .input-group input:focus { outline: 2px solid #2271b1; border-color: #2271b1; }
+.dpt-lang-inputs.narrow { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+@media (max-width: 768px) {
+    .dpt-lang-inputs { grid-template-columns: repeat(3, 1fr); }
+    .dpt-lang-inputs.narrow { grid-template-columns: repeat(3, 1fr); }
+}
 </style>
 
 <h3>Change Language</h3>
