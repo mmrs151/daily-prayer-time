@@ -271,26 +271,22 @@ class DPTHelper
         }
     }
 
-    public function getSunriseOrZawal($row)
+    public function getSunriseOrZawalOrIshraq($row)
     {
-        if ($this->isIshraqTimeNext($row)) {
-            $zuhrTs = strtotime($row['zuhr_begins']);
-            $nowTs = strtotime(current_time('H:i'));
-            
-            if ($nowTs < $zuhrTs) {
-                return 'zuhr';
-            }
-            return 'sunrise';
-        }
-        
-        if (get_option('zawal') && $this->isZawalTimeNext($row)) {
-            return 'zawal';
-        }
-        
-        if (get_option('ishraq')) {
+        $nextPrayer = $this->getNextPrayer($row);
+        $ishraqMins = get_option('ishraq');
+
+        // If ishraq is next, show ishraq
+        if ($ishraqMins && $ishraqMins != '0' && $nextPrayer == 'ishraq') {
             return 'ishraq';
         }
-        
+
+        // If zawal is enabled and zuhr is next, show zawal
+        if (get_option('zawal') && $nextPrayer == 'zuhr') {
+            return 'zawal';
+        }
+
+        // Otherwise show sunrise
         return 'sunrise';
     }
 

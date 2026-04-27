@@ -8,9 +8,11 @@ foreach ($this->localPrayerNames as $name) {
 if(isset($row['announcement']) && ! empty( $row['announcement'] )) {
     $announcement = "<tr><th colspan='7' style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
 }
-$sunriseOrZawal = $this->dptHelper->getSunriseOrZawal($row);
+$sunriseOrZawal = $this->dptHelper->getSunriseOrZawalOrIshraq($row);
 if ($sunriseOrZawal == 'zawal') {
     $sunriseOrZawalTime = $this->dptHelper->getZawalTime($row['zuhr_begins']);
+} elseif ($sunriseOrZawal == 'ishraq') {
+    $sunriseOrZawalTime = $this->dptHelper->getIshraqTime($row['sunrise']);
 } else {
     $sunriseOrZawalTime = $this->formatDateForPrayer($row['sunrise']);
 }
