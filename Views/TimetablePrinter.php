@@ -531,7 +531,9 @@ class TimetablePrinter
     {
         $jamahTimes = array( $row["fajr_begins"], $row['sunrise'], $row["zuhr_begins"], $row["asr_begins"], $row["maghrib_begins"], $row["isha_begins"]);
         $jamahNames = array_keys($this->prayerLocal);
-        array_pop($jamahNames); // remove zawal
+        $jamahNames = array_filter($jamahNames, function($key) {
+            return !in_array($key, ['zawal', 'ishraq']);
+        }); // remove zawal and ishraq (they have no begins/jamah)
         return array_combine( $jamahNames, $jamahTimes );
     }
 
