@@ -15,6 +15,8 @@
         <li>[daily_next_prayer] <i>display_dates=true</i></li>
         <li>[fajr_prayer]</li>
         <li>[sunrise]</li>
+        <li>[ishraq]</li>
+        <li>[zawal]</li>
         <li>[zuhr_prayer]</li>
         <li>[asr_prayer]</li>
         <li>[maghrib_prayer]</li>
