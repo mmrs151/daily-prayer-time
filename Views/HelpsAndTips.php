@@ -215,14 +215,41 @@ function toggleHelpAccordion(header) {
 }
 
 function copyShortcode(el, text) {
-    navigator.clipboard.writeText(text).then(function() {
-        var original = el.innerText;
-        el.classList.add('copied');
-        el.innerText = 'Copied!';
-        setTimeout(function() {
-            el.classList.remove('copied');
-            el.innerText = original;
-        }, 1500);
-    });
+    // Try modern clipboard API first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+            showCopyFeedback(el, text);
+        }).catch(function(err) {
+            fallbackCopy(text, el);
+        });
+    } else {
+        fallbackCopy(text, el);
+    }
+}
+
+function fallbackCopy(text, el) {
+    // Fallback for older browsers
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        showCopyFeedback(el, text);
+    } catch (err) {
+        alert('Failed to copy. Please manually select and copy: ' + text);
+    }
+    document.body.removeChild(textarea);
+}
+
+function showCopyFeedback(el, originalText) {
+    el.classList.add('copied');
+    el.innerText = 'Copied! ✓';
+    setTimeout(function() {
+        el.classList.remove('copied');
+        el.innerText = originalText;
+    }, 1500);
 }
 </script>
