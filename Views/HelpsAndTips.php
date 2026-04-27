@@ -72,7 +72,8 @@ $examples = [
 .dpt-help-accordion.active .accordion-header:after { transform: rotate(180deg); }
 .dpt-help-accordion .accordion-content { display: none; padding: 15px; border: 1px solid #ddd; border-top: none; }
 .dpt-help-accordion.active .accordion-content { display: block; }
-.dpt-shortcode-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 15px; }
+.dpt-shortcode-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 15px; }
+.dpt-shortcode-grid.basic { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .dpt-shortcode-card { 
     background: #f6f7f7; border: 1px solid #dcdcde; padding: 10px 12px; border-radius: 4px; 
     font-family: monospace; font-size: 13px; cursor: pointer; transition: background 0.2s; position: relative;
@@ -95,6 +96,10 @@ $examples = [
     <span class="red">! Important !</span> Please <a href="plugins.php">re-activate</a> the plugin if your data is not imported
 </p>
 
+<p style="background:#e7f1ff; padding:10px; border-radius:4px; margin-bottom:15px;">
+    <strong>💡 Tip:</strong> Click on any shortcode below to copy it to your clipboard!
+</p>
+
 <h2>Helps and Tips</h2>
 
 <div id="dpt-help-accordions">
@@ -103,8 +108,8 @@ $examples = [
     <div class="dpt-help-accordion active">
         <div class="accordion-header" onclick="toggleHelpAccordion(this)">Basic Shortcodes</div>
         <div class="accordion-content">
-            <p>Most commonly used shortcodes for displaying prayer times:</p>
-            <div class="dpt-shortcode-grid">
+            <p>Most commonly used shortcodes for displaying prayer times (click to copy):</p>
+            <div class="dpt-shortcode-grid basic">
                 <?php foreach ($basicShortcodes as $sc): ?>
                     <div class="dpt-shortcode-card" onclick="copyShortcode(this, '<?php echo esc_attr($sc); ?>')"><?php echo esc_html($sc); ?></div>
                 <?php endforeach; ?>
