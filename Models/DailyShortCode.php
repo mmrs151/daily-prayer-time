@@ -450,6 +450,29 @@ class DailyShortCode extends TimetablePrinter
                     . $this->formatDateForPrayer($zawal) 
                 . "</span>";
     }
+    
+    public function scIshraq($attr)
+    {
+        $sunrise = $this->row['sunrise'];
+        if (isset($attr['sunrise'])) {
+            $sunrise = $attr['sunrise'];
+        }
+        $ishraq = $this->dptHelper->getIshraqTime($sunrise);
+
+        if (! $this->deactivateTomorrow) {
+        
+            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($sunrise) ) {
+                $sunrise = $this->row['tomorrow']['sunrise'];
+                $ishraq = $this->dptHelper->getIshraqTime($sunrise);
+            }
+        }
+
+        return "<span class='dpt_ishraq " 
+                    . $this->clsPrayerFinished . " " 
+                    . $this->dptHelper->getNextPrayerClass('ishraq', $this->row) ."'>" 
+                    . $this->formatDateForPrayer($ishraq) 
+                . "</span>";
+    }
 
     private function isPrayerFinished($time) 
     {
