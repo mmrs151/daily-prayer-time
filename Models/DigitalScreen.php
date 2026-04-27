@@ -248,7 +248,7 @@ class DigitalScreen extends DailyShortCode
                             <td class="l-red">' . do_shortcode("[fajr_start]") . '</td>
                             <td>' . do_shortcode("[fajr_prayer]") . '</td>
                         </tr>
-                        <tr class=' . ($sunriseOrZawal == 'zuhr' ? '' : $this->getNextPrayerClass($sunriseOrZawal, $this->row)) . '>
+                        <tr class=' . ($sunriseOrZawal == 'zawal' ? '' : $this->getNextPrayerClass($sunriseOrZawal, $this->row)) . '>
                             <td class="prayerName"><span>' . $this->getLocalPrayerNames()[$sunriseOrZawal] . '</span></td>
                             <td class="prayerName sunrise" colspan="2">' . do_shortcode("[$sunriseOrZawal]") . '</td>
                         </tr>';
