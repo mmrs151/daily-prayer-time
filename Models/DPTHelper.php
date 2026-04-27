@@ -183,6 +183,7 @@ class DPTHelper
             return false;
         }
         
+        $fajrTs = strtotime($row['fajr_begins']);
         $sunrise = $row['sunrise'];
         $ishraqTime = $this->getIshraqTime($sunrise);
         $now = user_current_time('H:i');
@@ -190,7 +191,7 @@ class DPTHelper
         $nowTs = strtotime($now);
         $ishraqTs = strtotime($ishraqTime);
         
-        return $nowTs >= $ishraqTs;
+        return $nowTs >= $fajrTs && $nowTs < $ishraqTs;
     }
 
     public function getNextPrayerClass($prayerName, $row, $isFajr=false)
