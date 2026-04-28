@@ -1,7 +1,7 @@
 <?php
 function displayImage($slide){
     if (filter_var($slide, FILTER_VALIDATE_URL)) {
-        return  '<img src="' . esc_html($slide ) . '" style="max-height: 30px; margin-top: 5px;" class="grow">';
+        return  '<img src="' . esc_html($slide ) . '" style="max-height: 30px;" class="grow">';
     }
     return '';
 }
@@ -35,6 +35,11 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
 }
 .dpt-slider-input-group input[type="text"] {
     flex: 1;
+}
+.dpt-slider-input-group img {
+    max-height: 30px;
+    margin-left: 10px;
+    vertical-align: middle;
 }
 .dpt-media-btn { 
     padding: 8px 12px; cursor: pointer; border: 1px solid #ccc; 
@@ -151,8 +156,8 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
                         <div class="dpt-slider-input-group">
                             <button type="button" class="dpt-media-btn" data-input="slider<?php echo $i; ?>">🖼️ Select from Media</button>
                             <input type="text" class="slider-text" placeholder="Image URL or message" name="slider<?php echo $i; ?>" value="<?php echo esc_html(stripslashes(get_option("slider$i")) )?>">
+                            <?php echo displayImage(get_option("slider$i")); ?>
                         </div>
-                        <?php echo displayImage(get_option("slider$i")); ?>
                         <div class="dpt-slider-input-group">
                             <span style="color: #666; font-size: 12px;">Optional link:</span>
                             <input type="text" class="slider-text" placeholder="http(s):// url" name="slider<?php echo $i; ?>Url" value="<?php echo esc_html(get_option("slider{$i}Url")); ?>">
