@@ -108,29 +108,7 @@ $isSliderActive = get_option("slider-chbox") === 'slider';
     
     <div id="dpt-ds-accordions">
         
-        <!-- Template Selection (at top, optional) -->
-        <div class="dpt-ds-accordion">
-            <div class="accordion-header" onclick="toggleDsAccordion(this)">🎨 Template Selection (Optional)</div>
-            <div class="accordion-content">
-                <div class="dpt-template-grid">
-                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'eict') ? 'selected' : ''; ?>">
-                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__)?>" alt="EICT">
-                        <div><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>> <strong>Edgware ICT</strong></div>
-                    </label>
-                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'usman') ? 'selected' : ''; ?>">
-                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" alt="Usman">
-                        <div><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>> <strong>Masjid-E-Usman</strong></div>
-                    </label>
-                    <label class="dpt-template-card" style="opacity: 0.6;">
-                        <div style="padding: 40px 10px;">Coming Soon</div>
-                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
-                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <!-- General Settings -->
+        <!-- General Settings + Messages (merged, top, expanded) -->
         <div class="dpt-ds-accordion active">
             <div class="accordion-header" onclick="toggleDsAccordion(this)">⚙️ General Settings</div>
             <div class="accordion-content">
@@ -152,13 +130,7 @@ $isSliderActive = get_option("slider-chbox") === 'slider';
                     <label>Custom Site Logo URL</label>
                     <input type="text" name="ds-logo" placeholder="https://..." value="<?php echo esc_html(get_option("ds-logo")); ?>">
                 </div>
-            </div>
-        </div>
-
-        <!-- Messages -->
-        <div class="dpt-ds-accordion">
-            <div class="accordion-header" onclick="toggleDsAccordion(this)">💬 Messages</div>
-            <div class="accordion-content">
+                <hr style="margin: 20px 0;">
                 <div class="dpt-ds-row">
                     <div class="dpt-ds-field">
                         <label>Scrolling Text</label>
@@ -176,7 +148,7 @@ $isSliderActive = get_option("slider-chbox") === 'slider';
             </div>
         </div>
 
-        <!-- Slider Settings (only visible when slider is active) -->
+        <!-- Slider Settings (conditional) -->
         <div class="dpt-ds-accordion <?php echo $isSliderActive ? 'active' : ''; ?>" id="dpt-slider-accordion">
             <div class="accordion-header" onclick="toggleDsAccordion(this)">🖼️ Slider Settings</div>
             <div class="accordion-content">
@@ -218,6 +190,28 @@ $isSliderActive = get_option("slider-chbox") === 'slider';
                     <?php endfor; ?>
                     
                     <button type="button" class="dpt-add-slider-btn" id="dpt-add-slider"<?php echo ($displayCount >= 7) ? ' style="display:none;"' : ''; ?>>+ Add Another Slider</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template Selection (before Advanced) -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🎨 Template Selection (Optional)</div>
+            <div class="accordion-content">
+                <div class="dpt-template-grid">
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'eict') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__)?>" alt="EICT">
+                        <div><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>> <strong>Edgware ICT</strong></div>
+                    </label>
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'usman') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" alt="Usman">
+                        <div><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>> <strong>Masjid-E-Usman</strong></div>
+                    </label>
+                    <label class="dpt-template-card" style="opacity: 0.6;">
+                        <div style="padding: 40px 10px;">Coming Soon</div>
+                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
+                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
+                    </label>
                 </div>
             </div>
         </div>
