@@ -290,7 +290,7 @@ class DigitalScreenSettings {
             <div class="dpt-section-content">
                 <div class="dpt-template-grid">
                     <?php foreach ($this->templates as $key => $template): ?>
-                    <label class="dpt-template-card <?php echo $template['isSelected'] ? 'selected' : ''; ?>">
+                    <label class="dpt-template-card <?php echo $template['isSelected'] ? 'selected' : ''; ?>" onclick="selectTemplate('<?php echo esc_js($key); ?>', this)">
                         <img src="<?php echo esc_url($template['image']); ?>" alt="<?php echo esc_attr($template['name']); ?>">
                         <div>
                             <input type="radio" name="ds-template" value="<?php echo esc_attr($key); ?>"
@@ -374,6 +374,21 @@ class DigitalScreenSettings {
             header.parentElement.classList.toggle('active');
         }
         
+        function selectTemplate(value, element) {
+            // Set the radio button
+            const radio = element.querySelector('input[type="radio"]');
+            radio.checked = true;
+            
+            // Update visual selection
+            document.querySelectorAll('.dpt-template-card').forEach(function(card) {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            // Log for debugging
+            console.log('Selected template:', value);
+        }
+        
         window.updateDisplayMode = function(value) {
             const sliderSection = document.getElementById('dpt-slider-section');
             const quranInput = document.getElementById('quran-chbox-hidden');
@@ -420,28 +435,6 @@ class DigitalScreenSettings {
                 });
                 
                 frame.open();
-            });
-            
-// Template selection - only for enabled radios (skip placeholder)
-            $('.dpt-template-card:not(.dpt-template-placeholder)').on('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const radio = $(this).find('input[type="radio"]');
-                radio.prop('checked', true).trigger('change');
-                
-                // Update UI
-                $('.dpt-template-card').removeClass('selected');
-                $(this).addClass('selected');
-                
-                // Debug - check if value is being set
-                console.log('Template selected:', radio.val());
-                console.log('Radio checked:', radio.prop('checked'));
-            });
-            
-            // Debug: Log all form data on submit
-            $('form[name="digitalScreen"]').on('submit', function() {
-                console.log('ds-template value:', $('input[name="ds-template"]:checked').val());
             });
         });
         </script>
