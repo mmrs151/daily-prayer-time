@@ -127,6 +127,8 @@ class DigitalScreenSettings {
             .dpt-template-card:hover { border-color: #2271b1; }
             .dpt-template-card.selected { border-color: #2271b1; background: #e7f1ff; }
             .dpt-template-card img { max-width: 100%; border-radius: 4px; }
+            .dpt-template-card.dpt-template-placeholder { opacity: 0.8; cursor: pointer; border-style: dashed; }
+            .dpt-template-card.dpt-template-placeholder:hover { border-color: #2271b1; background: #f5f5f5; }
             
             .dpt-instructions { background: #f0f0f1; padding: 15px; border-radius: 8px; }
             .dpt-instructions h3 { margin: 0 0 12px 0; color: #2271b1; }
@@ -290,10 +292,13 @@ class DigitalScreenSettings {
                         </div>
                     </label>
                     <?php endforeach; ?>
-                    <label class="dpt-template-card" style="opacity: 0.6;">
-                        <div style="padding: 40px 10px;">Coming Soon</div>
-                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
-                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
+                    <label class="dpt-template-card dpt-template-placeholder">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEzMCIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TGV0J3MgZGlzc3Vzc+PC90ZXh0Pjx0ZXh0IHg9IjUwJSIgeT0iNjAlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7CoCBEcm9wIHRoZSBpbWFnZSBobZXJlPC90ZXh0Pjwvc3ZnPg==" alt="Add your template">
+                        <div>
+                            <input type="radio" name="ds-template" value="custom" disabled>
+                            <strong>Add your template here</strong>
+                        </div>
+                        <small><a href="mailto:mmrs151@gmail.com">Let's discuss</a></small>
                     </label>
                 </div>
             </div>
