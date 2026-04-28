@@ -24,16 +24,18 @@ class DigitalScreenSettings {
     }
     
     private function loadSettings(): void {
+        $savedTemplate = get_option('dsTemplate') ?? '';
+        
         $this->templates = [
             'eict' => [
                 'name' => 'Edgware ICT',
                 'image' => plugins_url('../../Assets/images/EICT.png', __FILE__),
-                'value' => get_option('dsTemplate')
+                'isSelected' => $savedTemplate === 'eict'
             ],
             'usman' => [
                 'name' => 'Masjid-E-Usman',
                 'image' => plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__),
-                'value' => get_option('dsTemplate')
+                'isSelected' => $savedTemplate === 'usman'
             ]
         ];
         
@@ -288,11 +290,11 @@ class DigitalScreenSettings {
             <div class="dpt-section-content">
                 <div class="dpt-template-grid">
                     <?php foreach ($this->templates as $key => $template): ?>
-                    <label class="dpt-template-card <?php echo $template['value'] === $key ? 'selected' : ''; ?>">
+                    <label class="dpt-template-card <?php echo $template['isSelected'] ? 'selected' : ''; ?>">
                         <img src="<?php echo esc_url($template['image']); ?>" alt="<?php echo esc_attr($template['name']); ?>">
                         <div>
                             <input type="radio" name="ds-template" value="<?php echo esc_attr($key); ?>"
-                                <?php checked($template['value'], $key); ?>>
+                                <?php checked($template['isSelected']); ?>>
                             <strong><?php echo esc_html($template['name']); ?></strong>
                         </div>
                     </label>
