@@ -143,10 +143,6 @@ if (! empty($_POST['themeSettings']) && check_admin_referer( 'themeSettings' )) 
 }
 
 if (! empty($_POST['digitalScreen']) && check_admin_referer( 'digitalScreen' )) {
-    // DEBUG: Log ds-template value
-    error_log('DEBUG: ds-template POST value: ' . print_r($_POST['ds-template'], true));
-    error_log('DEBUG: ds-template-hidden POST value: ' . print_r($_POST['ds-template-hidden'] ?? 'NOT SET', true));
-    
     $data = [
         'ds-logo' => sanitize_text_field($_POST['ds-logo']),
         'ds-scroll-text' => sanitize_text_field($_POST['ds-scroll-text']),

@@ -1,66 +1,12 @@
 <?php
 /**
  * Digital Screen Settings Admin Page
- * 
- * Handles configuration for digital screen display options including:
- * - Display mode (Quran verse or Slider)
- * - Messages (scrolling, blink text)
- * - Slider images with media gallery
- * - Template selection
- * - Advanced CSS
  */
 
 class DigitalScreenSettings {
     
     const MAX_SLIDERS = 7;
     const TOTAL_SLIDER_FIELDS = 11;
-    
-    private array $templates = [];
-    private array $displayOptions = [];
-    private array $sliderSettings = [];
-    
-    public function __construct() {
-        $this->loadSettings();
-    }
-    
-    private function loadSettings(): void {
-        $savedTemplate = get_option('dsTemplate') ?? '';
-        
-        $this->templates = [
-            'eict' => [
-                'name' => 'Edgware ICT',
-                'image' => plugins_url('../../Assets/images/EICT.png', __FILE__),
-                'isSelected' => $savedTemplate === 'eict'
-            ],
-            'usman' => [
-                'name' => 'Masjid-E-Usman',
-                'image' => plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__),
-                'isSelected' => $savedTemplate === 'usman'
-            ]
-        ];
-        
-        $this->displayOptions = [
-            'quran' => get_option('quran-chbox') === 'displayQuran',
-            'slider' => get_option('slider-chbox') === 'slider'
-        ];
-        
-        $this->sliderSettings = $this->loadSliderSettings();
-    }
-    
-    private function loadSliderSettings(): array {
-        $count = 0;
-        for ($i = 1; $i <= self::TOTAL_SLIDER_FIELDS; $i++) {
-            if (!empty(get_option("slider$i"))) {
-                $count = max($count, $i);
-            }
-        }
-        
-        return [
-            'displayCount' => max(1, min($count, self::MAX_SLIDERS)),
-            'isActive' => $this->displayOptions['slider'],
-            'maxSliders' => self::MAX_SLIDERS
-        ];
-    }
     
     public function render(): void {
         $this->renderStyles();
@@ -104,7 +50,6 @@ class DigitalScreenSettings {
             
             .dpt-option-group { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
             .dpt-option-group label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-            .dpt-option-group input[type="radio"], .dpt-option-group input[type="checkbox"] { width: auto; }
             
             .dpt-slider-card {
                 border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 12px;
@@ -129,19 +74,11 @@ class DigitalScreenSettings {
             .dpt-template-card:hover { border-color: #2271b1; }
             .dpt-template-card.selected { border-color: #2271b1; background: #e7f1ff; }
             .dpt-template-card img { max-width: 100%; border-radius: 4px; }
-            .dpt-template-card input[type="radio"] { margin: 5px; }
-            .dpt-template-card.dpt-template-placeholder { opacity: 0.8; cursor: pointer; border-style: dashed; }
-            .dpt-template-card.dpt-template-placeholder:hover { border-color: #2271b1; background: #f5f5f5; }
-            .dpt-placeholder-img { 
-                height: 100px; background: #e0e0e0; border-radius: 4px; margin-bottom: 8px;
-                display: flex; align-items: center; justify-content: center;
-                color: #888; font-size: 13px; border: 2px dashed #bbb;
-            }
+            .dpt-template-card.dpt-template-placeholder { opacity: 0.8; border-style: dashed; }
             
             .dpt-instructions { background: #f0f0f1; padding: 15px; border-radius: 8px; }
             .dpt-instructions h3 { margin: 0 0 12px 0; color: #2271b1; }
             .dpt-instructions code { background: #fff; padding: 2px 5px; border-radius: 3px; }
-            .dpt-instructions li { margin-bottom: 6px; }
             .dpt-divider { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
         </style>
         <?php
@@ -158,29 +95,37 @@ class DigitalScreenSettings {
     }
     
     private function renderGeneralSettings(): void {
-        $isActive = $this->sliderSettings['isActive'];
+        $sliderActive = get_option('slider-chbox') === 'slider';
+        $templateActive = get_option('template-chbox') === 'template';
         ?>
         <div class="dpt-section active">
             <div class="dpt-section-header" onclick="toggleDptSection(this)">⚙️ General Settings</div>
             <div class="dpt-section-content">
                 <div class="dpt-option-group">
                     <label>
+                        <input type="radio" name="displayMode" value="default" 
+                            <?php echo (!$sliderActive && !$templateActive) ? 'checked' : ''; ?>>
+                        Default Layout
+                    </label>
+                    <label>
                         <input type="radio" name="displayMode" value="quran" 
-                            <?php checked($this->displayOptions['quran']); ?> 
-                            onchange="updateDisplayMode(this.value)">
+                            <?php echo get_option('quran-chbox') === 'displayQuran' ? 'checked' : ''; ?>>
                         Display Quran Verse
                     </label>
                     <label>
                         <input type="radio" name="displayMode" value="slider" 
-                            <?php checked($this->displayOptions['slider']); ?> 
-                            onchange="updateDisplayMode(this.value)">
+                            <?php echo $sliderActive ? 'checked' : ''; ?>>
                         Activate Slider
                     </label>
+                    <label>
+                        <input type="checkbox" id="template-chbox" 
+                            <?php echo $templateActive ? 'checked' : ''; ?>>
+                        Activate Template
+                    </label>
                 </div>
-                <input type="hidden" name="quran-chbox" id="quran-chbox-hidden" 
-                    value="<?php echo esc_attr(get_option('quran-chbox')); ?>">
-                <input type="hidden" name="slider-chbox" id="slider-chbox-hidden" 
-                    value="<?php echo esc_attr(get_option('slider-chbox')); ?>">
+                <input type="hidden" name="quran-chbox" id="quran-chbox-hidden" value="<?php echo esc_attr(get_option('quran-chbox') ?? ''); ?>">
+                <input type="hidden" name="slider-chbox" id="slider-chbox-hidden" value="<?php echo esc_attr(get_option('slider-chbox') ?? ''); ?>">
+                <input type="hidden" name="template-chbox" id="template-chbox-hidden" value="<?php echo esc_attr(get_option('template-chbox') ?? ''); ?>">
                 
                 <div class="dpt-form-row">
                     <div class="dpt-form-group" style="flex: 2;">
@@ -219,11 +164,11 @@ class DigitalScreenSettings {
     }
     
     private function renderSliderSettings(): void {
-        $displayCount = $this->sliderSettings['displayCount'];
-        $isActive = $this->sliderSettings['isActive'];
+        $displayCount = $this->getDisplayCount();
+        $sliderActive = get_option('slider-chbox') === 'slider';
         
         ?>
-        <div class="dpt-section <?php echo $isActive ? 'active' : ''; ?>" id="dpt-slider-section">
+        <div class="dpt-section <?php echo $sliderActive ? 'active' : ''; ?>" id="dpt-slider-section">
             <div class="dpt-section-header" onclick="toggleDptSection(this)">🖼️ Slider Settings</div>
             <div class="dpt-section-content">
                 <div class="dpt-form-row">
@@ -235,14 +180,8 @@ class DigitalScreenSettings {
                     <div class="dpt-form-group">
                         <label>Transition Effect</label>
                         <div style="display: flex; gap: 15px; margin-top: 8px;">
-                            <label>
-                                <input type="radio" name="transitionEffect" value="slide" 
-                                    <?php checked(get_option('transitionEffect'), 'slide'); ?>> Slide
-                            </label>
-                            <label>
-                                <input type="radio" name="transitionEffect" value="carousel-fade" 
-                                    <?php checked(get_option('transitionEffect'), 'carousel-fade'); ?>> Fade
-                            </label>
+                            <label><input type="radio" name="transitionEffect" value="slide" <?php echo get_option('transitionEffect') === 'slide' ? 'checked' : ''; ?>> Slide</label>
+                            <label><input type="radio" name="transitionEffect" value="carousel-fade" <?php echo get_option('transitionEffect') === 'carousel-fade' ? 'checked' : ''; ?>> Fade</label>
                         </div>
                     </div>
                     <div class="dpt-form-group">
@@ -285,30 +224,33 @@ class DigitalScreenSettings {
     }
     
     private function renderTemplateSettings(): void {
+        $savedTemplate = get_option('dsTemplate') ?? '';
+        $templateActive = get_option('template-chbox') === 'template';
         ?>
-        <div class="dpt-section">
-            <div class="dpt-section-header" onclick="toggleDptSection(this)">🎨 Template Selection (Optional)</div>
+        <div class="dpt-section <?php echo $templateActive ? 'active' : 'hidden'; ?>" id="dpt-template-section">
+            <div class="dpt-section-header" onclick="toggleDptSection(this)">🎨 Template Selection</div>
             <div class="dpt-section-content">
+                <p style="color: #666; margin-bottom: 15px;">
+                    Select a template design for your digital screen. This will replace the default layout.
+                </p>
                 <div class="dpt-template-grid">
-                    <?php foreach ($this->templates as $key => $template): ?>
-                    <label class="dpt-template-card <?php echo $template['isSelected'] ? 'selected' : ''; ?>" onclick="selectTemplate('<?php echo esc_js($key); ?>', this)">
-                        <img src="<?php echo esc_url($template['image']); ?>" alt="<?php echo esc_attr($template['name']); ?>">
-                        <div>
-                            <input type="radio" name="ds-template" value="<?php echo esc_attr($key); ?>"
-                                <?php checked($template['isSelected']); ?>>
-                            <strong><?php echo esc_html($template['name']); ?></strong>
-                        </div>
+                    <label class="dpt-template-card <?php echo $savedTemplate === 'eict' ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__); ?>" alt="EICT">
+                        <div><input type="radio" name="ds-template" value="eict" <?php echo $savedTemplate === 'eict' ? 'checked' : ''; ?>> <strong>Edgware ICT</strong></div>
                     </label>
-                    <?php endforeach; ?>
+                    <label class="dpt-template-card <?php echo $savedTemplate === 'usman' ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__); ?>" alt="Usman">
+                        <div><input type="radio" name="ds-template" value="usman" <?php echo $savedTemplate === 'usman' ? 'checked' : ''; ?>> <strong>Masjid-E-Usman</strong></div>
+                    </label>
                     <label class="dpt-template-card dpt-template-placeholder">
-                        <div class="dpt-placeholder-img">Add your template here</div>
-                        <div>
-                            <input type="radio" name="ds-template" value="custom" disabled>
-                            <strong>Add your template here</strong>
-                        </div>
-                        <small><a href="<?php echo esc_url( 'mailto:mmrs151@gmail.com?subject=' . rawurlencode( 'Custom Template Design' ) ); ?>"><?php echo esc_html( "Let's discuss" ); ?></a></small>
+                        <div class="dpt-placeholder-img" style="height:100px;background:#e0e0e0;border-radius:4px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;color:#888;font-size:13px;border:2px dashed #bbb;">Add your template here</div>
+                        <div><input type="radio" disabled> <strong>Add your template here</strong></div>
+                        <small><a href="mailto:mmrs151@gmail.com?subject=Custom Template Design">Let's discuss</a></small>
                     </label>
                 </div>
+                <p style="margin-top: 15px; color: #888; font-size: 12px;">
+                    To return to the default layout, uncheck "Activate Template" above.
+                </p>
             </div>
         </div>
         <?php
@@ -375,58 +317,60 @@ class DigitalScreenSettings {
             header.parentElement.classList.toggle('active');
         }
         
-        function selectTemplate(value, element) {
-            // Find the radio button inside the label
-            const radio = element.querySelector('input[type="radio"]');
-            if (radio) {
-                radio.checked = true;
-                radio.setAttribute('checked', 'checked');
-            }
-            
-            // Update visual selection
-            var cards = document.querySelectorAll('.dpt-template-card');
-            for (var i = 0; i < cards.length; i++) {
-                cards[i].classList.remove('selected');
-            }
-            element.classList.add('selected');
-            
-            // Debug
-            console.log('Selected template:', value, 'Radio checked:', radio ? radio.checked : 'no radio');
-            
-            // Force form to include this value
-            var form = document.querySelector('form[name="digitalScreen"]');
-            if (form) {
-                var hiddenInput = form.querySelector('input[name="ds-template-hidden"]');
-                if (!hiddenInput) {
-                    hiddenInput = document.createElement('input');
-                    hiddenInput.type = 'hidden';
-                    hiddenInput.name = 'ds-template-hidden';
-                    form.appendChild(hiddenInput);
-                }
-                hiddenInput.value = value;
-                console.log('Hidden input set to:', value);
-            }
-        }
-        
-        window.updateDisplayMode = function(value) {
-            const sliderSection = document.getElementById('dpt-slider-section');
-            const quranInput = document.getElementById('quran-chbox-hidden');
-            const sliderInput = document.getElementById('slider-chbox-hidden');
-            
-            if (value === 'slider') {
-                quranInput.value = '';
-                sliderInput.value = 'slider';
-                sliderSection.classList.remove('hidden');
-                sliderSection.classList.add('active');
-            } else if (value === 'quran') {
-                sliderInput.value = '';
-                quranInput.value = 'displayQuran';
-                sliderSection.classList.remove('active');
-                sliderSection.classList.add('hidden');
-            }
-        };
-        
         jQuery(document).ready(function($) {
+            // Display mode selection
+            $('input[name="displayMode"]').on('change', function() {
+                const value = $(this).val();
+                const sliderSection = $('#dpt-slider-section');
+                const templateSection = $('#dpt-template-section');
+                const quranInput = $('#quran-chbox-hidden');
+                const sliderInput = $('#slider-chbox-hidden');
+                const templateInput = $('#template-chbox-hidden');
+                const templateCheckbox = $('#template-chbox');
+                
+                if (value === 'slider') {
+                    quranInput.val('');
+                    sliderInput.val('slider');
+                    templateInput.val('');
+                    templateCheckbox.prop('checked', false);
+                    sliderSection.removeClass('hidden').addClass('active');
+                    templateSection.removeClass('active').addClass('hidden');
+                } else if (value === 'quran') {
+                    sliderInput.val('');
+                    templateInput.val('');
+                    templateCheckbox.prop('checked', false);
+                    quranInput.val('displayQuran');
+                    sliderSection.removeClass('active').addClass('hidden');
+                    templateSection.removeClass('active').addClass('hidden');
+                } else if (value === 'default') {
+                    sliderInput.val('');
+                    templateInput.val('');
+                    templateCheckbox.prop('checked', false);
+                    quranInput.val('');
+                    sliderSection.removeClass('active').addClass('hidden');
+                    templateSection.removeClass('active').addClass('hidden');
+                }
+            });
+            
+            // Template checkbox toggle
+            $('#template-chbox').on('change', function() {
+                const templateSection = $('#dpt-template-section');
+                const templateInput = $('#template-chbox-hidden');
+                
+                if ($(this).is(':checked')) {
+                    templateInput.val('template');
+                    templateSection.removeClass('hidden').addClass('active');
+                } else {
+                    templateInput.val('');
+                    templateSection.removeClass('active').addClass('hidden');
+                }
+            });
+            
+            // Initialize template section visibility on load
+            if (!$('#template-chbox').is(':checked')) {
+                $('#dpt-template-section').addClass('hidden');
+            }
+            
             // Add slider button
             $('#dpt-add-slider').on('click', function() {
                 const hidden = $('.dpt-slider-card.hidden').first();
@@ -458,6 +402,16 @@ class DigitalScreenSettings {
         });
         </script>
         <?php
+    }
+    
+    private function getDisplayCount(): int {
+        $count = 0;
+        for ($i = 1; $i <= self::TOTAL_SLIDER_FIELDS; $i++) {
+            if (!empty(get_option("slider$i"))) {
+                $count = max($count, $i);
+            }
+        }
+        return max(1, min($count, self::MAX_SLIDERS));
     }
     
     private function displayImage(string $url = ''): string {
