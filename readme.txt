@@ -4,8 +4,8 @@ Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
-Tested up to: 6.8
-Stable tag: 2026.04.26
+Tested up to: 6.9
+Stable tag: 2026.04.28
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,16 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
+= 2026.04.28 =
+* Feat: Add Ishraq time feature with admin toggle in settings
+* Feat: Redesign Helps & Tips page with accordion layout and click-to-copy shortcodes
+* Feat: Redesign Language Settings page with accordion layout and language presets
+* Fix: Correct isIshraqTimeNext logic - check if now is between Fajr and Ishraq
+* Fix: Handle ishraq in daily timetable - merge into sunrise row
+* Fix: Remove ishraq/zawal from getAzanTime array to prevent errors
+* Fix: Add CSV row validation in QuranDB import
+* Fix: Various bug fixes and improvements
+
 = 2026.04.26 =
 * Feat: show detailed CSV upload results - inserted and updated rows in accordion
 * Fix: change Hijri date to update after Maghrib (sunset) instead of midnight
@@ -136,6 +146,11 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 * Fix: Fix JS bug
 
 == Upgrade Notice ==
+
+= 2026.04.28 =
+* New: Ishraq time feature - display calculated Ishraq time in timetable
+* New: Improved Helps & Tips page with copyable shortcodes
+* New: Improved Language Settings with presets for common languages
 
 = 2026.04.26 =
 * Improvements: CSV upload results display, Hijri date calculation, and API enhancements
