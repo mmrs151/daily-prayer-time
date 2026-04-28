@@ -15,6 +15,31 @@ for ($i = 1; $i <= 11; $i++) {
 $displayCount = max(1, min($existingSliders, $maxSliders));
 ?>
 <style>
+.dpt-ds-accordion { margin-bottom: 10px; }
+.dpt-ds-accordion .accordion-header { 
+    background: #2271b1; color: #fff; padding: 12px 15px; cursor: pointer; 
+    border-radius: 4px; display: flex; justify-content: space-between; align-items: center;
+}
+.dpt-ds-accordion .accordion-header:hover { background: #1d5a8a; }
+.dpt-ds-accordion .accordion-header:after { content: '▼'; font-size: 10px; transition: transform 0.3s; }
+.dpt-ds-accordion.active .accordion-header:after { transform: rotate(180deg); }
+.dpt-ds-accordion .accordion-content { display: none; padding: 15px; border: 1px solid #ddd; border-top: none; }
+.dpt-ds-accordion.active .accordion-content { display: block; }
+
+.dpt-ds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+.dpt-ds-field { display: flex; flex-direction: column; gap: 5px; }
+.dpt-ds-field label { font-weight: 600; font-size: 13px; color: #444; }
+.dpt-ds-field input, .dpt-ds-field textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+.dpt-ds-field input:focus, .dpt-ds-field textarea:focus { outline: 2px solid #2271b1; border-color: #2271b1; }
+.dpt-ds-field .hint { font-size: 11px; color: #666; font-weight: normal; }
+
+.dpt-template-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
+.dpt-template-card { border: 2px solid #ddd; border-radius: 8px; padding: 10px; cursor: pointer; transition: all 0.2s; }
+.dpt-template-card:hover { border-color: #2271b1; }
+.dpt-template-card.selected { border-color: #2271b1; background: #e7f1ff; }
+.dpt-template-card img { max-width: 100%; border-radius: 4px; }
+.dpt-template-card input { margin-top: 8px; }
+
 .dpt-slider-section {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -56,100 +81,134 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
 .dpt-add-slider-btn:disabled { background: #ccc; cursor: not-allowed; }
 .dpt-slider-hidden { display: none; }
 .dpt-sliders-container { margin-top: 20px; }
+
+.dpt-ds-checkbox { display: flex; align-items: center; gap: 8px; }
+.dpt-ds-checkbox input { width: auto; }
+.dpt-ds-checkbox label { font-weight: normal; }
+
+.dpt-ds-row { display: flex; gap: 20px; flex-wrap: wrap; }
+.dpt-ds-row .dpt-ds-field { flex: 1; min-width: 200px; }
+
+.instructions-box { background: #f0f0f1; padding: 15px; border-radius: 8px; }
+.instructions-box h3 { margin-top: 0; color: #2271b1; font-size: 16px; }
+.instructions-box code { background: #fff; padding: 2px 5px; border-radius: 3px; font-size: 12px; }
+.instructions-box li { margin-bottom: 8px; font-size: 13px; }
 </style>
 
-<h3>Masjid/Mobile screen settings</h3>
+<h3>Masjid/Mobile Screen Settings</h3>
 <div class="container-fluid">
     <form class="form-group" name="digitalScreen" method="post">
-    <div class="row ds-templates">
-        <table class="table">
-            <tr>
-                <td class="align-middle">
-                <?php $template = plugins_url('../../Assets/images/EICT.png', __FILE__)?>
-                    <a href="<?php echo $template ?>" target="_new">
-                        <img src="<?php echo $template ?>" width="200px">
-                    </a>
-                    <br/>or use shortcode <code>template='eict'</code>
-                </td>
-                <td>
-                    <?php $template = plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>
-                    <a href="<?php echo $template ?>" target="_new">
-                        <img src="<?php echo $template ?>" width="200px">
-                    </a>
-                    <br/>or use shortcode <code>template='usman'</code>
-                </td>
-                <td><img src="<?php echo plugins_url('../../Assets/images/new-template.png', __FILE__)?>" width="200px"></td>
-            </tr>
-            <tr>
-                <td style="width: 33%;"><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>><strong>Edgware Islamic Cultural Trust</strong></td>
-                <td><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>><strong>Masjid-E-Usman</strong></td>
-                <td><input type="radio" name="ds-template" value="" disabled><a href="mailto:mmrs151@gmail.com?subject=Add my design to your plugin" target="_new">Add Your Design</a></td>
-            </tr>
-        </table>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 col-xs-12">
-            <?php echo wp_nonce_field( 'digitalScreen'); ?>
-                <table class="table">
-                    <tr>
-                        <td class="active-slider">Select Template</td>
-                        <td><input class="templateChbox" type="checkbox" id="template-chbox" name="template-chbox" value="template" <?php if(get_option("template-chbox") === 'template'){ echo 'checked'; } ?>></td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Fading Messages </br><i><sub>seperated by full stop.</sub></i></td>
-                        <td>
-                            <textarea name="ds-fading-msg" cols="30"><?php echo esc_html(stripslashes(get_option("ds-fading-msg")) )?></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Custom Site Logo</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="ds-logo" size="30" value=<?php echo esc_html(get_option("ds-logo") )?>></td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Scrolling Text</td>
-                        <td><input type="text" class="" name="ds-scroll-text" size="30" value="<?php echo esc_html(stripslashes(get_option("ds-scroll-text")) )?>"></td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Scrolling Speed</td>
-                        <td><input type="number" min="10" max="100" class="" name="ds-scroll-speed" size="30" value="<?php echo esc_html(get_option("ds-scroll-speed") )?>"></td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Blink Text</td>
-                        <td><input type="text" class="slider-text" name="ds-blink-text" size="30" value="<?php echo esc_html(stripslashes(get_option("ds-blink-text")) )?>"></td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Display Quran verse</td>
-                        <td><input class="oneChbox" type="checkbox" id="quran-chbox" name="quran-chbox" value="displayQuran" <?php if(get_option("quran-chbox") === 'displayQuran'){ echo 'checked'; } ?>></td>
-                    </tr>
-                    <tr>
-                        <td class="active-slider">Activate Slider</td>
-                        <td><input class="oneChbox" type="checkbox" id="slider-chbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>></td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Re-display Next Prayer</td>
-                        <td><input type="number" class="slider-text" placeholder=" after number of slides" name="nextPrayerSlide" min="0" value=<?php echo esc_html(get_option("nextPrayerSlide") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Transition Effect</td>
-                        <td>
-                            <label class="radio-inline">
-                                <input type="radio" name="transitionEffect" value="slide" <?php if(get_option("transitionEffect") === 'slide'){ echo 'checked'; } ?>>Slide
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="transitionEffect" value="carousel-fade" <?php if(get_option("transitionEffect") === 'carousel-fade'){ echo 'checked'; } ?>>Fade
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Transition Speed</td>
-                        <td><input type="number" min="0" class="slider-text" name="transitionSpeed" placeholder="5" value=<?php echo esc_html(get_option("transitionSpeed")/1000 ) ?>> seconds </td>
-                    </tr>
-                </table>
-                
+    <?php echo wp_nonce_field( 'digitalScreen'); ?>
+    
+    <div id="dpt-ds-accordions">
+        <!-- Template Selection -->
+        <div class="dpt-ds-accordion active">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🎨 Template Selection</div>
+            <div class="accordion-content">
+                <div class="dpt-template-grid">
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'eict') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__)?>" alt="EICT">
+                        <div><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>> <strong>Edgware ICT</strong></div>
+                    </label>
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'usman') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" alt="Usman">
+                        <div><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>> <strong>Masjid-E-Usman</strong></div>
+                    </label>
+                    <label class="dpt-template-card" style="opacity: 0.6;">
+                        <div style="padding: 40px 10px;">Coming Soon</div>
+                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
+                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- General Settings -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">⚙️ General Settings</div>
+            <div class="accordion-content">
+                <div class="dpt-ds-row">
+                    <div class="dpt-ds-field">
+                        <label class="dpt-ds-checkbox">
+                            <input type="checkbox" name="template-chbox" value="template" <?php if(get_option("template-chbox") === 'template'){ echo 'checked'; } ?>>
+                            Show Template Header
+                        </label>
+                    </div>
+                    <div class="dpt-ds-field">
+                        <label class="dpt-ds-checkbox">
+                            <input type="checkbox" name="quran-chbox" value="displayQuran" <?php if(get_option("quran-chbox") === 'displayQuran'){ echo 'checked'; } ?>>
+                            Display Quran Verse
+                        </label>
+                    </div>
+                </div>
+                <div class="dpt-ds-field" style="margin-top: 15px;">
+                    <label>Fading Messages <span class="hint">(separated by full stop)</span></label>
+                    <textarea name="ds-fading-msg" rows="3"><?php echo esc_html(stripslashes(get_option("ds-fading-msg")) )?></textarea>
+                </div>
+                <div class="dpt-ds-field" style="margin-top: 15px;">
+                    <label>Custom Site Logo URL</label>
+                    <input type="text" name="ds-logo" placeholder="https://..." value="<?php echo esc_html(get_option("ds-logo")); ?>">
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">💬 Messages</div>
+            <div class="accordion-content">
+                <div class="dpt-ds-row">
+                    <div class="dpt-ds-field">
+                        <label>Scrolling Text</label>
+                        <input type="text" name="ds-scroll-text" value="<?php echo esc_html(stripslashes(get_option("ds-scroll-text"))); ?>">
+                    </div>
+                    <div class="dpt-ds-field">
+                        <label>Scrolling Speed (1-100)</label>
+                        <input type="number" name="ds-scroll-speed" min="10" max="100" value="<?php echo esc_html(get_option("ds-scroll-speed")); ?>">
+                    </div>
+                </div>
+                <div class="dpt-ds-field" style="margin-top: 15px;">
+                    <label>Blink Text</label>
+                    <input type="text" name="ds-blink-text" value="<?php echo esc_html(stripslashes(get_option("ds-blink-text"))); ?>">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Settings -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🖼️ Slider Settings</div>
+            <div class="accordion-content">
+                <div class="dpt-ds-field" style="margin-bottom: 15px;">
+                    <label class="dpt-ds-checkbox">
+                        <input type="checkbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>>
+                        Activate Slider
+                    </label>
+                </div>
+                <div class="dpt-ds-row">
+                    <div class="dpt-ds-field">
+                        <label>Re-display Next Prayer After # Slides</label>
+                        <input type="number" name="nextPrayerSlide" min="0" value="<?php echo esc_html(get_option("nextPrayerSlide")); ?>">
+                    </div>
+                    <div class="dpt-ds-field">
+                        <label>Transition Effect</label>
+                        <div style="display: flex; gap: 15px; margin-top: 5px;">
+                            <label><input type="radio" name="transitionEffect" value="slide" <?php if(get_option("transitionEffect") === 'slide'){ echo 'checked'; } ?>> Slide</label>
+                            <label><input type="radio" name="transitionEffect" value="carousel-fade" <?php if(get_option("transitionEffect") === 'carousel-fade'){ echo 'checked'; } ?>> Fade</label>
+                        </div>
+                    </div>
+                    <div class="dpt-ds-field">
+                        <label>Transition Speed (seconds)</label>
+                        <input type="number" name="transitionSpeed" min="0" placeholder="5" value="<?php echo esc_html(get_option("transitionSpeed") / 1000); ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sliders -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">📷 Image Sliders <span class="hint">(click to expand)</span></div>
+            <div class="accordion-content">
+                <p style="margin-bottom: 15px; color: #666;">Click <strong>"🖼️ Select from Media"</strong> to choose images from your gallery. Maximum 7 sliders.</p>
                 <div class="dpt-sliders-container">
-                    <h4>Sliders <small>(click + Add Another to add more, max 7)</small></h4>
-                    
                     <?php for ($i = 1; $i <= 11; $i++): ?>
                     <div class="dpt-slider-section<?php echo ($i > $displayCount) ? ' dpt-slider-hidden' : ''; ?>" data-slider="<?php echo $i; ?>">
                         <h4>Slider #<?php echo $i; ?></h4>
@@ -167,33 +226,57 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
                     
                     <button type="button" class="dpt-add-slider-btn" id="dpt-add-slider"<?php echo ($displayCount >= 7) ? ' style="display:none;"' : ''; ?>>+ Add Another Slider</button>
                 </div>
-                
-                <table class="table" style="margin-top: 20px;">
-                    <tr>
-                        <td class="active-slider">Additional CSS</td>
-                        <td><textarea name="ds-additional-css" cols="30"><?php echo esc_html(get_option("ds-additional-css") )?></textarea></td>
-                    </tr>   
-                </table>
-                <?php submit_button('Save changes', 'primary', 'digitalScreen'); ?>
+            </div>
         </div>
-        <div class="col-sm-6 col-xs-12" style="background-color: #eeeeee;">
-            <h3 class="pt-2"><code>INSTRUCTIONS</code></h3>
-            <li><a class="url" href="post-new.php?post_type=page">Create a new page</a></li>
-            <li>Select page template <code>Digital Screen Prayer Time</code></li>
-            <li>Use shortcode <code>[digital_screen]</code> to display in Monitor</li>
-            <li><code>[digital_screen view='vertical']</code> for Mobile diaplay</li>
-            <li><code>[digital_screen view='presentation']</code> display slides only, hiding prayer time</li>
-            <li><code>[digital_screen slides="image1Url,image2Url,...image11Url"]</code> Override slides</li>
-            <li><code>[digital_screen view='vertical' dim=10]</code> to dim vertically screen for 10 mins when prayer starts</li>
-            <li><code>[digital_screen view='vertical' dim=10 scroll='any text']</code> to override scrolling message</li>
-            <li><code>[digital_screen view='vertical' dim=10 blink='any text']</code> to override blinking alert message</li>
-            <li><code>[digital_screen view='vertical' blink='any text' blnk_link='https://valid.url' scroll='any text' scroll_link='https://valid.url']</code> Allows mobile user to click on the text and possibly pay donation</li>
+
+        <!-- Advanced -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🔧 Advanced</div>
+            <div class="accordion-content">
+                <div class="dpt-ds-field">
+                    <label>Additional CSS <span class="hint">(advanced users only)</span></label>
+                    <textarea name="ds-additional-css" rows="5" placeholder=".dpt-class { ... }"><?php echo esc_html(get_option("ds-additional-css")); ?></textarea>
+                </div>
+            </div>
         </div>
+
+        <!-- Instructions -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">❓ How to Use</div>
+            <div class="accordion-content">
+                <div class="instructions-box">
+                    <h3>Quick Start Guide</h3>
+                    <ol>
+                        <li><a href="<?php echo admin_url('post-new.php?post_type=page'); ?>">Create a new page</a></li>
+                        <li>Select page template: <code>Digital Screen Prayer Time</code></li>
+                        <li>Add shortcode: <code>[digital_screen]</code></li>
+                    </ol>
+                    <h3>Shortcode Options</h3>
+                    <ul>
+                        <li><code>[digital_screen view='vertical']</code> - Mobile display</li>
+                        <li><code>[digital_screen view='presentation']</code> - Slides only (no prayer times)</li>
+                        <li><code>[digital_screen slides='url1,url2']</code> - Override slider images</li>
+                        <li><code>[digital_screen dim=10]</code> - Dim after 10 mins</li>
+                        <li><code>[digital_screen scroll='Your text']</code> - Override scroll message</li>
+                        <li><code>[digital_screen blink='Alert text']</code> - Override blink text</li>
+                        <li><code>[digital_screen scroll_link='https://...']</code> - Make scroll text clickable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <?php submit_button('Save All Settings', 'primary', 'digitalScreen'); ?>
     </div>
     </form>
 </div>
 
 <script>
+function toggleDsAccordion(header) {
+    header.parentElement.classList.toggle('active');
+}
+
 jQuery(document).ready(function($) {
     // Add Another Slider button
     $('#dpt-add-slider').on('click', function() {
@@ -212,7 +295,6 @@ jQuery(document).ready(function($) {
         var btn = $(this);
         var inputName = btn.data('input');
         
-        // Create WordPress media frame
         var frame = wp.media({
             title: 'Select Image for Slider',
             button: { text: 'Use this image' },
@@ -226,9 +308,15 @@ jQuery(document).ready(function($) {
         
         frame.open();
     });
+
+    // Template card selection
+    $('.dpt-template-card').on('click', function() {
+        $(this).find('input[type="radio"]').prop('checked', true);
+        $('.dpt-template-card').removeClass('selected');
+        $(this).addClass('selected');
+    });
 });
 </script>
 <?php 
-// Enqueue WordPress media uploader scripts
 wp_enqueue_media();
 ?>
