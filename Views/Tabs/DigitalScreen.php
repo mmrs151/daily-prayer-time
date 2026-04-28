@@ -361,6 +361,16 @@ class DigitalScreenSettings {
                 $('#dpt-template-section').addClass('hidden');
             }
             
+            // Sync hidden inputs with checked radio on page load
+            const checkedValue = $('input[name="displayMode"]:checked').val();
+            if (checkedValue === 'quran') {
+                $('#quran-chbox-hidden').val('displayQuran');
+            } else if (checkedValue === 'slider') {
+                $('#slider-chbox-hidden').val('slider');
+            } else if (checkedValue === 'template') {
+                $('#template-chbox-hidden').val('template');
+            }
+            
             // Add slider button
             $('#dpt-add-slider').on('click', function() {
                 const hidden = $('.dpt-slider-card.hidden').first();
