@@ -154,7 +154,7 @@ if (! empty($_POST['digitalScreen']) && check_admin_referer( 'digitalScreen' )) 
         'quran-chbox' => sanitize_text_field($_POST['quran-chbox'] ?? ''),
         'slider-chbox' => sanitize_text_field($_POST['slider-chbox'] ?? ''),
         'nextPrayerSlide' => sanitize_text_field($_POST['nextPrayerSlide']),
-        'ds-template' => sanitize_text_field($_POST['ds-template'] ?? ''),
+        'ds-template' => sanitize_text_field($_POST['ds-template-hidden'] ?? $_POST['ds-template'] ?? ''),
         'transitionEffect' => sanitize_text_field($_POST['transitionEffect'] ?? ''),
         'transitionSpeed' => sanitize_text_field($_POST['transitionSpeed']),
         'slider1' => sanitize_text_field($_POST['slider1']),

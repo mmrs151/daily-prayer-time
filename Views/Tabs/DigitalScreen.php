@@ -129,6 +129,7 @@ class DigitalScreenSettings {
             .dpt-template-card:hover { border-color: #2271b1; }
             .dpt-template-card.selected { border-color: #2271b1; background: #e7f1ff; }
             .dpt-template-card img { max-width: 100%; border-radius: 4px; }
+            .dpt-template-card input[type="radio"] { margin: 5px; }
             .dpt-template-card.dpt-template-placeholder { opacity: 0.8; cursor: pointer; border-style: dashed; }
             .dpt-template-card.dpt-template-placeholder:hover { border-color: #2271b1; background: #f5f5f5; }
             .dpt-placeholder-img { 
@@ -375,18 +376,36 @@ class DigitalScreenSettings {
         }
         
         function selectTemplate(value, element) {
-            // Set the radio button
+            // Find the radio button inside the label
             const radio = element.querySelector('input[type="radio"]');
-            radio.checked = true;
+            if (radio) {
+                radio.checked = true;
+                radio.setAttribute('checked', 'checked');
+            }
             
             // Update visual selection
-            document.querySelectorAll('.dpt-template-card').forEach(function(card) {
-                card.classList.remove('selected');
-            });
+            var cards = document.querySelectorAll('.dpt-template-card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('selected');
+            }
             element.classList.add('selected');
             
-            // Log for debugging
-            console.log('Selected template:', value);
+            // Debug
+            console.log('Selected template:', value, 'Radio checked:', radio ? radio.checked : 'no radio');
+            
+            // Force form to include this value
+            var form = document.querySelector('form[name="digitalScreen"]');
+            if (form) {
+                var hiddenInput = form.querySelector('input[name="ds-template-hidden"]');
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'ds-template-hidden';
+                    form.appendChild(hiddenInput);
+                }
+                hiddenInput.value = value;
+                console.log('Hidden input set to:', value);
+            }
         }
         
         window.updateDisplayMode = function(value) {
