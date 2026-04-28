@@ -108,6 +108,13 @@ class DigitalScreenSettings {
                         Default Layout
                     </label>
                     <label>
+                        <input type="radio" name="displayMode" value="template" 
+                            <?php echo $templateActive ? 'checked' : ''; ?>>
+                        Activate Template
+                    </label>
+                </div>
+                <div class="dpt-option-group">
+                    <label>
                         <input type="radio" name="displayMode" value="quran" 
                             <?php echo get_option('quran-chbox') === 'displayQuran' ? 'checked' : ''; ?>>
                         Display Quran Verse
@@ -116,11 +123,6 @@ class DigitalScreenSettings {
                         <input type="radio" name="displayMode" value="slider" 
                             <?php echo $sliderActive ? 'checked' : ''; ?>>
                         Activate Slider
-                    </label>
-                    <label>
-                        <input type="checkbox" id="template-chbox" 
-                            <?php echo $templateActive ? 'checked' : ''; ?>>
-                        Activate Template
                     </label>
                 </div>
                 <input type="hidden" name="quran-chbox" id="quran-chbox-hidden" value="<?php echo esc_attr(get_option('quran-chbox') ?? ''); ?>">
@@ -326,48 +328,36 @@ class DigitalScreenSettings {
                 const quranInput = $('#quran-chbox-hidden');
                 const sliderInput = $('#slider-chbox-hidden');
                 const templateInput = $('#template-chbox-hidden');
-                const templateCheckbox = $('#template-chbox');
                 
                 if (value === 'slider') {
                     quranInput.val('');
                     sliderInput.val('slider');
                     templateInput.val('');
-                    templateCheckbox.prop('checked', false);
                     sliderSection.removeClass('hidden').addClass('active');
                     templateSection.removeClass('active').addClass('hidden');
                 } else if (value === 'quran') {
                     sliderInput.val('');
                     templateInput.val('');
-                    templateCheckbox.prop('checked', false);
                     quranInput.val('displayQuran');
                     sliderSection.removeClass('active').addClass('hidden');
                     templateSection.removeClass('active').addClass('hidden');
+                } else if (value === 'template') {
+                    sliderInput.val('');
+                    quranInput.val('');
+                    templateInput.val('template');
+                    sliderSection.removeClass('active').addClass('hidden');
+                    templateSection.removeClass('hidden').addClass('active');
                 } else if (value === 'default') {
                     sliderInput.val('');
                     templateInput.val('');
-                    templateCheckbox.prop('checked', false);
                     quranInput.val('');
                     sliderSection.removeClass('active').addClass('hidden');
                     templateSection.removeClass('active').addClass('hidden');
                 }
             });
             
-            // Template checkbox toggle
-            $('#template-chbox').on('change', function() {
-                const templateSection = $('#dpt-template-section');
-                const templateInput = $('#template-chbox-hidden');
-                
-                if ($(this).is(':checked')) {
-                    templateInput.val('template');
-                    templateSection.removeClass('hidden').addClass('active');
-                } else {
-                    templateInput.val('');
-                    templateSection.removeClass('active').addClass('hidden');
-                }
-            });
-            
             // Initialize template section visibility on load
-            if (!$('#template-chbox').is(':checked')) {
+            if ($('input[name="displayMode"]:checked').val() !== 'template') {
                 $('#dpt-template-section').addClass('hidden');
             }
             
