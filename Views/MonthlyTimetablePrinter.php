@@ -22,9 +22,12 @@ class MonthlyTimetablePrinter extends TimetablePrinter
      */
     public function displayTable($rows, $options)
     {
-        $table = $this->printFullTableTop($options);
+        $table = '<div class="dpt-monthly-table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">';
+        $table .= $this->printFullTableTop($options);
 
         $table .= $this->printFullTableRow( $rows, $options, 'both' );
+
+        $table .= '</div>';
 
         return $table;
     }
@@ -173,9 +176,12 @@ class MonthlyTimetablePrinter extends TimetablePrinter
      */
     public function displayTableJamahOnly($rows, $options)
     {
-        $table = $this->printTableTop( $options );
+        $table = '<div class="dpt-monthly-table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">';
+        $table .= $this->printTableTop( $options );
 
         $table .= $this->printTableRow( $rows, $options );
+
+        $table .= '</div>';
 
         return $table;
     }
@@ -188,7 +194,8 @@ class MonthlyTimetablePrinter extends TimetablePrinter
      */
     public function displayTableAzanOnly($rows, $options)
     {
-        $table = $this->printTableTop( $options, true );
+        $table = '<div class="dpt-monthly-table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">';
+        $table .= $this->printTableTop( $options, true );
         $asrMethod = get_option('asrSelect');
 
         foreach($rows as $day) {
@@ -212,6 +219,8 @@ class MonthlyTimetablePrinter extends TimetablePrinter
                 <td>" . $this->formatDateForPrayer($day['isha_begins']). "</td>
                 </tr>";
         }
+
+        $table .= '</div>';
 
         return $table;
     }
