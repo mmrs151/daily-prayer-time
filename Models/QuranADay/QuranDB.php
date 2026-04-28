@@ -54,8 +54,8 @@ class DPTQuranDB
 
         if (($handle = fopen($path, 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, '|')) !== false) {
-                $sql = 'INSERT INTO '.$this->tableName."  (lang, sura, ayat, text) values ('".$lang."', '".$data[0]."', '".$data[1]."', '".esc_sql($data[2])."');";
-                if (!empty($data[2])) {
+                if (count($data) >= 3 && !empty($data[2])) {
+                    $sql = 'INSERT INTO '.$this->tableName."  (lang, sura, ayat, text) values ('".$lang."', '".$data[0]."', '".$data[1]."', '".esc_sql($data[2])."');";
                     $wpdb->query($sql);
                 }
             }

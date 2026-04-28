@@ -1,92 +1,255 @@
-<p class="green" style="font-size:20px;">
-    <span class="red">! important !</span> Please
-    <a href="plugins.php"> re-activate</a>
-    the plugin if your data is not imported
+<?php
+$basicShortcodes = [
+    '[monthlytable]', '[dailytable_vertical]', '[dailytable_horizontal]', '[display_ramadan_time]', '[daily_next_prayer]'
+];
+
+$prayerTimes = [
+    '[fajr_prayer]', '[sunrise]', '[ishraq]', '[zawal]', '[zuhr_prayer]', '[asr_prayer]', '[maghrib_prayer]', '[isha_prayer]', '[jummah_prayer]'
+];
+
+$individualTimes = [
+    '[fajr_start]', '[zuhr_start]', '[asr_start]', '[maghrib_start]', '[isha_start]'
+];
+
+$specialFeatures = [
+    '[display_iqamah_update]', '[quran_verse]', '[digital_screen]', '[hijri_date]'
+];
+
+$options = [
+    ['key' => 'asr', 'value' => 'hanafi', 'desc' => 'Use Hanafi Asr start method'],
+    ['key' => 'display', 'value' => 'iqamah_only/azan_only', 'desc' => 'Show only azan or iqamah times'],
+    ['key' => 'hide_time_remaining', 'value' => 'true', 'desc' => 'Hide countdown timer'],
+    ['key' => 'hide_ramadan', 'value' => 'true', 'desc' => 'Hide Ramadan row'],
+    ['key' => 'announcement', 'value' => '"Any text"', 'desc' => 'Show announcement text'],
+    ['key' => 'day', 'value' => 'friday', 'desc' => 'Day for announcement: everyday/saturday/.../friday'],
+    ['key' => 'heading', 'value' => '"any text"', 'desc' => 'Custom heading'],
+    ['key' => 'use_div_layout', 'value' => 'true', 'desc' => 'Simple div layout (horizontal only)'],
+    ['key' => 'start_time', 'value' => 'true', 'desc' => 'Show prayer start time (single prayer only)'],
+];
+
+$digitalOptions = [
+    ['key' => 'view', 'value' => 'vertical/presentation', 'desc' => 'Display mode'],
+    ['key' => 'slides', 'value' => 'image1,image2', 'desc' => 'Slide images'],
+    ['key' => 'dim', 'value' => 'number', 'desc' => 'Minutes to dim after Jamaat'],
+    ['key' => 'scroll', 'value' => 'text', 'desc' => 'Scrolling text'],
+    ['key' => 'scroll_link', 'value' => 'url', 'desc' => 'Make scroll text clickable'],
+    ['key' => 'blink', 'value' => 'text', 'desc' => 'Blinking text'],
+    ['key' => 'blink_link', 'value' => 'url', 'desc' => 'Make blink text clickable'],
+    ['key' => 'disable_overnight_dim', 'value' => 'true', 'desc' => 'Disable overnight dimming'],
+    ['key' => 'deactivate_tomorrow', 'value' => 'true', 'desc' => 'Hide tomorrow after prayer finishes'],
+    ['key' => 'mute_adhan', 'value' => 'true', 'desc' => 'Disable Adhan sound'],
+];
+
+$examples = [
+    ['[monthlytable]', 'Display yearly and monthly prayer time with ajax month selector'],
+    ['[monthlytable display=iqamah_only]', 'Display Iqamah times only'],
+    ['[monthlytable display=azan_only]', 'Display Azan times only'],
+    ['[monthlytable heading="Månedlige Tidsplan"]', 'Custom heading in any language'],
+    ['[dailytable_vertical]', 'Display daily timetable vertically'],
+    ['[dailytable_vertical asr=hanafi]', 'Vertical with Hanafi Asr method'],
+    ['[dailytable_horizontal]', 'Display daily timetable horizontally'],
+    ['[dailytable_horizontal display=iqamah_only]', 'Horizontal with Iqamah times only'],
+    ['[dailytable_horizontal asr=hanafi]', 'Horizontal with Hanafi Asr'],
+    ['[dailytable_vertical asr=hanafi announcement="First Khutbah: 1:15" day=friday]', 'Announcement on Friday'],
+    ['[sunrise]', 'Display sunrise time'],
+    ['[isha_prayer]', 'Display Isha prayer time'],
+    ['[fajr_prayer start_time=true]', 'Display fajr with start time'],
+    ['[daily_next_prayer]', 'Display only next prayer'],
+    ['[digital_screen]', 'Display on big monitors'],
+    ['[digital_screen view=vertical]', 'Portrait mode'],
+    ['[digital_screen dim=5]', 'Dim after 5 minutes'],
+    ['[quran_verse min_word=20 max_word=30 language=bangla]', 'Quran verse in Bengali'],
+];
+?>
+<style>
+.dpt-help-accordion { margin-bottom: 10px; }
+.dpt-help-accordion .accordion-header { 
+    background: #2271b1; color: #fff; padding: 12px 15px; cursor: pointer; 
+    border-radius: 4px; display: flex; justify-content: space-between; align-items: center;
+}
+.dpt-help-accordion .accordion-header:hover { background: #1d5a8a; }
+.dpt-help-accordion .accordion-header:after { content: '▼'; font-size: 10px; transition: transform 0.3s; }
+.dpt-help-accordion.active .accordion-header:after { transform: rotate(180deg); }
+.dpt-help-accordion .accordion-content { display: none; padding: 15px; border: 1px solid #ddd; border-top: none; }
+.dpt-help-accordion.active .accordion-content { display: block; }
+.dpt-shortcode-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 15px; }
+.dpt-shortcode-grid.basic { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.dpt-shortcode-card { 
+    background: #f6f7f7; border: 1px solid #dcdcde; padding: 10px 12px; border-radius: 4px; 
+    font-family: monospace; font-size: 13px; cursor: pointer; transition: background 0.2s; position: relative;
+}
+.dpt-shortcode-card:hover { background: #e6e6e6; border-color: #2271b1; }
+.dpt-shortcode-card.copied { background: #d1e7dd; border-color: #0f5132; }
+.dpt-option-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.dpt-option-card { background: #f6f7f7; border: 1px solid #dcdcde; padding: 10px; border-radius: 4px; }
+.dpt-option-card code { background: #fff; padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+.dpt-example-list { list-style: none; padding: 0; }
+.dpt-example-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+.dpt-example-list li:last-child { border-bottom: none; }
+.dpt-example-list code { background: #f6f7f7; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+.dpt-example-list .desc { color: #666; font-size: 12px; display: block; margin-top: 4px; }
+.dpt-tip { background: #fff8c5; border-left: 4px solid #f0c33c; padding: 10px 15px; margin-bottom: 20px; font-size: 14px; }
+.dpt-tip a { color: #2271b1; }
+</style>
+
+<p class="dpt-tip">
+    <span class="red">! Important !</span> Please <a href="plugins.php">re-activate</a> the plugin if your data is not imported
+</p>
+
+<p style="background:#e7f1ff; padding:10px; border-radius:4px; margin-bottom:15px;">
+    <strong>💡 Tip:</strong> Click on any shortcode below to copy it to your clipboard!
 </p>
 
 <h2>Helps and Tips</h2>
-<p>
-    <h3><u>Shortcodes:</u></h3>
-    <ol>
-        <li>[monthlytable]</li>
-        <li>[dailytable_vertical]</li>
-        <li>[dailytable_horizontal]</li>
-        <li>[display_ramadan_time] <i>(no shortcode options)</i></li>
-        <li>[daily_next_prayer] <i>display_dates=true</i></li>
-        <li>[fajr_prayer]</li>
-        <li>[sunrise]</li>
-        <li>[zuhr_prayer]</li>
-        <li>[asr_prayer]</li>
-        <li>[maghrib_prayer]</li>
-        <li>[isha_prayer]</li>
-        <li>[fajr_start]</li>
-        <li>[zuhr_start]</li>
-        <li>[asr_start]</li>
-        <li>[maghrib_start]</li>
-        <li>[isha_start]</li>
-        <li>[display_iqamah_update] <i>threshold={min}</i></li>
-        <li>[quran_verse]</li>
-        <li>[digital_screen]</li>
-        <li>[jummah_prayer]</li>
-        <li>[hijri_date]</li>
-    </ol>
 
-    <h3>Shortcode Options:</h3>
-    <ol>
-        <li>asr=hanafi</li>
-        <li>display=iqamah_only/azan_only</li>
-        <li>hide_time_remaining=true</li>
-        <li>hide_ramadan=true</li>
-        <li>announcement="Any text" day=everyday/saturday/sunday/monday/tuesday/wednesday/thursday/friday</li>
-        <li>heading="any text"</li>
-        <li>use_div_layout=true (restrictive, works with horizontal, no other options)</li>
-        <li>start_time=true (only for single prayer time)</li>
-        <li>min_word=20 max_word=30 language='bangla' <i>(only for quran_verse)</i></li>
-    </ol>
-    <ol><p><strong>[digital_screen ]</strong></p>
-        <li>view='vertical/presentation' </li>
-        <li>view='presentation' slides='image1,image2,image_n'</li>
-        <li>dim=number of minutes to dim the screen after Jamaat start</li>
-        <li>scroll=any text scroll_link=url to make the text clickable</li>
-        <li>blink=any text blink_link=url to make the text clickable</li>
-        <li>disable_overnight_dim=true <i>(disable overnight dimming of the digital screen )</i></li>
-        <li>deactivate_tomorrow=true <i>(Deactivate tomorrow's prayer time after a prayer finished)</i></li>
-        <li>mute_adhan=true <i>Disable Adhan on a screen</i></li>
-    </ol>
-</p>
-<p>
-    <h3>shortcodes examples</h3>
-    <ol>
+<div id="dpt-help-accordions">
 
-        <li><b>[sunrise]</b> - Display sunrise for the day, use span class dpt_sunrise to decorate your view</li>
-        <li><b>[isha_prayer]</b> - Display Isha prayer time, use span class dpt_jamah to write your css for jamah time</li>
-        <li><b>[fajr_prayer start_time=true]</b> - Display fajr prayer with start time, use span class dpt_start to design your css for start time</li>
-        <li><b>[daily_next_prayer]</b> - Display only next prayer on post or page</li>
-        <li><b>[monthlytable]</b> - Display Yearly and Monthly prayer time with ajax month selector</li>
-        <li><b>[monthlytable display=iqamah_only]</b> - Display Iqamah only for Yearly and Monthly prayer time with ajax month selector</li>
-        <li><b>[monthlytable display=azan_only]</b> - Display monthly time table heading in any language, default is 'Monthly Time Table for'</li>
-        <li><b>[monthlytable heading="Månedlige Tidsplan"]</b> - Display monthly time table heading in any language, default is 'Monthly Time Table for'</li>
-        <li><b>[monthlytable heading="Månedlige Tidsplan" display=azan_only]</b> - Please notice the use of " " while using multiple words in a shortcode option</li>
-        <li><b>[dailytable_vertical]</b> - Display daily timetable vertically</li>
-        <li><b>[dailytable_vertical asr=hanafi]</b> - Display daily timetable vertically with Hanafi Asr start method</li>
-        <li><b>[dailytable_horizontal]</b> - Display daily timetable horizontally</li>
-        <li><b>[dailytable_horizontal display=iqamah_only]</b> - Display daily azan only timetable horizontally</li>
-        <li><b>[dailytable_horizontal asr=hanafi]</b> - Display daily timetable horizontally with Hanafi Asr start method</li>
-        <li><b>[dailytable_horizontal asr=hanafi display=azan_only]</b> - Display daily iqamah only timetable horizontally with Hanafi Asr start method</li>
-        <li><b>[dailytable_vertical asr=hanafi announcement="First Khutbah: 1:15. Second Khutbah: 1:45" day=friday]</b> - Display announcement on your given day or everyday</li>
-        <li><b>[digital_screen]</b> - Display prayer time on big monitors in the masjid</li>
-        <li><b>[digital_screen view='vertical']</b> - Display prayer time in Portrait mode</li>
-        <li><b>[quran_verse min_word=20 max_word=30 language='bangla'] </b> - Display Quran verse in a shortcode</li>
+    <!-- Basic Shortcodes -->
+    <div class="dpt-help-accordion active">
+        <div class="accordion-header" onclick="toggleHelpAccordion(this)">Basic Shortcodes</div>
+        <div class="accordion-content">
+            <p>Most commonly used shortcodes for displaying prayer times (click to copy):</p>
+            <div class="dpt-shortcode-grid basic">
+                <?php foreach ($basicShortcodes as $sc): ?>
+                    <div class="dpt-shortcode-card" onclick="copyShortcode(this, '<?php echo esc_attr($sc); ?>')"><?php echo esc_html($sc); ?></div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 
-    </ol>
-        <a href="https://wordpress.org/plugins/daily-prayer-time-for-mosques/screenshots/" target="_new">Please check the screen shots <i class="fa fa-external-link" aria-hidden="true"></i></a>
-</p>
-<p>
-    <h3><u>How to update ramadan timetable</u></h3>
-    Simply put '1' for the column(is_ramadan) in the sample csv for the days belongs to ramadan before upload
-</p>
-<p>
-    <h3><u>How to use custom hijri date</u></h3>
-    Insert your own calculated Hijri date in the csv column(hijri_date) and allow visibility from settings
-</p>
+    <!-- Prayer Times -->
+    <div class="dpt-help-accordion">
+        <div class="accordion-header" onclick="toggleHelpAccordion(this)">Prayer Times</div>
+        <div class="accordion-content">
+            <p>Display individual prayer times with Iqamah:</p>
+            <div class="dpt-shortcode-grid">
+                <?php foreach ($prayerTimes as $sc): ?>
+                    <div class="dpt-shortcode-card" onclick="copyShortcode(this, '<?php echo esc_attr($sc); ?>')"><?php echo esc_html($sc); ?></div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 
+    <!-- Individual Times -->
+    <div class="dpt-help-accordion">
+        <div class="accordion-header" onclick="toggleHelpAccordion(this)">Individual Times (Start/Jamah)</div>
+        <div class="accordion-content">
+            <p>Display only start time or jamah time for each prayer:</p>
+            <div class="dpt-shortcode-grid">
+                <?php foreach ($individualTimes as $sc): ?>
+                    <div class="dpt-shortcode-card" onclick="copyShortcode(this, '<?php echo esc_attr($sc); ?>')"><?php echo esc_html($sc); ?></div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Special Features -->
+    <div class="dpt-help-accordion">
+        <div class="accordion-header" onclick="toggleHelpAccordion(this)">Special Features</div>
+        <div class="accordion-content">
+            <p>Additional features like Quran verse, digital screen, etc:</p>
+            <div class="dpt-shortcode-grid">
+                <?php foreach ($specialFeatures as $sc): ?>
+                    <div class="dpt-shortcode-card" onclick="copyShortcode(this, '<?php echo esc_attr($sc); ?>')"><?php echo esc_html($sc); ?></div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Reference -->
+    <div class="dpt-help-accordion">
+        <div class="accordion-header" onclick="toggleHelpAccordion(this)">Shortcode Options Reference</div>
+        <div class="accordion-content">
+            <p>Add these options to any shortcode (e.g., [dailytable_horizontal asr=hanafi]):</p>
+            <div class="dpt-option-grid">
+                <?php foreach ($options as $opt): ?>
+                    <div class="dpt-option-card">
+                        <code><?php echo esc_html($opt['key']); ?>=<?php echo esc_html($opt['value']); ?></code>
+                        <br><small><?php echo esc_html($opt['desc']); ?></small>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <p style="margin-top: 15px;"><strong>Digital Screen Options:</strong></p>
+            <div class="dpt-option-grid">
+                <?php foreach ($digitalOptions as $opt): ?>
+                    <div class="dpt-option-card">
+                        <code><?php echo esc_html($opt['key']); ?>=<?php echo esc_html($opt['value']); ?></code>
+                        <br><small><?php echo esc_html($opt['desc']); ?></small>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Examples -->
+    <div class="dpt-help-accordion">
+        <div class="accordion-header" onclick="toggleHelpAccordion(this)">Practical Examples</div>
+        <div class="accordion-content">
+            <p>Click any example to copy it:</p>
+            <ul class="dpt-example-list">
+                <?php foreach ($examples as $ex): ?>
+                    <li>
+                        <code onclick="copyShortcode(this, '<?php echo esc_attr($ex[0]); ?>')" style="cursor:pointer;"><?php echo esc_html($ex[0]); ?></code>
+                        <span class="desc"><?php echo esc_html($ex[1]); ?></span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <p><a href="https://wordpress.org/plugins/daily-prayer-time-for-mosques/screenshots/" target="_new">View screenshots <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+        </div>
+    </div>
+
+    <!-- Ramadan & Hijri -->
+    <div class="dpt-help-accordion">
+        <div class="accordion-header" onclick="toggleHelpAccordion(this)">How To: Ramadan & Custom Hijri</div>
+        <div class="accordion-content">
+            <p><strong>Update Ramadan timetable:</strong><br>Put '1' for column (is_ramadan) in the sample CSV for days belonging to Ramadan before upload.</p>
+            <p><strong>Use custom Hijri date:</strong><br>Insert your own calculated Hijri date in the CSV column (hijri_date) and enable visibility from settings.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function toggleHelpAccordion(header) {
+    header.parentElement.classList.toggle('active');
+}
+
+function copyShortcode(el, text) {
+    // Try modern clipboard API first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+            showCopyFeedback(el, text);
+        }).catch(function(err) {
+            fallbackCopy(text, el);
+        });
+    } else {
+        fallbackCopy(text, el);
+    }
+}
+
+function fallbackCopy(text, el) {
+    // Fallback for older browsers
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        showCopyFeedback(el, text);
+    } catch (err) {
+        alert('Failed to copy. Please manually select and copy: ' + text);
+    }
+    document.body.removeChild(textarea);
+}
+
+function showCopyFeedback(el, originalText) {
+    el.classList.add('copied');
+    el.innerText = 'Copied! ✓';
+    setTimeout(function() {
+        el.classList.remove('copied');
+        el.innerText = originalText;
+    }, 1500);
+}
+</script>

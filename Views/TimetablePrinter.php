@@ -8,6 +8,7 @@ class TimetablePrinter
     protected $prayerLocal = array(
         "fajr" => "Fajr",
         "sunrise" => "Sunrise",
+        "ishraq" => "Ishraq",
         "zuhr" => "Zuhr",
         "asr" => "Asr",
         "maghrib" => "Maghrib",
@@ -126,6 +127,10 @@ class TimetablePrinter
         if (is_array($localPrayerName)) {
             $localPrayerName = array_map( 'sanitize_text_field', $localPrayerName);
             $localPrayerName = array_map('stripslashes', $localPrayerName);
+        }
+
+        if (!isset($localPrayerName['ishraq'])) {
+            $localPrayerName['ishraq'] = 'Israq';
         }
 
         return $localPrayerName;
@@ -423,6 +428,9 @@ class TimetablePrinter
         if ($nextPrayer == 'zawal') {
             return $this->localPrayerNames['zuhr'].' '. $iqamah;
         }
+        if ($nextPrayer == 'ishraq') {
+            return $this->localPrayerNames['ishraq'];
+        }
         if ( is_null($nextPrayer)) {
             return $this->localPrayerNames['fajr'].' '. $iqamah;
         }
@@ -441,14 +449,18 @@ class TimetablePrinter
             $nextPrayer = 'zuhr';
         }
 
-        $key = ($nextPrayer == 'sunrise') ? $nextPrayer : strtolower($nextPrayer.'_jamah');
+        if ($nextPrayer == 'ishraq') {
+            $nextPrayerTime = $this->dptHelper->getIshraqTime($dbRow['sunrise']);
+        } else {
+            $key = ($nextPrayer == 'sunrise') ? $nextPrayer : strtolower($nextPrayer.'_jamah');
 
-        if (isset($dbRow[$key])) {
-            $nextPrayerTime = $dbRow[$key];
-        }
+            if (isset($dbRow[$key])) {
+                $nextPrayerTime = $dbRow[$key];
+            }
 
-        if (is_null($nextPrayer)) {
-            $nextPrayerTime = $dbRow['nextFajr'];
+            if (is_null($nextPrayer)) {
+                $nextPrayerTime = $dbRow['nextFajr'];
+            }
         }
         $nextPrayerTime24Hours = $this->formatDateForPrayer24Hour($nextPrayerTime);
 
@@ -475,8 +487,7 @@ class TimetablePrinter
     protected function getJamahTime(array $row)
     {
         $jamahTimes = array( $row["fajr_jamah"], $row['sunrise'], $row["zuhr_jamah"], $row["asr_jamah"], $row["maghrib_jamah"], $row["isha_jamah"]);
-        $jamahNames = array_keys($this->prayerLocal);
-        array_pop($jamahNames); // remove zawal
+        $jamahNames = array("fajr", "sunrise", "zuhr", "asr", "maghrib", "isha");
         return array_combine( $jamahNames, $jamahTimes );
 
     }
@@ -520,7 +531,9 @@ class TimetablePrinter
     {
         $jamahTimes = array( $row["fajr_begins"], $row['sunrise'], $row["zuhr_begins"], $row["asr_begins"], $row["maghrib_begins"], $row["isha_begins"]);
         $jamahNames = array_keys($this->prayerLocal);
-        array_pop($jamahNames); // remove zawal
+        $jamahNames = array_filter($jamahNames, function($key) {
+            return !in_array($key, ['zawal', 'ishraq']);
+        }); // remove zawal and ishraq (they have no begins/jamah)
         return array_combine( $jamahNames, $jamahTimes );
     }
 

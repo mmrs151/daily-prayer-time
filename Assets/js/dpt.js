@@ -25,6 +25,7 @@ DPT = {
         this.fadingMessages();
 
         this.updateTimeDifference();
+        this.toggleSunriseZawal();
     },
 
     monthlyCalendarChange: function () {
@@ -490,6 +491,89 @@ DPT = {
         }
         localTimes = JSON.parse(localTimes);
         return localTimes[time] || '';
+    },
+
+    toggleSunriseZawal: function() {
+        if (!jQuery('.x-board')[0] && !jQuery('.dpt-horizontal-wrapper')[0] && !jQuery('.d-masjid-e-usman')[0]) {
+            return;
+        }
+
+        var ishraqOption = jQuery('#ishraqOption').val();
+        var zawalOption = jQuery('#zawalOption').val();
+        
+        if ((!ishraqOption || ishraqOption === '0') && (!zawalOption || zawalOption === '0')) {
+            return;
+        }
+
+        var ishraqTime = jQuery('#ishraqTime').val();
+        var sunriseTime = jQuery('#sunriseTime').val();
+        var zawalTime = jQuery('#zawalTime').val();
+        
+        var nameElem = jQuery('.sunrise-section .sunrise-title');
+        var timeElem = jQuery('.sunrise-section .sunrise-time');
+        
+        if (nameElem.length === 0) {
+            nameElem = jQuery('.prayer-sunrise .prayerName, tr:has(.sunrise) .prayerName').first();
+            timeElem = jQuery('.prayer-sunrise td[colspan="2"], tr:has(.sunrise) td[colspan="2"]').first();
+        }
+        
+        if (nameElem.length === 0) {
+            return;
+        }
+        
+        var state = 0;
+        setInterval(function() {
+            var now = new Date();
+            var hour = now.getHours();
+            
+            var parseTime = function(t) {
+                var match = t.match(/(\d+):(\d+)/);
+                if (!match) return 0;
+                var h = parseInt(match[1]);
+                if (t.toLowerCase().includes('pm') && h < 12) h += 12;
+                if (t.toLowerCase().includes('am') && h === 12) h = 0;
+                return h * 60 + parseInt(match[2]);
+            };
+            
+            var ishMins = (ishraqOption && ishraqOption !== '0' && ishraqTime) ? parseTime(ishraqTime) : 99999;
+            var zawalMins = (zawalOption && zawalOption !== '0' && zawalTime) ? parseTime(zawalTime) : 99999;
+            var currentMins = hour * 60 + now.getMinutes();
+            
+            if (currentMins >= zawalMins) {
+                // After zawal - stop toggling, show Sunrise only
+                nameElem.text('Sunrise');
+                timeElem.text(sunriseTime);
+                return;
+            }
+            
+            // If ishraq is set and before ishraq time: toggle Sunrise ↔ Ishraq
+            if (ishraqOption && ishraqOption !== '0' && currentMins < ishMins) {
+                state = (state === 0) ? 1 : 0;
+                if (state === 1) {
+                    nameElem.text('Ishraq');
+                    timeElem.text(ishraqTime);
+                } else {
+                    nameElem.text('Sunrise');
+                    timeElem.text(sunriseTime);
+                }
+            }
+            // If zawal is set (and after ishraq if ishraq is set): toggle Sunrise ↔ Zawal
+            else if (zawalOption && zawalOption !== '0' && currentMins < zawalMins) {
+                state = (state === 0) ? 1 : 0;
+                if (state === 1) {
+                    nameElem.text('Zawal');
+                    timeElem.text(zawalTime);
+                } else {
+                    nameElem.text('Sunrise');
+                    timeElem.text(sunriseTime);
+                }
+            }
+            // Default: show Sunrise
+            else {
+                nameElem.text('Sunrise');
+                timeElem.text(sunriseTime);
+            }
+        }, 5000);
     }
 };
 jQuery(document).ready(function() { DPT.init(); });

@@ -52,6 +52,11 @@ if ( ! class_exists('DPTOtherProcessor')) {
             $zawal = sanitize_text_field($zawal);
             delete_option('zawal');
             add_option('zawal', $zawal);
+
+            $ishraq = $this->data['ishraq'] ?? '';
+            $ishraq = sanitize_text_field($ishraq);
+            delete_option('ishraq');
+            add_option('ishraq', $ishraq);
         }
     }
 }

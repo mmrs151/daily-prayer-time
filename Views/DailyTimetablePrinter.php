@@ -369,6 +369,18 @@ class DailyTimetablePrinter extends TimetablePrinter
             unset($localPrayerNames['zawal']);
         }
 
+        // Handle ishraq - merge into sunrise row
+        $ishraqMins = get_option('ishraq');
+        if ($ishraqMins && $ishraqMins != '0' && isset($localPrayerNames['ishraq'])) {
+            if ($this->dptHelper->isIshraqTimeNext($row)) {
+                $localPrayerNames['sunrise'] = $localPrayerNames['ishraq'];
+                $row['sunrise'] = $this->dptHelper->getIshraqTime($row['sunrise']);
+            }
+        }
+        if (isset($localPrayerNames['ishraq'])) {
+            unset($localPrayerNames['ishraq']);
+        }
+
         foreach ($localPrayerNames as $key=>$prayerName) {
             $begins =  $key != 'sunrise' ? lcfirst( $key ).'_begins' : 'sunrise';
             $jamah =  $key != 'sunrise' ? lcfirst( $key ).'_jamah' : 'sunrise';
