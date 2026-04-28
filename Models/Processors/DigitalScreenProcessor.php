@@ -47,10 +47,9 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             update_option('nextPrayerSlide', $nextPrayerSlide);
             
             $dsTemplate = sanitize_text_field($this->data['ds-template']);
+            error_log('DEBUG: dsTemplate value before save: ' . $dsTemplate);
             update_option('dsTemplate', $dsTemplate);
-            if (empty($template)) {
-                delete_option('dsTemplate');
-            }
+            error_log('DEBUG: dsTemplate option saved, current value: ' . get_option('dsTemplate'));
 
             $transitionEffect = sanitize_text_field($this->data['transitionEffect']);
             update_option('transitionEffect', $transitionEffect);
