@@ -13,6 +13,7 @@ for ($i = 1; $i <= 11; $i++) {
     }
 }
 $displayCount = max(1, min($existingSliders, $maxSliders));
+$isSliderActive = get_option("slider-chbox") === 'slider';
 ?>
 <style>
 .dpt-ds-accordion { margin-bottom: 10px; }
@@ -25,6 +26,7 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
 .dpt-ds-accordion.active .accordion-header:after { transform: rotate(180deg); }
 .dpt-ds-accordion .accordion-content { display: none; padding: 15px; border: 1px solid #ddd; border-top: none; }
 .dpt-ds-accordion.active .accordion-content { display: block; }
+.dpt-ds-accordion.dpt-hidden { display: none; }
 
 .dpt-ds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
 .dpt-ds-field { display: flex; flex-direction: column; gap: 5px; }
@@ -106,15 +108,33 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
     
     <div id="dpt-ds-accordions">
         
+        <!-- Template Selection (at top, optional) -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🎨 Template Selection (Optional)</div>
+            <div class="accordion-content">
+                <div class="dpt-template-grid">
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'eict') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__)?>" alt="EICT">
+                        <div><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>> <strong>Edgware ICT</strong></div>
+                    </label>
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'usman') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" alt="Usman">
+                        <div><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>> <strong>Masjid-E-Usman</strong></div>
+                    </label>
+                    <label class="dpt-template-card" style="opacity: 0.6;">
+                        <div style="padding: 40px 10px;">Coming Soon</div>
+                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
+                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
+                    </label>
+                </div>
+            </div>
+        </div>
+
         <!-- General Settings -->
         <div class="dpt-ds-accordion active">
             <div class="accordion-header" onclick="toggleDsAccordion(this)">⚙️ General Settings</div>
             <div class="accordion-content">
                 <div class="dpt-exclusive-group">
-                    <label>
-                        <input type="radio" name="displayMode" value="none" <?php echo (get_option("quran-chbox") !== 'displayQuran' && get_option("slider-chbox") !== 'slider') ? 'checked' : ''; ?>>
-                        None
-                    </label>
                     <label>
                         <input type="radio" name="displayMode" value="quran" <?php echo (get_option("quran-chbox") === 'displayQuran') ? 'checked' : ''; ?>>
                         Display Quran Verse
@@ -156,9 +176,9 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
             </div>
         </div>
 
-        <!-- Slider Settings + Image Sliders (merged) -->
-        <div class="dpt-ds-accordion">
-            <div class="accordion-header" onclick="toggleDsAccordion(this)">🖼️ Slider / Quran Settings</div>
+        <!-- Slider Settings (only visible when slider is active) -->
+        <div class="dpt-ds-accordion <?php echo $isSliderActive ? 'active' : ''; ?>" id="dpt-slider-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🖼️ Slider Settings</div>
             <div class="accordion-content">
                 <div class="dpt-ds-row" style="margin-bottom: 20px;">
                     <div class="dpt-ds-field">
@@ -213,7 +233,7 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
             </div>
         </div>
 
-        <!-- Instructions -->
+        <!-- How to Use (last) -->
         <div class="dpt-ds-accordion">
             <div class="accordion-header" onclick="toggleDsAccordion(this)">❓ How to Use</div>
             <div class="accordion-content">
@@ -238,28 +258,6 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
             </div>
         </div>
 
-        <!-- Template Selection (at bottom, optional) -->
-        <div class="dpt-ds-accordion">
-            <div class="accordion-header" onclick="toggleDsAccordion(this)">🎨 Template Selection (Optional)</div>
-            <div class="accordion-content">
-                <div class="dpt-template-grid">
-                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'eict') ? 'selected' : ''; ?>">
-                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__)?>" alt="EICT">
-                        <div><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>> <strong>Edgware ICT</strong></div>
-                    </label>
-                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'usman') ? 'selected' : ''; ?>">
-                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" alt="Usman">
-                        <div><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>> <strong>Masjid-E-Usman</strong></div>
-                    </label>
-                    <label class="dpt-template-card" style="opacity: 0.6;">
-                        <div style="padding: 40px 10px;">Coming Soon</div>
-                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
-                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
-                    </label>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <div style="margin-top: 20px;">
@@ -277,15 +275,18 @@ jQuery(document).ready(function($) {
     // Handle exclusive radio buttons
     $('input[name="displayMode"]').on('change', function() {
         var value = $(this).val();
-        if (value === 'quran') {
-            $('input[name="quran-chbox"]').val('displayQuran');
-            $('input[name="slider-chbox"]').val('');
-        } else if (value === 'slider') {
+        var $sliderAccordion = $('#dpt-slider-accordion');
+        
+        if (value === 'slider') {
             $('input[name="slider-chbox"]').val('slider');
             $('input[name="quran-chbox"]').val('');
-        } else {
-            $('input[name="quran-chbox"]').val('');
+            $sliderAccordion.removeClass('dpt-hidden');
+            $sliderAccordion.addClass('active');
+        } else if (value === 'quran') {
+            $('input[name="quran-chbox"]').val('displayQuran');
             $('input[name="slider-chbox"]').val('');
+            $sliderAccordion.removeClass('active');
+            $sliderAccordion.addClass('dpt-hidden');
         }
     });
     
