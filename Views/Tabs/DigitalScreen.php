@@ -114,14 +114,17 @@ $isSliderActive = get_option("slider-chbox") === 'slider';
             <div class="accordion-content">
                 <div class="dpt-exclusive-group">
                     <label>
-                        <input type="radio" name="displayMode" value="quran" <?php echo (get_option("quran-chbox") === 'displayQuran') ? 'checked' : ''; ?>>
+                        <input type="radio" name="displayMode" value="quran" <?php echo (get_option("quran-chbox") === 'displayQuran') ? 'checked' : ''; ?> onchange="updateDisplayMode(this.value)">
                         Display Quran Verse
                     </label>
                     <label>
-                        <input type="radio" name="displayMode" value="slider" <?php echo (get_option("slider-chbox") === 'slider') ? 'checked' : ''; ?>>
+                        <input type="radio" name="displayMode" value="slider" <?php echo (get_option("slider-chbox") === 'slider') ? 'checked' : ''; ?> onchange="updateDisplayMode(this.value)">
                         Activate Slider
                     </label>
                 </div>
+                <!-- Hidden inputs to store actual option values -->
+                <input type="hidden" name="quran-chbox" id="quran-chbox-hidden" value="<?php echo esc_attr(get_option("quran-chbox")); ?>">
+                <input type="hidden" name="slider-chbox" id="slider-chbox-hidden" value="<?php echo esc_attr(get_option("slider-chbox")); ?>">
                 <div class="dpt-ds-field" style="margin-top: 15px;">
                     <label>Fading Messages <span class="hint">(separated by full stop)</span></label>
                     <textarea name="ds-fading-msg" rows="3"><?php echo esc_html(stripslashes(get_option("ds-fading-msg")) )?></textarea>
@@ -266,23 +269,20 @@ function toggleDsAccordion(header) {
 }
 
 jQuery(document).ready(function($) {
-    // Handle exclusive radio buttons
-    $('input[name="displayMode"]').on('change', function() {
-        var value = $(this).val();
-        var $sliderAccordion = $('#dpt-slider-accordion');
-        
+    // Handle exclusive display mode selection
+    window.updateDisplayMode = function(value) {
         if (value === 'slider') {
-            $('input[name="slider-chbox"]').val('slider');
-            $('input[name="quran-chbox"]').val('');
-            $sliderAccordion.removeClass('dpt-hidden');
-            $sliderAccordion.addClass('active');
+            $('#quran-chbox-hidden').val('');
+            $('#slider-chbox-hidden').val('slider');
+            $('#dpt-slider-accordion').removeClass('dpt-hidden');
+            $('#dpt-slider-accordion').addClass('active');
         } else if (value === 'quran') {
-            $('input[name="quran-chbox"]').val('displayQuran');
-            $('input[name="slider-chbox"]').val('');
-            $sliderAccordion.removeClass('active');
-            $sliderAccordion.addClass('dpt-hidden');
+            $('#slider-chbox-hidden').val('');
+            $('#quran-chbox-hidden').val('displayQuran');
+            $('#dpt-slider-accordion').removeClass('active');
+            $('#dpt-slider-accordion').addClass('dpt-hidden');
         }
-    });
+    };
     
     // Add Another Slider button
     $('#dpt-add-slider').on('click', function() {
