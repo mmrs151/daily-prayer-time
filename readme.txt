@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.04.28
+Stable tag: 2026.04.28.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,9 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
+= 2026.04.28.1 =
+* Fix: Add horizontal scroll wrapper to monthly table for mobile display
+
 = 2026.04.28 =
 * Feat: Add Ishraq time feature with admin toggle in settings
 * Feat: Redesign Helps & Tips page with accordion layout and click-to-copy shortcodes
@@ -146,6 +149,9 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 * Fix: Fix JS bug
 
 == Upgrade Notice ==
+
+= 2026.04.28.1 =
+* Fix: Monthly table mobile display - now scrolls horizontally on small screens
 
 = 2026.04.28 =
 * New: Ishraq time feature - display calculated Ishraq time in timetable
