@@ -31,7 +31,7 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
 .dpt-ds-field label { font-weight: 600; font-size: 13px; color: #444; }
 .dpt-ds-field input, .dpt-ds-field textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
 .dpt-ds-field input:focus, .dpt-ds-field textarea:focus { outline: 2px solid #2271b1; border-color: #2271b1; }
-.dpt-ds-field .hint { font-size: 11px; color: #666; font-weight: normal; }
+.dpt-ds-field .hint { font-weight: normal; color: #666; }
 
 .dpt-template-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
 .dpt-template-card { border: 2px solid #ddd; border-radius: 8px; padding: 10px; cursor: pointer; transition: all 0.2s; }
@@ -93,6 +93,10 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
 .instructions-box h3 { margin-top: 0; color: #2271b1; font-size: 16px; }
 .instructions-box code { background: #fff; padding: 2px 5px; border-radius: 3px; font-size: 12px; }
 .instructions-box li { margin-bottom: 8px; font-size: 13px; }
+
+.dpt-exclusive-group { display: flex; gap: 20px; margin-bottom: 15px; flex-wrap: wrap; }
+.dpt-exclusive-group label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.dpt-exclusive-group input { width: auto; }
 </style>
 
 <h3>Masjid/Mobile Screen Settings</h3>
@@ -101,45 +105,24 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
     <?php echo wp_nonce_field( 'digitalScreen'); ?>
     
     <div id="dpt-ds-accordions">
-        <!-- Template Selection -->
-        <div class="dpt-ds-accordion active">
-            <div class="accordion-header" onclick="toggleDsAccordion(this)">🎨 Template Selection</div>
-            <div class="accordion-content">
-                <div class="dpt-template-grid">
-                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'eict') ? 'selected' : ''; ?>">
-                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__)?>" alt="EICT">
-                        <div><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>> <strong>Edgware ICT</strong></div>
-                    </label>
-                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'usman') ? 'selected' : ''; ?>">
-                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" alt="Usman">
-                        <div><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>> <strong>Masjid-E-Usman</strong></div>
-                    </label>
-                    <label class="dpt-template-card" style="opacity: 0.6;">
-                        <div style="padding: 40px 10px;">Coming Soon</div>
-                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
-                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
-                    </label>
-                </div>
-            </div>
-        </div>
-
+        
         <!-- General Settings -->
-        <div class="dpt-ds-accordion">
+        <div class="dpt-ds-accordion active">
             <div class="accordion-header" onclick="toggleDsAccordion(this)">⚙️ General Settings</div>
             <div class="accordion-content">
-                <div class="dpt-ds-row">
-                    <div class="dpt-ds-field">
-                        <label class="dpt-ds-checkbox">
-                            <input type="checkbox" name="template-chbox" value="template" <?php if(get_option("template-chbox") === 'template'){ echo 'checked'; } ?>>
-                            Show Template Header
-                        </label>
-                    </div>
-                    <div class="dpt-ds-field">
-                        <label class="dpt-ds-checkbox">
-                            <input type="checkbox" name="quran-chbox" value="displayQuran" <?php if(get_option("quran-chbox") === 'displayQuran'){ echo 'checked'; } ?>>
-                            Display Quran Verse
-                        </label>
-                    </div>
+                <div class="dpt-exclusive-group">
+                    <label>
+                        <input type="radio" name="displayMode" value="none" <?php echo (get_option("quran-chbox") !== 'displayQuran' && get_option("slider-chbox") !== 'slider') ? 'checked' : ''; ?>>
+                        None
+                    </label>
+                    <label>
+                        <input type="radio" name="displayMode" value="quran" <?php echo (get_option("quran-chbox") === 'displayQuran') ? 'checked' : ''; ?>>
+                        Display Quran Verse
+                    </label>
+                    <label>
+                        <input type="radio" name="displayMode" value="slider" <?php echo (get_option("slider-chbox") === 'slider') ? 'checked' : ''; ?>>
+                        Activate Slider
+                    </label>
                 </div>
                 <div class="dpt-ds-field" style="margin-top: 15px;">
                     <label>Fading Messages <span class="hint">(separated by full stop)</span></label>
@@ -173,17 +156,11 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
             </div>
         </div>
 
-        <!-- Slider Settings -->
+        <!-- Slider Settings + Image Sliders (merged) -->
         <div class="dpt-ds-accordion">
-            <div class="accordion-header" onclick="toggleDsAccordion(this)">🖼️ Slider Settings</div>
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🖼️ Slider / Quran Settings</div>
             <div class="accordion-content">
-                <div class="dpt-ds-field" style="margin-bottom: 15px;">
-                    <label class="dpt-ds-checkbox">
-                        <input type="checkbox" name="slider-chbox" value="slider" <?php if(get_option("slider-chbox") === 'slider'){ echo 'checked'; } ?>>
-                        Activate Slider
-                    </label>
-                </div>
-                <div class="dpt-ds-row">
+                <div class="dpt-ds-row" style="margin-bottom: 20px;">
                     <div class="dpt-ds-field">
                         <label>Re-display Next Prayer After # Slides</label>
                         <input type="number" name="nextPrayerSlide" min="0" value="<?php echo esc_html(get_option("nextPrayerSlide")); ?>">
@@ -200,13 +177,9 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
                         <input type="number" name="transitionSpeed" min="0" placeholder="5" value="<?php echo esc_html(get_option("transitionSpeed") / 1000); ?>">
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Sliders -->
-        <div class="dpt-ds-accordion">
-            <div class="accordion-header" onclick="toggleDsAccordion(this)">📷 Image Sliders <span class="hint">(click to expand)</span></div>
-            <div class="accordion-content">
+                
+                <hr style="margin: 20px 0;">
+                
                 <p style="margin-bottom: 15px; color: #666;">Click <strong>"🖼️ Select from Media"</strong> to choose images from your gallery. Maximum 7 sliders.</p>
                 <div class="dpt-sliders-container">
                     <?php for ($i = 1; $i <= 11; $i++): ?>
@@ -264,6 +237,29 @@ $displayCount = max(1, min($existingSliders, $maxSliders));
                 </div>
             </div>
         </div>
+
+        <!-- Template Selection (at bottom, optional) -->
+        <div class="dpt-ds-accordion">
+            <div class="accordion-header" onclick="toggleDsAccordion(this)">🎨 Template Selection (Optional)</div>
+            <div class="accordion-content">
+                <div class="dpt-template-grid">
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'eict') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/EICT.png', __FILE__)?>" alt="EICT">
+                        <div><input type="radio" name="ds-template" value="eict" <?php if(get_option("dsTemplate") === 'eict'){ echo 'checked'; } ?>> <strong>Edgware ICT</strong></div>
+                    </label>
+                    <label class="dpt-template-card <?php echo (get_option("dsTemplate") === 'usman') ? 'selected' : ''; ?>">
+                        <img src="<?php echo plugins_url('../../Assets/images/masjid-e-usman.jpeg', __FILE__)?>" alt="Usman">
+                        <div><input type="radio" name="ds-template" value="usman" <?php if(get_option("dsTemplate") === 'usman'){ echo 'checked'; } ?>> <strong>Masjid-E-Usman</strong></div>
+                    </label>
+                    <label class="dpt-template-card" style="opacity: 0.6;">
+                        <div style="padding: 40px 10px;">Coming Soon</div>
+                        <div><input type="radio" disabled> <strong>Your Design</strong></div>
+                        <small><a href="mailto:mmrs151@gmail.com">Request quote</a></small>
+                    </label>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div style="margin-top: 20px;">
@@ -278,6 +274,21 @@ function toggleDsAccordion(header) {
 }
 
 jQuery(document).ready(function($) {
+    // Handle exclusive radio buttons
+    $('input[name="displayMode"]').on('change', function() {
+        var value = $(this).val();
+        if (value === 'quran') {
+            $('input[name="quran-chbox"]').val('displayQuran');
+            $('input[name="slider-chbox"]').val('');
+        } else if (value === 'slider') {
+            $('input[name="slider-chbox"]').val('slider');
+            $('input[name="quran-chbox"]').val('');
+        } else {
+            $('input[name="quran-chbox"]').val('');
+            $('input[name="slider-chbox"]').val('');
+        }
+    });
+    
     // Add Another Slider button
     $('#dpt-add-slider').on('click', function() {
         var $hidden = $('.dpt-slider-section.dpt-slider-hidden').first();
