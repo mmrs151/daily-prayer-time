@@ -48,8 +48,9 @@ class DigitalScreenSettings {
             }
             .dpt-hint { font-weight: normal; color: #666; font-size: 12px; }
             
-            .dpt-option-group { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+            .dpt-option-group { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
             .dpt-option-group label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+            .dpt-option-group .dpt-separator { color: #999; font-weight: bold; margin: 0 10px; }
             
             .dpt-slider-card {
                 border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 12px;
@@ -112,8 +113,7 @@ class DigitalScreenSettings {
                             <?php echo $templateActive ? 'checked' : ''; ?>>
                         Activate Template
                     </label>
-                </div>
-                <div class="dpt-option-group">
+                    <span class="dpt-separator">|</span>
                     <label>
                         <input type="radio" name="displayMode" value="quran" 
                             <?php echo get_option('quran-chbox') === 'displayQuran' ? 'checked' : ''; ?>>
