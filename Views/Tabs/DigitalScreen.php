@@ -303,7 +303,7 @@ class DigitalScreenSettings {
                             <input type="radio" name="ds-template" value="custom" disabled>
                             <strong>Add your template here</strong>
                         </div>
-                        <small><a href="mailto:mmrs151@gmail.com?subject=Custom Template Design">Let's discuss</a></small>
+                        <small><a href="<?php echo esc_url( 'mailto:mmrs151@gmail.com?subject=' . rawurlencode( 'Custom Template Design' ) ); ?>"><?php echo esc_html( "Let's discuss" ); ?></a></small>
                     </label>
                 </div>
             </div>
@@ -420,9 +420,11 @@ class DigitalScreenSettings {
                 frame.open();
             });
             
-            // Template selection
-            $('.dpt-template-card').on('click', function() {
-                $(this).find('input[type="radio"]').prop('checked', true);
+// Template selection - only for enabled radios (skip placeholder)
+            $('.dpt-template-card:not(.dpt-template-placeholder)').on('click', function(e) {
+                e.preventDefault();
+                const radio = $(this).find('input[type="radio"]');
+                radio.prop('checked', true).trigger('change');
                 $('.dpt-template-card').removeClass('selected');
                 $(this).addClass('selected');
             });
