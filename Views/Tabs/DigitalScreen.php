@@ -5,7 +5,70 @@ function displayImage($slide){
     }
     return '';
 }
+$maxSliders = 7;
+$existingSliders = 0;
+for ($i = 1; $i <= 11; $i++) {
+    if (!empty(get_option("slider$i"))) {
+        $existingSliders = max($existingSliders, $i);
+    }
+}
+$displayCount = max(1, min($existingSliders, $maxSliders));
 ?>
+<style>
+.dpt-slider-row { display: flex; align-items: center; gap: 8px; }
+.dpt-slider-row input[type="text"] { flex: 1; }
+.dpt-media-btn { 
+    padding: 6px 10px; cursor: pointer; border: 1px solid #ccc; 
+    background: #f0f0f0; border-radius: 4px; font-size: 16px; 
+}
+.dpt-media-btn:hover { background: #e0e0e0; }
+.dpt-add-slider-btn {
+    margin-top: 10px; padding: 8px 16px; cursor: pointer;
+    background: #2271b1; color: #fff; border: none; border-radius: 4px;
+}
+.dpt-add-slider-btn:hover { background: #1d5a8a; }
+.dpt-slider-hidden { display: none; }
+</style>
+
+<script>
+jQuery(document).ready(function($) {
+    var frame;
+    $('.dpt-media-btn').on('click', function(e) {
+        e.preventDefault();
+        var $button = $(this);
+        var $input = $button.closest('.dpt-slider-row').find('input[name="slider[]"]');
+        
+        if (frame) {
+            frame.open();
+            return;
+        }
+        
+        frame = wp.media({
+            title: 'Select Image for Slider',
+            button: { text: 'Use this image' },
+            multiple: false
+        });
+        
+        frame.on('select', function() {
+            var attachment = frame.state().get('selection').first().toJSON();
+            $input.val(attachment.url).trigger('change');
+        });
+        
+        frame.open();
+    });
+    
+    $('.dpt-add-slider-btn').on('click', function() {
+        var currentVisible = $('.ds-slides:visible').length;
+        if (currentVisible < 7) {
+            $('.ds-slides').eq(currentVisible).show();
+            if ($('.ds-slides:visible').length >= 7) {
+                $(this).hide();
+            }
+        }
+    });
+});
+</script>
+
 <h3>Masjid/Mobile screen settings</h3>
 <div class="container-fluid">
     <form class="form-group" name="digitalScreen" method="post">
@@ -94,92 +157,24 @@ function displayImage($slide){
                         <td><input type="number" min="0" class="slider-text" name="transitionSpeed" placeholder="5" value=<?php echo esc_html(get_option("transitionSpeed")/1000 ) ?>> seconds </td>
                     </tr>
 
-                    <tr class="ds-slides">
-                        <td>Slider #1</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider1" size="30" value="<?php echo esc_html(stripslashes(get_option("slider1")) )?>">
-                        <?php echo displayImage(get_option("slider1")); ?>
+                    <?php for ($i = 1; $i <= 11; $i++): ?>
+                    <tr class="ds-slides<?php echo ($i > $displayCount) ? ' dpt-slider-hidden' : ''; ?>" data-slider="<?php echo $i; ?>">
+                        <td>Slider #<?php echo $i; ?></td>
+                        <td>
+                            <div class="dpt-slider-row">
+                                <button type="button" class="dpt-media-btn" title="Select from Media Gallery">🖼️</button>
+                                <input type="text" class="slider-text" placeholder="Any message or image url" name="slider<?php echo $i; ?>" size="30" value="<?php echo esc_html(stripslashes(get_option("slider$i")) )?>">
+                            </div>
+                            <?php echo displayImage(get_option("slider$i")); ?>
                             <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider1Url" size="30" value=<?php echo esc_html(get_option("slider1Url") )?>>
+                            <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider<?php echo $i; ?>Url" size="30" value=<?php echo esc_html(get_option("slider{$i}Url") )?>>
                         </td>
                     </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #2</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider2" size="30" value="<?php echo esc_html(stripslashes(get_option("slider2")) )?>">
-                        <?php echo displayImage(get_option("slider2")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider2Url" size="30" value=<?php echo esc_html(get_option("slider2Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #3</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider3" size="30" value="<?php echo esc_html(stripslashes(get_option("slider3")) )?>">
-                            <?php echo displayImage(get_option("slider3")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider3Url" size="30" value=<?php echo esc_html(get_option("slider3Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #4</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider4" size="30" value="<?php echo esc_html(stripslashes(get_option("slider4")) )?>">
-                            <?php echo displayImage(get_option("slider4")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider4Url" size="30" value=<?php echo esc_html(get_option("slider4Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #5</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider5" size="30" value="<?php echo esc_html(stripslashes(get_option("slider5")) )?>">
-                            <?php echo displayImage(get_option("slider5")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider5Url" size="30" value=<?php echo esc_html(get_option("slider5Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #6</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider6" size="30" value="<?php echo esc_html(stripslashes(get_option("slider6")) )?>">
-                            <?php echo displayImage(get_option("slider6")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider6Url" size="30" value=<?php echo esc_html(get_option("slider6Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #7</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider7" size="30" value="<?php echo esc_html(stripslashes(get_option("slider7")) )?>">
-                            <?php echo displayImage(get_option("slider7")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider7Url" size="30" value=<?php echo esc_html(get_option("slider7Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #8</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider8" size="30" value="<?php echo esc_html(stripslashes(get_option("slider8")) )?>">
-                            <?php echo displayImage(get_option("slider8")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider8Url" size="30" value=<?php echo esc_html(get_option("slider8Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #9</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider9" size="30" value="<?php echo esc_html(stripslashes(get_option("slider9")) )?>">
-                            <?php echo displayImage(get_option("slider9")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider9Url" size="30" value=<?php echo esc_html(get_option("slider9Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #10</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider10" size="30" value="<?php echo esc_html(stripslashes(get_option("slider10")) )?>">
-                            <?php echo displayImage(get_option("slider10")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider10Url" size="30" value=<?php echo esc_html(get_option("slider10Url") )?>>
-                        </td>
-                    </tr>
-                    <tr class="ds-slides">
-                        <td>Slider #11</td>
-                        <td><input type="text" class="slider-text" placeholder="Any message or image url" name="slider11" size="30" value="<?php echo esc_html(stripslashes(get_option("slider11")) )?>">
-                            <?php echo displayImage(get_option("slider11")); ?>
-                            <br/>
-                                <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider11Url" size="30" value=<?php echo esc_html(get_option("slider11Url") )?>>
+                    <?php endfor; ?>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <button type="button" class="dpt-add-slider-btn"<?php echo ($displayCount >= 7) ? ' style="display:none;"' : ''; ?>>+ Add Another Slider</button>
                         </td>
                     </tr>
                     <tr>
@@ -205,4 +200,3 @@ function displayImage($slide){
     </div>
     </form>
 </div>
-
