@@ -1,7 +1,7 @@
 <?php
 function displayImage($slide){
     if (filter_var($slide, FILTER_VALIDATE_URL)) {
-        return  '<img src="' . esc_html($slide ) . '" style="max-height: 25px;" class="grow">';
+        return  '<img src="' . esc_html($slide ) . '" style="max-height: 30px; margin-top: 5px;" class="grow">';
     }
     return '';
 }
@@ -15,59 +15,43 @@ for ($i = 1; $i <= 11; $i++) {
 $displayCount = max(1, min($existingSliders, $maxSliders));
 ?>
 <style>
-.dpt-slider-row { display: flex; align-items: center; gap: 8px; }
-.dpt-slider-row input[type="text"] { flex: 1; }
-.dpt-media-btn { 
-    padding: 6px 10px; cursor: pointer; border: 1px solid #ccc; 
-    background: #f0f0f0; border-radius: 4px; font-size: 16px; 
+.dpt-slider-section {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
 }
-.dpt-media-btn:hover { background: #e0e0e0; }
+.dpt-slider-section h4 {
+    margin: 0 0 10px 0;
+    color: #2271b1;
+    font-weight: 600;
+}
+.dpt-slider-input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.dpt-slider-input-group input[type="text"] {
+    flex: 1;
+}
+.dpt-media-btn { 
+    padding: 8px 12px; cursor: pointer; border: 1px solid #ccc; 
+    background: #fff; border-radius: 4px; font-size: 14px;
+    white-space: nowrap;
+}
+.dpt-media-btn:hover { background: #e0e0e0; border-color: #2271b1; }
 .dpt-add-slider-btn {
-    margin-top: 10px; padding: 8px 16px; cursor: pointer;
+    display: inline-block; padding: 10px 20px; cursor: pointer;
     background: #2271b1; color: #fff; border: none; border-radius: 4px;
+    font-size: 14px; margin-top: 10px;
 }
 .dpt-add-slider-btn:hover { background: #1d5a8a; }
+.dpt-add-slider-btn:disabled { background: #ccc; cursor: not-allowed; }
 .dpt-slider-hidden { display: none; }
+.dpt-sliders-container { margin-top: 20px; }
 </style>
-
-<script>
-jQuery(document).ready(function($) {
-    var frame;
-    $('.dpt-media-btn').on('click', function(e) {
-        e.preventDefault();
-        var $button = $(this);
-        var $input = $button.closest('.dpt-slider-row').find('input[name="slider[]"]');
-        
-        if (frame) {
-            frame.open();
-            return;
-        }
-        
-        frame = wp.media({
-            title: 'Select Image for Slider',
-            button: { text: 'Use this image' },
-            multiple: false
-        });
-        
-        frame.on('select', function() {
-            var attachment = frame.state().get('selection').first().toJSON();
-            $input.val(attachment.url).trigger('change');
-        });
-        
-        frame.open();
-    });
-    
-    $('.dpt-add-slider-btn').on('click', function() {
-        var currentVisible = $('.ds-slides:visible').length;
-        if (currentVisible < 7) {
-            $('.ds-slides').eq(currentVisible).show();
-            if ($('.ds-slides:visible').length >= 7) {
-                $(this).hide();
-            }
-        }
-    });
-});
-</script>
 
 <h3>Masjid/Mobile screen settings</h3>
 <div class="container-fluid">
@@ -156,27 +140,30 @@ jQuery(document).ready(function($) {
                         <td>Transition Speed</td>
                         <td><input type="number" min="0" class="slider-text" name="transitionSpeed" placeholder="5" value=<?php echo esc_html(get_option("transitionSpeed")/1000 ) ?>> seconds </td>
                     </tr>
-
+                </table>
+                
+                <div class="dpt-sliders-container">
+                    <h4>Sliders <small>(click + Add Another to add more, max 7)</small></h4>
+                    
                     <?php for ($i = 1; $i <= 11; $i++): ?>
-                    <tr class="ds-slides<?php echo ($i > $displayCount) ? ' dpt-slider-hidden' : ''; ?>" data-slider="<?php echo $i; ?>">
-                        <td>Slider #<?php echo $i; ?></td>
-                        <td>
-                            <div class="dpt-slider-row">
-                                <button type="button" class="dpt-media-btn" title="Select from Media Gallery">🖼️</button>
-                                <input type="text" class="slider-text" placeholder="Any message or image url" name="slider<?php echo $i; ?>" size="30" value="<?php echo esc_html(stripslashes(get_option("slider$i")) )?>">
-                            </div>
-                            <?php echo displayImage(get_option("slider$i")); ?>
-                            <br/>
-                            <input type="text" class="slider-text" placeholder="[optional] http(s)://  url" name="slider<?php echo $i; ?>Url" size="30" value=<?php echo esc_html(get_option("slider{$i}Url") )?>>
-                        </td>
-                    </tr>
+                    <div class="dpt-slider-section<?php echo ($i > $displayCount) ? ' dpt-slider-hidden' : ''; ?>" data-slider="<?php echo $i; ?>">
+                        <h4>Slider #<?php echo $i; ?></h4>
+                        <div class="dpt-slider-input-group">
+                            <button type="button" class="dpt-media-btn" data-input="slider<?php echo $i; ?>">🖼️ Select from Media</button>
+                            <input type="text" class="slider-text" placeholder="Image URL or message" name="slider<?php echo $i; ?>" value="<?php echo esc_html(stripslashes(get_option("slider$i")) )?>">
+                        </div>
+                        <?php echo displayImage(get_option("slider$i")); ?>
+                        <div class="dpt-slider-input-group">
+                            <span style="color: #666; font-size: 12px;">Optional link:</span>
+                            <input type="text" class="slider-text" placeholder="http(s):// url" name="slider<?php echo $i; ?>Url" value="<?php echo esc_html(get_option("slider{$i}Url")); ?>">
+                        </div>
+                    </div>
                     <?php endfor; ?>
                     
-                    <tr>
-                        <td colspan="2">
-                            <button type="button" class="dpt-add-slider-btn"<?php echo ($displayCount >= 7) ? ' style="display:none;"' : ''; ?>>+ Add Another Slider</button>
-                        </td>
-                    </tr>
+                    <button type="button" class="dpt-add-slider-btn" id="dpt-add-slider"<?php echo ($displayCount >= 7) ? ' style="display:none;"' : ''; ?>>+ Add Another Slider</button>
+                </div>
+                
+                <table class="table" style="margin-top: 20px;">
                     <tr>
                         <td class="active-slider">Additional CSS</td>
                         <td><textarea name="ds-additional-css" cols="30"><?php echo esc_html(get_option("ds-additional-css") )?></textarea></td>
@@ -200,3 +187,43 @@ jQuery(document).ready(function($) {
     </div>
     </form>
 </div>
+
+<script>
+jQuery(document).ready(function($) {
+    // Add Another Slider button
+    $('#dpt-add-slider').on('click', function() {
+        var $hidden = $('.dpt-slider-section.dpt-slider-hidden').first();
+        if ($hidden.length) {
+            $hidden.removeClass('dpt-slider-hidden');
+            if ($('.dpt-slider-section:not(.dpt-slider-hidden)').length >= 7) {
+                $(this).hide();
+            }
+        }
+    });
+    
+    // Media gallery button
+    $(document).on('click', '.dpt-media-btn', function(e) {
+        e.preventDefault();
+        var btn = $(this);
+        var inputName = btn.data('input');
+        
+        // Create WordPress media frame
+        var frame = wp.media({
+            title: 'Select Image for Slider',
+            button: { text: 'Use this image' },
+            multiple: false
+        });
+        
+        frame.on('select', function() {
+            var attachment = frame.state().get('selection').first().toJSON();
+            $('input[name="' + inputName + '"]').val(attachment.url).trigger('change');
+        });
+        
+        frame.open();
+    });
+});
+</script>
+<?php 
+// Enqueue WordPress media uploader scripts
+wp_enqueue_media();
+?>
