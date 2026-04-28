@@ -425,10 +425,23 @@ class DigitalScreenSettings {
 // Template selection - only for enabled radios (skip placeholder)
             $('.dpt-template-card:not(.dpt-template-placeholder)').on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
+                
                 const radio = $(this).find('input[type="radio"]');
                 radio.prop('checked', true).trigger('change');
+                
+                // Update UI
                 $('.dpt-template-card').removeClass('selected');
                 $(this).addClass('selected');
+                
+                // Debug - check if value is being set
+                console.log('Template selected:', radio.val());
+                console.log('Radio checked:', radio.prop('checked'));
+            });
+            
+            // Debug: Log all form data on submit
+            $('form[name="digitalScreen"]').on('submit', function() {
+                console.log('ds-template value:', $('input[name="ds-template"]:checked').val());
             });
         });
         </script>
