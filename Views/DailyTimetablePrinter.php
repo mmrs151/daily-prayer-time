@@ -231,21 +231,15 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
         
         foreach ($localPrayerNames as $key=>$prayerName) {
-            // On Friday, replace Zuhr with Jumuah in display
-            if ($this->todayIsFriday() && $key == 'zuhr') {
-                $prayerName = $this->localHeaders['jumuah'] ?? 'Jumuah';
-            }
-            $class = $nextPrayer == $key ? 'highlight' : '';
-            // On Friday, highlight Jumuah instead of Zuhr
-            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
-                $class = 'highlight';
-            }
+            // On Friday, Zuhr stays as "Zuhr" but NOT highlighted
+            $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
+            $class = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
         
-        // Add Jumuah column on Friday
+        // Add Jumuah column on Friday after Zuhr
         if ($this->todayIsFriday() && get_option('jumuah1')) {
-            $jumuahClass = $nextPrayer == 'jumuah' ? 'highlight' : '';
+            $jumuahClass = ($nextPrayer == 'jumuah') ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $jumuahClass."'>".($this->localHeaders['jumuah'] ?? 'Jumuah')."</th>";
         }
 
@@ -339,7 +333,9 @@ class DailyTimetablePrinter extends TimetablePrinter
         $tds = '';
         $nextPrayer =  $this->getNextPrayer( $row );
         foreach ($jamahTimes as $key => $azan) {
-            $class = $nextPrayer == $key ? 'class=highlight' : 'class=jamah';
+            // On Friday, don't highlight Zuhr - only Jumuah will be highlighted
+            $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
+            $class = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'class=highlight' : 'class=jamah';
             $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key, true )."</th>";
             
             // On Friday, add Jumuah column after Zuhr
@@ -440,8 +436,10 @@ class DailyTimetablePrinter extends TimetablePrinter
             $begins =  $key != 'sunrise' ? lcfirst( $key ).'_begins' : 'sunrise';
             $jamah =  $key != 'sunrise' ? lcfirst( $key ).'_jamah' : 'sunrise';
 
-            $class = $nextPrayer == $key ? 'highlight' : '';
-            $highlightForJamah = $nextPrayer == $key ? 'highlight' : '';
+            // On Friday, don't highlight Zuhr - only Jumuah will be highlighted
+            $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
+            $class = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'highlight' : '';
+            $highlightForJamah = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'highlight' : '';
 
             $trs .= '<tr>
                     <th class="prayerName ' .$class.'">' . $prayerName . '</th>';
