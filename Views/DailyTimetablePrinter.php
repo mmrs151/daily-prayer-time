@@ -231,8 +231,22 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
         
         foreach ($localPrayerNames as $key=>$prayerName) {
+            // On Friday, replace Zuhr with Jumuah in display
+            if ($this->todayIsFriday() && $key == 'zuhr') {
+                $prayerName = $this->localHeaders['jumuah'] ?? 'Jumuah';
+            }
             $class = $nextPrayer == $key ? 'highlight' : '';
+            // On Friday, highlight Jumuah instead of Zuhr
+            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $class = 'highlight';
+            }
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
+        }
+        
+        // Add Jumuah column on Friday
+        if ($this->todayIsFriday() && get_option('jumuah1')) {
+            $jumuahClass = $nextPrayer == 'jumuah' ? 'highlight' : '';
+            $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $jumuahClass."'>".($this->localHeaders['jumuah'] ?? 'Jumuah')."</th>";
         }
 
         return $ths;
@@ -392,18 +406,8 @@ class DailyTimetablePrinter extends TimetablePrinter
         $nextPrayer = $this->getNextPrayer( $row );
 
         $localPrayerNames = $this->localPrayerNames;
-        if (get_option('zawal')) {
-            if ($this->dptHelper->isZawalTimeNext($row)) {
-                $localPrayerNames = $this->toggleSunriseZawal($row, $localPrayerNames);
-                $row['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
-            } else {
-                unset($localPrayerNames['zawal']);
-            }
-        } else {
-            unset($localPrayerNames['zawal']);
-        }
-
-        // Handle ishraq - merge into sunrise row
+        
+        // Handle ishraq - ONLY if ishraq is NEXT (not yet passed)
         $ishraqMins = get_option('ishraq');
         if ($ishraqMins && $ishraqMins != '0' && isset($localPrayerNames['ishraq'])) {
             if ($this->dptHelper->isIshraqTimeNext($row)) {
@@ -413,6 +417,17 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
         if (isset($localPrayerNames['ishraq'])) {
             unset($localPrayerNames['ishraq']);
+        }
+        
+        // Handle zawal - ONLY if zawal is NEXT (not yet passed)
+        if (get_option('zawal')) {
+            if ($this->dptHelper->isZawalTimeNext($row)) {
+                $localPrayerNames['sunrise'] = $localPrayerNames['zawal'];
+                $row['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
+            }
+        }
+        if (isset($localPrayerNames['zawal'])) {
+            unset($localPrayerNames['zawal']);
         }
 
         foreach ($localPrayerNames as $key=>$prayerName) {
