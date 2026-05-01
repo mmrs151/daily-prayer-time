@@ -131,12 +131,12 @@ class DigitalScreenSettings {
                     </label>
                     <span class="dpt-separator">|</span>
                     <label>
-                        <input type="radio" name="displayMode" value="quran" 
+                        <input type="radio" name="displayModeAlt" value="quran" 
                             <?php echo get_option('quran-chbox') === 'displayQuran' ? 'checked' : ''; ?>>
                         Display Quran Verse
                     </label>
                     <label>
-                        <input type="radio" name="displayMode" value="slider" 
+                        <input type="radio" name="displayModeAlt" value="slider" 
                             <?php echo $sliderActive ? 'checked' : ''; ?>>
                         Activate Slider
                     </label>
@@ -336,8 +336,28 @@ class DigitalScreenSettings {
         }
         
         jQuery(document).ready(function($) {
-            // Display mode selection
+            // Display mode selection - group 1 (default/template)
             $('input[name="displayMode"]').on('change', function() {
+                const value = $(this).val();
+                const sliderSection = $('#dpt-slider-section');
+                const templateSection = $('#dpt-template-section');
+                const sliderInput = $('#slider-chbox-hidden');
+                const templateInput = $('#template-chbox-hidden');
+                
+                if (value === 'template') {
+                    sliderInput.val('');
+                    templateInput.val('template');
+                    sliderSection.removeClass('active').addClass('hidden');
+                    templateSection.removeClass('hidden').addClass('active');
+                } else if (value === 'default') {
+                    templateInput.val('');
+                    sliderSection.removeClass('active').addClass('hidden');
+                    templateSection.removeClass('active').addClass('hidden');
+                }
+            });
+            
+            // Display mode selection - group 2 (quran/slider)
+            $('input[name="displayModeAlt"]').on('change', function() {
                 const value = $(this).val();
                 const sliderSection = $('#dpt-slider-section');
                 const templateSection = $('#dpt-template-section');
@@ -356,19 +376,6 @@ class DigitalScreenSettings {
                     templateInput.val('');
                     quranInput.val('displayQuran');
                     sliderSection.removeClass('active').addClass('hidden');
-                    templateSection.removeClass('active').addClass('hidden');
-                } else if (value === 'template') {
-                    sliderInput.val('');
-                    quranInput.val('');
-                    templateInput.val('template');
-                    sliderSection.removeClass('active').addClass('hidden');
-                    templateSection.removeClass('hidden').addClass('active');
-                } else if (value === 'default') {
-                    sliderInput.val('');
-                    templateInput.val('');
-                    quranInput.val('');
-                    sliderSection.removeClass('active').addClass('hidden');
-                    templateSection.removeClass('active').addClass('hidden');
                 }
             });
             
@@ -379,12 +386,15 @@ class DigitalScreenSettings {
             
             // Sync hidden inputs with checked radio on page load
             const checkedValue = $('input[name="displayMode"]:checked').val();
-            if (checkedValue === 'quran') {
-                $('#quran-chbox-hidden').val('displayQuran');
-            } else if (checkedValue === 'slider') {
-                $('#slider-chbox-hidden').val('slider');
-            } else if (checkedValue === 'template') {
+            const checkedValueAlt = $('input[name="displayModeAlt"]:checked').val();
+            
+            if (checkedValue === 'template') {
                 $('#template-chbox-hidden').val('template');
+            } else if (checkedValueAlt === 'quran') {
+                $('#quran-chbox-hidden').val('displayQuran');
+            } else if (checkedValueAlt === 'slider') {
+                $('#slider-chbox-hidden').val('slider');
+            }
             }
             
             // Add slider button
