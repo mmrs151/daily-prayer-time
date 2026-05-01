@@ -43,9 +43,11 @@ class DigitalScreenSettings {
             .dpt-form-group input, .dpt-form-group textarea { 
                 width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
             }
+            .dpt-form-group textarea { max-height: 120px; overflow-y: auto; resize: vertical; }
             .dpt-form-group input:focus, .dpt-form-group textarea:focus { 
                 outline: 2px solid #2271b1; border-color: #2271b1; 
             }
+            .dpt-section textarea { min-height: 100px; }
             .dpt-form-group-wide { flex: 2; }
             .dpt-hint { font-weight: normal; color: #666; font-size: 12px; }
             
