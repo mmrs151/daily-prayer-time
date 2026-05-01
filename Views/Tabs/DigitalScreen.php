@@ -63,11 +63,11 @@ class DigitalScreenSettings {
                 background: #f9f9f9;
             }
             .dpt-slider-card h4 { margin: 0 0 12px 0; color: #2271b1; }
-            .dpt-slider-row { display: flex; gap: 15px; align-items: center; }
+            .dpt-slider-row { display: flex; gap: 20px; align-items: flex-start; }
             .dpt-slider-fields { flex: 1; }
             .dpt-slider-preview { 
-                width: 80px; 
-                height: 60px; 
+                width: 120px; 
+                height: 90px; 
                 display: flex; 
                 align-items: center; 
                 justify-content: center;
@@ -75,8 +75,9 @@ class DigitalScreenSettings {
                 border-radius: 4px;
                 background: #f9f9f9;
                 flex-shrink: 0;
+                padding: 5px;
             }
-            .dpt-slider-preview img { max-width: 100%; max-height: 100%; }
+            .dpt-slider-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
             .dpt-slider-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
             .dpt-slider-input-row input { flex: 1; }
             .dpt-slider-url-row { display: flex; gap: 15px; margin-top: 8px; }
