@@ -245,7 +245,7 @@ class DigitalScreenSettings {
                     <div class="dpt-slider-row">
                         <div class="dpt-slider-fields">
                             <div class="dpt-slider-input-row">
-                                <button type="button" class="dpt-media-btn" data-input="slider<?php echo $i; ?>">🖼️ Select from Media</button>
+                                <button type="button" class="dpt-media-btn" data-input="slider<?php echo $i; ?>">📁 Media Library</button>
                                 <input type="text" placeholder="Image URL or message" name="slider<?php echo $i; ?>" 
                                     value="<?php echo esc_attr(get_option("slider$i") ?? ''); ?>">
                             </div>
