@@ -337,19 +337,31 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
 
         $tds = '';
-        $nextPrayer =  $this->getNextPrayer( $row );
+$nextPrayer =  $this->getNextPrayer( $row );
+        
+        // On Friday, Zuhr should NOT be highlighted - only Jumuah
+        $onFriday = $this->todayIsFriday();
+        
         foreach ($jamahTimes as $key => $azan) {
-            // On Friday, don't highlight Zuhr - only Jumuah will be highlighted
-            $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
-            $class = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'class=highlight' : 'class=jamah';
-            $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key, true )."</th>";
+            $shouldHighlight = false;
+            if ($onFriday) {
+                // On Friday, highlight only Jumuah, not Zuhr
+                $shouldHighlight = ($key == 'jumuah' || ($nextPrayer == 'jumuah' && $key != 'zuhr') || ($nextPrayer != 'jumuah' && $nextPrayer == $key));
+                // But don't highlight Zuhr on Friday
+                if ($key == 'zuhr') $shouldHighlight = false;
+            } else {
+                $shouldHighlight = ($nextPrayer == $key);
+            }
+            
+            $class = $shouldHighlight ? 'class=highlight' : 'class=jamah';
+            $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key, true )."</td>";
         }
         
-        // On Friday, add Jumuah column at the END (after Isha)
-        if ($this->todayIsFriday() && get_option('jumuah1')) {
-            $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : 'class=jamah';
-            $tds .= "<td ".$jumuahClass." rowspan='2'>".$this->getJumuahTimesArray()."</td>";
-        }
+        // // On Friday, add Jumuah column at the END (after Isha)
+        // if ($this->todayIsFriday() && get_option('jumuah1')) {
+        //     $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : 'class=jamah';
+        //     $tds .= "<td ".$jumuahClass." rowspan='2'>".$this->getJumuahTimesArray()."</td>";
+        // }
 
         return $tds;
     }
@@ -478,10 +490,6 @@ class DailyTimetablePrinter extends TimetablePrinter
 
     private function getFormattedDateForPrayer($time, $prayerName, $isJamatTime=false)
     {
-//        $jumuahTime = get_option('jumuah1');
-//        if ( ($prayerName === 'zuhr' && $this->todayIsFriday()) && $isJamatTime && $jumuahTime) {
-//            return $this->getJumuahTimesArray();
-//        }
         return $this->formatDateForPrayer($time);
     }
 
