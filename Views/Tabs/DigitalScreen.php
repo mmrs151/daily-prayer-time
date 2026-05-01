@@ -282,7 +282,7 @@ class DigitalScreenSettings {
                 <div class="dpt-form-group">
                     <label>Additional CSS <span class="dpt-hint">(advanced users only)</span></label>
                     <textarea name="ds-additional-css" rows="5" placeholder=".dpt-class { ... }">
-                        <?php echo esc_textarea(get_option('ds-additional-css') ?? 'x'); ?>asdfa
+                        <?php echo esc_textarea(get_option('ds-additional-css') ?? ''); ?>
                     </textarea>
                 </div>
             </div>
