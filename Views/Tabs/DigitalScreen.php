@@ -48,6 +48,9 @@ class DigitalScreenSettings {
             }
             .dpt-hint { font-weight: normal; color: #666; font-size: 12px; }
             
+            .dpt-form-group { flex: 1; }
+            .dpt-form-group-wide { flex: 2; }
+            
             .dpt-option-group { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
             .dpt-option-group label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
             .dpt-option-group .dpt-separator { color: #999; font-weight: bold; margin: 0 10px; }
@@ -59,6 +62,9 @@ class DigitalScreenSettings {
             .dpt-slider-card h4 { margin: 0 0 12px 0; color: #2271b1; }
             .dpt-slider-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
             .dpt-slider-input-row input { flex: 1; }
+            .dpt-slider-url-row { display: flex; gap: 15px; margin-top: 8px; }
+            .dpt-slider-url-row span { color: #666; font-size: 12px; min-width: 80px; }
+            .dpt-slider-optional { color: #666; margin-bottom: 15px; }
             .dpt-media-btn { 
                 padding: 8px 14px; cursor: pointer; border: 1px solid #ccc; 
                 background: #fff; border-radius: 4px; white-space: nowrap;
@@ -69,6 +75,7 @@ class DigitalScreenSettings {
                 background: #2271b1; color: #fff; border: none; border-radius: 4px;
             }
             .dpt-add-btn:hover { background: #1d5a8a; }
+            .dpt-add-btn-hidden { display: none; }
             
             .dpt-template-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
             .dpt-template-card { border: 2px solid #ddd; border-radius: 8px; padding: 12px; cursor: pointer; }
@@ -76,11 +83,20 @@ class DigitalScreenSettings {
             .dpt-template-card.selected { border-color: #2271b1; background: #e7f1ff; }
             .dpt-template-card img { max-width: 100%; border-radius: 4px; }
             .dpt-template-card.dpt-template-placeholder { opacity: 0.8; border-style: dashed; }
+            .dpt-placeholder-img { 
+                height: 100px; background: #e0e0e0; border-radius: 4px; margin-bottom: 8px;
+                display: flex; align-items: center; justify-content: center;
+                color: #888; font-size: 13px; border: 2px dashed #bbb;
+            }
+            .dpt-template-note { margin-top: 15px; color: #888; font-size: 12px; }
             
             .dpt-instructions { background: #f0f0f1; padding: 15px; border-radius: 8px; }
             .dpt-instructions h3 { margin: 0 0 12px 0; color: #2271b1; }
             .dpt-instructions code { background: #fff; padding: 2px 5px; border-radius: 3px; }
             .dpt-divider { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
+
+            .dpt-form-row-wide { margin-top: 20px; }
+            .dpt-image-preview { max-height: 30px; margin-left: 10px; }
         </style>
         <?php
     }
@@ -130,7 +146,7 @@ class DigitalScreenSettings {
                 <input type="hidden" name="template-chbox" id="template-chbox-hidden" value="<?php echo esc_attr(get_option('template-chbox') ?? ''); ?>">
                 
                 <div class="dpt-form-row">
-                    <div class="dpt-form-group" style="flex: 2;">
+                    <div class="dpt-form-group dpt-form-group-wide">
                         <label>Fading Messages <span class="dpt-hint">(separated by full stop)</span></label>
                         <textarea name="ds-fading-msg" rows="3"><?php echo esc_textarea(get_option('ds-fading-msg') ?? ''); ?></textarea>
                     </div>
@@ -181,7 +197,7 @@ class DigitalScreenSettings {
                     </div>
                     <div class="dpt-form-group">
                         <label>Transition Effect</label>
-                        <div style="display: flex; gap: 15px; margin-top: 8px;">
+                        <div class="dpt-slider-url-row">
                             <label><input type="radio" name="transitionEffect" value="slide" <?php echo get_option('transitionEffect') === 'slide' ? 'checked' : ''; ?>> Slide</label>
                             <label><input type="radio" name="transitionEffect" value="carousel-fade" <?php echo get_option('transitionEffect') === 'carousel-fade' ? 'checked' : ''; ?>> Fade</label>
                         </div>
@@ -195,7 +211,7 @@ class DigitalScreenSettings {
                 
                 <hr class="dpt-divider">
                 
-                <p style="color: #666; margin-bottom: 15px;">
+                <p class="dpt-slider-optional">
                     Click <strong>"🖼️ Select from Media"</strong> to choose images. Maximum <?php echo self::MAX_SLIDERS; ?> sliders.
                 </p>
                 
@@ -209,7 +225,7 @@ class DigitalScreenSettings {
                         <?php echo $this->displayImage(get_option("slider$i")); ?>
                     </div>
                     <div class="dpt-slider-input-row">
-                        <span style="color: #666; font-size: 12px; min-width: 80px;">Optional link:</span>
+                        <span class="dpt-slider-url-label">Optional link:</span>
                         <input type="text" placeholder="http(s):// url" name="slider<?php echo $i; ?>Url" 
                             value="<?php echo esc_attr(get_option("slider{$i}Url") ?? ''); ?>">
                     </div>
@@ -217,7 +233,7 @@ class DigitalScreenSettings {
                 <?php endfor; ?>
                 
                 <button type="button" class="dpt-add-btn" id="dpt-add-slider"
-                    <?php echo $displayCount >= self::MAX_SLIDERS ? 'style="display:none;"' : ''; ?>>
+                    <?php echo $displayCount >= self::MAX_SLIDERS ? 'class="dpt-add-btn dpt-add-btn-hidden"' : 'class="dpt-add-btn"'; ?>>
                     + Add Another Slider
                 </button>
             </div>
@@ -232,7 +248,7 @@ class DigitalScreenSettings {
         <div class="dpt-section <?php echo $templateActive ? 'active' : 'hidden'; ?>" id="dpt-template-section">
             <div class="dpt-section-header" onclick="toggleDptSection(this)">🎨 Template Selection</div>
             <div class="dpt-section-content">
-                <p style="color: #666; margin-bottom: 15px;">
+                <p class="dpt-slider-optional">
                     Select a template design for your digital screen. This will replace the default layout.
                 </p>
                 <div class="dpt-template-grid">
@@ -245,12 +261,12 @@ class DigitalScreenSettings {
                         <div><input type="radio" name="ds-template" value="usman" <?php echo $savedTemplate === 'usman' ? 'checked' : ''; ?>> <strong>Masjid-E-Usman</strong></div>
                     </label>
                     <label class="dpt-template-card dpt-template-placeholder">
-                        <div class="dpt-placeholder-img" style="height:100px;background:#e0e0e0;border-radius:4px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;color:#888;font-size:13px;border:2px dashed #bbb;">Add your template here</div>
+                        <div class="dpt-placeholder-img">Add your template here</div>
                         <div><input type="radio" disabled> <strong>Add your template here</strong></div>
                         <small><a href="mailto:mmrs151@gmail.com?subject=Custom Template Design">Let's discuss</a></small>
                     </label>
                 </div>
-                <p style="margin-top: 15px; color: #888; font-size: 12px;">
+                <p class="dpt-template-note">
                     To return to the default layout, uncheck "Activate Template" above.
                 </p>
             </div>
@@ -303,7 +319,7 @@ class DigitalScreenSettings {
     private function renderFormClose(): void {
         ?>
             </div>
-            <div style="margin-top: 20px;">
+            <div class="dpt-form-row-wide">
                 <?php submit_button('Save All Settings', 'primary', 'digitalScreen'); ?>
             </div>
             </form>
@@ -416,7 +432,7 @@ class DigitalScreenSettings {
     
     private function displayImage(string $url = ''): string {
         if (filter_var($url, FILTER_VALIDATE_URL)) {
-            return '<img src="' . esc_url($url) . '" style="max-height: 30px; margin-left: 10px;">';
+            return '<img src="' . esc_url($url) . '" class="dpt-image-preview">';
         }
         return '';
     }
