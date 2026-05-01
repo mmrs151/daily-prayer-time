@@ -164,7 +164,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         if (! $row['hideTimeRemaining']) {
             $nextIqamah = $isAzanOnly == true ? '' : $this->getNextIqamahTime($row);
         }
-        $colspan = 7;
+        $colspan = 8;
         $ramadanTds = '<td></td>';
 
         $ramadan = '';
@@ -233,11 +233,12 @@ class DailyTimetablePrinter extends TimetablePrinter
         foreach ($localPrayerNames as $key=>$prayerName) {
             // On Friday, Zuhr stays as "Zuhr" but NOT highlighted
             $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
-            $class = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'highlight' : '';
+            $shouldHighlight = (!$isFridayAndZuhr && $nextPrayer == $key);
+            $class = $shouldHighlight ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
         
-        // Add Jumuah column on Friday at the END (after Isha)
+        // Add Jumuah column on Friday at the END (after Isha) - HIGHLIGHT IT
         if ($this->todayIsFriday() && get_option('jumuah1')) {
             $jumuahClass = ($nextPrayer == 'jumuah') ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $jumuahClass."'>".($this->localHeaders['jumuah'] ?? 'Jumuah')."</th>";
