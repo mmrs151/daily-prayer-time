@@ -99,17 +99,17 @@ class DigitalScreenSettings {
             .dpt-divider { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
 
             .dpt-form-row-wide { margin-top: 20px; }
-            .dpt-image-preview { max-height: 30px; margin-left: 10px; }
+            .dpt-image-preview { max-height: 30px; margin-left: 10px; transition: all 0.3s ease; }
             .dpt-image-preview:hover { 
                 position: fixed; 
-                top: 50%; left: 50%; 
-                transform: translate(-50%, -50%); 
-                max-height: 80vh; 
-                max-width: 80vw; 
+                bottom: 20px; right: 20px; 
+                max-height: 50vh; 
+                max-width: 50vw; 
                 z-index: 9999; 
                 background: #fff; 
                 padding: 10px;
                 box-shadow: 0 0 20px rgba(0,0,0,0.5);
+                border-radius: 8px;
             }
         </style>
         <?php
