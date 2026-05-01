@@ -238,9 +238,9 @@ class DailyTimetablePrinter extends TimetablePrinter
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
         
-        // Add Jumuah column on Friday at the END (after Isha) - HIGHLIGHT IT
+        // Add Jumuah column on Friday at the END (after Isha) - ALWAYS HIGHLIGHT ON FRIDAY
         if ($this->todayIsFriday() && get_option('jumuah1')) {
-            $jumuahClass = ($nextPrayer == 'jumuah') ? 'highlight' : '';
+            $jumuahClass = 'highlight';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $jumuahClass."'>".($this->localHeaders['jumuah'] ?? 'Jumuah')."</th>";
         }
 
@@ -249,12 +249,11 @@ class DailyTimetablePrinter extends TimetablePrinter
 
     private function toggleSunriseZawal($row, $prayerNames)
     {
+        // Only replace sunrise with zawal if zawal time is NEXT (not passed)
         if ($this->dptHelper->isZawalTimeNext($row)) {
             $prayerNames['sunrise'] = $prayerNames['zawal'];
             unset($prayerNames['zawal']);
-        } 
-
-        unset($prayerNames['zawal']);
+        }
 
         return $prayerNames;
     }
@@ -298,9 +297,9 @@ class DailyTimetablePrinter extends TimetablePrinter
             $tds .= "<td ". $rowspan ." ".$class.">".$this->getFormattedDateForPrayer( $azan, $key)."</th>";
         }
         
-        // On Friday, add Jumuah column at the END (after Isha) for Azan
+        // On Friday, add Jumuah column at the END (after Isha) for Azan - ALWAYS HIGHLIGHT ON FRIDAY
         if ($this->todayIsFriday() && get_option('jumuah1')) {
-            $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : '';
+            $jumuahClass = 'class=highlight';
             $tds .= "<td ".$jumuahClass." rowspan='2'>".$this->getJumuahTimesArray()."</td>";
         }
 
@@ -358,11 +357,11 @@ $nextPrayer =  $this->getNextPrayer( $row );
             $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key, true )."</td>";
         }
         
-        // // On Friday, add Jumuah column at the END (after Isha)
-        // if ($this->todayIsFriday() && get_option('jumuah1')) {
-        //     $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : 'class=jamah';
-        //     $tds .= "<td ".$jumuahClass." rowspan='2'>".$this->getJumuahTimesArray()."</td>";
-        // }
+        // On Friday, add Jumuah column at the END (after Isha) - ALWAYS HIGHLIGHT ON FRIDAY
+        if ($this->todayIsFriday() && get_option('jumuah1')) {
+            $jumuahClass = 'class=highlight';
+            $tds .= "<td ".$jumuahClass.">".$this->getJumuahTimesArray()."</td>";
+        }
 
         return $tds;
     }
