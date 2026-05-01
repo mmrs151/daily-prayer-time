@@ -46,10 +46,8 @@ class DigitalScreenSettings {
             .dpt-form-group input:focus, .dpt-form-group textarea:focus { 
                 outline: 2px solid #2271b1; border-color: #2271b1; 
             }
-            .dpt-hint { font-weight: normal; color: #666; font-size: 12px; }
-            
-            .dpt-form-group { flex: 1; }
             .dpt-form-group-wide { flex: 2; }
+            .dpt-hint { font-weight: normal; color: #666; font-size: 12px; }
             
             .dpt-option-group { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
             .dpt-option-group label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
