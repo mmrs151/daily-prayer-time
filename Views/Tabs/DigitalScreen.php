@@ -100,6 +100,17 @@ class DigitalScreenSettings {
 
             .dpt-form-row-wide { margin-top: 20px; }
             .dpt-image-preview { max-height: 30px; margin-left: 10px; }
+            .dpt-image-preview:hover { 
+                position: fixed; 
+                top: 50%; left: 50%; 
+                transform: translate(-50%, -50%); 
+                max-height: 80vh; 
+                max-width: 80vw; 
+                z-index: 9999; 
+                background: #fff; 
+                padding: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            }
         </style>
         <?php
     }
