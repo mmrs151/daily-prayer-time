@@ -266,7 +266,13 @@ class DPTHelper
                 }
                 $prayer = array_search( $jamah, $row ); 
                 $prayer = explode( '_', $prayer);
-                return $prayer[0]; 
+                $nextPrayer = $prayer[0];
+                
+                // If today is Friday and next is Zuhr, return Jumuah
+                if ($this->todayIsFriday() && $nextPrayer == 'zuhr') {
+                    return 'jumuah';
+                }
+                return $nextPrayer; 
             }
         }
     }
