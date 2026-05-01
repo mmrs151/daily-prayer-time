@@ -80,6 +80,10 @@ class DigitalScreenSettings {
             .dpt-add-btn:hover { background: #1d5a8a; }
             .dpt-add-btn-hidden { display: none; }
             
+            .dpt-slider-url-label { font-size: 11px; color: #666; min-width: 70px; flex-shrink: 0; }
+            .dpt-slider-input-row input[name^="slider"][name$="Url"] { font-size: 12px; padding: 6px; }
+            .dpt-image-preview { max-height: 28px; margin-left: 8px; }
+            
             .dpt-template-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
             .dpt-template-card { border: 2px solid #ddd; border-radius: 8px; padding: 12px; cursor: pointer; }
             .dpt-template-card:hover { border-color: #2271b1; }
@@ -99,28 +103,6 @@ class DigitalScreenSettings {
             .dpt-divider { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
 
             .dpt-form-row-wide { margin-top: 20px; }
-            .dpt-image-preview { max-height: 30px; margin-left: 10px; cursor: pointer; }
-            #dpt-image-enlarged {
-                display: none;
-                position: fixed;
-                z-index: 9999;
-                background: #fff;
-                padding: 15px;
-                box-shadow: 0 0 30px rgba(0,0,0,0.5);
-                border-radius: 8px;
-                max-width: 45vw;
-                max-height: 45vh;
-            }
-            #dpt-image-enlarged.show {
-                display: block;
-                animation: dptZoomIn 0.3s ease-out;
-            }
-            @keyframes dptZoomIn {
-                from { opacity: 0; transform: scale(0.8); }
-                to { opacity: 1; transform: scale(1); }
-            }
-                transform: scale(1);
-            }
         </style>
         <?php
     }
@@ -352,31 +334,12 @@ class DigitalScreenSettings {
     private function renderScripts(): void {
         wp_enqueue_media();
         ?>
-        <div id="dpt-image-enlarged"></div>
         <script>
         function toggleDptSection(header) {
             header.parentElement.classList.toggle('active');
         }
         
         jQuery(document).ready(function($) {
-            // Image hover enlarge
-            $('.dpt-image-preview').on('mouseenter', function() {
-                var src = $(this).attr('src');
-                var offset = $(this).offset();
-                var width = $(this).width();
-                var height = $(this).height();
-                
-                $('#dpt-image-enlarged').html('<img src="' + src + '" style="max-width:100%;max-height:100%;">');
-                $('#dpt-image-enlarged')
-                    .css({
-                        left: offset.left,
-                        top: offset.top + 10
-                    })
-                    .addClass('show');
-            }).on('mouseleave', function() {
-                $('#dpt-image-enlarged').removeClass('show');
-            });
-            
             // Display mode selection - group 1 (default/template)
             $('input[name="displayMode"]').on('change', function() {
                 const value = $(this).val();
