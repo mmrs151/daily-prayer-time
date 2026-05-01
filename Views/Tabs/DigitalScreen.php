@@ -99,7 +99,7 @@ class DigitalScreenSettings {
             .dpt-divider { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
 
             .dpt-form-row-wide { margin-top: 20px; }
-            .dpt-image-preview { max-height: 30px; margin-left: 10px; }
+            .dpt-image-preview { max-height: 30px; margin-left: 10px; cursor: pointer; }
             #dpt-image-enlarged {
                 display: none;
                 position: fixed;
@@ -110,13 +110,15 @@ class DigitalScreenSettings {
                 border-radius: 8px;
                 max-width: 45vw;
                 max-height: 45vh;
-                transition: all 0.3s ease-out;
-                opacity: 0;
-                transform: scale(0.8);
             }
             #dpt-image-enlarged.show {
                 display: block;
-                opacity: 1;
+                animation: dptZoomIn 0.3s ease-out;
+            }
+            @keyframes dptZoomIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
                 transform: scale(1);
             }
         </style>
