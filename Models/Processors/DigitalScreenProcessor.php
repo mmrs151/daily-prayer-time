@@ -28,10 +28,12 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             $dsBlinkText = sanitize_text_field($this->data['ds-blink-text']);
             update_option('ds-blink-text', $dsBlinkText);
 
-            $dsAdditionalCss = sanitize_textarea_field($this->data['ds-additional-css']);
+            $dsAdditionalCss = sanitize_textarea_field($this->data['ds-additional-css'] ?? '');
+            $dsAdditionalCss = preg_replace('/\r\n/', "\n", $dsAdditionalCss);
             update_option('ds-additional-css', $dsAdditionalCss);
 
-            $dsFadingMsg = sanitize_textarea_field($this->data['ds-fading-msg']);
+            $dsFadingMsg = sanitize_textarea_field($this->data['ds-fading-msg'] ?? '');
+            $dsFadingMsg = preg_replace('/\r\n/', "\n", $dsFadingMsg);
             update_option('ds-fading-msg', $dsFadingMsg);
 
             $template = sanitize_text_field($this->data['template-chbox']);
