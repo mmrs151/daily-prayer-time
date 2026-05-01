@@ -300,7 +300,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         // On Friday, add Jumuah column at the END (after Isha) for Azan
         if ($this->todayIsFriday() && get_option('jumuah1')) {
             $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : '';
-            $tds .= "<td ".$jumuahClass.">".$this->getJumuahTimesArray()."</td>";
+            $tds .= "<td ".$jumuahClass." rowspan='2'>".$this->getJumuahTimesArray()."</td>";
         }
 
         return $tds;
@@ -348,7 +348,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         // On Friday, add Jumuah column at the END (after Isha)
         if ($this->todayIsFriday() && get_option('jumuah1')) {
             $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : 'class=jamah';
-            $tds .= "<td ".$jumuahClass.">".$this->getJumuahTimesArray()."</td>";
+            $tds .= "<td ".$jumuahClass." rowspan='2'>".$this->getJumuahTimesArray()."</td>";
         }
 
         return $tds;
