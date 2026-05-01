@@ -208,7 +208,8 @@ class DPTHelper
         }
 
         // If zawal time is next, highlight zuhr row (not sunrise row)
-        if ($this->isZawalTimeNext($row) && $prayerName == 'zuhr') {
+        // Do not highlight Zuhr for zawal on Fridays (Jumuah handling takes precedence)
+        if ($this->isZawalTimeNext($row) && $prayerName == 'zuhr' && ! $this->todayIsFriday()) {
             return 'nextPrayer';
         }
         
