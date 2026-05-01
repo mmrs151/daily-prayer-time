@@ -395,7 +395,6 @@ class DigitalScreenSettings {
             } else if (checkedValueAlt === 'slider') {
                 $('#slider-chbox-hidden').val('slider');
             }
-            }
             
             // Add slider button
             $('#dpt-add-slider').on('click', function() {
