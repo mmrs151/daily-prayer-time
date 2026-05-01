@@ -338,10 +338,12 @@ class DailyTimetablePrinter extends TimetablePrinter
             $class = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'class=highlight' : 'class=jamah';
             $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key, true )."</th>";
             
-            // On Friday, add Jumuah column after Zuhr
+            // On Friday, add Jumuah column after Zuhr showing full Jumuah time
             if ($this->todayIsFriday() && $key == 'zuhr' && get_option('jumuah1')) {
                 $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : 'class=jamah';
-                $tds .= "<td ".$jumuahClass.">".$this->getJumuahTimesArray()."</th>";
+                // Display Jumuah times spanning this column
+                $jumuahTimes = $this->getJumuahTimesArray();
+                $tds .= "<td ".$jumuahClass." colspan='2'>".$jumuahTimes."</td>";
             }
         }
 
