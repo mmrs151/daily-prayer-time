@@ -341,6 +341,12 @@ class DailyTimetablePrinter extends TimetablePrinter
         foreach ($jamahTimes as $key => $azan) {
             $class = $nextPrayer == $key ? 'class=highlight' : 'class=jamah';
             $tds .= "<td ".$class.">".$this->getFormattedDateForPrayer( $azan, $key, true )."</th>";
+            
+            // On Friday, add Jumuah column after Zuhr
+            if ($this->todayIsFriday() && $key == 'zuhr' && get_option('jumuah1')) {
+                $jumuahClass = ($nextPrayer == 'jumuah') ? 'class=highlight' : 'class=jamah';
+                $tds .= "<td ".$jumuahClass.">".$this->getJumuahTimesArray()."</th>";
+            }
         }
 
         return $tds;
@@ -455,7 +461,8 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
 
         if ( get_option('jumuah1') && $display != 'azan' ) {
-            $jumuahClass = ($nextPrayer == 'jumuah') ? 'highlight' : '';
+            $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr');
+            $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $trs .= '<tr>
                             <th class="prayerName ' . $jumuahClass . '"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
                             <td colspan="2" class="jamah ' . $jumuahClass . '">' . $this->getJumuahTimesArray() . '</td>
