@@ -282,7 +282,7 @@ class DigitalScreenSettings {
                 <div class="dpt-form-group">
                     <label>Additional CSS <span class="dpt-hint">(advanced users only)</span></label>
                     <textarea name="ds-additional-css" rows="5" placeholder=".dpt-class { ... }">
-                        <?php echo esc_textarea(get_option('ds-additional-css') ?? ''); ?>
+                        <?php echo esc_textarea(get_option('ds-additional-css') ?? 'x'); ?>asdfa
                     </textarea>
                 </div>
             </div>
@@ -339,19 +339,14 @@ class DigitalScreenSettings {
             // Display mode selection - group 1 (default/template)
             $('input[name="displayMode"]').on('change', function() {
                 const value = $(this).val();
-                const sliderSection = $('#dpt-slider-section');
                 const templateSection = $('#dpt-template-section');
-                const sliderInput = $('#slider-chbox-hidden');
                 const templateInput = $('#template-chbox-hidden');
                 
                 if (value === 'template') {
-                    sliderInput.val('');
                     templateInput.val('template');
-                    sliderSection.removeClass('active').addClass('hidden');
                     templateSection.removeClass('hidden').addClass('active');
                 } else if (value === 'default') {
                     templateInput.val('');
-                    sliderSection.removeClass('active').addClass('hidden');
                     templateSection.removeClass('active').addClass('hidden');
                 }
             });
@@ -360,20 +355,15 @@ class DigitalScreenSettings {
             $('input[name="displayModeAlt"]').on('change', function() {
                 const value = $(this).val();
                 const sliderSection = $('#dpt-slider-section');
-                const templateSection = $('#dpt-template-section');
                 const quranInput = $('#quran-chbox-hidden');
                 const sliderInput = $('#slider-chbox-hidden');
-                const templateInput = $('#template-chbox-hidden');
                 
                 if (value === 'slider') {
                     quranInput.val('');
                     sliderInput.val('slider');
-                    templateInput.val('');
                     sliderSection.removeClass('hidden').addClass('active');
-                    templateSection.removeClass('active').addClass('hidden');
                 } else if (value === 'quran') {
                     sliderInput.val('');
-                    templateInput.val('');
                     quranInput.val('displayQuran');
                     sliderSection.removeClass('active').addClass('hidden');
                 }
