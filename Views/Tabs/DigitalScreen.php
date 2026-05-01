@@ -66,8 +66,7 @@ class DigitalScreenSettings {
             .dpt-slider-row { display: flex; gap: 20px; align-items: flex-start; }
             .dpt-slider-fields { flex: 1; }
             .dpt-slider-preview { 
-                width: 120px; 
-                height: 90px; 
+                width: 15%; 
                 display: flex; 
                 align-items: center; 
                 justify-content: center;
@@ -100,7 +99,11 @@ class DigitalScreenSettings {
             .dpt-image-preview { max-height: 28px; margin-left: 8px; }
             
             .dpt-template-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
-            .dpt-template-card { border: 2px solid #ddd; border-radius: 8px; padding: 12px; cursor: pointer; }
+            @media (max-width: 768px) { .dpt-template-grid { grid-template-columns: 1fr; } }
+            .dpt-template-card { 
+                border: 2px solid #ddd; border-radius: 8px; padding: 12px; cursor: pointer;
+                display: flex; flex-direction: column; justify-content: flex-end;
+            }
             .dpt-template-card:hover { border-color: #2271b1; }
             .dpt-template-card.selected { border-color: #2271b1; background: #e7f1ff; }
             .dpt-template-card img { max-width: 100%; border-radius: 4px; }
