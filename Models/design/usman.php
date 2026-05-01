@@ -102,14 +102,14 @@ $html = '';
             $rightClass = '';
             $slides = '';
 
-            if (get_option('quran-chbox') || get_option('slider-chbox')) {
+            if (get_option('quran-chbox') || get_option('slider-chbox') || $this->hasSliderImages()) {
                 $leftClass = 'col-md-4 col-sm-4 col-4';
                 $rightClass = 'col-md-8 col-sm-8 col-8';
 
                 if (get_option('quran-chbox')) {
                     $slides = $this->getQuranSlides($transitionSpeed);
                 } else {
-                    $slides = $this->getPresentationRow($transitionSpeed);
+                    $slides = $this->getPresentationRow($transitionSpeed, true);
                 }
             }
             ?>
@@ -121,7 +121,7 @@ $html = '';
                         </div>
                     </div>
                 </div>
-                <div class="row masjid-name-logo">
+                <div class="row mosque-info-overlay">
                     <div class="col-md-3 logo-section">
                         <?php echo $this->getLogoUrl(); ?>
                     </div>

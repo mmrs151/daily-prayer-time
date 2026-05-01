@@ -59,7 +59,10 @@ class DigitalScreen extends DailyShortCode
 
     public function displayDigitalScreen()
     {
-        if ($this->template || get_option('template-chbox')) {
+        $templateEnabled = get_option('template-chbox') === 'template';
+        $hasTemplate = !empty(get_option('dsTemplate'));
+        
+        if ($this->template || ($templateEnabled && $hasTemplate)) {
             return $this->getTemplate();
         }
 
@@ -376,10 +379,14 @@ class DigitalScreen extends DailyShortCode
         return $html;
     }
 
-    private function getPresentationRow()
+    private function getPresentationRow($transitionSpeed = null, $slidesOnly = false)
     {
         $transitionEffect = get_option('transitionEffect');
-        $transitionSpeed = get_option('transitionSpeed');
+        $transitionSpeed = $transitionSpeed ?? get_option('transitionSpeed');
+
+        if ($slidesOnly) {
+            return $this->getPresentationSlides($transitionSpeed);
+        }
 
         $middleRow = $this->isPresentation ? 'middle-row85' : 'middle-row';
 
@@ -394,6 +401,17 @@ class DigitalScreen extends DailyShortCode
         ';
 
         return $html;
+    }
+
+    private function getQuranSlides($transitionSpeed): string
+    {
+        return '<div class="carousel-item active height-100" data-bs-interval="10000">
+            <div class="nextPrayer">
+                <div class="align-middle-next-prayer">
+                    <h4 id="quranVerse" class="' . $this->verticalClass . '"></h4>
+                </div>
+            </div>
+        </div>';
     }
 
     private function getPresentationSlides($transitionSpeed): string
@@ -532,13 +550,18 @@ class DigitalScreen extends DailyShortCode
         }
 
         foreach (range(1, 11) as $item) {
-            $slides[] = get_option('slider' . $item);
-            $slides = array_filter($slides, function($slide) {
-                return filter_var($slide, FILTER_VALIDATE_URL);
-            });
+            $slideUrl = get_option('slider' . $item);
+            if (!empty($slideUrl) && filter_var($slideUrl, FILTER_VALIDATE_URL)) {
+                $slides[] = $slideUrl;
+            }
         }
 
         return $slides;
+    }
+    
+    public function hasSliderImages(): bool
+    {
+        return !empty($this->getSliderUrls());
     }
 
     private function getImageOrMessage($slide): string

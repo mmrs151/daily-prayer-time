@@ -103,9 +103,14 @@
 .x-board-modern .carousel-inner {
     height:100%;
 }
-.x-board-modern #carouselExampleIndicators div  div  img {
-    object-fit: fill !important;
-    width: auto;
+.x-board-modern .carousel-inner .carousel-item {
+    height: 100%;
+}
+.x-board-modern .carousel-inner .carousel-item img,
+.x-board-modern #carouselExampleIndicators div div img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
 }
 .x-board-modern #banner-section .prayer-time{
     font-size: 30px;

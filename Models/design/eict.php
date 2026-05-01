@@ -50,14 +50,14 @@
         $leftClass = 'col-md-12 col-sm-12 col-12';
         $rightClass = '';
         $slides = '';
-        if ( get_option('quran-chbox') || get_option('slider-chbox')) {
+        if ( get_option('quran-chbox') || get_option('slider-chbox') || $this->hasSliderImages()) {
             $leftClass = 'col-md-4 col-sm-4 col-4';
             $rightClass = 'col-md-8 col-sm-8 col-8';
 
             if ( get_option('quran-chbox')) {
                 $slides = $this->getQuranSlides($transitionSpeed);
             } else {
-                $slides = $this->getPresentationRow($transitionSpeed);
+                $slides = $this->getPresentationRow($transitionSpeed, true);
             }
         }
     ?>
@@ -77,7 +77,6 @@
                     $slidesHtml ='
                         <div id="carouselExampleIndicators" class="carousel slide ' . $transitionEffect . ' height-100" data-bs-ride="carousel">
                             <div class="carousel-inner height-100">
-                                <div class="carousel-item active"></div>
                                 ' . $slides . '
                             </div>';
                             $slidesHtml .= '

@@ -28,10 +28,10 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             $dsBlinkText = sanitize_text_field($this->data['ds-blink-text']);
             update_option('ds-blink-text', $dsBlinkText);
 
-            $dsAdditionalCss = sanitize_text_field($this->data['ds-additional-css']);
+            $dsAdditionalCss = trim($this->data['ds-additional-css'] ?? '');
             update_option('ds-additional-css', $dsAdditionalCss);
 
-            $dsFadingMsg = sanitize_text_field($this->data['ds-fading-msg']);
+            $dsFadingMsg = trim($this->data['ds-fading-msg'] ?? '');
             update_option('ds-fading-msg', $dsFadingMsg);
 
             $template = sanitize_text_field($this->data['template-chbox']);
@@ -48,9 +48,6 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             
             $dsTemplate = sanitize_text_field($this->data['ds-template']);
             update_option('dsTemplate', $dsTemplate);
-            if (empty($template)) {
-                delete_option('dsTemplate');
-            }
 
             $transitionEffect = sanitize_text_field($this->data['transitionEffect']);
             update_option('transitionEffect', $transitionEffect);
