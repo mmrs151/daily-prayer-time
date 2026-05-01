@@ -41,9 +41,13 @@ class DigitalScreenSettings {
             .dpt-form-group { flex: 1; min-width: 200px; }
             .dpt-form-group label { display: block; font-weight: 600; margin-bottom: 6px; color: #444; }
             .dpt-form-group input, .dpt-form-group textarea { 
-                width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+                width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
             }
-            .dpt-form-group textarea { resize: vertical; }
+            .dpt-form-group textarea { 
+                resize: vertical; 
+                min-height: unset;
+                height: auto;
+            }
             .dpt-form-group input:focus, .dpt-form-group textarea:focus { 
                 outline: 2px solid #2271b1; border-color: #2271b1; 
             }
@@ -280,7 +284,7 @@ class DigitalScreenSettings {
             <div class="dpt-section-content">
                 <div class="dpt-form-group">
                     <label>Additional CSS <span class="dpt-hint">(advanced users only)</span></label>
-                    <textarea name="ds-additional-css" rows="5" placeholder=".dpt-class { ... }">
+                    <textarea name="ds-additional-css" rows="3" placeholder=".dpt-class { ... }">
                         <?php echo esc_textarea(get_option('ds-additional-css') ?? ''); ?>
                     </textarea>
                 </div>
