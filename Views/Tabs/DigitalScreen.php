@@ -379,9 +379,20 @@ class DigitalScreenSettings {
                 }
             });
             
-            // Initialize template section visibility on load
-            if ($('input[name="displayMode"]:checked').val() !== 'template') {
-                $('#dpt-template-section').addClass('hidden');
+            // Initialize section visibility on load
+            const displayMode = $('input[name="displayMode"]:checked').val();
+            const displayModeAlt = $('input[name="displayModeAlt"]:checked').val();
+            
+            if (displayMode === 'template') {
+                $('#dpt-template-section').removeClass('hidden').addClass('active');
+            } else {
+                $('#dpt-template-section').addClass('hidden').removeClass('active');
+            }
+            
+            if (displayModeAlt === 'slider') {
+                $('#dpt-slider-section').removeClass('hidden').addClass('active');
+            } else {
+                $('#dpt-slider-section').addClass('hidden').removeClass('active');
             }
             
             // Sync hidden inputs with checked radio on page load
