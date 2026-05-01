@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.04.28.1
+Stable tag: 2026.05.01
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,16 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 12. Sample 2
 
 == Changelog ==
+
+= 2026.05.01 =
+* Feat: Add media gallery button for selecting slider images from WordPress media library
+* Feat: Add dynamic slider management - show 1 initially, add more up to 7 sliders
+* Feat: Add template selection with checkbox to enable/disable templates (EICT, Usman)
+* Feat: Add two-section slider card layout - fields on left, thumbnail preview on right
+* Feat: Make template grid responsive (stacks on mobile)
+* Fix: Template display logic - now requires both checkbox AND template selection enabled
+* Fix: Preserve textarea formatting without extra spaces
+* Fix: Remove duplicate CSS rules causing extra spacing
 
 = 2026.04.28.1 =
 * Fix: Add horizontal scroll wrapper to monthly table for mobile display
