@@ -218,6 +218,18 @@ class DailyTimetablePrinter extends TimetablePrinter
         if (get_option('zawal')) {
             $localPrayerNames = $this->toggleSunriseZawal($row, $localPrayerNames);
         }
+        
+        // Handle ishraq - merge into sunrise row, show only sunrise
+        $ishraqMins = get_option('ishraq');
+        if ($ishraqMins && $ishraqMins != '0' && isset($localPrayerNames['ishraq'])) {
+            if ($this->dptHelper->isIshraqTimeNext($row)) {
+                $localPrayerNames['sunrise'] = $localPrayerNames['ishraq'];
+            }
+        }
+        if (isset($localPrayerNames['ishraq'])) {
+            unset($localPrayerNames['ishraq']);
+        }
+        
         foreach ($localPrayerNames as $key=>$prayerName) {
             $class = $nextPrayer == $key ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
@@ -249,11 +261,21 @@ class DailyTimetablePrinter extends TimetablePrinter
         $nextPrayer = $this->getNextPrayer( $row );
         $azanTimings = $this->getAzanTime( $row );
 
-
         if (get_option('zawal')) {
             if ($this->dptHelper->isZawalTimeNext($row)) {
                 $azanTimings['sunrise'] = $this->dptHelper->getZawalTime($azanTimings['zuhr']);
             }
+        }
+        
+        // Handle ishraq - merge into sunrise row
+        $ishraqMins = get_option('ishraq');
+        if ($ishraqMins && $ishraqMins != '0' && isset($azanTimings['ishraq'])) {
+            if ($this->dptHelper->isIshraqTimeNext($row)) {
+                $azanTimings['sunrise'] = $this->dptHelper->getIshraqTime($row['sunrise']);
+            }
+        }
+        if (isset($azanTimings['ishraq'])) {
+            unset($azanTimings['ishraq']);
         }
 
         foreach ($azanTimings as $key => $azan) {
@@ -284,6 +306,18 @@ class DailyTimetablePrinter extends TimetablePrinter
                 $jamahTimes['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
             }
         }
+        
+        // Handle ishraq - merge into sunrise row
+        $ishraqMins = get_option('ishraq');
+        if ($ishraqMins && $ishraqMins != '0' && isset($jamahTimes['ishraq'])) {
+            if ($this->dptHelper->isIshraqTimeNext($row)) {
+                $jamahTimes['sunrise'] = $this->dptHelper->getIshraqTime($row['sunrise']);
+            }
+        }
+        if (isset($jamahTimes['ishraq'])) {
+            unset($jamahTimes['ishraq']);
+        }
+        
         if (! $isSunrise) {
             unset( $jamahTimes['sunrise'] );
         }
@@ -406,9 +440,10 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
 
         if ( get_option('jumuah1') && $display != 'azan' ) {
+            $jumuahClass = ($nextPrayer == 'jumuah') ? 'highlight' : '';
             $trs .= '<tr>
-                            <th class="prayerName"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
-                            <td colspan="2" class="jamah">' . $this->getJumuahTimesArray() . '</td>
+                            <th class="prayerName ' . $jumuahClass . '"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
+                            <td colspan="2" class="jamah ' . $jumuahClass . '">' . $this->getJumuahTimesArray() . '</td>
                         </tr>';
         }
 
