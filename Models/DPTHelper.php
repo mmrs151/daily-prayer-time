@@ -365,10 +365,8 @@ class DPTHelper
 
     public function isZawalTimeNext($row)
     {
-        $userTime = user_current_time( 'H:i');
         $now = new DateTime();
-        $now->setTimestamp(strtotime($userTime));
-
+        
         $ishraqMins = get_option('ishraq');
         
         // If ishraq is enabled, use ishraq time as start of zawal window
@@ -377,11 +375,8 @@ class DPTHelper
             $zawalStart = $this->getIshraqTime($row['sunrise']);
         }
 
-        $zawalStartDt = new DateTime();
-        $zawalStartDt->setTimestamp(strtotime($zawalStart));
-
-        $zuhr = new DateTime();
-        $zuhr->setTimestamp(strtotime($row['zuhr_begins']));
+        $zawalStartDt = new DateTime($zawalStart);
+        $zuhr = new DateTime($row['zuhr_begins']);
 
         if ($now > $zawalStartDt && $now < $zuhr) { 
             return true;
