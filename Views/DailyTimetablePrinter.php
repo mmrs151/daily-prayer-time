@@ -260,9 +260,9 @@ class DailyTimetablePrinter extends TimetablePrinter
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
-            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
+            // On Friday, don't highlight Zuhr (Jumuah row is highlighted instead)
             $isFriday = $this->todayIsFriday();
-            if ($isFriday && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+            if ($isFriday && $key == 'zuhr') {
                 $shouldHighlight = false;
             }
             error_log("DEBUG printTableHeading: key=$key, nextPrayer=$nextPrayer, isFriday=$isFriday, shouldHighlight=$shouldHighlight");
@@ -307,8 +307,8 @@ class DailyTimetablePrinter extends TimetablePrinter
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
-            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
-            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+            // On Friday, don't highlight Zuhr (Jumuah row is highlighted instead)
+            if ($this->todayIsFriday() && $key == 'zuhr') {
                 $shouldHighlight = false;
             }
 
@@ -356,8 +356,8 @@ class DailyTimetablePrinter extends TimetablePrinter
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
-            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
-            if ($onFriday && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+            // On Friday, don't highlight Zuhr (Jumuah row is highlighted instead)
+            if ($onFriday && $key == 'zuhr') {
                 $shouldHighlight = false;
             }
             
@@ -463,8 +463,8 @@ class DailyTimetablePrinter extends TimetablePrinter
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
-            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
-            if ($isFriday && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+            // On Friday, don't highlight Zuhr (Jumuah row is highlighted instead)
+            if ($isFriday && $key == 'zuhr') {
                 $shouldHighlight = false;
             }
             error_log("DEBUG printVerticalRow: key=$key, nextPrayer=$nextPrayer, isFriday=$isFriday, shouldHighlight=$shouldHighlight");
