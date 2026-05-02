@@ -84,8 +84,19 @@ if ($sunriseOrZawal == 'zawal') {
             <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["isha_jamah"]) );?></div>
 
         </div> <!-- END of prayer time-->
-        <?php if ( ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr') ) { ?>
-            <div class="prayer-time prayer-jumuah <?php if ('nextPrayer' ==  $this->getNextPrayerClass('jumuah', $row)) echo "highlight"; ?>">
+        <?php 
+        // Check if Jumuah times are set and current time is before last Jumuah
+        $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
+        $showJumuah = false;
+        if (!empty($jumuahOptions) && $this->todayIsFriday()) {
+            $nowTs = strtotime(user_current_time('H:i'));
+            $lastJumuahTs = max(array_map('strtotime', $jumuahOptions));
+            if ($nowTs < $lastJumuahTs) {
+                $showJumuah = true;
+            }
+        }
+        if ($showJumuah) { ?>
+            <div class="prayer-time prayer-jumuah <?php if ($nextPrayer == 'jumuah') echo "highlight"; ?>">
                 <span class="iconify-inline dptPrayerIcon" data-icon="fa-solid:mosque""></span>
 
                 <h3><?php echo esc_html( $this->headersLocal['jumuah'] )?></h3>
