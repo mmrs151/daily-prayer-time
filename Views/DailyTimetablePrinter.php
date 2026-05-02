@@ -56,7 +56,7 @@ class DailyTimetablePrinter extends TimetablePrinter
             }
         }
 
-        $shouldHighlightJumuah = ($nextPrayer == 'jumuah');
+        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $showJumuah);
         if ( $shouldHighlightJumuah || $showJumuah ) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $table .= '<tr class="' . $jumuahClass . '">
@@ -497,7 +497,7 @@ class DailyTimetablePrinter extends TimetablePrinter
             }
         }
 
-        $shouldHighlightJumuah = ($nextPrayer == 'jumuah');
+        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $showJumuah);
         if ($shouldHighlightJumuah || $showJumuah) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $trs .= '<tr>

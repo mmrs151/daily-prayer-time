@@ -96,7 +96,7 @@ if ($sunriseOrZawal == 'zawal') {
             }
         }
         if ($showJumuah) { ?>
-            <div class="prayer-time prayer-jumuah <?php if ($nextPrayer == 'jumuah') echo "highlight"; ?>">
+            <div class="prayer-time prayer-jumuah <?php if (strtolower($nextPrayer) == 'jumuah') echo "highlight"; ?>">
                 <span class="iconify-inline dptPrayerIcon" data-icon="fa-solid:mosque""></span>
 
                 <h3><?php echo esc_html( $this->headersLocal['jumuah'] )?></h3>
