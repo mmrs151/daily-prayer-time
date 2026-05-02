@@ -260,6 +260,10 @@ class DailyTimetablePrinter extends TimetablePrinter
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
+            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
+            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $shouldHighlight = false;
+            }
             $class = $shouldHighlight ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
@@ -300,6 +304,10 @@ class DailyTimetablePrinter extends TimetablePrinter
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
+            }
+            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
+            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $shouldHighlight = false;
             }
 
             $class = $shouldHighlight ? "class='highlight'" : '';
@@ -345,6 +353,10 @@ class DailyTimetablePrinter extends TimetablePrinter
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
+            }
+            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
+            if ($onFriday && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $shouldHighlight = false;
             }
             
             $class = $shouldHighlight ? 'class=highlight' : 'class=jamah';
@@ -412,6 +424,7 @@ class DailyTimetablePrinter extends TimetablePrinter
     {
         $trs = '';
         $nextPrayer = $this->getNextPrayer( $row );
+        $isFriday = $this->todayIsFriday();
 
         $localPrayerNames = $this->localPrayerNames;
         
@@ -448,6 +461,10 @@ class DailyTimetablePrinter extends TimetablePrinter
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
+            // On Friday with Jumuah, don't highlight Zuhr (Jumuah row is highlighted instead)
+            if ($isFriday && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $shouldHighlight = false;
+            }
             $class = $shouldHighlight ? 'highlight' : '';
             $highlightForJamah = $shouldHighlight ? 'highlight' : '';
 
@@ -472,7 +489,6 @@ class DailyTimetablePrinter extends TimetablePrinter
         // and current time is before the last configured Jumuah time (on Fridays).
         $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
         $showJumuah = false;
-        $isFriday = $this->todayIsFriday();
         if (! empty($jumuahOptions) && $isFriday) {
             $nowTs = strtotime( user_current_time('H:i') );
             $lastJumuahTs = max( array_map('strtotime', $jumuahOptions) );
