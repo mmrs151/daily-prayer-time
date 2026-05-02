@@ -208,7 +208,8 @@ class DPTHelper
         }
 
         // If zawal time is next, highlight zuhr row (not sunrise row)
-        if ($this->isZawalTimeNext($row) && $prayerName == 'zuhr') {
+        // Do not highlight Zuhr for zawal on Fridays (Jumuah handling takes precedence)
+        if ($this->isZawalTimeNext($row) && $prayerName == 'zuhr' && ! $this->todayIsFriday()) {
             return 'nextPrayer';
         }
         
@@ -245,8 +246,8 @@ class DPTHelper
             $nowTs = strtotime($now);
             $ishraqTs = strtotime($ishraqTime);
             
-            // After ishraq starts but before zuhr, next prayer is zuhr
-            if ($nowTs >= $ishraqTs && $nowTs < $zuhrTs) {
+            // Between ishraq and zuhr, next prayer is zuhr
+            if ($nowTs > $ishraqTs && $nowTs < $zuhrTs) {
                 return 'zuhr';
             }
         }
@@ -266,23 +267,29 @@ class DPTHelper
                 }
                 $prayer = array_search( $jamah, $row ); 
                 $prayer = explode( '_', $prayer);
-                return $prayer[0]; 
+                $nextPrayer = $prayer[0];
+                
+                // If today is Friday and next is Zuhr, return Jumuah
+                if ($this->todayIsFriday() && $nextPrayer == 'zuhr') {
+                    return 'jumuah';
+                }
+                return $nextPrayer; 
             }
         }
     }
 
     public function getSunriseOrZawalOrIshraq($row)
     {
-        $nextPrayer = $this->getNextPrayer($row);
         $ishraqMins = get_option('ishraq');
+        $zawalEnabled = get_option('zawal');
 
-        // If ishraq is next, show ishraq
-        if ($ishraqMins && $ishraqMins != '0' && $nextPrayer == 'ishraq') {
+        // If ishraq time is next (between fajr and ishraq), show ishraq - check FIRST
+        if ($ishraqMins && $ishraqMins != '0' && $this->isIshraqTimeNext($row)) {
             return 'ishraq';
         }
 
-        // If zawal is enabled and zuhr is next, show zawal
-        if (get_option('zawal') && $nextPrayer == 'zuhr') {
+        // If zawal is enabled and zawal time is next (between sunrise and zuhr), show zawal
+        if ($zawalEnabled && $this->isZawalTimeNext($row)) {
             return 'zawal';
         }
 
@@ -359,19 +366,22 @@ class DPTHelper
 
     public function isZawalTimeNext($row)
     {
-        $userTime = user_current_time( 'H:i');
-        $now = new DateTime();
-        $now->setTimestamp(strtotime($userTime));
-
-        $sunrise = new DateTime();
-        $sunrise->setTimestamp(strtotime($row['sunrise']));
-
-        $zuhr = new DateTime();
-        $zuhr->setTimestamp(strtotime($row['zuhr_begins']));
-
-        if ($now > $sunrise && $now < $zuhr) { 
-            return true;
+        $ishraqMins = get_option('ishraq');
+        
+        // Determine zawal start time (sunrise or ishraq if enabled)
+        $zawalStart = $row['sunrise'];
+        if ($ishraqMins && $ishraqMins != '0') {
+            $zawalStart = $this->getIshraqTime($row['sunrise']);
         }
-        return false;
+        
+        $zuhrBegins = $row['zuhr_begins'];
+        
+        // Use strtotime for consistent comparison (same as isIshraqTimeNext)
+        $nowStr = user_current_time('H:i');
+        $nowTs = strtotime($nowStr);
+        $zawalStartTs = strtotime($zawalStart);
+        $zuhrTs = strtotime($zuhrBegins);
+        
+        return $nowTs >= $zawalStartTs && $nowTs < $zuhrTs;
     }
 }

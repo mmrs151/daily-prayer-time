@@ -44,10 +44,10 @@ if ($sunriseOrZawal == 'zawal') {
             <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["fajr_jamah"]) );?></div>
 
         </div> <!-- END of prayer time-->
-        <div class="prayer-time prayer-sunrise <?php if ($nextPrayer == $sunriseOrZawal) echo "highlight"; ?>">
+        <div class="prayer-time prayer-sunrise <?php if ($sunriseOrZawal == 'ishraq' && strtolower($nextPrayer) == 'ishraq') echo "highlight"; ?>">
         <span class="iconify-inline dptPrayerIcon" data-icon="bi:sunrise-fill"></span>
 
-            <h3><?php echo esc_html( $this->localPrayerNames[$sunriseOrZawal] )?></h3>
+            <h3><?php echo esc_html( $this->localPrayerNames[$sunriseOrZawal] ?? ucfirst($sunriseOrZawal) )?></h3>
             <div class="prayer-jamaat"><?php echo  esc_html( $sunriseOrZawalTime );?></div>
             <div>&nbsp;</div>
 
@@ -84,8 +84,20 @@ if ($sunriseOrZawal == 'zawal') {
             <div class="prayer-jamaat"><?php echo  esc_html( $this->formatDateForPrayer($row["isha_jamah"]) );?></div>
 
         </div> <!-- END of prayer time-->
-        <?php if (get_option('jumuah1')) { ?>
-            <div class="prayer-time prayer-jumuah <?php if ('nextPrayer' ==  $this->getNextPrayerClass('jumuah', $row)) echo "highlight"; ?>">
+        <?php 
+        // Check if Jumuah times are set and current time is before last Jumuah
+        $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
+        $showJumuah = false;
+        $isFriday = $this->todayIsFriday();
+        if (!empty($jumuahOptions) && $isFriday) {
+            $nowTs = strtotime(user_current_time('H:i'));
+            $lastJumuahTs = max(array_map('strtotime', $jumuahOptions));
+            if ($nowTs < $lastJumuahTs) {
+                $showJumuah = true;
+            }
+        }
+        if ($showJumuah) { ?>
+            <div class="prayer-time prayer-jumuah <?php if ($isFriday && $showJumuah) echo "highlight"; ?>">
                 <span class="iconify-inline dptPrayerIcon" data-icon="fa-solid:mosque""></span>
 
                 <h3><?php echo esc_html( $this->headersLocal['jumuah'] )?></h3>

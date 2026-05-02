@@ -431,6 +431,9 @@ class TimetablePrinter
         if ($nextPrayer == 'ishraq') {
             return $this->localPrayerNames['ishraq'];
         }
+        if ($nextPrayer == 'jumuah') {
+            return $this->localHeaders['jumuah'];
+        }
         if ( is_null($nextPrayer)) {
             return $this->localPrayerNames['fajr'].' '. $iqamah;
         }
@@ -449,7 +452,9 @@ class TimetablePrinter
             $nextPrayer = 'zuhr';
         }
 
-        if ($nextPrayer == 'ishraq') {
+        if ($nextPrayer == 'jumuah') {
+            $nextPrayerTime = $dbRow['zuhr_jamah'];
+        } elseif ($nextPrayer == 'ishraq') {
             $nextPrayerTime = $this->dptHelper->getIshraqTime($dbRow['sunrise']);
         } else {
             $key = ($nextPrayer == 'sunrise') ? $nextPrayer : strtolower($nextPrayer.'_jamah');
@@ -458,7 +463,7 @@ class TimetablePrinter
                 $nextPrayerTime = $dbRow[$key];
             }
 
-            if (is_null($nextPrayer)) {
+            if (is_null($nextPrayerTime)) {
                 $nextPrayerTime = $dbRow['nextFajr'];
             }
         }
