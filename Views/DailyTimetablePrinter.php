@@ -43,8 +43,23 @@ class DailyTimetablePrinter extends TimetablePrinter
             '</tr>';
 
             $nextPrayer = $this->getNextPrayer( $row );
-        if ( ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr') ) {
-            $table .= '<tr>
+
+        // Determine whether to show Jumuah row: only when jumuah times are configured
+        // and current time is before the last configured Jumuah time (on Fridays).
+        $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
+        $showJumuah = false;
+        if (! empty($jumuahOptions) && $this->todayIsFriday()) {
+            $nowTs = strtotime( user_current_time('H:i') );
+            $lastJumuahTs = max( array_map('strtotime', $jumuahOptions) );
+            if ($nowTs < $lastJumuahTs) {
+                $showJumuah = true;
+            }
+        }
+
+        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr');
+        if ( $shouldHighlightJumuah || $showJumuah ) {
+            $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
+            $table .= '<tr class="' . $jumuahClass . '">
                             <th class="tableHeading">' . stripslashes($this->getLocalHeaders()['jumuah']) . '</th>
                             <td colspan="6" class="jamah">' . $this->getJumuahTimesArray() . '</td>
                         </tr>';
@@ -229,7 +244,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         
         // Handle zawal - show zawal instead of sunrise if zawal time is next
         if (get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
-            $localPrayerNames['sunrise'] = $localPrayerNames['zawal'];
+            $localPrayerNames['sunrise'] = $localPrayerNames['zawal'] ?? 'Zawal';
         }
         
         // Remove zawal - never show as separate prayer name
@@ -240,15 +255,14 @@ class DailyTimetablePrinter extends TimetablePrinter
         foreach ($localPrayerNames as $key=>$prayerName) {
             // On Friday, Zuhr stays as "Zuhr" but NOT highlighted
             $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
-            $shouldHighlight = (!$isFridayAndZuhr && $nextPrayer == $key);
-            $class = $shouldHighlight ? 'highlight' : '';
+            $shouldHighlight = false;
+            if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
+                $shouldHighlight = true;
+            } elseif ($key != 'sunrise' && $nextPrayer == $key) {
+                $shouldHighlight = true;
+            }
+            $class = (!$isFridayAndZuhr && $shouldHighlight) ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
-        }
-        
-        // Add Jumuah column on Friday at the END - ALWAYS HIGHLIGHT ON FRIDAY
-        if (($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr')) {
-            $jumuahClass = 'highlight';
-            $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $jumuahClass."'>".($this->localHeaders['jumuah'] ?? 'Jumuah')."</th>";
         }
 
         return $ths;
@@ -295,17 +309,16 @@ class DailyTimetablePrinter extends TimetablePrinter
         foreach ($azanTimings as $key => $azan) {
 
             $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
-            $shouldHighlight = (!$isFridayAndZuhr && $nextPrayer == $key);
+            $shouldHighlight = false;
+            if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
+                $shouldHighlight = true;
+            } elseif ($key != 'sunrise' && $nextPrayer == $key) {
+                $shouldHighlight = true;
+            }
 
             $class = $shouldHighlight ? "class='highlight'" : '';
             $rowspan = ($key == 'sunrise') ? "rowspan='2'" : '';
             $tds .= "<td ". $rowspan ." ".$class.">".$this->getFormattedDateForPrayer( $azan, $key)."</td>";
-        }
-        
-        // On Friday, add Jumuah column at the END - rowspan=2 to span azan and iqamah rows
-        if (($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr')) {
-            $jumuahClass = 'class=highlight';
-            $tds .= "<td ".$jumuahClass." rowspan='2'>".$this->getJumuahTimesArray()."</td>";
         }
 
         return $tds;
@@ -349,15 +362,18 @@ class DailyTimetablePrinter extends TimetablePrinter
         
         foreach ($jamahTimes as $key => $azan) {
             $shouldHighlight = false;
+            if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
+                $shouldHighlight = true;
+            } elseif ($key != 'sunrise' && $nextPrayer == $key) {
+                $shouldHighlight = true;
+            }
             if ($onFriday) {
                 // On Friday: highlight Jumuah if it's next, otherwise highlight next prayer (not Zuhr)
                 if ($nextPrayer == 'jumuah') {
                     $shouldHighlight = ($key == 'jumuah');
                 } elseif ($key != 'zuhr') {
-                    $shouldHighlight = ($key == $nextPrayer);
+                    $shouldHighlight = ($nextPrayer == $key);
                 }
-            } else {
-                $shouldHighlight = ($nextPrayer == $key);
             }
             
             $class = $shouldHighlight ? 'class=highlight' : 'class=jamah';
@@ -442,7 +458,7 @@ class DailyTimetablePrinter extends TimetablePrinter
         
         // Handle zawal - show zawal instead of sunrise if zawal time is next
         if (get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
-            $localPrayerNames['sunrise'] = $localPrayerNames['zawal'];
+            $localPrayerNames['sunrise'] = $localPrayerNames['zawal'] ?? 'Zawal';
             $row['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
         }
         
@@ -457,8 +473,14 @@ class DailyTimetablePrinter extends TimetablePrinter
 
             // On Friday, don't highlight Zuhr - only Jumuah will be highlighted
             $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
-            $class = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'highlight' : '';
-            $highlightForJamah = (!$isFridayAndZuhr && $nextPrayer == $key) ? 'highlight' : '';
+            $shouldHighlight = false;
+            if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
+                $shouldHighlight = true;
+            } elseif ($key != 'sunrise' && $nextPrayer == $key) {
+                $shouldHighlight = true;
+            }
+            $class = (!$isFridayAndZuhr && $shouldHighlight) ? 'highlight' : '';
+            $highlightForJamah = (!$isFridayAndZuhr && $shouldHighlight) ? 'highlight' : '';
 
             $trs .= '<tr>
                     <th class="prayerName ' .$class.'">' . $prayerName . '</th>';
@@ -477,8 +499,20 @@ class DailyTimetablePrinter extends TimetablePrinter
             }
         }
 
-        if ( ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr') ) {
-            $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr');
+        // Determine whether to show Jumuah row: only when jumuah times are configured
+        // and current time is before the last configured Jumuah time (on Fridays).
+        $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
+        $showJumuah = false;
+        if (! empty($jumuahOptions) && $this->todayIsFriday()) {
+            $nowTs = strtotime( user_current_time('H:i') );
+            $lastJumuahTs = max( array_map('strtotime', $jumuahOptions) );
+            if ($nowTs < $lastJumuahTs) {
+                $showJumuah = true;
+            }
+        }
+
+        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr');
+        if ($shouldHighlightJumuah || $showJumuah) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $trs .= '<tr>
                             <th class="prayerName ' . $jumuahClass . '"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>

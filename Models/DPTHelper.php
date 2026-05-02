@@ -281,6 +281,7 @@ class DPTHelper
     public function getSunriseOrZawalOrIshraq($row)
     {
         $ishraqMins = get_option('ishraq');
+        $zawalEnabled = get_option('zawal');
 
         // If ishraq time is next (between fajr and ishraq), show ishraq - check FIRST
         if ($ishraqMins && $ishraqMins != '0' && $this->isIshraqTimeNext($row)) {
@@ -288,7 +289,7 @@ class DPTHelper
         }
 
         // If zawal is enabled and zawal time is next (between sunrise and zuhr), show zawal
-        if (get_option('zawal') && $this->isZawalTimeNext($row)) {
+        if ($zawalEnabled && $this->isZawalTimeNext($row)) {
             return 'zawal';
         }
 
@@ -365,7 +366,9 @@ class DPTHelper
 
     public function isZawalTimeNext($row)
     {
+        $nowStr = user_current_time('H:i');
         $now = new DateTime();
+        $now->setTimestamp(strtotime($nowStr));
         
         $ishraqMins = get_option('ishraq');
         
