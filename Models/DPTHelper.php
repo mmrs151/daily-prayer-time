@@ -246,8 +246,8 @@ class DPTHelper
             $nowTs = strtotime($now);
             $ishraqTs = strtotime($ishraqTime);
             
-            // After ishraq starts but before zuhr, next prayer is zuhr
-            if ($nowTs >= $ishraqTs && $nowTs < $zuhrTs) {
+            // Between ishraq and zuhr, next prayer is zuhr
+            if ($nowTs > $ishraqTs && $nowTs < $zuhrTs) {
                 return 'zuhr';
             }
         }
@@ -280,16 +280,15 @@ class DPTHelper
 
     public function getSunriseOrZawalOrIshraq($row)
     {
-        $nextPrayer = $this->getNextPrayer($row);
         $ishraqMins = get_option('ishraq');
 
-        // If ishraq is next, show ishraq
-        if ($ishraqMins && $ishraqMins != '0' && $nextPrayer == 'ishraq') {
+        // If ishraq time is next (between fajr and ishraq), show ishraq - check FIRST
+        if ($ishraqMins && $ishraqMins != '0' && $this->isIshraqTimeNext($row)) {
             return 'ishraq';
         }
 
-        // If zawal is enabled and zuhr is next, show zawal
-        if (get_option('zawal') && $nextPrayer == 'zuhr') {
+        // If zawal is enabled and zawal time is next (between sunrise and zuhr), show zawal
+        if (get_option('zawal') && $this->isZawalTimeNext($row)) {
             return 'zawal';
         }
 

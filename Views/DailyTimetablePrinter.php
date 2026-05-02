@@ -42,7 +42,8 @@ class DailyTimetablePrinter extends TimetablePrinter
                   .$this->printJamahTime($row, false).
             '</tr>';
 
-        if ( get_option('jumuah1') && ! $this->todayIsFriday() ) {
+            $nextPrayer = $this->getNextPrayer( $row );
+        if ( ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $nextPrayer == 'zuhr') ) {
             $table .= '<tr>
                             <th class="tableHeading">' . stripslashes($this->getLocalHeaders()['jumuah']) . '</th>
                             <td colspan="6" class="jamah">' . $this->getJumuahTimesArray() . '</td>
