@@ -261,11 +261,9 @@ class DailyTimetablePrinter extends TimetablePrinter
                 $shouldHighlight = true;
             }
             // On Friday, don't highlight Zuhr (Jumuah row is highlighted instead)
-            $isFriday = $this->todayIsFriday();
-            if ($isFriday && $key == 'zuhr') {
+            if ($this->todayIsFriday() && $key == 'zuhr') {
                 $shouldHighlight = false;
             }
-            error_log("DEBUG printTableHeading: key=$key, nextPrayer=$nextPrayer, isFriday=$isFriday, shouldHighlight=$shouldHighlight");
             $class = $shouldHighlight ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
@@ -467,7 +465,6 @@ class DailyTimetablePrinter extends TimetablePrinter
             if ($isFriday && $key == 'zuhr') {
                 $shouldHighlight = false;
             }
-            error_log("DEBUG printVerticalRow: key=$key, nextPrayer=$nextPrayer, isFriday=$isFriday, shouldHighlight=$shouldHighlight");
             $class = $shouldHighlight ? 'highlight' : '';
             $highlightForJamah = $shouldHighlight ? 'highlight' : '';
 
