@@ -42,7 +42,7 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
     <?php //wp_head(); ?>
 
     <style>
-        <?php echo get_option('ds-additional-css'); ?>
+        <?php echo esc_html(get_option('ds-additional-css')); ?>
     </style>
     
 </head>
