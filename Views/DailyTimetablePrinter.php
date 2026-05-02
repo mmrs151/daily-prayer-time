@@ -285,25 +285,13 @@ class DailyTimetablePrinter extends TimetablePrinter
         $nextPrayer = $this->getNextPrayer( $row );
         $azanTimings = $this->getAzanTime( $row );
 
-        // Handle ishraq - merge into sunrise row
+        // Handle ishraq - merge into sunrise row (check FIRST)
         $ishraqMins = get_option('ishraq');
-        if ($ishraqMins && $ishraqMins != '0' && isset($azanTimings['ishraq'])) {
-            if ($this->dptHelper->isIshraqTimeNext($row)) {
-                $azanTimings['sunrise'] = $this->dptHelper->getIshraqTime($row['sunrise']);
-            }
-        }
-        if (isset($azanTimings['ishraq'])) {
-            unset($azanTimings['ishraq']);
-        }
-
-        // Handle zawal - show zawal time instead of sunrise if zawal time is next
-        if (get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
+        if ($ishraqMins && $ishraqMins != '0' && $this->dptHelper->isIshraqTimeNext($row)) {
+            $azanTimings['sunrise'] = $this->dptHelper->getIshraqTime($row['sunrise']);
+        } elseif (get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
+            // Handle zawal - show zawal time instead of sunrise if zawal time is next
             $azanTimings['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
-        }
-
-        // Remove zawal - never show as separate time
-        if (isset($azanTimings['zawal'])) {
-            unset($azanTimings['zawal']);
         }
 
         foreach ($azanTimings as $key => $azan) {
@@ -334,22 +322,15 @@ class DailyTimetablePrinter extends TimetablePrinter
     {
         $jamahTimes = $this->getJamahTime( $row );
         
-        // Handle ishraq - merge into sunrise row
+        // Handle ishraq - merge into sunrise row (check FIRST)
         $ishraqMins = get_option('ishraq');
-        if ($ishraqMins && $ishraqMins != '0' && isset($jamahTimes['ishraq'])) {
-            if ($this->dptHelper->isIshraqTimeNext($row)) {
-                $jamahTimes['sunrise'] = $this->dptHelper->getIshraqTime($row['sunrise']);
-            }
-        }
-        if (isset($jamahTimes['ishraq'])) {
-            unset($jamahTimes['ishraq']);
-        }
-
-        // Handle zawal - show zawal time instead of sunrise if zawal time is next
-        if (get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
+        if ($ishraqMins && $ishraqMins != '0' && $this->dptHelper->isIshraqTimeNext($row)) {
+            $jamahTimes['sunrise'] = $this->dptHelper->getIshraqTime($row['sunrise']);
+        } elseif (get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
+            // Handle zawal - show zawal time instead of sunrise if zawal time is next
             $jamahTimes['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
         }
-        
+
         if (! $isSunrise) {
             unset( $jamahTimes['sunrise'] );
         }
@@ -444,7 +425,7 @@ class DailyTimetablePrinter extends TimetablePrinter
 
         $localPrayerNames = $this->localPrayerNames;
         
-        // Handle ishraq - ONLY if ishraq is NEXT (not yet passed)
+        // Handle ishraq - ONLY if ishraq is NEXT (not yet passed) - check FIRST
         $ishraqMins = get_option('ishraq');
         if ($ishraqMins && $ishraqMins != '0' && isset($localPrayerNames['ishraq'])) {
             if ($this->dptHelper->isIshraqTimeNext($row)) {
@@ -456,8 +437,8 @@ class DailyTimetablePrinter extends TimetablePrinter
             unset($localPrayerNames['ishraq']);
         }
         
-        // Handle zawal - show zawal instead of sunrise if zawal time is next
-        if (get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
+        // Handle zawal - show zawal instead of sunrise if zawal time is next (only if ishraq not next)
+        if (!$this->dptHelper->isIshraqTimeNext($row) && get_option('zawal') && $this->dptHelper->isZawalTimeNext($row)) {
             $localPrayerNames['sunrise'] = $localPrayerNames['zawal'] ?? 'Zawal';
             $row['sunrise'] = $this->dptHelper->getZawalTime($row['zuhr_begins']);
         }
