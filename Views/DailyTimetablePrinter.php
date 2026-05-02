@@ -58,7 +58,6 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
 
         $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($isFriday && $showJumuah);
-        error_log("DEBUG printHorizontalTableTop: nextPrayer=$nextPrayer, isFriday=$isFriday, showJumuah=$showJumuah, shouldHighlightJumuah=$shouldHighlightJumuah");
         if ( $shouldHighlightJumuah || $showJumuah ) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $table .= '<tr class="' . $jumuahClass . '">
@@ -255,15 +254,10 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
         
         foreach ($localPrayerNames as $key=>$prayerName) {
-            // On Friday, when nextPrayer is 'jumuah', highlight Zuhr column (represents Jumuah)
             $shouldHighlight = false;
             if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
-                $shouldHighlight = true;
-            }
-            // On Friday, nextPrayer is 'jumuah' - highlight Zuhr header
-            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
                 $shouldHighlight = true;
             }
             $class = $shouldHighlight ? 'highlight' : '';
@@ -305,10 +299,6 @@ class DailyTimetablePrinter extends TimetablePrinter
             if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
-                $shouldHighlight = true;
-            }
-            // On Friday, nextPrayer is 'jumuah' - highlight Zuhr azan time
-            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
                 $shouldHighlight = true;
             }
 
@@ -354,10 +344,6 @@ class DailyTimetablePrinter extends TimetablePrinter
             if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
-                $shouldHighlight = true;
-            }
-            // On Friday, nextPrayer is 'jumuah' but we're in the Zuhr column - still highlight
-            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
                 $shouldHighlight = true;
             }
             
@@ -456,15 +442,10 @@ class DailyTimetablePrinter extends TimetablePrinter
             $begins =  $key != 'sunrise' ? lcfirst( $key ).'_begins' : 'sunrise';
             $jamah =  $key != 'sunrise' ? lcfirst( $key ).'_jamah' : 'sunrise';
 
-            // On Friday, when nextPrayer is 'jumuah', highlight the Zuhr row (shows Jumuah times)
             $shouldHighlight = false;
             if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
-                $shouldHighlight = true;
-            }
-            // On Friday, nextPrayer is 'jumuah' - highlight Zuhr row
-            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
                 $shouldHighlight = true;
             }
             $class = $shouldHighlight ? 'highlight' : '';
@@ -501,7 +482,6 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
 
         $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($isFriday && $showJumuah);
-        error_log("DEBUG printVerticalRow: nextPrayer=$nextPrayer, isFriday=$isFriday, showJumuah=$showJumuah, shouldHighlightJumuah=$shouldHighlightJumuah");
         if ($shouldHighlightJumuah || $showJumuah) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $trs .= '<tr>

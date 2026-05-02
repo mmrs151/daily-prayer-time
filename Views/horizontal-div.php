@@ -96,7 +96,6 @@ if ($sunriseOrZawal == 'zawal') {
                 $showJumuah = true;
             }
         }
-        error_log("DEBUG horizontal-div: nextPrayer=$nextPrayer, isFriday=$isFriday, showJumuah=$showJumuah");
         if ($showJumuah) { ?>
             <div class="prayer-time prayer-jumuah <?php if ($isFriday && $showJumuah) echo "highlight"; ?>">
                 <span class="iconify-inline dptPrayerIcon" data-icon="fa-solid:mosque""></span>
