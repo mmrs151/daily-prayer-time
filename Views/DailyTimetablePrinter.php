@@ -48,7 +48,8 @@ class DailyTimetablePrinter extends TimetablePrinter
         // and current time is before the last configured Jumuah time (on Fridays).
         $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
         $showJumuah = false;
-        if (! empty($jumuahOptions) && $this->todayIsFriday()) {
+        $isFriday = $this->todayIsFriday();
+        if (! empty($jumuahOptions) && $isFriday) {
             $nowTs = strtotime( user_current_time('H:i') );
             $lastJumuahTs = max( array_map('strtotime', $jumuahOptions) );
             if ($nowTs < $lastJumuahTs) {
@@ -56,7 +57,8 @@ class DailyTimetablePrinter extends TimetablePrinter
             }
         }
 
-        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $showJumuah);
+        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($isFriday && $showJumuah);
+        error_log("DEBUG printHorizontalTableTop: nextPrayer=$nextPrayer, isFriday=$isFriday, showJumuah=$showJumuah, shouldHighlightJumuah=$shouldHighlightJumuah");
         if ( $shouldHighlightJumuah || $showJumuah ) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $table .= '<tr class="' . $jumuahClass . '">
@@ -489,7 +491,8 @@ class DailyTimetablePrinter extends TimetablePrinter
         // and current time is before the last configured Jumuah time (on Fridays).
         $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
         $showJumuah = false;
-        if (! empty($jumuahOptions) && $this->todayIsFriday()) {
+        $isFriday = $this->todayIsFriday();
+        if (! empty($jumuahOptions) && $isFriday) {
             $nowTs = strtotime( user_current_time('H:i') );
             $lastJumuahTs = max( array_map('strtotime', $jumuahOptions) );
             if ($nowTs < $lastJumuahTs) {
@@ -497,7 +500,8 @@ class DailyTimetablePrinter extends TimetablePrinter
             }
         }
 
-        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($this->todayIsFriday() && $showJumuah);
+        $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($isFriday && $showJumuah);
+        error_log("DEBUG printVerticalRow: nextPrayer=$nextPrayer, isFriday=$isFriday, showJumuah=$showJumuah, shouldHighlightJumuah=$shouldHighlightJumuah");
         if ($shouldHighlightJumuah || $showJumuah) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
             $trs .= '<tr>
