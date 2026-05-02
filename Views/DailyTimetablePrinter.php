@@ -253,15 +253,18 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
         
         foreach ($localPrayerNames as $key=>$prayerName) {
-            // On Friday, Zuhr stays as "Zuhr" but NOT highlighted
-            $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
+            // On Friday, when nextPrayer is 'jumuah', highlight Zuhr column (represents Jumuah)
             $shouldHighlight = false;
             if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
-            $class = (!$isFridayAndZuhr && $shouldHighlight) ? 'highlight' : '';
+            // On Friday, nextPrayer is 'jumuah' - highlight Zuhr header
+            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $shouldHighlight = true;
+            }
+            $class = $shouldHighlight ? 'highlight' : '';
             $ths .= "<th class='tableHeading prayerName" . $this->tableClass . " ". $class."'>".$prayerName."</th>";
         }
 
@@ -296,11 +299,14 @@ class DailyTimetablePrinter extends TimetablePrinter
 
         foreach ($azanTimings as $key => $azan) {
 
-            $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
             $shouldHighlight = false;
             if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
+                $shouldHighlight = true;
+            }
+            // On Friday, nextPrayer is 'jumuah' - highlight Zuhr azan time
+            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
                 $shouldHighlight = true;
             }
 
@@ -348,13 +354,9 @@ class DailyTimetablePrinter extends TimetablePrinter
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
-            if ($onFriday) {
-                // On Friday: highlight Jumuah if it's next, otherwise highlight next prayer (not Zuhr)
-                if ($nextPrayer == 'jumuah') {
-                    $shouldHighlight = ($key == 'jumuah');
-                } elseif ($key != 'zuhr') {
-                    $shouldHighlight = ($nextPrayer == $key);
-                }
+            // On Friday, nextPrayer is 'jumuah' but we're in the Zuhr column - still highlight
+            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $shouldHighlight = true;
             }
             
             $class = $shouldHighlight ? 'class=highlight' : 'class=jamah';
@@ -452,16 +454,19 @@ class DailyTimetablePrinter extends TimetablePrinter
             $begins =  $key != 'sunrise' ? lcfirst( $key ).'_begins' : 'sunrise';
             $jamah =  $key != 'sunrise' ? lcfirst( $key ).'_jamah' : 'sunrise';
 
-            // On Friday, don't highlight Zuhr - only Jumuah will be highlighted
-            $isFridayAndZuhr = ($this->todayIsFriday() && $key == 'zuhr');
+            // On Friday, when nextPrayer is 'jumuah', highlight the Zuhr row (shows Jumuah times)
             $shouldHighlight = false;
             if ($key == 'sunrise' && $nextPrayer == 'ishraq') {
                 $shouldHighlight = true;
             } elseif ($key != 'sunrise' && $nextPrayer == $key) {
                 $shouldHighlight = true;
             }
-            $class = (!$isFridayAndZuhr && $shouldHighlight) ? 'highlight' : '';
-            $highlightForJamah = (!$isFridayAndZuhr && $shouldHighlight) ? 'highlight' : '';
+            // On Friday, nextPrayer is 'jumuah' - highlight Zuhr row
+            if ($this->todayIsFriday() && $nextPrayer == 'jumuah' && $key == 'zuhr') {
+                $shouldHighlight = true;
+            }
+            $class = $shouldHighlight ? 'highlight' : '';
+            $highlightForJamah = $shouldHighlight ? 'highlight' : '';
 
             $trs .= '<tr>
                     <th class="prayerName ' .$class.'">' . $prayerName . '</th>';
