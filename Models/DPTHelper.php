@@ -369,13 +369,21 @@ class DPTHelper
         $now = new DateTime();
         $now->setTimestamp(strtotime($userTime));
 
-        $sunrise = new DateTime();
-        $sunrise->setTimestamp(strtotime($row['sunrise']));
+        $ishraqMins = get_option('ishraq');
+        
+        // If ishraq is enabled, use ishraq time as start of zawal window
+        $zawalStart = $row['sunrise'];
+        if ($ishraqMins && $ishraqMins != '0') {
+            $zawalStart = $this->getIshraqTime($row['sunrise']);
+        }
+
+        $zawalStartDt = new DateTime();
+        $zawalStartDt->setTimestamp(strtotime($zawalStart));
 
         $zuhr = new DateTime();
         $zuhr->setTimestamp(strtotime($row['zuhr_begins']));
 
-        if ($now > $sunrise && $now < $zuhr) { 
+        if ($now > $zawalStartDt && $now < $zuhr) { 
             return true;
         }
         return false;
