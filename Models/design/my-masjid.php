@@ -161,7 +161,7 @@ $localTimes = $this->getLocalTimes();
     position: relative;
   }
 
-  /* ── NEXT PRAYER BANNER ── */
+/* ── NEXT PRAYER BANNER ── */
   .next-banner {
     background: var(--dark);
     color: var(--white);
@@ -173,20 +173,13 @@ $localTimes = $this->getLocalTimes();
     justify-content: space-between;
   }
 
-  .next-banner .label {
-    font-size: 2vw;
-    font-weight: 400;
-    opacity: 0.75;
-  }
-
   .next-banner .next-name {
-    font-size: 2.5vw;
+    font-size: 3vw;
     font-weight: 700;
     color: #ffd700;
-    margin-top: 0.5vh;
   }
 
-.next-banner .countdown {
+  .next-banner .countdown {
     font-size: 6vw;
     font-weight: 800;
     color: var(--teal);
@@ -342,11 +335,8 @@ $localTimes = $this->getLocalTimes();
     <!-- Next prayer banner -->
     <?php echo $this->getHiddenVariables(); ?>
     <div class="next-banner">
-      <div>
-        <div class="label">Next prayer in</div>
-        <div class="next-name"><?php echo $localTimes['next prayer']; ?></div>
-      </div>
-      <div class="countdown" id="dsNextPrayer"></div>
+      <div class="next-name"><?php echo $localTimes['next prayer']; ?></div>
+      <h2 id="dsNextPrayer" class="countdown"></h2>
     </div>
 
     <!-- Prayer Times Table -->
