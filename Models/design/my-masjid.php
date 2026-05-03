@@ -62,10 +62,11 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
 
   .masjid-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 1vw;
-    text-align: center;
+    text-align: left;
     width: 100%;
   }
 
@@ -85,8 +86,8 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   .masjid-logo svg { width: 80%; height: 80%; }
 
   .masjid-info {
-    text-align: center;
-    width: 100%;
+    text-align: left;
+    width: auto;
   }
 
   .masjid-info h1 {
