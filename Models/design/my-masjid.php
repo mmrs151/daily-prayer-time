@@ -4,6 +4,7 @@ $sunriseOrZawal = $this->dptHelper->getSunriseOrZawalOrIshraq($this->row);
 $prayerNames = $this->getLocalPrayerNames();
 $headers = $this->getLocalHeaders();
 $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
+$nextPrayer = $this->dptHelper->getNextPrayer($this->row);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +69,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     gap: 1vw;
     text-align: left;
     width: 100%;
-    margin: 100px 0;
+    margin: 50px 0;
   }
 
   .masjid-logo {
@@ -175,6 +176,13 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     font-size: 2vw;
     font-weight: 400;
     opacity: 0.75;
+  }
+
+  .next-banner .next-name {
+    font-size: 2.5vw;
+    font-weight: 700;
+    color: #ffd700;
+    margin-top: 0.5vh;
   }
 
   .next-banner .countdown {
@@ -346,6 +354,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     <div class="next-banner">
       <div>
         <div class="label">Next prayer in</div>
+        <div class="next-name"><?php echo $prayerNames[$nextPrayer] ?? ucfirst($nextPrayer); ?></div>
       </div>
       <div class="countdown" id="nextCountdown">--<span>min</span></div>
       <div class="website"><?php echo parse_url(get_bloginfo('url'), PHP_URL_HOST); ?></div>
