@@ -169,22 +169,32 @@ $localTimes = $this->getLocalTimes();
     padding: 2vh 2vw;
     margin-bottom: 3vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    text-align: center;
   }
 
   .next-banner .next-name {
     font-size: 3vw;
     font-weight: 700;
-    color: #ffd700;
   }
 
   .next-banner .countdown {
     font-size: 6vw;
     font-weight: 800;
-    color: var(--teal);
     line-height: 1;
     letter-spacing: -2px;
+  }
+
+  /* Dynamic highlight color from backend */
+  .next-banner .highlight-text {
+    color: var(--highlight, #ffd700);
+  }
+
+  .x-board .bg-green .next-banner .highlight-text,
+  .next-banner .highlight-text.highlight {
+    color: var(--highlight, #ffd700);
   }
 
   /* ── PRAYER TABLE ── */
@@ -335,8 +345,8 @@ $localTimes = $this->getLocalTimes();
     <!-- Next prayer banner -->
     <?php echo $this->getHiddenVariables(); ?>
     <div class="next-banner">
-      <div class="next-name"><?php echo do_shortcode("[daily_next_prayer]"); ?></div>
-      <h2 id="dsNextPrayer" class="countdown"></h2>
+      <div class="next-name highlight-text"><?php echo do_shortcode("[daily_next_prayer]"); ?></div>
+      <h2 id="dsNextPrayer" class="countdown highlight-text"></h2>
     </div>
 
     <!-- Prayer Times Table -->

@@ -78,12 +78,14 @@ class UpdateStyles
         return "
             .x-board-modern #time-table-section,
             .x-board-modern .date-english-arabic,
-            .x-board-my-masjid .prayer-table-section {
+            .x-board-my-masjid .prayer-table-section,
+            .x-board-my-masjid .next-banner {
                 background: {$this->options['tableBackground'] } !important
             }
             .green,
             .x-board-modern .mosque-name h2,
-            .x-board-modern .clock {
+            .x-board-modern .clock,
+            .x-board-my-masjid .highlight-text {
                 color: {$this->options['tableBackground']}
             }
             .dpt-horizontal-wrapper.customStyles {
@@ -174,13 +176,25 @@ class UpdateStyles
         return $styles;
     }
 
-    private function getHighlightStyles()
+private function getHighlightStyles()
     {
+        if (empty($this->options['highlight'])) {
+            return '';
+        }
+
         return "
+            :root {
+                --dpt-highlight: {$this->options['highlight']} !important;
+                --dpt-highlight-font: {$this->options['highlightFont']} !important;
+            }
             table.customStyles tr.highlight, th.highlight, td.highlight {
-                font-weight: bold;
                 background: {$this->options['highlight']} !important;
                 color: {$this->options['highlightFont']} !important;
+            }
+            .x-board .prayerName.highlight,
+            .x-board-modern .nextPrayer,
+            .x-board .nextPrayer {
+                color: {$this->options['highlight']}
             }
             span.nextPrayer {
                 font-weight: bold;
