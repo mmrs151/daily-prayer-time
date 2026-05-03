@@ -55,7 +55,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 2vh 2vw;
     position: relative;
   }
@@ -68,6 +68,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     gap: 1vw;
     text-align: left;
     width: 100%;
+    margin: 100px 0;
   }
 
   .masjid-logo {
@@ -114,10 +115,10 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   /* ── ANALOG CLOCK ── */
   .clock-wrap {
     position: relative;
-    width: 35vw;
-    height: 35vw;
-    max-width: 380px;
-    max-height: 380px;
+    width: 40vw;
+    height: 40vw;
+    max-width: 420px;
+    max-height: 420px;
     flex-shrink: 0;
   }
 
