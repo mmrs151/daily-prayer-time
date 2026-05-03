@@ -855,11 +855,18 @@
     padding-top: 10px;
 }
 
-/* Jumuah times: smaller and wrap if needed */
+/* Jumuah times: smaller and allow text wrap */
 .x-board-modern .jummah-prayer .prayer-jamaat p {
-    font-size: clamp(0.65rem, 1.8vw, 1.4rem);
+    font-size: clamp(0.6rem, 1.5vw, 1.2rem);
     white-space: normal;
-    word-spacing: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+}
+
+.x-board-modern .jummah-prayer .prayer-jamaat p .dsJumuah {
+    display: inline-block;
 }
 
 .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
