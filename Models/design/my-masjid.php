@@ -70,15 +70,15 @@ $headers = $this->getLocalHeaders();
                         $name = $prayerNames[$prayer];
                         $start = do_shortcode("[{$prayer}_start]");
                         $jamah = do_shortcode("[{$prayer}_prayer]");
-                        echo "
-                        <tr class='{$nextClass}'>
-                            <td class='name'>{$name}</td>
-                            <td class='ar'>" . ($prayer === 'fajr' ? 'فجر' : ($prayer === 'zuhr' ? 'ظهر' : ($prayer === 'asr' ? 'عصر' : ($prayer === 'maghrib' ? 'مغرب' : 'عشاء'))) . "</td>
-                            <td class='time text-end bold'>{$start}</td>
-                            <td class='time text-end'>{$jamah}</td>
-                        </tr>";
-                    }
-                    ?>
+                        $arabic = $prayer === 'fajr' ? 'فجر' : ($prayer === 'zuhr' ? 'ظهر' : ($prayer === 'asr' ? 'عصر' : ($prayer === 'maghrib' ? 'مغرب' : 'عشاء')));
+                        ?>
+                        <tr class="<?php echo $nextClass; ?>">
+                            <td class="name"><?php echo $name; ?></td>
+                            <td class="ar"><?php echo $arabic; ?></td>
+                            <td class="time text-end bold"><?php echo $start; ?></td>
+                            <td class="time text-end"><?php echo $jamah; ?></td>
+                        </tr>
+                    <?php } ?>
                     <!-- Sunrise -->
                     <tr class="dimmed <?php echo $this->dptHelper->getNextPrayerClass($sunriseOrZawal, $this->row); ?>">
                         <td class="name"><?php echo $prayerNames[$sunriseOrZawal]; ?></td>
