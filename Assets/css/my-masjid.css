@@ -1,94 +1,329 @@
-.my-masjid {
-    background: linear-gradient(180deg, #0a1628 0%, #1a3a5c 50%, #0d2137 100%);
+.x-board-my-masjid {
+    font-family: 'Outfit', 'Ubuntu', sans-serif;
     min-height: 100vh;
-    padding: 20px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     color: #fff;
-    font-family: 'Lato', sans-serif;
+    padding: 0;
 }
 
-.my-masjid .banner-section {
-    background: linear-gradient(90deg, #1e3a5f 0%, #2d4a6f 50%, #1e3a5f 100%);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: center;
-    border: 1px solid rgba(255,215,0,0.3);
+.x-board-my-masjid .top-section {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px 30px;
 }
 
-.my-masjid .next-prayer-label {
-    font-size: 1.2rem;
-    color: #aaa;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.my-masjid .next-prayer-name {
-    font-size: 3rem;
-    color: #ffd700;
-    font-weight: 700;
-    margin: 10px 0;
-}
-
-.my-masjid .time-remaining {
-    font-size: 2.5rem;
-    color: #fff;
-    font-weight: 300;
-}
-
-.my-masjid .prayer-table {
+.x-board-my-masjid .top-inner {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-.my-masjid .prayer-row {
+.x-board-my-masjid .logo-name {
     display: flex;
     align-items: center;
-    background: rgba(255,255,255,0.05);
-    border-radius: 8px;
-    padding: 15px 20px;
-    border-left: 4px solid transparent;
-    transition: all 0.3s ease;
+    gap: 15px;
 }
 
-.my-masjid .prayer-row:hover {
-    background: rgba(255,255,255,0.1);
+.x-board-my-masjid .logo-name img {
+    max-height: 60px;
+    width: auto;
 }
 
-.my-masjid .prayer-row.current {
-    background: rgba(255,215,0,0.15);
-    border-left: 4px solid #ffd700;
-}
-
-.my-masjid .prayer-row.current .prayer-name {
-    color: #ffd700;
-}
-
-.my-masjid .prayer-row.current .prayer-time {
-    color: #ffd700;
+.x-board-my-masjid .masjid-name {
+    font-size: 28px;
     font-weight: 700;
-}
-
-.my-masjid .prayer-name {
-    flex: 1;
-    font-size: 1.5rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.my-masjid .prayer-time {
-    font-size: 1.3rem;
-    color: #ccc;
-    text-align: right;
-    min-width: 150px;
-}
-
-.my-masjid .prayer-time .iqamah-time {
-    margin-left: 10px;
     color: #ffd700;
 }
 
-.my-masjid .prayer-time .end-time {
-    opacity: 0.7;
+.x-board-my-masjid .date-display {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.x-board-my-masjid .english-date {
+    font-size: 18px;
+    color: #e0e0e0;
+}
+
+.x-board-my-masjid .hijri-date {
+    font-family: 'Tajawal', 'Arabic Typesetter', sans-serif;
+    font-size: 16px;
+    color: #ffd700;
+}
+
+/* Middle Section */
+.x-board-my-masjid .middle-section {
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+}
+
+.x-board-my-masjid .clock-column {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.x-board-my-masjid .clock-wrap {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.x-board-my-masjad .clock {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.x-board-my-masjid .clock li {
+    display: inline-block;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffd700;
+}
+
+.x-board-my-masjid .clock li#pointx {
+    color: #fff;
+    margin: 0 5px;
+}
+
+.x-board-my-masjid .digital-time {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #e0e0e0;
+}
+
+/* Next Prayer Banner */
+.x-board-my-masjid .next-prayer-banner {
+    flex: 1;
+    background: linear-gradient(90deg, #1a1a2e 0%, #2d2d4a 100%);
+    border-radius: 15px;
+    padding: 30px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.x-board-my-masjid .next-prayer-label {
+    font-size: 18px;
+    color: #e0e0e0;
+    opacity: 0.8;
+}
+
+.x-board-my-masjid .next-prayer-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffd700;
+    margin-top: 5px;
+}
+
+.x-board-my-masjid .next-prayer-time {
+    font-size: 48px;
+    font-weight: 800;
+    color: #ffd700;
+}
+
+.x-board-my-masjid .next-prayer-time span {
+    font-size: 20px;
+    font-weight: 400;
+    color: #e0e0e0;
+}
+
+/* Prayer Table */
+.x-board-my-masjid .prayer-table-section {
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.x-board-my-masjid .prayer-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.x-board-my-masjid .prayer-table thead {
+    background: rgba(255, 215, 0, 0.15);
+}
+
+.x-board-my-masjid .prayer-table th {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffd700;
+    text-align: left;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.x-board-my-masjid .prayer-table th.ar {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 400;
+    color: #b0b0b0;
+    text-align: right;
+    direction: rtl;
+}
+
+.x-board-my-masjid .prayer-table th.text-end,
+.x-board-my-masjid .prayer-table td.text-end {
+    text-align: right;
+}
+
+.x-board-my-masjid .prayer-table td {
+    padding: 18px 20px;
+    font-size: 18px;
+    color: #e0e0e0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.x-board-my-masjid .prayer-table td.name {
+    font-weight: 600;
+    color: #fff;
+}
+
+.x-board-my-masjid .prayer-table td.ar {
+    font-family: 'Tajawal', sans-serif;
+    color: #b0b0b0;
+    direction: rtl;
+    text-align: right;
+}
+
+.x-board-my-masjid .prayer-table td.time {
+    font-family: 'Outfit', sans-serif;
+}
+
+.x-board-my-masjid .prayer-table td.bold {
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Active/Next Prayer Row */
+.x-board-my-masjid .prayer-table tr.green td {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+}
+
+.x-board-my-masjid .prayer-table tr.green td.name {
+    font-size: 20px;
+}
+
+/* Dimmed Rows (past prayers, sunrise) */
+.x-board-my-masjid .prayer-table tr.dimmed td {
+    opacity: 0.5;
+    color: #808080;
+}
+
+.x-board-my-masjid .prayer-table tr.dimmed td.name {
+    color: #808080;
+}
+
+/* Jumuah Row */
+.x-board-my-masjid .prayer-table tr.jumuah-row td {
+    background: rgba(100, 149, 237, 0.2);
+}
+
+/* Bottom Section */
+.x-board-my-masjid .bottom-section {
+    padding: 20px 30px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.x-board-my-masjid .watermark {
+    font-size: 14px;
+    color: #606060;
+}
+
+.x-board-my-masjid .watermark a {
+    color: #606060;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .x-board-my-masjid .top-section {
+        padding: 15px;
+    }
+    
+    .x-board-my-masjid .top-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .x-board-my-masjid .masjid-name {
+        font-size: 22px;
+    }
+    
+    .x-board-my-masjid .middle-section {
+        flex-direction: column;
+        padding: 20px 15px;
+    }
+    
+    .x-board-my-masjid .clock-column {
+        display: none;
+    }
+    
+    .x-board-my-masjid .next-prayer-banner {
+        padding: 20px;
+    }
+    
+    .x-board-my-masjid .next-prayer-time {
+        font-size: 36px;
+    }
+    
+    .x-board-my-masjid .prayer-table-section {
+        padding: 15px;
+    }
+    
+    .x-board-my-masjid .prayer-table th,
+    .x-board-my-masjid .prayer-table td {
+        padding: 12px 10px;
+        font-size: 14px;
+    }
+    
+    .x-board-my-masjid .prayer-table thead {
+        display: none;
+    }
+    
+    .x-board-my-masjid .prayer-table,
+    .x-board-my-masjid .prayer-table tbody,
+    .x-board-my-masjid .prayer-table tr,
+    .x-board-my-masjid .prayer-table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .x-board-my-masjid .prayer-table tr {
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 15px;
+    }
+    
+    .x-board-my-masjid .prayer-table td {
+        padding: 5px 10px;
+        border: none;
+    }
+    
+    .x-board-my-masjid .prayer-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #ffd700;
+        display: inline-block;
+        width: 100px;
+    }
+    
+    .x-board-my-masjid .prayer-table td.ar {
+        direction: ltr;
+        text-align: left;
+    }
 }

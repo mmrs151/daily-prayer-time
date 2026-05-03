@@ -4,6 +4,8 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
 
     function enqueue_dpt_scripts() {
         wp_enqueue_script('dpt', plugin_dir_url(__FILE__) . 'js/dpt.js', array('jquery'), '1.0', true);
+        
+        wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Tajawal:wght@400;700&display=swap', array(), null);
     }
 
     add_action('wp_enqueue_scripts', 'enqueue_dpt_scripts');

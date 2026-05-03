@@ -77,7 +77,8 @@ class UpdateStyles
 
         return "
             .x-board-modern #time-table-section,
-            .x-board-modern .date-english-arabic {
+            .x-board-modern .date-english-arabic,
+            .x-board-my-masjid .prayer-table-section {
                 background: {$this->options['tableBackground'] } !important
             }
             .green,
