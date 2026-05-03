@@ -153,8 +153,8 @@
                 <div class="col-md-2 jummah-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="la:mosque"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('jumuah', $this->row) ?>'><?php echo $this->getLocalHeaders()['jumuah'] ?></h4>
-                    <div class="prayer-jamaat">
-                        <p class="mb-0 time1 <?php echo $this->getNextPrayerClass('jumuah', $this->row) ?>"><?php echo $this->getJumuahTimesArray(null, ' '); ?></p>
+                    <div class="prayer-jamaat jumah-times">
+                        <p class="mb-0 time1 <?php echo $this->getNextPrayerClass('jumuah', $this->row) ?>"><?php echo $this->getJumuahTimesArray(null, ' | '); ?></p>
                     </div>
                 </div>
             </div>
