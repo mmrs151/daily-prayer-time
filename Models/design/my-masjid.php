@@ -335,7 +335,7 @@ $localTimes = $this->getLocalTimes();
     <!-- Next prayer banner -->
     <?php echo $this->getHiddenVariables(); ?>
     <div class="next-banner">
-      <div class="next-name"><?php echo $localTimes['next prayer']; ?></div>
+      <div class="next-name"><?php echo do_shortcode("[daily_next_prayer]"); ?></div>
       <h2 id="dsNextPrayer" class="countdown"></h2>
     </div>
 
