@@ -150,13 +150,13 @@
                         <p class='<?php echo $this->getNextPrayerClass('isha', $this->row) ?>'><?php echo do_shortcode("[isha_prayer]") ?></p>
                     </div>
                 </div>
-                <div class="col-md-2 jummah-prayer prayer-card">
+<div class="col-md-2 jummah-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="la:mosque"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('jumuah', $this->row) ?>'><?php echo $this->getLocalHeaders()['jumuah'] ?></h4>
                     <?php 
                         $jumuahCount = count(array_filter([get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3')]));
                     ?>
-                    <p class="mb-0 time1 <?php echo $this->getNextPrayerClass('jumuah', $this->row) ?> jumah-<?php echo $jumuahCount; ?>"><?php echo $this->getJumuahTimesArray(false, ' '); ?></p>
+                    <p class="mb-0 time1 <?php echo $this->getNextPrayerClass('jumuah', $this->row) ?> jummah-<?php echo $jumuahCount; ?>"><?php echo $this->getJumuahTimesArray(false, ' '); ?></p>
                 </div>
             </div>
     </div>

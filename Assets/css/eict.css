@@ -194,16 +194,20 @@
     padding-top: 20px;
 }
 
-.x-board-modern .prayer-jamaat-jummah p{ 
-    font-size: clamp(0.75rem, 2.5vw, 2rem);
-    font-family: 'Lato',sans-serif;
-    color: #e2e2e2;
-    font-weight: 900;
-    letter-spacing: 3px;
-}
+
 .x-board-modern .sunrise p , .x-board-modern .jummah-prayer p{
     margin-top: 15px;
+    color: #e2e2e2;
 }
+
+.x-board-modern .sunrise p , .x-board-modern .jummah-prayer p.jummah-1{
+    font-size: clamp(0.85rem, 2.5vw, 1.5rem);
+}
+
+.x-board-modern .sunrise p , .x-board-modern .jummah-prayer p.jummah-3{
+    font-size: clamp(0.85rem, 2.5vw, 1.5rem);
+}
+
 
 .x-board-modern .fajr-prayer ,.x-board-modern .sunrise, .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer, .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer{
     border-right: 1px solid rgba(62,96,92,0.3);
@@ -669,9 +673,7 @@
         border-bottom: 1px solid rgba(62,96,92,0.3);
         padding: 10px 5px;
     }
-    .x-board-modern .jummah-prayer{
-        border-bottom: none;
-    }
+
     .x-board-modern #banner-section{
         height: 200px;
     }
@@ -851,24 +853,6 @@
     .x-board-modern .zuhr-prayer , .x-board-modern .asr-prayer , .x-board-modern .maghrib-prayer , .x-board-modern .isha-prayer{
         padding-top: 10px;
     }
-.x-board-modern .jummah-prayer{
-    padding-top: 10px;
-}
-
-/* Jumuah times: by count on p tag */
-.x-board-modern .jummah-prayer p.jumah-1,
-.x-board-modern .jummah-prayer p.jumah-2 {
-    font-size: clamp(0.9rem, 2.2vw, 1.4rem);
-    margin-top: 8px;
-}
-
-/* All jumah times get this size */
-.x-board-modern .jummah-prayer p {
-    font-size: 1.2rem !important;
-    white-space: normal;
-    margin-top: 8px;
-    display: inline-block;
-}
 
 .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
         height: auto;
