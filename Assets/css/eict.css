@@ -201,11 +201,11 @@
 }
 
 .x-board-modern .sunrise p , .x-board-modern .jummah-prayer p.jummah-1{
-    font-size: clamp(0.85rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
 }
 
 .x-board-modern .sunrise p , .x-board-modern .jummah-prayer p.jummah-3{
-    font-size: clamp(0.85rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.5rem, 3.5vw, 2.5em);
 }
 
 

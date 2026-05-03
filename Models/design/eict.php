@@ -157,7 +157,7 @@
                         $jumuah3 = get_option('jumuah3');
                         $jumuahClass = $jumuah3 ? 'jummah-3' : 'jummah-1';
                     ?>
-                    <p class="mb-0 time1 <?php echo $this->getNextPrayerClass('jumuah', $this->row) ?> <?php echo $jumuahClass; ?>"><?php echo $this->getJumuahTimesArray(false, ' '); ?></p>
+                    <p class="mb-0 time1 <?php echo $this->getNextPrayerClass('jumuah', $this->row) ?> <?php echo $jumuahClass; ?>"><?php echo $this->getJumuahTimesArray(false, ' | '); ?></p>
                 </div>
             </div>
     </div>
