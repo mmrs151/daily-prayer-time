@@ -859,30 +859,9 @@
     white-space: nowrap;
 }
 
-/* Mobile: Use pipe separator (< 768px) */
-@media (max-width: 768px) {
-    .x-board-modern .jumah-times p {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .x-board-modern .jumah-times p .dsJumuah + .dsJumuah::before {
-        content: " | ";
-        color: #e2e2e2;
-        margin-right: 6px;
-    }
-}
-
-/* Desktop (large screen): no separator */
-@media (min-width: 769px) {
-    .x-board-modern .jumah-times p {
-        display: inline-block;
-    }
-    
-    .x-board-modern .jumah-times p .dsJumuah + .dsJumuah::before {
-        display: none;
-    }
+/* Jumuah times: slightly smaller than regular prayer times */
+.x-board-modern .jummah-prayer .prayer-jamaat p {
+    font-size: clamp(0.7rem, 2vw, 1.5rem);
 }
 
 .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
