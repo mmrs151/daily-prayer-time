@@ -637,13 +637,39 @@
     .x-board-modern #time-table-section .pt-4{
         padding-top: 1rem !important;
     }
-    .x-board-modern #time-table-section .col-md-2{
+.x-board-modern #time-table-section .col-md-2{
         flex: 0 0 100%;
         max-width: 100%;
     }
+    .x-board-modern #time-table-section .col-sm-6{
+        flex: 0 0 48%;
+        max-width: 48%;
+        margin: 1%;
+    }
+    .x-board-modern #time-table-section{
+        height: auto;
+        min-height: 600px;
+        padding-bottom: 20px;
+    }
+    .x-board-modern #time-table-section .row{
+        padding-left: 0;
+        justify-content: center;
+    }
+    .x-board-modern .fajr-prayer , .x-board-modern .sunrise, .x-board-modern .zuhr-prayer, .x-board-modern .asr-prayer, .x-board-modern .maghrib-prayer, .x-board-modern .isha-prayer{
+        border-right: 0;
+        border-bottom: 1px solid rgba(62,96,92,0.3);
+        padding: 10px 5px;
+    }
+    .x-board-modern .jummah-prayer{
+        border-bottom: none;
+    }
+    .x-board-modern #banner-section{
+        height: 200px;
+    }
 .x-board-modern #time-table-section .col-sm-6{
-        flex: 0 0 33.333%;
-        max-width: 33.333%;
+        flex: 0 0 48%;
+        max-width: 48%;
+        margin: 1%;
     }
 
     /* Tablet: 2 columns */
@@ -669,6 +695,12 @@
     }
     .x-board-modern #time-table-section .row{
         padding-top: 0;
+        justify-content: center;
+    }
+    .x-board-modern #time-table-section .col-sm-6{
+        flex: 0 0 45%;
+        max-width: 45%;
+        margin: 1%;
     }
     .x-board-modern #time-table-section{
         height: auto;
@@ -739,25 +771,31 @@
         height: 70px;
     }
     .x-board-modern .mosque-name h2{
-        font-size: 21px;
+        font-size: 19px;
         letter-spacing: 1px;
     }
     .x-board-modern .logo img{
-        height: 60px;
-        padding-left: 20px;
+        height: 50px;
+        padding-left: 15px;
     }
     .x-board-modern .time h3{
-        font-size: 35px;
+        font-size: 30px;
     }
     .x-board-modern .date-english-arabic p{
         font-size: 7px;
     }
     .x-board-modern #time-table-section .row{
         padding-top: 0;
+        justify-content: center;
+    }
+    .x-board-modern #time-table-section .col-sm-6{
+        flex: 0 0 45%;
+        max-width: 45%;
+        margin: 1%;
     }
     .x-board-modern #time-table-section{
         height: auto;
-        min-height: 450px;
+        min-height: 400px;
         padding-bottom: 10px;
     } 
     .x-board-modern #time-table-section h4{
