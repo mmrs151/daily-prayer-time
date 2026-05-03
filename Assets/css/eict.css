@@ -865,21 +865,23 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 8px;
     }
 
     .x-board-modern .jumah-times p .dsJumuah + .dsJumuah::before {
         content: " | ";
         color: #e2e2e2;
         margin-right: 6px;
-        font-weight: bold;
     }
 }
 
 /* Desktop (large screen): no separator */
 @media (min-width: 769px) {
+    .x-board-modern .jumah-times p {
+        display: inline-block;
+    }
+    
     .x-board-modern .jumah-times p .dsJumuah + .dsJumuah::before {
-        content: none;
+        display: none;
     }
 }
 
