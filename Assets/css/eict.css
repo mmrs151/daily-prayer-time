@@ -139,7 +139,7 @@
     transition: all 0.3s ease;
 }
 .x-board-modern #time-table-section h4{
-    font-size: clamp(1rem, 2.5vw, 2.5rem);
+    font-size: clamp(1rem, 4vw, 4rem);
     color: #fffacd;
     font-weight: 700;
     font-family: 'Lato', sans-serif;
@@ -177,7 +177,7 @@
 .x-board-modern .prayer-start p{
     margin-top: 14px;
     margin-bottom: 0;
-    font-size: clamp(0.875rem, 2vw, 1.25rem);
+    font-size: clamp(0.875rem, 3vw, 2rem);
     color: #e2e2e2;
     font-weight: 900;
     font-family: 'Lato', sans-serif;
@@ -186,7 +186,7 @@
 }
 
 .x-board-modern .prayer-jamaat p{ 
-    font-size: clamp(1rem, 3vw, 1.75rem);
+    font-size: clamp(1rem, 4vw, 3rem);
     font-family: 'Lato',sans-serif;
     color: #e2e2e2;
     font-weight: 900;
@@ -266,14 +266,14 @@
         font-size: clamp(18px, 2.5vw, 25px);
     }
     .x-board-modern #time-table-section h4{
-        font-size: clamp(0.875rem, 2vw, 1.5rem);
+        font-size: clamp(0.875rem, 3vw, 2rem);
         letter-spacing: 1px;
     }
     .x-board-modern .prayer-start p{
-        font-size: clamp(0.75rem, 1.5vw, 1rem);
+        font-size: clamp(0.75rem, 2vw, 1.25rem);
     }
     .x-board-modern .prayer-jamaat p{
-        font-size: clamp(0.875rem, 2vw, 1.25rem);
+        font-size: clamp(0.875rem, 2.5vw, 1.5rem);
     }
 }
 
