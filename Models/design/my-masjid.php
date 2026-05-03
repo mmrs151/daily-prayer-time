@@ -5,6 +5,7 @@ $prayerNames = $this->getLocalPrayerNames();
 $headers = $this->getLocalHeaders();
 $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
 $nextPrayer = $this->dptHelper->getNextPrayer($this->row);
+$localTimes = $this->getLocalTimes();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -185,24 +186,12 @@ $nextPrayer = $this->dptHelper->getNextPrayer($this->row);
     margin-top: 0.5vh;
   }
 
-  .next-banner .countdown {
+.next-banner .countdown {
     font-size: 6vw;
     font-weight: 800;
     color: var(--teal);
     line-height: 1;
     letter-spacing: -2px;
-  }
-
-  .next-banner .countdown span {
-    font-size: 2vw;
-    font-weight: 600;
-    letter-spacing: 0;
-  }
-
-  .next-banner .website {
-    font-size: 1.2vw;
-    opacity: 0.5;
-    align-self: flex-end;
   }
 
   /* ── PRAYER TABLE ── */
@@ -351,13 +340,13 @@ $nextPrayer = $this->dptHelper->getNextPrayer($this->row);
   <div class="right">
 
     <!-- Next prayer banner -->
+    <?php echo $this->getHiddenVariables(); ?>
     <div class="next-banner">
       <div>
         <div class="label">Next prayer in</div>
-        <div class="next-name"><?php echo $prayerNames[$nextPrayer] ?? ucfirst($nextPrayer); ?></div>
+        <div class="next-name"><?php echo $localTimes['next prayer']; ?></div>
       </div>
-      <div class="countdown" id="nextCountdown">--<span>min</span></div>
-      <div class="website"><?php echo parse_url(get_bloginfo('url'), PHP_URL_HOST); ?></div>
+      <div class="countdown" id="dsNextPrayer"></div>
     </div>
 
     <!-- Prayer Times Table -->
