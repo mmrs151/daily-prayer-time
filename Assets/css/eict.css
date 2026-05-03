@@ -858,12 +858,12 @@
 /* Jumuah times: by count on p tag */
 .x-board-modern .jummah-prayer p.jumah-1,
 .x-board-modern .jummah-prayer p.jumah-2 {
-    font-size: clamp(0.7rem, 1.8vw, 1.1rem);
+    font-size: clamp(0.8rem, 2vw, 1.3rem);
     margin-top: 5px;
 }
 
 .x-board-modern .jummah-prayer p.jumah-3 {
-    font-size: clamp(0.55rem, 1.2vw, 0.9rem);
+    font-size: clamp(0.6rem, 1.4vw, 1rem);
     white-space: normal;
     display: flex;
     flex-wrap: wrap;
