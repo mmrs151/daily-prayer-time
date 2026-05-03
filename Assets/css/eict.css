@@ -859,34 +859,36 @@
     white-space: nowrap;
 }
 
-/* Mobile: Use pipe separator */
-.x-board-modern .jumah-times p {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-}
+/* Mobile: Use pipe separator (< 768px) */
+@media (max-width: 768px) {
+    .x-board-modern .jumah-times p {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
 
-.x-board-modern .jumah-times p span + span::before {
-    content: " | ";
-    color: #e2e2e2;
-    margin-left: 4px;
+    .x-board-modern .jumah-times p span + span::before {
+        content: " | ";
+        color: #e2e2e2;
+        margin-left: 2px;
+    }
 }
 
 /* Desktop (large screen): reduce size if 3 jumah times */
-@media (min-width: 1200px) {
+@media (min-width: 769px) {
+    .x-board-modern .jumah-times p {
+        display: inline;
+    }
+    
+    .x-board-modern .jumah-times p span + span::before {
+        content: " "; /* Space on desktop, not pipe */
+        margin-left: 2px;
+    }
+    
+    /* 3rd jumah time smaller on large screens */
     .x-board-modern .jummah-prayer .prayer-jamaat.jumah-times p span:nth-child(3) {
         font-size: 0.85em;
-    }
-    .x-board-modern .jummah-prayer .prayer-jamaat.jumah-times p span:nth-child(3)::before {
-        margin-left: 2px;
-    }
-}
-
-/* Mobile (< 768px): smaller separator spacing and font */
-@media (max-width: 768px) {
-    .x-board-modern .jumah-times p span + span::before {
-        margin-left: 2px;
     }
 }
     .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
