@@ -855,21 +855,21 @@
     padding-top: 10px;
 }
 
-/* Jumuah times: by count on p tag */
+/* Jumuah times: simple sizing */
 .x-board-modern .jummah-prayer p.jumah-1,
 .x-board-modern .jummah-prayer p.jumah-2 {
-    font-size: clamp(0.8rem, 2vw, 1.3rem);
-    margin-top: 5px;
+    font-size: clamp(0.9rem, 2.2vw, 1.4rem);
+    margin-top: 8px;
 }
 
 .x-board-modern .jummah-prayer p.jumah-3 {
-    font-size: clamp(0.6rem, 1.4vw, 1rem);
+    font-size: 0.85rem;
     white-space: normal;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2px;
-    margin-top: 5px;
+    gap: 3px;
+    margin-top: 8px;
 }
 
 .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
