@@ -360,8 +360,8 @@ $localTimes = $this->getLocalTimes();
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($prayers as $i => $prayer): ?>
-        <tr class="<?php echo $i === 0 ? 'active' : ''; ?>">
+        <?php foreach ($prayers as $prayer): ?>
+        <tr class="<?php echo $this->dptHelper->getNextPrayerClass($prayer, $this->row, $prayer === 'fajr'); ?>">
           <td class="name"><?php echo $prayerNames[$prayer]; ?></td>
           <td class="ar"><?php echo $prayer === 'fajr' ? 'فجر' : ($prayer === 'zuhr' ? 'ظهر' : ($prayer === 'asr' ? 'عصر' : ($prayer === 'maghrib' ? 'مغرب' : 'عشاء'))); ?></td>
           <td class="bold right-align"><?php echo do_shortcode("[{$prayer}_start]"); ?></td>
