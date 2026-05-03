@@ -854,19 +854,12 @@
 .x-board-modern .jummah-prayer{
     padding-top: 10px;
 }
-.x-board-modern .jummah-prayer .prayer-jamaat p {
-    font-size: clamp(0.75rem, 2.5vw, 1.75rem);
-    white-space: nowrap;
-}
 
-/* Jumuah times: slightly smaller than regular prayer times */
+/* Jumuah times: smaller and wrap if needed */
 .x-board-modern .jummah-prayer .prayer-jamaat p {
-    font-size: clamp(0.7rem, 2vw, 1.5rem);
-}
-
-/* If 3 Jumuah times, reduce all times further */
-.x-board-modern .jummah-prayer .prayer-jamaat p .dsJumuah {
-    font-size: 0.7em;
+    font-size: clamp(0.65rem, 1.8vw, 1.4rem);
+    white-space: normal;
+    word-spacing: 2px;
 }
 
 .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
