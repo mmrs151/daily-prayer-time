@@ -56,7 +56,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    padding: 5vh 2vw;
+    padding: 2vh 2vw;
     position: relative;
   }
 
@@ -114,10 +114,10 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   /* ── ANALOG CLOCK ── */
   .clock-wrap {
     position: relative;
-    width: 35vw;
-    height: 35vw;
-    max-width: 400px;
-    max-height: 400px;
+    width: 28vw;
+    height: 28vw;
+    max-width: 320px;
+    max-height: 320px;
     flex-shrink: 0;
   }
 
