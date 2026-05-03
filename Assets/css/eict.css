@@ -864,9 +864,10 @@
 
 /* All jumah times get this size */
 .x-board-modern .jummah-prayer p {
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;
     white-space: normal;
     margin-top: 8px;
+    display: inline-block;
 }
 
 .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
