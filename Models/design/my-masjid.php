@@ -244,15 +244,14 @@ $localTimes = $this->getLocalTimes();
 
   .prayer-table td.bold { font-weight: 700; font-size: 2.2vw; }
 
-  /* Highlighted row */
-  .prayer-table tr.active td {
-    color: var(--teal);
+  /* Active/Next Prayer Row */
+  .prayer-table tr.nextPrayer td {
     font-weight: 700;
   }
 
-  .prayer-table tr.active td.name { font-size: 2.2vw; }
+  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; }
 
-  /* Shouruq (dimmed) */
+  /* Dimmed rows */
   .prayer-table tr.dimmed td {
     color: var(--text-light);
     font-weight: 400;
@@ -376,15 +375,6 @@ $localTimes = $this->getLocalTimes();
         </tr>
       </tbody>
     </table>
-
-    <div class="watermark">
-      <?php echo parse_url(get_bloginfo('url'), PHP_URL_HOST); ?>
-      <div class="watermark-icon">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M7 1C4 1 1 3.5 1 7s3 6 6 6 6-3 6-6-3-6-6-6z" fill="white" opacity="0.8"/>
-        </svg>
-      </div>
-    </div>
 
   </div>
 </div>

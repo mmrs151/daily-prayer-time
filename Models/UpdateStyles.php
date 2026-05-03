@@ -193,8 +193,12 @@ private function getHighlightStyles()
             }
             .x-board .prayerName.highlight,
             .x-board-modern .nextPrayer,
-            .x-board .nextPrayer {
+            .x-board .nextPrayer,
+            .x-board-my-masjid tr.nextPrayer td {
                 color: {$this->options['highlight']}
+            }
+            .x-board-my-masjid tr.nextPrayer td {
+                font-weight: 700;
             }
             span.nextPrayer {
                 font-weight: bold;
