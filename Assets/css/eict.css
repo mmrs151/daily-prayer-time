@@ -864,9 +864,9 @@
     font-size: clamp(0.7rem, 2vw, 1.5rem);
 }
 
-/* If 3 Jumuah times, reduce 3rd time further */
-.x-board-modern .jummah-prayer .prayer-jamaat p .dsJumuah:nth-child(3) {
-    font-size: 0.85em;
+/* If 3 Jumuah times, reduce all times further */
+.x-board-modern .jummah-prayer .prayer-jamaat p .dsJumuah {
+    font-size: 0.8em;
 }
 
 .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
