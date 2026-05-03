@@ -883,24 +883,7 @@
     }
 }
 
-    .x-board-modern .jumah-times p span + span::before {
-        content: " | ";
-        color: #e2e2e2;
-        margin-left: 2px;
-    }
-}
-
-/* Desktop (large screen): no separator, just show times inline */
-@media (min-width: 769px) {
-    .x-board-modern .jumah-times p {
-        display: inline;
-    }
-    
-    .x-board-modern .jumah-times p span + span::before {
-        content: none;
-    }
-}
-    .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
+.x-board-modern .fajr-prayer , .x-board-modern .sunrise{
         height: auto;
         border-bottom: 1px solid rgba(62,96,92,0.3);
     }
