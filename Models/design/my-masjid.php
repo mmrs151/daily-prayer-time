@@ -2,8 +2,6 @@
     $html = '';
     $sunriseOrZawal = $this->dptHelper->getSunriseOrZawalOrIshraq($this->row);
     $nextPrayer = $this->dptHelper->getNextPrayer($this->row);
-    $nextPrayerClass = $this->getNextPrayerClass($nextPrayer, $this->row);
-    $now = date('H:i');
 ?>
 
 <div class="my-masjid">
@@ -21,56 +19,55 @@
     <div class="prayer-table">
 
         <!-- Fajr -->
-        <div class="prayer-row <?php echo $this->getNextPrayerClass('fajr', $this->row, true) ? 'current' : ''; ?>">
+        <div class="prayer-row <?php echo $this->getNextPrayerClass('fajr', $this->row, true); ?>">
             <div class="prayer-name"><?php echo $this->getLocalPrayerNames()['fajr']; ?></div>
             <div class="prayer-time">
-                <span class="start-time"><?php echo $this->formatTime($this->row['fajr_begins']); ?></span>
-                <span class="iqamah-time"><?php echo $this->formatTime($this->row['fajr_jamah']); ?></span>
+                <span class="start-time"><?php echo do_shortcode("[fajr_start]"); ?></span>
+                <span class="iqamah-time"><?php echo do_shortcode("[fajr_prayer]"); ?></span>
             </div>
         </div>
 
         <!-- Sunrise / Zawal / Ishraq -->
-        <div class="prayer-row <?php echo $this->getNextPrayerClass($sunriseOrZawal, $this->row) ? 'current' : ''; ?>">
+        <div class="prayer-row <?php echo $this->getNextPrayerClass($sunriseOrZawal, $this->row); ?>">
             <div class="prayer-name"><?php echo $this->getLocalPrayerNames()[$sunriseOrZawal]; ?></div>
             <div class="prayer-time">
-                <span class="start-time"><?php echo $this->formatTime($this->row['sunrise']); ?></span>
-                <span class="iqamah-time"></span>
+                <span class="start-time"><?php echo do_shortcode("[$sunriseOrZawal]"); ?></span>
             </div>
         </div>
 
         <!-- Zuhr -->
-        <div class="prayer-row <?php echo $this->getNextPrayerClass('zuhr', $this->row) ? 'current' : ''; ?>">
+        <div class="prayer-row <?php echo $this->getNextPrayerClass('zuhr', $this->row); ?>">
             <div class="prayer-name"><?php echo $this->getLocalPrayerNames()['zuhr']; ?></div>
             <div class="prayer-time">
-                <span class="start-time"><?php echo $this->formatTime($this->row['zuhr_begins']); ?></span>
-                <span class="iqamah-time"><?php echo $this->formatTime($this->row['zuhr_jamah']); ?></span>
+                <span class="start-time"><?php echo do_shortcode("[zuhr_start]"); ?></span>
+                <span class="iqamah-time"><?php echo do_shortcode("[zuhr_prayer]"); ?></span>
             </div>
         </div>
 
         <!-- Asr -->
-        <div class="prayer-row <?php echo $this->getNextPrayerClass('asr', $this->row) ? 'current' : ''; ?>">
+        <div class="prayer-row <?php echo $this->getNextPrayerClass('asr', $this->row); ?>">
             <div class="prayer-name"><?php echo $this->getLocalPrayerNames()['asr']; ?></div>
             <div class="prayer-time">
-                <span class="start-time"><?php echo $this->formatTime($this->row['asr_begins']); ?></span>
-                <span class="iqamah-time"><?php echo $this->formatTime($this->row['asr_jamah']); ?></span>
+                <span class="start-time"><?php echo do_shortcode("[asr_start]"); ?></span>
+                <span class="iqamah-time"><?php echo do_shortcode("[asr_prayer]"); ?></span>
             </div>
         </div>
 
         <!-- Maghrib -->
-        <div class="prayer-row <?php echo $this->getNextPrayerClass('maghrib', $this->row) ? 'current' : ''; ?>">
+        <div class="prayer-row <?php echo $this->getNextPrayerClass('maghrib', $this->row); ?>">
             <div class="prayer-name"><?php echo $this->getLocalPrayerNames()['maghrib']; ?></div>
             <div class="prayer-time">
-                <span class="start-time"><?php echo $this->formatTime($this->row['maghrib_begins']); ?></span>
-                <span class="iqamah-time"><?php echo $this->formatTime($this->row['maghrib_jamah']); ?></span>
+                <span class="start-time"><?php echo do_shortcode("[maghrib_start]"); ?></span>
+                <span class="iqamah-time"><?php echo do_shortcode("[maghrib_prayer]"); ?></span>
             </div>
         </div>
 
         <!-- Isha -->
-        <div class="prayer-row <?php echo $this->getNextPrayerClass('isha', $this->row) ? 'current' : ''; ?>">
+        <div class="prayer-row <?php echo $this->getNextPrayerClass('isha', $this->row); ?>">
             <div class="prayer-name"><?php echo $this->getLocalPrayerNames()['isha']; ?></div>
             <div class="prayer-time">
-                <span class="start-time"><?php echo $this->formatTime($this->row['isha_begins']); ?></span>
-                <span class="iqamah-time"><?php echo $this->formatTime($this->row['isha_jamah']); ?></span>
+                <span class="start-time"><?php echo do_shortcode("[isha_start]"); ?></span>
+                <span class="iqamah-time"><?php echo do_shortcode("[isha_prayer]"); ?></span>
             </div>
         </div>
 
