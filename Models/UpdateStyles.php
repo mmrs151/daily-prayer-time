@@ -78,7 +78,7 @@ class UpdateStyles
         return "
             .x-board-modern #time-table-section,
             .x-board-modern .date-english-arabic {
-                background-color: {$this->options['tableBackground']}
+                background: {$this->options['tableBackground'] } !important
             }
             .green,
             .x-board-modern .mosque-name h2,
