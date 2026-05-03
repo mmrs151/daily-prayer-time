@@ -76,12 +76,10 @@ $localTimes = $this->getLocalTimes();
   .masjid-logo {
     width: 6vw;
     height: 6vw;
-    max-width: 80px;
-    max-height: 80px;
-    background: #4a7c59;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 10px;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
@@ -94,7 +92,7 @@ $localTimes = $this->getLocalTimes();
   }
 
   .masjid-info h1 {
-    font-size: 2vw;
+    font-size: 3vw;
     font-weight: 700;
     color: var(--text-main);
     line-height: 1.1;
@@ -166,7 +164,6 @@ $localTimes = $this->getLocalTimes();
     background: var(--dark);
     color: var(--white);
     border-radius: 12px;
-    padding: 2vh 2vw;
     margin-bottom: 3vh;
     display: flex;
     flex-direction: column;
@@ -209,7 +206,7 @@ $localTimes = $this->getLocalTimes();
   }
 
   .prayer-table th {
-    font-size: 1.5vw;
+    font-size: clamp(2rem, 2.5vw, 2rem);
     font-weight: 600;
     color: var(--text-main);
     text-align: left;
@@ -218,7 +215,7 @@ $localTimes = $this->getLocalTimes();
 
   .prayer-table th.ar {
     font-family: 'Tajawal', sans-serif;
-    font-size: 1.3vw;
+    font-size: clamp(2rem, 2.5vw, 2rem);
     color: var(--text-light);
     font-weight: 400;
     direction: rtl;
@@ -228,18 +225,18 @@ $localTimes = $this->getLocalTimes();
   .prayer-table td.right-align { text-align: right; }
 
   .prayer-table td {
-    font-size: 2vw;
+    font-size: clamp(2rem, 2.5vw, 2rem);
     font-weight: 500;
     color: var(--text-main);
-    padding: 1.5vh 0;
+    padding: 1vh 0;
     border-bottom: 1px solid rgba(43,60,74,0.07);
   }
 
   .prayer-table td.ar {
     font-family: 'Tajawal', sans-serif;
-    font-size: 1.4vw;
+    font-size: clamp(1rem, 2.5vw, 2rem)
     color: var(--text-light);
-    direction: rtl;
+    text-align: center;
   }
 
   .prayer-table td.bold { font-weight: 700; font-size: 2.2vw; }
@@ -249,38 +246,25 @@ $localTimes = $this->getLocalTimes();
     font-weight: 700;
   }
 
-  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; }
-
   /* Dimmed rows */
   .prayer-table tr.dimmed td {
     color: var(--text-light);
     font-weight: 400;
   }
 
-  /* ── WATERMARK ── */
-  .watermark {
-    margin-top: auto;
-    text-align: right;
-    font-size: 1vw;
-    color: var(--text-light);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 6px;
-    padding-top: 1vh;
+  .x-board td span.dpt_start, td span.dpt_jamah {
+    font-size: clamp(2rem, 2.5vw, 2rem) !important;
   }
 
-  .watermark-icon {
-    width: 2vw;
-    height: 2vw;
-    max-width: 24px;
-    max-height: 24px;
-    background: var(--text-main);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  @media (max-width: 768px) {
+  .left {
+    display: none;
   }
+
+  .screen {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>
@@ -292,14 +276,7 @@ $localTimes = $this->getLocalTimes();
 
     <div class="masjid-header">
       <div class="masjid-logo">
-        <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="24" width="36" height="14" rx="2" fill="#d4ead9"/>
-          <path d="M21 6 C14 6 8 12 8 18 L8 24 L34 24 L34 18 C34 12 28 6 21 6Z" fill="#d4ead9"/>
-          <rect x="18" y="2" width="6" height="8" rx="3" fill="#d4ead9"/>
-          <rect x="5" y="18" width="4" height="6" fill="#d4ead9"/>
-          <rect x="33" y="18" width="4" height="6" fill="#d4ead9"/>
-          <rect x="17" y="30" width="8" height="8" rx="1" fill="#4a7c59"/>
-        </svg>
+      <?php echo $this->getLogoUrl(); ?>
       </div>
       <div class="masjid-info">
         <h1><?php echo get_bloginfo('name'); ?></h1>
@@ -354,8 +331,8 @@ $localTimes = $this->getLocalTimes();
         <tr>
           <th><?php echo $headers['prayer']; ?></th>
           <th class="ar">صلاة</th>
-          <th class="right-align"><?php echo strtoupper($headers['begins']); ?><br><span style="font-family:'Tajawal',sans-serif;font-weight:400;font-size:12px;color:#7a8a99;">أذان</span></th>
-          <th class="right-align"><?php echo strtoupper($headers['iqamah']); ?><br><span style="font-family:'Tajawal',sans-serif;font-weight:400;font-size:12px;color:#7a8a99;">إقامة</span></th>
+          <th class="right-align"><?php echo strtoupper($headers['begins']); ?><br><span>أذان</span></th>
+          <th class="right-align"><?php echo strtoupper($headers['iqamah']); ?><br><span>إقامة</span></th>
         </tr>
       </thead>
       <tbody>
@@ -363,7 +340,7 @@ $localTimes = $this->getLocalTimes();
         <tr class="<?php echo $this->dptHelper->getNextPrayerClass($prayer, $this->row, $prayer === 'fajr'); ?>">
           <td class="name"><?php echo $prayerNames[$prayer]; ?></td>
           <td class="ar"><?php echo $prayer === 'fajr' ? 'فجر' : ($prayer === 'zuhr' ? 'ظهر' : ($prayer === 'asr' ? 'عصر' : ($prayer === 'maghrib' ? 'مغرب' : 'عشاء'))); ?></td>
-          <td class="bold right-align"><?php echo do_shortcode("[{$prayer}_start]"); ?></td>
+          <td class="right-align"><?php echo do_shortcode("[{$prayer}_start]"); ?></td>
           <td class="right-align"><?php echo do_shortcode("[{$prayer}_prayer]"); ?></td>
         </tr>
         <?php endforeach; ?>
