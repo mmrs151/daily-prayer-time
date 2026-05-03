@@ -875,20 +875,14 @@
     }
 }
 
-/* Desktop (large screen): reduce size if 3 jumah times */
+/* Desktop (large screen): no separator, just show times inline */
 @media (min-width: 769px) {
     .x-board-modern .jumah-times p {
         display: inline;
     }
     
     .x-board-modern .jumah-times p span + span::before {
-        content: " "; /* Space on desktop, not pipe */
-        margin-left: 2px;
-    }
-    
-    /* 3rd jumah time smaller on large screens */
-    .x-board-modern .jummah-prayer .prayer-jamaat.jumah-times p span:nth-child(3) {
-        font-size: 0.85em;
+        content: none;
     }
 }
     .x-board-modern .fajr-prayer , .x-board-modern .sunrise{
