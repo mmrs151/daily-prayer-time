@@ -862,11 +862,11 @@
 
 .x-board-modern .jummah-prayer .prayer-jamaat.jumah-1 p,
 .x-board-modern .jummah-prayer .prayer-jamaat.jumah-2 p {
-    font-size: clamp(0.65rem, 1.8vw, 1.1rem);
+    font-size: clamp(0.65rem, 1.8vw, 1.1rem) !important;
 }
 
 .x-board-modern .jummah-prayer .prayer-jamaat.jumah-3 p {
-    font-size: clamp(0.5rem, 1.2vw, 0.85rem);
+    font-size: clamp(0.5rem, 1.2vw, 0.85rem) !important;
     white-space: normal;
     display: flex;
     flex-wrap: wrap;
