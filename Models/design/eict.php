@@ -91,9 +91,9 @@
 
     <!--TIMETABLE SECTION-->
 
-    <div id="time-table-section" class="row text-center">
+<div id="time-table-section" class="row text-center">
             <div class="row pt-4">
-                <div class="col-md-2 col-sm-6 fajr-prayer">
+                <div class="col-md-2 col-sm-6 fajr-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="lucide:sunrise"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('fajr', $this->row, true) ?>'><?php echo $this->getLocalPrayerNames()['fajr'] ?></h4>
                     <div class="prayer-start">
@@ -103,14 +103,14 @@
                         <p class='<?php echo $this->getNextPrayerClass('fajr', $this->row, true) ?>'><?php echo do_shortcode("[fajr_prayer]") ?></p>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 sunrise">
+                <div class="col-md-2 col-sm-6 sunrise prayer-card">
                 <span class="iconify-inline icon" data-icon="bi:sunrise-fill"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('sunrise', $this->row) ?>'><?php echo $this->getLocalPrayerNames()[$sunriseOrZawal] ?></h4>
                     <div class="prayer-jamaat">
                         <p class='<?php echo $this->getNextPrayerClass($sunriseOrZawal, $this->row) ?>'><?php echo do_shortcode("[$sunriseOrZawal]") ?></p>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 zuhr-prayer">
+                <div class="col-md-2 col-sm-6 zuhr-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="emojione:sun"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('zuhr', $this->row) ?>'><?php echo $this->getLocalPrayerNames()['zuhr'] ?></h4>
                     <div class="prayer-start">
@@ -120,7 +120,7 @@
                         <p class='<?php echo $this->getNextPrayerClass('zuhr', $this->row) ?>'><?php echo do_shortcode("[zuhr_prayer]") ?></p>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 asr-prayer">
+                <div class="col-md-2 col-sm-6 asr-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="bi:sun"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('asr', $this->row) ?>' ><?php echo $this->getLocalPrayerNames()['asr'] ?></h4>
                     <div class="prayer-start">
@@ -130,7 +130,7 @@
                         <p class='<?php echo $this->getNextPrayerClass('asr', $this->row) ?>'><?php echo do_shortcode("[asr_prayer]") ?></p>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 maghrib-prayer">
+                <div class="col-md-2 col-sm-6 maghrib-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="carbon:sunset"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('maghrib', $this->row) ?>'><?php echo $this->getLocalPrayerNames()['maghrib'] ?></h4>
                     <div class="prayer-start">
@@ -140,7 +140,7 @@
                         <p class='<?php echo $this->getNextPrayerClass('maghrib', $this->row) ?>'><?php echo do_shortcode("[maghrib_prayer]") ?></p>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 isha-prayer">
+                <div class="col-md-2 col-sm-6 isha-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="bi:moon-stars-fill"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('isha', $this->row) ?>'><?php echo $this->getLocalPrayerNames()['isha'] ?></h4>
                     <div class="prayer-start">
@@ -150,7 +150,7 @@
                         <p class='<?php echo $this->getNextPrayerClass('isha', $this->row) ?>'><?php echo do_shortcode("[isha_prayer]") ?></p>
                     </div>
                 </div>
-                <div class="col-md-2 jummah-prayer">
+                <div class="col-md-2 jummah-prayer prayer-card">
                 <span class="iconify-inline icon" data-icon="la:mosque"></span>
                     <h4 class='<?php echo $this->getNextPrayerClass('jumuah', $this->row) ?>'><?php echo $this->getLocalHeaders()['jumuah'] ?></h4>
                     <div class="prayer-jamaat">
