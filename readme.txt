@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.05.01
+Stable tag: 2026.05.03
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,14 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 12. Sample 2
 
 == Changelog ==
+
+= 2026.05.03 =
+* Fix: Timezone issue in isZawalTimeNext by using user_current_time for consistent comparison
+* Fix: Show zawal name instead of sunrise when zawal is next (with fallback)
+* Fix: Only highlight ishraq row when ishraq is next (not zawal)
+* Fix: Only highlight zuhr row when zawal is next (not sunrise row)
+* Fix: Ishraq highlighting in horizontal table's printAzanTime method
+* Fix: Jumuah display logic - show row only when times set and before last jumuah time
 
 = 2026.05.01 =
 * Feat: Add media gallery button for selecting slider images from WordPress media library
