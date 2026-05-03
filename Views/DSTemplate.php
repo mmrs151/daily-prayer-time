@@ -10,10 +10,16 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
 
     wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.bundle.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
 
+    wp_register_style( 'timetable-style', plugins_url('../Assets/css/styles.css', __FILE__), array(), DPT_PLUGIN_VERSION );
+    wp_enqueue_style( 'timetable-style' );
+    
     wp_register_style( 'dpt_bootstrap', plugins_url('../Assets/css/bootstrap.min.css', __FILE__), array(), DPT_PLUGIN_VERSION );
     
     wp_enqueue_style( 'dpt_bootstrap' );
 
+    require_once plugin_dir_path(__FILE__) . '../Models/UpdateStyles.php';
+    new UpdateStyles('timetable-style');
+    
     // Set headers to prevent caching
     add_action('send_headers', function() {
         header('Cache-Control: no-cache, no-store, must-revalidate');
