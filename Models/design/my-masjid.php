@@ -40,11 +40,11 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   }
 
   .screen {
-    width: 1280px;
-    height: 720px;
+    width: 100vw;
+    height: 100vh;
     background: var(--bg);
     display: grid;
-    grid-template-columns: 420px 1fr;
+    grid-template-columns: 1fr 1fr;
     overflow: hidden;
     position: relative;
   }
@@ -55,21 +55,23 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 32px 24px 28px;
+    justify-content: center;
+    padding: 5vh 2vw;
     position: relative;
   }
 
   .masjid-header {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 1.5vw;
     align-self: flex-start;
   }
 
   .masjid-logo {
-    width: 60px;
-    height: 60px;
+    width: 6vw;
+    height: 6vw;
+    max-width: 80px;
+    max-height: 80px;
     background: #4a7c59;
     border-radius: 10px;
     display: flex;
@@ -78,10 +80,10 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     flex-shrink: 0;
   }
 
-  .masjid-logo svg { width: 42px; height: 42px; }
+  .masjid-logo svg { width: 80%; height: 80%; }
 
   .masjid-info h1 {
-    font-size: 20px;
+    font-size: 2vw;
     font-weight: 700;
     color: var(--text-main);
     line-height: 1.1;
@@ -89,14 +91,14 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
 
   .masjid-info .arabic {
     font-family: 'Tajawal', sans-serif;
-    font-size: 15px;
+    font-size: 1.4vw;
     color: var(--text-light);
     direction: rtl;
     margin-top: 2px;
   }
 
   .masjid-info .address {
-    font-size: 12px;
+    font-size: 1vw;
     color: var(--text-light);
     margin-top: 3px;
   }
@@ -104,8 +106,10 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   /* ── ANALOG CLOCK ── */
   .clock-wrap {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 35vw;
+    height: 35vw;
+    max-width: 400px;
+    max-height: 400px;
     flex-shrink: 0;
   }
 
@@ -121,7 +125,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   }
 
   .digital .time {
-    font-size: 64px;
+    font-size: 6vw;
     font-weight: 800;
     color: var(--text-main);
     letter-spacing: 2px;
@@ -129,7 +133,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   }
 
   .digital .date {
-    font-size: 15px;
+    font-size: 1.4vw;
     font-weight: 400;
     color: var(--text-light);
     margin-top: 6px;
@@ -142,7 +146,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 28px 52px 28px 40px;
+    padding: 5vh 4vw;
     position: relative;
   }
 
@@ -151,21 +155,21 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     background: var(--dark);
     color: var(--white);
     border-radius: 12px;
-    padding: 18px 28px;
-    margin-bottom: 28px;
+    padding: 2vh 2vw;
+    margin-bottom: 3vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   .next-banner .label {
-    font-size: 16px;
+    font-size: 2vw;
     font-weight: 400;
     opacity: 0.75;
   }
 
   .next-banner .countdown {
-    font-size: 72px;
+    font-size: 6vw;
     font-weight: 800;
     color: var(--teal);
     line-height: 1;
@@ -173,13 +177,13 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   }
 
   .next-banner .countdown span {
-    font-size: 22px;
+    font-size: 2vw;
     font-weight: 600;
     letter-spacing: 0;
   }
 
   .next-banner .website {
-    font-size: 13px;
+    font-size: 1.2vw;
     opacity: 0.5;
     align-self: flex-end;
   }
@@ -188,6 +192,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   .prayer-table {
     width: 100%;
     border-collapse: collapse;
+    flex: 1;
   }
 
   .prayer-table thead tr {
@@ -195,16 +200,16 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   }
 
   .prayer-table th {
-    font-size: 14px;
+    font-size: 1.5vw;
     font-weight: 600;
     color: var(--text-main);
     text-align: left;
-    padding: 0 0 10px 0;
+    padding: 0 0 1vh 0;
   }
 
   .prayer-table th.ar {
     font-family: 'Tajawal', sans-serif;
-    font-size: 13px;
+    font-size: 1.3vw;
     color: var(--text-light);
     font-weight: 400;
     direction: rtl;
@@ -214,21 +219,21 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   .prayer-table td.right-align { text-align: right; }
 
   .prayer-table td {
-    font-size: 18px;
+    font-size: 2vw;
     font-weight: 500;
     color: var(--text-main);
-    padding: 12px 0;
+    padding: 1.5vh 0;
     border-bottom: 1px solid rgba(43,60,74,0.07);
   }
 
   .prayer-table td.ar {
     font-family: 'Tajawal', sans-serif;
-    font-size: 16px;
+    font-size: 1.4vw;
     color: var(--text-light);
     direction: rtl;
   }
 
-  .prayer-table td.bold { font-weight: 700; font-size: 20px; }
+  .prayer-table td.bold { font-weight: 700; font-size: 2.2vw; }
 
   /* Highlighted row */
   .prayer-table tr.active td {
@@ -236,7 +241,7 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
     font-weight: 700;
   }
 
-  .prayer-table tr.active td.name { font-size: 20px; }
+  .prayer-table tr.active td.name { font-size: 2.2vw; }
 
   /* Shouruq (dimmed) */
   .prayer-table tr.dimmed td {
@@ -248,18 +253,20 @@ $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
   .watermark {
     margin-top: auto;
     text-align: right;
-    font-size: 12px;
+    font-size: 1vw;
     color: var(--text-light);
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 6px;
-    padding-top: 10px;
+    padding-top: 1vh;
   }
 
   .watermark-icon {
-    width: 22px;
-    height: 22px;
+    width: 2vw;
+    height: 2vw;
+    max-width: 24px;
+    max-height: 24px;
     background: var(--text-main);
     border-radius: 50%;
     display: inline-flex;
