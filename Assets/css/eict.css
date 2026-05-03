@@ -868,6 +868,24 @@
         gap: 8px;
     }
 
+    .x-board-modern .jumah-times p .dsJumuah + .dsJumuah::before {
+        content: " | ";
+        color: #e2e2e2;
+        margin-right: 4px;
+    }
+}
+
+/* Desktop (large screen): no separator */
+@media (min-width: 769px) {
+    .x-board-modern .jumah-times p {
+        display: inline;
+    }
+    
+    .x-board-modern .jumah-times p .dsJumuah + .dsJumuah::before {
+        content: none;
+    }
+}
+
     .x-board-modern .jumah-times p span + span::before {
         content: " | ";
         color: #e2e2e2;
