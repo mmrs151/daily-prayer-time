@@ -406,7 +406,11 @@
 }
 
 .d-masjid-e-usman #quranVerse .quranVerse {
-    padding: 20px;
+    padding: 30px;
+    border: 3px solid rgb(86,247,79);
+    border-radius: 15px;
+    background: rgba(0,0,0,0.5);
+    max-width: 90%;
 }
 
 .d-masjid-e-usman #quranVerse blockquote {
