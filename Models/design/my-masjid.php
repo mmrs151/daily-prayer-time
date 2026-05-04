@@ -245,12 +245,18 @@ $localTimes = $this->getLocalTimes();
 
   .prayer-table td.bold { font-weight: 700; font-size: 2.2vw; }
 
-/* Active/Next Prayer Row - color set by UpdateStyles */
+/* Active/Next Prayer Row - hardcoded fallback */
   .prayer-table tr.nextPrayer td {
     font-weight: 700;
+    color: #ffd700 !important;
   }
 
-  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; }
+  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; color: #ffd700 !important; }
+  
+  /* Override with higher specificity from UpdateStyles */
+  html body .x-board-my-masjid .prayer-table tr.nextPrayer td {
+    color: #ffd700 !important;
+  }
 
   /* Dimmed rows */
   .prayer-table tr.dimmed td {
@@ -286,52 +292,9 @@ $localTimes = $this->getLocalTimes();
       </div>
       <div class="masjid-info">
         <h1><?php echo get_bloginfo('name'); ?></h1>
-      </div>
+</div>
     </div>
-
-    <!-- Analog Clock -->
-    <div class="clock-wrap">
-      <svg class="clock-svg" viewBox="0 0 300 300" id="analogClock">
-        <circle cx="150" cy="150" r="140" fill="#d4d4d4" stroke="#c0c0c0" stroke-width="2"/>
-        <circle cx="150" cy="22" r="8" fill="#a0a8b0"/>
-        <circle cx="278" cy="150" r="8" fill="#a0a8b0"/>
-        <circle cx="150" cy="278" r="8" fill="#a0a8b0"/>
-        <circle cx="22" cy="150" r="8" fill="#a0a8b0"/>
-        <circle cx="224" cy="37" r="5" fill="#b8bec5"/>
-        <circle cx="263" cy="76" r="5" fill="#b8bec5"/>
-        <circle cx="263" cy="224" r="5" fill="#b8bec5"/>
-        <circle cx="224" cy="263" r="5" fill="#b8bec5"/>
-        <circle cx="76" cy="263" r="5" fill="#b8bec5"/>
-        <circle cx="37" cy="224" r="5" fill="#b8bec5"/>
-        <circle cx="37" cy="76" r="5" fill="#b8bec5"/>
-        <circle cx="76" cy="37" r="5" fill="#b8bec5"/>
-        <line id="hourHand" x1="150" y1="150" x2="150" y2="80" stroke="#6a7a8a" stroke-width="10" stroke-linecap="round" transform="rotate(0, 150, 150)"/>
-        <line id="minuteHand" x1="150" y1="150" x2="150" y2="50" stroke="#6a7a8a" stroke-width="7" stroke-linecap="round" transform="rotate(0, 150, 150)"/>
-        <line id="secondHand" x1="150" y1="170" x2="150" y2="40" stroke="#e05050" stroke-width="3" stroke-linecap="round" transform="rotate(0, 150, 150)"/>
-        <circle cx="150" cy="150" r="10" fill="#5a6a7a"/>
-        <circle cx="150" cy="150" r="5" fill="#3a4a5a"/>
-      </svg>
-    </div>
-
-    <!-- Digital Clock -->
-    <div class="digital">
-      <div class="time" id="digitalTime">--:--</div>
-      <div class="date" id="digitalDate">--</div>
-      <p><?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?></p>
-    </div>
-
-  </div>
-
-  <!-- RIGHT -->
-  <div class="right">
-
-    <!-- Next prayer banner -->
-    <?php echo $this->getHiddenVariables(); ?>
-    <div class="next-banner">
-      <div class="next-name highlight-text"><?php echo do_shortcode("[daily_next_prayer]"); ?></div>
-      <h2 id="dsNextPrayer" class="countdown highlight-text"></h2>
-    </div>
-
+    
     <!-- Prayer Times Table -->
     <table class="prayer-table">
       <thead>
@@ -343,8 +306,14 @@ $localTimes = $this->getLocalTimes();
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($prayers as $prayer): ?>
-        <tr class="<?php echo $this->dptHelper->getNextPrayerClass($prayer, $this->row, $prayer === 'fajr'); ?>">
+        <?php 
+        $highlightColor = get_option('highlight') ?: '#ffd700';
+        $highlightFontColor = get_option('highlightFont') ?: '#000000';
+        foreach ($prayers as $prayer): 
+        $nextClass = $this->dptHelper->getNextPrayerClass($prayer, $this->row, $prayer === 'fajr');
+        $rowStyle = $nextClass === 'nextPrayer' ? "background-color: $highlightColor !important; color: $highlightFontColor !important;" : '';
+        ?>
+        <tr class="<?php echo $nextClass; ?>" style="<?php echo $rowStyle; ?>">
           <td class="name"><?php echo $prayerNames[$prayer]; ?></td>
           <td class="ar"><?php echo $prayer === 'fajr' ? 'فجر' : ($prayer === 'zuhr' ? 'ظهر' : ($prayer === 'asr' ? 'عصر' : ($prayer === 'maghrib' ? 'مغرب' : 'عشاء'))); ?></td>
           <td class="right-align"><?php echo do_shortcode("[{$prayer}_start]"); ?></td>
