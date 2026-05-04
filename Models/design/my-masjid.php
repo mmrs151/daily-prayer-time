@@ -6,6 +6,9 @@ $headers = $this->getLocalHeaders();
 $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
 $nextPrayer = $this->dptHelper->getNextPrayer($this->row);
 $localTimes = $this->getLocalTimes();
+
+$maghribTime = do_shortcode("[maghrib_start]");
+$fajrTimeTomorrow = do_shortcode("[fajr_start]");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +20,7 @@ $localTimes = $this->getLocalTimes();
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* Light Mode Colors */
   :root {
     --bg: #e8e8e8;
     --panel: #d4d4d4;
@@ -29,6 +33,20 @@ $localTimes = $this->getLocalTimes();
     --shadow: rgba(0,0,0,0.12);
     --clock-face: #d0d0d0;
     --clock-dot: #a0a8b0;
+  }
+
+  /* Dark Mode Colors */
+  .dark-mode {
+    --bg: #0a1628;
+    --panel: #1a2d42;
+    --dark: #1a3a5c;
+    --teal: #ffd700;
+    --white: #1a2d42;
+    --text-main: #e8e8e8;
+    --text-light: #a0a8b0;
+    --shadow: rgba(0,0,0,0.4);
+    --clock-face: #2a3d52;
+    --clock-dot: #4a5d6a;
   }
 
   /* Override with backend highlight if set */
@@ -383,6 +401,42 @@ function updateClock() {
   document.getElementById('hourHand').setAttribute('transform', 'rotate(' + hourDeg + ', 150, 150)');
   document.getElementById('minuteHand').setAttribute('transform', 'rotate(' + minDeg + ', 150, 150)');
   document.getElementById('secondHand').setAttribute('transform', 'rotate(' + secDeg + ', 150, 150)');
+  
+  // Dark mode check
+  checkDarkMode();
+}
+
+// Dark mode: Maghrib to Fajr
+function checkDarkMode() {
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  
+  // Parse maghrib time from PHP (format: "20:31" or similar)
+  const maghribParts = '<?php echo $maghribTime; ?>'.split(':');
+  const maghribMinutes = parseInt(maghribParts[0]) * 60 + parseInt(maghribParts[1]);
+  
+  // Parse fajr time - need to handle whether it's today or tomorrow
+  const fajrParts = '<?php echo $fajrTimeTomorrow; ?>'.split(':');
+  let fajrMinutes = parseInt(fajrParts[0]) * 60 + parseInt(fajrParts[1]);
+  
+  // Determine if we should be in dark mode
+  let darkMode = false;
+  if (currentMinutes >= maghribMinutes) {
+    darkMode = true; // After maghrib
+  } else if (fajrMinutes < maghribMinutes) {
+    // Fajr is next day (e.g., 04:00 vs 20:00)
+    if (currentMinutes < fajrMinutes) {
+      darkMode = true; // Before Fajr (between midnight and Fajr)
+    }
+  } else {
+    // Same day comparison
+    if (currentMinutes < fajrMinutes && now.getHours() < 12) {
+      darkMode = true; // Early morning before Fajr
+    }
+  }
+  
+  // Apply dark mode class
+  document.querySelector('.screen').classList.toggle('dark-mode', darkMode);
 }
 updateClock();
 setInterval(updateClock, 1000);
