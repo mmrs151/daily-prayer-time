@@ -23,6 +23,40 @@
     overflow: hidden;
 }
 
+/* ─── TOP HEADER ───────────────────────────────────────────────────── */
+.d-masjid-e-usman .top-header-row {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.3);
+    border-bottom: 2px solid rgb(86,247,79);
+}
+
+.d-masjid-e-usman .logo-section-top {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+.d-masjid-e-usman .logo-section-top img {
+    max-height: 60px;
+    width: auto;
+}
+
+.d-masjid-e-usman .mosque-name-top {
+    flex: 1;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.d-masjid-e-usman .mosque-name-top h1 {
+    color: #d7d7d7;
+    font-family: "BebasNeueRegular";
+    font-size: clamp(28px, 5vw, 48px);
+    margin: 0;
+    text-shadow: 3px 3px black;
+}
+
 .d-masjid-e-usman .row {
     flex: 1;
     display: flex;
@@ -119,7 +153,6 @@
     display: block;
     line-height: 1.1;
     text-shadow: 5px 5px black;
-    padding-left: 9px;
 }
 
 .d-masjid-e-usman .seconds-count p {
@@ -453,7 +486,7 @@
     /* Clock digits */
     .d-masjid-e-usman .digital-clock {
         align-items: center;
-        padding: 0;
+        padding-left: 30px;
     }
 
     .d-masjid-e-usman .digital-clock h2 {
@@ -490,7 +523,6 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-left: 6px;
     }
 
     .d-masjid-e-usman .seconds-count h4 {
@@ -564,7 +596,6 @@
 
     /* Prayer name */
     .d-masjid-e-usman .title-value {
-        font-size: 16px;
         font-weight: bold;
         padding-top: 0;
         padding-left: 4px;
@@ -574,7 +605,6 @@
     /* Time values */
     .d-masjid-e-usman .time-value h3,
     .d-masjid-e-usman .jummah {
-        font-size: 18px;
         text-shadow: 2px 2px black;
         line-height: 1.2;
     }
@@ -611,7 +641,6 @@
     }
 
     .d-masjid-e-usman .left-main-col-sun-times p {
-        font-size: 9px;
         letter-spacing: 0;
         padding-top: 4px;
         line-height: 1.2;
@@ -621,7 +650,6 @@
     }
 
     .d-masjid-e-usman .left-main-col-sun-times h4 {
-        font-size: 17px;
         line-height: 1.2;
     }
 

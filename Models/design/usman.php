@@ -5,10 +5,12 @@ $html = '';
 <!-- MASJID DESIGN -->
 <div class="usman-body">
     <div class="container-fluid d-masjid-e-usman">
-        <div class="row mobile-logo-row">
-            <div class="col-sm-12 mobile-logo-column text-center" >
+        <div class="row top-header-row">
+            <div class="col-md-3 logo-section-top">
                 <?php echo $this->getLogoUrl(); ?>
-            
+            </div>
+            <div class="col-md-9 mosque-name-top">
+                <h1><?php echo get_bloginfo('name'); ?></h1>
             </div>
         </div>
         <div class="row">
@@ -120,14 +122,6 @@ $html = '';
                         <div class="carousel-inner height-100">
                             <?php echo $slides; ?>
                         </div>
-                    </div>
-                </div>
-                <div class="row mosque-info-overlay">
-                    <div class="col-md-3 logo-section">
-                        <?php echo $this->getLogoUrl(); ?>
-                    </div>
-                    <div class="col-md-9 afterlogo-text">
-                        <h1 class="bottomright-masjidname"><?php echo get_bloginfo('name'); ?></h1>
                     </div>
                 </div>
             </div>
