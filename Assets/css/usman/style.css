@@ -272,21 +272,12 @@
 }
 
 .d-masjid-e-usman .start-title,
-.d-masjid-e-usman .fajr-start-time h3,
-.d-masjid-e-usman .zuhr-start-time h3,
-.d-masjid-e-usman .asr-start-time h3,
-.d-masjid-e-usman .maghrib-start-time h3,
-.d-masjid-e-usman .esha-start-time h3,
-.d-masjid-e-usman .jummah-start-time h3 {
+.d-masjid-e-usman .prayer-start-time h3 {
     padding-right: 28px;
     text-align: right;
 }
 
-.d-masjid-e-usman .fajr-jamah-time,
-.d-masjid-e-usman .zuhr-jamah-time,
-.d-masjid-e-usman .asr-jamah-time,
-.d-masjid-e-usman .maghrib-jamah-time,
-.d-masjid-e-usman .esha-jamah-time,
+.d-masjid-e-usman .prayer-jamah-time,
 .d-masjid-e-usman .jummah-jamah-time {
     padding-right: 0;
 }
@@ -497,13 +488,12 @@
     display: flex;
 }
 
-.d-masjid-e-usman .isha-jamah-time {
-    padding-right: 0;
+.d-masjid-e-usman .prayer-start-time {
+    position: relative;
 }
 
-.d-masjid-e-usman .isha-start-time {
-    position: relative;
-    right: 25px;
+.d-masjid-e-usman .prayer-jamah-time {
+    padding-right: 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -544,17 +534,8 @@
     }
 
     .d-masjid-e-usman .start-title,
-    .d-masjid-e-usman .fajr-start-time h3,
-    .d-masjid-e-usman .zuhr-start-time h3,
-    .d-masjid-e-usman .asr-start-time h3,
-    .d-masjid-e-usman .maghrib-start-time h3,
-    .d-masjid-e-usman .esha-start-time h3,
-    .d-masjid-e-usman .jummah-start-time h3 {
+    .d-masjid-e-usman .prayer-start-time h3 {
         padding-right: 12px;
-    }
-
-    .d-masjid-e-usman .isha-start-time {
-        right: 12px;
     }
 }
 
@@ -711,7 +692,7 @@
 
     .d-masjid-e-usman .lmc-heading h3 {
         font-size: 12px;
-        padding-right: 4px;
+        padding-right: 50px;
         margin-bottom: 0;
         letter-spacing: 0.5px;
         color: rgba(255,255,255,0.7);
@@ -738,7 +719,7 @@
     /* Prayer name */
     .d-masjid-e-usman .title-value {
         padding-top: 0;
-        padding-left: 4px;
+        padding-left: 33px;
         line-height: 1.2;
     }
 
@@ -752,22 +733,15 @@
 
     /* Remove desktop fixed padding on start times */
     .d-masjid-e-usman .start-title,
-    .d-masjid-e-usman .fajr-start-time h3,
-    .d-masjid-e-usman .zuhr-start-time h3,
-    .d-masjid-e-usman .asr-start-time h3,
-    .d-masjid-e-usman .maghrib-start-time h3,
-    .d-masjid-e-usman .esha-start-time h3,
-    .d-masjid-e-usman .jummah-start-time h3 {
-        padding-right: 4px;
-    }
-
-    .d-masjid-e-usman .isha-start-time {
-        right: 0;
+    .d-masjid-e-usman .prayer-start-time,
+    .d-masjid-e-usman .prayer-start-time h3 {
         position: static;
+        padding-right: 33px;
     }
 
+    .d-masjid-e-usman .prayer-jamah-time,
     .d-masjid-e-usman .jummah-jamah-time {
-        padding-right: 4px;
+        padding-right: 50px;
     }
 
     /* ── Sun times bar — 2×2 grid on very small screens, row on normal ── */

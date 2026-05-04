@@ -289,8 +289,13 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     font-weight: 400;
   }
 
-  .x-board td span.dpt_start, td span.dpt_jamah {
+  .x-board-my-masjid td span.dpt_start,
+  .x-board-my-masjid td span.dpt_jamah {
     font-size: clamp(2rem, 2.5vw, 2rem) !important;
+  }
+
+  .x-board-my-masjid p.hijriDate {
+    color: var(--text-main) !important;
   }
 
   @media (max-width: 768px) {
@@ -354,7 +359,7 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     <div class="digital">
       <div class="time" id="digitalTime">--:--</div>
       <div class="date" id="digitalDate">--</div>
-      <p><?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?></p>
+      <p class="hijriDate"><?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?></p>
     </div>
 
   </div>

@@ -56,10 +56,10 @@ $html = '';
                                 <div class='col-md-4 col-sm-4 col-4 {$prayer}-title title-value'>
                                     <span class='title'>{$prayerName}</span>
                                 </div>
-                                <div class='col-md-4 col-sm-4 col-4 {$prayer}-start-time time-value'>
+                                <div class='col-md-4 col-sm-4 col-4 prayer-start-time time-value'>
                                     <h3>{$startTime}</h3>
                                 </div>
-                                <div class='col-md-4 col-sm-4 col-4 {$prayer}-jamah-time time-value'>
+                                <div class='col-md-4 col-sm-4 col-4 prayer-jamah-time time-value'>
                                     <h3>{$jamahTime}</h3>
                                 </div>
                             </div>";
