@@ -245,13 +245,12 @@ $localTimes = $this->getLocalTimes();
 
   .prayer-table td.bold { font-weight: 700; font-size: 2.2vw; }
 
-  /* Active/Next Prayer Row */
+/* Active/Next Prayer Row - color set by UpdateStyles */
   .prayer-table tr.nextPrayer td {
     font-weight: 700;
-    color: var(--highlight) !important;
   }
 
-  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; color: var(--highlight) !important; }
+  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; }
 
   /* Dimmed rows */
   .prayer-table tr.dimmed td {
