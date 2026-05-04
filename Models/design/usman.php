@@ -1,4 +1,5 @@
 <?php
+echo $this->getHiddenVariables();
 $html = '';
 ?>
 <!-- MASJID DESIGN -->
@@ -10,7 +11,7 @@ $html = '';
             
             </div>
         </div>
-        <div class="row height-100">
+        <div class="row">
             <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
             <div class="col-md-6 col-sm-12 col-12 left-main-column">
                 <div class="row left-main-col-dateandtime">
@@ -74,7 +75,7 @@ $html = '';
                     </div>
                 </div>
 
-                <div class="row left-main-col-sun-times pt-md-3 text-center highlight">
+                <div class="row left-main-col-sun-times pt-md-3 pt-2 text-center highlight">
                     <div class="col-md-3 col-sm-3 col-3 sub-sadiq-section">
                         <p class="sub-sadiq-title">SUBH-SADIQ</p><br>
                         <h4 class="sub-sadiq-time"><?php echo do_shortcode("[fajr_start]"); ?></h4>
@@ -113,7 +114,7 @@ $html = '';
                 }
             }
             ?>
-            <div class="col-md-6 right-main-column height-100">
+            <div class="col-md-6 col-sm-12 col-12 right-main-column">
                 <div class="row banner-section">
                     <div id="carouselExampleIndicators" class="carousel slide <?php echo $transitionEffect; ?> height-100" data-bs-ride="carousel">
                         <div class="carousel-inner height-100">
