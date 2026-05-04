@@ -77,7 +77,7 @@
 }
 
 .d-masjid-e-usman .digital-clock h2 {
-    font-size: clamp(40px, 10vw, 120px);
+    font-size: clamp(48px, 12vw, 120px);
     font-weight: 900;
     display: inline-block;
     text-shadow: 7px 7px black;
@@ -112,14 +112,23 @@
 }
 
 .d-masjid-e-usman .seconds-count h4 {
-    font-family: "DSDIGI", sans-serif;
-    font-size: clamp(24px, 5vw, 45px);
+    font-family: "DSDIGI" , sans-serif;
+    font-size: clamp(28px, 6vw, 45px);
     font-weight: 600;
     margin-bottom: 0;
     display: block;
     line-height: 1.1;
     text-shadow: 5px 5px black;
     padding-left: 9px;
+}
+
+.d-masjid-e-usman .seconds-count p {
+    margin-bottom: 0;
+    font-size: clamp(20px, 4vw, 35px);
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline;
+    line-height: 1.2;
+    text-shadow: 5px 5px black;
 }
 
 .d-masjid-e-usman .seconds-count p {
@@ -146,7 +155,14 @@
 }
 
 .d-masjid-e-usman .english-date {
-    font-size: clamp(14px, 3vw, 33px);
+    font-size: clamp(22px, 5vw, 33px);
+}
+
+.d-masjid-e-usman .hijriDate {
+    font-size: clamp(22px, 5vw, 32px);
+    padding-top: 20px;
+    font-style: normal;
+    text-align: right;
 }
 
 .d-masjid-e-usman .hijriDate {
@@ -161,7 +177,7 @@
 .d-masjid-e-usman .lmc-heading h3 {
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: clamp(18px, 3vw, 30px);
+    font-size: clamp(22px, 4vw, 30px);
     text-align: right;
     text-shadow: 3px 2px black;
 }
@@ -189,7 +205,7 @@
 
 .d-masjid-e-usman .time-value h3 {
     font-family: "DSDIGI", sans-serif;
-    font-size: clamp(24px, 5vh, 7vh);
+    font-size: clamp(28px, 6vh, 7vh);
     color: #fff;
     font-weight: bolder;
     margin: 0;
@@ -219,7 +235,7 @@
 
 .d-masjid-e-usman .title-value {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: clamp(18px, 4vh, 5vh);
+    font-size: clamp(22px, 5vh, 5vh);
     color: #fff;
     text-shadow: 3px 2px black;
     padding-top: 10px;
@@ -242,14 +258,14 @@
 
 .d-masjid-e-usman .left-main-col-sun-times p {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: clamp(9px, 1.5vw, 3vh);
+    font-size: clamp(12px, 2vw, 3vh);
     padding-top: 10px;
     letter-spacing: 1px;
 }
 
 .d-masjid-e-usman .left-main-col-sun-times h4 {
     font-family: "DSDIGI", sans-serif;
-    font-size: clamp(14px, 2.5vw, 40px);
+    font-size: clamp(18px, 3vw, 40px);
     font-weight: bold;
     line-height: 1.2;
     color: rgb(86,247,79);
@@ -309,7 +325,7 @@
 .d-masjid-e-usman .afterlogo-text h1 {
     color: #d7d7d7;
     font-family: "BebasNeueRegular";
-    font-size: clamp(24px, 5vw, 65px);
+    font-size: clamp(28px, 6vw, 65px);
     padding: 25px 0 0 0;
     text-align: center;
 }
