@@ -25,10 +25,15 @@ $localTimes = $this->getLocalTimes();
     --white: #ffffff;
     --text-main: #2b3a4a;
     --text-light: #7a8a99;
-    --highlight-row: #2bbcd4;
+    --highlight: #ffd700;
     --shadow: rgba(0,0,0,0.12);
     --clock-face: #d0d0d0;
     --clock-dot: #a0a8b0;
+  }
+
+  /* Override with backend highlight if set */
+  .x-board-my-masjid {
+    --highlight: var(--dpt-highlight, #ffd700);
   }
 
   body {
@@ -243,14 +248,10 @@ $localTimes = $this->getLocalTimes();
   /* Active/Next Prayer Row */
   .prayer-table tr.nextPrayer td {
     font-weight: 700;
-    color: #ffd700 !important;
+    color: var(--highlight) !important;
   }
 
-  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; color: #ffd700 !important; }
-
-  .x-board-my-masjid .prayer-table tr.nextPrayer td {
-    color: #ffd700 !important;
-  }
+  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; color: var(--highlight) !important; }
 
   /* Dimmed rows */
   .prayer-table tr.dimmed td {
