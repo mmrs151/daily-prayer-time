@@ -562,7 +562,57 @@
     /* ── Layout ── */
     .d-masjid-e-usman {
         height: auto;
+        min-height: 100vh;
     }
+
+    .d-masjid-e-usman .banner-section {
+        height: calc(100% - 100px);
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .d-masjid-e-usman .top-header-row {
+        flex: 0 0 60px;
+        min-height: 60px;
+    }
+
+    /* Mobile logo — compact header strip */
+    .d-masjid-e-usman .mobile-logo-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(86,247,79,0.3);
+        background: rgba(0,0,0,0.25);
+    }
+
+    /* Hide desktop bottom overlay on mobile */
+    .d-masjid-e-usman .mosque-info-overlay.desktop-only {
+        display: none;
+    }
+
+    /* Ensure Quran verse is centered on mobile */
+    .d-masjid-e-usman #quranVerse {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .d-masjid-e-usman #quranVerse p {
+        font-size: clamp(22px, 4vw, 36px);
+    }
+
+    .d-masjid-e-usman #quranVerse .sura {
+        font-size: clamp(14px, 2.5vw, 22px);
+    }
+}
 
     .d-masjid-e-usman .banner-section {
         height: calc(100% - 70px);
