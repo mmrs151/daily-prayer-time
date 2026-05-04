@@ -6,8 +6,10 @@ $headers = $this->getLocalHeaders();
 $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
 $nextPrayer = $this->dptHelper->getNextPrayer($this->row);
 $localTimes = $this->getLocalTimes();
-$maghribTime = do_shortcode("[maghrib_start]");
-$fajrTimeTomorrow = do_shortcode("[fajr_start]");
+
+// Get raw times (just H:SS format)
+$maghribTime = isset($this->row['maghrib_begins']) ? substr($this->row['maghrib_begins'], 0, 5) : '20:00';
+$fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'], 0, 5) : '04:00';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +49,25 @@ $fajrTimeTomorrow = do_shortcode("[fajr_start]");
     --clock-face: #2a3d52;
     --clock-dot: #4a5d6a;
   }
+
+  .dark-mode .prayer-table td,
+    .dark-mode .prayer-table th {
+    color: var(--text-main); /* already #e8e8e8 in dark mode */
+    border-bottom-color: rgba(255,255,255,0.07);
+    }
+
+    .dark-mode .prayer-table thead tr {
+    border-bottom-color: rgba(255,255,255,0.12);
+    }
+
+    .dark-mode .prayer-table td.ar,
+    .dark-mode .prayer-table th.ar {
+    color: var(--text-light); /* #a0a8b0 in dark mode */
+    }
+
+    .dark-mode .prayer-table tr.dimmed td {
+    color: var(--text-light);
+    }
 
   /* Override with backend highlight if set */
   .x-board-my-masjid {
@@ -259,7 +280,7 @@ $fajrTimeTomorrow = do_shortcode("[fajr_start]");
 
 /* Active/Next Prayer Row - color set by UpdateStyles */
   .prayer-table tr.nextPrayer td {
-    font-weight: 700;
+    font-weight: 900;
   }
 
   /* Dimmed rows */
@@ -291,7 +312,7 @@ $fajrTimeTomorrow = do_shortcode("[fajr_start]");
 
 <div class="screen x-board-my-masjid" 
      data-maghrib="<?php echo $maghribTime; ?>" 
-     data-fajr="<?php echo $fajrTimeTomorrow; ?>">
+     data-fajr="<?php echo $fajrTime; ?>">
 
   <!-- LEFT -->
   <div class="left">
@@ -411,47 +432,20 @@ function updateClock() {
 function checkDarkMode() {
   const screen = document.querySelector('.screen');
   if (!screen) return;
-  
+
   const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
-  
-  // Debug: log current time
-  console.log('Current time (min):', currentMinutes, 'Hours:', now.getHours(), 'Min:', now.getMinutes());
-  
-  // Get times from data attributes
-  const maghribTime = screen.dataset.maghrib || '20:00';
-  const fajrTime = screen.dataset.fajr || '04:00';
-  console.log('Maghrib:', maghribTime, 'Fajr:', fajrTime);
-  
-  // Parse maghrib time
-  const maghribParts = maghribTime.split(':');
+
+  const maghribParts = (screen.dataset.maghrib || '20:00').split(':');
   const maghribMinutes = parseInt(maghribParts[0]) * 60 + parseInt(maghribParts[1]);
-  console.log('Maghrib (min):', maghribMinutes);
-  
-  // Parse fajr time
-  const fajrParts = fajrTime.split(':');
-  let fajrMinutes = parseInt(fajrParts[0]) * 60 + parseInt(fajrParts[1]);
-  
-  // Simple logic: Dark from maghrib to Fajr next day
-  let darkMode = false;
-  
-  if (currentMinutes >= maghribMinutes) {
-    darkMode = true;
-    console.log('After Maghrib - dark mode');
-  } else if (currentMinutes < fajrMinutes) {
-    darkMode = true;
-    console.log('Before Fajr - dark mode');
-  } else {
-    console.log('Light mode (daytime)');
-  }
-  
-  // Apply immediately
-  if (darkMode) {
-    screen.classList.add('dark-mode');
-  } else {
-    screen.classList.remove('dark-mode');
-  }
-  console.log('Dark mode applied:', darkMode, 'class:', screen.className);
+
+  const fajrParts = (screen.dataset.fajr || '04:00').split(':');
+  const fajrMinutes = parseInt(fajrParts[0]) * 60 + parseInt(fajrParts[1]);
+
+  // Dark mode: after Maghrib OR before Fajr (overnight window)
+  const darkMode = currentMinutes >= maghribMinutes || currentMinutes < fajrMinutes;
+
+  screen.classList.toggle('dark-mode', darkMode);
 }
 updateClock();
 setInterval(updateClock, 1000);
