@@ -355,7 +355,7 @@ $localTimes = $this->getLocalTimes();
         <tr class="dimmed <?php echo $this->dptHelper->getNextPrayerClass('jumuah', $this->row); ?>">
           <td class="name"><?php echo stripslashes($headers['jumuah']); ?></td>
           <td class="ar">جمعة</td>
-          <td class="right-align" colspan="2"><?php echo $this->getJumuahTimesArray(); ?></td>
+          <td class="right-align" colspan="2"><?php echo do_shortcode("[jummah_prayer]"); ?></td>
         </tr>
         <?php endif; ?>
       </tbody>
