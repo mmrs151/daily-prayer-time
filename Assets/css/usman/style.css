@@ -23,10 +23,10 @@
     overflow: hidden;
 }
 
-/* ─── TOP HEADER ───────────────────────────────────────────────────── */
+/* ─── TOP HEADER - Mobile only ───────────────────────────────── */
 .d-masjid-e-usman .top-header-row {
     flex: 0 0 auto;
-    display: flex;
+    display: none;
     align-items: center;
     padding: 10px 20px;
     background: rgba(0,0,0,0.3);
@@ -55,6 +55,22 @@
     font-size: clamp(28px, 5vw, 48px);
     margin: 0;
     text-shadow: 3px 3px black;
+}
+
+/* Hide desktop bottom overlay on mobile */
+.d-masjid-e-usman .mosque-info-overlay.desktop-only {
+    display: flex;
+}
+
+/* Mobile only - show top, hide bottom */
+@media (max-width: 767px) {
+    .d-masjid-e-usman .top-header-row {
+        display: flex;
+    }
+    
+    .d-masjid-e-usman .mosque-info-overlay.desktop-only {
+        display: none;
+    }
 }
 
 .d-masjid-e-usman .row {
