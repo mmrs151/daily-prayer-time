@@ -73,6 +73,8 @@
 @media (max-width: 767px) {
     .d-masjid-e-usman .top-header-row {
         display: flex !important;
+        flex: 0 !important;
+        background: none !important;
     }
     
     .d-masjid-e-usman .mosque-info-overlay.desktop-only {
@@ -348,12 +350,63 @@
     margin: 0;
     height: 85%;
     padding: 25px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .d-masjid-e-usman .banner-section img {
     height: 100%;
     width: 100%;
     border: 1px solid rgb(255, 255, 255);
+}
+
+/* ─── QURAN VERSE ─────────────────────────────────────────────────── */
+
+.d-masjid-e-usman #quranVerse {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: rgb(86,247,79);
+}
+
+.d-masjid-e-usman #quranVerse .quranVerse {
+    padding: 20px;
+}
+
+.d-masjid-e-usman #quranVerse blockquote {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.d-masjid-e-usman #quranVerse p {
+    font-size: clamp(28px, 4vw, 48px);
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    text-shadow: 3px 3px black;
+}
+
+.d-masjid-e-usman #quranVerse .link {
+    margin-top: 15px;
+}
+
+.d-masjid-e-usman #quranVerse .sura {
+    font-size: clamp(18px, 2.5vw, 28px);
+    color: rgb(86,247,79);
+    display: block;
+    margin-top: 10px;
+}
+
+.d-masjid-e-usman #quranVerse a {
+    color: rgb(86,247,79);
+    text-decoration: none;
 }
 
 .d-masjid-e-usman .logo-section img {
