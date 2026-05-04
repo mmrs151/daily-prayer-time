@@ -159,8 +159,10 @@ $localTimes = $this->getLocalTimes();
     background: var(--bg);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 5vh 4vw;
+    justify-content: space-between; /* banner + table fill height evenly */
+    height: 100vh;
+    overflow: hidden;
+    padding: 3vh 3vw;
     position: relative;
   }
 
@@ -168,35 +170,26 @@ $localTimes = $this->getLocalTimes();
   .next-banner {
     background: var(--dark);
     color: var(--white);
-    border-radius: 12px;
-    margin-bottom: 3vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-bottom: 2vh;
+    padding: 1.5vh 2vw; /* add padding so it breathes at all sizes */
+    border-radius: 1vw;
   }
 
-  .next-banner .next-name {
-    font-size: 3vw;
+  .next-banner .next-name, .dptScTime{
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
     font-weight: 700;
   }
 
   .next-banner .countdown {
-    font-size: 6vw;
+    font-size: clamp(3rem, 5vw, 5rem);
     font-weight: 800;
     line-height: 1;
     letter-spacing: -2px;
-  }
-
-  /* Dynamic highlight color from backend */
-  .next-banner .highlight-text {
-    color: var(--highlight, #ffd700);
-  }
-
-  .x-board .bg-green .next-banner .highlight-text,
-  .next-banner .highlight-text.highlight {
-    color: var(--highlight, #ffd700);
   }
 
   /* ── PRAYER TABLE ── */
@@ -204,10 +197,12 @@ $localTimes = $this->getLocalTimes();
     width: 100%;
     border-collapse: collapse;
     flex: 1;
+    height: 100%; /* lets table rows stretch to fill remaining space */
   }
 
   .prayer-table thead tr {
     border-bottom: 2px solid rgba(43,60,74,0.12);
+    height: calc(100% / 8); /* divide rows equally — adjust 7 to your row count */
   }
 
   .prayer-table th {
@@ -232,13 +227,13 @@ $localTimes = $this->getLocalTimes();
   .prayer-table td {
     font-size: clamp(2rem, 2.5vw, 2rem);
     font-weight: 500;
-    padding: 1vh 0;
+    padding: 1.2vh 0;
     border-bottom: 1px solid rgba(43,60,74,0.07);
   }
 
   .prayer-table td.ar {
     font-family: 'Tajawal', sans-serif;
-    font-size: clamp(1rem, 2.5vw, 2rem)
+    font-size: clamp(1rem, 2.5vw, 2rem);
     color: var(--text-light);
     text-align: center;
   }
@@ -249,8 +244,6 @@ $localTimes = $this->getLocalTimes();
   .prayer-table tr.nextPrayer td {
     font-weight: 700;
   }
-
-  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; }
 
   /* Dimmed rows */
   .prayer-table tr.dimmed td {
@@ -269,6 +262,10 @@ $localTimes = $this->getLocalTimes();
 
   .screen {
     grid-template-columns: 1fr;
+  }
+
+  .timeLeftCountDown, h2.dptScTime{
+    font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
   }
 }
 </style>
@@ -336,7 +333,7 @@ $localTimes = $this->getLocalTimes();
     <table class="prayer-table">
       <thead>
         <tr>
-          <th><?php echo $headers['prayer']; ?></th>
+          <th><?php echo strtoupper($headers['prayer']); ?></th>
           <th class="ar">صلاة</th>
           <th class="right-align"><?php echo strtoupper($headers['begins']); ?><br><span>أذان</span></th>
           <th class="right-align"><?php echo strtoupper($headers['iqamah']); ?><br><span>إقامة</span></th>
