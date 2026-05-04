@@ -348,12 +348,26 @@
 
 .d-masjid-e-usman .banner-section {
     margin: 0;
-    height: 100%;
-    padding: 25px 20px 0 20px;
+    height: 85%;
+    padding: 15px 20px 0 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.d-masjid-e-usman .right-main-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.d-masjid-e-usman .mosque-info-overlay {
+    flex: 0 0 auto;
+    min-height: 80px;
+}
+
+.mobile-only .banner-section {
+    height: calc(100% - 80px);
 }
 
 .d-masjid-e-usman .banner-section .carousel-item {
@@ -541,13 +555,22 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   MOBILE  (≤ 767px)
-═══════════════════════════════════════════════════════════════════════ */
+    MOBILE  (≤ 767px)
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
 
     /* ── Layout ── */
     .d-masjid-e-usman {
         height: auto;
+    }
+
+    .d-masjid-e-usman .banner-section {
+        height: calc(100% - 70px);
+    }
+    
+    .d-masjid-e-usman .top-header-row {
+        flex: 0 0 60px;
+        min-height: 60px;
     }
 
     /* Mobile logo — compact header strip */
