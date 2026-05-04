@@ -80,6 +80,7 @@ class UpdateStyles
             .x-board-modern .date-english-arabic,
             .x-board-my-masjid .prayer-table-section,
             .x-board-my-masjid .next-banner {
+            .x-board-modern .date-english-arabic {
                 background: {$this->options['tableBackground'] } !important
             }
             .green,
