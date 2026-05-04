@@ -1,0 +1,121 @@
+.my-masjid {
+    background: linear-gradient(180deg, #0a1628 0%, #1a3a5c 50%, #0d2137 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+}
+
+.my-masjid .banner-section {
+    background: linear-gradient(90deg, #1e3a5f 0%, #2d4a6f 50%, #1e3a5f 100%);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid rgba(255,215,0,0.3);
+}
+
+.my-masjid .next-prayer-label {
+    font-size: 1.2rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.my-masjid .next-prayer-name {
+    font-size: 3rem;
+    color: #ffd700;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.my-masjid .time-remaining {
+    font-size: 2.5rem;
+    color: #fff;
+    font-weight: 300;
+}
+
+.my-masjid .prayer-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.my-masjid .prayer-row {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 15px 20px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.my-masjid .prayer-row:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.my-masjid .prayer-row.current {
+    background: rgba(255,215,0,0.15);
+    border-left: 4px solid #ffd700;
+}
+
+.my-masjid .prayer-row.current .prayer-name {
+    color: #ffd700;
+}
+
+.my-masjid .prayer-row.current .prayer-time {
+    color: #ffd700;
+    font-weight: 700;
+}
+
+.my-masjid .prayer-name {
+    flex: 1;
+    font-size: 1.5rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.my-masjid .prayer-time {
+    font-size: 1.3rem;
+    color: #ccc;
+    text-align: right;
+    min-width: 150px;
+}
+
+.my-masjid .prayer-time .iqamah-time {
+    margin-left: 10px;
+    color: #ffd700;
+}
+
+.my-masjid .prayer-time .end-time {
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .my-masjid .prayer-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .my-masjid .prayer-name {
+        font-size: 1.2rem;
+    }
+    
+    .my-masjad .prayer-time {
+        font-size: 1.1rem;
+        text-align: left;
+        min-width: auto;
+    }
+    
+    .my-masjid .next-prayer-name {
+        font-size: 2rem;
+    }
+    
+    .my-masjid .time-remaining {
+        font-size: 1.8rem;
+    }
+}

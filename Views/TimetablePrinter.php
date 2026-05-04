@@ -463,7 +463,7 @@ class TimetablePrinter
                 $nextPrayerTime = $dbRow[$key];
             }
 
-            if (is_null($nextPrayerTime)) {
+            if (empty($nextPrayerTime)) {
                 $nextPrayerTime = $dbRow['nextFajr'];
             }
         }

@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.05.03
+Stable tag: 2026.05.04
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,16 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 12. Sample 2
 
 == Changelog ==
+
+= 2026.05.04 =
+* Feat: Glassmorphism prayer cards with blur effect in EICT template
+* Feat: Glow animation on next prayer highlight
+* Feat: Hover transitions with smooth card lift
+* Feat: Gradient backgrounds (top section and banner)
+* Feat: Fluid typography using clamp() for responsive sizing
+* Feat: Mobile responsive - 2-column centered layout for prayer cards
+* Fix: Jumuah font sizing - smaller font when jumuah3 is set
+* Fix: Correct spelling from jumah to jummah in CSS selectors
 
 = 2026.05.03 =
 * Fix: Timezone issue in isZawalTimeNext by using user_current_time for consistent comparison
