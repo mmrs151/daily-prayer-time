@@ -415,13 +415,18 @@ function checkDarkMode() {
   const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
   
+  // Debug: log current time
+  console.log('Current time (min):', currentMinutes, 'Hours:', now.getHours(), 'Min:', now.getMinutes());
+  
   // Get times from data attributes
   const maghribTime = screen.dataset.maghrib || '20:00';
   const fajrTime = screen.dataset.fajr || '04:00';
+  console.log('Maghrib:', maghribTime, 'Fajr:', fajrTime);
   
   // Parse maghrib time
   const maghribParts = maghribTime.split(':');
   const maghribMinutes = parseInt(maghribParts[0]) * 60 + parseInt(maghribParts[1]);
+  console.log('Maghrib (min):', maghribMinutes);
   
   // Parse fajr time
   const fajrParts = fajrTime.split(':');
@@ -431,17 +436,22 @@ function checkDarkMode() {
   let darkMode = false;
   
   if (currentMinutes >= maghribMinutes) {
-    // After maghrib - dark mode
     darkMode = true;
+    console.log('After Maghrib - dark mode');
   } else if (currentMinutes < fajrMinutes) {
-    // Before fajr (early morning) - dark mode
     darkMode = true;
-  } else if (fajrMinutes < maghribMinutes && currentMinutes < fajrMinutes && now.getHours() < 12) {
-    // Same day early morning
-    darkMode = true;
+    console.log('Before Fajr - dark mode');
+  } else {
+    console.log('Light mode (daytime)');
   }
   
-  screen.classList.toggle('dark-mode', darkMode);
+  // Apply immediately
+  if (darkMode) {
+    screen.classList.add('dark-mode');
+  } else {
+    screen.classList.remove('dark-mode');
+  }
+  console.log('Dark mode applied:', darkMode, 'class:', screen.className);
 }
 updateClock();
 setInterval(updateClock, 1000);
