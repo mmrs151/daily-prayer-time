@@ -6,7 +6,6 @@ $headers = $this->getLocalHeaders();
 $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
 $nextPrayer = $this->dptHelper->getNextPrayer($this->row);
 $localTimes = $this->getLocalTimes();
-
 $maghribTime = do_shortcode("[maghrib_start]");
 $fajrTimeTomorrow = do_shortcode("[fajr_start]");
 ?>
@@ -290,7 +289,9 @@ $fajrTimeTomorrow = do_shortcode("[fajr_start]");
 </head>
 <body>
 
-<div class="screen x-board-my-masjid">
+<div class="screen x-board-my-masjid" 
+     data-maghrib="<?php echo $maghribTime; ?>" 
+     data-fajr="<?php echo $fajrTimeTomorrow; ?>">
 
   <!-- LEFT -->
   <div class="left">
@@ -408,35 +409,39 @@ function updateClock() {
 
 // Dark mode: Maghrib to Fajr
 function checkDarkMode() {
+  const screen = document.querySelector('.screen');
+  if (!screen) return;
+  
   const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
   
-  // Parse maghrib time from PHP (format: "20:31" or similar)
-  const maghribParts = '<?php echo $maghribTime; ?>'.split(':');
+  // Get times from data attributes
+  const maghribTime = screen.dataset.maghrib || '20:00';
+  const fajrTime = screen.dataset.fajr || '04:00';
+  
+  // Parse maghrib time
+  const maghribParts = maghribTime.split(':');
   const maghribMinutes = parseInt(maghribParts[0]) * 60 + parseInt(maghribParts[1]);
   
-  // Parse fajr time - need to handle whether it's today or tomorrow
-  const fajrParts = '<?php echo $fajrTimeTomorrow; ?>'.split(':');
+  // Parse fajr time
+  const fajrParts = fajrTime.split(':');
   let fajrMinutes = parseInt(fajrParts[0]) * 60 + parseInt(fajrParts[1]);
   
-  // Determine if we should be in dark mode
+  // Simple logic: Dark from maghrib to Fajr next day
   let darkMode = false;
+  
   if (currentMinutes >= maghribMinutes) {
-    darkMode = true; // After maghrib
-  } else if (fajrMinutes < maghribMinutes) {
-    // Fajr is next day (e.g., 04:00 vs 20:00)
-    if (currentMinutes < fajrMinutes) {
-      darkMode = true; // Before Fajr (between midnight and Fajr)
-    }
-  } else {
-    // Same day comparison
-    if (currentMinutes < fajrMinutes && now.getHours() < 12) {
-      darkMode = true; // Early morning before Fajr
-    }
+    // After maghrib - dark mode
+    darkMode = true;
+  } else if (currentMinutes < fajrMinutes) {
+    // Before fajr (early morning) - dark mode
+    darkMode = true;
+  } else if (fajrMinutes < maghribMinutes && currentMinutes < fajrMinutes && now.getHours() < 12) {
+    // Same day early morning
+    darkMode = true;
   }
   
-  // Apply dark mode class
-  document.querySelector('.screen').classList.toggle('dark-mode', darkMode);
+  screen.classList.toggle('dark-mode', darkMode);
 }
 updateClock();
 setInterval(updateClock, 1000);
