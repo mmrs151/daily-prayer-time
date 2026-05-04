@@ -227,7 +227,6 @@ $localTimes = $this->getLocalTimes();
   .prayer-table td {
     font-size: clamp(2rem, 2.5vw, 2rem);
     font-weight: 500;
-    color: var(--text-main);
     padding: 1vh 0;
     border-bottom: 1px solid rgba(43,60,74,0.07);
   }
@@ -244,6 +243,13 @@ $localTimes = $this->getLocalTimes();
   /* Active/Next Prayer Row */
   .prayer-table tr.nextPrayer td {
     font-weight: 700;
+    color: #ffd700 !important;
+  }
+
+  .prayer-table tr.nextPrayer td.name { font-size: 2.2vw; color: #ffd700 !important; }
+
+  .x-board-my-masjid .prayer-table tr.nextPrayer td {
+    color: #ffd700 !important;
   }
 
   /* Dimmed rows */
@@ -355,7 +361,7 @@ $localTimes = $this->getLocalTimes();
         <tr class="dimmed <?php echo $this->dptHelper->getNextPrayerClass('jumuah', $this->row); ?>">
           <td class="name"><?php echo stripslashes($headers['jumuah']); ?></td>
           <td class="ar">جمعة</td>
-          <td class="right-align" colspan="2"><?php echo do_shortcode("[jummah_prayer]"); ?></td>
+          <td class="right-align" colspan="2"><?php echo $this->getJumuahTimesArray(); ?></td>
         </tr>
         <?php endif; ?>
       </tbody>
