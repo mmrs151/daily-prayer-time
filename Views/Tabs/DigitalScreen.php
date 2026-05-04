@@ -291,8 +291,8 @@ class DigitalScreenSettings {
                         <div><input type="radio" name="ds-template" value="usman" <?php echo $savedTemplate === 'usman' ? 'checked' : ''; ?>> <strong>Masjid-E-Usman</strong></div>
                     </label>
                     <label class="dpt-template-card <?php echo $savedTemplate === 'my-masjid' ? 'selected' : ''; ?>">
-                        <img src="<?php echo plugins_url('../../Assets/images/my-masjid-preview.png', __FILE__); ?>" alt="My Masjid">
-                        <div><input type="radio" name="ds-template" value="my-masjid" <?php echo $savedTemplate === 'my-masjid' ? 'checked' : ''; ?>> <strong>My Masjid</strong></div>
+                        <img src="<?php echo plugins_url('../../Assets/images/my-masjid-preview.png', __FILE__); ?>" alt="Simple Masjid">
+                        <div><input type="radio" name="ds-template" value="my-masjid" <?php echo $savedTemplate === 'my-masjid' ? 'checked' : ''; ?>> <strong>Simple Masjid</strong></div>
                     </label>
                     <label class="dpt-template-card dpt-template-placeholder">
                         <div class="dpt-placeholder-img">Add your template here</div>

@@ -350,6 +350,13 @@ $localTimes = $this->getLocalTimes();
           <td class="right-align"><?php echo do_shortcode("[{$sunriseOrZawal}]"); ?></td>
           <td class="right-align">–</td>
         </tr>
+        <?php if (!empty($headers['jumuah'])): ?>
+        <tr class="<?php echo $this->dptHelper->getNextPrayerClass('jumuah', $this->row); ?>">
+          <td class="name"><?php echo stripslashes($headers['jumuah']); ?></td>
+          <td class="ar">جمعة</td>
+          <td class="right-align" colspan="2"><?php echo do_shortcode("[jumuah_prayer]"); ?></td>
+        </tr>
+        <?php endif; ?>
       </tbody>
     </table>
 
