@@ -348,12 +348,28 @@
 
 .d-masjid-e-usman .banner-section {
     margin: 0;
-    height: 85%;
+    height: 100%;
     padding: 25px 20px 0 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.d-masjid-e-usman .banner-section .carousel-item {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100%;
+}
+
+.d-masjid-e-usman .banner-section .nextPrayer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .d-masjid-e-usman .banner-section img {
@@ -753,6 +769,9 @@
         height: 100%;
         border-radius: 6px;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .d-masjid-e-usman .banner-section img {
