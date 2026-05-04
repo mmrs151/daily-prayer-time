@@ -269,7 +269,7 @@ $localTimes = $this->getLocalTimes();
 </head>
 <body>
 
-<div class="screen .x-board-my-masjid">
+<div class="screen x-board-my-masjid">
 
   <!-- LEFT -->
   <div class="left">
