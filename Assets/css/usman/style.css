@@ -136,7 +136,7 @@
 }
 
 .d-masjid-e-usman .digital-clock h2 {
-    font-size: clamp(48px, 12vw, 120px);
+    font-size: clamp(48px, 12vw, 100px);
     font-weight: 900;
     display: inline-block;
     text-shadow: 7px 7px black;
@@ -172,7 +172,7 @@
 
 .d-masjid-e-usman .seconds-count h4 {
     font-family: "DSDIGI" , sans-serif;
-    font-size: clamp(28px, 6vw, 45px);
+    font-size: clamp(28px, 6vw, 40px);
     font-weight: 600;
     margin-bottom: 0;
     display: block;
@@ -182,7 +182,7 @@
 
 .d-masjid-e-usman .seconds-count p {
     margin-bottom: 0;
-    font-size: clamp(20px, 4vw, 35px);
+    font-size: clamp(20px, 4vw, 30px);
     font-family: Arial, Helvetica, sans-serif;
     display: inline;
     line-height: 1.2;
