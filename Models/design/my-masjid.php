@@ -269,7 +269,7 @@ $localTimes = $this->getLocalTimes();
 </head>
 <body>
 
-<div class="screen">
+<div class="screen .x-board-my-masjid">
 
   <!-- LEFT -->
   <div class="left">
@@ -311,6 +311,7 @@ $localTimes = $this->getLocalTimes();
     <div class="digital">
       <div class="time" id="digitalTime">--:--</div>
       <div class="date" id="digitalDate">--</div>
+      <p><?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?></p>
     </div>
 
   </div>
@@ -351,10 +352,10 @@ $localTimes = $this->getLocalTimes();
           <td class="right-align">–</td>
         </tr>
         <?php if (!empty($headers['jumuah'])): ?>
-        <tr class="<?php echo $this->dptHelper->getNextPrayerClass('jumuah', $this->row); ?>">
+        <tr class="dimmed <?php echo $this->dptHelper->getNextPrayerClass('jumuah', $this->row); ?>">
           <td class="name"><?php echo stripslashes($headers['jumuah']); ?></td>
           <td class="ar">جمعة</td>
-          <td class="right-align" colspan="2"><?php echo do_shortcode("[jumuah_prayer]"); ?></td>
+          <td class="right-align" colspan="2"><?php echo $this->getJumuahTimesArray(); ?></td>
         </tr>
         <?php endif; ?>
       </tbody>
