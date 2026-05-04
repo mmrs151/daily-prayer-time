@@ -683,11 +683,25 @@
         line-height: 1.3;
     }
 
-    /* ── Prayer table ── */
+/* ── Prayer table ── */
     .d-masjid-e-usman .left-main-col-prayernames {
-        height: auto;
-        padding-top: 4px;
-        border-bottom: 2px solid rgba(194,194,194,0.5);
+        padding-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    /* Prayer name - tighter */
+    .d-masjid-e-usman .title-value {
+        padding-top: 0;
+        padding-left: 2px;
+        line-height: 1.1;
+    }
+
+    /* Time values - tighter */
+    .d-masjid-e-usman .time-value h3,
+    .d-masjid-e-usman .jummah {
+        text-shadow: 2px 2px black;
+        line-height: 1.1;
+        font-size: 18px;
     }
 
     /* Column headers */
@@ -703,16 +717,15 @@
         color: rgba(255,255,255,0.7);
     }
 
-    /* Prayer rows — alternating subtle background for readability */
+    /* Prayer rows — tighter spacing on mobile */
     .d-masjid-e-usman .fajr-section,
     .d-masjid-e-usman .zuhr-section,
     .d-masjid-e-usman .asr-section,
     .d-masjid-e-usman .maghrib-section,
     .d-masjid-e-usman .isha-section,
     .d-masjid-e-usman .jummah-section {
-        padding: 5px 0;
+        padding: 2px 0;
         align-items: center;
-        border-radius: 4px;
         margin: 1px 0;
     }
 
@@ -853,8 +866,8 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   SMALL MOBILE  (≤ 380px)
-═══════════════════════════════════════════════════════════════════════ */
+    SMALL MOBILE  (≤ 380px)
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 380px) {
     .d-masjid-e-usman .digital-clock h2 {
         font-size: 40px;
@@ -864,13 +877,28 @@
         font-size: 20px;
     }
 
+    /* Tighter prayer rows */
+    .d-masjid-e-usman .left-main-col-prayernames {
+        padding: 0;
+    }
+
+    .d-masjid-e-usman .fajr-section,
+    .d-masjid-e-usman .zuhr-section,
+    .d-masjid-e-usman .asr-section,
+    .d-masjid-e-usman .maghrib-section,
+    .d-masjid-e-usman .isha-section,
+    .d-masjid-e-usman .jummah-section {
+        padding: 1px 0;
+        margin: 0;
+    }
+
     .d-masjid-e-usman .title-value {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .d-masjid-e-usman .time-value h3,
     .d-masjid-e-usman .jummah {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .d-masjid-e-usman .left-main-col-sun-times p {
