@@ -124,6 +124,14 @@ $html = '';
                         </div>
                     </div>
                 </div>
+                <div class="row mosque-info-overlay desktop-only">
+                    <div class="col-md-3 logo-section">
+                        <?php echo $this->getLogoUrl(); ?>
+                    </div>
+                    <div class="col-md-9 afterlogo-text">
+                        <h1 class="bottomright-masjidname"><?php echo get_bloginfo('name'); ?></h1>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

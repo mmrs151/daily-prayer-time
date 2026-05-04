@@ -383,6 +383,10 @@
     display: none;
 }
 
+.d-masjid-e-usman .mosque-info-overlay.desktop-only {
+    display: flex;
+}
+
 .d-masjid-e-usman .isha-jamah-time {
     padding-right: 0;
 }
@@ -462,6 +466,11 @@
         padding: 8px 0;
         border-bottom: 1px solid rgba(86,247,79,0.3);
         background: rgba(0,0,0,0.25);
+    }
+
+    /* Hide desktop bottom overlay on mobile */
+    .d-masjid-e-usman .mosque-info-overlay.desktop-only {
+        display: none;
     }
 
     .d-masjid-e-usman .mobile-logo-row img {
@@ -596,7 +605,6 @@
 
     /* Prayer name */
     .d-masjid-e-usman .title-value {
-        font-weight: bold;
         padding-top: 0;
         padding-left: 4px;
         line-height: 1.2;
@@ -607,6 +615,7 @@
     .d-masjid-e-usman .jummah {
         text-shadow: 2px 2px black;
         line-height: 1.2;
+        font-size: 20px;
     }
 
     /* Remove desktop fixed padding on start times */
