@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.05.04
+Stable tag: 2026.05.05
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,15 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 12. Sample 2
 
 == Changelog ==
+
+= 2026.05.05 =
+* Fix: Display Quran verse on right panel for Usman template
+* Fix: Show top header with logo and mosque name on mobile, bottom on desktop
+* Refactor: Simplify CSS with clamp() for responsive fonts
+* Refactor: Use flexbox layouts for full height utilization
+* Style: Add decorative border around Quran verse
+* Fix: Reduce spacing in prayer section on mobile
+* Style: Larger font sizes for prayers and headings
 
 = 2026.05.04 =
 * Feat: Glassmorphism prayer cards with blur effect in EICT template
