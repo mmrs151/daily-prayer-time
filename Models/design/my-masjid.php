@@ -257,6 +257,7 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     color: var(--text-light);
     font-weight: 400;
     direction: rtl;
+    text-align: center;
   }
 
   .prayer-table th.right-align,
