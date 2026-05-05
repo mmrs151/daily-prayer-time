@@ -1,16 +1,19 @@
 <?php
+echo $this->getHiddenVariables();
 $html = '';
 ?>
 <!-- MASJID DESIGN -->
 <div class="usman-body">
     <div class="container-fluid d-masjid-e-usman">
-        <div class="row mobile-logo-row">
-            <div class="col-sm-12 mobile-logo-column text-center" >
+        <div class="row top-header-row">
+            <div class="col-md-3 logo-section-top">
                 <?php echo $this->getLogoUrl(); ?>
-            
+            </div>
+            <div class="col-md-9 mosque-name-top">
+                <h1><?php echo get_bloginfo('name'); ?></h1>
             </div>
         </div>
-        <div class="row height-100">
+        <div class="row">
             <!-- LEFT SIDE TIME TABLE AND INFORMATION -->
             <div class="col-md-6 col-sm-12 col-12 left-main-column">
                 <div class="row left-main-col-dateandtime">
@@ -53,10 +56,10 @@ $html = '';
                                 <div class='col-md-4 col-sm-4 col-4 {$prayer}-title title-value'>
                                     <span class='title'>{$prayerName}</span>
                                 </div>
-                                <div class='col-md-4 col-sm-4 col-4 {$prayer}-start-time time-value'>
+                                <div class='col-md-4 col-sm-4 col-4 prayer-start-time time-value'>
                                     <h3>{$startTime}</h3>
                                 </div>
-                                <div class='col-md-4 col-sm-4 col-4 {$prayer}-jamah-time time-value'>
+                                <div class='col-md-4 col-sm-4 col-4 prayer-jamah-time time-value'>
                                     <h3>{$jamahTime}</h3>
                                 </div>
                             </div>";
@@ -74,7 +77,7 @@ $html = '';
                     </div>
                 </div>
 
-                <div class="row left-main-col-sun-times pt-md-3 text-center highlight">
+                <div class="row left-main-col-sun-times pt-md-3 pt-2 text-center highlight">
                     <div class="col-md-3 col-sm-3 col-3 sub-sadiq-section">
                         <p class="sub-sadiq-title">SUBH-SADIQ</p><br>
                         <h4 class="sub-sadiq-time"><?php echo do_shortcode("[fajr_start]"); ?></h4>
@@ -113,7 +116,7 @@ $html = '';
                 }
             }
             ?>
-            <div class="col-md-6 right-main-column height-100">
+            <div class="col-md-6 col-sm-12 col-12 right-main-column">
                 <div class="row banner-section">
                     <div id="carouselExampleIndicators" class="carousel slide <?php echo $transitionEffect; ?> height-100" data-bs-ride="carousel">
                         <div class="carousel-inner height-100">
@@ -121,7 +124,7 @@ $html = '';
                         </div>
                     </div>
                 </div>
-                <div class="row mosque-info-overlay">
+                <div class="row mosque-info-overlay desktop-only">
                     <div class="col-md-3 logo-section">
                         <?php echo $this->getLogoUrl(); ?>
                     </div>

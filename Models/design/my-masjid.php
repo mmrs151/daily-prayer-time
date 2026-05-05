@@ -257,10 +257,21 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     color: var(--text-light);
     font-weight: 400;
     direction: rtl;
+    text-align: center;
   }
 
   .prayer-table th.right-align,
   .prayer-table td.right-align { text-align: right; }
+
+  .prayer-table th:first-child,
+  .prayer-table td:first-child {
+    padding-left: clamp(6px, 2vw, 10px);
+  }
+
+  .prayer-table th:last-child,
+  .prayer-table td:last-child {
+    padding-right: clamp(6px, 2vw, 10px);
+  }
 
   .prayer-table td {
     font-size: clamp(2rem, 2.5vw, 2rem);
@@ -289,8 +300,18 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     font-weight: 400;
   }
 
-  .x-board td span.dpt_start, td span.dpt_jamah {
+  .x-board-my-masjid td span.dpt_start,
+  .x-board-my-masjid td span.dpt_jamah {
     font-size: clamp(2rem, 2.5vw, 2rem) !important;
+  }
+
+  .x-board-my-masjid p.hijriDate {
+    color: var(--text-main) !important;
+  }
+
+  /* Mobile-only duplicate of masjid header (left panel is hidden) */
+  .masjid-header--mobile {
+    display: none;
   }
 
   @media (max-width: 768px) {
@@ -302,8 +323,107 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     grid-template-columns: 1fr;
   }
 
-  .timeLeftCountDown, h2.dptScTime{
-    font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
+  .masjid-header--mobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 0;
+    text-align: center;
+  }
+
+  .masjid-header--mobile .masjid-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  .masjid-header--mobile .masjid-info {
+    text-align: center;
+    min-width: 0;
+  }
+
+  .masjid-header--mobile .masjid-info h1 {
+    font-size: clamp(1rem, 4.2vw, 1.35rem);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  /* Tight screen margins so table can use width; column padding handles inset */
+  .right {
+    padding: 0.8vh max(4px, env(safe-area-inset-right, 0px)) 1vh max(4px, env(safe-area-inset-left, 0px));
+    justify-content: flex-start;
+  }
+
+  .next-banner {
+    margin-bottom: 0.6vh;
+    padding: 0.7vh max(4px, env(safe-area-inset-right, 0px)) 0.7vh max(4px, env(safe-area-inset-left, 0px));
+    border-radius: 8px;
+  }
+
+  .next-banner .next-name, .dptScTime {
+    font-size: clamp(0.95rem, 3.8vw, 1.2rem) !important;
+  }
+
+  .next-banner .countdown {
+    font-size: clamp(1.75rem, 8vw, 2.6rem) !important;
+    letter-spacing: -1px;
+  }
+
+  .prayer-table thead tr {
+    height: auto;
+  }
+
+  .prayer-table th {
+    font-size: clamp(1.1rem, 4.2vw, 1.4rem) !important;
+    padding: 0 0 0.35vh 0;
+    line-height: 1.15;
+  }
+
+  .prayer-table th.ar {
+    font-size: clamp(1rem, 4vw, 1.3rem) !important;
+  }
+
+  .prayer-table td {
+    font-size: clamp(1.1rem, 4.2vw, 1.4rem) !important;
+    padding: 0.28vh 0;
+    line-height: 1.15;
+  }
+
+  .prayer-table th:first-child {
+    padding-left: clamp(34px, calc(30px + 2.4vw), 48px) !important;
+  }
+
+  .prayer-table th:last-child {
+    padding-right: clamp(34px, calc(30px + 2.4vw), 48px) !important;
+  }
+
+  .prayer-table td:first-child {
+    padding-left: clamp(34px, calc(30px + 2.4vw), 48px) !important;
+  }
+
+  .prayer-table td:last-child {
+    padding-right: clamp(34px, calc(30px + 2.4vw), 48px) !important;
+  }
+
+  .prayer-table td.ar {
+    font-size: clamp(1rem, 3.8vw, 1.25rem) !important;
+  }
+
+  .prayer-table td.bold {
+    font-size: clamp(1.15rem, 4.4vw, 1.45rem) !important;
+  }
+
+  .x-board-my-masjid td span.dpt_start,
+  .x-board-my-masjid td span.dpt_jamah {
+    font-size: clamp(1.1rem, 4.2vw, 1.4rem) !important;
+  }
+
+  .timeLeftCountDown, h2.dptScTime {
+    font-size: clamp(1.65rem, 5vw, 2.2rem) !important;
   }
 }
 </style>
@@ -354,13 +474,22 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     <div class="digital">
       <div class="time" id="digitalTime">--:--</div>
       <div class="date" id="digitalDate">--</div>
-      <p><?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?></p>
+      <p class="hijriDate"><?php echo $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow()); ?></p>
     </div>
 
   </div>
 
   <!-- RIGHT -->
   <div class="right">
+
+    <div class="masjid-header masjid-header--mobile">
+      <div class="masjid-logo">
+      <?php echo $this->getLogoUrl(); ?>
+      </div>
+      <div class="masjid-info">
+        <h1><?php echo get_bloginfo('name'); ?></h1>
+      </div>
+    </div>
 
     <!-- Next prayer banner -->
     <?php echo $this->getHiddenVariables(); ?>
