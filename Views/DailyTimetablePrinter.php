@@ -47,9 +47,9 @@ class DailyTimetablePrinter extends TimetablePrinter
         // Determine whether to show Jumuah row: only when jumuah times are configured
         // and current time is before the last configured Jumuah time (on Fridays).
         $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
-        $showJumuah = false;
+        $showJumuah = !empty($row['showJumuah']);
         $isFriday = $this->todayIsFriday();
-        if (! empty($jumuahOptions) && $isFriday) {
+        if (! $showJumuah && ! empty($jumuahOptions) && $isFriday) {
             $nowTs = strtotime( user_current_time('H:i') );
             $lastJumuahTs = max( array_map('strtotime', $jumuahOptions) );
             if ($nowTs < $lastJumuahTs) {
@@ -488,8 +488,8 @@ class DailyTimetablePrinter extends TimetablePrinter
         // Determine whether to show Jumuah row: only when jumuah times are configured
         // and current time is before the last configured Jumuah time (on Fridays).
         $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
-        $showJumuah = false;
-        if (! empty($jumuahOptions) && $isFriday) {
+        $showJumuah = !empty($row['showJumuah']);
+        if (! $showJumuah && ! empty($jumuahOptions) && $isFriday) {
             $nowTs = strtotime( user_current_time('H:i') );
             $lastJumuahTs = max( array_map('strtotime', $jumuahOptions) );
             if ($nowTs < $lastJumuahTs) {

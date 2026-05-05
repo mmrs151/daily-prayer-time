@@ -18,6 +18,7 @@ $specialFeatures = [
 $options = [
     ['key' => 'asr', 'value' => 'hanafi', 'desc' => 'Use Hanafi Asr start method'],
     ['key' => 'display', 'value' => 'iqamah_only/azan_only', 'desc' => 'Show only azan or iqamah times'],
+    ['key' => 'show_jumuah', 'value' => 'true', 'desc' => 'Force show Jumuah row even when it is not Friday (dailytable vertical/horizontal/div)'],
     ['key' => 'hide_time_remaining', 'value' => 'true', 'desc' => 'Hide countdown timer'],
     ['key' => 'hide_ramadan', 'value' => 'true', 'desc' => 'Hide Ramadan row'],
     ['key' => 'announcement', 'value' => '"Any text"', 'desc' => 'Show announcement text'],
@@ -50,6 +51,9 @@ $examples = [
     ['[dailytable_horizontal]', 'Display daily timetable horizontally'],
     ['[dailytable_horizontal display=iqamah_only]', 'Horizontal with Iqamah times only'],
     ['[dailytable_horizontal asr=hanafi]', 'Horizontal with Hanafi Asr'],
+    ['[dailytable_vertical show_jumuah=true]', 'Always show Jumuah row in vertical view'],
+    ['[dailytable_horizontal show_jumuah=true]', 'Always show Jumuah row in horizontal table view'],
+    ['[dailytable_horizontal use_div_layout=true show_jumuah=true]', 'Always show Jumuah card in horizontal div layout'],
     ['[dailytable_vertical asr=hanafi announcement="First Khutbah: 1:15" day=friday]', 'Announcement on Friday'],
     ['[sunrise]', 'Display sunrise time'],
     ['[isha_prayer]', 'Display Isha prayer time'],

@@ -34,6 +34,9 @@ class DailyShortCode extends TimetablePrinter
     /** @var bool  */
     private $displayHijriDate = false;
 
+    /** @var bool */
+    private $showJumuah = false;
+
     /** $var db */
     protected $db;
 
@@ -97,6 +100,11 @@ class DailyShortCode extends TimetablePrinter
     public function displayHijriDate()
     {
         $this->displayHijriDate = true;
+    }
+
+    public function showJumuah()
+    {
+        $this->showJumuah = true;
     }
 
     /**
@@ -553,6 +561,7 @@ class DailyShortCode extends TimetablePrinter
         $row['hideRamadan'] = $this->hideRamadan;
         $row['hideTimeRemaining'] = $this->hideTimeRemaining;
         $row['displayHijriDate'] = $this->displayHijriDate;
+        $row['showJumuah'] = $this->showJumuah;
         $row['nextFajr'] = $this->db->getFajrJamahForTomorrow();
 
         return $row;
@@ -582,6 +591,12 @@ class DailyShortCode extends TimetablePrinter
 
         if (isset($attr['hide_ramadan'])) {
             $this->hideRamadan();
+        }
+
+        if (isset($attr['show_jumuah']) || isset($attr['showJumuah'])) {
+            $this->showJumuah();
+        } else {
+            $this->showJumuah = false;
         }
 
         $hijriCheckbox = get_option('hijri-chbox');

@@ -87,9 +87,9 @@ if ($sunriseOrZawal == 'zawal') {
         <?php 
         // Check if Jumuah times are set and current time is before last Jumuah
         $jumuahOptions = array_filter([ get_option('jumuah1'), get_option('jumuah2'), get_option('jumuah3') ]);
-        $showJumuah = false;
+        $showJumuah = !empty($row['showJumuah']);
         $isFriday = $this->todayIsFriday();
-        if (!empty($jumuahOptions) && $isFriday) {
+        if (!$showJumuah && !empty($jumuahOptions) && $isFriday) {
             $nowTs = strtotime(user_current_time('H:i'));
             $lastJumuahTs = max(array_map('strtotime', $jumuahOptions));
             if ($nowTs < $lastJumuahTs) {
