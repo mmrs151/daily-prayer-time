@@ -5,8 +5,8 @@
 
 class DigitalScreenSettings {
     
-    const MAX_SLIDERS = 7;
-    const TOTAL_SLIDER_FIELDS = 11;
+    const MAX_SLIDERS = 13;
+    const TOTAL_SLIDER_FIELDS = 13;
     
     public function render(): void {
         $this->renderStyles();
@@ -262,8 +262,8 @@ class DigitalScreenSettings {
                 </div>
                 <?php endfor; ?>
                 
-                <button type="button" class="dpt-add-btn" id="dpt-add-slider"
-                    <?php echo $displayCount >= self::MAX_SLIDERS ? 'class="dpt-add-btn dpt-add-btn-hidden"' : 'class="dpt-add-btn"'; ?>>
+                <button type="button" id="dpt-add-slider"
+                    class="dpt-add-btn<?php echo $displayCount >= self::MAX_SLIDERS ? ' dpt-add-btn-hidden' : ''; ?>">
                     + Add Another Slider
                 </button>
             </div>
@@ -369,11 +369,11 @@ class DigitalScreenSettings {
         
         jQuery(document).ready(function($) {
             // Display mode selection - group 1 (default/template)
-            $('input[name="displayMode"]').on('change', function() {
+            $('input[name="displayMode"]').on('click', function() {
                 const value = $(this).val();
                 const templateSection = $('#dpt-template-section');
                 const templateInput = $('#template-chbox-hidden');
-                
+
                 if (value === 'template') {
                     templateInput.val('template');
                     templateSection.removeClass('hidden').addClass('active');
@@ -382,14 +382,14 @@ class DigitalScreenSettings {
                     templateSection.removeClass('active').addClass('hidden');
                 }
             });
-            
+
             // Display mode selection - group 2 (quran/slider)
-            $('input[name="displayModeAlt"]').on('change', function() {
+            $('input[name="displayModeAlt"]').on('click', function() {
                 const value = $(this).val();
                 const sliderSection = $('#dpt-slider-section');
                 const quranInput = $('#quran-chbox-hidden');
                 const sliderInput = $('#slider-chbox-hidden');
-                
+
                 if (value === 'slider') {
                     quranInput.val('');
                     sliderInput.val('slider');
@@ -400,41 +400,47 @@ class DigitalScreenSettings {
                     sliderSection.removeClass('active').addClass('hidden');
                 }
             });
-            
-            // Initialize section visibility on load
+
+            // Initialize section visibility on load — trust PHP-rendered state,
+            // only override when a radio is explicitly checked.
             const displayMode = $('input[name="displayMode"]:checked').val();
             const displayModeAlt = $('input[name="displayModeAlt"]:checked').val();
-            
+
             if (displayMode === 'template') {
                 $('#dpt-template-section').removeClass('hidden').addClass('active');
-            } else {
-                $('#dpt-template-section').addClass('hidden').removeClass('active');
+            } else if (displayMode === 'default') {
+                $('#dpt-template-section').removeClass('active').addClass('hidden');
             }
-            
+
             if (displayModeAlt === 'slider') {
                 $('#dpt-slider-section').removeClass('hidden').addClass('active');
-            } else {
-                $('#dpt-slider-section').addClass('hidden').removeClass('active');
+            } else if (displayModeAlt === 'quran') {
+                $('#dpt-slider-section').removeClass('active').addClass('hidden');
             }
-            
+
             // Sync hidden inputs with checked radio on page load
             const checkedValue = $('input[name="displayMode"]:checked').val();
             const checkedValueAlt = $('input[name="displayModeAlt"]:checked').val();
-            
+
             if (checkedValue === 'template') {
                 $('#template-chbox-hidden').val('template');
-            } else if (checkedValueAlt === 'quran') {
+            }
+            if (checkedValueAlt === 'quran') {
                 $('#quran-chbox-hidden').val('displayQuran');
             } else if (checkedValueAlt === 'slider') {
                 $('#slider-chbox-hidden').val('slider');
             }
             
-            // Add slider button
+            // Add slider button — hide on load if already at max
+            if ($('.dpt-slider-card:not(.hidden)').length >= <?php echo self::MAX_SLIDERS; ?>) {
+                $('#dpt-add-slider').hide();
+            }
+
             $('#dpt-add-slider').on('click', function() {
                 const hidden = $('.dpt-slider-card.hidden').first();
                 if (hidden.length) {
                     hidden.removeClass('hidden');
-                    if ($('.dpt-slider-card:not(.hidden)').length >= 7) {
+                    if ($('.dpt-slider-card:not(.hidden)').length >= <?php echo self::MAX_SLIDERS; ?>) {
                         $(this).hide();
                     }
                 }

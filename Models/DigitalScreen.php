@@ -84,9 +84,11 @@ class DigitalScreen extends DailyShortCode
         if ($template = get_option('dsTemplate')) {
             $this->template = $template;
         }
-        
+
+        ob_start();
         include "design/$this->template.php";
         $this->template = null;
+        return ob_get_clean();
     }
 
     private function getHiddenVariables()
@@ -549,7 +551,7 @@ class DigitalScreen extends DailyShortCode
             return $this->presentationSlides;
         }
 
-        foreach (range(1, 11) as $item) {
+        foreach (range(1, 13) as $item) {
             $slideUrl = get_option('slider' . $item);
             if (!empty($slideUrl) && filter_var($slideUrl, FILTER_VALIDATE_URL)) {
                 $slides[] = $slideUrl;

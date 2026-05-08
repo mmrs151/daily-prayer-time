@@ -34,6 +34,10 @@ delete_option('slider2Url');
 delete_option('slider3Url');
 delete_option('slider4Url');
 delete_option('slider5Url');
+delete_option('slider12');
+delete_option('slider12Url');
+delete_option('slider13');
+delete_option('slider13Url');
 
 delete_option('fajr-delay');
 delete_option('zuhr-delay');

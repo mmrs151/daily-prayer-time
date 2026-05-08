@@ -110,6 +110,16 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             update_option('slider11', $slider11);
             $slider11Url = sanitize_text_field($this->data['slider11Url']);
             update_option('slider11Url', $slider11Url);
+
+            $slider12 = sanitize_text_field($this->data['slider12']);
+            update_option('slider12', $slider12);
+            $slider12Url = sanitize_text_field($this->data['slider12Url']);
+            update_option('slider12Url', $slider12Url);
+
+            $slider13 = sanitize_text_field($this->data['slider13']);
+            update_option('slider13', $slider13);
+            $slider13Url = sanitize_text_field($this->data['slider13Url']);
+            update_option('slider13Url', $slider13Url);
         }
-    }    
+    }
 }
