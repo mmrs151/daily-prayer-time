@@ -459,12 +459,20 @@ height: 70%;
     opacity: 50%;
 }
 
-.x-board .dsScroll{
-    display: inline;
+.x-board .dpt-ticker {
+    overflow: hidden;
+    width: 100%;
 }
 
-.x-board .marquee {
+.x-board .dpt-ticker-track {
+    display: inline-block;
     white-space: nowrap;
+    animation: dpt-ticker-scroll linear infinite;
+}
+
+@keyframes dpt-ticker-scroll {
+    from { transform: translateX(100vw); }
+    to   { transform: translateX(-100%); }
 }
 
 .x-board span.jamahChanges {

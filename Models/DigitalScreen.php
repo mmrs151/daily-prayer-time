@@ -346,7 +346,7 @@ class DigitalScreen extends DailyShortCode
                     <div class="col-sm-9 col-xs-12 height-100 dpt-bg">
                         <div class="align-middle">
                             <div class="text-primary scrolling">
-                            <div class="marquee">
+                            <div class="dpt-ticker">
                                 ' . $this->getIqamahUpdate() . '
                             </div>
                             </div>
@@ -362,7 +362,7 @@ class DigitalScreen extends DailyShortCode
                     <div class="col-sm-12 col-xs-12 height-24">
                         <div class="align-middle">
                             <div class="text-primary scrolling-vertical">
-                            <div class="marquee">
+                            <div class="dpt-ticker">
                                 ' . $this->getIqamahUpdate() . '
                             </div>
                             </div>
@@ -443,18 +443,15 @@ class DigitalScreen extends DailyShortCode
             $orientation = 'vertical';
         }
 
+        $content = '<input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">';
+
         if ( $this->scrollText ) {
-            return '
-            <span class="dsScroll">
-                <input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">
-                <a class="scroll" target="_new" href="'. $this->scrollUrl .' " >'. $this->scrollText . '</a>
-            </span>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
-        } else {
-            return '
-            <span class="dsScroll">
-                <input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">
-            </span>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
+            $content .= '<a class="scroll" target="_new" href="' . $this->scrollUrl . '">' . $this->scrollText . '</a> ';
         }
+
+        $content .= do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
+
+        return '<span class="dpt-ticker-track" style="animation-duration:' . (int) $this->scrollSpeed . 's">' . $content . '</span>';
     }
 
     private function getBlink(): string
