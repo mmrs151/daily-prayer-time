@@ -459,8 +459,12 @@ height: 70%;
     opacity: 50%;
 }
 
-.x-board div.dsScroll{
-    display: inline-block;
+.x-board .dsScroll{
+    display: inline;
+}
+
+.x-board .marquee {
+    white-space: nowrap;
 }
 
 .x-board span.jamahChanges {

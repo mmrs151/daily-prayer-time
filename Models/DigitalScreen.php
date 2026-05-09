@@ -445,15 +445,15 @@ class DigitalScreen extends DailyShortCode
 
         if ( $this->scrollText ) {
             return '
-            <div class="dsScroll">
+            <span class="dsScroll">
                 <input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">
                 <a class="scroll" target="_new" href="'. $this->scrollUrl .' " >'. $this->scrollText . '</a>
-            </div>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
+            </span>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
         } else {
             return '
-            <div class="dsScroll">
+            <span class="dsScroll">
                 <input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">
-            </div>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
+            </span>' . do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
         }
     }
 
