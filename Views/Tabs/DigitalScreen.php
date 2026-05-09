@@ -62,7 +62,13 @@ class DigitalScreenSettings {
                 border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 12px;
                 background: #f9f9f9;
             }
-            .dpt-slider-card h4 { margin: 0 0 12px 0; color: #2271b1; }
+            .dpt-slider-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+            .dpt-slider-card h4 { margin: 0; color: #2271b1; }
+            .dpt-remove-slider { 
+                color: #d63638; cursor: pointer; font-size: 18px; padding: 2px 8px; 
+                border: none; background: none; border-radius: 4px;
+            }
+            .dpt-remove-slider:hover { background: #f0f0f1; }
             .dpt-slider-row { display: flex; gap: 20px; align-items: flex-start; }
             .dpt-slider-fields { flex: 1; }
             .dpt-slider-preview { 
@@ -241,7 +247,10 @@ class DigitalScreenSettings {
                 
                 <?php for ($i = 1; $i <= self::TOTAL_SLIDER_FIELDS; $i++): ?>
                 <div class="dpt-slider-card <?php echo $i > $displayCount ? 'hidden' : ''; ?>" data-slider="<?php echo $i; ?>">
-                    <h4>Slider #<?php echo $i; ?></h4>
+                    <div class="dpt-slider-card-header">
+                        <h4>Slider #<?php echo $i; ?></h4>
+                        <button type="button" class="dpt-remove-slider" data-remove="<?php echo $i; ?>" title="Remove slider">✕</button>
+                    </div>
                     <div class="dpt-slider-row">
                         <div class="dpt-slider-fields">
                             <div class="dpt-slider-input-row">
@@ -444,6 +453,39 @@ class DigitalScreenSettings {
                         $(this).hide();
                     }
                 }
+            });
+
+            // Remove slider button
+            $(document).on('click', '.dpt-remove-slider', function(e) {
+                e.preventDefault();
+                if (!confirm('Are you sure you want to remove this slider?')) return;
+                
+                const sliderNum = $(this).data('remove');
+                const $card = $(this).closest('.dpt-slider-card');
+                
+                // Clear the input values
+                $card.find('input[name="slider' + sliderNum + '"]').val('');
+                $card.find('input[name="slider' + sliderNum + 'Url"]').val('');
+                $card.find('.dpt-slider-preview img').remove();
+                
+                // Mark as removed so form handler knows to delete
+                $card.addClass('slider-removed');
+                
+                // Hide the slider card
+                $card.addClass('hidden');
+                
+                // Show the "Add Another Slider" button if it was hidden
+                $('#dpt-add-slider').show();
+            });
+
+            // Clear removed sliders before form submit
+            $('form[name="digitalScreen"]').on('submit', function() {
+                $('.dpt-slider-card.slider-removed').each(function() {
+                    const sliderNum = $(this).data('slider');
+                    $(this).find('input').each(function() {
+                        $(this).val('');
+                    });
+                });
             });
             
             // Media gallery

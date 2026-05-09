@@ -36,9 +36,13 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
 
                 if ($value !== '') {
                     update_option("slider$i", $value);
+                } else {
+                    delete_option("slider$i");
                 }
                 if ($url !== '') {
                     update_option("slider{$i}Url", $url);
+                } else {
+                    delete_option("slider{$i}Url");
                 }
             }
         }
