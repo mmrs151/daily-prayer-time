@@ -468,6 +468,9 @@ height: 70%;
     display: inline-block;
     white-space: nowrap;
     animation: dpt-ticker-scroll linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 @keyframes dpt-ticker-scroll {
@@ -687,10 +690,12 @@ height: 70%;
     font-weight: bold;
     font-size: 4vh;
     line-height: 1.2;
+    will-change: opacity;
 }
 .x-board .blink-vertical{
     animation: blink 1s infinite;
     font-weight: bold;
+    will-change: opacity;
 }
 
 .x-board .blink-vertical a{
@@ -819,6 +824,7 @@ inspired from https://codepen.io/Rowno/pen/Afykb
 .carousel-fade .carousel-inner .item {
     opacity: 0;
     transition-property: opacity;
+    will-change: opacity;
 }
 
 .carousel-fade .carousel-inner .active {
@@ -909,6 +915,7 @@ ul.clock li#sec {
     position: relative;
     -moz-animation: mymove 1s ease infinite;
     -webkit-animation: mymove 1s ease infinite;
+    will-change: opacity;
 }
 
 /* Simple Animation */
