@@ -345,11 +345,11 @@ class DigitalScreen extends DailyShortCode
                     </div>
                     <div class="col-sm-9 col-xs-12 height-100 dpt-bg">
                         <div class="align-middle">
-                            <h3 class="text-primary scrolling">
+                            <div class="text-primary scrolling">
                             <div class="marquee">
-                                <span>' . $this->getIqamahUpdate() . '</span>
+                                ' . $this->getIqamahUpdate() . '
                             </div>
-                            </h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -361,11 +361,11 @@ class DigitalScreen extends DailyShortCode
                 <div class="row bottom-row">
                     <div class="col-sm-12 col-xs-12 height-24">
                         <div class="align-middle">
-                            <h3 class="text-primary scrolling-vertical">
+                            <div class="text-primary scrolling-vertical">
                             <div class="marquee">
-                                <span>' . $this->getIqamahUpdate() . '</span>
+                                ' . $this->getIqamahUpdate() . '
                             </div>
-                            </h3>
+                            </div>
                         </div>
                     </div>
                     <div class="notificationBackground notificationFont col-sm-12 col-xs-12 text-center height-50 align-middle">

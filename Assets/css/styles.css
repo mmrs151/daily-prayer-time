@@ -720,7 +720,7 @@ div.jamahChanges-vertical span{
     padding-bottom: 10px;
 }
 
-h3.scrolling-vertical > marquee > div > span {
+div.scrolling-vertical > marquee > div > span {
     font-size: 3vh;
     word-spacing: 10px;
     padding-bottom: 10px;
