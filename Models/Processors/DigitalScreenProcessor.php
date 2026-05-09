@@ -20,8 +20,8 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
             update_option('ds-scroll-text',    sanitize_text_field($this->data['ds-scroll-text']    ?? ''));
             update_option('ds-scroll-speed',   sanitize_text_field($this->data['ds-scroll-speed']   ?? ''));
             update_option('ds-blink-text',     sanitize_text_field($this->data['ds-blink-text']     ?? ''));
-            update_option('ds-additional-css', trim($this->data['ds-additional-css']                ?? ''));
-            update_option('ds-fading-msg',     trim($this->data['ds-fading-msg']                    ?? ''));
+            update_option('ds-additional-css', sanitize_textarea_field($this->data['ds-additional-css'] ?? ''));
+            update_option('ds-fading-msg',     sanitize_textarea_field($this->data['ds-fading-msg']     ?? ''));
             update_option('template-chbox',    sanitize_text_field($this->data['template-chbox']    ?? ''));
             update_option('quran-chbox',       sanitize_text_field($this->data['quran-chbox']       ?? ''));
             update_option('slider-chbox',      sanitize_text_field($this->data['slider-chbox']      ?? ''));
@@ -32,7 +32,7 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
 
             for ($i = 1; $i <= 13; $i++) {
                 $value = sanitize_text_field($this->data["slider$i"] ?? '');
-                $url   = sanitize_text_field($this->data["slider{$i}Url"] ?? '');
+                $url   = esc_url_raw($this->data["slider{$i}Url"] ?? '');
 
                 if ($value !== '') {
                     update_option("slider$i", $value);
