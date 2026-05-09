@@ -18,68 +18,21 @@ class ThemeSettingsProcessor
 
     public function process()
     {
-        $hideTableBorder = $this->data['hideTableBorder'];
-        delete_option('hideTableBorder');
-        add_option('hideTableBorder', $hideTableBorder);
-
-        $tableBackground = $this->data['tableBackground'];
-        delete_option('tableBackground');
-        add_option('tableBackground', $tableBackground);
-
-        $tableHeading = $this->data['tableHeading'];
-        delete_option('tableHeading');
-        add_option('tableHeading', $tableHeading);
-
-        $tableHeadingFont = $this->data['tableHeadingFont'];
-        delete_option('tableHeadingFont');
-        add_option('tableHeadingFont', $tableHeadingFont);
-
-        $evenRow = $this->data['evenRow'];
-        delete_option('evenRow');
-        add_option('evenRow', $evenRow);
-
-        $fontColor = $this->data['fontColor'];
-        delete_option('fontColor');
-        add_option('fontColor', $fontColor);
-
-        $highlight = $this->data['highlight'];
-        delete_option('highlight');
-        add_option('highlight', $highlight);
-
-        $highlightFont = $this->data['highlightFont'];
-        delete_option('highlightFont');
-        add_option('highlightFont', $highlightFont);
-
-        $notificationBackground = $this->data['notificationBackground'];
-        delete_option('notificationBackground');
-        add_option('notificationBackground', $notificationBackground);
-
-        $notificationFont = $this->data['notificationFont'];
-        delete_option('notificationFont');
-        add_option('notificationFont', $notificationFont);
-
-        $prayerName = $this->data['prayerName'];
-        delete_option('prayerName');
-        add_option('prayerName', $prayerName);
-
-        $prayerNameFont = $this->data['prayerNameFont'];
-        delete_option('prayerNameFont');
-        add_option('prayerNameFont', $prayerNameFont);
-
-        $digitalScreenRed = $this->data['digitalScreenRed'];
-        delete_option('digitalScreenRed');
-        add_option('digitalScreenRed', $digitalScreenRed);
-
-        $digitalScreenLightRed = $this->data['digitalScreenLightRed'];
-        delete_option('digitalScreenLightRed');
-        add_option('digitalScreenLightRed', $digitalScreenLightRed);
-
-        $digitalScreenGreen = $this->data['digitalScreenGreen'];
-        delete_option('digitalScreenGreen');
-        add_option('digitalScreenGreen', $digitalScreenGreen);
-
-        $digitalScreenPrayerName = $this->data['digitalScreenPrayerName'];
-        delete_option('digitalScreenPrayerName');
-        add_option('digitalScreenPrayerName', $digitalScreenPrayerName);
+        update_option('hideTableBorder',        $this->data['hideTableBorder']);
+        update_option('tableBackground',        $this->data['tableBackground']);
+        update_option('tableHeading',           $this->data['tableHeading']);
+        update_option('tableHeadingFont',       $this->data['tableHeadingFont']);
+        update_option('evenRow',                $this->data['evenRow']);
+        update_option('fontColor',              $this->data['fontColor']);
+        update_option('highlight',              $this->data['highlight']);
+        update_option('highlightFont',          $this->data['highlightFont']);
+        update_option('notificationBackground', $this->data['notificationBackground']);
+        update_option('notificationFont',       $this->data['notificationFont']);
+        update_option('prayerName',             $this->data['prayerName']);
+        update_option('prayerNameFont',         $this->data['prayerNameFont']);
+        update_option('digitalScreenRed',       $this->data['digitalScreenRed']);
+        update_option('digitalScreenLightRed',  $this->data['digitalScreenLightRed']);
+        update_option('digitalScreenGreen',     $this->data['digitalScreenGreen']);
+        update_option('digitalScreenPrayerName',$this->data['digitalScreenPrayerName']);
     }
 }
