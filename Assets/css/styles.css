@@ -460,7 +460,7 @@ height: 70%;
 }
 
 .x-board div.dsScroll{
-    float: left;
+    display: inline-block;
 }
 
 .x-board span.jamahChanges {
