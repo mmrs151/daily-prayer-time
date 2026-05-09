@@ -443,15 +443,19 @@ class DigitalScreen extends DailyShortCode
             $orientation = 'vertical';
         }
 
-        $content = '<input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">';
+        $content = '';
 
         if ( $this->scrollText ) {
-            $content .= '<a class="scroll" target="_new" href="' . $this->scrollUrl . '">' . $this->scrollText . '</a> ';
+            $content .= '<a class="scroll" target="_new" href="' . $this->scrollUrl . '">' . $this->scrollText . '</a> &nbsp;&nbsp;&nbsp; ';
         }
 
         $content .= do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");
 
-        return '<span class="dpt-ticker-track" style="animation-duration:' . (int) $this->scrollSpeed . 's">' . $content . '</span>';
+        // Duplicate content so the loop is seamless (animation goes 0 → -50%)
+        return '<input type="hidden" id="scrollSpeed" value="' . $this->scrollSpeed . '">'
+            . '<span class="dpt-ticker-track" style="animation-duration:' . (int) $this->scrollSpeed . 's">'
+            . $content . $content
+            . '</span>';
     }
 
     private function getBlink(): string

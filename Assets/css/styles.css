@@ -471,8 +471,8 @@ height: 70%;
 }
 
 @keyframes dpt-ticker-scroll {
-    from { transform: translateX(100vw); }
-    to   { transform: translateX(-100%); }
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
 .x-board span.jamahChanges {
