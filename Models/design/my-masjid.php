@@ -292,6 +292,7 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
 /* Active/Next Prayer Row - color set by UpdateStyles */
   .prayer-table tr.nextPrayer td {
     font-weight: 900;
+    color: green;
   }
 
   /* Dimmed rows */
@@ -362,10 +363,6 @@ $fajrTime = isset($this->row['fajr_begins']) ? substr($this->row['fajr_begins'],
     margin-bottom: 0.6vh;
     padding: 0.7vh max(4px, env(safe-area-inset-right, 0px)) 0.7vh max(4px, env(safe-area-inset-left, 0px));
     border-radius: 8px;
-  }
-
-  .next-banner .next-name, .dptScTime {
-    font-size: clamp(0.95rem, 3.8vw, 1.2rem) !important;
   }
 
   .next-banner .countdown {

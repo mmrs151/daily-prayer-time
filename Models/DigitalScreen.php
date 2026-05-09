@@ -446,7 +446,7 @@ class DigitalScreen extends DailyShortCode
         $content = '';
 
         if ( $this->scrollText ) {
-            $content .= '<a class="scroll" target="_new" href="' . $this->scrollUrl . '">' . $this->scrollText . '</a> &nbsp;&nbsp;&nbsp; ';
+            $content .= ' > '. $this->scrollText . ' < ';
         }
 
         $content .= do_shortcode("[display_iqamah_update orientation='" . $orientation . "']");

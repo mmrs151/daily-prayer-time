@@ -118,7 +118,7 @@ if (!empty($_POST['activate-automatic'])) {
                     </li>
                     <li><a class="url" target="_blank" href="https://www.salahtimes.com/search"> Get prayer start time for your city <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                     <li>Valid date formats are:
-                        <ul class='green' style="padding-left: 20px;">
+                        <ul style="padding-left: 20px; color: green;">
                             <li type="disc"> YYYY-MM-DD <i class='smallFont'>(2023-10-20)</i></li>
                             <li type="disc"> YY-MM-DD <i class='smallFont'>(23-10-20)</i></li>
                             <li type="disc"> MM/DD/YYYY <i class='smallFont'>(10/20/2021)</i></li>
