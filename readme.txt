@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.05.05
+Stable tag: 2026.05.11
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,14 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 12. Sample 2
 
 == Changelog ==
+
+= 2026.05.11 =
+* Feat: Two-column layout for Theme settings (Daily Prayer Table | Digital Screen)
+* Feat: Native HTML color picker for each color setting
+* Feat: Page-level "Reset All" button deletes all theme options
+* Feat: Only valid hex colors (#RRGGBB) are saved; '0' or empty are ignored
+* Feat: Add digitalScreenGreenFont color option for next prayer font
+* Fix: Stop sunrise/zawal toggle after zawal time has passed
 
 = 2026.05.05 =
 * Fix: Display Quran verse on right panel for Usman template
