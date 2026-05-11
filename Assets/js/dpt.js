@@ -541,7 +541,7 @@ DPT = {
             if (currentMins >= zawalMins) {
                 // After zawal - stop toggling, show Sunrise only
                 nameElem.text('Sunrise');
-                timeElem.text(sunriseTime);
+                // timeElem.text(sunriseTime);
                 return;
             }
             
