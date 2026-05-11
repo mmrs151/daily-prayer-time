@@ -38,6 +38,14 @@
                         <td><input type="text" name="prayerNameFont" value="<?php echo esc_attr(get_option('prayerNameFont')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
+                        <td>Highlight background</td>
+                        <td><input type="text" name="highlight" value="<?php echo esc_attr(get_option('highlight')) ?>" class="color-field"></td>
+                    </tr>
+                    <tr>
+                        <td>Highlight Font</td>
+                        <td><input type="text" name="highlightFont" value="<?php echo esc_attr(get_option('highlightFont')) ?>" class="color-field"></td>
+                    </tr>
+                    <tr>
                         <td>Alternate row</td>
                         <td><input type="text" name="evenRow" value="<?php echo esc_attr(get_option('evenRow')) ?>" class="color-field"></td>
                     </tr>
@@ -45,14 +53,6 @@
                     <tr>
                         <td>Background color</td>
                         <td><input type="text" name="tableBackground" value="<?php echo esc_attr(get_option('tableBackground')) ?>" class="color-field"></td>
-                    </tr>
-                    <tr>
-                        <td>Highlight background</td>
-                        <td><input type="text" name="highlight" value="<?php echo esc_attr(get_option('highlight')) ?>" class="color-field"></td>
-                    </tr>
-                    <tr>
-                        <td>Highlight Font</td>
-                        <td><input type="text" name="highlightFont" value="<?php echo esc_attr(get_option('highlightFont')) ?>" class="color-field"></td>
                     </tr>
 
                     <tr>
@@ -79,6 +79,10 @@
                     <tr>
                         <td>Next prayer background</td>
                         <td><input type="text" name="digitalScreenGreen" value="<?php echo esc_attr(get_option('digitalScreenGreen')) ?>" class="color-field"></td>
+                    </tr>
+                    <tr>
+                        <td>Next prayer Font</td>
+                        <td><input type="text" name="digitalScreenGreenFont" value="<?php echo esc_attr(get_option('digitalScreenGreenFont')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
                         <td colspan="2">

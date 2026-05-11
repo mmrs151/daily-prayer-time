@@ -386,11 +386,10 @@ DPT = {
 
     fadingMessages: function(){
         var msg = jQuery('#fadingMessages').val();
-
+        msg = JSON.parse(msg.trim());
         if (!msg) {
             return;
         }
-        msg = JSON.parse(msg.trim());
         fade();
         setInterval(fade, 10000);
 
@@ -542,7 +541,7 @@ DPT = {
             if (currentMins >= zawalMins) {
                 // After zawal - stop toggling, show Sunrise only
                 nameElem.text('Sunrise');
-                timeElem.text(sunriseTime);
+                // timeElem.text(sunriseTime);
                 return;
             }
             

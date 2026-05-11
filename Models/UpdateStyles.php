@@ -32,6 +32,7 @@ class UpdateStyles
             'digitalScreenRed' => get_option('digitalScreenRed'),
             'digitalScreenLightRed' => get_option('digitalScreenLightRed'),
             'digitalScreenGreen' => get_option('digitalScreenGreen'),
+            'digitalScreenGreenFont' => get_option('digitalScreenGreenFont') ?? 'white',
             'digitalScreenPrayerName' => get_option('digitalScreenPrayerName')
         ];
     }
@@ -189,33 +190,7 @@ class UpdateStyles
                 }
                 table.customStyles tr.highlight, th.highlight, td.highlight {
                     background: {$this->options['highlight']} !important;
-                }
-                .x-board .prayerName.highlight,
-                .x-board-modern .nextPrayer,
-                .x-board .nextPrayer {
-                    color: {$this->options['highlight']} !important;
-                }
-                span.nextPrayer {
-                    font-weight: bold;
-                    color: {$this->options['highlight']};
-                }
-                .x-board tr.nextPrayer td {
-                    background-color: {$this->options['highlight']} !important;
-                }
-                .x-board-modern h4.nextPrayer, p.nextPrayer {
-                    background: {$this->options['highlight']} !important;
-                }
-                .d-masjid-e-usman .nextPrayer h3,
-                .nextPrayer .title,
-                tr.nextPrayer,
-                td span.nextPrayer,
-                .dpt-wrapper-container .prayer-time.highlight {
-                    background: {$this->options['highlight']} !important;
-                }
-                .d-masjid-e-usman .left-main-col-sun-times h4,
-                .left-main-col-sun-times p {
-                    color: {$this->options['highlight']} !important;
-                }
+                }                
             ";
         }
     
@@ -227,36 +202,8 @@ class UpdateStyles
                 table.customStyles tr.highlight, th.highlight, td.highlight {
                     color: {$this->options['highlightFont']} !important;
                 }
-                .x-board-my-masjid tr.nextPrayer td {
-                    font-weight: 700;
-                    color: {$this->options['highlightFont']} !important;
-                }
-                .x-board tr.nextPrayer td {
-                    color: {$this->options['highlightFont']} !important;
-                }
-                .x-board-modern h4.nextPrayer, p.nextPrayer {
-                    color: {$this->options['highlightFont']} !important;
-                }
-                .d-masjid-e-usman .nextPrayer h3,
-                .nextPrayer .title,
-                tr.nextPrayer,
-                td span.nextPrayer,
-                .dpt-wrapper-container .prayer-time.highlight {
-                    color: {$this->options['highlightFont']} !important;
-                }
-                .d-masjid-e-usman .nextPrayer h3,
-                .nextPrayer .title,
-                .d-masjid-e-usman .nextPrayer .dsJumuah {
-                    color: {$this->options['highlightFont']} !important;
-                }
-                .dptPrayerIcon {
-                    color: {$this->options['highlightFont']} !important;
-                }
-                span.nextPrayer {
-                    color: {$this->options['highlightFont']} !important;
-                }
-                span.green {
-                    color: {$this->options['highlightFont']} !important;
+                div.dptScNextPrayer {
+                    color: {$this->options['highlightFont']};
                 }
             ";
         }
@@ -285,13 +232,58 @@ class UpdateStyles
         }
 
         if (!empty($this->options['digitalScreenGreen'])) {
+            $nextPrayerBackground = $this->options['digitalScreenGreen'];
             $styles .= "
                 .x-board .bg-green {
-                    background: {$this->options['digitalScreenGreen']} !important
+                    background: {$nextPrayerBackground} !important
+                }
+                .x-board tr.nextPrayer td {
+                    background-color: {$nextPrayerBackground} !important;
+                }
+                .x-board-modern h4.nextPrayer, p.nextPrayer {
+                    background: {$nextPrayerBackground} !important;
+                }
+                .d-masjid-e-usman .nextPrayer h3,
+                .nextPrayer .title,
+                tr.nextPrayer,
+                td span.nextPrayer,
+                .dpt-wrapper-container .prayer-time.highlight {
+                    background: {$nextPrayerBackground} !important;
+                }
+                .d-masjid-e-usman .left-main-col-sun-times h4,
+                .left-main-col-sun-times p {
+                    background: {$nextPrayerBackground} !important;
+                }
+                .x-board span.nextPrayer {
+                    font-weight: bold;
+                    background: {$nextPrayerBackground};
                 }
             ";
         }
-
+        
+        if (!empty($this->options['digitalScreenGreenFont'])) {
+            $nextPrayerFont = $this->options['digitalScreenGreenFont'];
+            $styles .= "
+                .x-board .bg-green td,
+                .x-board .bg-green div,
+                .x-board .bg-green h2,
+                .x-board .bg-green h3,
+                .x-board .bg-green h4 {
+                    color: {$nextPrayerFont} !important;
+                }
+                .x-board tr.nextPrayer td {
+                    color: {$nextPrayerFont} !important;
+                }
+                .x-board-modern h4.nextPrayer, p.nextPrayer {
+                    color: {$nextPrayerFont} !important;
+                }
+                .x-board span.nextPrayer {
+                    font-weight: bold;
+                    color: {$nextPrayerFont};
+                }
+            ";
+        }
+    
         if (!empty($this->options['digitalScreenPrayerName'])) {
             $styles .= "
                 .x-board td.prayerName {
