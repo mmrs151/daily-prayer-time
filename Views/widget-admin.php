@@ -136,6 +136,7 @@ if (! empty($_POST['themeSettings']) && check_admin_referer( 'themeSettings' )) 
         'digitalScreenRed' => sanitize_text_field($_POST['digitalScreenRed']),
         'digitalScreenLightRed' => sanitize_text_field($_POST['digitalScreenLightRed']),
         'digitalScreenGreen' => sanitize_text_field($_POST['digitalScreenGreen']),
+        'digitalScreenGreenFont' => sanitize_text_field($_POST['digitalScreenGreenFont']),
         'digitalScreenPrayerName' => sanitize_text_field($_POST['digitalScreenPrayerName']),
     ];
     $themeSettings = new ThemeSettingsProcessor($data);

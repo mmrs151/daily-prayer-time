@@ -365,9 +365,8 @@ class TimetablePrinter
         return
             $printDates . '
         <div class="dptScNextPrayer">
-            <span class="green">
-                <span class="nextPrayer">' . $this->getHeading($row, $nextPrayer). '</span> ' .
-                $this->getTimeLeftString($diff, $row);
+            <span class="nextPrayer">' . $this->getHeading($row, $nextPrayer). '</span> ' .
+            $this->getTimeLeftString($diff, $row);
     }
 
     protected function getTimeLeftString($nextIqamah, $row)

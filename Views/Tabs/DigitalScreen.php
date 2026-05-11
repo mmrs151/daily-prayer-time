@@ -177,7 +177,7 @@ class DigitalScreenSettings {
                 
                 <div class="dpt-form-row">
                     <div class="dpt-form-group dpt-form-group-wide">
-                        <label>Fading Messages <span class="dpt-hint">(separated by full stop)</span></label>
+                        <label>Fading Messages <span class="dpt-hint">(separated by full stop for new message)</span></label>
                         <textarea name="ds-fading-msg" rows="3"><?php echo esc_textarea(get_option('ds-fading-msg') ?? ''); ?></textarea>
                     </div>
                     <div class="dpt-form-group">

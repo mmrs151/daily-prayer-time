@@ -699,16 +699,15 @@ class DigitalScreen extends DailyShortCode
         $messages = explode('.', get_option('ds-fading-msg'));
         $messages = array_map('stripslashes', $messages);
         $messages = array_filter($messages);
-        
-        array_push($messages, date_i18n( 'l ' . get_option( 'date_format' )));
 
+        $gregorianDate = date_i18n( 'l ' . get_option( 'date_format' ));
+        
         $hijriCheckbox = get_option('hijri-chbox');
         if ( ! empty($hijriCheckbox) ) {
-            array_push($messages,
-                $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow())
-            );
+            $hijriDate = $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow());
+            $gregorianDate . ' | ' . $hijriDate;
         }
-
+        array_push($messages, $gregorianDate);
         return $messages;
     }
 

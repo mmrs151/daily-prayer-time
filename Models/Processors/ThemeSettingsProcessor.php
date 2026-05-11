@@ -33,6 +33,7 @@ class ThemeSettingsProcessor
         update_option('digitalScreenRed',       $this->data['digitalScreenRed']);
         update_option('digitalScreenLightRed',  $this->data['digitalScreenLightRed']);
         update_option('digitalScreenGreen',     $this->data['digitalScreenGreen']);
+        update_option('digitalScreenGreenFont',$this->data['digitalScreenGreenFont']);
         update_option('digitalScreenPrayerName',$this->data['digitalScreenPrayerName']);
     }
 }
