@@ -703,9 +703,10 @@ class DigitalScreen extends DailyShortCode
         $gregorianDate = date_i18n( 'l ' . get_option( 'date_format' ));
         
         $hijriCheckbox = get_option('hijri-chbox');
+
         if ( ! empty($hijriCheckbox) ) {
             $hijriDate = $this->getHijriDate(date("d"), date("m"), date("Y"), $this->getRow());
-            $gregorianDate . ' | ' . $hijriDate;
+            $gregorianDate = $gregorianDate . ' | ' . $hijriDate;
         }
         array_push($messages, $gregorianDate);
         return $messages;

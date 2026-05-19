@@ -77,12 +77,16 @@
                         <td><input type="text" name="digitalScreenRed" value="<?php echo esc_attr(get_option('digitalScreenRed')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
-                        <td>Next prayer background</td>
-                        <td><input type="text" name="digitalScreenGreen" value="<?php echo esc_attr(get_option('digitalScreenGreen')) ?>" class="color-field"></td>
+                        <td>Next prayer(row) background</td>
+                        <td><input type="text" name="digitalScreenGreen" value="<?php echo esc_attr(get_option('digitalScreenGreen', '0')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
                         <td>Next prayer Font</td>
-                        <td><input type="text" name="digitalScreenGreenFont" value="<?php echo esc_attr(get_option('digitalScreenGreenFont')) ?>" class="color-field"></td>
+                        <td><input type="text" name="digitalScreenGreenFont" value="<?php echo esc_attr(get_option('digitalScreenGreenFont', '0')) ?>" class="color-field"></td>
+                    </tr>
+                    <tr>
+                        <td>Next prayer(slide) background</td>
+                        <td><input type="text" name="digitalScreenSlideBg" value="<?php echo esc_attr(get_option('digitalScreenSlideBg', '0')) ?>" class="color-field"></td>
                     </tr>
                     <tr>
                         <td colspan="2">

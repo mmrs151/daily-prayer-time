@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-6 mosque-name text-center">
-                <h2>Edgware Islamic Cultural Trust</h2>
+                <h2><?php echo esc_textarea(get_option('ds-fading-msg') ?? ''); ?></h2>
             </div>
             <div class="col-md-3 col-sm-3 col-3 time-column">
                 <div class="time">

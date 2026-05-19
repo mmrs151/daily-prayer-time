@@ -386,7 +386,14 @@ DPT = {
 
     fadingMessages: function(){
         var msg = jQuery('#fadingMessages').val();
-        msg = JSON.parse(msg.trim());
+        if (!msg) return;
+        msg = msg.trim();
+        if (!msg) return;
+        try {
+            msg = JSON.parse(msg);
+        } catch (e) {
+            return;
+        }
         if (!msg) {
             return;
         }
@@ -415,7 +422,10 @@ DPT = {
             var now = new Date();
             now.setMinutes(now.getMinutes() + now.getTimezoneOffset() + timezoneOffset); // Adjust to WordPress timezone
 
-            var dptScTimeValue = jQuery('#dptScTimeCountDown').text().trim()
+            var dptScTimeValue = jQuery('#dptScTimeCountDown').text();
+            if (!dptScTimeValue) return;
+            dptScTimeValue = dptScTimeValue.trim();
+            if (!dptScTimeValue) return;
             var timeParts = dptScTimeValue.split(':');
             var hours = parseInt(timeParts[0]);
             var minutes = parseInt(timeParts[1]);

@@ -33,7 +33,8 @@ class UpdateStyles
             'digitalScreenLightRed' => get_option('digitalScreenLightRed'),
             'digitalScreenGreen' => get_option('digitalScreenGreen'),
             'digitalScreenGreenFont' => get_option('digitalScreenGreenFont') ?? 'white',
-            'digitalScreenPrayerName' => get_option('digitalScreenPrayerName')
+            'digitalScreenPrayerName' => get_option('digitalScreenPrayerName'),
+            'digitalScreenSlideBg' => get_option('digitalScreenSlideBg')
         ];
     }
 
@@ -184,26 +185,29 @@ class UpdateStyles
         $styles = '';
     
         if (!empty($this->options['highlight'])) {
+            $highlightBackground = $this->options['highlight'];
+            
             $styles .= "
                 :root {
-                    --dpt-highlight: {$this->options['highlight']} !important;
+                    --dpt-highlight: {$highlightBackground} !important;
                 }
                 table.customStyles tr.highlight, th.highlight, td.highlight {
-                    background: {$this->options['highlight']} !important;
-                }                
+                    background: {$highlightBackground} !important;
+                }
             ";
         }
     
         if (!empty($this->options['highlightFont'])) {
+            $highlightFont = $this->options['highlightFont'];
             $styles .= "
                 :root {
-                    --dpt-highlight-font: {$this->options['highlightFont']} !important;
+                    --dpt-highlight-font: {$highlightFont} !important;
                 }
                 table.customStyles tr.highlight, th.highlight, td.highlight {
-                    color: {$this->options['highlightFont']} !important;
+                    color: {$highlightFont} !important;
                 }
                 div.dptScNextPrayer {
-                    color: {$this->options['highlightFont']};
+                    color: {$highlightFont};
                 }
             ";
         }
@@ -232,31 +236,33 @@ class UpdateStyles
         }
 
         if (!empty($this->options['digitalScreenGreen'])) {
-            $nextPrayerBackground = $this->options['digitalScreenGreen'];
+            $nextPrayerRowBg = $this->options['digitalScreenGreen'];
+            $styles .= "
+                #dsPrayerTimetable tr.nextPrayer td,
+                .x-board tr.nextPrayer td {
+                    background: {$nextPrayerRowBg} !important;
+                }
+            ";
+        }
+        
+        if (!empty($this->options['digitalScreenSlideBg'])) {
+            $slideBg = $this->options['digitalScreenSlideBg'];
             $styles .= "
                 .x-board .bg-green {
-                    background: {$nextPrayerBackground} !important
+                    background-color: {$slideBg} !important
                 }
-                .x-board tr.nextPrayer td {
-                    background-color: {$nextPrayerBackground} !important;
-                }
-                .x-board-modern h4.nextPrayer, p.nextPrayer {
-                    background: {$nextPrayerBackground} !important;
+                .x-board-modern h4.nextPrayer, 
+                .x-board-modern p.nextPrayer {
+                    background-color: {$slideBg} !important;
                 }
                 .d-masjid-e-usman .nextPrayer h3,
                 .nextPrayer .title,
-                tr.nextPrayer,
-                td span.nextPrayer,
                 .dpt-wrapper-container .prayer-time.highlight {
-                    background: {$nextPrayerBackground} !important;
+                    background-color: {$slideBg} !important;
                 }
                 .d-masjid-e-usman .left-main-col-sun-times h4,
                 .left-main-col-sun-times p {
-                    background: {$nextPrayerBackground} !important;
-                }
-                .x-board span.nextPrayer {
-                    font-weight: bold;
-                    background: {$nextPrayerBackground};
+                    background-color: {$slideBg} !important;
                 }
             ";
         }
@@ -270,16 +276,16 @@ class UpdateStyles
                 .x-board .bg-green h3,
                 .x-board .bg-green h4 {
                     color: {$nextPrayerFont} !important;
-                }
-                .x-board tr.nextPrayer td {
-                    color: {$nextPrayerFont} !important;
-                }
+                }                
                 .x-board-modern h4.nextPrayer, p.nextPrayer {
                     color: {$nextPrayerFont} !important;
                 }
                 .x-board span.nextPrayer {
                     font-weight: bold;
                     color: {$nextPrayerFont};
+                }
+                .x-board tr.nextPrayer td {
+                    color: {$nextPrayerFont} !important;
                 }
             ";
         }
