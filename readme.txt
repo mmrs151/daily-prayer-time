@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.05.11
+Stable tag: 2026.05.12
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,13 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 12. Sample 2
 
 == Changelog ==
+
+= 2026.05.12 =
+* Feat: Add digitalScreenSlideBg option for slide/card background
+* Feat: Separate row background from slide background control
+* Fix: Remove td span.nextPrayer from slide background CSS
+* Fix: Add null checks for .trim() calls in dpt.js (JS error fix)
+* Fix: ThemeSettingsProcessor now deletes option when value is '0' or empty
 
 = 2026.05.11 =
 * Feat: Two-column layout for Theme settings (Daily Prayer Table | Digital Screen)
