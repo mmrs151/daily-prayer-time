@@ -251,17 +251,8 @@ class UpdateStyles
                 .x-board .bg-green {
                     background-color: {$slideBg} !important
                 }
-                .x-board-modern h4.nextPrayer, 
-                .x-board-modern p.nextPrayer {
-                    background-color: {$slideBg} !important;
-                }
-                .d-masjid-e-usman .nextPrayer h3,
-                .nextPrayer .title,
+                .x-board .nextPrayer .title,
                 .dpt-wrapper-container .prayer-time.highlight {
-                    background-color: {$slideBg} !important;
-                }
-                .d-masjid-e-usman .left-main-col-sun-times h4,
-                .left-main-col-sun-times p {
                     background-color: {$slideBg} !important;
                 }
             ";
@@ -276,9 +267,6 @@ class UpdateStyles
                 .x-board .bg-green h3,
                 .x-board .bg-green h4 {
                     color: {$nextPrayerFont} !important;
-                }                
-                .x-board-modern h4.nextPrayer, p.nextPrayer {
-                    color: {$nextPrayerFont} !important;
                 }
                 .x-board span.nextPrayer {
                     font-weight: bold;
@@ -286,6 +274,12 @@ class UpdateStyles
                 }
                 .x-board tr.nextPrayer td {
                     color: {$nextPrayerFont} !important;
+                }
+                .quranVerse {
+                    color: {$nextPrayerFont};
+                }
+                div.dptScNextPrayer {
+                    color: {$nextPrayerFont};
                 }
             ";
         }
