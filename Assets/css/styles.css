@@ -534,7 +534,7 @@ height: 70%;
 .x-board .date-eng{
     font-weight: bold;
     padding-left: 5px;
-    font-size: 6vh;
+    font-size: 5vh;
     text-shadow: 0 0 2px #00c6ff;
 }
 
@@ -635,9 +635,8 @@ height: 70%;
 .x-board table td span {
     font-weight: bold;
 }
-
-.x-board .nextPrayer {
-    color: #fff;
+.quranVerse {
+    color: #FFF;
 }
 .x-board span.nextPrayer {
     display: inline-block;
@@ -711,6 +710,7 @@ height: 70%;
     padding: 0px 30px 0px 30px;
     font-size: 4vh;
     background: red;
+    color: #def;
     font-weight: 800;
 }
 
@@ -718,6 +718,8 @@ height: 70%;
     padding: 0px 30px 0px 30px;
     font-size: 4vh;
     background: red;
+    color: #def;
+
     font-weight: 800;
     text-align: right;
 }

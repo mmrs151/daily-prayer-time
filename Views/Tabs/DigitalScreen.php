@@ -347,7 +347,7 @@ class DigitalScreenSettings {
                     <ul>
                         <li><code>[digital_screen view='vertical']</code> - Mobile display</li>
                         <li><code>[digital_screen view='presentation']</code> - Slides only</li>
-                        <li><code>[digital_screen dim=10]</code> - Dim after 10 mins</li>
+                        <li><code>[digital_screen dim=10]</code> - Dim for 10 mins</li>
                         <li><code>[digital_screen scroll='text']</code> - Override scroll</li>
                         <li><code>[digital_screen blink='text']</code> - Override blink</li>
                     </ul>
