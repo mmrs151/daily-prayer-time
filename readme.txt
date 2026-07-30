@@ -5,7 +5,7 @@ Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
 Tested up to: 6.9
-Stable tag: 2026.05.20
+Stable tag: 2026.07.30
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,10 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
+= 2026.07.30 =
+* Fix: next_prayer API now returns correct azanTime and iqamahTime
+  for jumuah, ishraq, and after-isha (null) edge cases instead of null
+
 = 2026.05.20 =
 * Feat: Add digitalScreenSlideBg option for slide/card background
 * Feat: Separate row background from slide background control
@@ -201,6 +205,9 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 * Fix: Fix JS bug
 
 == Upgrade Notice ==
+
+= 2026.07.30 =
+* Fix: next_prayer API azanTime/iqamahTime null for jumuah, ishraq, after-isha
 
 = 2026.04.28.1 =
 * Fix: Monthly table mobile display - now scrolls horizontally on small screens
