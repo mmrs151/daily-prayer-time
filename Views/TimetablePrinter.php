@@ -502,6 +502,18 @@ class TimetablePrinter
             return $row['sunrise'];
         }
 
+        if ($nextPrayer == 'jumuah') {
+            return $row['zuhr_jamah'];
+        }
+
+        if ($nextPrayer == 'ishraq') {
+            return $this->dptHelper->getIshraqTime($row['sunrise']);
+        }
+
+        if (is_null($nextPrayer)) {
+            return $row['tomorrow']['fajr_jamah'] ?? null;
+        }
+
         $key = strtolower($nextPrayer . '_jamah');
         
         if (isset($row[$key])) {
@@ -515,6 +527,18 @@ class TimetablePrinter
     {
         if ($nextPrayer == 'zawal' || $nextPrayer == 'sunrise') {
             return $row['sunrise'];
+        }
+
+        if ($nextPrayer == 'jumuah') {
+            return $row['zuhr_begins'];
+        }
+
+        if ($nextPrayer == 'ishraq') {
+            return $this->dptHelper->getIshraqTime($row['sunrise']);
+        }
+
+        if (is_null($nextPrayer)) {
+            return $row['tomorrow']['fajr_begins'] ?? null;
         }
 
         $key = strtolower($nextPrayer . '_begins');
