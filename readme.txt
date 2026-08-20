@@ -4,8 +4,8 @@ Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
 Requires PHP: 7.2
-Tested up to: 6.9
-Stable tag: 2026.07.30
+Tested up to: 7.1
+Stable tag: 2026.08.20
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,8 +131,6 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 * Fix: Individual start-time shortcodes ([fajr_start], [zuhr_start], [asr_start],
   [maghrib_start], [isha_start]) now keep showing today's start time until the
   prayer's Jamat/Iqamah time has passed before switching to tomorrow's time
-
-= 2026.07.30 =
 * Fix: next_prayer API now returns correct azanTime and iqamahTime
   for jumuah, ishraq, and after-isha (null) edge cases instead of null
 
@@ -211,8 +209,9 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Upgrade Notice ==
 
-= 2026.07.30 =
-* Fix: next_prayer API azanTime/iqamahTime null for jumuah, ishraq, after-isha
+= 2026.08.20 =
+* Fix: next_prayer API azanTime/iqamahTime null for asr, jumuah, ishraq, after-isha
+* Fix: Start times ([fajr_start] etc.) now hold today's value until Jamat time
 
 = 2026.04.28.1 =
 * Fix: Monthly table mobile display - now scrolls horizontally on small screens
