@@ -1,5 +1,12 @@
 # Changelog
 
+## [2026.08.20] - 2026-08-20
+
+### Fixed
+- Individual start-time shortcodes (`[fajr_start]`, `[zuhr_start]`, `[asr_start]`, `[maghrib_start]`, `[isha_start]`) now keep showing today's start time until the prayer's Jamat/Iqamah time has passed before switching to tomorrow's time. Previously they rolled over to tomorrow's value the minute the start time passed.
+
+---
+
 ## [2026.05.09] - 2026-05-09
 
 ### Added

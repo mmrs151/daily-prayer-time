@@ -230,10 +230,11 @@ class DailyShortCode extends TimetablePrinter
     public function scFajrStart($attr)
     {
         $begins = $this->row['fajr_begins'];
+        $jamah = $this->row['fajr_jamah'];
 
         if (! $this->deactivateTomorrow) {
 
-            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
             $begins = $this->row['tomorrow']['fajr_begins'];
             }
         }
@@ -283,10 +284,11 @@ class DailyShortCode extends TimetablePrinter
     public function scZuhrStart($attr)
     {
         $begins = $this->row['zuhr_begins'];
+        $jamah = $this->row['zuhr_jamah'];
 
         if (! $this->deactivateTomorrow) {
 
-            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
                 $begins = $this->row['tomorrow']['zuhr_begins'];
             }
         }
@@ -325,10 +327,11 @@ class DailyShortCode extends TimetablePrinter
         $method = $this->getAsrMethod($attr);
         
         $begins = $this->row[$method];
+        $jamah = $this->row['asr_jamah'];
 
         if (! $this->deactivateTomorrow) {
 
-            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
                 $begins = $this->row['tomorrow'][$method];
             }
         }
@@ -372,10 +375,11 @@ class DailyShortCode extends TimetablePrinter
     public function scMaghribStart($attr)
     {
         $begins = $this->row['maghrib_begins'];
+        $jamah = $this->row['maghrib_jamah'];
 
         if (! $this->deactivateTomorrow) {
 
-            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
                 $begins = $this->row['tomorrow']['maghrib_begins'];
             }
         }
@@ -410,10 +414,11 @@ class DailyShortCode extends TimetablePrinter
     public function scIshaStart($attr)
     {
         $begins = $this->row['isha_begins'];
+        $jamah = $this->row['isha_jamah'];
 
         if (! $this->deactivateTomorrow) {
 
-            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($begins) ) {
+            if ( isset($this->row['tomorrow']) && $this->isPrayerFinished($jamah) ) {
                 $begins = $this->row['tomorrow']['isha_begins'];
             }
         }

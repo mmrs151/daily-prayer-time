@@ -127,6 +127,11 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 
 == Changelog ==
 
+= 2026.08.20 =
+* Fix: Individual start-time shortcodes ([fajr_start], [zuhr_start], [asr_start],
+  [maghrib_start], [isha_start]) now keep showing today's start time until the
+  prayer's Jamat/Iqamah time has passed before switching to tomorrow's time
+
 = 2026.07.30 =
 * Fix: next_prayer API now returns correct azanTime and iqamahTime
   for jumuah, ishraq, and after-isha (null) edge cases instead of null

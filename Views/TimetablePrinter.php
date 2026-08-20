@@ -537,6 +537,10 @@ class TimetablePrinter
             return $this->dptHelper->getIshraqTime($row['sunrise']);
         }
 
+        if ($nextPrayer == 'asr') {
+            return get_option('asrSelect') == 'hanafi' ? $row['asr_mithl_2'] : $row['asr_mithl_1'];
+        }
+
         if (is_null($nextPrayer)) {
             return $row['tomorrow']['fajr_begins'] ?? null;
         }

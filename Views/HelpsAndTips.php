@@ -138,7 +138,7 @@ $examples = [
     <div class="dpt-help-accordion">
         <div class="accordion-header" onclick="toggleHelpAccordion(this)">Individual Times (Start/Jamah)</div>
         <div class="accordion-content">
-            <p>Display only start time or jamah time for each prayer:</p>
+            <p>Display only start time or jamah time for each prayer. Start times keep showing today's value until the prayer's Jamat time has passed:</p>
             <div class="dpt-shortcode-grid">
                 <?php foreach ($individualTimes as $sc): ?>
                     <div class="dpt-shortcode-card" onclick="copyShortcode(this, '<?php echo esc_attr($sc); ?>')"><?php echo esc_html($sc); ?></div>
