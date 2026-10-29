@@ -30,15 +30,15 @@ class DailyTimetablePrinter extends TimetablePrinter
         $table = $this->printHorizontalTableTop( $row );
 
         $table .= '
-            <tr>
-                <th class="tableHeading prayerName">' . $this->localHeaders['prayer'] . '</th>'
+            <tr class="dpt-horizontal-names">
+                <th class="tableHeading prayerName" scope="col">' . $this->localHeaders['prayer'] . '</th>'
                   . $this->printTableHeading($row) .
             '</tr>
-            <tr>
-                <th class="tableHeading">' .$this->localHeaders['begins']. '</th>'
+            <tr class="dpt-horizontal-begins">
+                <th class="tableHeading" scope="row">' .$this->localHeaders['begins']. '</th>'
                   .$this->printAzanTime($row).
             '</tr>
-            <tr><th class="tableHeading">' .$this->localHeaders['iqamah']. '</th>'
+            <tr class="dpt-horizontal-iqamah"><th class="tableHeading" scope="row">' .$this->localHeaders['iqamah']. '</th>'
                   .$this->printJamahTime($row, false).
             '</tr>';
 
@@ -66,7 +66,7 @@ class DailyTimetablePrinter extends TimetablePrinter
                         </tr>';
         }
 
-        $table .= '</table>';
+        $table .= '</table></div></div>';
 
         return $table;
     }
@@ -76,14 +76,14 @@ class DailyTimetablePrinter extends TimetablePrinter
         $table = $this->printHorizontalTableTop( $row );
 
         $table .= '
-            <tr><th>' .$this->localHeaders['prayer']. '</th>'
+            <tr class="dpt-horizontal-names"><th scope="col">' .$this->localHeaders['prayer']. '</th>'
                   . $this->printTableHeading($row) .
             '</tr>
-            <tr>
-                <th>'.$this->localHeaders['iqamah'].'</th>'
+            <tr class="dpt-horizontal-iqamah">
+                <th scope="row">'.$this->localHeaders['iqamah'].'</th>'
                   .$this->printJamahTime($row).
             '</tr>
-        </table>';
+        </table></div></div>';
 
         return $table;
     }
@@ -98,14 +98,14 @@ class DailyTimetablePrinter extends TimetablePrinter
         $table = $this->printHorizontalTableTop( $row, true );
 
         $table .=   '
-            <tr><th>' .$this->localHeaders['prayer']. '</th>'
+            <tr class="dpt-horizontal-names"><th scope="col">' .$this->localHeaders['prayer']. '</th>'
                     . $this->printTableHeading($row) .
             '</tr>
-            <tr>
-                <th>'.$this->localHeaders['begins'].'</th>'
+            <tr class="dpt-horizontal-begins">
+                <th scope="row">'.$this->localHeaders['begins'].'</th>'
                     .$this->printAzanTime($row).
             '</tr>
-        </table>';
+        </table></div></div>';
 
         return $table;
     }
@@ -119,13 +119,13 @@ class DailyTimetablePrinter extends TimetablePrinter
         $table = $this->printVerticalTableTop( $row , true);
 
         $table .=
-            '<tr>
-                <th class="tableHeading">' .$this->localHeaders['prayer']. '</th>
-                <th class="tableHeading">' .$this->localHeaders['begins']. '</th>
-                <th class="tableHeading">' .$this->localHeaders['iqamah']. '</th>
+            '<tr class="dpt-vertical-headings">
+                <th class="tableHeading" scope="col">' .$this->localHeaders['prayer']. '</th>
+                <th class="tableHeading" scope="col">' .$this->localHeaders['begins']. '</th>
+                <th class="tableHeading" scope="col">' .$this->localHeaders['iqamah']. '</th>
             </tr>'
             . $this->printVerticalRow( $row, 'both' ) .
-            '</table>';
+            '</table></div>';
 
         return $table;
     }
@@ -139,12 +139,12 @@ class DailyTimetablePrinter extends TimetablePrinter
         $table = $this->printVerticalTableTop( $row );
 
         $table .=
-            '<tr>
-                <th class="tableHeading">' .$this->localHeaders['prayer']. '</th>
-                <th class="tableHeading">' .$this->localHeaders['iqamah']. '</th>
+            '<tr class="dpt-vertical-headings">
+                <th class="tableHeading" scope="col">' .$this->localHeaders['prayer']. '</th>
+                <th class="tableHeading" scope="col">' .$this->localHeaders['iqamah']. '</th>
             </tr>'
             .$this->printVerticalRow( $row, 'iqamah' ) .
-            '</table>';
+            '</table></div>';
 
         return $table;
     }
@@ -158,12 +158,12 @@ class DailyTimetablePrinter extends TimetablePrinter
         $table = $this->printVerticalTableTop( $row, false, true );
 
         $table .=
-            '<tr>
-                <th class="tableHeading">' .$this->localHeaders['prayer']. '</th>
-                <th class="tableHeading">' .$this->localHeaders['begins']. '</th>
+            '<tr class="dpt-vertical-headings">
+                <th class="tableHeading" scope="col">' .$this->localHeaders['prayer']. '</th>
+                <th class="tableHeading" scope="col">' .$this->localHeaders['begins']. '</th>
             </tr>'
             .$this->printVerticalRow( $row, 'azan' ) .
-            '</table>';
+            '</table></div>';
 
         return $table;
     }
@@ -178,6 +178,7 @@ class DailyTimetablePrinter extends TimetablePrinter
     private function printHorizontalTableTop($row, $isAzanOnly=false)
     {
         $announcement = '';
+        $nextIqamah = '';
         if (! $row['hideTimeRemaining']) {
             $nextIqamah = $isAzanOnly == true ? '' : $this->getNextIqamahTime($row);
         }
@@ -199,13 +200,22 @@ class DailyTimetablePrinter extends TimetablePrinter
         }
 
         $table = "";
+        $date = date_i18n(get_option('date_format'));
+        $hijriDate = $this->getHijriDate(date('d'), date('m'), date('Y'), $row);
+        $title = trim((string) $row['widgetTitle']);
         $table .=
-            '<table class="customStyles dptUserStyles dptTimetable ' .$this->getTableClass().'"> '.$announcement.'
-            <tr>
-             <th colspan="'. $colspan .'" style="text-align:center">'
-                .$row['widgetTitle']. ' ' . date_i18n( get_option( 'date_format' ) ) .' '. $this->getHijriDate(date("d"), date("m"), date("Y"),$row) .'  ' . $nextIqamah .'
-             </th>
-            </tr>'. $ramadan;
+            '<div class="dpt-horizontal-shell alignwide">
+                <div class="dpt-horizontal-overview">
+                    <div class="dpt-horizontal-date">
+                        <span class="dpt-horizontal-kicker">' . esc_html($title !== '' ? $title : __('Prayer times', 'daily-prayer-time')) . '</span>
+                        <span class="dpt-horizontal-date-main">' . esc_html($date) . '</span>'
+                        . ($hijriDate ? '<span class="dpt-horizontal-hijri">' . esc_html($hijriDate) . '</span>' : '') . '
+                    </div>'
+                    . ($nextIqamah !== '' ? '<div class="dpt-horizontal-next">' . $nextIqamah . '</div>' : '') . '
+                </div>
+                <div class="dpt-horizontal-table-scroll">
+                    <table class="customStyles dptUserStyles dptTimetable dpt-horizontal-table ' . $this->getTableClass() . '" aria-label="' . esc_attr__('Daily prayer times', 'daily-prayer-time') . '"> '
+                    . $announcement . $ramadan;
 
         return $table;
     }
@@ -374,6 +384,7 @@ class DailyTimetablePrinter extends TimetablePrinter
      */
     private function printVerticalTableTop($row, $isFullTable=false, $isAzanOnly=false)
     {
+        $nextIqamah = '';
         if (! $row['hideTimeRemaining']) {
             $nextIqamah = $isAzanOnly == true ? '' : $this->getNextIqamahTime($row);
         }
@@ -402,14 +413,21 @@ class DailyTimetablePrinter extends TimetablePrinter
             $announcement = "<tr><th colspan=".$colspan." style='text-align:center' class='notificationBackground notificationFont'>".$row['announcement']. "</th></tr>";
         }
 
+        $date = date_i18n(get_option('date_format'));
+        $hijriDate = $this->getHijriDate(date('d'), date('m'), date('Y'), $row);
+        $title = trim((string) $row['widgetTitle']);
         $table .=
-            '<table class="dptTimetable ' .$this->getTableClass().' customStyles dptUserStyles"> '.$announcement.'
-            <tr>
-             <th colspan='.$colspan.' style="text-align:center">'
-                .$row['widgetTitle']. ' '. date_i18n( get_option( 'date_format' ) ) .' '. $this->getHijriDate(date("d"), date("m"), date("Y"), $row).'' . $nextIqamah . '
-             </th>
-            </tr>'
-            .$ramadan;
+            '<div class="dpt-vertical-shell">
+                <div class="dpt-horizontal-overview">
+                    <div class="dpt-horizontal-date">
+                        <span class="dpt-horizontal-kicker">' . esc_html($title !== '' ? $title : __('Prayer times', 'daily-prayer-time')) . '</span>
+                        <span class="dpt-horizontal-date-main">' . esc_html($date) . '</span>'
+                        . ($hijriDate ? '<span class="dpt-horizontal-hijri">' . esc_html($hijriDate) . '</span>' : '') . '
+                    </div>'
+                    . ($nextIqamah !== '' ? '<div class="dpt-horizontal-next">' . $nextIqamah . '</div>' : '') . '
+                </div>
+                <table class="dptTimetable dpt-vertical-table ' . $this->getTableClass() . ' customStyles dptUserStyles" aria-label="' . esc_attr__('Daily prayer times', 'daily-prayer-time') . '"> '
+                . $announcement . $ramadan;
 
         return $table;
     }
@@ -468,10 +486,10 @@ class DailyTimetablePrinter extends TimetablePrinter
             $class = $shouldHighlight ? 'highlight' : '';
             $highlightForJamah = $shouldHighlight ? 'highlight' : '';
 
-            $trs .= '<tr>
-                    <th class="prayerName ' .$class.'">' . $prayerName . '</th>';
+            $trs .= '<tr class="dpt-vertical-prayer-row">
+                    <th class="prayerName ' .$class.'" scope="row">' . $prayerName . '</th>';
             if ( ($key == 'sunrise') && $display == 'both') {
-                $trs .= '<td colspan="2" class="' . $class . '">'.$this->getFormattedDateForPrayer($row[$jamah], $key).'</td>';
+                $trs .= '<td colspan="2" class="' . $class . '">'.$this->getFormattedDateForPrayer($row[$jamah], $key).'</td></tr>';
             } elseif ($display == 'azan') {
                 $trs .='<td class="begins '.$class.'">'.$this->getFormattedDateForPrayer($row[$begins], $key).'</td>
                 </tr>';
@@ -500,9 +518,10 @@ class DailyTimetablePrinter extends TimetablePrinter
         $shouldHighlightJumuah = ($nextPrayer == 'jumuah') || ($isFriday && $showJumuah);
         if ($shouldHighlightJumuah || $showJumuah) {
             $jumuahClass = $shouldHighlightJumuah ? 'highlight' : '';
+            $jumuahColspan = $display == 'both' ? 2 : 1;
             $trs .= '<tr>
-                            <th class="prayerName ' . $jumuahClass . '"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
-                            <td colspan="2" class="jamah ' . $jumuahClass . '">' . $this->getJumuahTimesArray() . '</td>
+                            <th class="prayerName ' . $jumuahClass . '" scope="row"><span>' . stripslashes($this->getLocalHeaders()['jumuah']) . '</span></th>
+                            <td colspan="' . $jumuahColspan . '" class="jamah ' . $jumuahClass . '">' . $this->getJumuahTimesArray() . '</td>
                         </tr>';
         }
 

@@ -85,6 +85,10 @@ class DigitalScreenSettings {
             .dpt-slider-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
             .dpt-slider-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
             .dpt-slider-input-row input { flex: 1; }
+            .dpt-slider-days { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 8px 0; }
+            .dpt-slider-days > span { color: #666; font-size: 12px; }
+            .dpt-slider-days label { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; }
+            .dpt-slider-days input { margin: 0; }
             .dpt-slider-url-row { display: flex; gap: 15px; margin-top: 8px; }
             .dpt-slider-url-row span { color: #666; font-size: 12px; min-width: 80px; }
             .dpt-slider-optional { color: #666; margin-bottom: 15px; }
@@ -262,6 +266,22 @@ class DigitalScreenSettings {
                                 <span class="dpt-slider-url-label">Optional link:</span>
                                 <input type="text" placeholder="http(s):// url" name="slider<?php echo $i; ?>Url" 
                                     value="<?php echo esc_attr(get_option("slider{$i}Url") ?? ''); ?>">
+                            </div>
+                            <?php
+                            $savedDays = get_option("slider{$i}Days", false);
+                            $selectedDays = $savedDays === false
+                                ? array('0', '1', '2', '3', '4', '5', '6')
+                                : explode(',', (string) $savedDays);
+                            ?>
+                            <div class="dpt-slider-days" role="group" aria-label="Days to show slider <?php echo $i; ?>">
+                                <span>Show on:</span>
+                                <input type="hidden" name="slider<?php echo $i; ?>Days[]" value="">
+                                <?php foreach (array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') as $dayNumber => $dayName): ?>
+                                    <label><input type="checkbox" name="slider<?php echo $i; ?>Days[]"
+                                        value="<?php echo $dayNumber; ?>" <?php checked(in_array((string) $dayNumber, $selectedDays, true)); ?>>
+                                        <?php echo esc_html($dayName); ?></label>
+                                <?php endforeach; ?>
+                                <span>All selected = every day; none = hidden.</span>
                             </div>
                         </div>
                         <div class="dpt-slider-preview">
@@ -466,6 +486,7 @@ class DigitalScreenSettings {
                 // Clear the input values
                 $card.find('input[name="slider' + sliderNum + '"]').val('');
                 $card.find('input[name="slider' + sliderNum + 'Url"]').val('');
+                $card.find('input[name="slider' + sliderNum + 'Days[]"]').prop('checked', false);
                 $card.find('.dpt-slider-preview img').remove();
                 
                 // Mark as removed so form handler knows to delete

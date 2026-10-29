@@ -1,0 +1,51 @@
+services:
+  db:
+    image: mariadb:10.6
+    environment:
+      MARIADB_ROOT_PASSWORD: local-root-only
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: local-wordpress-only
+    volumes:
+      - dpt_demo_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  wordpress:
+    image: wordpress:php8.4-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: local-wordpress-only
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - dpt_demo_wp:/var/www/html
+      - ..:/var/www/html/wp-content/plugins/dpt:ro
+
+  wp:
+    image: wordpress:cli-php8.4
+    profiles: ["tools"]
+    user: "0:0"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: local-wordpress-only
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - dpt_demo_wp:/var/www/html
+      - ..:/var/www/html/wp-content/plugins/dpt:ro
+
+volumes:
+  dpt_demo_db:
+  dpt_demo_wp:

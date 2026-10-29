@@ -276,22 +276,25 @@ class DatabaseConnection
         $this->deleteTransients();
 
         global $wpdb;
-
-        $createIfNotUpdate = "INSERT INTO " .$this->dbTable. " VALUES (";
-
-        foreach ($row as $key => $value) {
-            $createIfNotUpdate .= "'" .$value. "',";
+        $columns = array(
+            'd_date', 'fajr_begins', 'fajr_jamah', 'sunrise', 'zuhr_begins',
+            'zuhr_jamah', 'asr_mithl_1', 'asr_mithl_2', 'asr_jamah',
+            'maghrib_begins', 'maghrib_jamah', 'isha_begins', 'isha_jamah',
+            'is_ramadan', 'hijri_date'
+        );
+        if (array_keys($row) !== $columns) {
+            return array('result' => false, 'date' => $row['d_date'] ?? 'Unknown');
         }
-        $createIfNotUpdate = rtrim($createIfNotUpdate, ', ');
 
-        $createIfNotUpdate .= " ) ON DUPLICATE KEY UPDATE ";
-        foreach ($row as $key => $value) {
-            $createIfNotUpdate .= $key. "='" .$value. "',";
-        }
-        $createIfNotUpdate = rtrim($createIfNotUpdate, ', ');
-        $createIfNotUpdate .= ';';
-
-        $result = $wpdb->query($createIfNotUpdate);
+        $quotedColumns = array_map(function ($column) { return '`' . $column . '`'; }, $columns);
+        $placeholders = array_fill(0, count($columns), '%s');
+        $placeholders[13] = '%d';
+        $updates = array_map(function ($column) {
+            return '`' . $column . '` = VALUES(`' . $column . '`)';
+        }, array_slice($columns, 1));
+        $sql = 'INSERT INTO ' . $this->dbTable . ' (' . implode(', ', $quotedColumns) . ') VALUES ('
+            . implode(', ', $placeholders) . ') ON DUPLICATE KEY UPDATE ' . implode(', ', $updates);
+        $result = $wpdb->query($wpdb->prepare($sql, array_values($row)));
         
         $date = $row['d_date'] ?? 'Unknown';
         

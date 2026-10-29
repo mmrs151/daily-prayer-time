@@ -52,7 +52,7 @@ if (isset($_POST['submit']) && check_admin_referer( 'csvUpload' )) {
         delete_option('asr-method');
     } else {
         echo "<p class='ui-state-error dptCenter'><b>Invalid csv file ?</b>";
-        echo "</br>Found: <i>(". $csvProcessor->getFileType() .")</i></p>";
+        echo "</br>Found: <i>(". esc_html($csvProcessor->getFileType()) .")</i></p>";
     }
 }
 
@@ -159,29 +159,14 @@ if (! empty($_POST['digitalScreen']) && check_admin_referer( 'digitalScreen' )) 
         'ds-template' => sanitize_text_field($_POST['ds-template-hidden'] ?? $_POST['ds-template'] ?? ''),
         'transitionEffect' => sanitize_text_field($_POST['transitionEffect'] ?? ''),
         'transitionSpeed' => sanitize_text_field($_POST['transitionSpeed']),
-        'slider1' => sanitize_text_field($_POST['slider1']),
-        'slider1Url' => sanitize_text_field($_POST['slider1Url']),
-        'slider2' => sanitize_text_field($_POST['slider2']),
-        'slider2Url' => sanitize_text_field($_POST['slider2Url']),
-        'slider3' => sanitize_text_field($_POST['slider3']),
-        'slider3Url' => sanitize_text_field($_POST['slider3Url']),
-        'slider4' => sanitize_text_field($_POST['slider4']),
-        'slider4Url' => sanitize_text_field($_POST['slider4Url']),
-        'slider5' => sanitize_text_field($_POST['slider5']),
-        'slider5Url' => sanitize_text_field($_POST['slider5Url']),
-        'slider6' => sanitize_text_field($_POST['slider6']),
-        'slider6Url' => sanitize_text_field($_POST['slider6Url']),
-        'slider7' => sanitize_text_field($_POST['slider7']),
-        'slider7Url' => sanitize_text_field($_POST['slider7Url']),
-        'slider8' => sanitize_text_field($_POST['slider8']),
-        'slider8Url' => sanitize_text_field($_POST['slider8Url']),
-        'slider9' => sanitize_text_field($_POST['slider9']),
-        'slider9Url' => sanitize_text_field($_POST['slider9Url']),
-        'slider10' => sanitize_text_field($_POST['slider10']),
-        'slider10Url' => sanitize_text_field($_POST['slider10Url']),
-        'slider11' => sanitize_text_field($_POST['slider11']),
-        'slider11Url' => sanitize_text_field($_POST['slider11Url']),
     ];
+    for ($i = 1; $i <= 13; $i++) {
+        $data["slider$i"] = sanitize_text_field(wp_unslash($_POST["slider$i"] ?? ''));
+        $data["slider{$i}Url"] = esc_url_raw(wp_unslash($_POST["slider{$i}Url"] ?? ''));
+        $data["slider{$i}Days"] = isset($_POST["slider{$i}Days"])
+            ? (array) wp_unslash($_POST["slider{$i}Days"])
+            : array();
+    }
     $themeSettings = new DPTDigitalScreenProcessor($data);
     $themeSettings->process();
 }

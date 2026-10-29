@@ -47,6 +47,9 @@ class Validator
      */
     public function isValidData(array $data)
     {
+        if (count($data) !== count($this->headers)) {
+            return false;
+        }
         if (! $this->hasEmptyLines($data)) {
             return false;
         }
@@ -78,28 +81,21 @@ class Validator
                 if(! $this->isValidateTimeFormat($data[$c])) {
                     echo "<h3 class='ui-state-error dptCenter'>Invalid Time format in " . esc_html( $data[$c] ) . " for " . esc_html($this->headers[$c]) .
                         " on ". esc_html($data[0]) .", valid time format is <span class='green'>HH:MM[24 hours]</span> </h3>";
-                    print_r('<pre>');
-                    print_r(array_combine($this->headers, $data));
-                    print_r('</pre>');
+                    echo '<pre>' . esc_html(print_r(array_combine($this->headers, $data), true)) . '</pre>';
                     return false;
                 }
             }
         }
 
-        $data = $this->sanitizeHijridate($data);
+        $ramadan = trim((string)$data[13]);
+        if (!in_array($ramadan, array('', '0', '1'), true)) {
+            return false;
+        }
+        $data[13] = $ramadan === '1' ? 1 : 0;
+        $data[14] = sanitize_text_field($data[14]);
         $this->setValidData($data);
 
         return true;
-    }
-
-    /**
-     * @return array
-     */
-    private function sanitizeHijridate(array $data) 
-    {
-        $unquote = addslashes($data[14]); // hijridate 
-        $data[14] = $unquote;
-        return $data;
     }
 
     /**
@@ -189,7 +185,7 @@ class Validator
         foreach($afternoonPrayers as $time) {
             $firstPart = explode(':', $time);
             if ($firstPart[0] !== '00' && (int)$firstPart[0] < 12) {
-                echo "<h3 class='dptCenter ui-state-error'>$time is not in 24 hour time format for date: ". esc_html( $row[0] ) ."
+                echo "<h3 class='dptCenter ui-state-error'>" . esc_html($time) . " is not in 24 hour time format for date: ". esc_html( $row[0] ) ."
                         </br> You must follow 24 hours time format, valid time format is <span class='green'>HH:MM</span></h3>";
                 return false;
             }

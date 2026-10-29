@@ -44,7 +44,7 @@ class DigitalScreen extends DailyShortCode
 
     /** @var DPTHelper */
     protected $dptHelper;
-    private ?string $adhan = 'adhan';
+    private $adhan = 'adhan';
 
     public function __construct($attr=array())
     {
@@ -62,7 +62,9 @@ class DigitalScreen extends DailyShortCode
         $templateEnabled = get_option('template-chbox') === 'template';
         $hasTemplate = !empty(get_option('dsTemplate'));
         
-        if ($this->template || ($templateEnabled && $hasTemplate)) {
+        $selectedTemplate = get_option('dsTemplate') ?: $this->template;
+        if (($this->template || ($templateEnabled && $hasTemplate))
+            && in_array($selectedTemplate, array('eict', 'usman', 'my-masjid'), true)) {
             return $this->getTemplate();
         }
 
@@ -81,12 +83,13 @@ class DigitalScreen extends DailyShortCode
 
     private function getTemplate()
     {
-        if ($template = get_option('dsTemplate')) {
-            $this->template = $template;
+        $this->template = get_option('dsTemplate') ?: $this->template;
+        if (!in_array($this->template, array('eict', 'usman', 'my-masjid'), true)) {
+            return '';
         }
 
         ob_start();
-        include "design/$this->template.php";
+        include __DIR__ . "/design/$this->template.php";
         $this->template = null;
         return ob_get_clean();
     }
@@ -96,6 +99,7 @@ class DigitalScreen extends DailyShortCode
         $hiddenVariables = '
             <input type="hidden" value="' . $this->canDimOvernight($this->getRow(), $this->disableOvernightDim) . '" id="overnightDim">
             <input type="hidden" value="' . $this->screenTimeout . '" id="screenTimeout">
+            <input type="hidden" value="' . $this->getSecondsUntilNextDay() . '" id="dptNextDayRefresh">
             
             <input type="hidden" value="' . $this->getKhutbahDim($this->getRow()) . '" id="khutbahDim">
             <input type="hidden" value="' . $this->getTaraweehDim($this->getRow()) . '" id="taraweehDim">
@@ -131,6 +135,23 @@ class DigitalScreen extends DailyShortCode
         }
 
         return $hiddenVariables;
+    }
+
+    private function getSecondsUntilNextDay(): int
+    {
+        $timezoneName = get_option('timezone_string');
+        if (!$timezoneName) {
+            $offsetMinutes = (int) round((float) get_option('gmt_offset', 0) * 60);
+            $timezoneName = sprintf('%s%02d:%02d', $offsetMinutes < 0 ? '-' : '+',
+                floor(abs($offsetMinutes) / 60), abs($offsetMinutes) % 60);
+        }
+        try {
+            $timezone = new DateTimeZone($timezoneName);
+        } catch (Exception $e) {
+            $timezone = new DateTimeZone('UTC');
+        }
+        $nextDay = new DateTime('tomorrow', $timezone);
+        return max(1, $nextDay->getTimestamp() - time());
     }
 
     private function getTopRow(): string
@@ -207,11 +228,11 @@ class DigitalScreen extends DailyShortCode
 
         $isLogo = get_option('ds-logo');
         if ( $isLogo) {
-            return '<img class="logo" src="' . $isLogo . '">';
+            return '<img class="logo" src="' . esc_url($isLogo) . '">';
         } else {
             $custom_logo_id = get_theme_mod( 'custom_logo' );
             $image_url = wp_get_attachment_image_url ( $custom_logo_id , 'full' );    
-            return '<img class="logo" src="' . $image_url . '">';
+            return '<img class="logo" src="' . esc_url($image_url) . '">';
         }
     }
 
@@ -418,17 +439,15 @@ class DigitalScreen extends DailyShortCode
 
     private function getPresentationSlides($transitionSpeed): string
     {
-        $this->presentationSlides = $this->getSliderUrls();
-        $html = '
-                <div class="carousel-item active height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <img class="carousel-slide" src="' . array_shift($this->presentationSlides) . '">
-                </div>';
-
-        foreach ($this->presentationSlides as $i => $slideUrl) {
-            if (empty($slideUrl))  continue;
+        $slides = $this->getSliderUrls();
+        if (!$slides) {
+            return '<div class="carousel-item active height-100">' . $this->getFirstSlide() . '</div>';
+        }
+        $html = '';
+        foreach ($slides as $slideUrl) {
             $html .= '
-                <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <img class="carousel-slide " src="' . trim($slideUrl) . '">
+                <div class="carousel-item ' . ($html === '' ? 'active ' : '') . 'height-100" data-bs-interval="'. esc_attr($transitionSpeed) .'">
+                    <img class="carousel-slide " src="' . esc_url(trim($slideUrl)) . '">
                 </div>
                 ';
         }
@@ -465,7 +484,7 @@ class DigitalScreen extends DailyShortCode
             $orientation = 'vertical';
         }
         
-        return '<a class="notificationFont blink-' .$orientation.'" target="_new" href="'. $this->blinkUrl .'">'. $this->blinkText .'</a>';
+        return '<a class="notificationFont blink-' .$orientation.'" target="_new" href="'. esc_url($this->blinkUrl) .'">'. esc_html($this->blinkText) .'</a>';
     }
 
     private function getFirstSlide(): string
@@ -514,13 +533,13 @@ class DigitalScreen extends DailyShortCode
 
         if ( get_option('slider-chbox') ) {
             $html = "";
-            $slides = $this->getSliderUrls();
-
-            $slides = array_filter(array_map('trim', $slides));
+            $slides = $this->getScheduledSlides();
+            $count = 0;
             foreach ($slides as $i => $slide) {
+                $count++;
                 $html .= '
                 <div class="carousel-item height-100" data-bs-interval="'. $transitionSpeed .'">
-                    <a href="' . get_option("slider". ($i+1) . "Url") . '" style="color:' . get_option('fontColor') .'">
+                    <a href="' . esc_url(get_option("slider{$i}Url")) . '" style="color:' . esc_attr(get_option('fontColor')) .'">
                         ' . $this->getImageOrMessage($slide) . '
                     </a>
                 </div>
@@ -528,7 +547,6 @@ class DigitalScreen extends DailyShortCode
 
                 $nextPrayerSlide = (int)get_option('nextPrayerSlide');
                 if (!$this->isPresentation && $nextPrayerSlide > 0) {
-                    $count = $i + 1;
                     if ( $count % $nextPrayerSlide == 0 ) {
                         $html .= '
                         <div class="carousel-item">
@@ -552,13 +570,26 @@ class DigitalScreen extends DailyShortCode
             return $this->presentationSlides;
         }
 
-        foreach (range(1, 13) as $item) {
-            $slideUrl = get_option('slider' . $item);
-            if (!empty($slideUrl) && filter_var($slideUrl, FILTER_VALIDATE_URL)) {
-                $slides[] = $slideUrl;
+        foreach ($this->getScheduledSlides() as $slide) {
+            if (filter_var($slide, FILTER_VALIDATE_URL)) {
+                $slides[] = $slide;
             }
         }
 
+        return $slides;
+    }
+
+    private function getScheduledSlides(): array
+    {
+        $slides = array();
+        $today = (string) current_time('w');
+        for ($i = 1; $i <= 13; $i++) {
+            $slide = trim((string) get_option("slider$i", ''));
+            $days = get_option("slider{$i}Days", false);
+            if ($slide !== '' && ($days === false || in_array($today, explode(',', (string) $days), true))) {
+                $slides[$i] = $slide;
+            }
+        }
         return $slides;
     }
     
@@ -573,12 +604,12 @@ class DigitalScreen extends DailyShortCode
             return '
             <div class="nextPrayer">
                 <div class="align-middle-next-prayer">
-                    <h4 class="sliderMessage">' . stripslashes($slide) . '</h4>
+                    <h4 class="sliderMessage">' . esc_html(stripslashes($slide)) . '</h4>
                 </div>
             </div>
             ';
         }
-        return '<img class="carousel-slide" src="' . $slide . '">';
+        return '<img class="carousel-slide" src="' . esc_url($slide) . '">';
     }
 
     private function getRefreshPoints()

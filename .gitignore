@@ -1,5 +1,7 @@
 .idea/
 *.csv
+!Models/QuranADay/files/english.csv
+!Models/QuranADay/files/bangla.csv
 *.DS_Store
 
 /vendor/

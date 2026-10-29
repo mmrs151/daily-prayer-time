@@ -27,7 +27,8 @@
         {
             $path = plugin_dir_url( __FILE__ ); // I am in Models
 
-            wp_enqueue_script( 'dpt',$path. '../Assets/js/dpt.js', array( 'jquery' ), DPT_PLUGIN_VERSION, true );
+            wp_enqueue_script( 'dpt',$path. '../Assets/js/dpt.js', array( 'jquery' ),
+                DPT_PLUGIN_VERSION . '-' . filemtime(__DIR__ . '/../Assets/js/dpt.js'), true );
         
             $protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
             $params = array(
@@ -52,7 +53,8 @@
         }
     
         private function add_stylesheet() {
-            wp_register_style( 'timetable-style', plugins_url('../Assets/css/styles.css', __FILE__), array(), DPT_PLUGIN_VERSION );
+            wp_register_style( 'timetable-style', plugins_url('../Assets/css/styles.css', __FILE__), array(),
+                DPT_PLUGIN_VERSION . '-' . filemtime(__DIR__ . '/../Assets/css/styles.css') );
             wp_enqueue_style( 'timetable-style' );
             
             wp_register_style( 'verge-style', plugins_url('../Assets/css/vergestyles.css', __FILE__), array(),  DPT_PLUGIN_VERSION );

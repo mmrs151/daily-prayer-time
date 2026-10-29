@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mariadb:10.6
+    environment:
+      MARIADB_ROOT_PASSWORD: test-root-password
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: test-password
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  wp:
+    image: wordpress:cli
+    user: "0:0"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: test-password
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress_test:/var/www/html
+      - ..:/var/www/html/wp-content/plugins/dpt:ro
+
+volumes:
+  wordpress_test:

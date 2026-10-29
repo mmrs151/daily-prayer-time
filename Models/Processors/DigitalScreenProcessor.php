@@ -36,8 +36,23 @@ if ( !class_exists('DPTDigitalScreenProcessor')) {
 
                 if ($value !== '') {
                     update_option("slider$i", $value);
+                    if (array_key_exists("slider{$i}Days", $this->data)) {
+                        $submittedDays = $this->data["slider{$i}Days"];
+                        $days = array_values(array_unique(array_intersect(
+                            array_map('strval', array_filter(
+                                is_array($submittedDays) ? $submittedDays : array(), 'is_scalar'
+                            )),
+                            array('0', '1', '2', '3', '4', '5', '6')
+                        )));
+                        if (count($days) === 7) {
+                            delete_option("slider{$i}Days");
+                        } else {
+                            update_option("slider{$i}Days", implode(',', $days));
+                        }
+                    }
                 } else {
                     delete_option("slider$i");
+                    delete_option("slider{$i}Days");
                 }
                 if ($url !== '') {
                     update_option("slider{$i}Url", $url);
