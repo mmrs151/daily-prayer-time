@@ -17,13 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check PHP syntax
-        run: find daily-prayer-time.php uninstall.php API Models Views -name '*.php' -print0 | xargs -0 -n1 php -l
+        run: find daily-prayer-time.php uninstall.php API Models Views vendor -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: Check advertised PHP 7.2 compatibility
         run: >-
           docker run --rm --platform linux/amd64 -v "$PWD:/plugin:ro" -w /plugin
-          php:7.2-cli sh -c "find daily-prayer-time.php uninstall.php API Models Views -name '*.php' -print0 | xargs -0 -n1 php -l"
-      - name: Install plugin dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+          php:7.2-cli sh -c "find daily-prayer-time.php uninstall.php API Models Views vendor -name '*.php' -print0 | xargs -0 -n1 php -l"
+      - name: Check bundled dependencies
+        run: test -f vendor/autoload.php && test -f vendor/islamic-network/prayer-times/src/PrayerTimes/PrayerTimes.php
       - name: Audit Composer dependencies
         run: composer audit --locked --no-interaction
       - name: Run WordPress regression suite

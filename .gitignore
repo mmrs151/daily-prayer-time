@@ -4,4 +4,7 @@
 !Models/QuranADay/files/bangla.csv
 *.DS_Store
 
-/vendor/
+/vendor/**/tests/
+/vendor/**/composer.lock
+/vendor/**/.gitignore
+/vendor/**/.github/
