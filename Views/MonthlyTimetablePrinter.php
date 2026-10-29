@@ -239,6 +239,8 @@ class MonthlyTimetablePrinter extends TimetablePrinter
         $fajrJamah = '';
         $maghribJamah = '';
         $azanOnlyClass = '';
+        $fajrHeading = '';
+        $maghribHeading = '';
 
         $prayers = $this->getLocalPrayerNames(true);
         if ($isAzanOnly) {

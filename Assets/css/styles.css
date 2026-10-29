@@ -149,6 +149,236 @@ table.dptTimetable th.highlight, tr.highlight, td.highlight {
     font-weight: bold;
 }
 
+/* Horizontal timetable: compact summary and readable prayer grid. */
+.dpt-horizontal-shell,
+.dpt-vertical-shell {
+    width: 100%;
+    max-width: 1200px;
+    margin: 16px auto;
+    overflow: hidden;
+    border: 1px solid #dce8e4;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 36px rgba(22, 58, 52, 0.08);
+    color: #1b3430;
+    font-family: inherit;
+}
+.dpt-vertical-shell {
+    max-width: 760px;
+}
+.dpt-horizontal-overview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 104px;
+    padding: 18px 26px;
+    background: linear-gradient(110deg, #f5faf8, #e9f3ef);
+    border-bottom: 1px solid #dce8e4;
+}
+.dpt-horizontal-date {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+.dpt-horizontal-kicker {
+    color: #37675d;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+.dpt-horizontal-date-main {
+    color: #173e36;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 700;
+    line-height: 1.2;
+}
+.dpt-horizontal-hijri {
+    color: #5f746e;
+    font-size: 13px;
+    font-weight: 500;
+}
+.dpt-horizontal-next {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+.dpt-horizontal-next .dptScNextPrayer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px 13px;
+    font-weight: 600;
+    text-transform: none;
+}
+.dpt-horizontal-next .nextPrayer {
+    color: #37675d;
+    font-size: 14px;
+    line-height: 1.25;
+}
+.dpt-horizontal-next h2.dptScTime {
+    display: block;
+    margin: 0;
+    padding: 0;
+    color: #173e36;
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-weight: 750;
+    line-height: 1.15;
+    white-space: nowrap;
+}
+.dpt-horizontal-next .timeLeftCountDown {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: #dceee4;
+    color: #176140;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.dpt-horizontal-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+table.dptTimetable.dpt-horizontal-table {
+    width: 100%;
+    min-width: 680px;
+    margin: 0;
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: 15px;
+    line-height: 1.3;
+}
+table.dptTimetable.dpt-horizontal-table tr,
+table.dptTimetable.dpt-horizontal-table th,
+table.dptTimetable.dpt-horizontal-table td {
+    width: auto;
+    border: 0;
+    white-space: nowrap;
+}
+table.dptTimetable.dpt-horizontal-table th,
+table.dptTimetable.dpt-horizontal-table td {
+    padding: 15px 12px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #e8efec;
+}
+table.dptTimetable.dpt-horizontal-table th:first-child {
+    width: 112px;
+    text-align: left;
+    padding-left: 22px;
+}
+:where(.dpt-horizontal-shell) table.customStyles th.tableHeading {
+    background: #eaf3ef;
+    color: #284e45;
+}
+table.dptTimetable.dpt-horizontal-table .dpt-horizontal-names th {
+    font-size: 14px;
+    font-weight: 700;
+}
+table.dptTimetable.dpt-horizontal-table .dpt-horizontal-begins td {
+    color: #4c625b;
+    font-weight: 500;
+}
+table.dptTimetable.dpt-horizontal-table .dpt-horizontal-iqamah td {
+    font-weight: 750;
+}
+table.dptTimetable.dpt-horizontal-table tr:last-child th,
+table.dptTimetable.dpt-horizontal-table tr:last-child td {
+    border-bottom: 0;
+}
+
+/* Vertical timetable uses the same compact summary with a roomier prayer list. */
+table.dptTimetable.dpt-vertical-table {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    color: #1b3430;
+    font-size: 16px;
+    line-height: 1.3;
+}
+table.dptTimetable.dpt-vertical-table tr,
+table.dptTimetable.dpt-vertical-table th,
+table.dptTimetable.dpt-vertical-table td {
+    width: auto;
+    border: 0;
+}
+table.dptTimetable.dpt-vertical-table th,
+table.dptTimetable.dpt-vertical-table td {
+    padding: 15px 22px;
+    border-bottom: 1px solid #e8efec;
+    vertical-align: middle;
+}
+table.dptTimetable.dpt-vertical-table th:first-child {
+    width: 34%;
+    text-align: left;
+}
+table.dptTimetable.dpt-vertical-table td {
+    text-align: center;
+    white-space: nowrap;
+}
+:where(.dpt-vertical-shell) table.customStyles th.tableHeading {
+    background: #eaf3ef;
+    color: #284e45;
+}
+table.dptTimetable.dpt-vertical-table .dpt-vertical-headings th {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-align: center;
+}
+table.dptTimetable.dpt-vertical-table .dpt-vertical-headings th:first-child {
+    text-align: left;
+}
+table.dptTimetable.dpt-vertical-table .dpt-vertical-prayer-row th {
+    font-weight: 650;
+}
+table.dptTimetable.dpt-vertical-table .dpt-vertical-prayer-row td.jamah {
+    font-weight: 750;
+}
+table.dptTimetable.dpt-vertical-table .dpt-vertical-prayer-row th.highlight,
+table.dptTimetable.dpt-vertical-table .dpt-vertical-prayer-row td.highlight {
+    background: #e2f3e8;
+    color: #174a3a;
+}
+table.dptTimetable.dpt-vertical-table .dpt-vertical-prayer-row:hover {
+    background: #f5faf8;
+}
+table.dptTimetable.dpt-vertical-table tr:last-child th,
+table.dptTimetable.dpt-vertical-table tr:last-child td {
+    border-bottom: 0;
+}
+
+@media (max-width: 700px) {
+    .dpt-horizontal-shell,
+    .dpt-vertical-shell { border-radius: 12px; }
+    .dpt-horizontal-overview {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+        min-height: 0;
+        padding: 17px 18px;
+    }
+    .dpt-horizontal-next .dptScNextPrayer { justify-content: flex-start; }
+    table.dptTimetable.dpt-horizontal-table { min-width: 650px; font-size: 14px; }
+    table.dptTimetable.dpt-horizontal-table th,
+    table.dptTimetable.dpt-horizontal-table td { padding: 12px 10px; }
+    table.dptTimetable.dpt-vertical-table { font-size: 14px; }
+    table.dptTimetable.dpt-vertical-table th,
+    table.dptTimetable.dpt-vertical-table td { padding: 12px 10px; }
+}
+
 /*No Border styling*/
 table.dptNoBorder {
     border: 0;

@@ -12,7 +12,8 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
 
     wp_enqueue_script( 'dpt_bootstrap_js', plugins_url( '../Assets/js/bootstrap.bundle.min.js', __FILE__ ), array( 'jquery' ), DPT_PLUGIN_VERSION);
 
-    wp_register_style( 'timetable-style', plugins_url('../Assets/css/styles.css', __FILE__), array(), DPT_PLUGIN_VERSION );
+    wp_register_style( 'timetable-style', plugins_url('../Assets/css/styles.css', __FILE__), array(),
+        DPT_PLUGIN_VERSION . '-' . filemtime(__DIR__ . '/../Assets/css/styles.css') );
     wp_enqueue_style( 'timetable-style' );
     
     wp_register_style( 'dpt_bootstrap', plugins_url('../Assets/css/bootstrap.min.css', __FILE__), array(), DPT_PLUGIN_VERSION );
@@ -36,10 +37,6 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <?php if ( ! get_theme_support( 'title-tag' ) ): ?>
-        <title><?php wp_title(); ?></title>
-    <?php endif; ?>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -47,7 +44,7 @@ if (is_page_template( '../Views/DSTemplate.php' )) {
     
     <link rel="profile" href="http://gmpg.org/xfn/11">
 
-    <?php //wp_head(); ?>
+    <?php wp_head(); ?>
 
     <style>
         <?php echo esc_html(get_option('ds-additional-css')); ?>

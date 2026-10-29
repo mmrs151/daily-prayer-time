@@ -60,6 +60,11 @@ class DailyShortCode extends TimetablePrinter
         parent::__construct();
     }
 
+    public function __clone()
+    {
+        $this->timetablePrinter = clone $this->timetablePrinter;
+    }
+
     public function setDeactivateTomorrow() 
     {
         $this->deactivateTomorrow = true;

@@ -12,7 +12,8 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
         /** @var string[]  */
         private $prayerNames = array('fajr', 'sunrise', 'zuhr', 'asr', 'sunset', 'maghrib', 'isha' );
 
-        private PrayerTimes $islamicNetworkPrayerTimes;
+        /** @var PrayerTimes */
+        private $islamicNetworkPrayerTimes;
         
         /** @var array */
         private $data;
@@ -161,11 +162,11 @@ if ( ! class_exists('DPTStartTimeProcessor')) {
         
         private function getLatLong($cityId)
         {
-            $cityId = sanitize_text_field( $cityId );
+            $cityId = absint($cityId);
             $cityId = empty($cityId) ? 26 : $cityId; // DEFAULT LONDON
             
             global $wpdb;
-            $sql = "SELECT lat, lng FROM  $this->dbTable WHERE id = " . $cityId;
+            $sql = $wpdb->prepare("SELECT lat, lng FROM $this->dbTable WHERE id = %d", $cityId);
             $row = $wpdb->get_row($sql, ARRAY_A);
             
             return array(

@@ -12,6 +12,7 @@ DPT = {
         this.printDiv();
         this.dsRefreshNextPrayer();
         this.refreshBeforeIqamah();
+        this.refreshForScheduledSlides();
         this.continiousMarquee();
         this.digitalClock();
 
@@ -55,7 +56,7 @@ DPT = {
     },
 
     changeInputBackground: function () {
-        jQuery("input").on('change', function() {
+        jQuery('input:not([type="checkbox"]):not([type="radio"])').on('change', function() {
             jQuery(this).css("background-color","#F6F8CE");
         });
     },
@@ -228,6 +229,13 @@ DPT = {
         {
             var timeParts = iqamah[i].split(":");
             DPT.executeFunctionOnTime(timeParts[0], timeParts[1], timeParts[2], function() { window.location.reload(true); });
+        }
+    },
+
+    refreshForScheduledSlides: function() {
+        var seconds = parseInt(jQuery('#dptNextDayRefresh').val(), 10);
+        if (seconds > 0) {
+            setTimeout(function() { window.location.reload(true); }, seconds * 1000 + 3000);
         }
     },
 
