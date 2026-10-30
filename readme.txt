@@ -3,22 +3,21 @@ Contributors: mmrs151, yasin84
 Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, salah time, salat, namaz, Quran verse
 Requires at least: 4.5
-Requires PHP: 7.2
+Requires PHP: 8.2
 Tested up to: 7.1
-Stable tag: 2026.08.20
+Stable tag: 2026.10.30
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display prayer time in any screen, in any language and many more.
+Display your mosque's prayer times on websites and digital screens.
 
 == Description ==
 For video tutorial please follow these links:
 - (Latest) How to tutorial [youtube https://youtu.be/ka5WxQfkFww]
 
-Alhamdulillah that you can display Yearly and Monthly prayer time with ajax month selector using shortcode [timetable]
-Daily prayer time can be displayed vertically or horizontally in your preferable widget area. Designed for any Mosque or Islamic institutes.
+Display monthly prayer times with a month selector using [monthlytable], or show today's times with [dailytable_horizontal] and [dailytable_vertical]. The [digital_screen] shortcode provides a full-screen display for mosque TVs, including media slides that can run daily or on selected weekdays. Other shortcodes show upcoming prayers and Quran verses. The plugin supports multilingual labels and custom styling.
 
-**You need to upload your masjid's timetable from plugin admin section.**
+**Upload your mosque's timetable in the plugin settings to display prayer times.**
 
 = PULL REQUEST =
 [GITHUB https://github.com/mmrs151/daily-prayer-time/pulls]
@@ -68,6 +67,8 @@ Once the installation above is done, this will allow the **Admin/Editor**
 - Display prayer time on big monitors in the masjid
 
 - Display Quran verse in a shortcode
+
+- Schedule individual digital-screen media slides for selected weekdays; slides without a schedule display daily
 
 = shortcodes =
 1. **[monthlytable]** - Display Yearly and Monthly prayer time with ajax month selector
@@ -126,6 +127,12 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 12. Sample 2
 
 == Changelog ==
+
+= 2026.10.30 =
+* Add optional weekday scheduling for individual digital-screen media slides. Existing slides continue to display daily.
+* Refresh the horizontal and vertical daily timetable layouts and improve weekday checkbox visibility in settings.
+* Add WordPress integration checks for shortcodes, screen templates, CSV import, slide schedules, and selected security regressions.
+* Require PHP 8.2 or newer.
 
 = 2026.08.20 =
 * Fix: Individual start-time shortcodes ([fajr_start], [zuhr_start], [asr_start],
@@ -208,6 +215,9 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 * Fix: Fix JS bug
 
 == Upgrade Notice ==
+
+= 2026.10.30 =
+* PHP 8.2 or newer is required. Media slides can now be scheduled for selected weekdays; existing slides remain daily.
 
 = 2026.08.20 =
 * Fix: next_prayer API azanTime/iqamahTime null for asr, jumuah, ishraq, after-isha
