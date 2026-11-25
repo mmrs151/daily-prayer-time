@@ -391,10 +391,17 @@ class DatabaseConnection
     {
         global $wpdb;
     
-        $sql = "DELETE FROM " . $this->dbTable . 'WHERE YEAR(d_date) !=' . date('Y');
+        $sql = $wpdb->prepare(
+            "DELETE FROM {$this->dbTable} WHERE YEAR(d_date) != %d",
+            (int) current_time('Y')
+        );
         $this->logger->log(__FILE__ . ' - ' . __LINE__ . ': ' . $sql);
-        
-        return $wpdb->query($sql);
+
+        $result = $wpdb->query($sql);
+        if ($result !== false) {
+            $this->deleteTransients();
+        }
+        return $result;
     }
 
     private function deleteTransients()

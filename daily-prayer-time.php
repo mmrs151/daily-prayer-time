@@ -2,12 +2,15 @@
 /*
 Plugin Name: Daily Prayer Time
 Version: 2026.10.30
+Requires at least: 6.6
 Requires PHP: 8.2
 Plugin URI: https://wordpress.org/plugins/daily-prayer-time-for-mosques/
 Description: Masjid Prayer time in any language, in any screen
 Author: <a href="http://mmrs151.wordpress.com">mmrs151</a>
-Text Domain: daily-prayer-time
+Text Domain: daily-prayer-time-for-mosques
 Domain Path: /languages
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 contributors: yasin84
 */
 require_once(__DIR__ . "/vendor/autoload.php");

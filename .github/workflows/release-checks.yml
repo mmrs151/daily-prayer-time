@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        wp-version: ['6.8.3', 'latest']
+        wp-version: ['6.6', '6.8.3', 'latest']
     env:
       DPT_WP_VERSION: ${{ matrix.wp-version }}
     steps:
@@ -28,3 +28,6 @@ jobs:
         run: composer audit --locked --no-interaction
       - name: Run WordPress regression suite
         run: bash tests/run.sh
+      - name: Check SVN release package
+        run: >-
+          bash scripts/build-svn-package.sh "$RUNNER_TEMP/dpt-svn-trunk"

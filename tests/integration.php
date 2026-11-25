@@ -249,4 +249,61 @@ foreach (array('today', 'month', 'year', 'ramadan', 'iqamah', 'tomorrow_fajr', '
     }
 }
 
+// The reset action must be submitted from a nonce-protected admin form and
+// delete other years without changing today's timetable.
+wp_set_current_user(1);
+$_POST = array();
+$_REQUEST = array();
+ob_start();
+include __DIR__ . '/../Views/Tabs/QuickUpdate.php';
+$quickUpdateForm = ob_get_clean();
+dpt_check(strpos($quickUpdateForm, 'name="_dpt_reset_nonce"') !== false,
+    'The reset-years form is missing its nonce');
+
+$otherYear = (int) current_time('Y') - 1;
+$oldRow = $todayRow;
+$oldRow['d_date'] = $otherYear . '-01-01';
+dpt_check($db->insertRow($oldRow)['result'] !== false, 'Could not seed an older year');
+$nonceRejected = false;
+$dieHandler = static function () {
+    return static function () {
+        throw new RuntimeException('Reset nonce rejected');
+    };
+};
+add_filter('wp_die_handler', $dieHandler);
+$_POST = array('action' => 'RESET YEARS');
+$_REQUEST = $_POST;
+ob_start();
+try {
+    include __DIR__ . '/../Views/Tabs/QuickUpdate.php';
+} catch (RuntimeException $e) {
+    $nonceRejected = $e->getMessage() === 'Reset nonce rejected';
+} finally {
+    ob_end_clean();
+    remove_filter('wp_die_handler', $dieHandler);
+}
+dpt_check($nonceRejected, 'Reset years accepted a request without a nonce');
+$oldYearCount = (int) $wpdb->get_var($wpdb->prepare(
+    'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'timetable WHERE YEAR(d_date) = %d',
+    $otherYear
+));
+dpt_check($oldYearCount > 0, 'Unauthenticated reset changed timetable rows');
+$_POST = array(
+    'action' => 'RESET YEARS',
+    '_dpt_reset_nonce' => wp_create_nonce('dpt-reset-years')
+);
+$_REQUEST = $_POST;
+ob_start();
+include __DIR__ . '/../Views/Tabs/QuickUpdate.php';
+ob_end_clean();
+$oldYearCount = (int) $wpdb->get_var($wpdb->prepare(
+    'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'timetable WHERE YEAR(d_date) = %d',
+    $otherYear
+));
+dpt_check($oldYearCount === 0, 'Reset years left older timetable rows');
+dpt_check(substr($db->getPrayerTimeForToday()['fajr_begins'], 0, 5) === '06:26',
+    'Reset years removed the current timetable');
+$_POST = array();
+$_REQUEST = array();
+
 echo 'PASS: ' . $GLOBALS['dpt_checks'] . " WordPress integration checks; EICT CSV, shortcodes, digital screen, and REST filters.\n";

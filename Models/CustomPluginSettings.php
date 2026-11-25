@@ -14,7 +14,7 @@
 	    function dpt_plugin_action_links( $links )
 	    {
 			$settings = array(
-				'<a href="' . admin_url( 'options-general.php?page=dpt' ) . '" title="' . __( 'Daily Prayer Time Settings', 'dpt-support' ) . '">' . __( 'Settings', 'dpt-support') . '</a>'
+				    '<a href="' . admin_url( 'options-general.php?page=dpt' ) . '" title="' . __( 'Daily Prayer Time Settings', 'daily-prayer-time-for-mosques' ) . '">' . __( 'Settings', 'daily-prayer-time-for-mosques') . '</a>'
 			);
 		    return array_merge($links, $settings);
 	    }
@@ -30,9 +30,9 @@
 			    return array_merge(
 				    $links,
 				    array(
-					    '<a target="_blank" href="https://wordpress.org/support/plugin/daily-prayer-time-for-mosques/">' . __( 'Get Support', 'dpt-support') . '</a>',
-					    '<a target="_blank" href="https://wordpress.org/support/plugin/daily-prayer-time-for-mosques/reviews/#new-post/">' . __( 'Leave a Review', 'dpt-support' ) . '</a>',
-					    '<a target="_blank" href="https://donate.uwt.org/Account/Index.aspx">' . __( 'Support the Ummah', 'dpt-support') . '</a>'
+				    '<a target="_blank" href="https://wordpress.org/support/plugin/daily-prayer-time-for-mosques/">' . __( 'Get Support', 'daily-prayer-time-for-mosques') . '</a>',
+				    '<a target="_blank" href="https://wordpress.org/support/plugin/daily-prayer-time-for-mosques/reviews/#new-post/">' . __( 'Leave a Review', 'daily-prayer-time-for-mosques' ) . '</a>',
+				    '<a target="_blank" href="https://donate.uwt.org/Account/Index.aspx">' . __( 'Support the Ummah', 'daily-prayer-time-for-mosques') . '</a>'
 				    )
 			    );
 		    }

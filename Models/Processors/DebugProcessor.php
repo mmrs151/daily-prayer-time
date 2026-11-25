@@ -19,7 +19,7 @@ if ( ! class_exists('DPTDebugProcessor')) {
         /**
          * @param array $data
          */
-        public function __construct(array $data=null) {
+        public function __construct(?array $data=null) {
             $this->data = $data;
             // $this->filePath = plugin_dir_path(__FILE__) . '../../Assets/debug.csv';
             $this->filePath = fopen('php://memory', 'rw+');

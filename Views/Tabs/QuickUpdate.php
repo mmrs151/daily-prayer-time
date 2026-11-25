@@ -6,9 +6,13 @@ $db = new DatabaseConnection();
 $quickMonth = date('m');
 $quickYear = date('Y');
 
-if (isset($_POST['action']) && $_POST['action'] == 'RESET YEARS') {
-    echo "... deleated all other years. Only current year available now.";
-    $db->resetOtherYears();
+if (isset($_POST['action']) && $_POST['action'] === 'RESET YEARS') {
+    check_admin_referer('dpt-reset-years', '_dpt_reset_nonce');
+    if (current_user_can('publish_pages') && $db->resetOtherYears() !== false) {
+        echo '<div class="notice notice-success"><p>Other years were removed. Only the current year remains.</p></div>';
+    } else {
+        echo '<div class="notice notice-error"><p>Could not reset the timetable years.</p></div>';
+    }
 }
 
 if ( isset($_POST['action']) && $_POST['action'] == 'Load Month') {
@@ -51,6 +55,7 @@ foreach($years as $year){
 }
 
 $data = $db->getPrayerTimeForMonth( $quickMonth, $quickYear );
+$resetNonce = wp_nonce_field('dpt-reset-years', '_dpt_reset_nonce', true, false);
 
 $timetable = new TimetablePrinter();
 $prayerNames = $timetable->getLocalPrayerNames();
@@ -63,6 +68,7 @@ if ( empty($data)) {
     echo "
 <div class='container-fluid'>
     <form name='quickUpdateMonth' method='post'>
+        $resetNonce
         <div class='row font-weight-bold' style='padding-bottom: 10px;'>
             <div class='col-sm-3' style='padding-left:0px;'><p class='h4'>Update Prayer time for:</p> </div>
             <div class='col-sm-2'>

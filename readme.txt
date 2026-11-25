@@ -2,12 +2,12 @@
 Contributors: mmrs151, yasin84
 Donate link: https://donate.uwt.org/Account/Index.aspx
 Tags: prayer time, salah time, salat, namaz, Quran verse
-Requires at least: 4.5
+Requires at least: 6.6
 Requires PHP: 8.2
 Tested up to: 7.1
 Stable tag: 2026.10.30
-License: GPLv2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Display your mosque's prayer times on websites and digital screens.
 
@@ -133,6 +133,7 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 * Refresh the horizontal and vertical daily timetable layouts and improve weekday checkbox visibility in settings.
 * Add WordPress integration checks for shortcodes, screen templates, CSV import, slide schedules, and selected security regressions.
 * Require PHP 8.2 or newer.
+* Require WordPress 6.6 or newer and protect the timetable year reset with a nonce.
 
 = 2026.08.20 =
 * Fix: Individual start-time shortcodes ([fajr_start], [zuhr_start], [asr_start],
@@ -217,7 +218,7 @@ Please look at https://trello.com/b/6Re5Dga7/salah-time-wordpress-plugin
 == Upgrade Notice ==
 
 = 2026.10.30 =
-* PHP 8.2 or newer is required. Media slides can now be scheduled for selected weekdays; existing slides remain daily.
+* PHP 8.2 and WordPress 6.6 or newer are required. Media slides can now be scheduled for selected weekdays; existing slides remain daily.
 
 = 2026.08.20 =
 * Fix: next_prayer API azanTime/iqamahTime null for asr, jumuah, ishraq, after-isha
