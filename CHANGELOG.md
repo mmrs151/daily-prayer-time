@@ -1,5 +1,18 @@
 # Changelog
 
+## [2026.10.30] - 2026-10-30
+
+### Added
+- Optional weekday scheduling for individual digital-screen media slides. Slides without a schedule still display daily.
+- WordPress integration checks for shortcodes, screen templates, CSV import, scheduled slides, and selected security regressions.
+
+### Changed
+- Refreshed horizontal and vertical daily timetable layouts.
+- Improved weekday checkbox visibility in the admin settings.
+- Raised the minimum supported PHP version to 8.2.
+
+---
+
 ## [2026.08.20] - 2026-08-20
 
 ### Fixed

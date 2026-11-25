@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32b9e0cb57366a501a805f4674964427",
+    "content-hash": "52a2cd30b9c92f13bb588836667d2b87",
     "packages": [
         {
             "name": "islamic-network/prayer-times",
@@ -97,10 +97,12 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {
+        "php": ">=8.2"
+    },
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

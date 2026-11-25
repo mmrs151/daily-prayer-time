@@ -13,7 +13,7 @@ services:
       retries: 30
 
   wp:
-    image: wordpress:cli
+    image: wordpress:cli-php8.2
     user: "0:0"
     depends_on:
       db:

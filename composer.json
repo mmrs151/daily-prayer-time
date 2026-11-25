@@ -5,6 +5,7 @@
     "license": "GPLv2",
     "minimum-stability": "stable",
     "require": {
+        "php": ">=8.2",
         "islamic-network/prayer-times": "^1.0"
     }
 }
