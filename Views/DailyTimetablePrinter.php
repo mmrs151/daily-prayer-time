@@ -207,14 +207,14 @@ class DailyTimetablePrinter extends TimetablePrinter
             '<div class="dpt-horizontal-shell alignwide">
                 <div class="dpt-horizontal-overview">
                     <div class="dpt-horizontal-date">
-                        <span class="dpt-horizontal-kicker">' . esc_html($title !== '' ? $title : __('Prayer times', 'daily-prayer-time')) . '</span>
+                        <span class="dpt-horizontal-kicker">' . esc_html($title !== '' ? $title : __('Prayer times', 'daily-prayer-time-for-mosques')) . '</span>
                         <span class="dpt-horizontal-date-main">' . esc_html($date) . '</span>'
                         . ($hijriDate ? '<span class="dpt-horizontal-hijri">' . esc_html($hijriDate) . '</span>' : '') . '
                     </div>'
                     . ($nextIqamah !== '' ? '<div class="dpt-horizontal-next">' . $nextIqamah . '</div>' : '') . '
                 </div>
                 <div class="dpt-horizontal-table-scroll">
-                    <table class="customStyles dptUserStyles dptTimetable dpt-horizontal-table ' . $this->getTableClass() . '" aria-label="' . esc_attr__('Daily prayer times', 'daily-prayer-time') . '"> '
+                    <table class="customStyles dptUserStyles dptTimetable dpt-horizontal-table ' . $this->getTableClass() . '" aria-label="' . esc_attr__('Daily prayer times', 'daily-prayer-time-for-mosques') . '"> '
                     . $announcement . $ramadan;
 
         return $table;
@@ -420,13 +420,13 @@ class DailyTimetablePrinter extends TimetablePrinter
             '<div class="dpt-vertical-shell">
                 <div class="dpt-horizontal-overview">
                     <div class="dpt-horizontal-date">
-                        <span class="dpt-horizontal-kicker">' . esc_html($title !== '' ? $title : __('Prayer times', 'daily-prayer-time')) . '</span>
+                        <span class="dpt-horizontal-kicker">' . esc_html($title !== '' ? $title : __('Prayer times', 'daily-prayer-time-for-mosques')) . '</span>
                         <span class="dpt-horizontal-date-main">' . esc_html($date) . '</span>'
                         . ($hijriDate ? '<span class="dpt-horizontal-hijri">' . esc_html($hijriDate) . '</span>' : '') . '
                     </div>'
                     . ($nextIqamah !== '' ? '<div class="dpt-horizontal-next">' . $nextIqamah . '</div>' : '') . '
                 </div>
-                <table class="dptTimetable dpt-vertical-table ' . $this->getTableClass() . ' customStyles dptUserStyles" aria-label="' . esc_attr__('Daily prayer times', 'daily-prayer-time') . '"> '
+                <table class="dptTimetable dpt-vertical-table ' . $this->getTableClass() . ' customStyles dptUserStyles" aria-label="' . esc_attr__('Daily prayer times', 'daily-prayer-time-for-mosques') . '"> '
                 . $announcement . $ramadan;
 
         return $table;

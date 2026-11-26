@@ -10,6 +10,7 @@
 - Refreshed horizontal and vertical daily timetable layouts.
 - Improved weekday checkbox visibility in the admin settings.
 - Raised the minimum supported PHP version to 8.2.
+- Raised the minimum supported WordPress version to 6.6 and protected the timetable year reset with a nonce.
 
 ---
 

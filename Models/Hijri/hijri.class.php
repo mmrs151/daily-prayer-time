@@ -101,7 +101,7 @@ class datetime extends \DateTime
 	 * @example 'examples/monthCalendar.php' 12 3 Create new DateTime
 	 *         
 	 */
-	public function __construct($time = 'now', \DateTimeZone $timezone = null, $langcode = null, $hijriCalendar = null)
+	public function __construct($time = 'now', ?\DateTimeZone $timezone = null, $langcode = null, $hijriCalendar = null)
 	{
 		global $hijri_settings;
 		if (isset($hijriCalendar)) {
@@ -141,7 +141,7 @@ class datetime extends \DateTime
 	 *        	Optional the Calendar object
 	 * @return self datetime object from the given hijri date
 	 */
-	public static function createFromHijri($year, $month, $day, \DateTimeZone $timezone = null, $langcode = null, $hijriCalendar = null)
+	public static function createFromHijri($year, $month, $day, ?\DateTimeZone $timezone = null, $langcode = null, $hijriCalendar = null)
 	{
 		if (isset($hijriCalendar) && ($hijriCalendar instanceof Calendar)) {
 			static::$hcal = $hijriCalendar;
