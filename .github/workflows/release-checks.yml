@@ -30,4 +30,4 @@ jobs:
         run: bash tests/run.sh
       - name: Check SVN release package
         run: >-
-          bash scripts/build-svn-package.sh "$RUNNER_TEMP/dpt-svn-trunk"
+          bash scripts/build-svn-package.sh --stage "$RUNNER_TEMP/dpt-svn-trunk"
